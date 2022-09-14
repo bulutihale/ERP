@@ -22,7 +22,7 @@ if firmaID = 5 then
 	sb_konum="izmir"
 	sb_yetkiliPersonel="Başar Sönmez|+905053376198"
 	sb_activeuserUrlTimeout="10000"
-	sb_ssl = 0
+	sb_ssl = 1
 
 	'## EMAIL
 	sb_portalMail		=	"portal@sbstasarim.com"
@@ -55,7 +55,7 @@ if firmaID = 6 then
 	sb_konum="izmir"
 	sb_yetkiliPersonel="Başar Sönmez|+905053376198"
 	sb_activeuserUrlTimeout="10000"
-	sb_ssl = 0
+	sb_ssl = 1
 	' yetkiarr=Array("cimax","cimaxpersonel","cimaxadmin")
 '	sb_OTSserverIP="192.168.1.244"
 	' sb_OTSserverWS="http://84.51.54.8:3033"

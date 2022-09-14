@@ -38,7 +38,8 @@ yetkiPersonel = yetkibul("personel")
 
 '####### INSERT - UPDATE
 '####### INSERT - UPDATE
-    sorgu = "Select top 1 * from personel.personel_yetki where kid = " & gorevID & " and yetkiAd = '" & yetkiAd & "'"
+    sorgu = "Select top 1 * from personel.personel_yetki where kid = " & gorevID & " and yetkiAd = N'" & yetkiAd & "'"
+    Response.Write sorgu
 	rs.Open sorgu, sbsv5, 1, 3
     if rs.recordcount = 0 then
         rs.addnew

@@ -153,11 +153,11 @@ call logla("Arıza Ekranı")
 		' if GorevListeleHerkes = True then
 			Response.Write "<div class=""col-sm-3 my-1"">"
 			Response.Write "<label class=""sr-only"" for=""inlineFormInputName"">Durum</label>"
-			sorgu = "Select ad,Id from Personel.Personel where expiration is null and firmaID = " & firmaID & " and (gorev like N'Bilgi İşlem%' or gorev like N'BİLGİ İŞLEM%') order by ad ASC"
+			sorgu = "select personel.personel.id,personel.personel.ad from personel.personel inner join personel.personel_yetki on personel.personel.id = personel.personel_yetki.kid where personel.personel.firmaID = " & firmaID & " and personel.personel_yetki.yetkiAd = N'Bilgi İşlem' and personel.personel_yetki.yetkiParametre > 0"
 			rs.open sorgu,sbsv5,1,3
 				degerler = "Personel=|"
 				do while not rs.eof
-					degerler = degerler & rs("Ad")
+					degerler = degerler & rs("ad")
 					degerler = degerler & "="
 					degerler = degerler & rs("Id")
 					degerler = degerler & "|"
