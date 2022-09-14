@@ -50,10 +50,16 @@
 			for di = 1 to rs.recordcount
 				ajID		=	rs("id")
 				icerik		=	rs("icerik")
-				Response.Write "<div class=""col-12 text-left"">"
-					Response.Write "<span id=""" & ajID & """ data-tablo=""portal.ajanda"" class=""pointer kayitSil mr-2""><i class=""fa fa-minus-circle text-danger""></i></span>"
-					Response.Write icerik
-				Response.Write "</div>"											
+				icerik		=	Replace(icerik,"|","<br>")
+				Response.Write "<div id=""" & ajID & """ data-tablo=""portal.ajanda"" class=""row pointer kayitSil mr-2 py-1 border-bottom border-success"">"
+					Response.Write "<div class=""col-1 text-left "">"
+						Response.Write "<i class=""fa fa-minus-circle text-danger""></i>"
+					Response.Write "</div>"
+					Response.Write "<div class=""col-11 text-left "">"
+						Response.Write icerik
+					Response.Write "</div>"
+				Response.Write "</div>"
+
 	rs.movenext
 	next
 	end if

@@ -7,8 +7,19 @@ $(document).ready(function() {
 	$('.summernote').summernote({height: 300});
 	
 
-	
-	
+//popover aktifleştimrk için 
+$(function () {
+	//"html: true" popover içindeki html kodlarının çalışması için 
+	//"trigger:'focus'" popover dışında bir yere tıklandığında kapanması için
+  $('[data-toggle="popover"]').popover({html:true,trigger: 'focus',container: 'body'});
+})
+
+$(document).ajaxComplete(function() {
+	$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',placement:'bottom',container: 'body'});
+});
+//popover aktifleştimrk için 
+
+
 	
 		/////////////////////////// select2 
 			$('.formSelect2').on('mouseenter',function() {
@@ -93,7 +104,7 @@ jQuery(document).ajaxSuccess(
 		// ortak sayfanın en üstüne koyulacak kapat butonunu gösteren kod
 		if($('body').hasClass('modal-open')){$('.mdi-close-circle').removeClass('d-none');}//kapat butonunu sadece modalda göster
 		if($('body').hasClass('modal-open')){$('.modaldaGoster').removeClass('d-none');}//.modaldaGoster class olan divleri göster
-		if($('body').hasClass('modal-open')){$('#modal-dialog .modaldaGizle').addClass('d-none');}//.modaldaGizle class olan divleri gizle
+		if($('body').hasClass('modal-open')){$('#modal-dialog .modaldaGizle, #modal-dialogfit .modaldaGizle').addClass('d-none');}//.modaldaGizle class olan divleri gizle
 	// hem normal #ortalan' da hem de modal içinde kullanılan sayfalar için modalkapat butonu göster / gizle
 
 
@@ -188,7 +199,7 @@ jQuery(document).ajaxSuccess(
 function divackapa(id){if ($(id).hasClass('hide')){$(id).removeClass('hide');}else{$(id).addClass('hide');}}
 
 function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,cancelstyle,callbackFocusOl,veriyollamaturu,closedelay,formverileri,ek5)
-// örnek bootmodal('Lütfen Sadece Sayısal Değer Giriniz','alert','','','','','','','','','','','')
+// örnek bootmodal('Lütfen Sadece Sayısal Değer Giriniz','custom','','','','','','','','','','','')
 {
 	if(tur=='confirm'){
 		bootbox.confirm(mesaj, function(result){
@@ -279,6 +290,8 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 
 
 function modalajax(t){$('#modal-dialog .modal-body').load(t);$('#modal-dialog').modal('show')}
+function modalajaxfit(t){$('#modal-dialogfit .modal-body').load(t);$('#modal-dialogfit').modal('show')}
+//function modalajaxfit(e,t){$('#modal-dialogfit .modal-body').load(t);if(e==''){}else{$('#modal-dialogfit .modalbaslik').text(e)};$('#modal-dialogfit').modal('show')}
 function modalkapat(){$('.modal').modal('hide');}
 function otomatikbuyut(id){$('#'+id).keyup(function(){this.value = this.value.toUpperCase();});}
 

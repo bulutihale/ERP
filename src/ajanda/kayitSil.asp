@@ -33,14 +33,18 @@
 '##### DOSYA SİL
 '##### DOSYA SİL
 
-		sorgu = "UPDATE " & tablo & " SET silindi = 1 WHERE id = " & silinecekID
+		sorgu = "SELECT silindi, DATEFROMPARTS(hangiYil, hangiAy, hangiGun) as planTarih FROM " & tablo & " WHERE id = " & silinecekID
 		rs.open sorgu,sbsv5,1,3
+			planTarih		=	rs("planTarih")
+			rs("silindi")	=	1
+			rs.update
+		rs.close
 
 	
 	
 
 
-response.Write "ok|"
+response.Write "ok|" & planTarih & ""
 
 	hatamesaj = "Kayıt Silindi"
 	call logla("Ajanda kaydı silindi ID:" & silinecekID)

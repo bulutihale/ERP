@@ -2,11 +2,22 @@
 
 	Response.Flush()
 	kid						=	kidbul()
-	ayHareket				=	cint(Request.Form("ayHareket"))
-	sorgulananTarih			=	cdate(Request.Form("sorgulananTarih"))
+	ayHareket				=	cint(Request.QueryString("ayHareket"))
+	sorgulananTarih			=	cdate(Request.QueryString("sorgulananTarih"))
 	siparisKalemID			=	Request.QueryString("siparisKalemID")
+	silAjandaID				=	Request.QueryString("silAjandaID")
+	yer						=	Request.QueryString("yer")
+
+	if silAjandaID = "" then
+		silAjandaID = 0
+	end if
+
+	If yer = "modal" Then
+		kisaSayi	=	20
+	Else
+		kisaSayi	=	40
+	End if
 	
-	response.Write siparisKalemID
 	
 	call sessiontest()
 	
@@ -27,12 +38,14 @@ call logla("Planlama ajanda sayfası girişi")
 		hangiYil		=	datepart("yyyy",date())
 		hangiAy			=	datepart("m",date())
 		sorgulananTarih	=	DateSerial(hangiYil, hangiAy, 1)
-	elseif ayHareket <> 0 AND sorgulananTarih <> 0 then
+	elseif ayHareket <> 0 OR sorgulananTarih <> 0 then
 		sorgulananTarih	=	DateAdd("m",ayHareket,sorgulananTarih)
 		hangiYil		=	datepart("yyyy",sorgulananTarih)
 		hangiAy			=	datepart("m",sorgulananTarih)
 	end if
 	
+	yilDeger	=	hangiYil
+	ayDeger		=	hangiAy
 
 
 
@@ -42,13 +55,19 @@ call logla("Planlama ajanda sayfası girişi")
 		aySonGun		=	ayingunleri(hangiAy, hangiYil)
 			Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein card"">"
 				Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
-				Response.Write "<div class=""text-center card-body"">"
+				Response.Write "<div class=""text-left card-body"">"
 				
-					Response.Write "<div id=""sabitBilgiler"" class=""d-none"" data-sorgulanantarih=""" & sorgulananTarih & """></div>"
+					Response.Write "<div id=""sabitBilgiler"""
+						Response.Write " class=""d-none"""
+						Response.Write " data-silajandaid=""" & silAjandaID & """"
+						Response.Write " data-sorgulanantarih=""" & sorgulananTarih & """"
+						Response.Write " data-sipariskalemid=""" & siparisKalemID & """"
+						Response.Write " data-yer=""" & yer & """"
+					Response.Write "></div>"
 				
 				
 				'##### yıl ve ay göster
-					Response.Write "<div class=""h3 bold"">"
+					Response.Write "<div class=""h3 bold text-center"">"
 						Response.Write "<i class=""fa fa-arrow-circle-left text-success pointer ayHareket geri mr-2""></i>"
 						Response.Write hangiYil & " - " & MonthName(hangiAy)
 						Response.Write "<i class=""fa fa-arrow-circle-right text-success pointer ayHareket ileri ml-2""></i>"
@@ -66,7 +85,7 @@ call logla("Planlama ajanda sayfası girişi")
 				
 				'###### gün kutularını sırala	
 				'###### gün kutularını sırala	
-						Response.Write "<div class=""row fontkucuk"" style=""height:120px"">"'günler satırı başla. bilerek döngünün dışında başladı, döngü sonunda kapanıp açılıyor.
+						Response.Write "<div class=""row fontkucuk "" style=""height:120px"">"'günler satırı başla. bilerek döngünün dışında başladı, döngü sonunda kapanıp açılıyor.
 							divSay = 0
 							for zi = 1 to aySonGun
 								divSay		=	divSay + 1
@@ -109,11 +128,18 @@ call logla("Planlama ajanda sayfası girişi")
 								for gi = 1 to 7
 									
 								'##### kutunun içini doldur
-								'##### kutunun içini doldur
+								'##### kutunun içini doldur 
 									if gunSayi = gi then
-										Response.Write "<div class=""col h-100 border border-dark " & bugunClass & """>"	'kutu çerçevesi
+										'kutu çerçevesi
+										
+
+										Response.Write "<div class=""col h-100 border border-dark  scroll-ekle3 " & bugunClass & """"
+										if siparisKalemID <> "" then
+										 	Response.Write " onclick=""planEkle("&silAjandaID&","&yilDeger&","&ayDeger&","&zi&","&siparisKalemID&",'" & yer & "')"""
+										end if
+										 Response.Write ">"
 											
-											Response.Write "<div class=""row"">" 'kutu içi satırlar
+											Response.Write "<div class=""row p-0"">" 'kutu içi satırlar
 											
 											'#### ayın kaçı ve resmi tatil açıklaması
 												Response.Write "<div class=""col-10 p-0 pl-1 bold text-left " & textClass & """>"
@@ -126,26 +152,50 @@ call logla("Planlama ajanda sayfası girişi")
 													Response.Write "<i class=""fa fa-search-plus text-success""></i>"
 												Response.Write "</div>"
 											'#### /gün içine kayıt yapmak için buton
-													
+
+											Response.Write "</div>"'kutu içi satırlar
+											
 											'#### gün içine daha önce kayıt edilmiş olayları yaz.
-													sorgu = "SELECT id, kid, hangiYil, hangiAy, hangiGun, icerik"
+													sorgu = "SELECT id, kid, hangiYil, hangiAy, hangiGun, siparisKalemID, icerik"
 													sorgu = sorgu & " FROM portal.ajanda"
 													sorgu = sorgu & " WHERE silindi = 0 AND kid = " & kid & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & zi
 													rs.open sorgu, sbsv5,1,3
 													if rs.recordcount > 0 then
 														for di = 1 to rs.recordcount
-															ajID		=	rs("id")
-															icerik		=	rs("icerik")
-														Response.Write "<div class=""col-12 text-left fontkucuk2"">"
-															Response.Write "- " & icerik
-														Response.Write "</div>"											
+															sipKalemID		=	rs("siparisKalemID")
+															ajID			=	rs("id")
+															icerikHam		=	rs("icerik")
+															icerikHam		=	Replace(icerikHam,"|","<br>")
+															icerik			=	Replace(icerikHam,"<br>","")
+															icerik			=	Replace(icerik,"<b>","")
+															icerik			=	Replace(icerik,"</b>","")
+															icerikKisa		=	LEFT(icerik,kisaSayi)
+															if LEN(icerik) >  kisaSayi then
+																icerikKisa 	= icerikKisa & "..."
+															end if
+													Response.Write "<div class=""row border bg-info rounded mt-1 p-0"">" 'kutu içi satırlar
+													if yetkiKontrol > 5 then
+														Response.Write "<div id=""" & ajID & """ onclick=""kayitSil(" & ajID & ",'portal.ajanda','" & yer & "')"" class=""pointer col-1 text-left p-0 m-0"">"
+															Response.Write "<i class=""fa fa-minus-circle text-danger""></i>"
+														Response.Write "</div>"
+													end if
+														Response.Write "<div class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0"""
+														Response.Write " title=""" & icerik & """"
+														Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','','','','Tamam','','btn-danger','','','','','')"">"
+															Response.Write icerikKisa
+														Response.Write "</div>"
+													if yetkiKontrol > 5 then
+														Response.Write "<div id=""" & ajID & """ onclick=""planDegistir(" & ajID & "," & yilDeger & "," & ayDeger & "," & zi & "," & sipKalemID & ",'" & yer & "')"" class=""pointer col-1 text-center p-0 m-0"">"
+															Response.Write "<i class=""mdi mdi-arrow-all text-danger""></i>"
+														Response.Write "</div>"
+													end if
+													Response.Write "</div>"'kutu içi satırlar
 														rs.movenext
 														next
 													end if
 													rs.close
 											'#### /gün içine daha önce kayıt edilmiş olayları yaz.
 											
-											Response.Write "</div>"'kutu içi satırlar
 											
 										Response.Write "</div>"'kutu çerçevesi
 										exit for
@@ -184,12 +234,129 @@ call logla("Planlama ajanda sayfası girişi")
 %>
 
 	<script>
+	// plan Değiştirme işlemleri		
+		function planDegistir(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer){
+				sorgulananTarih	=	$('#sabitBilgiler').attr('data-sorgulanantarih');
+					swal({
+					//title: hangiGun+'.'+hangiAy+'.'+hangiYil+' gününe üretim planı eklensin mi?',
+					title: 'Plan tarihini değiştirmek istediğiniz güne tıklayınız.',
+					type: 'warning',
+					showCancelButton: true,
+					  confirmButtonColor: '#DD6B55',
+					  confirmButtonText: 'devam',
+					  cancelButtonText: 'iptal'
+					}).then(
+					  function(result) {
+						// handle Confirm button click
+						// result is an optional parameter, needed for modals with input
+					if(yer == 'modal'){
+						yuklenecekDIV = 'ajandaAnaDIV'
+						}else{
+						yuklenecekDIV = 'ortaalan'
+							}
+						$('#'+yuklenecekDIV).load('/ajanda/ajanda.asp?silAjandaID='+silAjandaID+'&sorgulananTarih='+sorgulananTarih+'&siparisKalemID='+siparisKalemID+'&yer='+yer);
+
+						
+					  }, //confirm buton yapılanlar
+					  function(dismiss) {
+						// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+					  } //cancel buton yapılanlar		
+					);//swal sonu
+		}
+	// plan Değiştirme işlemleri		
+	
+	// plan Ekleme işlemleri		
+		function planEkle(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer){
+					swal({
+					title: hangiGun+'.'+hangiAy+'.'+hangiYil+' gününe üretim planı eklensin mi?',
+					type: 'warning',
+					showCancelButton: true,
+					  confirmButtonColor: '#DD6B55',
+					  confirmButtonText: 'evet',
+					  cancelButtonText: 'hayır'
+					}).then(
+					  function(result) {
+						// handle Confirm button click
+						// result is an optional parameter, needed for modals with input
+						
+						$('#ajax').load('/planlama/plan_kaydet.asp',{hangiGun:hangiGun, hangiAy:hangiAy, hangiYil:hangiYil, siparisKalemID:siparisKalemID,yer:yer,silAjandaID:silAjandaID});
+
+						
+					  }, //confirm buton yapılanlar
+					  function(dismiss) {
+						// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+					  } //cancel buton yapılanlar		
+					);//swal sonu
+		}
+	// plan Ekleme işlemleri
+
+	// kayıt sil
+		function kayitSil(silinecekID, tablo, yer) {
+			swal({
+			title: 'Kayıt silinecek?',
+			type: 'warning',
+			showCancelButton: true,
+			  confirmButtonColor: '#DD6B55',
+			  confirmButtonText: 'sil',
+			  cancelButtonText: 'hayır'
+			}).then(
+			  function(result) {
+				// handle Confirm button click
+				// result is an optional parameter, needed for modals with input
+		
+					$.ajax({
+						type:'POST',
+						url :'/ajanda/kayitSil.asp',
+						data :{'silinecekID':silinecekID,
+								'tablo':tablo,
+									},
+						beforeSend: function() {
+				
+							//$('#but_kaydet').html("<img src='image/loading__.gif' width='20' height='20'/>");
+						  },
+								success: function(sonuc) {
+										//alert(sonuc);
+										sonucc = sonuc.split('|');
+										p_sonuc = sonucc[0];
+										sonuc2	= sonucc[1];
+										
+										if(p_sonuc == "ok"){
+											toastr.options.positionClass = 'toast-bottom-right';
+											toastr.options.progressBar = true;
+											toastr.success('Kayıt silindi.','İşlem Yapıldı!');
+											$('.modal-content #'+silinecekID).closest('div').html('');
+											$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?yer='+yer+'&ayHareket=0&sorgulananTarih='+sonuc2+' #ajandaAnaDIV > *');
+											if(yer == 'modal'){
+												$('#ortaalan').load('/satis/siparis_liste.asp');
+											}
+										}
+										else{
+											toastr.options.positionClass = 'toast-bottom-right';
+											toastr.options.progressBar = true;
+											toastr.error('Kayıt silinemedi.','İşlem Başarısız!');
+										};
+										}
+					});//ajax işlemi sonu
+					
+			  }, //confirm buton yapılanlar
+			  function(dismiss) {
+				// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			  } //cancel buton yapılanlar		
+			);//swal sonu
+		}
+	// kayıt sil
+
+
+
 		$(document).ready(function() {
 	
 		//ileri geri okları ile sorgu
 			$('.ayHareket').off().on('click', function () {
 				
 				sorgulananTarih	=	$('#sabitBilgiler').attr('data-sorgulanantarih');
+				siparisKalemID	=	$('#sabitBilgiler').attr('data-sipariskalemid');
+				silAjandaID		=	$('#sabitBilgiler').attr('data-silajandaid');
+				yer				=	$('#sabitBilgiler').attr('data-yer');
 			
 				if($(this).hasClass('ileri')){
 					ayHareket = 1;
@@ -200,13 +367,16 @@ call logla("Planlama ajanda sayfası girişi")
 				else{ayHareket = 0};
 				
 				$('#ajandaAnaDIV').fadeOut('slow', function () {
-					$('#ajandaAnaDIV').load('/ajanda/ajanda.asp #ajandaAnaDIV > *',{ayHareket:ayHareket,sorgulananTarih:sorgulananTarih}).fadeIn('slow');
+					$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?yer='+yer+'&silAjandaID='+silAjandaID+'&siparisKalemID='+siparisKalemID+'&ayHareket='+ayHareket+'&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *').fadeIn('slow');
 				});
 					
 			});
+			
+			
+			
 	
 	
-		});
+		});//ready
 			
 			
 		$(document).ajaxSuccess(function() {
@@ -215,7 +385,10 @@ call logla("Planlama ajanda sayfası girişi")
 			$('.ayHareket').off().on('click', function () {
 				
 				sorgulananTarih	=	$('#sabitBilgiler').attr('data-sorgulanantarih');
-			
+				siparisKalemID	=	$('#sabitBilgiler').attr('data-sipariskalemid');
+				silAjandaID		=	$('#sabitBilgiler').attr('data-silajandaid');
+				yer				=	$('#sabitBilgiler').attr('data-yer');
+
 				if($(this).hasClass('ileri')){
 					ayHareket = 1;
 					}
@@ -225,7 +398,7 @@ call logla("Planlama ajanda sayfası girişi")
 				else{ayHareket = 0};
 				
 				$('#ajandaAnaDIV').fadeOut('slow', function () {
-					$('#ajandaAnaDIV').load('/ajanda/ajanda.asp #ajandaAnaDIV > *',{ayHareket:ayHareket,sorgulananTarih:sorgulananTarih}).fadeIn('slow');
+					$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?yer='+yer+'&silAjandaID='+silAjandaID+'&siparisKalemID='+siparisKalemID+'&ayHareket='+ayHareket+'&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *').fadeIn('slow');
 				});
 					
 			});
@@ -273,63 +446,6 @@ call logla("Planlama ajanda sayfası girişi")
 	
 	
 	
-    $('.kayitSil').off().on('click' ,function() {
-		var silinecekID 	=	$(this).attr('id');
-		var tablo			=	$(this).attr('data-tablo');
-
-		
-			swal({
-			title: 'Kayıt silinecek?',
-			type: 'warning',
-			showCancelButton: true,
-			  confirmButtonColor: '#DD6B55',
-			  confirmButtonText: 'sil',
-			  cancelButtonText: 'hayır'
-			}).then(
-			  function(result) {
-				// handle Confirm button click
-				// result is an optional parameter, needed for modals with input
-		
-					$.ajax({
-						type:'POST',
-						url :'/ajanda/kayitSil.asp',
-						data :{'silinecekID':silinecekID,
-								'tablo':tablo,
-									},
-						beforeSend: function() {
-				
-							//$('#but_kaydet').html("<img src='image/loading__.gif' width='20' height='20'/>");
-						  },
-								success: function(sonuc) {
-										//alert(sonuc);
-										sonucc = sonuc.split('|');
-										p_sonuc = sonucc[0];
-										
-										if(p_sonuc == "ok"){
-											toastr.options.positionClass = 'toast-bottom-right';
-											toastr.options.progressBar = true;
-											toastr.success('Kayıt silindi.','İşlem Yapıldı!');
-											$('.modal-content #'+silinecekID).closest('div').html('');
-											$('#ajandaAnaDIV').load('/ajanda/ajandaAna.asp #ajandaAnaDIV > *',{ayHareket:0,sorgulananTarih:0});
-										}
-										else{
-											toastr.options.positionClass = 'toast-bottom-right';
-											toastr.options.progressBar = true;
-											toastr.error('Kayıt silinemedi.','İşlem Başarısız!');
-										};
-										}
-					});//ajax işlemi sonu
-					
-			  }, //confirm buton yapılanlar
-			  function(dismiss) {
-				// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-			  } //cancel buton yapılanlar		
-			);//swal sonu
-    });
-		
-		// kayıt sil
-	
-			
 
 		});
 	</script>

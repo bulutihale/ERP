@@ -1,8 +1,8 @@
 ﻿<!--#include virtual="/reg/rs.asp" --><%
 
 
-'###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
+'###### FİLTRELER
+'###### FİLTRELER
 		
 	cariID			=	Request.Form("cariID")
 	stokID			=	Request.Form("stokID")
@@ -19,8 +19,8 @@
 	'####### /varsayılan tarih sınırları
 	
 
-'###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
+'###### FİLTRELER
+'###### FİLTRELER
 
 	yetkiKontrol	 = yetkibul(modulAd)
 
@@ -52,11 +52,12 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih, t2.teslimTarih,"
 			sorgu = sorgu & " ISNULL((SELECT SUM(t4.miktar) FROM stok.stokHareket t4 WHERE t4.siparisKalemID = t1.id AND t4.silindi = 0),0) as teslimEdilen,"
 			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id) as teslimBirim, t4.cariAd, t2.siparisNo,"
-			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat"
+			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat, DATEFROMPARTS(t5.hangiYil, t5.hangiAy, t5.hangiGun) as planTarih"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " INNER JOIN cari.cari t4 ON t2.cariID = t4.cariID"
+			sorgu = sorgu & " LEFT JOIN portal.ajanda t5 ON t1.id = t5.sipariskalemID AND t5.silindi = 0"
 			sorgu = sorgu & " WHERE t2.firmaID = " & firmaID
 			if stokID <> "" then
 				sorgu = sorgu & " AND t3.stokID = " & stokID & ""
@@ -98,6 +99,7 @@ Response.Write "<div class=""card-body"">"
 					teslimTarih			=	rs("teslimTarih")
 					eksikMiktarKapat	=	rs("eksikMiktarKapat")
 					bakiye				=	cdbl(teslimEdilen) + cdbl(eksikMiktarKapat)
+					planTarih			=	tarihtr(rs("planTarih"))
 
 					teslimDurum	=	""
 					satirClass	=	""
@@ -132,7 +134,11 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write "<div class=""btn btn-sm btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?siparisKalemID="&siparisKalemID&"')"">detay</div>"
-							Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajax('/ajanda/ajanda.asp?siparisKalemID="&siparisKalemID&"')"">planla</div>"
+							If not isdate(planTarih) Then
+								Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
+							Else
+								Response.Write "<div class=""btn btn-sm btn-success border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&sorgulananTarih=" & planTarih & "')"">" & planTarih & "</div>"
+							End if
 						Response.Write "</td>"
 						Response.Write "<td>" & cariAd & "</td>"
 					Response.Write "</tr>"
