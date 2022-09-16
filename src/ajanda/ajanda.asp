@@ -442,10 +442,9 @@ call logla("Planlama ajanda sayfası girişi")
 				}
 		});
 		});
-	// ajSave işlemleri		
+		// ajSave işlemleri		
 	
-	
-	
+
 
 		});
 	</script>
