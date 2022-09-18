@@ -84,7 +84,7 @@ yetkiKontrol = yetkibul(modulAd)
 		end if
 		Response.Write "</tr></thead><tbody>"
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t2.cariAd, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo"
+			sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t2.cariAd, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
@@ -117,7 +117,9 @@ yetkiKontrol = yetkibul(modulAd)
 					miktarBirim			=	rs("miktarBirim")
 					lot					=	rs("lot")
 					lotSKT				=	rs("lotSKT")
-					
+					stokID				=	rs("stokID")
+					stokID64		 	=	stokID
+					stokID64			=	base64_encode_tr(stokID64)
 					Response.Write "<tr>"
 						Response.Write "<td>" & girisTarih & "</td>"
 						Response.Write "<td>" & belgeNo & "</td>"
@@ -129,12 +131,18 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td class=""text-center"">" & lotSKT & "</td>"
 					if yetkiKontrol >= 5 then
 						Response.Write "<td class=""text-right"">"
-						'# stok düzenle
+						'# kalite formu çağır
+						Response.Write "<div class=""badge badge-pill badge-info pointer mr-1"" title=""Gelen Malzeme Kalite Kontrol Formu"""
+							Response.Write " onClick=""modalajaxfitozelKapat('/kaliteKontrol/kalite_form_yap.asp?formKod=1&stokID=" & stokID64 & "&ayiriciTabloAd=stokHareket&ayiriciTabloID=" & stokHareketID64 & "');"">"
+							Response.Write "<i class=""mdi mdi-webhook""></i>"
+						Response.Write "</div>"
+						'# /kalite formu çağır
+						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
 							Response.Write " onClick=""modalajax('/kaliteKontrol/kontrol_onay.asp?gorevID=" & stokHareketID64 & "');"">"
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
-						'# stok düzenle
+						'# /giriş onayla
 						Response.Write "</td>"
 					end if
 					Response.Write "</tr>"

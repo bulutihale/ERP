@@ -72,6 +72,7 @@ $(document).ajaxComplete(function() {
 				});
 			///// default seçilecek olan veri için
 				if(defDeger != undefined){
+
 					var a = defDeger.split("###");
 					var defID = a[0];
 					var defText = a[1];
@@ -126,7 +127,6 @@ jQuery(document).ajaxSuccess(
 				var minInput	=	$(this).attr('data-miniput');
 				var defDeger	=	$(this).attr('data-defdeger');
 
-
 				$(this).select2({
 					
 				  ajax: {
@@ -177,6 +177,7 @@ jQuery(document).ajaxSuccess(
 						var defSecim = new Option(defText, defID, true, true);
 						$(this).append(defSecim).trigger('change');
 					}
+					
 				}
 			///// default seçilecek olan veri için
 			});	
@@ -291,7 +292,7 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 
 function modalajax(t){$('#modal-dialog .modal-body').load(t);$('#modal-dialog').modal('show')}
 function modalajaxfit(t){$('#modal-dialogfit .modal-body').load(t);$('#modal-dialogfit').modal('show')}
-//function modalajaxfit(e,t){$('#modal-dialogfit .modal-body').load(t);if(e==''){}else{$('#modal-dialogfit .modalbaslik').text(e)};$('#modal-dialogfit').modal('show')}
+function modalajaxfitozelKapat(t){$('#modal-dialogfit .modal-body').load(t);$('#modal-dialogfit').modal({ backdrop: 'static', keyboard: false });$('#modal-dialogfit').modal('show')}
 function modalkapat(){$('.modal').modal('hide');}
 function otomatikbuyut(id){$('#'+id).keyup(function(){this.value = this.value.toUpperCase();});}
 

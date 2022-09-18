@@ -3523,8 +3523,12 @@ function yetkibul(byVal alan)
 end function
 
 
-function yetkisizGiris(byVal ek1, byVal ek2,byVal ek3)
-		call logla("Yetkisiz Giriş")
+function yetkisizGiris(byVal gelenmetin, byVal ek2,byVal ek3)
+		if gelenmetin = "" then
+			call logla("Yetkisiz Giriş")
+		else
+			call logla(gelenmetin)
+		end if
 		Response.Write "<div class=""container-fluid mt-5"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
@@ -3532,7 +3536,11 @@ function yetkisizGiris(byVal ek1, byVal ek2,byVal ek3)
 				Response.Write "<div class=""card"">"
 				Response.Write "<div class=""card-header text-white bg-primary"">Hata Oluştu</div>"
 				Response.Write "<div class=""card-body"">"
-				Response.Write "Bu alana girmek için yetkiniz yeterli değil."
+				if gelenmetin = ""then
+					Response.Write "Bu alana girmek için yetkiniz yeterli değil."
+				else
+					Response.Write gelenmetin
+				end if
 				Response.Write "</div>"
 				Response.Write "</div>"
 			Response.Write "</div>"
@@ -3748,7 +3756,61 @@ end function
  
  
  
- 
+ function dataTableYap(byVal dtad, byVal dtbasliklar, byVal dtjsonfile,byVal dtislemler, byVal dtsql, byVal ek1, byVal ek2, byVal ek3, byVal ek4, byVal ek5, byVal ek6, byVal ek7)
+    'dtad = sayfada birden fazla datatable varsa diye ayrıştırıcı isim. Türkçe karakter ve numara olmaz
+    'dtbasliklar = virgül ile ayrılmış başlıklar
+    'dtjsonfile = json dosya yolu
+    'dtislemler = işlemler alanı var - yok
+    'dtsql = opsiyonel.  dosya içinde gösterilecek sorgu.
+    Response.Write "<div class=""card"">"
+    Response.Write "<div class=""card-body"">"
+    Response.Write "<div class=""row"">"
+    Response.Write "<div class=""col-12"">"
+    Response.Write "<div class=""table-responsive"">"
+        Response.Write "<table id=""" & dtad & """ class=""display"" cellspacing=""0"" width=""100%"">"
+        Response.Write "<thead>"
+        Response.Write "<tr>"
+        dtbaslikarr = Split(dtbasliklar,",")
+        for dth = 0 to ubound(dtbaslikarr)
+            Response.Write "<th>" & dtbaslikarr(dth) & "</th>"
+        next
+        Response.Write "</thead>"
+        Response.Write "</table>"
+    Response.Write "</div>"
+    Response.Write "</div>"
+    Response.Write "</div>"
+    Response.Write "</div>"
+    Response.Write "</div>"
+
+    Response.Write "<scr" & "ipt type=""text/javascript"">"
+        Response.Write "$(document).ready(function() {"
+            Response.Write "$('#" & dtad & "').dataTable( {"
+                Response.Write "'lengthMenu': [[50, 100, 200, 500, 1000, -1], [50, 100, 200, 500, 1000, '" & translate("Hepsi","","") & "']]"
+                Response.Write ",processing: true"
+                Response.Write ",serverSide: true"
+                Response.Write ",order: [[ 4, ""desc"" ]]"
+                Response.Write ",ajax: '" & dtjsonfile & "'"
+                Response.Write ",'language': {"
+                Response.Write "'lengthMenu': '" & translate("Sayfa başına _MENU_ kayıt gösteriliyor","","") & "'"
+                Response.Write ",'zeroRecords': '" & translate("Kayıt bulunamadı","","") & "'"
+                Response.Write ",'info': '" & translate("_PAGE_ - _PAGES_ arası sayfalar gösteriliyor","","") & "'"
+                Response.Write ",'infoEmpty': '" & translate("Kayıt bulunamadı","","") & "'"
+                Response.Write ",'infoFiltered': '" & translate("(_MAX_ kayıt filtreleniyor)","","") & "'"
+                Response.Write ",'emptyTable': '" & translate("Veri Bulunamadı","","") & "'"
+                Response.Write ",'infoPostFix':''"
+                Response.Write ",'thousands':  ','"
+                Response.Write ",'loadingRecords': '" & translate("Yükleniyor","","") & "'"
+                Response.Write ",'processing': '" & translate("İşleniyor","","") & "'"
+                Response.Write ",'search': '" & translate("Ara :","","") & "'"
+                Response.Write ",'paginate': {'first':'" & translate("İlk","","") & "','last':'" & translate("Son","","") & "','next':'" & translate("Sonraki","","") & "','previous':'" & translate("Önceki","","") & "'}"
+                Response.Write "}"
+            Response.Write "});"
+        Response.Write "});"
+    Response.Write "</scr" & "ipt>"
+
+
+
+end function
  
  
 

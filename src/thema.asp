@@ -529,13 +529,14 @@ if kid <> "" then
 	else
 		sorgu = sorgu & "ad_en as ad"
 	end if
-	sorgu = sorgu & ",link,icon,target from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and (panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') or panelKullanimTuru is null) and menuYeri is null order by sira asc"
+	sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and (panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') or panelKullanimTuru is null) and menuYeri is null order by sira asc"
 	rs.open sorgu, sbsv5, 1, 3
 		for ri = 1 to rs.recordcount
 			ad		=	rs("ad")
 			link	=	rs("link")
 			icon	=	rs("icon")
 			target	=	rs("target") & ""
+			yetkigrup	=	rs("yetkigrup") & ""
 			if link = "#" or isnull(link) = True then
 				Response.Write "<li class=""nav-item""><a class=""nav-link"" data-toggle=""collapse"" href=""#ui-basic" & ri & """ aria-expanded=""false"" aria-controls=""ui-basic" & ri & """>"
 				Response.Write "<i class="""
@@ -546,22 +547,56 @@ if kid <> "" then
 				Response.Write "</span><i class=""menu-arrow""></i></a>"
 				Response.Write "<div class=""collapse"" id=""ui-basic" & ri & """>"
 				Response.Write "<ul class=""nav flex-column sub-menu"">"
+					if yetkigrup = "Raporlar" then
+						'######### RAPORLAR
+						'######### RAPORLAR
+							sorgu = "Select raporID,raporAd,raporDosya,raporIcon,raporTuru from rapor.raporIndex where firmaID = " & firmaID & " and silinmis = 'False' order by siraMenu asc"
+							rs3.open sorgu, sbsv5, 1, 3
+								for riii = 1 to rs3.recordcount
+									raporAd		=	rs3("raporAd")
+									raporDosya	=	rs3("raporDosya")
+									raporIcon	=	rs3("raporIcon")
+									raporTuru	=	rs3("raporTuru")
+									raporID		=	rs3("raporID")
+									if raporTuru = "datatable" or raporTuru = "htmltable" then
+										raporID64	=	raporID
+										raporID64	=	base64_encode_tr(raporID64)
+										raporDosya	=	"rapor/genel/" & raporID64
+									end if
+									Response.Write "<li class=""nav-item"">"
+									Response.Write "<a href=""/"
+									Response.Write raporDosya
+									Response.Write """"
+									Response.Write """ class=""nav-link"">"
+									Response.Write "<i class="""
+									Response.Write raporIcon
+									Response.Write """></i>"
+									Response.Write "&nbsp;"
+									Response.Write raporAd
+									Response.Write "</a>"
+									Response.Write "</li>"
+								rs3.movenext
+								next
+							rs3.close
+						'######### RAPORLAR
+						'######### RAPORLAR
+					end if
 				sorgu = "select id,"
 				if klang = "tr" then
 					sorgu = sorgu & "ad"
 				else
 					sorgu = sorgu & "ad_en as ad"
 				end if
-				sorgu = sorgu & ",link,icon,target from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = " & rs("ID") & " and " & yetkisorgu & " order by sira asc"
+				sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = " & rs("ID") & " and " & yetkisorgu & " order by sira asc"
 				rs2.open sorgu, sbsv5, 1, 3
 					for rii = 1 to rs2.recordcount
 						if gelenadres4 = link then
 							acikmenu = ri
 						end if
-						ad		=	rs2("ad")
-						link	=	rs2("link")
-						icon	=	rs2("icon")
-						target	=	rs2("target") & ""
+						ad			=	rs2("ad")
+						link		=	rs2("link")
+						icon		=	rs2("icon")
+						target		=	rs2("target") & ""
 						if link = "#" then
 							Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""#"">"
 							Response.Write "<i class="""

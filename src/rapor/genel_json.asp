@@ -5,7 +5,7 @@
     call sessiontest()
     kid		=	kidbul()
     hata    =   ""
-    modulAd =   "Teklif"
+    modulAd =   "Raporlar"
     personelID =   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR
@@ -18,8 +18,6 @@
 yetkiTeklif = yetkibul(modulAd)
 
 orderalanar		=	Array("teklifsonuc","firmaad","teklifsayi","teklifturu","tarih","teklifkullad","id")
-teklifturu		=	Array("","Kdv Dahil Toplamlı","Kdv Hariç Toplamlı","","Genel Teklif","Mail Order","Taksitli Mail Order")
-teklifsonuc		=	Array("<span class=\""badge badge-warning\"">Beklemede</span>","1","<span class=\""badge badge-success\"">Onaylanmış</span>","<span class=\""badge badge-info\"">Hazırlanıyor</span>","<span class=\""badge badge-danger\"">SATIŞ</span>")
 
 '##### gelen data
 	start		=	Request.QueryString("start")'40 - 0
@@ -51,41 +49,41 @@ call logla("Teklif JSON : " & aramakelime)
 	ToplamSayfa = 0
 
 sorgu = "EXEC teklif.sp_teklifliste @aramaKelime = '" & aramakelime & "' , @ilk = " & start & ",@kayit=" & length & ",@siralama='" & orderalan & "',@siralamaYon='" & ordertur & "',@yetki='" & yetkiTeklif & "',@kid='" & kid & "',@firmaID='" & firmaID & "'"
+sorgu = "select top 1 teklifsonuc,firmaad,teklifsayi,teklifturu,tarih,teklifkullad from teklif.teklif where teklifsonuc = 4 and tarih > '2022-01-01' and silinmis = 0"
 rs.open sorgu, sbsv5, 1, 3
 	if not rs.eof then
-		ToplamKayit = rs("ToplamKayit")
-		ToplamSayfa = rs("ToplamSayfa")
+		ToplamKayit = 1'rs("ToplamKayit")
+		ToplamSayfa = 1'rs("ToplamSayfa")
 	end if
 		Response.Write "{""draw"":" & session("tabloislem") & ",""recordsTotal"":" & ToplamKayit & ",""recordsFiltered"":" & ToplamKayit & ",""data"":["
 			do While not rs.eof
 				dongu = dongu + 1
 				Response.Write "["
-					Response.Write """" & teklifsonuc(rs("teklifsonuc")) & """"
+					Response.Write """" & rs("teklifsonuc") & """"
 					Response.Write ",""" & rs("firmaad") & """"
 					Response.Write ",""" & rs("teklifsayi") & """"
-					Response.Write ","""
-					Response.Write teklifturu(rs("teklifturu")) & """"
+					Response.Write ",""" & rs("teklifturu") & """"
 					Response.Write ",""" & rs("tarih") & """"
 					Response.Write ",""" & rs("teklifkullad") & """"
-					Response.Write ","""
-						if yetkiTeklif >= 2 then
-							if yetkiTeklif >= 5 then
-								Response.Write "<a style=\""cursor:pointer\"" title=\""Teklifi Onayla\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/onay.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-check-circle-o fa-lg\""></i></a>"
-							end if
-							if yetkiTeklif >= 7 then
-								Response.Write "<a style=\""cursor:pointer\"" title=\""Satışı Onayla\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/onay.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-money fa-lg\""></i></a>"
-							end if
-							if yetkiTeklif >= 6 then
-								Response.Write "<a style=\""cursor:pointer\"" title=\""Teklifi Sil\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/sil.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-trash fa-lg\""></i></a>"
-							end if
-							if yetkiTeklif >= 3 then
-								Response.Write "<a style=\""cursor:pointer\"" title=\""Teklifi Düzenle\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/yeni.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-file-text-o fa-lg\""></i></a>"
-							end if
-							if yetkiTeklif >= 2 then
-								Response.Write "<a style=\""cursor:pointer\"" title=\""PDF\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/pdf.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-file-pdf-o fa-lg\""></i></a>"
-							end if
-						end if
-					Response.Write """"
+					' Response.Write ","""
+					' 	if yetkiTeklif >= 2 then
+					' 		if yetkiTeklif >= 5 then
+					' 			Response.Write "<a style=\""cursor:pointer\"" title=\""Teklifi Onayla\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/onay.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-check-circle-o fa-lg\""></i></a>"
+					' 		end if
+					' 		if yetkiTeklif >= 7 then
+					' 			Response.Write "<a style=\""cursor:pointer\"" title=\""Satışı Onayla\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/onay.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-money fa-lg\""></i></a>"
+					' 		end if
+					' 		if yetkiTeklif >= 6 then
+					' 			Response.Write "<a style=\""cursor:pointer\"" title=\""Teklifi Sil\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/sil.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-trash fa-lg\""></i></a>"
+					' 		end if
+					' 		if yetkiTeklif >= 3 then
+					' 			Response.Write "<a style=\""cursor:pointer\"" title=\""Teklifi Düzenle\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/yeni.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-file-text-o fa-lg\""></i></a>"
+					' 		end if
+					' 		if yetkiTeklif >= 2 then
+					' 			Response.Write "<a style=\""cursor:pointer\"" title=\""PDF\"" class=\""badge\"" target=\""_blank\"" href=\""/teklif/pdf.asp?teklifid=" & rs("id") & "\""><i class=\""fa fa-file-pdf-o fa-lg\""></i></a>"
+					' 		end if
+					' 	end if
+					' Response.Write """"
 				Response.Write "]"
 			rs.movenext
 			if not rs.eof then
