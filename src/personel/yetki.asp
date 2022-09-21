@@ -45,6 +45,13 @@ yetkiPersonel = yetkibul("personel")
         firmamodulListesiArr            =   Split(firmamodulListesi,",")
         firmamodulListesiSecenekler     =   rs("modulListesiSecenekler")
         firmamodulListesiSecenekler     =   Split(firmamodulListesiSecenekler,"|")
+        for i = 0 to ubound(firmamodulListesiSecenekler)
+            fmArr = firmamodulListesiSecenekler(i)
+            fmArr = Split(fmArr,"##")
+            firmamodulListesiSecenekler(i) = fmArr(1)
+            ' Response.Write fmArr(1)
+            ' Response.Write "<br />"
+        next
 	end if
 	rs.close
 '###### FİRMAYI BUL

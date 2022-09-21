@@ -67,39 +67,51 @@ else
 	else
 		if yetkiKontrol > 0 then
             rs.open raporSQL, sbsv5, 1, 3
-                Response.Write "<div class=""table-responsive"">"
-                Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-                raporBasliklar = raporSQL
-                raporBasliklar = Replace(raporBasliklar,"select ","")
-                raporBasliklar1 = instr(raporBasliklar," from ")
-                raporBasliklar = left(raporBasliklar,raporBasliklar1)
-                raporBasliklarArr = Split(raporBasliklar,",")
-                for ri = 0 to ubound(raporBasliklarArr)
-                    if instr(raporBasliklarArr(ri)," as ") > 0 then
-                        baslikArr = Split(raporBasliklarArr(ri)," as ")
-                        baslik = baslikArr(1)
-                        baslik = Replace(baslik,"'","")
-                    else
-                        baslik = raporBasliklarArr(ri)
-                    end if
-                    Response.Write "<th scope=""col"">" & baslik & "</th>"
-                next
-                Response.Write "</tr></thead><tbody>"
-                if rs.recordcount > 0 then
-                    for i = 1 to rs.recordcount
-					Response.Write "<tr>"
-                        for ti = 0 to ubound(raporBasliklarArr)
-                            Response.Write "<td>"
-                            Response.Write rs(ti)
-                            Response.Write "</td>"
-                        next
-					Response.Write "</tr>"
-                    rs.movenext
-                    next
-                end if
-                Response.Write "</tbody>"
-                Response.Write "</table>"
-                Response.Write "</div>"
+			Response.Write "<div class=""container-fluid"">"
+			Response.Write "<div class=""row"">"
+				Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
+					Response.Write "<div class=""card"">"
+					Response.Write "<div class=""card-body"">"
+					Response.Write "<div class=""row"">"
+						Response.Write "<div class=""table-responsive"">"
+						Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
+						raporBasliklar = raporSQL
+						raporBasliklar = Replace(raporBasliklar,"select ","")
+						raporBasliklar1 = instr(raporBasliklar," from ")
+						raporBasliklar = left(raporBasliklar,raporBasliklar1)
+						raporBasliklarArr = Split(raporBasliklar,",")
+						for ri = 0 to ubound(raporBasliklarArr)
+							if instr(raporBasliklarArr(ri)," as ") > 0 then
+								baslikArr = Split(raporBasliklarArr(ri)," as ")
+								baslik = baslikArr(1)
+								baslik = Replace(baslik,"'","")
+							else
+								baslik = raporBasliklarArr(ri)
+							end if
+							Response.Write "<th scope=""col"">" & baslik & "</th>"
+						next
+						Response.Write "</tr></thead><tbody>"
+						if rs.recordcount > 0 then
+							for i = 1 to rs.recordcount
+							Response.Write "<tr>"
+								for ti = 0 to ubound(raporBasliklarArr)
+									Response.Write "<td>"
+									Response.Write rs(ti)
+									Response.Write "</td>"
+								next
+							Response.Write "</tr>"
+							rs.movenext
+							next
+						end if
+						Response.Write "</tbody>"
+						Response.Write "</table>"
+						Response.Write "</div>"
+					Response.Write "</div>"
+					Response.Write "</div>"
+					Response.Write "</div>"
+				Response.Write "</div>"
+			Response.Write "</div>"
+			Response.Write "</div>"
             rs.close
 		else
 			call yetkisizGiris("Raporu Görme Yetkiniz Yok","","")

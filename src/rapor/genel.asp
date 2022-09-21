@@ -50,11 +50,12 @@ else
 	'### YETKİ KONTROLÜ YAP
 	'### RAPOR BİLGİLERİNİ AL
 	'### RAPOR BİLGİLERİNİ AL
-	sorgu = "Select raporAd,raporTuru from rapor.raporIndex where raporID = " & gorevID
+	sorgu = "Select raporAd,raporTuru,raporSQL from rapor.raporIndex where raporID = " & gorevID
 	rs.open sorgu, sbsv5, 1, 3
 		if rs.recordcount > 0 then
 			raporAd = rs("raporAd")
 			raporTuru = rs("raporTuru")
+			raporSQL    =   rs("raporSQL")
 		end if
 	rs.close
 	'### RAPOR BİLGİLERİNİ AL
@@ -64,23 +65,34 @@ else
 	else
 		call logla("Rapor : " & raporAd)
 		if yetkiKontrol > 0 then
-			Response.Write "<div class=""container-fluid"">"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
-					Response.Write "<div class=""card"">"
-					Response.Write "<div class=""card-body"">"
-					Response.Write "<div class=""row"">"
-						if raporTuru = "htmltable" then
-							Server.Execute "/rapor/genel_html.asp"
-						elseif raporTuru = "datatable" then
-							call dataTableYap("deneme","Durum,Firma Adı,Teklif Sayı,Teklif Türü,Tarih,Personel","/rapor/genel_json.asp","","","","","","","","","")
+			if raporTuru = "htmltable" then
+				Server.Execute "/rapor/genel_html.asp"
+			elseif raporTuru = "datatable" then
+				'##### BAŞLIKLARI BUL
+				'##### BAŞLIKLARI BUL
+					raporBasliklar = raporSQL
+					raporBasliklar = Replace(raporBasliklar,"select ","")
+					raporBasliklar1 = instr(raporBasliklar," from ")
+					raporBasliklar = left(raporBasliklar,raporBasliklar1)
+					raporBasliklarArr = Split(raporBasliklar,",")
+					for ri = 0 to ubound(raporBasliklarArr)
+						if instr(raporBasliklarArr(ri)," as ") > 0 then
+							baslikArr = Split(raporBasliklarArr(ri)," as ")
+							baslik = baslikArr(1)
+							baslik = Replace(baslik,"'","")
+						else
+							baslik = raporBasliklarArr(ri)
 						end if
-					Response.Write "</div>"
-					Response.Write "</div>"
-					Response.Write "</div>"
-				Response.Write "</div>"
-			Response.Write "</div>"
-			Response.Write "</div>"
+						basliklar = basliklar & "," & baslik
+					next
+					basliklar = right(basliklar,len(basliklar)-1)
+				'##### BAŞLIKLARI BUL
+				'##### BAŞLIKLARI BUL
+
+						Response.Write basliklar
+
+				call dataTableYap("deneme","Firma Adı,Teklif Sayı,Teklif Türü,Tarih,Personel","/rapor/genel_json.asp?id=" & gorevID64,"","","","","","","","","")
+			end if
 		else
 			call yetkisizGiris("Raporu Görme Yetkiniz Yok","","")
 		end if
