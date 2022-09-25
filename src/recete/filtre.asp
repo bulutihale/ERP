@@ -12,9 +12,12 @@
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
 
-		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "<div class=""row rounded justify-content-between card-header p-0 border-secondary mb-2"">"
+			Response.Write "<div class=""h5 p-2"">Filtreler</div>"
+			Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "</div>"
+
 	Response.Write "<div class=""card rounded-top"">"
-		Response.Write "<div class=""card-header h5"">Fitreler</div>"
 	
 		Response.Write "<div class=""card-body"">"
 			Response.Write "<form action=""/recete/recete_liste.asp"" method=""post"" id=""filtreForm"">"

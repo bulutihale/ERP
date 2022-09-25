@@ -318,6 +318,9 @@ language_tr = language_tr & "||Sonraki=Sonraki"
 language_tr = language_tr & "||Önceki=Önceki"
 language_tr = language_tr & "||Ara :=Ara :"
 language_tr = language_tr & "||YENİ STOK=YENİ STOK"
+language_tr = language_tr & "||Rapor Adı=Rapor Adı"
+language_tr = language_tr & "||Rapor Türü=Rapor Türü"
+language_tr = language_tr & "||SQL Sorgusu=SQL Sorgusu"
 if klang = "" then
 klang = "tr"
 end if

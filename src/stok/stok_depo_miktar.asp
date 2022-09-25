@@ -46,7 +46,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<th scope=""col"">Ürün Adı</th>"
 		Response.Write "<th scope=""col"">LOT</th>"
 		Response.Write "<th scope=""col"">Lot Miktar</th>"
-		Response.Write "<th scope=""col"">Depo Miktar</th>"
+		' Response.Write "<th scope=""col"">Depo Miktar</th>"
 		Response.Write "<th scope=""col"">Depo Ad</th>"
 		Response.Write "</tr></thead><tbody>"
 		
@@ -63,7 +63,7 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td>" & stokAd & "</td>"
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td class=""text-right"">" & lotMiktar & " " & miktarBirim & " </td>"
-						Response.Write "<td class=""text-right"">" & stokMiktar & " " & miktarBirim & " </td>"
+						' Response.Write "<td class=""text-right"">" & stokMiktar & " " & miktarBirim & " </td>"
 						Response.Write "<td>" & depoAd & "</td>"
 					Response.Write "</tr>"
 					Response.Flush()

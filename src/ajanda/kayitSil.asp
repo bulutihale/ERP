@@ -4,20 +4,6 @@
 	Response.Flush()
 
 
-'##### kidarr
-'##### kidarr
-	kidarr	=	Request.Cookies("kidarr")
-	kidarr	=	base64_decode_tr(kidarr)
-	if instr(kidarr,"#") > 0 then
-		kidarr 				= 	Split(kidarr,"#")
-		musteriID			=	kidarr(0)
-		mtimeout			=	kidarr(1)
-		kad					=	kidarr(2)
-		sayfaKayitSayisi	=	int(kidarr(3))
-		set kidarr = Nothing
-	end if
-'##### kidarr
-'##### kidarr
 
 
 	'##### request
@@ -40,7 +26,8 @@
 			rs.update
 		rs.close
 
-	
+		sorgu = "UPDATE " & tablo & " SET silindi = 1 WHERE bagliAjandaID = " & silinecekID
+		rs.open sorgu,sbsv5,1,3
 	
 
 

@@ -211,7 +211,7 @@ else
 											Response.Write "<div title=""" & translate("Reçete Adım Düzenle","","") & """ class=""badge badge-pill pointer"
 											Response.Write " badge-success"
 											Response.Write """"
-											Response.Write " onClick=""modalajax('/recete/recete_adim_yeni.asp?receteAdimID=" & rs("receteAdimID") & "&receteID=" & gorevID & "')"">"
+											Response.Write " onClick=""modalajax('/recete/recete_adim_yeni.asp?islem=edit&receteAdimID=" & rs("receteAdimID") & "&receteID=" & gorevID & "')"">"
 											Response.Write "<i class=""mdi mdi-account-convert"
 											Response.Write """></i>"
 											Response.Write "</div>"

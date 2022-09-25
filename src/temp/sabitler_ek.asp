@@ -23,6 +23,8 @@ if firmaID = 5 then
 	sb_yetkiliPersonel="Başar Sönmez|+905053376198"
 	sb_activeuserUrlTimeout="10000"
 	sb_ssl = 1
+	sb_sqlYedekCompress = true
+	sb_fizikselPath = "C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\backup\"
 
 	'## EMAIL
 	sb_portalMail		=	"portal@sbstasarim.com"

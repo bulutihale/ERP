@@ -73,8 +73,4 @@ else
 end if
 
 
-
-'|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9
-
-
 %><!--#include virtual="/reg/rs.asp" -->

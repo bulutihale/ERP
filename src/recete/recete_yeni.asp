@@ -19,7 +19,6 @@
 Response.Flush()
 
 
-call logla("Yeni Reçete Ekleme Ekranı Girişi")
 
 yetkiKontrol = yetkibul(modulAd)
 
@@ -55,11 +54,18 @@ end if
 				eskiReceteID	=	gorevID
 				receteAd		=	receteAd & " - KOPYA"
 				gorevID			=	""
+				divAd			=	"Reçete Klonlama"
+			else
+				divAd			=	"Yeni Reçete Oluşturma"
 			end if
 
+call logla(divAd & " Ekranı Girişi")
 
 	if hata = "" and yetkiKontrol > 2 then
-		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "<div class=""row rounded justify-content-between card-header p-0 border-secondary mb-2"">"
+			Response.Write "<div class=""h5 p-2"">" & divAd & "</div>"
+			Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "</div>"
 		Response.Write "<form action=""/recete/recete_ekle.asp"" method=""post"" class=""ajaxform"">"
 			call formhidden("receteID",gorevID,"","","","","receteID","")
 			call formhidden("islem",islem,"","","","","islem","")
@@ -97,8 +103,7 @@ end if
 				Response.Write "</div>"
 			Response.Write "</div>"
 		Response.Write "</div>"
-		
-		
+
 		Response.Write "<div class=""form-row align-items-center"">"
 			Response.Write "<div class=""col-sm-3 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Tipi</span>"

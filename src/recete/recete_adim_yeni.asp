@@ -7,6 +7,7 @@
     kid					=	kidbul()
     receteAdimID		=	Request.QueryString("receteAdimID")
 	receteID			=	Request.QueryString("receteID")
+	islem				=	Request.QueryString("islem")
 	if receteID = "" then
 		receteID = Request.Form("receteID")
 	end if
@@ -23,7 +24,8 @@ call logla("Yeni Reçete Adım Ekleme Ekranı Girişi")
 yetkiKontrol = yetkibul(modulAd)
 
 if receteAdimID <> "" then
-            sorgu = "SELECT t1.stokID, t3.stokAd, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID, t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur"
+            sorgu = "SELECT t1.stokID, t3.stokAd, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID,"
+			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger"
 			sorgu = sorgu & " FROM recete.receteAdim t1"
 			sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t1.receteISlemTipiID = t2.receteISlemTipiID"
 			sorgu = sorgu & " LEFT JOIN stok.stok t3 ON t1.stokID = t3.stokID"
@@ -42,12 +44,14 @@ if receteAdimID <> "" then
 				sira				=	rs("sira")
 				altReceteID			=	rs("altReceteID")
 				stokKontroluYap		=	rs("stokKontroluYap")
+				onHazirlikTur		=	rs("onHazirlikTur")
+				onHazirlikDeger		=	rs("onHazirlikDeger")
 				receteIslemTipiID	=	rs("receteIslemTipiID")
 				receteIslemAd		=	rs("ad")
-				defDeger1			=	receteIslemTipiID&"###"&receteIslemAd
-				defDeger2			=	stokID&"###"&stokAd
-				defDeger3			=	miktarBirim&"###"&uzunBirim
-				defDeger4			=	fireBirim&"###"&uzunBirim
+				defDeger1			=	receteIslemTipiID & "###" & receteIslemAd
+				defDeger2			=	stokID & "###" & stokAd
+				defDeger3			=	miktarBirim & "###" & uzunBirim
+				defDeger4			=	fireBirim & "###" & uzunBirim
             rs.close
 			
 end if
@@ -60,7 +64,7 @@ end if
 		rs.open sorgu, sbsv5, 1, 3
 			islemTur	=	rs("islemTur")
 			islemAd		=	rs("ad")
-			defDeger	=	receteISlemTipiID&"###"&islemAd
+			defDeger	=	receteISlemTipiID & "###" & islemAd
 		rs.close
 	end if	
 '################ Yeni adım kayıt ediliyorsa seçilen işleme göre inputları göster
@@ -94,6 +98,7 @@ end if
 	Response.Write "<div id=""adimYeniUStDIV"">"
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "<form action=""/recete/recete_adim_ekle.asp"" method=""post"" class=""ajaxform"">"
+			call formhidden("islem",islem,"","","","autocompleteOFF","islem","")
 			call formhidden("receteID",receteID,"","","","autocompleteOFF","receteID","")
 			call formhidden("receteAdimID",receteAdimID,"","","","autocompleteOFF","receteAdimID","")
 						Response.Write "<div class=""row mt-2"">"
@@ -142,6 +147,19 @@ end if
 							Response.Write "</div>"
 						Response.Write "</div>"
 						'#### KİŞİ SAYISI
+
+						Response.Write "<div class=""row mt-2"">"
+							Response.Write "<div class=""col-6 my-1"">"
+								Response.Write "<span class=""badge badge-secondary rounded-left"">Ön Hazırlık Süre</span>"
+								call formselectv2("onHazirlikDeger",onHazirlikDeger,"","","onHazirlikDeger","","onHazirlikDeger",sayiDegerler,"")
+							Response.Write "</div>"
+							Response.Write "<div class=""col-6 my-1"">"
+								Response.Write "<span class=""badge badge-secondary rounded-left"">Ön Hazırlık Birim</span>"
+								call formselectv2("onHazirlikTur",onHazirlikTur,"","","onHazirlikTur","","onHazirlikTur",hazTurDegerler,"")
+							Response.Write "</div>"						
+						Response.Write "</div>"
+						
+
 						
 						'#### BAŞKA REÇETE ÇAĞIR
 						Response.Write "<div class=""row mt-2"&altReceteRow&""">"

@@ -27,6 +27,18 @@ muhasebedbArr   =   Array("best2022","best2021")
 				stokTipDegerler = "=|Mamül=1|Yarı Mamül=2|Bileşen=3|Hammadde=4"
 	'##### Stok Tipleri
 	
-	
+	'##### Reçete Ön Hazırlık Tipleri
+				hazTurDegerler = "=|Saat=Saat|Gün=Gün"
+	'##### Reçete Ön Hazırlık Tipleri
+
+	'##### 0'dan 24'e sayilar
+			sayiDegerler = "=|"
+		for qi = 0 to 24
+			sayiDegerler = sayiDegerler & qi & " = " & qi
+			if qi < 24 then
+				sayiDegerler = sayiDegerler & "|"
+			end if
+		next
+	'##### 0'dan 24'e sayilar
 
 %>

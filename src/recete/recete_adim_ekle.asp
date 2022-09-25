@@ -10,6 +10,7 @@
 	receteID64			=	receteID
 	receteID64			=	base64_encode_tr(receteID64)
 	receteAdimID		=	Request.Form("receteAdimID")
+	islem				=	Request.Form("islem")
 	receteIslemTipiID	=	Request.Form("receteIslemTipiID")
 	stokID				=	Request.Form("stokID")
     miktar	 			=	Request.Form("miktar")
@@ -17,6 +18,8 @@
 	fire				=	Request.Form("fire")
 	fireBirim			=	Request.Form("fireBirim")
 	isGucuSayi			=	Request.Form("isGucuSayi")
+	onHazirlikDeger		=	Request.Form("onHazirlikDeger")
+	onHazirlikTur		=	Request.Form("onHazirlikTur")
 	altReceteID			=	Request.Form("altReceteID")
 	silindi				=	Request.Form("silindi")
 
@@ -74,7 +77,11 @@ end if
 				rs("isGucuSayi")		=	isGucuSayi
 				rs("altReceteID")		=	altReceteID
 				rs("receteIslemTipiID")	=	receteIslemTipiID
-				rs("sira")				=	900' en son eklenen adım en son sıraya atılsın, recete_adim_sira.asp ye yönlendiğinde sıra numarası düzeltiliyor.
+				rs("onHazirlikDeger")	=	onHazirlikDeger
+				rs("onHazirlikTur")		=	onHazirlikTur
+				if islem <> "edit" then 'editleniyorsa sıra değişmesin
+					rs("sira")				=	900' en son eklenen adım en son sıraya atılsın, recete_adim_sira.asp ye yönlendiğinde sıra numarası düzeltiliyor.
+				end if
             rs.update
 				receteAdimID	=	rs("receteAdimID")
             rs.close
@@ -83,7 +90,11 @@ end if
 
 call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
 
-call jsrun("$('#ajax').load('/recete/recete_adim_sira.asp?receteAdimID="&receteAdimID&"')")
+if islem = "edit" then
+	call jsac("/recete/recete_adim_liste.asp?gorevID=" & receteID)
+else
+	call jsrun("$('#ajax').load('/recete/recete_adim_sira.asp?receteAdimID="&receteAdimID&"')")
+end if
 
 
 'call jsrun("$('#ortaalan').load('/recete/recete_adim_liste/"&receteID64&" #ortaalan >*')")

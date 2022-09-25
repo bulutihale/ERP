@@ -59,7 +59,7 @@ end if
 '###### ARAMA FORMU
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 2 then
-		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "<div class=""text-right""><span onclick=""modalkapat()"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "<form action=""/depo/depo_ekle.asp"" method=""post"" class=""ajaxform"">"
 			call formhidden("depoID",gorevID,"","","","autocompleteOFF","depoID","")
 			'call formhidden("cariID",cariID,"","","","autocompleteOFF","cariID","")
