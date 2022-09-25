@@ -23,26 +23,32 @@ if firmaID = 5 then
 	sb_yetkiliPersonel="Başar Sönmez|+905053376198"
 	sb_activeuserUrlTimeout="10000"
 	sb_ssl = 1
-	sb_sqlYedekCompress = true
 	sb_fizikselPath = "C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\backup\"
+	sb_sqlYedekCompress = true
+	sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
+	sb_sqlYedekSilGun	=	30
 
 	'## EMAIL
-	sb_portalMail		=	"portal@sbstasarim.com"
-	sb_portalMailUser	=	"portal@sbstasarim.com"
-	sb_portalMailPass	=	"portAl112!"
-	sb_teklifMail		=	"satis@sbstasarim.com"
-	sb_teklifMailUser	=	"satis@sbstasarim.com"
-	sb_teklifMailPass	=	"Sati22^11"
+	sb_mailserver		=	"212.68.61.84:587"
+	sb_mailsender		=	"teknik@sbstasarim.com"
+	sb_mailsenderPass	=	"sgxuewlv12!!@3"
+	sb_mailsenderAd		=	"ERP"
+	' sb_portalMail		=	"portal@sbstasarim.com"
+	' sb_portalMailUser	=	"portal@sbstasarim.com"
+	' sb_portalMailPass	=	"portAl112!"
+	' sb_teklifMail		=	"satis@sbstasarim.com"
+	' sb_teklifMailUser	=	"satis@sbstasarim.com"
+	' sb_teklifMailPass	=	"Sati22^11"
 
 	'## SSO
-	firmaSSO		=	""
-	firmaSSOAdres	=	""
-	firmaSSODomain	=	""
-	firmaSSOLdap	=	""
-	firmaSSOdb		=	"TIO2022"
+	firmaSSO			=	""
+	firmaSSOAdres		=	""
+	firmaSSODomain		=	""
+	firmaSSOLdap		=	""
+	firmaSSOdb			=	"TIO2022"
 
-    sb_TBLSTSABIT_cache    =   false
-    sb_iskontoSayisi        =   0
+    sb_TBLSTSABIT_cache	=   false
+    sb_iskontoSayisi	=   0
 
 end if
 

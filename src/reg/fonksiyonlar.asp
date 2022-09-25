@@ -2452,7 +2452,17 @@ function iphonenotification(byVal mesaj,byVal pushID,byVal site)
 	call apklog("iphone-notification","pushID","")
 end function
 
+
+
 Function hizlimailat(byVal baslik, byVal icerik,byVal gonderen,byVal hedef,byVal ek)
+
+' BU
+' ESKİDİ
+' YENİSİ
+' call mailgonder(baslik,icerik,gonderen,gonderenAd,hedef,ekDosya,basariliMesaj,hataMesaj,"","","","","")
+
+
+
 	'call hizlimailat(baslik,icerik,gonderen,hedef,ek)
 	if hedef <> "" then
 		'http://www.dimac.net/Products/w3Jmail/Version37/Reference/RefStart.htm
@@ -2461,8 +2471,7 @@ Function hizlimailat(byVal baslik, byVal icerik,byVal gonderen,byVal hedef,byVal
 		JMail.Silent					=	true
 		JMail.Logging					=	true
 		JMail.charset					=	"utf-8"
-'		JMail.ServerAddress				=	"212.68.61.84:587"
-		JMail.ServerAddress				=	"77.92.141.133:587"
+		JMail.ServerAddress				=	sb_mailserver
 		JMail.Sender					=	gonderen
 		JMail.Subject					=	baslik
 		JMail.HTMLBody					=	icerik
@@ -2479,11 +2488,15 @@ Function hizlimailat(byVal baslik, byVal icerik,byVal gonderen,byVal hedef,byVal
 		end if
 '		JMail.AddRecipientbcc				"teknik@sbstasarim.com"
 		if ek <> "" then
-			JMail.AddAttachment				Server.Mappath(ek)
+			' if left(ek,1) = "/" then
+				' JMail.AddAttachment				("C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\backup\yedek25092022170245.bak")
+			' else
+				JMail.AddAttachment				Server.Mappath(ek)
+			' end if
 		end if
 
 		if not JMail.execute then
-			response.write "Mesaj:" & JMail.ErrorMessage & "Kaynak : " & JMail.ErrorSource & "Log : " & JMail.Log
+			Response.Write "Mesaj:" & JMail.ErrorMessage & "Kaynak : " & JMail.ErrorSource & "Log : " & JMail.Log
 		end if
 		if jmaillog = True then
 			jmaillog = JMail.Log
@@ -3812,6 +3825,61 @@ end function
 
 end function
  
- 
+
+
+
+
+function dosyaOlustur(byVal dosyaAd, byVal dosyaYolu, byVal dosyaIcerik, byVal ek1, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
+	Set objStream = server.CreateObject("ADODB.Stream")
+	objStream.Open
+	objStream.CharSet = "UTF-8"
+    objStream.WriteText dosyaIcerik
+	objStream.SaveToFile Server.Mappath(dosyaYolu & dosyaAd),2
+	objStream.Close
+	set objStream = Nothing
+end function
+
+
+
+Function mailgonder(byVal baslik, byVal icerik, byVal gonderen, byVal gonderenAd, byVal hedef, byVal ekDosya, byVal basariliMesaj, byVal hataMesaj, byVal ek1, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
+    if hedef <> "" then
+        on error resume next
+        set msg                 =   Server.CreateOBject("JMail.Message")
+        msg.Charset             =   "UTF-8"
+        msg.Logging             =   true
+        msg.From                =   sb_mailsender
+        msg.FromName            =   gonderenAd
+        msg.MailServerUserName  =   sb_mailsender
+        msg.MailServerPassword  =   sb_mailsenderPass
+        msg.AddRecipient            hedef
+        msg.Subject             =   baslik
+        msg.Body                =   icerik
+        if ekDosya = "" then
+        else
+            if left(ekDosya,1) = "/" then
+                msg.AddAttachment ekDosya
+            else
+                msg.AddAttachment ekDosya
+            end if
+        end if
+		msg.AddHeader "Originating-IP", Request.ServerVariables("REMOTE_ADDR")
+        if not msg.Send( "212.68.61.84:587" ) then
+            dosyaAd     =   unique() & ".txt"
+            dosyaYolu   =   "/temp/mailhata/"
+            dosyaIcerik =   msg.log
+            call dosyaOlustur(dosyaAd,dosyaYolu,dosyaIcerik,"","","","","")
+            mesajicerik = hataMesaj
+            call logla(mesajicerik)
+            Response.Write mesajicerik & " : " & now() & "<br />"
+            Response.Flush()
+        else
+            mesajicerik = basariliMesaj
+            call logla(mesajicerik)
+            Response.Write mesajicerik & " : " & now() & "<br />"
+            Response.Flush()
+        end if
+        on error goto 0
+    end if
+End Function
 
 %>
