@@ -14,7 +14,7 @@
     modulAd 		=   "satis"
 	
 	'####### varsayılan tarih sınırları
-		if t1 = "" then t1 = date() - 30 end if
+		if t1 = "" then t1 = date() - 60 end if
 		if t2 = "" then t2 = date() end if
 	'####### /varsayılan tarih sınırları
 	
@@ -39,7 +39,8 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Tarih</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Teslim Tarih</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Kod</th>"
-		Response.Write "<th class=""col-3"" scope=""col"">Ürün Adı</th>"
+		Response.Write "<th class=""col-2"" scope=""col"">Ürün Adı</th>"
+		Response.Write "<th class=""col-1"" scope=""col"">Depo</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Miktar</th>"
 		Response.Write "<th class=""col-1"" scope=""col""><span>Giden</span> / <span class=""text-danger"">İptal</span></th>"
 		Response.Write "<th class=""col-1"" scope=""col""></th>"
@@ -85,6 +86,8 @@ Response.Write "<div class=""card-body"">"
 					siparisKalemID		=	rs("siparisKalemID")
 					siparisNo			=	rs("siparisNo")
 					stokID				=	rs("stokID")
+					stokID64	 		=	stokID
+					stokID64			=	base64_encode_tr(stokID64)
 					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
 					cariAd				=	rs("cariAd")
@@ -123,6 +126,12 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td class=""text-center"">" & teslimTarih & "</td>"
 						Response.Write "<td>" & stokKodu & "</td>"
 						Response.Write "<td>" & stokAd & "</td>"
+						Response.Write "<td class=""text-center"">"
+							Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
+								Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
+								Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+							Response.Write "</div>"
+						Response.Write "</td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
 						Response.Write "<td class=""text-center bold"">"
 							Response.Write  "<span>" & teslimEdilen & " " & teslimBirim & "</span>"

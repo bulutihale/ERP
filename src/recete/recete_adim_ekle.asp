@@ -40,6 +40,9 @@ yetkiKontrol = yetkibul(modulAd)
 if miktar = "" then
 	miktar = 0
 end if
+if fire = "" then
+	fire = 0
+end if
 
 if isGucuSayi = "" then
 	isGucuSayi = 0

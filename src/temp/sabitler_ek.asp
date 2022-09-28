@@ -1,5 +1,7 @@
 <%
-mainUrl = Request.ServerVariables("HTTP_HOST")
+'##### OTOMATİK SSL
+'##### OTOMATİK SSL
+	mainUrl = Request.ServerVariables("HTTP_HOST")
 	sb_url=mainUrl
 	if Request.ServerVariables("SERVER_PORT") = 443 then
 		sb_mainUrlOnEk = "https://"
@@ -8,6 +10,8 @@ mainUrl = Request.ServerVariables("HTTP_HOST")
 		sb_mainUrlOnEk = "http://"
 		sb_ssl=0
 	end if
+'##### OTOMATİK SSL
+'##### OTOMATİK SSL
 
 
 
@@ -19,20 +23,21 @@ if firmaID = 5 then
 	sb_logo128=sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
 	sb_cdnUrl=sb_mainUrlOnEk & mainUrl & "/cdn"
 	sb_activeuserUrl=sb_mainUrlOnEk & mainUrl & "/activeuser.asp"
-	sb_konum="izmir"
-	sb_yetkiliPersonel="Başar Sönmez|+905053376198"
-	sb_activeuserUrlTimeout="10000"
+	sb_konum="izmir"																			'hava durumu için
+	sb_yetkiliPersonel="Başar Sönmez|+905053376198"												'destek için. eklenecek
+	sb_activeuserUrlTimeout="10000"																'çalışmıyor
 	sb_ssl = 1
 	sb_fizikselPath = "C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\backup\"
 	sb_sqlYedekCompress = true
 	sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-	sb_sqlYedekSilGun	=	30
+	sb_sqlYedekAlGun	=	7																	'dashboard üzerinden otomatik yedek alma. yazılacak
+	sb_sqlYedekSilGun	=	30																	'yetki sorunu veriyor. onar
 
 	'## EMAIL
 	sb_mailserver		=	"212.68.61.84:587"
 	sb_mailsender		=	"teknik@sbstasarim.com"
 	sb_mailsenderPass	=	"sgxuewlv12!!@3"
-	sb_mailsenderAd		=	"ERP"
+	sb_mailsenderAd		=	"TIO ERP"
 	' sb_portalMail		=	"portal@sbstasarim.com"
 	' sb_portalMailUser	=	"portal@sbstasarim.com"
 	' sb_portalMailPass	=	"portAl112!"

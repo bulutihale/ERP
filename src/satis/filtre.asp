@@ -43,7 +43,7 @@
 					Response.Write "<div class=""border border-dark rounded p-2"">"
 						Response.Write "<div class=""col-lg-12"">"
 							Response.Write "<div class=""badge badge-secondary rounded-left"">İlk Tarih</div>"
-							call forminput("t1",date()-30,"","İlk Tarihi","tarih","autocompleteOFF","t1","")
+							call forminput("t1",date()-60,"","İlk Tarihi","tarih","autocompleteOFF","t1","")
 						Response.Write "</div>"
 						Response.Write "<div class=""col-lg-12 "">"
 							Response.Write "<div class=""badge badge-secondary rounded-left"">Bitiş Tarih</div>"

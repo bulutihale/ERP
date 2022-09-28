@@ -30,8 +30,8 @@
 				sorgu = sorgu & " AND t1.malKabulizin = 1"
 			elseif sart = "redGirisizin" then
 				sorgu = sorgu & " AND t1.redGirisizin = 1"
-			elseif sart = "malKabul" then
-				sorgu = sorgu & " AND t1.depoKategori = 'malKabul'"
+			elseif sart <> "" then
+				sorgu = sorgu & " AND t1.depoKategori IN "&sart&""
 			end if
 			sorgu = sorgu & " ORDER BY t1.depoKod ASC"
 			rs.open sorgu, sbsv5, 1, 3

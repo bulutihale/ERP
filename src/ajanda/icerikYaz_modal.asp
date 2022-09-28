@@ -8,12 +8,12 @@
 	call sessiontest()
 
 
+    modulAd 		=   "Planlama"
 
 
 '##### YETKİ BUL
 '##### YETKİ BUL
-	sorgu		=	""
-	sayfaadi	=	"Dosya Detay"
+	yetkiKontrol	 = yetkibul(modulAd)
 '##### YETKİ BUL
 '##### YETKİ BUL
 
@@ -21,7 +21,7 @@
 
 
 
-
+if yetkiKontrol > 0 then
 
 	
 		Response.Write "<form id=""takvimIcerik"" action=""/ajanda/icerikKaydet.asp"" method=""post"" class=""ajaxform"">"
@@ -52,9 +52,11 @@
 				icerik		=	rs("icerik")
 				icerik		=	Replace(icerik,"|","<br>")
 				Response.Write "<div id=""" & ajID & """ data-tablo=""portal.ajanda"" class=""row pointer kayitSil mr-2 py-1 border-bottom border-success"">"
+				if yetkiKontrol > 7 then
 					Response.Write "<div class=""col-1 text-left "">"
 						Response.Write "<i class=""fa fa-minus-circle text-danger""></i>"
 					Response.Write "</div>"
+				end if
 					Response.Write "<div class=""col-11 text-left "">"
 						Response.Write icerik
 					Response.Write "</div>"
@@ -64,6 +66,11 @@
 	next
 	end if
 	rs.close
+
+	else
+		'call yetkisizGiris("","","")
+		call jsrun("swal('Yetkisiz İşlem','')")
+	end if
 
 
 %>

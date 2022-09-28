@@ -3536,18 +3536,21 @@ function yetkibul(byVal alan)
 end function
 
 
-function yetkisizGiris(byVal gelenmetin, byVal ek2,byVal ek3)
+function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 		if gelenmetin = "" then
 			call logla("Yetkisiz Giriş")
 		else
 			call logla(gelenmetin)
+		end if
+		if gelenbaslik = "" then
+			gelenbaslik = "Hata Oluştu"
 		end if
 		Response.Write "<div class=""container-fluid mt-5"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
 			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-10 col-xs-10"">"
 				Response.Write "<div class=""card"">"
-				Response.Write "<div class=""card-header text-white bg-primary"">Hata Oluştu</div>"
+				Response.Write "<div class=""card-header text-white bg-primary"">" & gelenbaslik & "</div>"
 				Response.Write "<div class=""card-body"">"
 				if gelenmetin = ""then
 					Response.Write "Bu alana girmek için yetkiniz yeterli değil."
@@ -3863,7 +3866,7 @@ Function mailgonder(byVal baslik, byVal icerik, byVal gonderen, byVal gonderenAd
             end if
         end if
 		msg.AddHeader "Originating-IP", Request.ServerVariables("REMOTE_ADDR")
-        if not msg.Send( "212.68.61.84:587" ) then
+        if not msg.Send(sb_mailserver) then
             dosyaAd     =   unique() & ".txt"
             dosyaYolu   =   "/temp/mailhata/"
             dosyaIcerik =   msg.log

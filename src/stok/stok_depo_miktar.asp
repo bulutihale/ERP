@@ -40,27 +40,30 @@ yetkiKontrol = yetkibul(modulAd)
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 2 then
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+
+		stokKodu		=	rs("stokKodu")
+		stokAd			=	rs("stokAd")
+
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col h3 text-info bold"">" & stokKodu & "</div>"
+			Response.Write "<div class=""col h3 text-info text-right bold"">" & stokAd & "</div>"
+		Response.Write "</div>"
+
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-		Response.Write "<th scope=""col"">Kod</th>"
-		Response.Write "<th scope=""col"">Ürün Adı</th>"
 		Response.Write "<th scope=""col"">LOT</th>"
 		Response.Write "<th scope=""col"">Lot Miktar</th>"
 		' Response.Write "<th scope=""col"">Depo Miktar</th>"
 		Response.Write "<th scope=""col"">Depo Ad</th>"
 		Response.Write "</tr></thead><tbody>"
-		
+
 				do until rs.EOF
-					stokKodu		=	rs("stokKodu")
-					stokAd			=	rs("stokAd")
 					depoAd			=	rs("depoAd")
 					lot				=	rs("lot")
 					lotMiktar		=	rs("lotMiktar")
 					stokMiktar		=	rs("stokMiktar")
 					miktarBirim		=	rs("miktarBirim")
 					Response.Write "<tr>"
-						Response.Write "<td>" & stokKodu & "</td>"
-						Response.Write "<td>" & stokAd & "</td>"
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td class=""text-right"">" & lotMiktar & " " & miktarBirim & " </td>"
 						' Response.Write "<td class=""text-right"">" & stokMiktar & " " & miktarBirim & " </td>"

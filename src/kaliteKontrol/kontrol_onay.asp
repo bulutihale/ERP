@@ -128,7 +128,7 @@ end if
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-6 col-sm-12 my-1"">"
 				Response.Write "<span class=""badge badge-success rounded-left"">Giriş Depo</span>"
-				call formselectv2("girisDepoID","","","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""malKabul""")
+				call formselectv2("girisDepoID","","","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('malKabul','iade')""")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-3 col-sm-12 my-1"">"
 				Response.Write "<span class=""badge badge-success rounded-left"">Atanan LOT</span>"

@@ -84,13 +84,15 @@
 			'################ sipariş kaleminin reçetesini bul yarı mamullerin depo transferini ajandaya kaydet
 				if siparisKalemID <> "" then
 				'###### siparişteki stok ve cari vilgilerini al
-					sorgu = "SELECT t1.stokID, t2.cariID"
+					sorgu = "SELECT t1.stokID, t2.cariID, t1.miktar, t1.mikBirim"
 					sorgu = sorgu & " FROM teklif.siparisKalem t1"
 					sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 					sorgu = sorgu & " WHERE t1.id = " & siparisKalemID
 					rs.open sorgu, sbsv5,1,3
-						stokID 	= 	rs("stokID")
-						cariID	=	rs("cariID")
+						sipMiktar	=	rs("miktar")
+						sipMikBirim	=	rs("mikBirim")
+						stokID 		= 	rs("stokID")
+						cariID		=	rs("cariID")
 					rs.close
 				'###### siparişteki stok ve cari vilgilerini al
 
@@ -106,17 +108,26 @@
 							rs.close
 							rs.open ikinciSorgu, sbsv5,1,3
 						end if
-					receteID	=	rs("receteID")
+						if rs.recordcount > 0 then
+							receteID	=	rs("receteID")
+						else
+							receteID = 0
+							call jsrun("swal('','Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.')")
+						end if
 					rs.close
 				'### cari için  özel reçete var mı? yoksa normal reçeteyi al
 
-					sorgu = "SELECT t1.onHazirlikDeger, t1.onHazirlikTur"
+					sorgu = "SELECT t1.onHazirlikDeger, t1.onHazirlikTur, t1.stokID as receteStokID, t2.stokKodu as receteStokKodu, t1.receteAdimID"
 					sorgu = sorgu & " FROM recete.receteAdim t1"
+					sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 					sorgu = sorgu & " WHERE t1.receteID = " & receteID & " AND t1.stokID is not null "
 					rs.open sorgu, sbsv5,1,3
 
 					if rs.recordcount > 0 then
 						for ti = 1 to rs.recordcount
+							receteStokKodu	=	rs("receteStokKodu")
+							receteAdimID	=	rs("receteAdimID")
+							receteStokID	=	rs("receteStokID")
 							onHazirlikTur	=	rs("onHazirlikTur")
 							onHazirlikDeger	=	rs("onHazirlikDeger") * -1
 
@@ -150,6 +161,7 @@
 							next
 						'#### /resmi tatil kontrol
 
+
 							hangiYil		=	datepart("yyyy",kayitTarih)
 							hangiAy			=	datepart("m",kayitTarih)
 							hangiGun		=	datepart("d",kayitTarih)
@@ -162,9 +174,11 @@
 									rs1("hangiGun")			=	hangiGun
 									rs1("hangiAy")			=	hangiAy
 									rs1("hangiYil")			=	hangiYil
-									rs1("icerik")			=	stokID & " stokID üretim depoya gönder."
+									rs1("icerik")			=	receteStokID & " stokID üretim depoya gönder."
+									rs1("stokID")			=	receteStokID
+									rs1("receteAdimID")		=	receteAdimID
 									rs1("bagliAjandaID")	=	ajandaID
-									rs1("isTur")			=	isTur
+									rs1("isTur")			=	"transfer"
 								rs1.update
 							rs1.close
 						rs.movenext

@@ -62,7 +62,7 @@
 					rs("stokKodu")		=	stokKodu
 					rs.update
 				end if
-		'####### chr13 ve chr10 temizle json patlamasın
+		'####### /chr13 ve chr10 temizle json patlamasın
 				
 				
 					Response.Write "{"

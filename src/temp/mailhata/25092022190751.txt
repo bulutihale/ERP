@@ -1,0 +1,25 @@
+﻿The message was undeliverable. All servers failed to receive the message
+.execute()
+{
+  Trying server mail:212.68.61.84
+  <- 220 sbstasarim.com ESMTP IceWarp 10.4.5; Sun, 25 Sep 2022 19:07:48 +0300
+  -> EHLO LH5139
+  <- 250-sbstasarim.com Hello LH5139 [212.68.61.84], pleased to meet you.
+250-ENHANCEDSTATUSCODES
+250-SIZE 104857600
+250-EXPN
+250-ETRN
+250-ATRN
+250-DSN
+250-CHECKPOINT
+250-8BITMIME
+250-AUTH PLAIN LOGIN DIGEST-MD5 CRAM-MD5 GSSAPI
+250 HELP
+  -> AUTH LOGIN
+Sending authentication data..
+ <- 535 5.7.8 Authentication credentials invalid
+Authentication failed.
+  212.68.61.84 failed..
+  No socket for server. ConnectToServer()
+  1 of 1 servers failed
+}

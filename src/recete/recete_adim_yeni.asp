@@ -45,6 +45,9 @@ if receteAdimID <> "" then
 				altReceteID			=	rs("altReceteID")
 				stokKontroluYap		=	rs("stokKontroluYap")
 				onHazirlikTur		=	rs("onHazirlikTur")
+				if onHazirlikTur = "" then
+					onHazirlikTur = "Saat"
+				end if
 				onHazirlikDeger		=	rs("onHazirlikDeger")
 				receteIslemTipiID	=	rs("receteIslemTipiID")
 				receteIslemAd		=	rs("ad")

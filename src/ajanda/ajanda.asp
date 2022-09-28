@@ -22,7 +22,7 @@
 	
 	call sessiontest()
 	
-    modulAd 		=   "Planlama"
+    modulAd 		=   "Planlama" 
 
 
 '##### YETKİ BUL
@@ -183,7 +183,7 @@ if yetkiKontrol > 0 then
 												'####### ajanda kaydı silme
 													if yetkiKontrol > 7 then
 														Response.Write "<div id=""" & ajID & """ class=""pointer col-1 text-left hoverGel p-0 m-0"""
-														if sipKalemID = 0 AND isTur = "plan" AND not isnull(bagliAjandaID) then
+														if sipKalemID = 0 AND not isnull(bagliAjandaID) then
 															Response.Write " onclick=""swal('Bağlı işlem silinemez','')"""
 														else
 															Response.Write " onclick=""kayitSil(" & ajID & ",'portal.ajanda','" & yer & "', '" & isTur & "')"""
@@ -193,15 +193,22 @@ if yetkiKontrol > 0 then
 														Response.Write "</div>"
 													end if
 												'####### /ajanda kaydı silme
+
 														Response.Write "<div class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0"""
-														Response.Write " title=""" & icerik & """"
-														Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Tamam','','btn-danger','','','','','')"">"
+															Response.Write " title=""" & icerik & """"
+															if isTur = "plan" then
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
+															elseif isTur = "transfer" then
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"">"
+															end if
+
 															Response.Write icerikKisa
 														Response.Write "</div>"
+
 												'####### ajanda kaydının tarihini değiştirme
 													if yetkiKontrol > 2 then
 														Response.Write "<div id=""" & ajID & """"
-														if sipKalemID = 0 AND isTur = "plan" AND not isnull(bagliAjandaID) then
+														if sipKalemID = 0 AND not isnull(bagliAjandaID) then
 															Response.Write " onclick=""swal('Bağlı işlem değiştirilemez','')"""
 														else
 															Response.Write " onclick=""planDegistir(" & ajID & "," & yilDeger & "," & ayDeger & "," & zi & "," & sipKalemID & ",'" & yer & "','" & isTur & "')"""
@@ -250,10 +257,10 @@ if yetkiKontrol > 0 then
 				Response.Write "</div>"
 			Response.Write "</div>"
 	'	############# /1 aylık grid
-		else
-			'call yetkisizGiris("","","")
-			call jsrun("swal('Yetkisiz İşlem','')")
-		end if
+	else
+		'call yetkisizGiris("","","")
+		call jsrun("swal('Yetkisiz İşlem','')")
+	end if
 	
 	
 %>
@@ -358,7 +365,7 @@ if yetkiKontrol > 0 then
 										else{
 											toastr.options.positionClass = 'toast-bottom-right';
 											toastr.options.progressBar = true;
-											toastr.error('Kayıt silinemedi.','İşlem Başarısız!');
+											toastr.error(sonuc2,'İşlem Başarısız!');
 										};
 										}
 					});//ajax işlemi sonu
@@ -444,7 +451,7 @@ if yetkiKontrol > 0 then
 
 		$.ajax({
 			type:'POST',
-			url :'/ajanda/hucre_kaydet.asp',
+			url :'/portal/hucre_kaydet.asp',
 			data :{'alan':alan,'id':id,'tablo':tablo,'deger':$(this).val(),
 						},
 			beforeSend: function() {
