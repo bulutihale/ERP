@@ -13,8 +13,13 @@
 	ajandaID		=	base64_decode_tr(ajandaID)
     stokID64		=   Request.QueryString("stokID")
 	stokID			=	stokID64
-	stokID			=	base64_decode_tr(stokID)
+	if not isnumeric(stokID) then
+		stokID			=	base64_decode_tr(stokID)
+	end if
 	girisDepoID		=	Request.Form("girisDepoID")
+	if girisDepoID = "" then
+		girisDepoID = 0
+	end if
 	modulAd			=   "Depo"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -24,40 +29,47 @@ Response.Flush()
 
 yetkiKontrol = yetkibul(modulAd)
 
-	'### sipariş miktar ve birimini bul
-		sorgu = "SELECT t2.miktar, t2.mikBirim"
-		sorgu = sorgu & " FROM portal.ajanda t1"
-		sorgu = sorgu & " INNER JOIN teklif.siparisKalem t2 ON t2.id = (SELECT siparisKalemID FROM portal.ajanda t3 WHERE t3.id = t1.bagliAjandaID)"
-		sorgu = sorgu & " WHERE t1.id = " & ajandaID
-		rs.open sorgu, sbsv5, 1, 3
-			siparisMiktar	=	rs("miktar")
-			siparisBirim	=	rs("mikBirim")
-		rs.close
-	'### /sipariş miktar ve birimini bul
+	if ajandaID <> "" then
+		'### sipariş miktar ve birimini bul
+			sorgu = "SELECT t2.miktar, t2.mikBirim"
+			sorgu = sorgu & " FROM portal.ajanda t1"
+			sorgu = sorgu & " INNER JOIN teklif.siparisKalem t2 ON t2.id = (SELECT siparisKalemID FROM portal.ajanda t3 WHERE t3.id = t1.bagliAjandaID)"
+			sorgu = sorgu & " WHERE t1.id = " & ajandaID
+			rs.open sorgu, sbsv5, 1, 3
+				siparisMiktar	=	rs("miktar")
+				siparisBirim	=	rs("mikBirim")
+			rs.close
+		'### /sipariş miktar ve birimini bul
+	end if
 
-	'### bileşenin reçetedeki miktarını  bul
-		sorgu = "SELECT miktar FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
-		rs.open sorgu, sbsv5, 1, 3
-			receteMiktar	=	rs("miktar")
-		rs.close
-	'### /bileşenin reçetedeki miktarını  bul
+	if receteAdimID <> "" then
+		'### bileşenin reçetedeki miktarını  bul
+			sorgu = "SELECT miktar FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
+			rs.open sorgu, sbsv5, 1, 3
+				receteMiktar	=	rs("miktar")
+			rs.close
+		'### /bileşenin reçetedeki miktarını  bul
 
 		ihtiyacMiktar	=	siparisMiktar * receteMiktar
+	end if
 
-
-	sorgu = "SELECT t1.stokKodu, t1.stokAd FROM stok.stok t1 WHERE stokID = " & stokID
-	rs.open sorgu, sbsv5, 1, 3
-		stokKodu	=	rs("stokKodu")
-		stokAd		=	rs("stokAd")
-		defDeger	=	stokID & "###" & stokAd
-	rs.close
+	if stokID <> "" then
+		sorgu = "SELECT t1.stokKodu, t1.stokAd FROM stok.stok t1 WHERE stokID = " & stokID
+		rs.open sorgu, sbsv5, 1, 3
+			stokKodu	=	rs("stokKodu")
+			stokAd		=	rs("stokAd")
+			defDeger	=	stokID & "###" & stokAd
+		rs.close
+	end if
 
 	if girisDepoID <> "" then
 		sorgu = "SELECT t1.depoAd, t1.id FROM stok.depo t1 WHERE id = " & girisDepoID
 		rs.open sorgu, sbsv5, 1, 3
-			depoID		=	rs("id")
-			depoAd		=	rs("depoAd")
-			defDeger1	=	depoID & "###" & depoAd
+			if rs.recordcount > 0 then
+				depoID		=	rs("id")
+				depoAd		=	rs("depoAd")
+				defDeger1	=	depoID & "###" & depoAd
+			end if
 		rs.close
 		call logla("Depolar arası transfer giriş depo seçildi giriş depo:"&depoAd&"")
 	else
@@ -73,7 +85,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-12"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left"">Stok</div>"
-						call formselectv2("stokID","","","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger&"""")
+						call formselectv2("stokID","","girisDepoSec('" & girisDepoID & "','" & receteAdimID64 & "', '" & ajandaID64 & "',$(this).val())","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger&"""")
 					Response.Write "</div>"
 				Response.Write "</div>"
 
@@ -124,8 +136,8 @@ yetkiKontrol = yetkibul(modulAd)
 							rs.movenext
 							next
 						Response.Write "</div>"
-					else
-						Response.Write "<div class=""row my-2 border border-dark bg-warning rounded"">"
+					elseif girisDepoID > 0 then
+						Response.Write "<div class=""row my-4 border border-dark bg-warning rounded"">"
 							Response.Write "<div class=""col-lg-12 bold"">Bu depo için giriş bekleyen ürün yok.</div>"
 						Response.Write "</div>"
 					end if
@@ -133,6 +145,7 @@ yetkiKontrol = yetkibul(modulAd)
 		end if
 	'#####seçilen depoda giriş bekleyenleri göster
 
+				if stokID <> "" then
 					sorgu = "SELECT "
 					sorgu = sorgu & " stok.stokSayDepoLot(t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
 					sorgu = sorgu & " FROM stok.stokHareket t1"
@@ -176,7 +189,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<div class=""col-lg-2 col-sm-6"">"
 								call forminput("aktarMiktar","","","","","autocompleteOFF","aktarMiktar_"&siraNo&"","")
 							Response.Write "</div>"
-							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "');"">"
+							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "'," & lotMiktar & ");"">"
 								Response.Write "<i class=""mdi mdi-jira pointer bold""></i>"
 							Response.Write "</div>"
 							end if
@@ -184,7 +197,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs.movenext
 					loop
 					rs.close
-
+				end if
 				Response.Write "</div>"
 
 			Response.Write "</div>"
@@ -193,12 +206,12 @@ yetkiKontrol = yetkibul(modulAd)
 		call yetkisizGiris("","","")
 		hata = 1
 	end if
-
+ 
 %><!--#include virtual="/reg/rs.asp" -->
 
 	<script>
 	// transfer işlemleri		
-		function depoTransfer(siraNo,lot,lotSKT,miktarBirim,depoID,stokID,stokKodu,receteAdimID64,ajandaID64,stokID64){
+		function depoTransfer(siraNo,lot,lotSKT,miktarBirim,depoID,stokID,stokKodu,receteAdimID64,ajandaID64,stokID64,lotMiktar){
 			var girisDepoID	=	$('#girisDepoID').val();
 			var aktarMiktar	=	$('#aktarMiktar_'+siraNo).val();
 					swal({
@@ -207,14 +220,14 @@ yetkiKontrol = yetkibul(modulAd)
 					type: 'warning',
 					showCancelButton: true,
 					  confirmButtonColor: '#DD6B55',
-					  confirmButtonText: 'devam',
-					  cancelButtonText: 'iptal'
+					  confirmButtonText: 'Devam',
+					  cancelButtonText: 'İptal'
 					}).then(
 					  function(result) {
 						// handle Confirm button click
 						// result is an optional parameter, needed for modals with input
 
-					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID});
+					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID,lotMiktar:lotMiktar});
 					
 					girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64);
 
@@ -233,4 +246,8 @@ yetkiKontrol = yetkibul(modulAd)
 			$('#refreshDIV').load('/depo/depo_transfer.asp?receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+' #refreshDIV > *',{girisDepoID:girisDepoID})
 		}
 	// Giriş depo seçildiğinde deponun kendi kendine aktarımını engellemek için sayfayı post et
+
+				$(document).ready(function() {
+					$('#girisDepoID, #stokID').trigger('mouseenter');
+				});
 </script>

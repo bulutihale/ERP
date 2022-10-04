@@ -83,6 +83,7 @@ call logla(divAd & " Ekranı Girişi")
 				if gorevID = "" then
 					call formselectv2("stokSec","","","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
 				else
+					call formhidden("stokSec",stokID,"","","","","stokSec","")
 					call forminput("stokAd",stokAd,"","","","autocompleteOFF","stokAd","disabled")
 				end if
 			Response.Write "</div>"

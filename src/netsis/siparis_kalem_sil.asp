@@ -1,14 +1,42 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
-sessiontest()
-
-call logla("Sipariş Kalemi Silindi")
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
+    call sessiontest()
+    kid		=	kidbul()
+    hata    =   ""
+    modul   =   "Netsis Sipariş"
+    modulAd =   modul
+    Response.Flush()
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
 
 id		=	Request.QueryString("id")
 siphash	=	Request.QueryString("siphash")
 
-sorgu		=	"Delete teklif.siparisKalemTemp where id = " & id
-rs.open sorgu,ssov5,3,3
+
+'##### ÜRÜNÜ BUL
+'##### ÜRÜNÜ BUL
+    sorgu = "Select STOK_ADI,STOK_KODU from netsis.siparisKalemTemp where id = " & id
+    rs.open sorgu,sbsv5,1,3
+    if rs.recordcount > 0 then
+        STOK_ADI = rs("STOK_ADI")
+        STOK_KODU = rs("STOK_KODU")
+    end if
+    rs.close
+'##### ÜRÜNÜ BUL
+'##### ÜRÜNÜ BUL
+
+
+
+
+
+call logla(STOK_KODU & " kodlu " & STOK_ADI & " sipariş kalemi silindi")
+
+
+
+sorgu		=	"Delete netsis.siparisKalemTemp where id = " & id
+rs.open sorgu,sbsv5,3,3
 
 
 

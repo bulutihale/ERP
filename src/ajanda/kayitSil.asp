@@ -35,8 +35,8 @@
 		sorgu = "UPDATE " & tablo & " SET silindi = 1 WHERE bagliAjandaID = " & silinecekID
 		rs.open sorgu,sbsv5,1,3
 	
-		sorgu = "UPDATE stok.stokHareket SET silindi = 1 WHERE bagliAjandaID = " & silinecekID
-		rs.open sorgu,sbsv5,1,3
+		'sorgu = "UPDATE stok.stokHareket SET silindi = 1 WHERE bagliAjandaID = " & silinecekID
+		'rs.open sorgu,sbsv5,1,3
 
 		Response.Write "ok|" & planTarih & ""
 

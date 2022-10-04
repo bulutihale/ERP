@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var ajaxform = {target:'#ajax',type:'POST'};$('.ajaxform').ajaxForm(ajaxform);
 	var modalform = {target:'#modalform',type:'POST'};$('.modalform').ajaxForm(modalform);
 	var ortaform = {target:'#ortaalan',type:'POST'};$('.ortaform').ajaxForm(ortaform);
-	$('.tarih').datepicker({format: "dd.mm.yyyy",weekStart: 1,maxViewMode: 2,language: "tr",keyboardNavigation: false,daysOfWeekHighlighted: "0,6",autoclose: true});
+	$('.tarih').datepicker({format: "dd.mm.yyyy",weekStart: 1,maxViewMode: 2,language: "tr",keyboardNavigation: false,daysOfWeekHighlighted: "0,6",autoclose: true,todayHighlight: true});
 	$('.summernote').summernote({height: 300});
 	
 
@@ -95,7 +95,7 @@ jQuery(document).ajaxSuccess(
 		var ajaxform = {target:'#ajax',type:'POST'};$('.ajaxform').ajaxForm(ajaxform);
 		var modalform = {target:'#modalform',type:'POST'};$('.modalform').ajaxForm(modalform);
 		var ortaform = {target:'#ortaalan',type:'POST'};$('.ortaform').ajaxForm(ortaform);
-		$('.tarih').datepicker({format: "dd.mm.yyyy",weekStart: 1,maxViewMode: 2,language: "tr",keyboardNavigation: false,daysOfWeekHighlighted: "0,6",autoclose: true});
+		$('.tarih').datepicker({format: "dd.mm.yyyy",weekStart: 1,maxViewMode: 2,language: "tr",keyboardNavigation: false,daysOfWeekHighlighted: "0,6",autoclose: true,todayHighlight: true});
 		if($("div").hasClass('cycle_s1')){$('.cycle_s1').cycle({fx:'blindX'});}
 		if($("textarea").hasClass('summernote')){$('.summernote').summernote({height: 200});}
 

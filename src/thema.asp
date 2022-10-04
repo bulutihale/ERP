@@ -304,10 +304,10 @@ Response.Write "<link rel=""icon"" type=""image/png"" sizes=""32x32"" href=""/ar
 
 
 if kid = "" then
-	bgsayi = rastgele(7,1)
+	bgsayi = rastgele(6,1)
 	Response.Write "<style>"
 		Response.Write "body {"
-			Response.Write "background-image: url('/temp/background" & bgsayi & ".jpg');"
+			Response.Write "background-image: url('/temp/background/" & firmaID & "/background" & bgsayi & ".jpg');"
 			Response.Write "background-size: cover;"
 		Response.Write "}"
 	Response.Write "</style>"
@@ -957,12 +957,12 @@ else
 	Response.Write "</div>"
 end if
 
-Response.Write "<div id=""ajax""></div>"
+Response.Write "<div id=""ajax"" class=""d-none""></div>"
 
 
 
 Response.Write "<scr" & "ipt src=""/template/bootstrap-datepicker/js/bootstrap-datepicker.min.js""></scr" & "ipt>"
-
+Response.Write "<scr" & "ipt src=""/template/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js""></scr" & "ipt>"
 
 'Response.Write "<scr" & "ipt src=""/template/vendors/chart.js/Chart.min.js""></scr" & "ipt>"
 Response.Write "<scr" & "ipt src=""/template/vendors/datatables.net/jquery.dataTables.js""></scr" & "ipt>"

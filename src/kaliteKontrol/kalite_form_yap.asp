@@ -53,7 +53,7 @@ end if
 		defDeger		=	kaliteFormID &"###"& kaliteFormText
 '###### select2 de inital value ve form içeriğini oluşturmak için
 
-	sorgu = "SELECT t1.landscapeDeger, t1.pdfKaynakYol, t1.pdfKaynakDosya, t1.formStyle, t1.formEngStyle FROM kalite.form t1 WHERE t1.formKod = " & formKod
+	sorgu = "SELECT t1.landscapeDeger, t1.pdfKaynakYol, t1.pdfKaynakDosya, t1.formStyle, t1.formEngStyle, t1.sutunWidthArr FROM kalite.form t1 WHERE t1.formKod = " & formKod
 	rs.open sorgu, sbsv5, 1, 3
 		landscapeDeger	=	rs("landscapeDeger")
 		pdfKaynakYol	=	rs("pdfKaynakYol")
@@ -61,9 +61,11 @@ end if
 		formStyle		=	rs("formStyle")
 		formStyle		=	formStyle & formPDFstyle
 		formEngStyle	=	rs("formEngStyle")
+		sutunWidth		=	rs("sutunWidthArr")
+		sutunWidthArr	=	split(sutunWidth,",")
 	rs.close
 
-'###### sabir değerleri js ye hazırla
+'###### sabit değerleri js ye hazırla
 
 	if hata = "" and yetkiKontrol > 2 then
 	Response.Write "<div id=""kaliteFormUstDiv"">"
@@ -96,7 +98,7 @@ end if
 		if kaliteFormID > 0 then
 			Response.Write "<table border=""1"" width=""98%"" style=""" & formStyle & """ class=""mt-2"">"
 
-				sorgu = "SELECT t1.satirSira, t1.satirStyle, t1.satirEngStyle"
+				sorgu = "SELECT t1.satirSira, t1.satirStyle, t1.satirEngStyle, t1.sayfaKes"
 				sorgu = sorgu & " FROM kalite.satir t1"
 				sorgu = sorgu & " WHERE t1.formID = " & kaliteFormID & " AND t1.firmaID = " & firmaID & " AND silindi = 0"
 				sorgu = sorgu & " ORDER BY t1.satirSira ASC"
@@ -107,6 +109,7 @@ end if
 							satirSira		=	rs("satirSira")
 							satirStyle		=	rs("satirStyle")
 							satirEngStyle	=	rs("satirEngStyle")
+							sayfaKes		=	rs("sayfaKes")
 
 							Response.Write "<tr style=""" & satirStyle & """>"
 
@@ -126,7 +129,7 @@ end if
 									if not isnull(sutunMetinEng) then
 										sutunMetin	=	sutunMetin & "<br><span style=""" & formEngStyle & satirEngStyle & engStyle & """>" & sutunMetinEng & "</span>"
 									end if 
-									sutunStyle		=	rs1("sutunStyle")
+									sutunStyle		=	rs1("sutunStyle") & " width:" & sutunWidthArr(hi-1) & ";"
 									sutunSpan		=	rs1("sutunSpan")
 									satirSpan		=	rs1("satirSpan")
 									sutunTur		=	rs1("sutunTur")
@@ -181,11 +184,11 @@ end if
 							End if
 							Response.Write "</tr>"
 				'##### page break denemesi	
-					'if zi = 10 then
-						'Response.Write "</table>"
-						'Response.Write "<BR style=""page-break-before: always"">"
-						'Response.Write "<table border=""1"" width=""98%"" style=""" & formStyle & """ class=""mt-2"">"
-					'end if
+					if sayfaKes = 1 then
+						Response.Write "</table>"
+						Response.Write "<BR style=""page-break-before: always"">"
+						Response.Write "<table border=""1"" width=""98%"" style=""" & formStyle & """ class=""mt-2"">"
+					end if
 				'##### /page break denemesi	
 						rs.movenext
 						next

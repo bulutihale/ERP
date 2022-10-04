@@ -33,18 +33,20 @@
 		call jsrun("swal('Geçmiş tarihe plan girilemez.','')")
 	else
 		if yetkiKontrol > 5 then
-			sorgu = "SELECT t3.cariAd, t4.stokAd, t1.miktar, t1.mikBirim"
+			sorgu = "SELECT t3.cariAd, t4.stokAd, t1.miktar, t1.mikBirim, t1.stokID, t2.cariID"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN cari.cari t3 ON t3.cariID = t2.cariID"
 			sorgu = sorgu & " INNER JOIN stok.stok t4 ON t1.stokID = t4.stokID"
 			sorgu = sorgu & " WHERE t1.id = " & siparisKalemID
 			rs.open sorgu, sbsv5,1,3
+				cariID		=	rs("cariID")
 				cariAd		=	rs("cariAd")
+				stokID 		= 	rs("stokID")
 				stokAd		=	rs("stokAd")
-				miktar		=	rs("miktar")
-				mikBirim	=	rs("mikBirim")
-				inpicerik	=	"<b>Ürün</b>: " & stokAd & " | <b>Miktar</b>: " & miktar & " " & mikBirim & " | <b>Cari</b>: " & cariAd
+				sipMiktar	=	rs("miktar")
+				sipMikBirim	=	rs("mikBirim")
+				inpicerik	=	"<b>Ürün</b>: " & stokAd & " | <b>Miktar</b>: " & sipMiktar & " " & sipMikBirim & " | <b>Cari</b>: " & cariAd
 			rs.close
 
 
@@ -83,19 +85,7 @@
 
 			'################ sipariş kaleminin reçetesini bul yarı mamullerin depo transferini ajandaya kaydet
 				if siparisKalemID <> "" then
-				'###### siparişteki stok ve cari vilgilerini al
-					sorgu = "SELECT t1.stokID, t2.cariID, t1.miktar, t1.mikBirim"
-					sorgu = sorgu & " FROM teklif.siparisKalem t1"
-					sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
-					sorgu = sorgu & " WHERE t1.id = " & siparisKalemID
-					rs.open sorgu, sbsv5,1,3
-						sipMiktar	=	rs("miktar")
-						sipMikBirim	=	rs("mikBirim")
-						stokID 		= 	rs("stokID")
-						cariID		=	rs("cariID")
-					rs.close
-				'###### siparişteki stok ve cari vilgilerini al
-
+				
 				'### cari için  özel reçete var mı? yoksa normal reçeteyi al
 						ekSorgu		=	" AND t1.cariID = " & cariID
 						ekSorgu2	=	" AND t1.cariID = 0"
@@ -115,9 +105,10 @@
 							call jsrun("swal('','Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.')")
 						end if
 					rs.close
-				'### cari için  özel reçete var mı? yoksa normal reçeteyi al
+				'### /cari için  özel reçete var mı? yoksa normal reçeteyi al
 
-					sorgu = "SELECT t1.onHazirlikDeger, t1.onHazirlikTur, t1.stokID as receteStokID, t2.stokKodu as receteStokKodu, t1.receteAdimID"
+					sorgu = "SELECT t1.onHazirlikDeger, t1.onHazirlikTur, t1.stokID as receteStokID, t1.miktar as receteMiktar, t1.miktarBirim as receteBirim,"
+					sorgu = sorgu & " t2.stokAd as receteStokAd, t2.stokKodu as receteStokKodu, t1.receteAdimID"
 					sorgu = sorgu & " FROM recete.receteAdim t1"
 					sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 					sorgu = sorgu & " WHERE t1.receteID = " & receteID & " AND t1.stokID is not null "
@@ -126,6 +117,10 @@
 					if rs.recordcount > 0 then
 						for ti = 1 to rs.recordcount
 							receteStokKodu	=	rs("receteStokKodu")
+							receteStokAd	=	rs("receteStokAd")
+							receteMiktar	=	rs("receteMiktar")
+							receteBirim		=	rs("receteBirim")
+							topReceteMiktar	=	sipMiktar * receteMiktar
 							receteAdimID	=	rs("receteAdimID")
 							receteStokID	=	rs("receteStokID")
 							onHazirlikTur	=	rs("onHazirlikTur")
@@ -174,7 +169,7 @@
 									rs1("hangiGun")			=	hangiGun
 									rs1("hangiAy")			=	hangiAy
 									rs1("hangiYil")			=	hangiYil
-									rs1("icerik")			=	receteStokID & " stokID üretim depoya gönder."
+									rs1("icerik")			=	topReceteMiktar & " " & receteBirim & " " & receteStokKodu & " " & receteStokAd & " ürünü üretim depoya gönder.<br>(" & planTarih & " planlanmış " & stokAd & " üretimi için.)"  
 									rs1("stokID")			=	receteStokID
 									rs1("receteAdimID")		=	receteAdimID
 									rs1("bagliAjandaID")	=	ajandaID

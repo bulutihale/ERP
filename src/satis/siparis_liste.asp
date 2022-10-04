@@ -144,9 +144,9 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td class=""text-center"">"
 							Response.Write "<div class=""btn btn-sm btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?siparisKalemID="&siparisKalemID&"')"">detay</div>"
 							If not isdate(planTarih) Then
-								Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=plan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
+								Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
 							Else
-								Response.Write "<div class=""btn btn-sm btn-success border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=plan&sorgulananTarih=" & planTarih & "')"">" & planTarih & "</div>"
+								Response.Write "<div class=""btn btn-sm btn-success border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&sorgulananTarih=" & planTarih & "')"">" & planTarih & "</div>"
 							End if
 						Response.Write "</td>"
 						Response.Write "<td>" & cariAd & "</td>"

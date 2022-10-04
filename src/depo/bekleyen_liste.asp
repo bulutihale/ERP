@@ -148,20 +148,20 @@ yetkiKontrol = yetkibul(modulAd)
 					type: durum,
 					showCancelButton: true,
 					  confirmButtonColor: '#DD6B55',
-					  confirmButtonText: 'devam',
-					  cancelButtonText: 'iptal'
+					  confirmButtonText: 'Devam',
+					  cancelButtonText: 'İptal'
 					}).then(
 					  function(result) {
 						// handle Confirm button click
 						// result is an optional parameter, needed for modals with input
 						
 						$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:stokHareketID,alan:alan,tablo:tablo,deger:deger})
+
 				//eğer transfer kabul edilmeyecekse diğer depodan çıkış işlemi iptal edilsin
-					if(cevap == 'red'){
-						$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:refHareketID,alan:alan,tablo:tablo,deger:deger})
-						}
-					document.location = ('/depo/bekleyen_liste/uretim');
-					//$('#ortaalan').load('/depo/bekleyen_liste/uretim');
+					if(cevap == 'red'){$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:refHareketID,alan:alan,tablo:tablo,deger:deger})}
+				//eğer transfer kabul edilmeyecekse diğer depodan çıkış işlemi iptal edilsin
+
+						document.location = ('/depo/bekleyen_liste/uretim');
 
 					  }, //confirm buton yapılanlar
 					  function(dismiss) {

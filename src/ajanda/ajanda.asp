@@ -24,7 +24,6 @@
 	
     modulAd 		=   "Planlama" 
 
-
 '##### YETKİ BUL
 '##### YETKİ BUL
 	yetkiKontrol	 = yetkibul(modulAd)
@@ -196,7 +195,7 @@ if yetkiKontrol > 0 then
 
 														Response.Write "<div class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0"""
 															Response.Write " title=""" & icerik & """"
-															if isTur = "plan" then
+															if isTur = "uretimPlan" then
 																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
 															elseif isTur = "transfer" then
 																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"">"

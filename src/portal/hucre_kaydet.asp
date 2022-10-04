@@ -41,7 +41,7 @@
 	'## veritabanı
 
 '##### HÜCRE EDIT
-'##### HÜCRE EDIT
+'##### HÜCRE EDIT 
 
 
 

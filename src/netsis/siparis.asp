@@ -13,7 +13,7 @@
     modul   =   Request.QueryString("modul")
    	aramaad	=	Request.Form("aramaad")
     hata    =   ""
-    modul   =   "netsis.sipariş"
+    modul   =   "Netsis Sipariş"
     modulAd =   modul
     Response.Flush()
 '###### ANA TANIMLAMALAR
@@ -62,6 +62,9 @@ Response.Write "<input type=""hidden"" name=""cariTur"" id=""cariTur"" value="""
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                     Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-info"">"
+                        Response.Write "Ürün Listesi"
+                    Response.Write "</div>"
                     Response.Write "<div class=""card-body"">"
                     Response.Write "<div class=""row"">"
                         'cari seç
@@ -274,17 +277,20 @@ Response.Write "</form>"
 
 
 
-            Response.Write "<div class=""container-fluid"">"
-            Response.Write "<div class=""row"">"
-                Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
-                    Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-body"">"
+            ' Response.Write "<div class=""container-fluid"">"
+            ' Response.Write "<div class=""row"">"
+            '     Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
+            '         Response.Write "<div class=""card"">"
+            '         Response.Write "<div class=""card-header text-white bg-info"">"
+            '             Response.Write "Eklenen Ürünler"
+            '         Response.Write "</div>"
+            '         Response.Write "<div class=""card-body"">"
 Response.Write "<div id=""siparislistesi""></div>"
-                    Response.Write "</div>"
-                    Response.Write "</div>"
-                Response.Write "</div>"
-            Response.Write "</div>"
-            Response.Write "</div>"
+            '         Response.Write "</div>"
+            '         Response.Write "</div>"
+            '     Response.Write "</div>"
+            ' Response.Write "</div>"
+            ' Response.Write "</div>"
 
 
 

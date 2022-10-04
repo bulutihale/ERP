@@ -14,13 +14,13 @@
     modul   =   Request.QueryString("modul")
    	aramaad	=	Request.Form("aramaad")
     hata    =   ""
-    modul   =   "netsis.sipariş"
+    modul   =   "Netsis Sipariş"
     modulAd =   modul
     Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
-call logla("Sipariş Oluşturuldu")
+call logla("Sipariş Oluşturuluyor")
 
 if ssoID = "" then
 	hatamesaj = "Plasiyer Kodu Bulunamadı"
@@ -46,44 +46,45 @@ end if
 '#### fiyatları yeniden hesapla
 	sorgu = "" & vbcrlf
 	sorgu = sorgu & "select " & vbcrlf
-	sorgu = sorgu & "sbs.siparisKalemTemp.sipno " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.adet " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.fiyat " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.birimfiyat_modifiye " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.tarih " & vbcrlf
+	sorgu = sorgu & "netsis.siparisKalemTemp.sipno " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.adet " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.fiyat " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat_modifiye " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.tarih " & vbcrlf
 	
-	sorgu = sorgu & ",sbs.siparisKalemTemp.birim " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.OLCUBR " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.birim " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.OLCUBR " & vbcrlf
 
-	sorgu = sorgu & ",sbs.siparisKalemTemp.pay " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.payda " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.pay " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.payda " & vbcrlf
 
-	sorgu = sorgu & ",sbs.siparisKalemTemp.cariTur " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.cariTur " & vbcrlf
 
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto1 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto2 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto3 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto4 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.birimfiyat " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto1 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto2 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto3 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto4 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat " & vbcrlf
 
-	sorgu = sorgu & ",dbo.TBLSTSABIT.STOK_ADI " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT1 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT2 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT3 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT4 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.KDV_ORANI " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.OLCU_BR1 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.OLCU_BR2 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_ADI " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT2 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT3 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT4 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.KDV_ORANI " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR2 " & vbcrlf
 
-	sorgu = sorgu & ",dbo.TBLSTSABIT.PAY_1 AS P1 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.PAYDA_1 AS PD1 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.PAY2 AS P2 " & vbcrlf
-	sorgu = sorgu & ",dbo.TBLSTSABIT.PAYDA2 AS PD2 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY_1 AS P1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA_1 AS PD1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY2 AS P2 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA2 AS PD2 " & vbcrlf
 
-	sorgu = sorgu & "from sbs.siparisKalemTemp " & vbcrlf
-	sorgu = sorgu & "INNER JOIN dbo.TBLSTSABIT on sbs.siparisKalemTemp.STOK_KODU = dbo.TBLSTSABIT.STOK_KODU " & vbcrlf
-	sorgu = sorgu & "where sbs.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (sbs.siparisKalemTemp.sipno = '' or sbs.siparisKalemTemp.sipno is null)" & vbcrlf
-	rs.open sorgu,ssov5,1,3
+	sorgu = sorgu & "from netsis.siparisKalemTemp " & vbcrlf
+	sorgu = sorgu & "INNER JOIN " & firmaSSOdb & ".dbo.TBLSTSABIT on netsis.siparisKalemTemp.STOK_KODU = " & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU " & vbcrlf
+	sorgu = sorgu & "where netsis.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (netsis.siparisKalemTemp.sipno = '' or netsis.siparisKalemTemp.sipno is null)" & vbcrlf
+
+	rs.open sorgu,sbsv5,1,3
 		toplamfiyat =	0
 		toplamkdv	=	0
 		for kalemsayisi = 1 to rs.recordcount
@@ -319,7 +320,7 @@ aciklama	=	""
 '#### sipariş oluştur
 '#### sipariş oluştur
 
-
+call logla("Sipariş Kaydı Eklendi : " & sipno)
 
 
 
@@ -331,34 +332,34 @@ aciklama	=	""
 '#### siparişe ürünleri ekle
 	sorgu = ""
 	sorgu = sorgu & "select "
-	sorgu = sorgu & "sbs.siparisKalemTemp.sipno "
-	sorgu = sorgu & ",sbs.siparisKalemTemp.adet "
-	sorgu = sorgu & ",sbs.siparisKalemTemp.fiyat "
-	sorgu = sorgu & ",sbs.siparisKalemTemp.birim "
-	sorgu = sorgu & ",sbs.siparisKalemTemp.OLCUBR "
-	sorgu = sorgu & ",sbs.siparisKalemTemp.pay " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.payda " & vbcrlf
+	sorgu = sorgu & "netsis.siparisKalemTemp.sipno "
+	sorgu = sorgu & ",netsis.siparisKalemTemp.adet "
+	sorgu = sorgu & ",netsis.siparisKalemTemp.fiyat "
+	sorgu = sorgu & ",netsis.siparisKalemTemp.birim "
+	sorgu = sorgu & ",netsis.siparisKalemTemp.OLCUBR "
+	sorgu = sorgu & ",netsis.siparisKalemTemp.pay " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.payda " & vbcrlf
 
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto1 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto2 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto3 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.iskonto4 " & vbcrlf
-	sorgu = sorgu & ",sbs.siparisKalemTemp.birimfiyat " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto1 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto2 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto3 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto4 " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat " & vbcrlf
 
-	sorgu = sorgu & ",dbo.TBLSTSABIT.STOK_ADI "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT1 "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT2 "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT3 "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.SATIS_FIAT4 "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.KDV_ORANI "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.OLCU_BR1 "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.OLCU_BR2 "
-	sorgu = sorgu & ",dbo.TBLSTSABIT.STOK_KODU "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_ADI "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT1 "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT2 "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT3 "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT4 "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.KDV_ORANI "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR1 "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR2 "
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU "
 	
-	sorgu = sorgu & "from sbs.siparisKalemTemp "
-	sorgu = sorgu & "INNER JOIN dbo.TBLSTSABIT on sbs.siparisKalemTemp.STOK_KODU = dbo.TBLSTSABIT.STOK_KODU "
-	sorgu = sorgu & "where sbs.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (sbs.siparisKalemTemp.sipno = '' or sbs.siparisKalemTemp.sipno is null)"
-	rs.open sorgu,ssov5,1,3
+	sorgu = sorgu & "from netsis.siparisKalemTemp "
+	sorgu = sorgu & "INNER JOIN " & firmaSSOdb & ".dbo.TBLSTSABIT on netsis.siparisKalemTemp.STOK_KODU = " & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU "
+	sorgu = sorgu & "where netsis.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (netsis.siparisKalemTemp.sipno = '' or netsis.siparisKalemTemp.sipno is null)"
+	rs.open sorgu,sbsv5,1,3
 		for kalemsayisi = 1 to rs.recordcount
 			'#### HAZIRLIK
 			'#### HAZIRLIK
@@ -501,6 +502,9 @@ aciklama	=	""
 			rs2.close
 			rs("sipno") = sipno
 			rs.update
+
+call logla("Sipariş Kalemi Eklendi. Sipariş No : " & sipno & ". Stok Kodu : " & STOK_KODU)
+
 		rs.movenext
 		next
 		rs.close
@@ -508,5 +512,7 @@ aciklama	=	""
 '#### siparişe ürünleri ekle
 
 call jsrun("$('#siparislistesi').html('<h3 class=""text-center text-danger"">SİPARİŞ OLUŞTURULDU.<br />Sipariş No : " & sipno & "</h3>')")
+
+call logla("Sipariş Oluşturuldu. Sipariş No : " & sipno)
 
 %><!--#include virtual="/reg/rs.asp" -->

@@ -1,6 +1,18 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
-sessiontest()
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
+    call sessiontest()
+    kid		=	kidbul()
+    hata    =   ""
+    modul   =   "Netsis Sipariş"
+    modulAd =   modul
+    Response.Flush()
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
+
+
+
 
 'eklemek için
 'aciklama	=	Request.Form("aciklama")
@@ -15,7 +27,7 @@ iskonto3	=	Request.Form("iskonto3")
 iskonto4	=	Request.Form("iskonto4")
 birimfiyat	=	Request.Form("birimfiyat")
 kid			=	kidbul()
-'eklemek için
+'eklemek içinaa
 
 
 'silmek için
@@ -131,8 +143,8 @@ else
 	'##### her şartta ekle
 	'##### her şartta ekle
 	'##### her şartta ekle
-	sorgu		=	"Select top(1) * from sbs.siparisKalemTemp"
-	rs.open sorgu,ssov5,1,3
+	sorgu		=	"Select top(1) * from netsis.siparisKalemTemp"
+	rs.open sorgu,sbsv5,1,3
 	rs.addnew
 '		rs("aciklama")		=	aciklama
 		rs("CARI_KOD")		=	CARI_KOD
@@ -166,9 +178,19 @@ end if
 
 
 
-sorgu = "Select * from sbs.siparisKalemTemp where CARI_KOD = '" & CARI_KOD & "' and (sipno = '' or sipno is null)"
-rs.open sorgu,ssov5,1,3
+sorgu = "Select * from netsis.siparisKalemTemp where CARI_KOD = '" & CARI_KOD & "' and (sipno = '' or sipno is null)"
+rs.open sorgu,sbsv5,1,3
 	if rs.recordcount > 0 then
+            Response.Write "<div class=""container-fluid"">"
+            Response.Write "<div class=""row"">"
+                Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
+                    Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-warning"">"
+                        Response.Write "Eklenen Ürünler"
+                    Response.Write "</div>"
+                    Response.Write "<div class=""card-body"">"
+
+
 		Response.Write "<div class=""row"">"
 		Response.Write "<div class=""col-lg-12 col-xs-12 mt10 mb10"">"
 			Response.Write "<table class=""table table-striped table-bordered table-hover"">"
@@ -269,6 +291,17 @@ rs.open sorgu,ssov5,1,3
 			Response.Write "</table>"
 		Response.Write "</div>"
 		Response.Write "</div>"
+
+
+
+                    Response.Write "</div>"
+                    Response.Write "</div>"
+                Response.Write "</div>"
+            Response.Write "</div>"
+            Response.Write "</div>"
+
+
+
 	end if
 rs.close
 

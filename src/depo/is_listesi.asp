@@ -101,7 +101,16 @@ call logla("Depo Günlük İş Listesi")
 												Response.Write "<i class=""fa fa-chevron-circle-left fa-2x text-success pointer gunHareket geri mr-2""></i>"
 											Response.Write "</div>"
 									end if
-											Response.Write "<div class=""col-10"">"
+										if tarihsql2(yeniTarih) = tarihsql2(date()) AND fi = 2 then
+											tarihClass = " bg-warning col-10 "
+										elseif tarihsql2(yeniTarih) <> tarihsql2(date()) AND fi = 2 then
+											tarihClass = " col-10 "
+										elseif tarihsql2(yeniTarih) = tarihsql2(date()) AND fi <> 2 then
+											tarihClass = " bg-warning col-12 "
+										else
+											tarihClass = " rounded col-12 "
+										end if
+											Response.Write "<div class=""text-center rounded" & tarihClass & """>"
 												Response.Write hangiGun & " - " & MonthName(hangiAy) & " -" & hangiYil & " - " & gunAd
 											Response.Write "</div>"
 									if fi = 2 then
@@ -117,7 +126,7 @@ call logla("Depo Günlük İş Listesi")
 							'##### gün - ay - yıl göster
 							
 							'#### gün içine daha önce kayıt edilmiş olayları yaz.
-									sorgu = "SELECT id, kid, hangiYil, hangiAy, hangiGun, siparisKalemID, icerik, isTur, stokID, receteAdimID"
+									sorgu = "SELECT id, kid, hangiYil, hangiAy, hangiGun, siparisKalemID, icerik, isTur, stokID, receteAdimID, tamamlandi"
 									sorgu = sorgu & " FROM portal.ajanda"
 									sorgu = sorgu & " WHERE silindi = 0 AND kid = " & kid & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & hangiGun
 									rs.open sorgu, sbsv5,1,3
@@ -136,6 +145,7 @@ call logla("Depo Günlük İş Listesi")
 											ajandaID		=	rs("id")
 											ajandaID64		=	ajandaID
 											ajandaID64		=	base64_encode_tr(ajandaID64)
+											tamamlandi		=	rs("tamamlandi")
 											icerikHam		=	rs("icerik")
 											icerik			=	Replace(icerikHam,"|","<br>")
 											'icerik			=	Replace(icerikHam,"<br>","")
@@ -145,16 +155,35 @@ call logla("Depo Günlük İş Listesi")
 											if LEN(icerik) >  kisaSayi then
 												icerikKisa 	= icerikKisa & "..."
 											end if
-									Response.Write "<div class=""row border border-dark rounded mt-2"">" 'kutu içi satırlar
-										Response.Write "<div class=""col-12 text-left fontkucuk pointer hoverGel"""
+											if isTur = "uretimPlan" then
+												kutuClass	=	" border-info" 
+											elseif isTur = "transfer" then
+												kutuClass	=	" border-warning " 
+											end if
+											if tamamlandi = 1 then
+												deger 	=	0
+												divBG	=	" bg-success "
+												ikon	=	" mdi mdi-calendar-check "
+											else
+												deger 	=	1
+												divBG	=	" bg-danger "
+												ikon	=	" mdi mdi-timer-sand "
+											end if
+									Response.Write "<div class=""row border  rounded mt-2"&kutuClass&""">" 'kutu içi satırlar
+										Response.Write "<div class=""col-11 text-left fontkucuk pointer hoverGel"""
 										Response.Write " title=""" & icerik & """"
-											if isTur = "plan" then
-												Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
+											if isTur = "uretimPlan" then
+												Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
 											elseif isTur = "transfer" then
 												Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"">"
 											end if
 											Response.Write icerik
 										Response.Write "</div>"
+										if yetkiKontrol > 5 then
+										if isTur = "transfer" then
+											Response.Write "<div class=""col-1 text-center pointer hoverGel "&divBG&""" onclick=""hucreKaydet('id',"&ajandaID&",'tamamlandi','portal.ajanda',"&deger&")""><div class=""mt-3 align-middle""><i class="""&ikon&"""></i></div></div>"
+										end if
+										end if
 									Response.Write "</div>"'kutu içi satırlar
 										rs.movenext
 										next
@@ -180,6 +209,35 @@ call logla("Depo Günlük İş Listesi")
 %>
 
 	<script>
+	// hucreKaydet işlemleri		
+		function hucreKaydet(idAlan,id,alan,tablo,deger,refHareketID,yer,sorgulananTarih){
+				sorgulananTarih	=	$('#sabitBilgiler').attr('data-sorgulanantarih');
+				yer				=	$('#sabitBilgiler').attr('data-yer');
+				if(deger == 1){var baslik = 'İşlem tamamlandı olarak işaretlensin mi?'
+				}else
+				{var baslik = 'İşlem tamamlandı kaydı kaldırılsın mı?'};
+			swal({
+			title: baslik,
+			type: 'warning',
+			showCancelButton: true,
+				confirmButtonColor: '#DD6B55',
+				confirmButtonText: 'evet',
+				cancelButtonText: 'hayır'
+			}).then(
+				function(result) {
+				// handle Confirm button click
+				// result is an optional parameter, needed for modals with input
+					$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:id,alan:alan,tablo:tablo,deger:deger})
+					$('#ajandaAnaDIV').load('/depo/is_listesi.asp?yer='+yer+'&ayHareket=0&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *');
+				}, //confirm buton yapılanlar
+				function(dismiss) {
+				// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+				} //cancel buton yapılanlar		
+			);//swal sonu
+		}
+	// hucreKaydet işlemleri		
+
+
 	// plan Ekleme işlemleri		
 		function planEkle(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer){
 					swal({
@@ -317,48 +375,6 @@ call logla("Depo Günlük İş Listesi")
 				});
 					
 			});
-			
-	// ajSave işlemleri		
-			
-		$('.ajSave').off().on('change', function() {
-
-
-			var hamID = $(this).attr('id');
-
-			arr 	= hamID.split('|');
-			alan 		=	arr[0];
-			id 			=	arr[1];
-			tablo 		=	arr[2];
-
-		$.ajax({
-			type:'POST',
-			url :'/portal/hucre_kaydet.asp',
-			data :{'alan':alan,'id':id,'tablo':tablo,'deger':$(this).val(),
-						},
-			beforeSend: function() {
-
-				//$('#but_kaydet').html("<img src='image/loading__.gif' width='20' height='20'/>");
-			  },
-					success: function(sonuc) {
-							//alert(sonuc);
-							sonucc = sonuc.split('|');
-							
-							if(sonucc[0] == "ok"){
-								toastr.options.positionClass = 'toast-bottom-right';
-								toastr.success('Değişiklik kayıt edildi.','İşlem Yapıldı!');
-								//$('#'+yuklenecekDIV).load(yuklenecekDosya+'.asp #'+yuklenecekDIV+' > *', {calisanID:degisken1, parametre2:parametre2});
-							}
-							else{
-								toastr.options.positionClass = 'toast-bottom-right';
-								toastr.error(sonucc[0],'İşlem Başarısız!');
-							};
-									
-								
-				}
-		});
-		});
-		// ajSave işlemleri		
-	
 
 
 		});
