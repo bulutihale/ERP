@@ -78,7 +78,7 @@ yetkiKontrol = yetkibul(modulAd)
 		if yetkiKontrol >= 5 then
 			Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 		end if
-		Response.Write "</tr></thead><tbody>"
+		Response.Write "</tr></thead><tbody>" 
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.cariID,"
 			sorgu = sorgu & " t1.cariKodu,"

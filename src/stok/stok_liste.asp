@@ -83,7 +83,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""col p-0"">Stok</div>"
 				Response.Write "<div id=""divDurum2"" class=""col p-0 m-0"">"
 					Response.Write "<i class=""mdi mdi-arrow-expand text-danger pointer"" title=""Sıfır stokları göster/gizle"""
-						Response.Write " onclick=""working('divDurum2');$('#ortaalan').load('/stok/stok_liste.asp?durum2=" & q2 & "');"">"
+						Response.Write " onclick=""working('divDurum2',20,20);$('#ortaalan').load('/stok/stok_liste.asp?durum2=" & q2 & "');"">"
 					Response.Write "</i>"
 				Response.Write "</div>"
 			Response.Write "</div>"
@@ -94,7 +94,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""col"">Durum</div>"
 				Response.Write "<div id=""divDurum"" class=""col p-0 m-0"">"
 					Response.Write "<i class=""mdi mdi-arrow-expand text-danger pointer"" title=""Pasif ürünleri göster/gizle"""
-						Response.Write " onclick=""working('divDurum');$('#ortaalan').load('/stok/stok_liste.asp?durum=" & q & "');"">"
+						Response.Write " onclick=""working('divDurum',20,20);$('#ortaalan').load('/stok/stok_liste.asp?durum=" & q & "');"">"
 					Response.Write "</i>"
 				Response.Write "</div>"
 			Response.Write "</div>"
@@ -104,7 +104,7 @@ yetkiKontrol = yetkibul(modulAd)
 		end if
 		Response.Write "</tr></thead><tbody>"
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.stokID, stok.stoksay(t1.stokID) as stokMiktar, t1.stokKodu, t1.stokAd, t1.stokBarcode," 
+			sorgu = sorgu & " t1.stokID, stok.stoksay(" & firmaID & ", t1.stokID) as stokMiktar, t1.stokKodu, t1.stokAd, t1.stokBarcode," 
 			sorgu = sorgu & " CASE WHEN t1.silindi = 1 THEN '<span class=""text-danger"">PASİF</span>' ELSE 'AKTİF' END as durum,"
 			sorgu = sorgu & " CASE WHEN t1.stokTuru = '1' THEN 'Mamul' WHEN t1.stokTuru = '2' THEN 'Yarı Mamul' WHEN t1.stokTuru = '3' THEN 'Bileşen' WHEN t1.stokTuru = '4' THEN 'Hammadde' END as stokTuru"
 			sorgu = sorgu & " FROM stok.stok t1" 
@@ -114,7 +114,7 @@ yetkiKontrol = yetkibul(modulAd)
 				sorgu = sorgu & " AND t1.silindi = 0"
 			end if
 			if durum2 = "" then
-				sorgu = sorgu & " AND stok.stoksay(t1.stokID) > 0"
+				sorgu = sorgu & " AND stok.stoksay(" & firmaID & ", t1.stokID) > 0"
 			end if		
 			if aramaad = "" then
 			else

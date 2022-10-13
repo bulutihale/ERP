@@ -194,7 +194,7 @@ jQuery(document).ajaxSuccess(
 
 
 //bekleme animasyonu için ID gönder 
-	function working(id){$('#'+id).html('<img src="/arayuz/working2.gif" width="20" height="20"/>');}
+	function working(id,deger1,deger2){$('#'+id).html('<img src="/arayuz/working2.gif" width="'+deger1+'" height="'+deger2+'"/>');}
 //bekleme animasyonu için ID gönder 
 
 function divackapa(id){if ($(id).hasClass('hide')){$(id).removeClass('hide');}else{$(id).addClass('hide');}}

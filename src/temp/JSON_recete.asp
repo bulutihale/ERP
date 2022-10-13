@@ -26,6 +26,9 @@
 			sorgu = sorgu & " FROM recete.recete"
 			sorgu = sorgu & " WHERE silindi = 0"
 			sorgu = sorgu & " AND (receteAd like N'%" & arananKelime & "%')"
+			if sart <> "" then
+				sorgu = sorgu & " AND stokID = " & sart
+			end if
 			sorgu = sorgu & " ORDER BY receteAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
 				

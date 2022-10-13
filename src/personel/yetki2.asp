@@ -1,6 +1,5 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
-
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
     call sessiontest()
@@ -34,12 +33,12 @@ yetkiPersonel = yetkibul("personel")
 '###### 64 DÖNÜŞÜM
 '###### 64 DÖNÜŞÜM
 
+hedefID = gorevID
 
 
 '####### INSERT - UPDATE
 '####### INSERT - UPDATE
     sorgu = "Select top 1 * from personel.personel_yetki where kid = " & gorevID & " and yetkiAd = N'" & yetkiAd & "'"
-    Response.Write sorgu
 	rs.Open sorgu, sbsv5, 1, 3
     if rs.recordcount = 0 then
         rs.addnew
@@ -57,5 +56,7 @@ yetkiPersonel = yetkibul("personel")
     call logla("Yetki Güncellendi : " & yetkiAd)
     hatamesaj = translate("Yetki Güncellendi","","")
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+
+    call bildirim(hedefID,"",yetkiAd & " yetki değişikliği",1,kid,"","","","","")
 
 %><!--#include virtual="/reg/rs.asp" -->

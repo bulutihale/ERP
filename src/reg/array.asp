@@ -5,7 +5,6 @@ aylarkisa		=	Array("","Oc","Şb","Mr","Ns","My","Hz","Tm","Ağ","Ey","Ek","Ks","
 oncelikArr		=	Array("Düşük","","Düşük+","","","Normal","","Yüksek","","Acil")
 paraArr			=	Array("","TL","USD","EUR")
 
-
 hastaneArr      =   Array("","Özel Sağlık","Gözde Tepecik","Gözde Kuşadası")
 
 muhasebedbArr   =   Array("best2022","best2021")
@@ -15,7 +14,7 @@ muhasebedbArr   =   Array("best2022","best2021")
 	'##### Depo Tipleri
 	
 	'##### Depo Kategorileri
-				depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis"
+				depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis|Üretim Süreç=surec"
 	'##### Depo Kategorileri
 	
 	'##### EVET - HAYIR

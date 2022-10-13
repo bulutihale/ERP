@@ -7,6 +7,7 @@ ay			=	month(date())
 yil			=	year(date())
 bugun		=	date()
 
+renklerArr	=	Array("danger","danger","warning""success","primary","info")
 
 
 Function browser()
@@ -3885,4 +3886,15 @@ Function mailgonder(byVal baslik, byVal icerik, byVal gonderen, byVal gonderenAd
     end if
 End Function
 
+
+
+
+
+
+function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal ek1, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
+    ' call bildirim(gorevID,"",yetkiAd & " yetki değişikliği",1,kid,"","","","","")
+	veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
+	sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
+	fn1.open sorgu, sbsv5, 3, 3
+end function
 %>

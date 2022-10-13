@@ -125,26 +125,27 @@ else
 						Response.Write "</div>"
 						
 						Response.Write "<div class=""card-body""><div class=""row"">"
-					sorgu = "" & vbcrlf
-					sorgu = sorgu & "SELECT" & vbcrlf
-					sorgu = sorgu & "recete.receteAdim.receteAdimID" & vbcrlf
-					sorgu = sorgu & ",recete.receteIslemTipi.ad" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.stokID" & vbcrlf
-					sorgu = sorgu & ",stok.stok.stokAd" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.isGucuSayi" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.miktar" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.miktarBirim" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.sira" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.altReceteID" & vbcrlf
-					sorgu = sorgu & ",recete.recete.receteAd" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.stokKontroluYap" & vbcrlf
-					sorgu = sorgu & "FROM recete.receteAdim" & vbcrlf
-					sorgu = sorgu & "INNER JOIN recete.receteIslemTipi on recete.receteIslemTipi.receteIslemTipiID = recete.receteAdim.receteIslemTipiID" & vbcrlf
-					sorgu = sorgu & "left JOIN stok.stok on stok.stok.stokID = recete.receteAdim.stokID" & vbcrlf
-					sorgu = sorgu & "left JOIN recete.recete on recete.recete.receteID = recete.receteAdim.altReceteID" & vbcrlf
-					sorgu = sorgu & "where recete.receteAdim.receteID = " & gorevID & vbcrlf
-					sorgu = sorgu & "and recete.receteAdim.silindi = 0" & vbcrlf
-					sorgu = sorgu & "order by recete.receteAdim.sira ASC" & vbcrlf
+					sorgu = ""
+					sorgu = sorgu & "SELECT"
+					sorgu = sorgu & " t1.receteAdimID,"
+					sorgu = sorgu & " t2.ad,"
+					sorgu = sorgu & " t1.stokID,"
+					sorgu = sorgu & " t3.stokAd,"
+					sorgu = sorgu & " t1.isGucuSayi,"
+					sorgu = sorgu & " t1.miktar,"
+					sorgu = sorgu & " t1.miktarBirim,"
+					sorgu = sorgu & " t1.sira,"
+					sorgu = sorgu & " t1.altReceteID,"
+					sorgu = sorgu & " t4.receteAd,"
+					sorgu = sorgu & " t1.stokKontroluYap,"
+					sorgu = sorgu & " (SELECT TOP(1) receteAdimID FROM recete.receteAdim WHERE receteID = t1.altReceteID AND silindi = 0) as altReceteAdimID"
+					sorgu = sorgu & " FROM recete.receteAdim t1"
+					sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t2.receteIslemTipiID = t1.receteIslemTipiID"
+					sorgu = sorgu & " LEFT JOIN stok.stok t3 ON t3.stokID = t1.stokID"
+					sorgu = sorgu & " LEFT JOIN recete.recete t4 ON t4.receteID = t1.altReceteID"
+					sorgu = sorgu & " WHERE t1.receteID = " & gorevID
+					sorgu = sorgu & " AND t1.silindi = 0"
+					sorgu = sorgu & " ORDER BY t1.sira ASC"
 					rs.open sorgu, sbsv5, 1, 3
 					if rs.recordcount = 0 then
 						Response.Write "Reçete Adımları Bulunamadı"
@@ -153,7 +154,7 @@ else
 						Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
 							Response.Write "<th class=""col-1"" scope=""col""></th>"
 							Response.Write "<th class=""col-2"" scope=""col"">İşlem Tipi</th>"
-							Response.Write "<th class=""col-4"" scope=""col"">Stok Adı</th>"
+							Response.Write "<th class=""col-4"" scope=""col"">İşlem Açıklama</th>"
 							Response.Write "<th class=""col-1"" scope=""col"">Miktar</th>"
 							Response.Write "<th class=""col-1"" scope=""col"">İşgücü Sayı</th>"
 							Response.Write "<th class=""col-2"" scope=""col"">Alt Reçete</th>"
@@ -162,6 +163,10 @@ else
 							end if
 						Response.Write "</tr></thead><tbody>"
 							for i = 1 to rs.recordcount
+							altReceteID		=	rs("altReceteID")
+							altReceteAd		=	rs("receteAd")
+							receteAdimID	=	rs("receteAdimID")
+							altReceteAdimID	=	rs("altReceteAdimID")
 								Response.Write "<tr>"
 									Response.Write "<td>"
 									if yetkiKontrol >= 5 then
@@ -200,7 +205,14 @@ else
 									Response.Write "<td>" & rs("stokAd") & "</td>"
 									Response.Write "<td class=""text-right"">" & rs("miktar") & " " & rs("miktarBirim") & "</td>"
 									Response.Write "<td class=""text-right"">" & rs("isGucuSayi") & "</td>"
-									Response.Write "<td>" & rs("receteAd") & "</td>"
+									Response.Write "<td>"
+										Response.Write "<div class=""pointer"" onclick=""modalajax('/recete/recete_adim_yeni.asp?islem=gor&receteAdimID=" & altReceteAdimID & "&receteID=" & altReceteID & "')"">"
+										Response.Write altReceteAd
+										if not isnull(altReceteAd) then
+											Response.Write "<i class=""mdi mdi-clipboard-text""></i>"
+										end if
+										Response.Write "</div>"
+									Response.Write "</td>"
 									if yetkiKontrol >= 5 then
 										Response.Write "<td class=""text-right"">"
 											
@@ -211,7 +223,7 @@ else
 											Response.Write "<div title=""" & translate("Reçete Adım Düzenle","","") & """ class=""badge badge-pill pointer"
 											Response.Write " badge-success"
 											Response.Write """"
-											Response.Write " onClick=""modalajax('/recete/recete_adim_yeni.asp?islem=edit&receteAdimID=" & rs("receteAdimID") & "&receteID=" & gorevID & "')"">"
+											Response.Write " onClick=""modalajax('/recete/recete_adim_yeni.asp?islem=edit&receteAdimID=" & receteAdimID & "&receteID=" & gorevID & "')"">"
 											Response.Write "<i class=""mdi mdi-account-convert"
 											Response.Write """></i>"
 											Response.Write "</div>"

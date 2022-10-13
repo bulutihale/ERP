@@ -11,6 +11,7 @@
 	if receteID = "" then
 		receteID = Request.Form("receteID")
 	end if
+	stokID				=	Request.Form("stokID")
     receteISlemTipiID  	=	Request.Form("receteISlemTipiID")
 	modulAd 			=   "Reçete"
 '###### ANA TANIMLAMALAR
@@ -24,17 +25,18 @@ call logla("Yeni Reçete Adım Ekleme Ekranı Girişi")
 yetkiKontrol = yetkibul(modulAd)
 
 if receteAdimID <> "" then
-            sorgu = "SELECT t1.stokID, t3.stokAd, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID,"
-			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger"
+            sorgu = "SELECT t1.stokID, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID, t1.en, t1.boy, t1.enBoyBirim,"
+			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger, t5.receteAd as altReceteAd,  t6.uzunBirim as ebUzunBirim"
 			sorgu = sorgu & " FROM recete.receteAdim t1"
 			sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t1.receteISlemTipiID = t2.receteISlemTipiID"
-			sorgu = sorgu & " LEFT JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " LEFT JOIN portal.birimler t4 ON t1.miktarBirim = t4.kisaBirim"
+			sorgu = sorgu & " LEFT JOIN recete.recete t5 ON t1.altReceteID = t5.receteID"
+			sorgu = sorgu & " LEFT JOIN portal.birimler t6 ON t1.enBoyBirim = t6.kisaBirim"
 			sorgu = sorgu & " WHERE t1.receteAdimID = " & receteAdimID & " and t1.silindi = 0"
 			rs.open sorgu, sbsv5, 1, 3
+			if rs.recordcount > 0 then
 				islemTur			=	rs("islemTur")
                 stokID				=  	rs("stokID")
-				stokAd				=  	rs("stokAd")
                 miktar				=  	rs("miktar")
 				miktarBirim			=	rs("miktarBirim")
 				fire				=	rs("fire")
@@ -43,7 +45,12 @@ if receteAdimID <> "" then
 				uzunBirim			=	rs("uzunBirim")
 				sira				=	rs("sira")
 				altReceteID			=	rs("altReceteID")
+				altReceteAd			=	rs("altReceteAd")	
 				stokKontroluYap		=	rs("stokKontroluYap")
+				enUzunluk			=	rs("en")
+				boy					=	rs("boy")
+				enBoyBirim			=	rs("enBoyBirim")
+				ebUzunBirim			=	rs("ebUzunBirim")
 				onHazirlikTur		=	rs("onHazirlikTur")
 				if onHazirlikTur = "" then
 					onHazirlikTur = "Saat"
@@ -52,11 +59,22 @@ if receteAdimID <> "" then
 				receteIslemTipiID	=	rs("receteIslemTipiID")
 				receteIslemAd		=	rs("ad")
 				defDeger1			=	receteIslemTipiID & "###" & receteIslemAd
-				defDeger2			=	stokID & "###" & stokAd
 				defDeger3			=	miktarBirim & "###" & uzunBirim
 				defDeger4			=	fireBirim & "###" & uzunBirim
+				defDeger5			=	altReceteID & "###" & altReceteAd
+				defDeger6			=	enBoyBirim & "###" & ebUzunBirim
+			end if
             rs.close
 			
+end if
+
+if stokID <> "" then
+	sorgu = "SELECT stokID, stokAd, stokKodu FROM stok.stok WHERE stokID = " & stokID
+	rs.open sorgu, sbsv5, 1, 3
+		stokKodu			=	rs("stokKodu")
+		stokAd				=  	rs("stokAd")
+		defDeger2			=	stokID & "###" & stokKodu & " - " & stokAd
+	rs.close
 end if
 
 '################ Yeni adım kayıt ediliyorsa seçilen işleme göre inputları göster
@@ -110,8 +128,6 @@ end if
 								call formselectv2("receteIslemTipiID","","","","formSelect2 receteIslemTipiID border inpReset","","receteIslemTipiID","","data-holderyazi=""İşlem Tipi"" data-jsondosya=""JSON_receteIslemTipi"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
-
-
 						'#### STOK - YARI MAMÜL
 						Response.Write "<div class=""row mt-2" & stokRow & """>"
 							Response.Write "<div class=""col-12" & stokClass & """>"
@@ -119,7 +135,12 @@ end if
 								call formselectv2("stokID","","","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger2&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
-
+						Response.Write "<div id=""altReceteDIV"" class=""row" & stokRow & """>"
+							Response.Write "<div class=""col-12" & stokClass & """>"
+								Response.Write "<div class=""badge badge-warning rounded"">Alt Reçete</div>"
+								call formselectv2("altReceteID","","","","formSelect2 altReceteID border","","altReceteID","","data-holderyazi=""Alt Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sart="""& stokID & """ data-defdeger="""&defDeger5&"""")
+							Response.Write "</div>"
+						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
 							Response.Write "<div class=""col-6"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">" & miktarYazi & "</div>"
@@ -128,6 +149,20 @@ end if
 							Response.Write "<div class=""col-6"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
 								call formselectv2("miktarBirim","","","","formSelect2 miktarBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger3&"""")
+							Response.Write "</div>"
+						Response.Write "</div>"
+						Response.Write "<div class=""row mt-2" & miktarRow & """>"
+							Response.Write "<div class=""col-3"">"
+								Response.Write "<div class=""badge badge-secondary rounded-left"">En Uzunluğu</div>"
+								call forminput("enUzunluk",enUzunluk,"numara(this,true,false)","","inpReset","autocompleteOFF","enUzunluk","")
+							Response.Write "</div>"
+							Response.Write "<div class=""col-3"">"
+								Response.Write "<div class=""badge badge-secondary rounded-left"">Boy Uzunluğu</div>"
+								call forminput("boy",boy,"numara(this,true,false)","","inpReset","autocompleteOFF","boy","")
+							Response.Write "</div>"
+							Response.Write "<div class=""col-6"">"
+								Response.Write "<div class=""badge badge-secondary rounded-left"">En - Boy Birim</div>"
+								call formselectv2("enBoyBirim","","","","formSelect2 enBoyBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger6&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & fireRow & """>"
@@ -161,7 +196,12 @@ end if
 								call formselectv2("onHazirlikTur",onHazirlikTur,"","","onHazirlikTur","","onHazirlikTur",hazTurDegerler,"")
 							Response.Write "</div>"						
 						Response.Write "</div>"
-						
+						Response.Write "<div class=""row"">"
+							Response.Write "<div class=""col-sm-3 my-1"">"
+								Response.Write "<span class=""badge badge-secondary rounded-left"">Kullanım Dışı</span>"
+								call formselectv2("silindi",int(silindi),"","","silindi","","silindi",HEDegerler,"")
+							Response.Write "</div>"
+						Response.Write "</div>"
 
 						
 						'#### BAŞKA REÇETE ÇAĞIR
@@ -172,9 +212,13 @@ end if
 							Response.Write "</div>"
 						Response.Write "</div>"
 						'#### BAŞKA REÇETE ÇAĞIR
-
+					if islem = "gor" then
+						butonDurum = " d-none "
+					else
+						butonDurum = ""
+					end if
 						Response.Write "<div class=""form-row align-items-center"">"
-							Response.Write "<div class=""col-auto mt-4""><button type=""submit"" class=""btn btn-primary"">KAYDET</button></div>"
+							Response.Write "<div class=""col-auto mt-4""><button type=""submit"" class=""btn btn-primary"&butonDurum&""">KAYDET</button></div>"
 						Response.Write "</div>"
 		Response.Write "</form>"
 	Response.Write "</div>"	
@@ -194,8 +238,8 @@ end if
 		$('#receteIslemTipiID, #stokID, #birimSec, #fireBirimSec, #altReceteID').trigger('mouseenter');
 		
 		
-		$('#receteIslemTipiID').on('change',function() {
-			$('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {receteISlemTipiID:$(this).val(), receteID:$('#receteID').val()})
+		$('#receteIslemTipiID, #stokID').on('change',function() {
+			$('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {receteISlemTipiID:$('#receteIslemTipiID').val(), receteID:$('#receteID').val(), stokID:$('#stokID').val()})
 		})
 		
 

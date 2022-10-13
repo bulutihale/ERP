@@ -15,6 +15,9 @@
 	stokID				=	Request.Form("stokID")
     miktar	 			=	Request.Form("miktar")
 	miktarBirim			=	Request.Form("miktarBirim")
+	enUzunluk			=	Request.Form("enUzunluk")
+	boy					=	Request.Form("boy")
+	enBoyBirim			=	Request.Form("enBoyBirim")
 	fire				=	Request.Form("fire")
 	fireBirim			=	Request.Form("fireBirim")
 	isGucuSayi			=	Request.Form("isGucuSayi")
@@ -39,6 +42,12 @@ yetkiKontrol = yetkibul(modulAd)
 
 if miktar = "" then
 	miktar = 0
+end if
+if enUzunluk = "" then
+	enUzunluk = 0
+end if
+if boy = "" then
+	boy = 0
 end if
 if fire = "" then
 	fire = 0
@@ -77,11 +86,15 @@ end if
 				rs("fire")				=	fire
 				rs("fireBirim")			=	fireBirim
 				rs("miktarBirim")		=	miktarBirim
+				rs("en")				=	enUzunluk
+				rs("boy")				=	boy
+				rs("enBoyBirim")		=	enBoyBirim
 				rs("isGucuSayi")		=	isGucuSayi
 				rs("altReceteID")		=	altReceteID
 				rs("receteIslemTipiID")	=	receteIslemTipiID
 				rs("onHazirlikDeger")	=	onHazirlikDeger
 				rs("onHazirlikTur")		=	onHazirlikTur
+				rs("silindi")			=	silindi
 				if islem <> "edit" then 'editleniyorsa sıra değişmesin
 					rs("sira")				=	900' en son eklenen adım en son sıraya atılsın, recete_adim_sira.asp ye yönlendiğinde sıra numarası düzeltiliyor.
 				end if

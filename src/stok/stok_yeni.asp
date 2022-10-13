@@ -32,6 +32,7 @@ if gorevID <> "" then
 				stokKodu		=	rs("stokKodu")
 				stokAd			=	rs("stokAd")
 				stokTuru		=	rs("stokTuru")
+				minStok			=	rs("minStok")
 				stokBarcode		=	rs("stokBarcode")
 				kkDepoGiris		=	rs("kkDepoGiris")
 				silindi			=	rs("silindi")
@@ -49,24 +50,28 @@ end if
 
 		Response.Write "<div class=""form-row align-items-left"">"
 			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary"">Stok Kodu</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Kodu</span>"
 				call forminput("stokKodu",stokKodu,"","","",inpKontrol,"stokKodu","")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary"">Ürün Ad</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Ad</span>"
 				call forminput("stokAd",stokAd,"","","",inpKontrol,"stokAd","")
 			Response.Write "</div>"
-			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary"">Stok Türü</span>"
+			Response.Write "<div class=""col-sm-6 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Türü</span>"
 				call formselectv2("stokTuru",int(stokTuru),"","","stokTuru","","stokTuru",stokTipDegerler,"")
 			Response.Write "</div>"
+			Response.Write "<div class=""col-sm-6 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Minumum Stok Miktarı</span>"
+				call forminput("minStok",minStok,"","","","","minStok","")
+			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary"">Mal Kabulde İlk Giriş Kalite Kontrol Depoya</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Mal Kabulde İlk Giriş Kalite Kontrol Depoya</span>"
 				call formselectv2("kkDepoGiris",kkDepoGiris,"","","kkDepoGiris","","kkDepoGiris",HEDegerler,"")
 			Response.Write "</div>"
 		if yetkiKontrol >= 8 then
 			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary"">Kullanım Dışı</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Kullanım Dışı</span>"
 				call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
 			Response.Write "</div>"
 		end if

@@ -39,22 +39,24 @@ Response.Write "<div class=""card-body"">"
 		
 		Response.Write "<div class=""table-responsive mt-3"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
-			Response.Write "<th class=""col-2"" scope=""col"">Reçete Adı</th>"
-			Response.Write "<th class=""col-1"" scope=""col"">Ürün Kodu</th>"
-			Response.Write "<th class=""col-4"" scope=""col"">Ürün Adı</th>"
-			Response.Write "<th class=""col-4"" scope=""col"">Cari Adı</th>"
+			Response.Write "<th class=""col-lg-2 col-sm-1"" scope=""col"">Reçete Adı</th>"
+			Response.Write "<th class=""col-lg-1 col-sm-1"" scope=""col"">Ürün Kodu</th>"
+			Response.Write "<th class=""col-lg-4 col-sm-2"" scope=""col"">Ürün Adı</th>"
+			Response.Write "<th class=""col-lg-3 col-sm-2"" scope=""col"">Cari Adı</th>"
+			Response.Write "<th class=""col-lg-1 col-sm-1"" scope=""col"">Durum</th>"
 			if yetkiKontrol >= 5 then
-				Response.Write "<th class=""col-1"" scope=""col"">İşlem</th>"
+				Response.Write "<th class=""col-lg-1 col-sm-2"" scope=""col"">İşlem</th>"
 			end if
 		Response.Write "</tr></thead><tbody>"
 		
 		
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.receteID, t1.receteAd, t2.stokID, t2.stokKodu, t2.stokAd, t3.cariID, t3.cariKodu, t3.cariAd"
+			sorgu = sorgu & " t1.receteID, t1.receteAd, t2.stokID, t2.stokKodu, t2.stokAd, t3.cariID, t3.cariKodu, t3.cariAd,"
+			sorgu = sorgu & " CASE WHEN t1.silindi= 1 THEN '<span class=""text-danger bold"">PASİF</span>' ELSE 'AKTİF' END as receteDurum"
 			sorgu = sorgu & " FROM recete.recete t1"
 			sorgu = sorgu & " LEFT JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " LEFT JOIN cari.cari t3 ON t1.cariID = t3.cariID"
-			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.silindi = 0"
+			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & ""
 			if stokID <> "" then
 				sorgu = sorgu & " AND t2.stokID = " & stokID & ""
 			end if
@@ -78,12 +80,14 @@ Response.Write "<div class=""card-body"">"
 					cariID				=	rs("cariID")
 					cariKodu			=	rs("cariKodu")
 					cariAd				=	rs("cariAd")
+					receteDurum			=	rs("receteDurum")
 
 					Response.Write "<tr>"
 						Response.Write "<td>" & receteAd & "</td>"
 						Response.Write "<td>" & stokKodu & "</td>"
 						Response.Write "<td>" & stokAd & "</td>"
 						Response.Write "<td>" & cariAd & "</td>"
+						Response.Write "<td class=""text-center"">" & receteDurum & "</td>"
 						if yetkiKontrol >= 5 then
 						Response.Write "<td class=""text-right"">"
 

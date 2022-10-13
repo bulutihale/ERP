@@ -14835,7 +14835,7 @@ button.bg-success:focus {
 a.bg-info:hover, a.bg-info:focus,
 button.bg-info:hover,
 button.bg-info:focus {
-  background-color: #552ed7 !important;
+  background-color: #3b64c2 !important;
 }
 
 .bg-warning {
@@ -15041,7 +15041,8 @@ button.bg-dark:focus {
 }
 
 .d-flex, .navbar .navbar-menu-wrapper .navbar-nav, .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile, .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item, .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item .item-thumbnail .item-icon, .navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right .nav-item {
-  display: flex !important;
+  display: flex;
+  /* display: flex !important; */
 }
 
 .d-inline-flex {

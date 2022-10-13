@@ -12,6 +12,7 @@
     stokKodu 		=   Request.Form("stokKodu")
     stokAd	 		=   Request.Form("stokAd")
 	stokTuru		=   Request.Form("stokTuru")
+    minStok         =   Request.Form("minStok")
     gorevID			=   Request.Form("gorevID")
 	silindi			=   Request.Form("silindi")
 	kkDepoGiris		=	Request.Form("kkDepoGiris")
@@ -57,6 +58,7 @@ end if
                 rs("stokTuru")			=	stokTuru
                 rs("silindi")			=	silindi
 				rs("kkDepoGiris")		=	kkDepoGiris
+                rs("minStok")           =   minStok
             rs.update
             rs.close
 

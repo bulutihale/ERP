@@ -7,7 +7,7 @@
 	siparisKalemID			=	Request.QueryString("siparisKalemID")
 	silAjandaID				=	Request.QueryString("silAjandaID")
 	yer						=	Request.QueryString("yer")
-	isTur					=	Request.QueryString("isTur")
+	qisTur					=	Request.QueryString("isTur")
 
 	if silAjandaID = "" then
 		silAjandaID = 0
@@ -63,7 +63,7 @@ if yetkiKontrol > 0 then
 						Response.Write " data-sorgulanantarih=""" & sorgulananTarih & """"
 						Response.Write " data-sipariskalemid=""" & siparisKalemID & """"
 						Response.Write " data-yer=""" & yer & """"
-						Response.Write " data-istur=""" & isTur & """"
+						Response.Write " data-istur=""" & qisTur & """"
 					Response.Write "></div>"
 				
 				
@@ -136,7 +136,7 @@ if yetkiKontrol > 0 then
 
 										Response.Write "<div class=""col h-100 border border-dark  scroll-ekle3 " & bugunClass & """"
 										if siparisKalemID <> "" then
-										 	Response.Write " onclick=""planEkle("&silAjandaID&","&yilDeger&","&ayDeger&","&zi&","&siparisKalemID&",'"&yer&"','"&isTur&"')"""
+										 	Response.Write " onclick=""planEkle("&silAjandaID&","&yilDeger&","&ayDeger&","&zi&","&siparisKalemID&",'"&yer&"','"&qisTur&"')"""
 										end if
 										 Response.Write ">"
 											
@@ -193,13 +193,19 @@ if yetkiKontrol > 0 then
 													end if
 												'####### /ajanda kaydı silme
 
-														Response.Write "<div class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0"""
+														Response.Write "<div "
 															Response.Write " title=""" & icerik & """"
 															if isTur = "uretimPlan" then
-																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
+																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-info"""
+															elseif isTur = "kesimPlan" then
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Kesimhane','Kapat','btn-success','btn-danger','','','','','')"""
+																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-success"""
 															elseif isTur = "transfer" then
-																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"">"
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"""
+																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-secondary"""
 															end if
+															Response.Write ">"
 
 															Response.Write icerikKisa
 														Response.Write "</div>"
@@ -267,6 +273,7 @@ if yetkiKontrol > 0 then
 	<script>
 	// plan Değiştirme işlemleri		
 		function planDegistir(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer,isTur){
+			alert(isTur);
 				sorgulananTarih	=	$('#sabitBilgiler').attr('data-sorgulanantarih');
 					swal({
 					//title: hangiGun+'.'+hangiAy+'.'+hangiYil+' gününe üretim planı eklensin mi?',
@@ -291,7 +298,7 @@ if yetkiKontrol > 0 then
 					  }, //confirm buton yapılanlar
 					  function(dismiss) {
 						// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-					  } //cancel buton yapılanlar		
+					  } //cancel buton yapılanlar	
 					);//swal sonu
 		}
 	// plan Değiştirme işlemleri		

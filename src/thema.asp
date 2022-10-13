@@ -302,7 +302,6 @@ Response.Write "<link rel=""icon"" type=""image/png"" sizes=""32x32"" href=""/ar
 	'bu kısmı sonra seo.js ye al
 	'bu kısmı sonra seo.js ye al
 
-
 if kid = "" then
 	bgsayi = rastgele(6,1)
 	Response.Write "<style>"
@@ -442,23 +441,26 @@ if kid <> "" then
 				' 	Response.Write "</li>"
 				' end if
 
+
+
+
 			'## MESAJLAR
 			'## MESAJLAR
-'				Response.Write "<li class=""nav-item dropdown mr-1"">"
-'				Response.Write "<a class=""nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"" id=""messageDropdown"" href=""#"" data-toggle=""dropdown"">"
-'				Response.Write "<i class=""mdi mdi-message-text mx-0""></i>"
-'				Response.Write "<span class=""count""></span>"
-'				Response.Write "</a>"
-'				Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
-'				Response.Write "<p class=""mb-0 font-weight-normal float-left dropdown-header"">Mesajlar</p>"
-'				Response.Write "<a class=""dropdown-item"">"
-'				Response.Write "<div class=""item-content flex-grow"">"
-'				Response.Write "<h6 class=""ellipsis font-weight-normal"">Başlık</h6>"
-'				Response.Write "<p class=""font-weight-light small-text text-muted mb-0"">Mesaj</p>"
-'				Response.Write "</div>"
-'				Response.Write "</a>"
-'				Response.Write "</div>"
-'				Response.Write "</li>"
+				' Response.Write "<li class=""nav-item dropdown mr-1"">"
+				' Response.Write "<a class=""nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"" id=""messageDropdown"" href=""#"" data-toggle=""dropdown"">"
+				' Response.Write "<i class=""mdi mdi-bell mx-0""></i>"
+				' Response.Write "<span class=""count"">5</span>"
+				' Response.Write "</a>"
+				' ' Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
+				' ' Response.Write "<p class=""mb-0 font-weight-normal float-left dropdown-header"">Mesajlar</p>"
+				' ' Response.Write "<a class=""dropdown-item"">"
+				' ' Response.Write "<div class=""item-content flex-grow"">"
+				' ' Response.Write "<h6 class=""ellipsis font-weight-normal"">Başlık</h6>"
+				' ' Response.Write "<p class=""font-weight-light small-text text-muted mb-0"">Mesaj</p>"
+				' ' Response.Write "</div>"
+				' ' Response.Write "</a>"
+				' ' Response.Write "</div>"
+				' Response.Write "</li>"
 			'## MESAJLAR
 			'## MESAJLAR
 			'## KULLANICI MENÜSÜ
@@ -474,6 +476,46 @@ if kid <> "" then
 			Response.Write "</li>"
 			'## KULLANICI MENÜSÜ
 			'## KULLANICI MENÜSÜ
+
+
+
+
+			'## BİLDİRİM ALANI
+			'## BİLDİRİM ALANI
+				sorgu = "Select top 10 notificationID,icerik,onem from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid =  " & kid & " and tarih >= '" & tarihsql(date()-3) & "' order by notificationID desc"
+				rs.Open sorgu, sbsv5, 1, 3
+					Response.Write "<li class=""nav-item dropdown mr-1"
+					if rs.recordcount = 0 then
+						Response.Write " d-none"
+					end if
+					Response.Write """ bildirimcontainer>"
+						Response.Write "<a class=""nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"" id=""messageDropdown"" href=""#"" data-toggle=""dropdown"" aria-expanded=""true"">"
+							Response.Write "<div class=""badge badge-pill badge-success""><i class=""mdi mdi-bell mr-2""></i><span class=""bildirimsayi"">" & rs.recordcount & "</span></div>"
+							' Response.Write "<i class=""mdi mdi-bell text-danger mx-0""></i>"
+							' Response.Write "<span class=""count bildirimsayi"">4</span>"
+						Response.Write "</a>"
+						Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
+							for i = 1 to rs.recordcount
+								Response.Write "<a class=""dropdown-item bildirimitem"">"
+									Response.Write "<div class=""item-content flex-grow"">"
+										Response.Write "<h6 class=""ellipsis font-weight-normal"" onClick=""modalajax('/portal/notificationModal.asp?gorevID=" & rs("notificationID") & "')"">"
+											Response.Write rs("icerik")
+										Response.Write "</h6>"
+									Response.Write "</div>"
+								Response.Write "</a>"
+							rs.movenext
+							next
+						Response.Write "</div>"
+					Response.Write "</li>"
+				' end if
+				rs.close
+			'## BİLDİRİM ALANI
+			'## BİLDİRİM ALANI
+
+
+
+
+
 		Response.Write "</ul>"
 	'########### ÜST BAR
 	'########### ÜST BAR
@@ -486,31 +528,25 @@ if kid <> "" then
 
 
 	Response.Write "<div class=""container-fluid page-body-wrapper"">"
+
+
 	'########### SOL BAR
 	'########### SOL BAR
 		Response.Write "<nav class=""sidebar sidebar-offcanvas"" id=""sidebar"">"
 		Response.Write "<ul class=""nav"">"
 
 
+			' Response.Write "<li class=""nav-item"">"
+			' 	Response.Write "<a class=""nav-link"" data-toggle=""collapse"" href=""#ui-basic"" aria-expanded=""false"" aria-controls=""ui-basic""><i class=""mdi mdi-circle-outline menu-icon""></i><span class=""menu-title"">Menü Çoklu</span><i class=""menu-arrow""></i></a>"
+			' 	Response.Write "<div class=""collapse"" id=""ui-basic"">"
+			' 	Response.Write "<ul class=""nav flex-column sub-menu"">"
 
+			' 		Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 1</a></li>"
+			' 		Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 2</a></li>"
 
-
-
-
-
-
-
-	'		Response.Write "<li class=""nav-item"">"
-	'			Response.Write "<a class=""nav-link"" data-toggle=""collapse"" href=""#ui-basic"" aria-expanded=""false"" aria-controls=""ui-basic""><i class=""mdi mdi-circle-outline menu-icon""></i><span class=""menu-title"">Menü Çoklu</span><i class=""menu-arrow""></i></a>"
-	'			Response.Write "<div class=""collapse"" id=""ui-basic"">"
-	'			Response.Write "<ul class=""nav flex-column sub-menu"">"
-
-	'				Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 1</a></li>"
-	'				Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 2</a></li>"
-
-	'			Response.Write "</ul>"
-	'			Response.Write "</div>"
-	'		Response.Write "</li>"
+			' 	Response.Write "</ul>"
+			' 	Response.Write "</div>"
+			' Response.Write "</li>"
 
 
 
@@ -871,6 +907,8 @@ if kid <> "" then
 
 
 
+
+
 	'########### ALT BAR
 	'########### ALT BAR
 		Response.Write "<footer class=""footer"">"
@@ -959,7 +997,13 @@ end if
 
 Response.Write "<div id=""ajax"" class=""d-none""></div>"
 
-
+'#### ZAMANLANMIŞ GÖREVLER
+'#### ZAMANLANMIŞ GÖREVLER
+	Response.Write "<div id=""activeuserUrl"" class=""d-none"">"
+	Server.Execute sb_activeuserUrl
+	Response.Write "</div>"
+'#### ZAMANLANMIŞ GÖREVLER
+'#### ZAMANLANMIŞ GÖREVLER
 
 Response.Write "<scr" & "ipt src=""/template/bootstrap-datepicker/js/bootstrap-datepicker.min.js""></scr" & "ipt>"
 Response.Write "<scr" & "ipt src=""/template/bootstrap-datepicker/locales/bootstrap-datepicker.tr.min.js""></scr" & "ipt>"
@@ -992,6 +1036,9 @@ Response.Write "<scr" & "ipt type=""text/javascript"" src=""/template/swal/dist/
 
 Response.Write "<div class=""modal fade"" id=""modal-dialog"" tabindex=""-1"" role=""dialog"" aria-labelledby=""modalbaslik"" aria-hidden=""true""><div class=""modal-dialog modal-lg""><div class=""modal-content""><div class=""modal-body"" id=""modalform""></div></div></div></div>"
 Response.Write "<div class=""modal fade"" id=""modal-dialogfit"" role=""dialog"" aria-labelledby=""modalbaslik"" aria-hidden=""true""><div class=""modal-dialog modal-xl""><div class=""modal-content""><div class=""modal-body""></div></div></div></div>"
+
+
+
 Response.Write "</body>"
 Response.Write "</html>"
 %>
