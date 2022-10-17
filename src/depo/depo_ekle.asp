@@ -55,12 +55,12 @@ if ozelDepo = "1" AND depoTuru <> "satis" then
 end if
 
 if silindi > 0 then
-	sorgu = "SELECT sbs_tio.stok.depoBosKontrol(" & firmaID & ", " & depoID & ") as stokMiktar FROM stok.stok"
+	sorgu = "SELECT sbs_tio.stok.depoBosKontrol(" & depoID & ") as stokMiktar FROM stok.stok"
 	rs.open sorgu, sbsv5, 1, 3
 		if rs("stokMiktar") > 0 then
 			hatamesaj = "Depo Boş olmadığı için PASİF yapılamaz."
 			call logla(hatamesaj)
-			call toastrCagir(hatamesaj, "HATA", "right", "error", "otomatik", "")
+			call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
 			Response.End()
 		end if
 	rs.close

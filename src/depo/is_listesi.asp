@@ -6,11 +6,10 @@
 	kid						=	kidbul()
 	gunHareket				=	cint(Request.QueryString("gunHareket"))
 	ajandaSorguTarih		=	Session("sayfa5")
-	querySorguTarih			=	Request.QueryString("sorgulananTarih")
-	if ajandaSorguTarih <> "" AND querySorguTarih = "" then
+	if ajandaSorguTarih <> "" then
 		sorgulananTarih	=	ajandaSorguTarih
 	else
-		sorgulananTarih			=	querySorguTarih
+		sorgulananTarih			=	Request.QueryString("sorgulananTarih")
 	end if
 	siparisKalemID			=	Request.QueryString("siparisKalemID")
 	silAjandaID				=	Request.QueryString("silAjandaID")
@@ -131,8 +130,6 @@ call logla("Depo Günlük İş Listesi")
 									sorgu = sorgu & " FROM portal.ajanda"
 									sorgu = sorgu & " WHERE silindi = 0 AND kid = " & kid & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & hangiGun
 									rs.open sorgu, sbsv5,1,3
-								'Response.Write sorgu
-								'response.end
 									if rs.recordcount > 0 then
 										for di = 1 to rs.recordcount
 											sipKalemID		=	rs("siparisKalemID")
@@ -159,11 +156,9 @@ call logla("Depo Günlük İş Listesi")
 												icerikKisa 	= icerikKisa & "..."
 											end if
 											if isTur = "uretimPlan" then
-												kutuClass	=	" bg-info" 
-											elseif isTur = "kesimPlan" then
-												kutuClass	=	" bg-success " 
+												kutuClass	=	" border-info" 
 											elseif isTur = "transfer" then
-												kutuClass	=	" bg-secondary " 
+												kutuClass	=	" border-warning " 
 											end if
 											if tamamlandi = 1 then
 												deger 	=	0
@@ -178,13 +173,10 @@ call logla("Depo Günlük İş Listesi")
 										Response.Write "<div class=""col-11 text-left fontkucuk pointer hoverGel"""
 										Response.Write " title=""" & icerik & """"
 											if isTur = "uretimPlan" then
-												Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
-											elseif isTur = "kesimPlan" then
-												Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Kesimhane','Kapat','','btn-danger','','','','','')"""
+												Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
 											elseif isTur = "transfer" then
-												Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+												Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"">"
 											end if
-										Response.Write ">"
 											Response.Write icerik
 										Response.Write "</div>"
 										if yetkiKontrol > 5 then

@@ -10,8 +10,8 @@
     depoID 			=   Request.Form("depoID")
     lot		 		=   Request.Form("lot")
 	lotSKT			=   Request.Form("lotSKT")
-    aktarMiktar		=   cdbl(Request.Form("aktarMiktar"))
-	lotMiktar		=	cdbl(Request.Form("lotMiktar"))
+    aktarMiktar		=   Request.Form("aktarMiktar")
+	lotMiktar		=	Request.Form("lotMiktar")
 	miktarBirim		=   Request.Form("miktarBirim")
 	stokID			=   Request.Form("stokID")
 	stokKodu		=   Request.Form("stokKodu")
@@ -22,7 +22,6 @@
 
 call rqKontrol(girisDepoID,"Lütfen giriş yapılacak depo seçimi yapın.","")
 call rqKontrol(aktarMiktar,"Lütfen aktarım miktarını yazın.","")
-
 
 if lotMiktar < aktarMiktar then
 	call rqKontrol("","Aktarım miktarı toplam LOT miktarından fazla olamaz.","")

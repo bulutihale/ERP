@@ -193,19 +193,13 @@ if yetkiKontrol > 0 then
 													end if
 												'####### /ajanda kaydı silme
 
-														Response.Write "<div "
+														Response.Write "<div class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0"""
 															Response.Write " title=""" & icerik & """"
 															if isTur = "uretimPlan" then
-																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
-																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-info"""
-															elseif isTur = "kesimPlan" then
-																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Kesimhane','Kapat','btn-success','btn-danger','','','','','')"""
-																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-success"""
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
 															elseif isTur = "transfer" then
-																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"""
-																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-secondary"""
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"">"
 															end if
-															Response.Write ">"
 
 															Response.Write icerikKisa
 														Response.Write "</div>"
