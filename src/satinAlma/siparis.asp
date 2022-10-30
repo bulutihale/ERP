@@ -32,58 +32,65 @@ yetkiKontrol = yetkibul(modulAd)
 			Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                 Response.Write "<div class=""card"">"
 					Response.Write "<div class=""card-header"">"
-						Response.Write "<div class=""col-12 h4 text-left"">Satın Alma Siparişi</div>"
+						Response.Write "<div class=""col-12 h4 text-left"">Satın Alma Siparişi Oluşturma</div>"
 					Response.Write "</div>"
 					Response.Write "<form action=""/satinAlma/siparis_kalem_ekle.asp"" method=""post"" id=""siparisform"">"
-					Response.Write "<div class=""card-body pt-0"">"
-											
+					Response.Write "<div class=""card-body"">"
+
 						Response.Write "<div class=""row"">"
-							Response.Write "<div id=""divCariSec"" class=""col-6"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Cari Seçimi</div>"
-								call formselectv2("cariSec","","$('#siparislistesi').load('/satinalma/siparis_kalem_ekle.asp?islem=kontrol&siphash='+this.value);","","formSelect2 cariSec","","cariSec","","data-holderyazi=""Cari adı, cari kodu, vergi no"" data-jsondosya=""JSON_cariler"" data-miniput=""3""")
+							Response.Write "<div class=""col-lg-6 col-sm-12 col-md-12 border border-dark rounded mt-2"">" 
+								Response.Write "<div class=""row mt-2"">"
+									Response.Write "<div id=""divCariSec"" class=""col-lg-9 col-md-6 col-sm-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Sipariş Verilen Cari Seçimi</div>"
+										call formselectv2("cariSec","","$('#siparislistesi').load('/satinalma/siparis_kalem_ekle.asp?islem=kontrol&siphash='+this.value);","","formSelect2 cariSec","","cariSec","","data-holderyazi=""Cari adı, cari kodu, vergi no"" data-jsondosya=""JSON_cariler"" data-miniput=""3""")
+									Response.Write "</div>"
+									Response.Write "<div class=""col-lg-3 col-md-6 col-sm-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Sipariş Tarihi</div>"
+										call forminput("siparisTarih",date(),"","Sipariş tarihi","tarih","autocompleteOFF","siparisTarih","")
+									Response.Write "</div>"
+								Response.Write "</div>"
+
+								Response.Write "<div class=""row mt-2 mb-2"">"
+									Response.Write "<div id=""divCariSec"" class=""col-lg-9 col-md-6 col-sm-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
+										call formselectv2("stokSec","","","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+									Response.Write "</div>"
+									Response.Write "<div class=""col-lg-3 col-md-6 col-sm-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün notları</div>"
+										call forminput("kalemNot","","","Ürün için açıklama","inpReset","autocompleteOFF","kalemNot","")
+									Response.Write "</div>"
+								Response.Write "</div>"
 							Response.Write "</div>"
-							Response.Write "<div class=""col-1"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Sipariş Tarihi</div>"
-								call forminput("siparisTarih",date(),"","Sipariş tarihi","tarih","autocompleteOFF","siparisTarih","")
+							Response.Write "<div class=""col-lg-6 col-sm-12 col-md-12 border border-dark rounded mt-2"">"
+								Response.Write "<div class=""row mt-2"">"
+									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Miktar</div>"
+										call forminput("miktar",miktar,"numara(this,true,false)","miktar","inpReset","","miktar","")
+									Response.Write "</div>"
+									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
+										call formselectv2("birimSec","","","","formSelect2 birimSec border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0""")
+									Response.Write "</div>"
+								Response.Write "</div>"
+								Response.Write "<div class=""row mt-2 mb-2"">"
+									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Fiyat</div>"
+										call forminput("birimfiyat",birimfiyat,"numara(this,true,false)","Birim Fiyat","inpReset","","birimfiyat","")
+									Response.Write "</div>"
+									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Para Birim</div>"
+										call formselectv2("pBirimSec","","","","formSelect2 pBirimSec border inpReset","","pBirimSec","","data-holderyazi=""Para Birim"" data-jsondosya=""JSON_paraBirimler"" data-miniput=""0""")
+									Response.Write "</div>"
+								Response.Write "</div>"
+								
 							Response.Write "</div>"
 						Response.Write "</div>"
-						
-						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div id=""divCariSec"" class=""col-6"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
-								call formselectv2("stokSec","","","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
-							Response.Write "</div>"
-							Response.Write "<div class=""col-5"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün notları</div>"
-								call forminput("kalemNot","","","Ürün için açıklama","inpReset","autocompleteOFF","kalemNot","")
-							Response.Write "</div>"
-						Response.Write "</div>"
-						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-1"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Miktar</div>"
-								call forminput("miktar",miktar,"numara(this,true,false)","miktar","inpReset","","miktar","")
-							Response.Write "</div>"
-							Response.Write "<div class=""col-2"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
-								call formselectv2("birimSec","","","","formSelect2 birimSec border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0""")
-							Response.Write "</div>"
-							Response.Write "<div class=""col-1"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Fiyat</div>"
-								call forminput("birimfiyat",birimfiyat,"numara(this,true,false)","Birim Fiyat","inpReset","","birimfiyat","")
-							Response.Write "</div>"
-							Response.Write "<div class=""col-1"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">Para Birim</div>"
-								call formselectv2("pBirimSec","","","","formSelect2 pBirimSec border inpReset","","pBirimSec","","data-holderyazi=""Para Birim"" data-jsondosya=""JSON_paraBirimler"" data-miniput=""0""")
-							Response.Write "</div>"
-						Response.Write "</div>"
-						
-						
-						
 						Response.Write "<div class=""row"">"
-							Response.Write "<div class=""col-2 mt-4"">"
-								Response.Write "<button type=""submit"" class=""btn btn-primary form-control"">EKLE</button>"
+							Response.Write "<div class=""col-lg-12 col-sm-12 col-md-12 mt-4 text-center"">"
+								Response.Write "<div class=""col-12""><button type=""submit"" class=""btn btn-primary col-lg-6 col-md-12 col-sm-12"">KAYDET</button></div>"
 							Response.Write "</div>"
 						Response.Write "</div>"
+
 					Response.Write "</div>"
 					Response.Write "</form>"
 				Response.Write "</div>"

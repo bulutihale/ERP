@@ -27,6 +27,8 @@
 Response.Flush()
 
 
+call rqKontrol(stokID,"Lütfen aktarım yapılacak ürün seçimi yapın.","")
+
 yetkiKontrol = yetkibul(modulAd)
 
 	if ajandaID <> "" then
@@ -147,15 +149,15 @@ yetkiKontrol = yetkibul(modulAd)
 
 				if stokID <> "" then
 					sorgu = "SELECT "
-					sorgu = sorgu & " stok.stokSayDepoLot(t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
+					sorgu = sorgu & " stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
 					sorgu = sorgu & " FROM stok.stokHareket t1"
 					sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
 					sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & stokID & " AND t2.silindi = 0 AND t2.depoKategori IN ('malKabul','uretim')"
-					sorgu = sorgu & " AND stok.stokSayDepo(t1.stokID, t1.depoID) > 0"
-					sorgu = sorgu & " AND stok.stokSayDepoLot(t1.stokID, t1.depoID, t1.lot) > 0"
+					sorgu = sorgu & " AND stok.stokSayDepo(" & firmaID & ", t1.stokID, t1.depoID) > 0"
+					sorgu = sorgu & " AND stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
+					sorgu = sorgu & " AND t1.silindi = 0"
 					sorgu = sorgu & " GROUP BY t1.depoID, t1.stokKodu, t1.stokID, t2.depoAd, t1.lot, t1.miktarBirim, t1.lotSKT"
 					rs.open sorgu, sbsv5, 1, 3
-					
 						Response.Write "<div class=""row mt-1 text-center bold border-bottom mt-3"">"
 							Response.Write "<div class=""col-lg-3 col-sm-6"">Lot</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-6"">Depodaki Miktar</div>"

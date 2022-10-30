@@ -167,6 +167,8 @@ if yetkiKontrol > 0 then
 															sipKalemID64 	=	sipKalemID
 															sipKalemID64	=	base64_encode_tr(sipKalemID64)
 															ajID			=	rs("id")
+															ajandaID64		=	ajID
+															ajandaID64		=	base64_encode_tr(ajandaID64)
 															icerikHam		=	rs("icerik")
 															isTur			=	rs("isTur")
 															bagliAjandaID	=	rs("bagliAjandaID")
@@ -193,13 +195,19 @@ if yetkiKontrol > 0 then
 													end if
 												'####### /ajanda kaydı silme
 
-														Response.Write "<div class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0"""
+														Response.Write "<div "
 															Response.Write " title=""" & icerik & """"
 															if isTur = "uretimPlan" then
-																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&sipKalemID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"">"
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
+																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-info"""
+															elseif isTur = "kesimPlan" then
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Kesimhane','Kapat','btn-success','btn-danger','','','','','')"""
+																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-success"""
 															elseif isTur = "transfer" then
-																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"">"
+																Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Depo Transferi','Kapat','btn-info','btn-danger','','','','','')"""
+																Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-secondary"""
 															end if
+															Response.Write ">"
 
 															Response.Write icerikKisa
 														Response.Write "</div>"

@@ -8,9 +8,6 @@
 	cariID			=	Request.Form("cariID")
 	stokID			=	Request.Form("stokID")
     modulAd 		=   "Reçete"
-	
-	
-
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

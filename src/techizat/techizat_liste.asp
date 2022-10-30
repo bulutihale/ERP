@@ -78,7 +78,7 @@ yetkiKontrol = yetkibul(modulAd)
 			else
 				sorgu = sorgu & " and (t1.techizatAd like N'%" & aramaad & "%' OR t1.marka like N'%" & aramaad & "%' OR t1.uretici like N'%" & aramaad & "%')"
 			end if
-			sorgu = sorgu & " ORDER BY t1.silindi ASC, t1.techizatNo ASC"
+			sorgu = sorgu & " ORDER BY t1.techizatNo ASC"
 			rs.Open sorgu, sbsv5, 1, 3
 			
 			

@@ -1038,7 +1038,7 @@ End Function
 
 
 function kurcek(byVal kurturu)
-	Set xmlhttp = CreateObject("MSXML2.XMLHTTP")
+	set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP.6.0") 
 	path = "http://www.tcmb.gov.tr/kurlar/today.xml"
 	xmlhttp.Open "GET", path, False
 	xmlhttp.send "at"
@@ -3893,6 +3893,19 @@ End Function
 
 function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal ek1, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
     ' call bildirim(gorevID,"",yetkiAd & " yetki değişikliği",1,kid,"","","","","")
+	' CASE portal.notification.onem
+	' 	WHEN 1 THEN 'Önemsiz'
+	' 	WHEN 2 THEN 'Önemsiz'
+	' 	WHEN 3 THEN 'Normal'
+	' 	WHEN 4 THEN 'Normal'
+	' 	WHEN 5 THEN 'Normal'
+	' 	WHEN 6 THEN 'Normal'
+	' 	WHEN 7 THEN 'Önemli'
+	' 	WHEN 8 THEN 'Önemli'
+	' 	WHEN 8 THEN 'Önemli'
+	' 	WHEN 10 THEN 'Önemli'
+	' 	ELSE 'Belirsiz'
+	' END
 	veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
 	sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
 	fn1.open sorgu, sbsv5, 3, 3

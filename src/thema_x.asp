@@ -451,16 +451,16 @@ if kid <> "" then
 				' Response.Write "<i class=""mdi mdi-bell mx-0""></i>"
 				' Response.Write "<span class=""count"">5</span>"
 				' Response.Write "</a>"
-				' Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
-				' Response.Write "<p class=""mb-0 font-weight-normal float-left dropdown-header"">Mesajlar</p>"
-				' Response.Write "<a class=""dropdown-item"">"
-				' Response.Write "<div class=""item-content flex-grow"">"
-				' Response.Write "<h6 class=""ellipsis font-weight-normal"">Başlık</h6>"
-				' Response.Write "<p class=""font-weight-light small-text text-muted mb-0"">Mesaj</p>"
-				' Response.Write "</div>"
-				' Response.Write "</a>"
-				' Response.Write "</div>"
-				Response.Write "</li>"
+				' ' Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
+				' ' Response.Write "<p class=""mb-0 font-weight-normal float-left dropdown-header"">Mesajlar</p>"
+				' ' Response.Write "<a class=""dropdown-item"">"
+				' ' Response.Write "<div class=""item-content flex-grow"">"
+				' ' Response.Write "<h6 class=""ellipsis font-weight-normal"">Başlık</h6>"
+				' ' Response.Write "<p class=""font-weight-light small-text text-muted mb-0"">Mesaj</p>"
+				' ' Response.Write "</div>"
+				' ' Response.Write "</a>"
+				' ' Response.Write "</div>"
+				' Response.Write "</li>"
 			'## MESAJLAR
 			'## MESAJLAR
 			'## KULLANICI MENÜSÜ
@@ -488,7 +488,7 @@ if kid <> "" then
 					if rs.recordcount = 0 then
 						Response.Write " d-none"
 					end if
-					Response.Write " bildirimcontainer"">"
+					Response.Write """ bildirimcontainer>"
 						Response.Write "<a class=""nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"" id=""messageDropdown"" href=""#"" data-toggle=""dropdown"" aria-expanded=""true"">"
 							Response.Write "<div class=""badge badge-pill badge-success""><i class=""mdi mdi-bell mr-2""></i><span class=""bildirimsayi"">" & rs.recordcount & "</span></div>"
 							' Response.Write "<i class=""mdi mdi-bell text-danger mx-0""></i>"
@@ -496,7 +496,7 @@ if kid <> "" then
 						Response.Write "</a>"
 						Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
 							for i = 1 to rs.recordcount
-								Response.Write "<a class=""dropdown-item bildirimitem bildirimitem" & rs("notificationID") & """>"
+								Response.Write "<a class=""dropdown-item bildirimitem"">"
 									Response.Write "<div class=""item-content flex-grow"">"
 										Response.Write "<h6 class=""ellipsis font-weight-normal"" onClick=""modalajax('/portal/notificationModal.asp?gorevID=" & rs("notificationID") & "')"">"
 											Response.Write rs("icerik")
@@ -505,13 +505,6 @@ if kid <> "" then
 								Response.Write "</a>"
 							rs.movenext
 							next
-								Response.Write "<a class=""dropdown-item bildirimitem bildirimitemTum bg-info"">"
-									Response.Write "<div class=""item-content flex-grow"">"
-										Response.Write "<h6 class=""ellipsis font-weight-normal"" onClick=""document.location = '/portal/notification'"">"
-											Response.Write "Tüm bildirimleri incele"
-										Response.Write "</h6>"
-									Response.Write "</div>"
-								Response.Write "</a>"
 						Response.Write "</div>"
 					Response.Write "</li>"
 				' end if

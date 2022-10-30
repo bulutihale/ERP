@@ -3,7 +3,7 @@
 
 '### FORM VERİLERİNİ TOPLA
 '### FORM VERİLERİNİ TOPLA
-	username	=	Request.Form("email")
+	username	=	Request.Form("email") 
 	password	=	Request.Form("password")
 	password2 = password
 	site		=	Request.ServerVariables("HTTP_HOST")
@@ -366,6 +366,8 @@ sorgu = sorgu & " and personel.personel.firmaID = " & firmaID & vbcrlf
 	call logla(hatamesaj)
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
 	call jsgit("/")
+
+	call bildirim(kid,"Genel Bildirim","ERP girişi yaptınız",1,0,"","","","","")
 
 
 %><!--#include virtual="/reg/rs.asp" -->

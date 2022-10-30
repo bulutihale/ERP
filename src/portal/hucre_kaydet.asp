@@ -26,7 +26,7 @@
 '##### HÜCRE EDIT
 '##### HÜCRE EDIT
 	'## veritabanı
-		sorgu = "SELECT * FROM " & tablo & " WHERE " & idAlan & " = " & id
+		sorgu = "SELECT * FROM " & tablo & " WHERE " & idAlan & " = " & id 
 		rs.open sorgu, sbsv5,1,3
 		
 			

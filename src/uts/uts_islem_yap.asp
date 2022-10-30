@@ -21,18 +21,18 @@
 
 yetkiKontrol = yetkibul(modulAd)
 
-	bildirim			=	Request.Form("bildirim")
+	bildirimT			=	Request.Form("bildirim")
 	vergiNo				=	Request.Form("vergiNo")
 	vergiNo				=	cstr(vergiNo)
 	
 	
-	utsToken			=	"Systema8ecbcd0-7707-4a79-bb9f-1f87cd087a58"'token başka firmaya ait test amaçlı!!!!!!!!!!!!!!!!!!
+	utsToken			=	"Systemab7c969f-e0d1-4631-b6f0-77fbae727bf6"'token başka firmaya ait test amaçlı!!!!!!!!!!!!!!!!!!
 	
 
 	
 '############################ vergi numarası ile ÜTS kurum numaralarını sorgula
 '############################ vergi numarası ile ÜTS kurum numaralarını sorgula
-	if bildirim = "vergiNoSorgula" then
+	if bildirimT = "vergiNoSorgula" then
 	call logla("ÜTS kurum sorgula vkn:"&vergiNo&"")
 		vergiNoSorgulaSonuc = vergiNoSorgula(vergiNo, utsToken)
 		response.write vergiNoSorgulaSonuc

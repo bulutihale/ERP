@@ -21,7 +21,7 @@ Response.Flush()
 				depoLotTemplate = rs("depoLotTemplate") & ""
 			end if
 			rs.close
-			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'A' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by tarih desc"
+			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'T' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by tarih desc"
 			rs.open sorgu,sbsv5,1,3
 			if rs.recordcount > 0 then
 				sonlot = rs("lot") & ""

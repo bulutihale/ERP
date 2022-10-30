@@ -7,7 +7,7 @@
     kid				=	kidbul()
 	depoKategori	=	session("sayfa5")
     hata    		=   ""
-	If depoKategori = "uretim" Then
+	If depoKategori = "uretim" Then 
 		modulAd 		=   "Üretim"
 	Else
 		' false

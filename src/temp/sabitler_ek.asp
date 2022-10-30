@@ -16,24 +16,22 @@
 
 
 if firmaID = 5 then
-	sb_firmaAd="TİO"
-	sb_url=mainUrl
-    sb_logo=sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
-	sb_logoMini=sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
-	sb_logo128=sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
-	sb_cdnUrl=sb_mainUrlOnEk & mainUrl & "/cdn"
-	sb_activeuserUrl="/activeuser.asp"
-	sb_activeuserTime=5'saniye
-	' sb_activeuserUrl=sb_mainUrlOnEk & mainUrl & "/activeuser.asp"
-	sb_konum="izmir"																			'hava durumu için
-	sb_yetkiliPersonel="Başar Sönmez|+905053376198"												'destek için. eklenecek
-	sb_activeuserUrlTimeout="10000"																'çalışmıyor
-	sb_ssl = 1
-	sb_fizikselPath = "C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\backup\"
-	sb_sqlYedekCompress = true
-	sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-	sb_sqlYedekAlGun	=	7																	'dashboard üzerinden otomatik yedek alma. yazılacak
-	sb_sqlYedekSilGun	=	30																	'yetki sorunu veriyor. onar
+	sb_firmaAd								=	"TİO"
+	sb_url									=	mainUrl
+    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
+	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
+	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
+	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
+	sb_activeuserUrl						=	"/activeuser.asp"
+	sb_activeuserTime						=	30			'otomatik veri kontrolü için saniye
+	sb_konum								=	"izmir"		'hava durumu için
+	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
+	sb_ssl									=	1		'SSL var mı?
+	sb_fizikselPath							=	"C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\backup\"
+	sb_sqlYedekCompress						=	true
+	sb_sqlYedekCloudMail					=	"raptiye210@yahoo.com"
+	sb_sqlYedekAlGun						=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
+	sb_sqlYedekSilGun						=	30		'yetki sorunu veriyor. onar
 
 	'## EMAIL
 	sb_mailserver		=	"212.68.61.84:587"

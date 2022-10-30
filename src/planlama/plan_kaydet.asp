@@ -33,7 +33,7 @@
 		call jsrun("swal('Geçmiş tarihe plan girilemez.','')")
 	else
 		if yetkiKontrol > 5 then
-			sorgu = "SELECT t3.cariAd, t4.stokAd, t1.miktar, t1.mikBirim, t1.stokID, t2.cariID"
+			sorgu = "SELECT t3.cariAd, t4.stokKodu, t4.stokAd, t1.miktar, t1.mikBirim, t1.stokID, t2.cariID"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN cari.cari t3 ON t3.cariID = t2.cariID"
@@ -43,6 +43,7 @@
 				cariID		=	rs("cariID")
 				cariAd		=	rs("cariAd")
 				stokID 		= 	rs("stokID")
+				stokKodu	=	rs("stokKodu")
 				stokAd		=	rs("stokAd")
 				sipMiktar	=	rs("miktar")
 				sipMikBirim	=	rs("mikBirim")
@@ -145,7 +146,7 @@
 									rs2("hangiGun")			=	hangiGun
 									rs2("hangiAy")			=	hangiAy
 									rs2("hangiYil")			=	hangiYil
-									rs2("icerik")			=	topReceteMiktar & " " & receteBirim & " " & receteStokKodu & " " & receteStokAd & " ürünü üretim depoya gönder.<br>(" & planTarih & " planlanmış " & stokAd & " üretimi için.)"  
+									rs2("icerik")			=	topReceteMiktar & " " & receteBirim & " " & receteStokKodu & " " & receteStokAd & " ürünü üretim depoya gönder.<br>(" & planTarih & " planlanmış " & stokKodu & " - " & stokAd & " üretimi için.)"  
 									rs2("stokID")			=	receteStokID
 									rs2("receteAdimID")		=	receteAdimID
 									rs2("bagliAjandaID")	=	ajandaID
@@ -190,11 +191,13 @@
 									rs2("hangiGun")			=	hangiGun
 									rs2("hangiAy")			=	hangiAy
 									rs2("hangiYil")			=	hangiYil
-									rs2("icerik")			=	topReceteMiktar & " " & receteBirim & " " & altReceteStokKodu & " " & altReceteStokAd & " Yarı mamul üret.<br>(" & planTarih & " planlanmış " & stokAd & " üretimi için.)"  
-									rs2("stokID")			=	altReceteStokID
-									rs2("receteAdimID")		=	altAdimID
+									rs2("icerik")			=	altReceteStokKodu & " " & altReceteStokAd & " kullarak " & topReceteMiktar & " " & receteBirim & " " & receteStokKodu & " - " & receteStokAd &" Yarı mamul üret.<br>(" & planTarih & " planlanmış " & stokKodu & " - " & stokAd & " üretimi için.)"  
+									'rs2("stokID")			=	altReceteStokID
+									rs2("stokID")			=	receteStokID
+									'rs2("receteAdimID")		=	altAdimID
+									rs2("receteAdimID")		=	receteAdimID
 									rs2("bagliAjandaID")	=	ajandaID
-									rs2("isTur")			=	"transfer"
+									rs2("isTur")			=	"kesimPlan"
 								rs2.update
 							rs2.close
 				'####### /receteAdeımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın

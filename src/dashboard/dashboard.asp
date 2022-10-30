@@ -15,6 +15,15 @@ if yetkiIT > 0 then
 		Response.Write "</div>"
 end if
 
+' if firmaID = 2 then
+		'#### YEMEK LİSTESİ
+		'#### YEMEK LİSTESİ
+			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
+				Response.Write "<div class=""dashDovizDiv""></div>"
+			Response.Write "</div>"
+		'#### YEMEK LİSTESİ
+		'#### YEMEK LİSTESİ
+' end if
 if firmaID = 2 then
 		'#### YEMEK LİSTESİ
 		'#### YEMEK LİSTESİ
@@ -152,6 +161,11 @@ end if
 if yetkiIT > 0 then
 		' Response.Write "setTimeout(function(){$('.dashITariza').load('/otomatik/gunlukFaaliyetUyar.asp');}, 100);"
 end if
+
+
+	Response.Write "setTimeout(function(){$('.dashDovizDiv').load('/portal/doviz_dashboard.asp');}, 1000);"
+
+
 
 if firmaID = 2 then
 	Response.Write "setTimeout(function(){$('.dashpdksDiv').load('/personel/pdks_dashboard.asp');}, 1000);"

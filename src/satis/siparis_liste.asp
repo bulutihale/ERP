@@ -52,7 +52,7 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, t1.mikBirim, ISNULL(t1.birimFiyat,0) as birimFiyat, t1.paraBirim,"
 			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih, t2.teslimTarih,"
 			sorgu = sorgu & " ISNULL((SELECT SUM(t4.miktar) FROM stok.stokHareket t4 WHERE t4.siparisKalemID = t1.id AND t4.silindi = 0),0) as teslimEdilen,"
-			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id) as teslimBirim, t4.cariAd, t2.siparisNo,"
+			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id AND silindi = 0 AND stokID = t3.stokID) as teslimBirim, t4.cariAd, t2.siparisNo,"
 			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat, DATEFROMPARTS(t5.hangiYil, t5.hangiAy, t5.hangiGun) as planTarih"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
@@ -79,8 +79,8 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " AND t2.siparisTur = 'S'"
 			sorgu = sorgu & " ORDER BY t2.siparisTarih DESC"
 			rs.open sorgu, sbsv5, 1, 3
-'response.Write sorgu
-			
+
+
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
 					siparisKalemID		=	rs("siparisKalemID")
