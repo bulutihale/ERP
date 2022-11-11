@@ -18,9 +18,15 @@
 '###### ANA TANIMLAMALAR
 
 
-call logla("Stok Listesi Ekranı")
+call logla("Cari Listesi Ekranı")
 
-yetkiKontrol = yetkibul(modulAd)
+'#### yetkiler
+'#### yetkiler
+	yetkiKontrol	= yetkibul(modulAd)
+	yetkiTeklif	    = yetkibul("Teklif")
+	yetkiSatis  	= yetkibul("Satış")
+'#### yetkiler
+'#### yetkiler
 
 
 '###### ARAMA FORMU
@@ -39,11 +45,11 @@ yetkiKontrol = yetkibul(modulAd)
 					Response.Write "<input type=""text"" class=""form-control"" placeholder=""Cari Adı, Cari Kodu"" name=""aramaad"" value=""" & aramaad & """>"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
-					if isnull(firmaSSO) = True then
-					if yetkiKontrol >= 5 then
-						'Response.Write "<div class=""col-sm-3 my-1""><button type=""button"" class=""btn btn-danger"" onClick=""modalajax('/cari/cari_yeni.asp')"">" & translate("YENİ STOK","","") & "</a></div>"
+					' if isnull(firmaSSO) = True then
+					if yetkiTeklif >= 3 or yetkiSatis > 1 then
+						Response.Write "<div class=""col-auto my-1""><button type=""button"" class=""btn btn-danger"" onClick=""modalajaxfit('/cari/cari_yeni.asp')"">" & translate("YENİ CARİ","","") & "</a></div>"
 					end if
-					end if
+					' end if
 					Response.Write "</div>"
 					Response.Write "</form>"
 				Response.Write "</div>"
@@ -108,16 +114,35 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td>" & il & "</td>"
 						Response.Write "<td>" & vergiNo &  "</td>"
 					if yetkiKontrol >= 5 then
-						Response.Write "<td class=""text-right"">"
+						Response.Write "<td class=""text-right"" nowrap>"
 						'# cari düzenle
-
 						Response.Write "<div title=""" & translate("Cari Düzenle","","") & """ class=""badge badge-pill "
 						Response.Write " badge-success"
 						Response.Write """"
-						Response.Write " onClick=""modalajax('/cari/cari_yeni.asp?gorevID=" & cariID64 & "');"">"
+						Response.Write " onClick=""modalajaxfit('/cari/cari_yeni.asp?gorevID=" & cariID64 & "');"">"
 						Response.Write "<i class=""mdi mdi-account-convert"
 						Response.Write """></i>"
 						Response.Write "</div>"
+						'# cari düzenle
+						'# cari düzenle
+						Response.Write "<div title=""" & translate("Cari Düzenle","","") & """ class=""ml-1 badge badge-pill "
+						Response.Write " badge-success"
+						Response.Write """"
+						Response.Write " onClick=""modalajaxfit('/cari/cari_yetkili.asp?gorevID=" & cariID64 & "');"">"
+						Response.Write "<i class=""mdi mdi-account-multiple-outline"
+						Response.Write """></i>"
+						Response.Write "</div>"
+						'# cari düzenle
+						'# cari düzenle
+						teklif64 = cariID & "|"
+						teklif64 =	base64_encode_tr(teklif64)
+						Response.Write "<a href=""/teklif/teklif_yeni/" & teklif64 & """ title=""" & translate("Teklif Ver","","") & """ class=""ml-1 badge badge-pill "
+						Response.Write " badge-warning"
+						Response.Write """"
+						Response.Write " "">"
+						Response.Write "<i class=""mdi mdi-basket-unfill"
+						Response.Write """></i>"
+						Response.Write "</a>"
 						'# cari düzenle
 						Response.Write "</td>"
 					end if

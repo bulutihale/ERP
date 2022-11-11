@@ -186,7 +186,7 @@ if yetkiIT > 0 then
 end if
 
 
-		' Response.Write "setTimeout(function(){$('.dashWhatsNewDiv').load('/dashboard/whatsnew.asp');}, 5000);"
+		 Response.Write "setTimeout(function(){$('.dashWhatsNewDiv').load('/dashboard/whatsnew.asp');}, 5000);"
 		' if entegrasyon = "netsis" then
 		' 	Response.Write "setTimeout(function(){$('.dashNetsisCariDiv').load('/dashboard/netsiscari.asp');}, 20000);"
 		' end if

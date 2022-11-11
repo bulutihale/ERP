@@ -20,9 +20,13 @@
 	silindi			=   Request.Form("silindi")
 	depoKategori	=	Request.Form("depoKategori")
 	ozelDepo		=	Request.Form("ozelDepo")
+	surecSonuDepoID	=	Request.Form("surecSonuDepoSec")
+
+
 	if ozelDepo = "" then
 		ozelDepo = 0
 	end if
+
 	cariID			=	Request.Form("cariID")
 	modulAd 		=   "Depo"
 '###### ANA TANIMLAMALAR
@@ -47,8 +51,15 @@ if ozelDepo = "1" AND cariID = "" then
 	Response.End()
 end if
 
-if ozelDepo = "1" AND depoTuru <> "satis" then
+if ozelDepo = "1" AND depoKategori <> "satis" then
 	hatamesaj = "Sadece Satış türünde Özel Depo tanımlanabilir."
+	call logla(hatamesaj)
+	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+	Response.End()
+end if
+
+if depoTuru = 2 AND surecSonuDepoID = "" then
+	hatamesaj = "Depo kategorisi olarak SÜREÇ seçilmiş ise ""süreç sonu ürün giriş deposu seçilmelidir."""
 	call logla(hatamesaj)
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
 	Response.End()
@@ -89,6 +100,7 @@ end if
                 rs("depoAd")			=	depoAd
                 rs("depoEksiBakiye")	=	depoEksiBakiye
                 rs("depoTuru")			=	depoTuru
+				rs("surecSonuDepoID")	=	surecSonuDepoID
 				rs("malKabulizin")		=	malKabulizin
 				rs("redGirisizin")		=	redGirisizin
 				rs("depoKategori")		=	depoKategori

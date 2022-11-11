@@ -5,14 +5,19 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid		=	kidbul()
-    ID		=	Request.QueryString("ID")
-    kid64	=	ID
-    opener  =   Request.Form("opener")
-
     cariKodu 		=   Request.Form("cariKodu")
     cariAd	 		=   Request.Form("cariAd")
+    unvan	 		=   Request.Form("unvan")
+    vergiDairesi	=   Request.Form("vergiDairesi")
+    vergiNo	 		=   Request.Form("vergiNo")
+    sehir	 		=   Request.Form("sehir")
+    sehir2	 		=   Request.Form("sehir2")
+    telefon	 		=   Request.Form("telefon")
+    postakodu	 	=   Request.Form("postakodu")
+    email	 		=   Request.Form("email")
+    adres	 		=   Request.Form("adres")
     gorevID			=   Request.Form("gorevID")
-	silindi			=   Request.Form("silindi")
+    cariTur         =   Request.Form("cariTur")
 	modulAd 		=   "cari"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -20,14 +25,23 @@
 
 Response.Flush()
 
-call logla("Cari Güncelleme: " & depoAd & "")
 
-yetkiKontrol = yetkibul(modulAd)
-
-
+yetkiTeklif	    = yetkibul("Teklif")
+yetkiSatis  	= yetkibul("Satış")
 
 
-if cariKodu = "" then
+if yetkiTeklif >= 3 or yetkiSatis > 1 then
+    if gorevID = "" then
+        call logla("Cari Ekleme : " & cariAd)
+    else
+        call logla("Cari Güncelleme : " & cariAd)
+    end if
+else
+    call yetkisizGiris("Bu Alanı Görme Yetkiniz Yok","","")
+end if
+
+
+if cariAd = "" then
 	hatamesaj = "Cari Adını Yazın"
 	call logla(hatamesaj)
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
@@ -35,33 +49,85 @@ if cariKodu = "" then
 end if
 
 
-if yetkiKontrol > 2 then
-
-if gorevID = "" then
-    gorevID = 0
+if vergiDairesi = "" then
+	hatamesaj = "Vergi Dairesini Yazın"
+	call logla(hatamesaj)
+	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+	Response.End()
 end if
 
-            sorgu = "Select top 1 * from cari.cari where cariKodu = '" & cariKodu & "'"
-			rs.open sorgu, sbsv5, 1, 3
-            if rs.recordcount = 0 then
-                rs.addnew
-				call logla("Yeni cari Ekleniyor: " & cariKodu & "")
-			else
-				call logla("cari Güncelleniyor: " & cariKodu & "")
-            end if
-				rs("firmaID")			=	firmaID
-                rs("cariKodu")			=	cariKodu
-                rs("cariAd")			=	cariAd
-                rs("silindi")			=	silindi
-            rs.update
-            rs.close
 
+if vergiNo = "" then
+	hatamesaj = "Vergi Numarasını Yazın"
+	call logla(hatamesaj)
+	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+	Response.End()
 end if
 
-call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
 
-call jsac("/cari/cari_liste.asp")
-modalkapat()
+if gorevID <> "" then
+    if isnumeric(gorevID) = False then
+        hatamesaj = "Hatalı Kayıt. Lütfen yeniden deneyin."
+        call logla(hatamesaj)
+        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+        Response.End()
+    end if
+end if
+
+
+if gorevID <> "" then
+    hatamesaj = "Kayıt Güncellendi : " & cariAd
+    sorgu = "Select top 1 * from cari.cari where cariID = " & gorevID
+    rs.open sorgu, sbsv5, 1, 3
+elseif cariKodu <> "" then
+    hatamesaj = "Kayıt Güncellendi : " & cariAd
+    sorgu = "Select top 1 * from cari.cari where cariKodu = '" & cariKodu & "' and firmaID = " & firmaID
+    rs.open sorgu, sbsv5, 1, 3
+else
+    hatamesaj = "Kayıt Yapıldı : " & cariAd
+    sorgu = "Select top 1 * from cari.cari"
+    rs.open sorgu, sbsv5, 1, 3
+    rs.addnew
+    rs("manuelKayit")       =   True
+end if
+
+    rs("firmaID")           =   firmaID
+	rs("cariKodu")          =   cariKodu
+	rs("cariAd")            =   cariAd
+	rs("unvan")             =   unvan
+	rs("vergiDairesi")      =   vergiDairesi
+	rs("vergiNo")           =   vergiNo
+	rs("il")                =   il
+    if sehir <> "" then
+	    rs("sehir")         =   sehir
+    end if
+	rs("cariTur")           =   cariTur
+	rs("manuelKayit")       =   manuelKayit
+	rs("telefon")           =   telefon
+	rs("fax")               =   fax
+    rs("iskonto")           =   iskonto
+	rs("adres")             =   adres
+	rs("postakodu")         =   postakodu
+	rs("email")             =   email
+	rs("ilce")              =   ilce
+
+rs.update
+rs.close
+
+
+
+    call logla(hatamesaj)
+    call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+
+
+
+
+
+
+' call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
+
+' call jsac("/cari/cari_liste.asp")
+' modalkapat()
 
 
 

@@ -189,6 +189,8 @@ if yetkiKontrol > 2 then
 				rs.close
 end if
 
+call bildirim(2,"Ürün Bildirimi",stokKodu & " Ürün Kalite Kontrol girişi yapıldı",1,kid,"","","","","")
+
 call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
 
 call jsac("/kaliteKontrol/bekleyen_liste.asp")

@@ -96,20 +96,30 @@
 							Response.Write "<div id=""inputDIV"&siparisKalemID&""" class=""row inputDIV"">"
 							if kalemSec = "ok" AND teslimDurum = "eksik" then							
 									call formhidden("miktarbirim",mikBirim,"","","","","","")
+								Response.Write "<div class=""col-lg-10"">"
+									Response.Write "<div class=""row"">"
+										Response.Write "<div class=""col-lg-6 col-sm-12"">"
+											call forminput("gelenMiktar","","numara(this,true,false)","Miktar","inpReset","autocompleteOFF","gelenMiktar","")
+										Response.Write "</div>"
+										Response.Write "<div class=""col-lg-6 col-sm-12"">"
+											call forminput("lot","","","LOT","inpReset","autocompleteOFF","lot","")
+										Response.Write "</div>"
+									Response.Write "</div>"
+									Response.Write "<div class=""row"">"
+										Response.Write "<div class=""col-lg-6 col-sm-12"">"
+											call forminput("lotSKT","","","SKT","inpReset tarih","autocompleteOFF","lotSKT","")
+										Response.Write "</div>"
+										Response.Write "<div class=""col-lg-6 col-sm-12"">"
+											call forminput("aciklama","","","Açıklama","inpReset","autocompleteOFF","aciklama","")
+										Response.Write "</div>"
+									Response.Write "</div>"
+								Response.Write "</div>"
 								Response.Write "<div class=""col-lg-2"">"
-									call forminput("gelenMiktar","","numara(this,true,false)","Miktar","inpReset","autocompleteOFF","gelenMiktar","")
-								Response.Write "</div>"
-								Response.Write "<div class=""col-lg-3 col-sm-12"">"
-									call forminput("lot","","","LOT","inpReset","autocompleteOFF","lot","")
-								Response.Write "</div>"
-								Response.Write "<div class=""col-lg-2 col-sm-12"">"
-									call forminput("lotSKT","","","SKT","inpReset tarih","autocompleteOFF","lotSKT","")
-								Response.Write "</div>"
-								Response.Write "<div class=""col-lg-3 col-sm-12"">"
-									call forminput("aciklama","","","Açıklama","inpReset","autocompleteOFF","aciklama","")
-								Response.Write "</div>"
-								Response.Write "<div class=""col-lg-2 col-sm-12"">"
-									Response.Write "<button type=""submit"" class=""btn btn-warning form-control rounded p-0"">KAYDET</button>"
+									Response.Write "<div class=""row h-100"">"
+										Response.Write "<div class=""col-lg-12 col-sm-12 h-100"">"
+											Response.Write "<button type=""submit"" class=""btn btn-warning rounded p-0 h-100"">KAYDET</button>"
+										Response.Write "</div>"
+									Response.Write "</div>"
 								Response.Write "</div>"
 							elseif kalemSec = "ok" AND teslimDurum = "tam" then
 								Response.Write "<div class=""col-12"">"

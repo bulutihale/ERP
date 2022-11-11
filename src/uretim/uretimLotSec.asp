@@ -93,7 +93,7 @@ yetkiKontrol = yetkibul(modulAd)
 									call forminput("kullanimMiktar","","","","","autocompleteOFF","kullanimMiktar"&divSayi&"","")
 								Response.Write "</td>"
 								Response.Write "<td class=""text-center"">"
-									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','surecUretim',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"');"" class=""btn btn-info"">kullan</div>"
+									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','surecUretim',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&");"" class=""btn btn-info"">kullan</div>"
 								Response.Write "</td>"
 							Response.Write "</tr>"
 						rs1.movenext
@@ -117,7 +117,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 %>
 <script>
-	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,depoKategori,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT){
+	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,depoKategori,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID){
 
 		var kullanimMiktar		=	$('#kullanimMiktar'+divSayi).val();
 		if(kullanimMiktar == undefined){swal('miktar girişi yapılmalı',''); return false};
@@ -135,8 +135,8 @@ yetkiKontrol = yetkibul(modulAd)
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
-				$('#ajax').load('/uretim/uretimLotKaydet.asp', {secilenDepoID:secilenDepoID, miktarBirim:miktarBirim, isTur:isTur, stokKodu:stokKodu, stokHareketTuru:stokHareketTuru, kullanimMiktar:kullanimMiktar, depoKategori:depoKategori, stokID:stokID, siparisKalemID:siparisKalemID, lot:lot, stokHareketTipi:stokHareketTipi, lotSKT:lotSKT});
-				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim')	
+				$('#ajax').load('/uretim/uretimLotKaydet.asp', {ajandaID:ajandaID,secilenDepoID:secilenDepoID, miktarBirim:miktarBirim, isTur:isTur, stokKodu:stokKodu, stokHareketTuru:stokHareketTuru, kullanimMiktar:kullanimMiktar, depoKategori:depoKategori, stokID:stokID, siparisKalemID:siparisKalemID, lot:lot, stokHareketTipi:stokHareketTipi, lotSKT:lotSKT});
+				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')	
 				modalkapat();
 			}, //confirm buton yapılanlar
 			function(dismiss) {
