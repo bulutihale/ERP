@@ -48,6 +48,7 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "</tr></thead><tbody>"
 		
 		
+		'//FIXME - miktar hesaplaması yanlış, düzeltilmeli!!!
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, t1.mikBirim, ISNULL(t1.birimFiyat,0) as birimFiyat, t1.paraBirim,"
 			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih, t2.teslimTarih,"
@@ -142,7 +143,7 @@ Response.Write "<div class=""card-body"">"
 							end if
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
-							Response.Write "<div class=""btn btn-sm btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?siparisKalemID="&siparisKalemID&"')"">detay</div>"
+							Response.Write "<div class=""btn btn-sm btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?stokID="&stokID&"&siparisKalemID="&siparisKalemID&"')"">detay</div>"
 							If not isdate(planTarih) Then
 								Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
 							Else

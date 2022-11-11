@@ -17,6 +17,7 @@
 	stokHareketTipi		=	Request.Form("stokHareketTipi")
 	cikisDepoID			=	Request.Form("secilenDepoID")
 	lotSKT				=	Request.Form("lotSKT")
+	ajandaID			=	Request.Form("ajandaID")
 
 	modulAd =   "Üretim"
 '###### ANA TANIMLAMALAR
@@ -40,6 +41,8 @@ yetkiKontrol = yetkibul(modulAd)
 		elseif isTur = "kesimPlan" then
 			sorgu = sorgu & " depoKategori = 'surecKesim'"
 		end if
+		'Response.Write sorgu
+		'response.end
 	rs.open sorgu, sbsv5, 1, 3
 		surecDepoID	=	rs("id")
 	rs.close
@@ -62,6 +65,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("lot")					=	lot
 				rs("stokHareketTipi")		=	stokHareketTipi
 				rs("lotSKT")				=	lotSKT
+				rs("ajandaID")				=	ajandaID
 			rs.update
 			cikisHareketID	=	rs("stokHareketID")
 
@@ -82,6 +86,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("refHareketID")			=	cikisHareketID
 				rs("refHareketID")			=	cikisHareketID
 				rs("lotSKT")				=	lotSKT
+				rs("ajandaID")				=	ajandaID
 			rs.update
 		rs.close
 	else

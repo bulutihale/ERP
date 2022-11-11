@@ -25,24 +25,29 @@ yetkiKontrol = yetkibul(modulAd)
 
 inpDurum	=	""
 if gorevID <> "" then
-            sorgu = "SELECT t1.silindi, t1.depoKod, t1.depoAd, t1.depoEksiBakiye, t1.depoTuru, t1.ozelDepo, t1.depoKategori, t1.malKabulizin,"
-			sorgu = sorgu & " t1.redGirisizin, t2.cariAd, t1.cariID"
+            sorgu = "SELECT t1.silindi, t1.depoKod, t1.depoAd, t1.depoEksiBakiye, t1.depoTuru, t1.ozelDepo, t1.depoKategori, t1.malKabulizin, t1.surecSonuDepoID,"
+			sorgu = sorgu & " t1.redGirisizin, t2.cariAd, t1.cariID, t3.id as sonDepoID, t3.depoAd as sonDepoAd"
 			sorgu = sorgu & " FROM stok.depo t1"
 			sorgu = sorgu & " LEFT JOIN cari.cari t2 ON t1.cariID = t2.cariID"
+			sorgu = sorgu & " LEFT JOIN stok.depo t3 ON t1.surecSonuDepoID = t3.id"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.id = " & gorevID
 			rs.open sorgu, sbsv5, 1, 3
-                depoKod			=  	rs("depoKod")
-                depoAd			=  	rs("depoAd")
-				depoEksiBakiye	=	rs("depoEksiBakiye")
-				depoTuru		=	rs("depoTuru")
-				ozelDepo		=	rs("ozelDepo")
-				depoKategori	=	rs("depoKategori")
-				malKabulizin	=	rs("malKabulizin")
-				redGirisizin	=	rs("redGirisizin")
-				cariAd			=	rs("cariAd")
-				cariID			=	rs("cariID")
-				silindi			=	rs("silindi")
-				defDeger		=	cariID&"###"&cariAd
+                depoKod				=  	rs("depoKod")
+                depoAd				=  	rs("depoAd")
+				depoEksiBakiye		=	rs("depoEksiBakiye")
+				depoTuru			=	rs("depoTuru")
+				surecSonuDepoID		=	rs("surecSonuDepoID")
+				ozelDepo			=	rs("ozelDepo")
+				depoKategori		=	rs("depoKategori")
+				malKabulizin		=	rs("malKabulizin")
+				redGirisizin		=	rs("redGirisizin")
+				cariAd				=	rs("cariAd")
+				cariID				=	rs("cariID")
+				silindi				=	rs("silindi")
+				sonDepoID			=	rs("sonDepoID")
+				sonDepoAd			=	rs("sonDepoAd")
+				defDeger			=	cariID&"###"&cariAd
+				defDeger2			=	sonDepoID&"###"&sonDepoAd
             rs.close
 			
 			
@@ -120,6 +125,12 @@ end if
 				call formselectv2("silindi",int(silindi),"","","silindi","","silindi",HEDegerler,"")
 			Response.Write "</div>"
 		Response.Write "</div>"
+		Response.Write "<div id=""surecSonuRow"" class=""form-row align-items-center"">"
+			Response.Write "<div class=""col-sm-6 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Süreç Sonu Giriş depo seçimi</span>"
+				call formselectv2("surecSonuDepoSec",cint(surecSonuDepoID),"","","formSelect2 surecSonuDepoSec border","","surecSonuDepoSec","","data-holderyazi=""Süreç Sonu Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-defdeger="""&defDeger2&"""")
+			Response.Write "</div>"
+		Response.Write "</div>"
 		Response.Write "<div class=""form-row align-items-center"">"
 			Response.Write "<div class=""col-auto mt-4""><button type=""submit"" class=""btn btn-primary"">KAYDET</button></div>"
 		Response.Write "</div>"
@@ -138,7 +149,7 @@ end if
 
 <script>
 	$(document).ready(function() {
-		$('#cariID').trigger('mouseenter');
+		$('#cariID, #surecSonuDepoSec').trigger('mouseenter');
 	});
 	 
 </script>

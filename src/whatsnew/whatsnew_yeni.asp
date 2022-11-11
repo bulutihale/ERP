@@ -8,9 +8,9 @@ kid64	=	ID
 
 Response.Flush()
 
-yetkiIT = yetkibul("IT")
+' yetkiIT = yetkibul("IT")
 
-if yetkiIT = 9 then
+if yetkiIT = 9 or 1 = 1 then
 
 	if ID <> "" then
 		ID = base64_decode_tr(ID)

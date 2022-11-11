@@ -71,7 +71,7 @@ yetkiKontrol = yetkibul(modulAd)
 		
 		
             sorgu = "Select id, depoKod, depoAd, CASE WHEN depoEksiBakiye = 1 THEN 'EVET' ELSE 'HAYIR' END as depoEksiBakiye, depoKategori, ozelDepo, cariID,"
-			sorgu = sorgu & " CASE WHEN depoTuru= 0 THEN 'SANAL' WHEN depoTuru= 1 THEN 'FİZİKSEL' END as depoTuru, "
+			sorgu = sorgu & " CASE WHEN depoTuru= 0 THEN 'SANAL' WHEN depoTuru= 1 THEN 'FİZİKSEL' WHEN depoTuru= 2 THEN 'SÜREÇ' END as depoTuru, "
 			sorgu = sorgu & " CASE WHEN silindi= 1 THEN '<span class=""text-danger bold"">PASİF</span>' ELSE 'AKTİF' END as depoDurum,"
 			sorgu = sorgu & " CASE WHEN malKabulizin = 1 THEN '<span class=""text-success bold"">EVET</span>' ELSE 'HAYIR' END as malKabulizin"
 			sorgu = sorgu & " FROM stok.depo"

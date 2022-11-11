@@ -4,6 +4,7 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 	siparisKalemID	=	Request.Querystring("siparisKalemID")
+	stokID			=	Request.Querystring("stokID")
     modulAd 		=   "Depo"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -29,10 +30,10 @@
 			sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t1.miktar, t1.miktarBirim, t1.belgeNo, t1.belgeTarih, t2.stokAd, t1.aciklama, t1.lot"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
-			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.siparisKalemID = " & siparisKalemID & " AND t1.silindi = 0"
+			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.siparisKalemID = " & siparisKalemID & " AND t1.stokID = " & stokID & " AND t1.silindi = 0"
 			sorgu = sorgu & " ORDER BY t1.tarih"
 			rs.open sorgu, sbsv5, 1, 3
-'response.Write sorgu
+' response.Write sorgu
 			
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
@@ -48,7 +49,7 @@
 					belgeTarih			=	rs("belgeTarih")
 					lot					=	rs("lot")
 					
-					
+				
 
 					
 					Response.Write "<tr>"

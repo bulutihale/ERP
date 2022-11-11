@@ -3510,7 +3510,7 @@ function yetkibul(byVal alan)
 			yetkibul = False
 		else
 			alan = Replace(alan,"-","_")
-			rssorgu = "Select yetkiParametre from personel.personel_yetki where kid = " & kid & " and yetkiAd = '" & alan & "'"
+			rssorgu = "Select yetkiParametre from personel.personel_yetki where kid = " & kid & " and yetkiAd = N'" & alan & "'"
 			rs.open rssorgu,sbsv5,1,3
 			if rs.recordcount = 0 then
 				if uyarimesajgoster = False then
@@ -3910,4 +3910,24 @@ function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byV
 	sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
 	fn1.open sorgu, sbsv5, 3, 3
 end function
+
+
+
+
+
+
+
+function netsisturkce(gelen,yon)'netsisturkce("","netsis")
+	if yon = "" or yon = "netsis" then
+		gelen = Replace(gelen,"İ","Ý")
+		gelen = Replace(gelen,"Ş","Þ")
+	else
+		gelen = Replace(gelen,"Ý","İ")
+		gelen = Replace(gelen,"Þ","Ş")
+	end if
+	netsisturkce = gelen
+end function
+
+
+
 %>

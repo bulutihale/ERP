@@ -10,11 +10,11 @@ hastaneArr      =   Array("","Özel Sağlık","Gözde Tepecik","Gözde Kuşadas�
 muhasebedbArr   =   Array("best2022","best2021")
 
 	'##### Depo Tipleri
-				depoTipDegerler = "=|SANAL=0|FİZİKSEL=1"
+				depoTipDegerler = "=|SANAL=0|FİZİKSEL=1|SÜREÇ=2"
 	'##### Depo Tipleri
 	
 	'##### Depo Kategorileri
-				depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis|Üretim Süreç=surecUretim"
+				depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis|Üretim Süreç=surecUretim|Kesimhane Süreç=surecKesim"
 	'##### Depo Kategorileri
 	
 	'##### EVET - HAYIR

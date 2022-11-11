@@ -79,6 +79,7 @@
 				rs("icerik")			=	inpicerik
 				rs("siparisKalemID")	=	siparisKalemID
 				rs("isTur")				=	isTur
+				rs("stokID")			=	stokID
 			rs.update
 				ajandaID	=	rs("id")
 			rs.close
