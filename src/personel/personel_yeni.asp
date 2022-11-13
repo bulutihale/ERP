@@ -1,5 +1,7 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
+'//FIXME - webmail için bilgileri tanımlama
+
 
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR

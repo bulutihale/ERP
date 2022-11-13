@@ -1216,6 +1216,8 @@ function turkcele(gelen)
 		gelen = Replace(gelen,"Å&#382;","Ş")
 		gelen = Replace(gelen,"Å"&chr(158),"Ş")
 		gelen = Replace(gelen,"Ä"&chr(158),"Ğ")
+		gelen = Replace(gelen,"â€™","'")
+		
 	end if
 	turkcele = gelen
 end function
