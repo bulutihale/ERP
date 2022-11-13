@@ -27,7 +27,7 @@ if firmaID = 5 then
 	sb_konum								=	"izmir"		'hava durumu için
 	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
 	sb_ssl									=	1		'SSL var mı?
-	sb_fizikselPath							=	"C:\web\erp.sbstasarim.com\backup\"
+	sb_fizikselPath							=	"C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\backup\"
 	sb_sqlYedekCompress						=	true
 	sb_sqlYedekCloudMail					=	"raptiye210@yahoo.com"
 	sb_sqlYedekAlGun						=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
@@ -54,6 +54,7 @@ if firmaID = 5 then
 
     sb_TBLSTSABIT_cache	=   false
     sb_iskontoSayisi	=   0
+
 end if
 
 if firmaID = 6 then
@@ -137,50 +138,6 @@ if firmaID = 4 then
     sb_fiyatiSirifOlanStoklariGizle =   true
 
 
-end if
-
-
-
-
-if firmaID = 8 then
-	sb_firmaAd								=	"Cimax"
-	sb_url									=	mainUrl
-    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
-	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
-	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
-	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
-	sb_activeuserUrl						=	"/activeuser.asp"
-	sb_activeuserTime						=	30			'otomatik veri kontrolü için saniye
-	sb_konum								=	"izmir"		'hava durumu için
-	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
-	sb_ssl									=	1		'SSL var mı?
-	sb_fizikselPath							=	"C:\web\erp.sbstasarim.com\backup\"
-	sb_sqlYedekCompress						=	true
-	sb_sqlYedekCloudMail					=	"raptiye210@yahoo.com"
-	sb_sqlYedekAlGun						=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
-	sb_sqlYedekSilGun						=	30		'yetki sorunu veriyor. onar
-
-	'## EMAIL
-	sb_mailserver		=	"212.68.61.84:587"
-	sb_mailsender		=	"teknik@sbstasarim.com"
-	sb_mailsenderPass	=	"sgxuewlv12!!@3"
-	sb_mailsenderAd		=	"Cimax ERP"
-	' sb_portalMail		=	"portal@sbstasarim.com"
-	' sb_portalMailUser	=	"portal@sbstasarim.com"
-	' sb_portalMailPass	=	"portAl112!"
-	' sb_teklifMail		=	"satis@sbstasarim.com"
-	' sb_teklifMailUser	=	"satis@sbstasarim.com"
-	' sb_teklifMailPass	=	"Sati22^11"
-
-	'## SSO
-	firmaSSO			=	""
-	firmaSSOAdres		=	""
-	firmaSSODomain		=	""
-	firmaSSOLdap		=	""
-	firmaSSOdb			=	""
-
-    sb_TBLSTSABIT_cache	=   false
-    sb_iskontoSayisi	=   0
 end if
 
 
