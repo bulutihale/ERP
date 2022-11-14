@@ -3188,6 +3188,7 @@ end function
 
 
 function logla(byVal islem)
+'//FIXME - islem kısmında tek tırnak gelince patlıyor
 	FNtarih			=	tarihsaatsql(now())
 	FNpersonelID	=	kid
 	FNip			=	Request.ServerVariables("REMOTE_ADDR")
@@ -3550,11 +3551,11 @@ function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 		end if
 		Response.Write "<div class=""container-fluid mt-5"">"
 		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-10 col-xs-10"">"
+			Response.Write "<div class=""col-lg-3 col-md-3 col-sm-1 col-xs-1""></div>"
+			Response.Write "<div class=""col-lg-6 col-md-6 col-sm-10 col-xs-10"">"
 				Response.Write "<div class=""card"">"
 				Response.Write "<div class=""card-header text-white bg-primary"">" & gelenbaslik & "</div>"
-				Response.Write "<div class=""card-body"">"
+				Response.Write "<div class=""card-body text-center"">"
 				if gelenmetin = ""then
 					Response.Write "Bu alana girmek için yetkiniz yeterli değil."
 				else
@@ -3563,7 +3564,7 @@ function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 				Response.Write "</div>"
 				Response.Write "</div>"
 			Response.Write "</div>"
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
+			Response.Write "<div class=""col-lg-3 col-md-3 col-sm-1 col-xs-1""></div>"
 		Response.Write "</div>"
 		Response.Write "</div>"
 end function

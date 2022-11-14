@@ -18,30 +18,34 @@
 '###### ANA TANIMLAMALAR
 
 
+if kid <> "" then
     sorgu = "Select webmailUser,webmailPass,webmailIP from personel.personel where firmaID = " & firmaID & " and id = " & kid
     rs.Open sorgu, sbsv5, 1, 3
     if rs.recordcount > 0 then
         webmailUser =   rs("webmailUser")
         webmailPass =   rs("webmailPass")
-        webmailIP =   rs("webmailIP")
+        webmailIP   =   rs("webmailIP")
     end if
     rs.close
+else
+    hata = "Tanımsız Kullanıcı"
+end if
 
 
-
-call logla("Mail : Gelen Kutusu")
-Set pop3 = Server.CreateObject("JMail.POP3")
-pop3.Connect webmailUser, webmailPass, webmailIP
-
-		Response.Write "<div class=""container-fluid"">"
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
-                Response.Write "<div class=""card"">"
-                Response.Write "<div class=""card-body"">"
-				Response.Write "<div class=""row"">"
+if hata = "" then
+    Response.Write "<div class=""container-fluid"">"
+    Response.Write "<div class=""row"">"
+        Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
+            Response.Write "<div class=""card"">"
+            Response.Write "<div class=""card-body"">"
+            Response.Write "<div class=""row"">"
+            if webmailUser <> "" then
+                call logla("Mail : Gelen Kutusu")
+                Set pop3 = Server.CreateObject("JMail.POP3")
+                pop3.Connect webmailUser, webmailPass, webmailIP
                 if pop3.count = 0 then
                     hata = "Mail Bulunamadı"
-                    Response.Write hata
+                    call yetkisizGiris(hata,"","")
                 else
                     Response.Write "<div class=""table-responsive"">"
                     Response.Write "<table class=""table table-striped table-bordered table-hover table-sm"">"
@@ -89,10 +93,17 @@ pop3.Connect webmailUser, webmailPass, webmailIP
                     Response.Write "</table>"
                     Response.Write "</div>"
                 end if
-				Response.Write "</div>"
-				Response.Write "</div>"
-				Response.Write "</div>"
-			Response.Write "</div>"
-		Response.Write "</div>"
-		Response.Write "</div>"
+                pop3.disconnect
+            else
+                call yetkisizGiris("Mail Bilgileri Tanımlanmamış","","")
+            end if
+            Response.Write "</div>"
+            Response.Write "</div>"
+            Response.Write "</div>"
+        Response.Write "</div>"
+    Response.Write "</div>"
+    Response.Write "</div>"
+else
+    call yetkisizGiris(hata,"","")
+end if
 %>

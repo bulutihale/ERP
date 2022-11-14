@@ -172,7 +172,7 @@ end if
 
 
 	Response.Write "setTimeout(function(){$('.dashDovizDiv').load('/portal/doviz_dashboard.asp');}, 1000);"
-	Response.Write "setTimeout(function(){$('.dashMailDiv').load('/webmail/dashboard.asp');}, 5000);"
+	Response.Write "setTimeout(function(){$('.dashMailDiv').load('/webmail/dashboard.asp');}, 2000);"
 
 
 

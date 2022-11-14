@@ -14,22 +14,27 @@
 '###### ANA TANIMLAMALAR
 
 
+if kid <> "" then
     sorgu = "Select webmailUser,webmailPass,webmailIP from personel.personel where firmaID = " & firmaID & " and id = " & kid
     rs.Open sorgu, sbsv5, 1, 3
     if rs.recordcount > 0 then
         webmailUser =   rs("webmailUser")
         webmailPass =   rs("webmailPass")
-        webmailIP =   rs("webmailIP")
+        webmailIP   =   rs("webmailIP")
     end if
     rs.close
-
-
-MessageID  =   Request.QueryString("MessageID")
-
-
-if MessageID = "" then
-    hata = "Mail bilgisi alınamadı"
+else
+    hata = "Tanımsız Kullanıcı"
 end if
+
+
+if hata = "" then
+    MessageID  =   Request.QueryString("MessageID")
+    if MessageID = "" then
+        hata = "Mail bilgisi alınamadı"
+    end if
+end if
+
 
 if hata = "" then
     Set pop3 = Server.CreateObject("JMail.POP3")
