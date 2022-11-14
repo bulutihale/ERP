@@ -15,7 +15,6 @@ if yetkiIT > 0 then
 		Response.Write "</div>"
 end if
 
-' if firmaID = 2 then
 		'#### YEMEK LİSTESİ
 		'#### YEMEK LİSTESİ
 			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
@@ -23,7 +22,16 @@ end if
 			Response.Write "</div>"
 		'#### YEMEK LİSTESİ
 		'#### YEMEK LİSTESİ
-' end if
+
+		'#### WEBMAİL
+		'#### WEBMAİL
+			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
+				Response.Write "<div class=""dashMailDiv""></div>"
+			Response.Write "</div>"
+		'#### WEBMAİL
+		'#### WEBMAİL
+
+
 if firmaID = 2 then
 		'#### YEMEK LİSTESİ
 		'#### YEMEK LİSTESİ
@@ -164,6 +172,7 @@ end if
 
 
 	Response.Write "setTimeout(function(){$('.dashDovizDiv').load('/portal/doviz_dashboard.asp');}, 1000);"
+	Response.Write "setTimeout(function(){$('.dashMailDiv').load('/webmail/dashboard.asp');}, 5000);"
 
 
 
@@ -184,8 +193,6 @@ end if
 if yetkiIT > 0 then
 		Response.Write "setTimeout(function(){$('.dashGorevDurumDiv').load('/dashboard/it_arizadurum.asp');}, 3000);"
 end if
-
-
 		 Response.Write "setTimeout(function(){$('.dashWhatsNewDiv').load('/dashboard/whatsnew.asp');}, 5000);"
 		' if entegrasyon = "netsis" then
 		' 	Response.Write "setTimeout(function(){$('.dashNetsisCariDiv').load('/dashboard/netsiscari.asp');}, 20000);"
