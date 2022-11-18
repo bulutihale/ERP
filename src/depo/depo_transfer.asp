@@ -149,12 +149,12 @@ yetkiKontrol = yetkibul(modulAd)
 
 				if stokID <> "" then
 					sorgu = "SELECT "
-					sorgu = sorgu & " stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
+					sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
 					sorgu = sorgu & " FROM stok.stokHareket t1"
 					sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
 					sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & stokID & " AND t2.silindi = 0 AND t2.depoKategori IN ('malKabul','uretim')"
-					sorgu = sorgu & " AND stok.stokSayDepo(" & firmaID & ", t1.stokID, t1.depoID) > 0"
-					sorgu = sorgu & " AND stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
+					sorgu = sorgu & " AND stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t1.depoID) > 0"
+					sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
 					sorgu = sorgu & " AND t1.silindi = 0"
 					sorgu = sorgu & " GROUP BY t1.depoID, t1.stokKodu, t1.stokID, t2.depoAd, t1.lot, t1.miktarBirim, t1.lotSKT"
 					rs.open sorgu, sbsv5, 1, 3

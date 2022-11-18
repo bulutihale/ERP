@@ -255,8 +255,8 @@ yetkiKontrol = yetkibul(modulAd)
 						
 						Response.Write "<div class=""card-body""><div class=""row"">"
 					sorgu = "" & vbcrlf
-					sorgu = sorgu & "SELECT stok.stokSayDepo(" & firmaID & ", recete.receteAdim.stokID, " & secilenDepoID & ") as hazirMiktar," & vbcrlf
-					sorgu = sorgu & "stok.stokSayGB(" & firmaID & ", recete.receteAdim.stokID, " & secilenDepoID & ") as GBmiktar," & vbcrlf
+					sorgu = sorgu & "SELECT stok.FN_stokSayDepo(" & firmaID & ", recete.receteAdim.stokID, " & secilenDepoID & ") as hazirMiktar," & vbcrlf
+					sorgu = sorgu & "stok.FN_stokSayGB(" & firmaID & ", recete.receteAdim.stokID, " & secilenDepoID & ") as GBmiktar," & vbcrlf
 					sorgu = sorgu & "recete.receteAdim.receteAdimID" & vbcrlf
 					sorgu = sorgu & ",recete.receteIslemTipi.ad" & vbcrlf
 					sorgu = sorgu & ",recete.receteAdim.stokID" & vbcrlf

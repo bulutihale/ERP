@@ -38,7 +38,7 @@ yetkiKontrol = yetkibul(modulAd)
 					Response.Write "<form action=""/stok/stok_liste.asp"" method=""post"" class=""ortaform"">"
 						Response.Write "<div class=""form-row align-items-center"">"
 							Response.Write "<div class=""col-lg-2 col-sm-2 my-1"">"
-								Response.Write "<input type=""text"" class=""form-control"" placeholder=""Depo adı"" name=""aramaad"" value=""" & aramaad & """>"
+								Response.Write "<input type=""text"" class=""form-control"" placeholder=""Ürün adı"" name=""aramaad"" value=""" & aramaad & """>"
 							Response.Write "</div>"
 							Response.Write "<div class=""col-lg-1 col-sm-1 my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 							if yetkiKontrol >= 8 then
@@ -105,7 +105,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "</tr></thead><tbody>"
 
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.stokID, stok.stoksay(" & firmaID & ", t1.stokID) as stokMiktar, t1.stokKodu, t1.stokAd, t1.stokBarcode," 
+			sorgu = sorgu & " t1.stokID, stok.FN_stokSay(" & firmaID & ", t1.stokID) as stokMiktar, t1.stokKodu, t1.stokAd, t1.stokBarcode," 
 			sorgu = sorgu & " CASE WHEN t1.silindi = 1 THEN '<span class=""text-danger"">PASİF</span>' ELSE 'AKTİF' END as durum,"
 			sorgu = sorgu & " CASE WHEN t1.stokTuru = '1' THEN 'Mamul' WHEN t1.stokTuru = '2' THEN 'Yarı Mamul' WHEN t1.stokTuru = '3' THEN 'Bileşen' WHEN t1.stokTuru = '4' THEN 'Hammadde' END as stokTuru"
 			sorgu = sorgu & " FROM stok.stok t1" 
@@ -115,7 +115,7 @@ yetkiKontrol = yetkibul(modulAd)
 				sorgu = sorgu & " AND t1.silindi = 0"
 			end if
 			if durum2 = "" then
-				sorgu = sorgu & " AND stok.stoksay(" & firmaID & ", t1.stokID) > 0"
+				sorgu = sorgu & " AND stok.FN_stokSay(" & firmaID & ", t1.stokID) > 0"
 			end if		
 			if aramaad = "" then
 			else

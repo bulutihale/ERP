@@ -66,7 +66,7 @@ if depoTuru = 2 AND surecSonuDepoID = "" then
 end if
 
 if silindi > 0 then
-	sorgu = "SELECT sbs_tio.stok.depoBosKontrol(" & firmaID & ", " & depoID & ") as stokMiktar FROM stok.stok"
+	sorgu = "SELECT sbs_tio.stok.FN_depoBosKontrol(" & firmaID & ", " & depoID & ") as stokMiktar FROM stok.stok"
 	rs.open sorgu, sbsv5, 1, 3
 		if rs("stokMiktar") > 0 then
 			hatamesaj = "Depo Boş olmadığı için PASİF yapılamaz."

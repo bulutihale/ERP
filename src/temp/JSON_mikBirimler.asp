@@ -12,6 +12,8 @@
 '##### şart ile gelen sorgu 
 '##### şart ile gelen sorgu 
 	sart		=	request.QueryString ("sart")
+	sartOzel	=	request.QueryString ("sartOzel")
+	idKullan	=	request.QueryString ("idKullan")
 '##### /şart ile gelen sorgu 
 '##### /şart ile gelen sorgu 
 
@@ -21,13 +23,15 @@
 	'##### BİRİMLERİ ÇEK select2 için JSON verisi oluştur
 	
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.kisaBirim,"
-			sorgu = sorgu & " t1.uzunBirim"
+			sorgu = sorgu & " t1.birimID, t1.kisaBirim, t1.uzunBirim"
 			sorgu = sorgu & " FROM portal.birimler t1" 
-			sorgu = sorgu & " WHERE t1.birimTur = 'miktar'"
+			sorgu = sorgu & " WHERE t1.birimGrup = 'miktar'"
 			sorgu = sorgu & " AND (t1.kisaBirim like N'%" & arananKelime & "%' OR t1.uzunBirim like N'%" & arananKelime & "%')"
 			if sart <> "" then
 				sorgu = sorgu & " AND t1.birimTur = '" & sart & "'"
+			end if
+			if sartOzel <> "" then
+				sorgu = sorgu & " AND " & sartOzel
 			end if
 			sorgu = sorgu & " ORDER BY t1.uzunBirim ASC"
 			rs.open sorgu, sbsv5, 1, 3
@@ -37,7 +41,12 @@
 					response.Write "["
 				for i = 1 to rs.recordcount
 					Response.Write "{"
-					Response.Write """id"":""" & rs("kisaBirim") & ""","
+					if idKullan = "evet" then
+						idDeger =  rs("birimID")
+					else
+						idDeger =  rs("kisaBirim")
+					end if
+					Response.Write """id"":""" & idDeger & ""","
 					Response.Write """text"":""" & rs("kisaBirim") & " - " & rs("uzunBirim") & """"
 
 					if i < rs.recordcount then

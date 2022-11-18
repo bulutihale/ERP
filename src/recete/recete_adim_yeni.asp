@@ -26,7 +26,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 if receteAdimID <> "" then
             sorgu = "SELECT t1.stokID, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID, t1.en, t1.boy, t1.enBoyBirim,"
-			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger, t5.receteAd as altReceteAd,  t6.uzunBirim as ebUzunBirim"
+			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger, t5.receteAd as altReceteAd,  t6.uzunBirim as ebUzunBirim,"
+			sorgu = sorgu & " stok.FN_anaBirimIDBul(t1.stokID) as anaBirimID"
 			sorgu = sorgu & " FROM recete.receteAdim t1"
 			sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t1.receteISlemTipiID = t2.receteISlemTipiID"
 			sorgu = sorgu & " LEFT JOIN portal.birimler t4 ON t1.miktarBirim = t4.kisaBirim"
@@ -37,6 +38,7 @@ if receteAdimID <> "" then
 			if rs.recordcount > 0 then
 				islemTur			=	rs("islemTur")
                 stokID				=  	rs("stokID")
+				anaBirimID			=	rs("anaBirimID")
                 miktar				=  	rs("miktar")
 				miktarBirim			=	rs("miktarBirim")
 				fire				=	rs("fire")
@@ -148,7 +150,7 @@ end if
 							Response.Write "</div>"
 							Response.Write "<div class=""col-6"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
-								call formselectv2("miktarBirim","","","","formSelect2 miktarBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger3&"""")
+								call formselectv2("miktarBirim","","","","formSelect2 miktarBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger3&""" data-sartOzel=""t1.birimID="&anaBirimID&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
@@ -232,8 +234,9 @@ end if
 
 
 
-
 <script>
+//'//ANCHOR - select2 seçili gelsin data-defdeger 
+
 	$(document).ready(function() {
 		$('#receteIslemTipiID, #stokID, #birimSec, #fireBirimSec, #altReceteID').trigger('mouseenter');
 		

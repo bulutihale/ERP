@@ -17,7 +17,6 @@
 
 Response.Flush()
 
-call logla("Üretim başlat")
 
 if ajandaID = "" then
 	hata = 1
@@ -31,6 +30,12 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 	if islemDurum = "islemBasla" then
+
+		sorgu = "SELECT icerik FROM protal.ajanda WHERE id = " & ajandaID
+		rs.open sorgu,sbsv5,1,3
+			call logla("Üretim başlat: " & rs("icerik"))
+		rs.close
+
 			sorgu = "UPDATE stok.stokHareket SET stokHareketTipi = 'U' WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & " AND stokHareketTuru = 'G' AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
 
@@ -95,18 +100,30 @@ yetkiKontrol = yetkibul(modulAd)
 				yeniGirisID	=	rs("stokHareketID")
 			rs.close
 
-			sorgu = "SELECT stokHareketID, lot, lotSKT FROM stok.stokHareket WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & ""
-			sorgu = sorgu & " AND stokHareketTuru = 'G' AND stokID = " & stokID & " AND silindi = 0 ORDER BY stokHareketID DESC"			
+			sorgu = "SELECT stokHareketID, stokKodu, stokID, lot, miktar, miktarBirim, lotSKT, depoID, siparisKalemID, stokHareketTipi, ajandaID"
+			sorgu = sorgu & " FROM stok.stokHareket WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & ""
+			sorgu = sorgu & " AND stokHareketTuru = 'G' AND silindi = 0 AND stokHareketID <> " & yeniGirisID & " ORDER BY stokHareketID DESC"	
 			rs.open sorgu,sbsv5,1,3
 
 
 				for fi = 1 to rs.recordcount
-				stokHareketID = rs("stokHareketID")
+				stokHareketID 	=	rs("stokHareketID")
+				stokKodu		=	rs("stokKodu")
+				miktar			=	rs("miktar")
+				miktarBirim		=	rs("miktarBirim")
+				depoID			=	rs("depoID")
+				stokID			=	rs("stokID")
+				siparisKalemID	=	rs("siparisKalemID")
+				lot				=	rs("lot")
+				stokHareketTipi	=	rs("stokHareketTipi")
+				lotSKT			=	rs("lotSKT")
+				ajandaID		=	rs("ajandaID")
+				
 					sorgu = "INSERT INTO stok.stokHareket"
-					sorgu = sorgu & " SELECT getdate(),kid, firmaID, silindi, stokKodu, miktar, miktarBirim, getdate(), 'C', depoID, fisNo, aciklama, belgeNo, belgeTarih,"
-					sorgu = sorgu & " cevrim, stokID, cariID, siparisKalemID, lot, stokHareketTipi, null, " & yeniGirisID & ", lotSKT, 0, ajandaID"
-					sorgu = sorgu & " FROM stok.stokHareket "
-					sorgu = sorgu & " WHERE stokHareketID = " & stokHareketID
+					sorgu = sorgu & " (kid, firmaID, stokKodu, miktar, miktarBirim, girisTarih, stokHareketTuru, depoID, aciklama, stokID, siparisKalemID, lot, stokHareketTipi, prodHareketID, lotSKT, ajandaID)"
+					sorgu = sorgu & " VALUES("
+					sorgu = sorgu & kid & "," & firmaID & ",'" & stokKodu & "'," & miktar & ",'" & miktarBirim & "', getdate(), 'C'," & depoID & ", 'Üretim'," & stokID & "," & siparisKalemID & ",'" & lot & "','" & stokHareketTipi& "'," & yeniGirisID & ",'" & tarihsql(lotSKT) & "'," & ajandaID
+					sorgu = sorgu & ")"
 					rs1.open sorgu,sbsv5,3,3
 				rs.movenext
 				next
@@ -121,6 +138,11 @@ yetkiKontrol = yetkibul(modulAd)
 					rs.open sorgu,sbsv5,3,3
 				end if
 			'####### üretimdeki ana ürünün üretimi bitti ise tüm yan işlermleri bitti olarak işaretle
+
+			sorgu = "SELECT icerik FROM protal.ajanda WHERE id = " & ajandaID
+			rs.open sorgu,sbsv5,1,3
+				call logla("Üretim bitti: " & rs("icerik"))
+			rs.close
 
 		end if
 	else

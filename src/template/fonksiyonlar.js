@@ -28,6 +28,8 @@ $(document).ajaxComplete(function() {
 				var holderYazi	=	$(this).attr('data-holderyazi');
 				var jsonDosya	=	$(this).attr('data-jsondosya');
 				var sart		=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
+				var sartOzel	=	$(this).attr('data-sartOzel');//WHERE sorgusunu olduğu gibi yazmak için
+				var idKullan	=	$(this).attr('data-idkullan');
 				var minInput	=	$(this).attr('data-miniput');
 				var defDeger	=	$(this).attr('data-defdeger');
 
@@ -40,6 +42,8 @@ $(document).ajaxComplete(function() {
 					data: function (params) {
 					  return {
 						 sart:sart,
+						 sartOzel:sartOzel,
+						 idKullan:idKullan,
 						q: params.term, // search term
 						page: params.page
 					  };
@@ -124,6 +128,8 @@ jQuery(document).ajaxSuccess(
 				var holderYazi	=	$(this).attr('data-holderyazi');
 				var jsonDosya	=	$(this).attr('data-jsondosya');
 				var sart		=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
+				var sartOzel	=	$(this).attr('data-sartOzel');//WHERE sorgusunu olduğu gibi yazmak için
+				var idKullan	=	$(this).attr('data-idkullan');
 				var minInput	=	$(this).attr('data-miniput');
 				var defDeger	=	$(this).attr('data-defdeger');
 
@@ -136,6 +142,8 @@ jQuery(document).ajaxSuccess(
 					data: function (params) {
 					  return {
 						 sart:sart,
+						 sartOzel:sartOzel,
+						 idKullan:idKullan,
 						q: params.term, // search term
 						page: params.page
 					  };
@@ -347,7 +355,24 @@ function numara(nesne,para,uyari)
 }
 
 
-
+//'//NOTE - sistemde seçilen bir ürünün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.
+	function anaBirimKontrol(stokID,inputID){
+	//anaBirimKontrol($(this).val(),$(this).attr('id')) --> kullanım
+		if(stokID == null){return false};
+		$.post("/portal/stokHareketKontrol.asp",
+		{
+		stokID: stokID
+		},
+		function(data, status){
+			if(data != 'tanimlanamaz')
+			{
+				$('#'+inputID).val(null).trigger('change');
+				swal('Ana birim tanımlı değil','açılan pencerden ürüne ait ana birim tanımlaması yapınız.');
+				modalajax(data)
+			}else{};
+		});
+	}
+// sistemde seçilen bir ürürnün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.
 
 
 

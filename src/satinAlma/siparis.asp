@@ -53,7 +53,7 @@ yetkiKontrol = yetkibul(modulAd)
 								Response.Write "<div class=""row mt-2 mb-2"">"
 									Response.Write "<div id=""divCariSec"" class=""col-lg-9 col-md-6 col-sm-6"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
-										call formselectv2("stokSec","","","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+										call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
 									Response.Write "</div>"
 									Response.Write "<div class=""col-lg-3 col-md-6 col-sm-6"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün notları</div>"

@@ -79,6 +79,7 @@
 				sorgu = sorgu & "personel.songiris," & vbcrlf
 				sorgu = sorgu & "personel.sayac," & vbcrlf
 				sorgu = sorgu & "personel.language," & vbcrlf
+				sorgu = sorgu & "personel.webmailUser," & vbcrlf
 				sorgu = sorgu & "replace(" & vbcrlf
 				sorgu = sorgu & "replace(" & vbcrlf
 				sorgu = sorgu & "STUFF((SELECT '; ' + yetkiAd+':',yetkiParametre FROM personel.personel_yetki where personel.personel.id = personel.personel_yetki.kid FOR XML PATH('')), 1, 1, '')" & vbcrlf
@@ -101,6 +102,7 @@
 							LoginHatirla				=	rs("LoginHatirla")
 							yetkiler					=	rs("yetkiler") & ""
 							language					=	rs("language") & ""
+							webmailUser					=	rs("webmailUser") & ""
 							if LoginHatirla = 0 or isnull(LoginHatirla) = True then
 								LoginHatirla = 50
 							end if
@@ -171,7 +173,7 @@ end if
 '###### PERSONEL BUL
 '###### PERSONEL BUL
 if kid <> "" then
-	sorgu = "Select ad,passwordExpiration,passwordChangeFirstLogin from Personel.Personel where (expiration is null or expiration >= '" & tarihsql(date()) & "') and Id = " & kid
+	sorgu = "Select ad,passwordExpiration,passwordChangeFirstLogin,webmailUser from Personel.Personel where (expiration is null or expiration >= '" & tarihsql(date()) & "') and Id = " & kid
 	rs.Open sorgu, sbsv5, 1, 3
 	if rs.recordcount = 0 then
 		Response.Write "TANIMSIZ PERSONEL : " & kid
@@ -180,6 +182,7 @@ if kid <> "" then
 		personelAd					=	rs("ad")
 		passwordExpiration			=	rs("passwordExpiration")
 		passwordChangeFirstLogin	=	rs("passwordChangeFirstLogin")
+		webmailUser					=	rs("webmailUser")
 	end if
 	rs.close
 end if
@@ -463,26 +466,25 @@ if kid <> "" then
 				Response.Write "</li>"
 			'## MESAJLAR
 			'## MESAJLAR
-			'## KULLANICI MENÜSÜ
-			'## KULLANICI MENÜSÜ
-			personel64 = kid
-			personel64 = base64_encode_tr(personel64)
-			Response.Write "<li class=""nav-item nav-profile dropdown"">"
-			Response.Write "<a class=""nav-link dropdown-toggle"" href=""#"" data-toggle=""dropdown"" id=""profileDropdown""><span class=""nav-profile-name"">" & personelAd & " " & personelSoyad & "</span></a>"
-			Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""profileDropdown"">"
-			Response.Write "<a class=""dropdown-item"" onClick=""modalajax('/personel/personel_yeni.asp?gorevID=" & personel64 & "');""><i class=""mdi mdi-settings text-primary""></i>" & translate("Ayarlar","","") & "</a>"
-			Response.Write "<a class=""dropdown-item"" href=""/personel/logout.asp""><i class=""mdi mdi-logout text-primary""></i>" & translate("Çıkış","","") & "</a>"
-			Response.Write "</div>"
-			Response.Write "</li>"
-			'## KULLANICI MENÜSÜ
-			'## KULLANICI MENÜSÜ
 
 
+			'## MAİL
+			'## MAİL
+			if webmailUser <> "" then
+					Response.Write "<li class=""nav-item dropdown mr-1"">"
+					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/webmail/mail"">"
+					Response.Write "<i class=""mdi mdi-email-variant"" title=""E-Mail Listesi""></i>"
+						Response.Write "<div class=""badge badge-pill badge-warning""><span class=""mailSayi"">0</span></div>"
+					Response.Write "</a>"
+					Response.Write "</li>"
+			end if
+			'## MAİL
+			'## MAİL
 
 
 			'## BİLDİRİM ALANI
 			'## BİLDİRİM ALANI
-				sorgu = "Select top 10 notificationID,icerik,onem from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid =  " & kid & " and tarih >= '" & tarihsql(date()-3) & "' order by notificationID desc"
+				sorgu = "Select top 50 notificationID,icerik,onem from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid =  " & kid & " and tarih >= '" & tarihsql(date()-3) & "' order by notificationID desc"
 				rs.Open sorgu, sbsv5, 1, 3
 					Response.Write "<li class=""nav-item dropdown mr-1"
 					if rs.recordcount = 0 then
@@ -490,9 +492,8 @@ if kid <> "" then
 					end if
 					Response.Write " bildirimcontainer"">"
 						Response.Write "<a class=""nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"" id=""messageDropdown"" href=""#"" data-toggle=""dropdown"" aria-expanded=""true"">"
-							Response.Write "<div class=""badge badge-pill badge-success""><i class=""mdi mdi-bell mr-2""></i><span class=""bildirimsayi"">" & rs.recordcount & "</span></div>"
-							' Response.Write "<i class=""mdi mdi-bell text-danger mx-0""></i>"
-							' Response.Write "<span class=""count bildirimsayi"">4</span>"
+							Response.Write "<i class=""mdi mdi-bell""></i>"
+							Response.Write "<div class=""badge badge-pill badge-success""><span class=""bildirimsayi"">" & rs.recordcount & "</span></div>"
 						Response.Write "</a>"
 						Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
 							for i = 1 to rs.recordcount
@@ -503,6 +504,9 @@ if kid <> "" then
 										Response.Write "</h6>"
 									Response.Write "</div>"
 								Response.Write "</a>"
+								if i = 10 then
+									exit for
+								end if
 							rs.movenext
 							next
 								Response.Write "<a class=""dropdown-item bildirimitem bildirimitemTum bg-info"">"
@@ -520,6 +524,19 @@ if kid <> "" then
 			'## BİLDİRİM ALANI
 
 
+			'## KULLANICI MENÜSÜ
+			'## KULLANICI MENÜSÜ
+			personel64 = kid
+			personel64 = base64_encode_tr(personel64)
+			Response.Write "<li class=""nav-item nav-profile dropdown"">"
+			Response.Write "<a class=""nav-link dropdown-toggle"" href=""#"" data-toggle=""dropdown"" id=""profileDropdown""><span class=""nav-profile-name"">" & personelAd & " " & personelSoyad & "</span></a>"
+			Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""profileDropdown"">"
+			Response.Write "<a class=""dropdown-item"" onClick=""modalajax('/personel/personel_yeni.asp?gorevID=" & personel64 & "');""><i class=""mdi mdi-settings text-primary""></i>" & translate("Ayarlar","","") & "</a>"
+			Response.Write "<a class=""dropdown-item"" href=""/personel/logout.asp""><i class=""mdi mdi-logout text-primary""></i>" & translate("Çıkış","","") & "</a>"
+			Response.Write "</div>"
+			Response.Write "</li>"
+			'## KULLANICI MENÜSÜ
+			'## KULLANICI MENÜSÜ
 
 
 

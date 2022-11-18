@@ -8,6 +8,9 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
+'//FIXME - YETKİ TANIMLANACAK
+
+
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
     sorgu = "Select top 1 * from portal.doviz"

@@ -68,7 +68,7 @@ yetkiPersonel = yetkibul("personel")
                 modulDegerler = Replace(modulDegerler,",","|")
                 Response.Write "<div class=""col-sm-4 my-1"">"
                 Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Yetki : ","","") & firmamodulListesiArr(i) & "</span>"
-                sorgu = "Select yetkiParametre from personel.personel_yetki where yetkiAd = '" & firmamodulListesiArr(i) & "' and kid = " & gorevID
+                sorgu = "Select yetkiParametre from personel.personel_yetki where yetkiAd = N'" & firmamodulListesiArr(i) & "' and kid = " & gorevID
                 rs.Open sorgu, sbsv5, 1, 3
                 if rs.recordcount > 0 then
                     yetkiParametre = rs("yetkiParametre")

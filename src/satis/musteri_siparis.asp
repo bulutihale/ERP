@@ -94,7 +94,7 @@ yetkiKontrol = yetkibul(modulAd)
 								Response.Write "<div class=""row mt-2"">"
 									Response.Write "<div id=""divUrunSec"" class=""col-lg-6 col-sm-6 mt-2"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
-										call formselectv2("stokSec","","","","formSelect2 stokSec","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+										call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
 									Response.Write "</div>"
 									Response.Write "<div class=""col-lg-6 col-sm-6 mt-2"">"
 										Response.Write "<div for="""" class=""badge badge-secondary rounded-left"">Ürüne Özel Not</div>"
@@ -127,7 +127,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 								Response.Write "<div class=""row text-center mt-4"">"
 									Response.Write "<div class=""col-lg-12"">"
-										'Response.Write "<div class=""col-12""><button type=""submit"" class=""btn btn-primary col-lg-6 col-md-12 col-sm-12"">KAYDET</button></div>"
+										Response.Write "<div class=""col-12""><button type=""submit"" class=""btn btn-primary col-lg-6 col-md-12 col-sm-12"">KAYDET</button></div>"
 									Response.Write "</div>"
 								Response.Write "</div>"
 

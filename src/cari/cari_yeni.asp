@@ -5,6 +5,7 @@
 ' iskonto = sil
 ' ilce = sil
 ' il = sehir
+'//FIXME - Şehir - şehir2 inputunu onar
 
 
 '###### ANA TANIMLAMALAR

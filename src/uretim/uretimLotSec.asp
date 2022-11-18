@@ -61,11 +61,11 @@ yetkiKontrol = yetkibul(modulAd)
 					stokKodu		=	rs("stokKodu")
 					stokAd			=	rs("stokAd")
 
-					sorgu = "SELECT t1.lot, t1.miktarBirim, stok.stokSayDepoLot(" & firmaID & ", " & stokID & ", " & secilenDepoID & ", t1.lot) as lotMiktar,"
+					sorgu = "SELECT t1.lot, t1.miktarBirim, stok.FN_stokSayDepoLot(" & firmaID & ", " & stokID & ", " & secilenDepoID & ", t1.lot) as lotMiktar,"
 					sorgu = sorgu & " t1.lotSKT"
 					sorgu = sorgu & " FROM stok.stokHareket t1"
 					sorgu = sorgu & " WHERE t1.silindi = 0 AND t1.stokID = " & stokID & " AND t1.depoID = " & secilenDepoID & ""
-					sorgu = sorgu & " AND stok.stokSayDepoLot(" & firmaID & ", " & stokID & ", " & secilenDepoID & ", t1.lot) > 0"
+					sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", " & stokID & ", " & secilenDepoID & ", t1.lot) > 0"
 					sorgu = sorgu & " GROUP BY t1.lot, t1.miktarBirim, t1.lotSKT"
 					rs1.open sorgu, sbsv5, 1, 3
 					
