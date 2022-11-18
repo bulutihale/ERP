@@ -244,7 +244,7 @@ yetkiKontrol = yetkibul(modulAd)
 	
 	if secilenReceteID > 0 then
 
-		'###################NOTE REÇETE ADIM BİLGİLERİ
+		'################### REÇETE ADIM BİLGİLERİ
 		'################### REÇETE ADIM BİLGİLERİ
 					Response.Write "<div class=""card mt-3"">"
 						Response.Write "<div class=""card-header text-white bg-info"">"
@@ -333,14 +333,16 @@ yetkiKontrol = yetkibul(modulAd)
 									if not isnull(stokID) then
 										sorgu = "SELECT t1.stokHareketID, t1.lot, t1.miktar, t1.miktarBirim, t1.stokHareketTipi"
 										sorgu = sorgu & " FROM stok.stokHareket t1"
+										sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
 										sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & " AND t1.stokID = " & stokID & ""
-										sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHAreketTipi IN ('T','U') AND t1.silindi = 0"
+										sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID
 										rs1.open sorgu, sbsv5, 1, 3
 							'Response.Write sorgu
 							
 										if rs1.recordcount > 0 then
 											toplamLotMiktar	=	0
-'//FIXME - 'yarı mamul üretiminden çıkan  ürünü henüz LOT seçmeden seçilmiş gibi gösteriyor
+
+
 											for ti = 1 to rs1.recordcount
 												stokHareketID		=	rs1("stokHareketID")
 												lot					=	rs1("lot")
