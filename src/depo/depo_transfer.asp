@@ -160,8 +160,8 @@ yetkiKontrol = yetkibul(modulAd)
 					rs.open sorgu, sbsv5, 1, 3
 						Response.Write "<div class=""row mt-1 text-center bold border-bottom mt-3"">"
 							Response.Write "<div class=""col-lg-3 col-sm-6"">Lot</div>"
-							Response.Write "<div class=""col-lg-2 col-sm-6"">Depodaki Miktar</div>"
-							Response.Write "<div class=""col-lg-4 col-sm-6"">Çıkış Depo</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6"">Bulunduğu Depo</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6"">Depodaki Miktar</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-6"">Aktarılacak Miktar</div>"
 							Response.Write "<div class=""col-lg-1""></div>"				
 						Response.Write "</div>"	
@@ -185,11 +185,11 @@ yetkiKontrol = yetkibul(modulAd)
 
 						Response.Write "<div class=""row mt-1 hoverGel rounded"&divClass&""">"
 							Response.Write "<div class=""col-lg-3 col-sm-6"">" & lot & "</div>"
-							Response.Write "<div class=""col-lg-2 col-sm-6 text-right"">" & lotMiktar & " " & miktarBirim & "</div>"
-							Response.Write "<div class=""col-lg-4 col-sm-6"">" & depoAd &"</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6"">" & depoAd &"</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6 text-right pointer"" onclick=""$('#aktarMiktar_"&siraNo&"').val("&lotMiktar&")"">" & lotMiktar & " " & miktarBirim & "</div>"
 							if int(girisDepoID) <> int(depoID) then
 							Response.Write "<div class=""col-lg-2 col-sm-6"">"
-								call forminput("aktarMiktar","","","","","autocompleteOFF","aktarMiktar_"&siraNo&"","")
+								call forminput("aktarMiktar","","if(($('#girisDepoID').val())==null){swal('','Ürünün aktarılacağı Giriş depo seçimi yapılmamış.')}","","","autocompleteOFF","aktarMiktar_"&siraNo&"","")
 							Response.Write "</div>"
 							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "'," & lotMiktar & ");"">"
 								Response.Write "<i class=""mdi mdi-jira pointer bold""></i>"

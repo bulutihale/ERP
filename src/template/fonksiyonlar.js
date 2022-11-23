@@ -28,7 +28,7 @@ $(document).ajaxComplete(function() {
 				var holderYazi	=	$(this).attr('data-holderyazi');
 				var jsonDosya	=	$(this).attr('data-jsondosya');
 				var sart		=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
-				var sartOzel	=	$(this).attr('data-sartOzel');//WHERE sorgusunu olduğu gibi yazmak için
+				var sartOzel	=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
 				var idKullan	=	$(this).attr('data-idkullan');
 				var minInput	=	$(this).attr('data-miniput');
 				var defDeger	=	$(this).attr('data-defdeger');
@@ -128,7 +128,7 @@ jQuery(document).ajaxSuccess(
 				var holderYazi	=	$(this).attr('data-holderyazi');
 				var jsonDosya	=	$(this).attr('data-jsondosya');
 				var sart		=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
-				var sartOzel	=	$(this).attr('data-sartOzel');//WHERE sorgusunu olduğu gibi yazmak için
+				var sartOzel	=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
 				var idKullan	=	$(this).attr('data-idkullan');
 				var minInput	=	$(this).attr('data-miniput');
 				var defDeger	=	$(this).attr('data-defdeger');

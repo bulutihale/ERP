@@ -61,7 +61,7 @@ if yetkiKontrol > 2 then
 			sorgu = "SELECT *, (SELECT receteID FROM recete.receteAdim WHERE altReceteID = t1.receteID AND silindi = 0) as kullananReceteID"
 			sorgu = sorgu & " FROM recete.recete t1 WHERE t1.receteID = " & receteID
 			rs.open sorgu, sbsv5, 1, 3
-	if isnull(rs("kullananReceteID")) then
+	if isnull(rs("kullananReceteID")) OR rs.recordcount = 0 then
 				if rs.recordcount = 0 then
 					rs.addnew
 					call logla("Yeni Reçete Ekleniyor: " & receteAd & "")

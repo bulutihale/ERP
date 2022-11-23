@@ -338,9 +338,9 @@ yetkiKontrol = yetkibul(modulAd)
 										sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID
 										rs1.open sorgu, sbsv5, 1, 3
 							'Response.Write sorgu
-							
+										toplamLotMiktar	=	0
+
 										if rs1.recordcount > 0 then
-											toplamLotMiktar	=	0
 
 
 											for ti = 1 to rs1.recordcount

@@ -43,7 +43,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<div class=""col-lg-1 col-sm-1 my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 							if yetkiKontrol >= 8 then
 								Response.Write "<div class=""col-lg-9 col-sm-6 my-1 text-right"">"
-									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/stok/stok_yeni.asp')"">YENİ ÜRÜN EKLE</button>&nbsp;"
+									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/stok/stok_yeni.asp')"">YENİ ÜRÜN EKLE</button>&nbsp;" 
 								Response.Write "</div>"
 							end if
 						Response.Write "</div>"
@@ -60,7 +60,6 @@ yetkiKontrol = yetkibul(modulAd)
 	end if
 '###### ARAMA FORMU
 '###### ARAMA FORMU
-
 
 
 '####### SONUÇ TABLOSU
@@ -114,7 +113,7 @@ yetkiKontrol = yetkibul(modulAd)
 			else	
 				sorgu = sorgu & " AND t1.silindi = 0"
 			end if
-			if durum2 = "" then
+			if durum2 = "" AND  aramaad = "" then
 				sorgu = sorgu & " AND stok.FN_stokSay(" & firmaID & ", t1.stokID) > 0"
 			end if		
 			if aramaad = "" then
@@ -123,7 +122,6 @@ yetkiKontrol = yetkibul(modulAd)
 			end if
 			sorgu = sorgu & " order by t1.stokKodu, t1.stokAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
-			
 			
 			
 			if rs.recordcount > 0 then

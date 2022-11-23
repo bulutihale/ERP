@@ -25,6 +25,9 @@
 	onHazirlikTur		=	Request.Form("onHazirlikTur")
 	altReceteID			=	Request.Form("altReceteID")
 	silindi				=	Request.Form("silindi")
+	etiketeEkle			=	Request.Form("etiketeEkle")
+	etiketAd			=	Request.Form("etiketAd")
+	
 
 	modulAd 		=   "Reçete"
 '###### ANA TANIMLAMALAR
@@ -38,7 +41,7 @@ call logla("Yeni Reçete Ekleme veya Güncelleme: " & receteAd & "")
 
 yetkiKontrol = yetkibul(modulAd)
 
-
+if etiketeEkle <> 1 then etiketeEkle = 0
 
 if miktar = "" then
 	miktar = 0
@@ -95,6 +98,10 @@ end if
 				rs("onHazirlikDeger")	=	onHazirlikDeger
 				rs("onHazirlikTur")		=	onHazirlikTur
 				rs("silindi")			=	silindi
+				rs("etiketeEkle")		=	etiketeEkle
+				rs("etiketAd")			=	etiketAd
+
+				
 				if islem <> "edit" then 'editleniyorsa sıra değişmesin
 					rs("sira")				=	900' en son eklenen adım en son sıraya atılsın, recete_adim_sira.asp ye yönlendiğinde sıra numarası düzeltiliyor.
 				end if

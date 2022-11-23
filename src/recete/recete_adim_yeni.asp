@@ -27,7 +27,7 @@ yetkiKontrol = yetkibul(modulAd)
 if receteAdimID <> "" then
             sorgu = "SELECT t1.stokID, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID, t1.en, t1.boy, t1.enBoyBirim,"
 			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger, t5.receteAd as altReceteAd,  t6.uzunBirim as ebUzunBirim,"
-			sorgu = sorgu & " stok.FN_anaBirimIDBul(t1.stokID) as anaBirimID"
+			sorgu = sorgu & " stok.FN_anaBirimIDBul(t1.stokID) as anaBirimID, t1.etiketeEkle, t1.etiketAd"
 			sorgu = sorgu & " FROM recete.receteAdim t1"
 			sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t1.receteISlemTipiID = t2.receteISlemTipiID"
 			sorgu = sorgu & " LEFT JOIN portal.birimler t4 ON t1.miktarBirim = t4.kisaBirim"
@@ -53,6 +53,8 @@ if receteAdimID <> "" then
 				boy					=	rs("boy")
 				enBoyBirim			=	rs("enBoyBirim")
 				ebUzunBirim			=	rs("ebUzunBirim")
+				etiketeEkle			=	rs("etiketeEkle")
+				etiketAd			=	rs("etiketAd")
 				onHazirlikTur		=	rs("onHazirlikTur")
 				if onHazirlikTur = "" then
 					onHazirlikTur = "Saat"
@@ -93,6 +95,14 @@ end if
 '################ Yeni adım kayıt ediliyorsa seçilen işleme göre inputları göster
 '################ Yeni adım kayıt ediliyorsa seçilen işleme göre inputları göster
 
+			chckDurum		=	chckKontrol(etiketeEkle,1)
+
+			etiketisimClass	=	" d-none "
+			if etiketeEkle = 1 then
+				etiketisimClass = ""
+			end if
+
+
 			if islemTur = "stok" then
 				stokClass		=	""
 				fireRow			=	" "
@@ -100,19 +110,22 @@ end if
 				fireYazi		=	"Fire"
 				mPlaceHolder	=	"Miktar"
 				altReceteRow	=	" d-none "
-				 kisiRow		=	" d-none "
+				kisiRow			=	" d-none "
+				etiketDurum		=	" "
 			elseif islemTur = "zaman" then
 				fireRow			=	" d-none "
 				stokClass		=	" d-none "
 				miktarYazi		=	"Süre"
 				mPlaceHolder	=	"İşlem Süresi"
 				altReceteRow	=	" d-none "
+				etiketDurum		=	" d-none "
 			elseif isnull(islemTur) OR islemTur = "" then
 				 stokRow		=	" d-none "
 				 fireRow		=	" d-none "
 				 miktarRow		=	" d-none "
 				 altReceteRow	=	" d-none "
 				 kisiRow		=	" d-none "
+				etiketDurum		=	" d-none "
 			end if
 
 '###### ARAMA FORMU
@@ -143,6 +156,23 @@ end if
 								call formselectv2("altReceteID","","","","formSelect2 altReceteID border","","altReceteID","","data-holderyazi=""Alt Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sart="""& stokID & """ data-defdeger="""&defDeger5&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
+
+		Response.Write "<div id=""etiketDurumDIV"" class=""bg-warning rounded mt-2 "&etiketDurum&""">"
+			Response.Write "<div class=""row"">"	
+				Response.Write "<div class=""col-lg-3 my-1 rounded"">"
+					Response.Write "<div class=""badge badge-secondary rounded-left"">Son ürün etiketine ekle</div>"
+					Response.Write "<div class=""text-left"">"
+						Response.Write "<input type=""checkbox"" name=""etiketeEkle"" value=""1"" class=""chck30 form-control"" " & chckDurum & " onclick=""$('#DIVetiketAd').toggleClass('d-none');"">"
+					Response.Write "</div>"
+				Response.Write "</div>"
+				Response.Write "<div id=""DIVetiketAd"" class=""col-lg-9" & etiketisimClass & " my-1"">"
+					Response.Write "<div class=""badge badge-secondary rounded-left"">Etikette Görünen Ad</div>"
+						call forminput("etiketAd",etiketAd,"","","etiketAd pb-2","","etiketAd","")
+				Response.Write "</div>"
+			Response.Write "</div>"
+		Response.Write "</div>"
+
+
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
 							Response.Write "<div class=""col-6"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">" & miktarYazi & "</div>"
@@ -150,7 +180,10 @@ end if
 							Response.Write "</div>"
 							Response.Write "<div class=""col-6"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
-								call formselectv2("miktarBirim","","","","formSelect2 miktarBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger3&""" data-sartOzel=""t1.birimID="&anaBirimID&"""")
+								if anaBirimID > 0  then
+									y	=	"t1.birimID="&anaBirimID&""
+								end if
+								call formselectv2("miktarBirim","","","","formSelect2 miktarBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger3&""" data-sartozel="""&y&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
@@ -164,7 +197,7 @@ end if
 							Response.Write "</div>"
 							Response.Write "<div class=""col-6"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">En - Boy Birim</div>"
-								call formselectv2("enBoyBirim","","","","formSelect2 enBoyBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger6&"""")
+								call formselectv2("enBoyBirim","","","","formSelect2 enBoyBirim border inpReset","","enBoyBirim","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger6&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & fireRow & """>"
@@ -238,7 +271,7 @@ end if
 //'//ANCHOR - select2 seçili gelsin data-defdeger 
 
 	$(document).ready(function() {
-		$('#receteIslemTipiID, #stokID, #birimSec, #fireBirimSec, #altReceteID').trigger('mouseenter');
+		$('#receteIslemTipiID, #stokID, #birimSec, #enBoyBirim, #fireBirimSec, #altReceteID').trigger('mouseenter');
 		
 		
 		$('#receteIslemTipiID, #stokID').on('change',function() {
