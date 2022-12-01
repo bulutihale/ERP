@@ -28,12 +28,13 @@
 	etiketeEkle			=	Request.Form("etiketeEkle")
 	etiketAd			=	Request.Form("etiketAd")
 	
+	
 
 	modulAd 		=   "Reçete"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
-
+call rqKontrol(miktar,"Lütfen kullanılan hammadde/yarı mamul için Miktar girişi yapınız.","")
 
 Response.Flush()
 
@@ -100,7 +101,6 @@ end if
 				rs("silindi")			=	silindi
 				rs("etiketeEkle")		=	etiketeEkle
 				rs("etiketAd")			=	etiketAd
-
 				
 				if islem <> "edit" then 'editleniyorsa sıra değişmesin
 					rs("sira")				=	900' en son eklenen adım en son sıraya atılsın, recete_adim_sira.asp ye yönlendiğinde sıra numarası düzeltiliyor.

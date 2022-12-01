@@ -3968,7 +3968,8 @@ End Function
 
 
 
-function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal ek1, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
+function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal grupID, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
+	fnhata = False
     ' call bildirim(gorevID,"",yetkiAd & " yetki değişikliği",1,kid,"","","","","")
 	' CASE portal.notification.onem
 	' 	WHEN 1 THEN 'Önemsiz'
@@ -3983,9 +3984,38 @@ function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byV
 	' 	WHEN 10 THEN 'Önemli'
 	' 	ELSE 'Belirsiz'
 	' END
-	veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
-	sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
-	fn1.open sorgu, sbsv5, 3, 3
+
+	'###### grupID bulma
+		if isnumeric(grupID) = True then
+			personelGrupID = grupID
+		else
+			sorgu = "Select personelGrupID from personel.personelGrup where grupAd = N'" & grupID & "'"
+			fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount > 0 then
+				personelGrupID = fn1("personelGrupID")
+			else
+				personelGrupID = 0
+			end if
+			fn1.close
+		end if
+	'###### grupID bulma
+
+	'###### hata kontrol
+	if kid = "" then
+		fnhata = True
+	end if
+	if personelGrupID = "" then
+		personelGrupID = 0
+	end if
+
+	if fnhata = False then
+		if personelGrupID > 0 then
+		else
+			veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
+			sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
+			fn1.open sorgu, sbsv5, 3, 3
+		end if
+	end if
 end function
 
 

@@ -254,30 +254,29 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "</div>"
 						
 						Response.Write "<div class=""card-body""><div class=""row"">"
-					sorgu = "" & vbcrlf
-					sorgu = sorgu & "SELECT stok.FN_stokSayDepo(" & firmaID & ", recete.receteAdim.stokID, " & secilenDepoID & ") as hazirMiktar," & vbcrlf
-					sorgu = sorgu & "stok.FN_stokSayGB(" & firmaID & ", recete.receteAdim.stokID, " & secilenDepoID & ") as GBmiktar," & vbcrlf
-					sorgu = sorgu & "recete.receteAdim.receteAdimID" & vbcrlf
-					sorgu = sorgu & ",recete.receteIslemTipi.ad" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.stokID" & vbcrlf
-					sorgu = sorgu & ",stok.stok.stokAd" & vbcrlf
-					sorgu = sorgu & ",stok.stok.stokKodu" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.isGucuSayi" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.miktar" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.miktarBirim" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.sira" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.altReceteID" & vbcrlf
-					sorgu = sorgu & ",recete.recete.receteAd" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.stokKontroluYap" & vbcrlf
-					sorgu = sorgu & "FROM recete.receteAdim" & vbcrlf
-					sorgu = sorgu & "INNER JOIN recete.receteIslemTipi on recete.receteIslemTipi.receteIslemTipiID = recete.receteAdim.receteIslemTipiID" & vbcrlf
-					sorgu = sorgu & "left JOIN stok.stok on stok.stok.stokID = recete.receteAdim.stokID" & vbcrlf
-					sorgu = sorgu & "left JOIN recete.recete on recete.recete.receteID = recete.receteAdim.altReceteID" & vbcrlf
-					sorgu = sorgu & "where recete.receteAdim.receteID = " & secilenReceteID & vbcrlf
-					sorgu = sorgu & "and recete.receteAdim.silindi = 0" & vbcrlf
-					sorgu = sorgu & "order by recete.receteAdim.sira ASC" & vbcrlf
+					sorgu = ""
+					sorgu = sorgu & " SELECT stok.FN_stokSayDepo(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as hazirMiktar,"
+					sorgu = sorgu & " stok.FN_stokSayGB(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as GBmiktar,"
+					sorgu = sorgu & " t1.receteAdimID,"
+					sorgu = sorgu & " t2.ad,"
+					sorgu = sorgu & " t1.stokID,"
+					sorgu = sorgu & " t3.stokAd,"
+					sorgu = sorgu & " t3.stokKodu,"
+					sorgu = sorgu & " t1.isGucuSayi,"
+					sorgu = sorgu & " t1.miktar,"
+					sorgu = sorgu & " t1.miktarBirim,"
+					sorgu = sorgu & " t1.sira,"
+					sorgu = sorgu & " t1.altReceteID,"
+					sorgu = sorgu & " t4.receteAd,"
+					sorgu = sorgu & " t1.stokKontroluYap"
+					sorgu = sorgu & " FROM recete.receteAdim t1"
+					sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t2.receteIslemTipiID =  t1.receteIslemTipiID"
+					sorgu = sorgu & " LEFT JOIN stok.stok t3 ON  t3.stokID =  t1.stokID"
+					sorgu = sorgu & " LEFT JOIN recete.recete t4 ON  t4.receteID =  t1.altReceteID"
+					sorgu = sorgu & " WHERE t1.receteID = " & secilenReceteID
+					sorgu = sorgu & " AND t1.silindi = 0"
+					sorgu = sorgu & " ORDER BY t1.sira ASC"
 					rs.open sorgu, sbsv5, 1, 3
-
 
 					if rs.recordcount = 0 then
 						Response.Write "Reçete Adımları Bulunamadı"
@@ -334,7 +333,9 @@ yetkiKontrol = yetkibul(modulAd)
 										sorgu = "SELECT t1.stokHareketID, t1.lot, t1.miktar, t1.miktarBirim, t1.stokHareketTipi"
 										sorgu = sorgu & " FROM stok.stokHareket t1"
 										sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
-										sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & " AND t1.stokID = " & stokID & ""
+										sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & ""
+										sorgu = sorgu & " AND t1.ajandaID = " & ajandaID & ""
+										sorgu = sorgu & " AND t1.stokID = " & stokID & ""
 										sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID
 										rs1.open sorgu, sbsv5, 1, 3
 							'Response.Write sorgu
@@ -366,7 +367,6 @@ yetkiKontrol = yetkibul(modulAd)
 														Response.Write lot & " - " &formatnumber(miktar,0)&" " & miktarBirim
 													Response.Write "</div>"
 												Response.Write "</div>"
-
 											rs1.movenext
 											next
 										end if

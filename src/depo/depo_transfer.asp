@@ -229,7 +229,7 @@ yetkiKontrol = yetkibul(modulAd)
 						// handle Confirm button click
 						// result is an optional parameter, needed for modals with input
 
-					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID,lotMiktar:lotMiktar});
+					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID,lotMiktar:lotMiktar,ajandaID64:ajandaID64});
 					
 					girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64);
 

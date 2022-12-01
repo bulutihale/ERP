@@ -8,6 +8,7 @@ yetkiGorev = yetkibul("gorev")
 	Response.Write "<div class=""container-fluid"">"
 	Response.Write "<div class=""row"">"
 
+	call bildirim(kid,"Genel Bildirim","ERP girişi yaptınız",1,0,"","Depo","","","")
 
 if yetkiIT > 0 then
 		Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-3"">"
