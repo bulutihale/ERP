@@ -1038,7 +1038,7 @@ End Function
 
 
 function kurcek(byVal kurturu)
-	set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP.6.0") 
+	set xmlhttp = Server.CreateObject("MSXML2.ServerXMLHTTP.6.0")
 	path = "http://www.tcmb.gov.tr/kurlar/today.xml"
 	xmlhttp.Open "GET", path, False
 	xmlhttp.send "at"
@@ -2879,6 +2879,80 @@ function smsgonder(byVal sb_smsBaslik, byVal gonderimayrinti, byVal numara, byVa
 				'### ARŞİVLE
 				'### ARŞİVLE
 			end if
+			'### NAC
+			'### NAC
+				if sunucu = "nac" then
+					'#### VERİ BLOĞU
+					'#### VERİ BLOĞU
+						veri = ""
+						' veri = veri & "{""Credential"": {""Username"":""kaybilsem"",""Password"":""8muKNfcJ"",""ResellerID"":1298},"
+						veri = veri & "{"
+						veri = veri & """type"": 1,"
+						veri = veri & """sendingType"": 0,"
+						veri = veri & """title"": """ & gonderimayrinti & ""","
+						veri = veri & """content"": """ & mesaj & ""","
+						veri = veri & """number"": 90" & numara & ","
+						veri = veri & """encoding"": 0,"
+						veri = veri & """sender"": """ & gonderenbaslik & ""","
+						' veri = veri & """periodicSettings"": null,"
+						' veri = veri & """sendingDate"": null,"
+						veri = veri & """validity"": 60"
+						' veri = veri & """pushSettings"": null"
+						veri = veri & "}"
+					'#### VERİ BLOĞU
+					'#### VERİ BLOĞU
+
+					'#### SEND
+					'#### SEND
+						Set http = Server.CreateObject("msxml2.ServerXMLHTTP.6.0")
+						http.Open "POST", "http://smslogin.nac.com.tr:9587/sms/create", False', "kaybilsem","8muKNfcJ"
+						http.setTimeouts 5000, 5000, 10000, 10000 'ms - resolve, connect, send, receive'
+						http.setRequestHeader "Content-Type","application/json"
+						http.setRequestHeader "Authorization", "Basic a2F5Ymlsc2VtOjhtdUtOZmNK"
+						http.Send veri
+						gelendata	=	http.responseText
+					'#### SEND
+					'#### SEND
+
+					'#### ÇÖZÜMLE
+					'#### ÇÖZÜMLE
+						call jsconsole("Gelen Data : " & gelendata)'{"err":null,"data":{"pkgID":4625395}}
+						gelenXML	=	gelendata
+						gelendata	=	Replace(gelendata,"""","")
+						gelendata	=	Replace(gelendata,"}","")
+						gelendata	=	Replace(gelendata,"{","")
+						gelendata1	=	instr(gelendata,"pkgID:")
+						gonderimID	=	right(gelendata,len(gelendata)-(gelendata1+5))
+					'#### ÇÖZÜMLE
+					'#### ÇÖZÜMLE
+
+					'#### KAYIT
+					'#### KAYIT
+							fn1.open "Select top(1) * from sms.gecmis",sbsv5,1,3
+								fn1.addnew
+								fn1("durum")			=	"Sonuç Bekleniyor"
+								fn1("mesaj")			=	mesaj
+								fn1("telefon")			=	numara
+								fn1("gonderen")			=	gonderenbaslik
+								fn1("tarih")			=	now()
+								fn1("gonderimID")		=	gonderimID
+								fn1("baslik")			=	gonderimayrinti
+								fn1("sunucu")			=	sunucu
+								if grupID <> "" then
+									fn1("grupID")		=	grupID
+								end if
+								fn1("cevapXML")			=	gelenXML
+								fn1("gonderimUnique")	=	0
+								fn1.update
+							fn1.close
+							call jsconsole("SMS ATILDI : " & numara)
+					'#### KAYIT
+					'#### KAYIT
+				end if
+			'### NAC
+			'### NAC
+
+
 		end if
 	end if
 	'###### SMS GÖNDERİM İŞLERİ
@@ -3894,7 +3968,8 @@ End Function
 
 
 
-function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal ek1, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
+function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal grupID, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
+	fnhata = False
     ' call bildirim(gorevID,"",yetkiAd & " yetki değişikliği",1,kid,"","","","","")
 	' CASE portal.notification.onem
 	' 	WHEN 1 THEN 'Önemsiz'
@@ -3909,9 +3984,38 @@ function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byV
 	' 	WHEN 10 THEN 'Önemli'
 	' 	ELSE 'Belirsiz'
 	' END
-	veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
-	sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
-	fn1.open sorgu, sbsv5, 3, 3
+
+	'###### grupID bulma
+		if isnumeric(grupID) = True then
+			personelGrupID = grupID
+		else
+			sorgu = "Select personelGrupID from personel.personelGrup where grupAd = N'" & grupID & "'"
+			fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount > 0 then
+				personelGrupID = fn1("personelGrupID")
+			else
+				personelGrupID = 0
+			end if
+			fn1.close
+		end if
+	'###### grupID bulma
+
+	'###### hata kontrol
+	if kid = "" then
+		fnhata = True
+	end if
+	if personelGrupID = "" then
+		personelGrupID = 0
+	end if
+
+	if fnhata = False then
+		if personelGrupID > 0 then
+		else
+			veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
+			sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
+			fn1.open sorgu, sbsv5, 3, 3
+		end if
+	end if
 end function
 
 
@@ -3929,6 +4033,75 @@ function netsisturkce(gelen,yon)'netsisturkce("","netsis")
 		gelen = Replace(gelen,"Þ","Ş")
 	end if
 	netsisturkce = gelen
+end function
+
+
+
+
+
+
+
+
+
+function pageHeader()
+	'##################################################
+	'##################################################
+	'##################################################
+	'##################################################
+		Response.Write "<!DOCTYPE html>"
+		Response.Write "<html lang=""en"" ng-app=""app"">"
+		Response.Write "<!--[if IE 8]><html class=""no-js lt-ie9""><![endif]-->"
+		Response.Write "<!--[if IE 9]><html class=""no-js lt-ie10""><![endif]-->"
+		Response.Write "<!--[if gt IE 8]><!--><html class=""no-js""><!--<![endif]-->"
+		Response.Write "<head>"
+		Response.Write "<meta charset=""utf-8"">"
+		Response.Write "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"" />"
+		Response.Write "<title>" & sb_firmaAd & " Panel</title>"
+		Response.Write "<meta name=""robots"" content=""noindex"" />"
+		Response.Write "<meta name=""author"" content=""" & sb_firmaAd & """ />"
+		Response.Write "<link rel=""shortcut icon"" href=""/favicon.ico"" />"
+		Response.Write "<meta name=""viewport"" content=""width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"">"
+		Response.Write "<meta name=""apple-mobile-web-app-capable"" content=""yes"">"
+		Response.Write "<link rel=""stylesheet"" href=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.css"" />"
+		Response.Write "<link rel=""stylesheet"" href=""/cimax/ots.css"" />"
+		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/modernizr-2.7.1-respond-1.4.2.min.js""></scr" & "ipt>"
+		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery-2.1.1.min.js""></scr" & "ipt>"
+		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.js""></scr" & "ipt>"
+		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery.form-3.4.min.js""></scr" & "ipt>"
+		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootbox/bootbox.min.js""></scr" & "ipt>"
+		Response.Write "<scr" & "ipt type=""text/javascript"" src=""/cimax/ots.js""></scr" & "ipt>"
+		Response.Write "<style type=""text/css"">"
+		Response.Write "@import url('" & sb_cdnUrl & "/fonts/font-awesome-4.4.0/css/font-awesome.min.css');"
+		Response.Write ".cezaeviEkranSimge {min-height:214px;}"
+		Response.Write "body{touch-action: manipulation;}"
+		Response.Write "table tr td,table tr {padding-top:0 !important;padding-bottom:0 !important}"
+		Response.Write "</style>"
+		Response.Write "<meta http-equiv=""refresh"" content=""360"">"
+		Response.Write "</head>"
+		Response.Write "<body>"
+	'##################################################
+	'##################################################
+	'##################################################
+	'##################################################
+end function
+
+
+
+
+function pageFooter()
+	'##################################################
+	'##################################################
+	'##################################################
+	'##################################################
+		Response.Write "<div class=""modal fade"" id=""modal-dialog"" tabindex=""-1"" role=""dialog"" aria-labelledby=""modalbaslik"" aria-hidden=""true""><div class=""modal-dialog""><div class=""modal-content""><div class=""modal-body"">&nbsp;</div></div></div></div>"
+		Response.Write "<div class=""modal fade"" id=""modal-dialogfit"" tabindex=""-1"" role=""dialog"" aria-labelledby=""modalbaslik"" aria-hidden=""true""><div class=""modal-dialog modal-lg""><div class=""modal-content""><div class=""modal-body"">&nbsp;</div></div></div></div>"
+		Response.Write "<div id=""ajax"" class=""ajax hide""></div>"
+		Response.Write "</body>"
+		Response.Write "</html>"
+	'##################################################
+	'##################################################
+	'##################################################
+	'##################################################
 end function
 
 

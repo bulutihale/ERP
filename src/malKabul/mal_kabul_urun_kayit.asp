@@ -30,6 +30,13 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
+'//NOTE - birim ID bulma fonksiyonu
+	sorgu = "SELECT stok.FN_birimIDBul('" & miktarBirim & "','K') as bid"
+	rs.open sorgu,sbsv5,1,3
+		birimID	=	rs("bid")
+	rs.close
+
+
 
 Response.Flush()
 
@@ -67,6 +74,7 @@ end if
 			rs("stokKodu")			=	stokKodu
 			rs("miktar")			=	miktar
 			rs("miktarBirim")		=	miktarBirim
+			rs("miktarBirimID")		=	birimID
 			rs("stokHareketTuru")	=	"G"
 			rs("stokHareketTipi")	=	"A"
 			rs("depoID")			=	depoID

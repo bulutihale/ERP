@@ -26,6 +26,7 @@
 
 '#### BİLDİRİM YÖNETİMİ
 '#### BİLDİRİM YÖNETİMİ
+if kid <> "" then
     sorgu = "Select top 10 icerik,notificationID from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid = " & kid & " order by notificationID DESC"
     rs.Open sorgu, sbsv5, 1, 3
         bildirimsayi = rs.recordcount
@@ -62,6 +63,7 @@
             '## eksik bildirim varsa ekle
         end if
     rs.close
+end if
 '#### BİLDİRİM YÖNETİMİ
 '#### BİLDİRİM YÖNETİMİ
 

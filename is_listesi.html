@@ -1,133 +1,36 @@
 
-<<<<<<< HEAD
----- portal/yedek.asp yeni makineye göre güncellenmeli
+
 
 ---- notification için kullanıcı grupları olmalı tek kullanıcıya değil gruba gönderilebilmeli(ürün girişi yapıldığında şu gruptakilere uyarı gitsin gibi)
 
 
 
 =======
+'//TODO - TİO kullanıcısı, kullanılacak stok kodlarını belirleyecek
+'//TODO - TIO kullanıcısı ürünlere ait ana birimleri belirleyecek
 
 
 
 
-<<<<<<< HEAD
 
-=======
-//ANCHOR - 
->>>>>>> c45b391a14da4eff34ea59aaf16fffca2f89c8f4
->>>>>>> 4a94b40e1c55ef1eebbe90d4d83e6471857de74d
 
 ----- mal kabul giriş yaptığında kalite kontrole notification ve mail gönder
 ----- KK onay verdiğinde mal kabul vs. yere notification ve mail gönder
 ----- ürün transferi yapıldığında ilgili yere notification ve mail gönder (mal kabul --> üretim depo gibi )
 
 
----- ölçülerde, miktarlarda ondalıklı sayılar kullanımı?
+
 ---- recete.recetAdim tablosunda altReceteID var ise bu alt receteye kayıtlı sadece 1 (bir) adım olsun. bu şekilde kısıtla çünkü bu alt reçete ile yarı mamul üretiliyor olmalı.
-----üretim ekranlarında temin depoda bulunan miktar, üretime yetiyorsa YEŞİL renk badge yap, yeterli değil ise üretim butonu PASİF yap
 
 
 
-+++++++ https://tio.sbstasarim.com/kaliteKontrol/bekleyen_liste --> "kalite form modal" select2 değiştiğinde mükerrer isim geliyor
+user timeout, browser kapanınca logout --> personel ekranından erişim ver
 
 
 
 
-++++++ Üretim planlama menüsü ve yetkileri eklenecek
-
-http://tio.sbstasarim.com/satis/siparis_liste planla butonu koy
-
-	-- reçete seç --> 
-	-- tarih seç
-	-- saat seç
-	-- makine varsa eğer o saatte dolu mu ?
-	-- doluysa patla
-	-- stok kontrolü yapılsın mı seçeneği olsun
-		-- hayır ise stok kontrol etmeden devam et
-		-- evet ise mesela 3000 adet üretilecek ise, kayıt yapılabilsin, satın almaya mail ile acil tedarik yap maili gitsin ( default bu gelecek )
-	-- çalışacak işçileri seç
-	-- kaydet
-	
-	+++++++ takvimde gösterme seçeneği
-
-http://tio.sbstasarim.com/stok/stok_liste üretim planlanan ve stok kontrolü yapılsın seçilmiş olan stoklar burada gösterilsin (free stok, bağlı stok)
-
-stok için üret butonu seçilirse reçete değiştirilebilecek.
-
-sorgular WHERE clause silindi kontrolü
-
-TCMB döviz çek
-
-teklif oluştururken yeni cari açma
-
-user timeout, browser kapanınca logout
 
 
-++++++ http://tio.sbstasarim.com/satis/siparis_liste teslim tarih ekle
-
-++++++ http://tio.sbstasarim.com/satis/siparis_liste fiyat kaldır
-
-+++++ LOTOLUSTUR.ASP ajax ile çekilecek. kontrol onay.asp ye konulacak
-
-++++++ db tablolara firmaID alanı ekle
-
-++++++ sorgular WHERE clause firmaID kontrolü
-
-++++++ stok_depo_miktar.asp depo stok miktarlarını ve lot stok miktarlarını doğru hesaplıyor mu kontrol et
-
-++++++-- iconları ayarla
-
-depo yazılacak
-stoklar
-mal kabul
---- yetki ayarlaması
----- Mal Kabul Edebilir
-Kalite
-lot
---- yetki ayarlaması
-
-
-
-###################################################################
-
-http://tio.sbstasarim.com/malKabul/mal_kabul
-
-+++++ seç butonu kalkıcak
-+++++ satır seçilebilecek
-+++++ mouse pointer olucak
-
-###################
-+++++ thema
-
-++++++++ info nun rengini düzelt bg-* yerine table-* kullan
-
-++++++++ mal kabul giriş vs. açıklama  alanlarında LEFT kullan
-
-+++++ mal kabul ekranında SEÇ butonu kullanmak yerine tüm satırı link yap ->>>>>YAPAMADIM çünkü tr tagında onclick var js ile gelen inputlara tıkladığında tr'ye de tıkladığı için ajax tetikliyor.
-
-++++++++ kalite kontrol modal disabled input yap
-
-++++++++ stokHareket tabloseu ted. değerlendirme için alan aç, başarılı teslim yüzdesini yaz
-
-++++++++ kayıt olmayan sayfadaki tablo altına "kayıt yok" yaz
-
-++++++++ müşteri siparişlerine depo stoklarını görme 
-
-???????? müşteri siparişlerine stokta var yok işareti ekleme
-
-++++++++ müşteri sipraişlerine satınalma gibi listeleme yap
-
-++++++++ filtre modalına stok select2 ekle
-
-++++++++ depo tablosuna "cariID" alanı ekleyelim müşteriye özel üretilen ürünleri o müşteriye özel depo oluşturup o depoya atsınlar, diğer depolarda görünmesin.
-
-++++++++ Reçete Liste ekranı 
-
-++++++++ Yeni stok kartı tanımlama (Özellikle Yarı Mamuller için)
-
-
-######################################################
 ++++++++ select2 ye ID yollama ve default seçtirme ----          
 				$(document).ready(function() {
 					$('#receteIslemTipiID, #stokID, #birimSec, #altReceteID').trigger('mouseenter');
@@ -139,7 +42,7 @@ http://tio.sbstasarim.com/malKabul/mal_kabul
 ++++++++ select2 den seçilen value datasını js ile alıp işlem yapma
 
 
-++++++++ reçete adımlarında db tablosuna sıra yazmıyoruz, sıra değiştirme işlemleri
+
 
 
 

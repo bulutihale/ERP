@@ -109,7 +109,7 @@ end if
 		Response.Write "<div class=""form-row align-items-left"">"
 			Response.Write "<div class=""col-lg-3 col-sm-12 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Gelen Miktar</span>"
-				call forminput("miktar", miktar & " " & miktarBirim,"","","","","miktar","disabled")
+				call forminput("miktar", miktar & " " & miktarBirim,"$('#onayMiktar').val("&miktar&")","","pointer","","miktar","readonly")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-3 col-sm-12 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Gelen LOT</span>"

@@ -182,7 +182,11 @@ call logla("Depo Günlük İş Listesi")
 											elseif isTur = "kesimPlan" then
 												Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Kesimhane','Kapat','','btn-danger','','','','','')"""
 											elseif isTur = "transfer" then
-												Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+												if tamamlandi = 0 then
+													Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+												else
+													Response.Write " onclick=""swal('','Transfer işlemi yapılmış.')"""
+												end if
 											end if
 										Response.Write ">"
 											Response.Write icerik

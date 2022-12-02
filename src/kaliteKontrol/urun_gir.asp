@@ -30,13 +30,14 @@ call logla("Kalite Kontrol ürün kabul: " & stokHareketID & "")
 
 yetkiKontrol = yetkibul(modulAd)
 
-	sorgu = "SELECT t1.miktar, t1.miktarBirim, t1.stokKodu, t1.stokID, t1.lot, t1.lotSKT, t1.depoID"
+	sorgu = "SELECT t1.miktar, t1.miktarBirim, t1.stokKodu, t1.stokID, t1.lot, t1.lotSKT, t1.depoID, stok.FN_birimIDBul(t1.miktarBirim,'K') as miktarBirimID"
 	sorgu = sorgu & " FROM stok.stokHareket t1 WHERE t1.firmaID = " & firmaID & " AND t1.stokHareketID = " & stokHareketID
 	rs.open sorgu, sbsv5, 1, 3
 
 		
 		girisMiktar		=	rs("miktar")
 		miktarBirim		=	rs("miktarBirim")
+		miktarBirimID	=	rs("miktarBirimID")
 		stokKodu		=	rs("stokKodu")
 		stokID			=	rs("stokID")
 		cikanLot		=	rs("lot")
@@ -102,6 +103,7 @@ if yetkiKontrol > 2 then
 					rs("stokKodu")			=	stokKodu
 					rs("miktar")			=	onayMiktar
 					rs("miktarBirim")		=	miktarBirim
+					rs("miktarBirimID")		=	miktarBirimID
 					rs("stokHareketTuru")	=	"C"
 					rs("depoID")			=	cikisDepoID
 					rs("stokID")			=	stokID
@@ -124,6 +126,7 @@ if yetkiKontrol > 2 then
 					rs("stokKodu")			=	stokKodu
 					rs("miktar")			=	onayMiktar
 					rs("miktarBirim")		=	miktarBirim
+					rs("miktarBirimID")		=	miktarBirimID
 					rs("stokHareketTuru")	=	"G"
 					rs("depoID")			=	girisDepoID
 					rs("stokID")			=	stokID
@@ -150,6 +153,7 @@ if yetkiKontrol > 2 then
 						rs("stokKodu")			=	stokKodu
 						rs("miktar")			=	redMiktar
 						rs("miktarBirim")		=	miktarBirim
+						rs("miktarBirimID")		=	miktarBirimID
 						rs("stokHareketTuru")	=	"C"
 						rs("depoID")			=	cikisDepoID
 						rs("stokID")			=	stokID
@@ -171,6 +175,7 @@ if yetkiKontrol > 2 then
 						rs("stokKodu")			=	stokKodu
 						rs("miktar")			=	redMiktar
 						rs("miktarBirim")		=	miktarBirim
+						rs("miktarBirimID")		=	miktarBirimID
 						rs("stokHareketTuru")	=	"G"
 						rs("depoID")			=	redDepoID
 						rs("stokID")			=	stokID

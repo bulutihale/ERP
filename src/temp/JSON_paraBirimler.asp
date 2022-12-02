@@ -21,7 +21,7 @@
 			sorgu = sorgu & " t1.kisaBirim,"
 			sorgu = sorgu & " t1.uzunBirim"
 			sorgu = sorgu & " FROM portal.birimler t1" 
-			sorgu = sorgu & " WHERE t1.birimTur = 'para'"
+			sorgu = sorgu & " WHERE t1.birimGrup = 'para'"
 			sorgu = sorgu & " ORDER BY t1.uzunBirim ASC"
 			rs.open sorgu, sbsv5, 1, 3
 				

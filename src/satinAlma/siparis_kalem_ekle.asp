@@ -12,6 +12,14 @@ miktar			=	Request.Form("miktar")
 mikBirim		=	Request.Form("birimSec")
 paraBirim		=	Request.Form("pBirimSec")
 birimfiyat		=	Request.Form("birimfiyat")
+
+
+sorgu = "SELECT stok.FN_birimIDBul('" & mikBirim & "','K') as bid"
+rs.open sorgu,sbsv5,1,3
+	birimID	=	rs("bid")
+rs.close
+
+
 if birimFiyat = "" then
 	birimfiyat = 0
 end if
@@ -48,26 +56,11 @@ else
 	'###### STOK_ADI bul
 	'###### STOK_ADI bul
 	'###### STOK_ADI bul
-	sorgu		=	"Select stokAd, olcuBr1,olcuBr2,pay1,payda1,pay2,payda2 FROM stok.stok where stokID = " & stokID
+	sorgu		=	"Select stokAd FROM stok.stok where stokID = " & stokID
 	rs.open sorgu,sbsv5,1,3
 	
 	if rs.recordcount > 0 then
 		stokAd	=	rs("stokAd")
-
-		'pay payda ve ölçü birim tesbit
-		'pay payda ve ölçü birim tesbit
-		if birim = rs("olcuBr1") then
-			pay = rs("pay1")
-			payda = rs("payda1")
-			olcubr = 1
-		end if
-		if birim = rs("olcuBr2") then
-			pay = rs("pay2")
-			payda = rs("payda2")
-			olcubr = 2
-		end if
-		'pay payda ve ölçü birim tesbit
-		'pay payda ve ölçü birim tesbit
 	end if
 	rs.close
 	'###### STOK_ADI bul
@@ -78,9 +71,9 @@ else
 	'###### fiyat hesapla
 	'###### fiyat hesapla
 	'###### fiyat hesapla
-		fiyat	=	formatnumber(birimfiyat,4)
-		adet	=	int(adet)
-		toplamfiyat = fiyat * adet
+		fiyat		=	formatnumber(birimfiyat,4)
+		adet		=	int(adet)
+		toplamfiyat =	fiyat * adet
 	'###### fiyat hesapla
 	'###### fiyat hesapla
 	'###### fiyat hesapla
@@ -100,15 +93,11 @@ else
 		rs("stokID")		=	stokID
 		rs("miktar")		=	miktar
 		rs("mikBirim")		=	mikBirim
+		rs("mikBirimID")	=	birimID
 		rs("birimfiyat")	=	birimfiyat
 		rs("paraBirim")		=	paraBirim
 		rs("siparisTur")	=	"satinAlma"
 
-		'ek alanlar
-		rs("pay")			=	pay
-		rs("payda")			=	payda
-		rs("OLCUBR")		=	olcubr
-		'ek alanlar
 	rs.update
 	rs.close
 	'##### her şartta ekle

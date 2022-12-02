@@ -130,6 +130,7 @@ else
 					sorgu = sorgu & " t1.receteAdimID,"
 					sorgu = sorgu & " t2.ad,"
 					sorgu = sorgu & " t1.stokID,"
+					sorgu = sorgu & " t3.stokKodu,"
 					sorgu = sorgu & " t3.stokAd,"
 					sorgu = sorgu & " t1.isGucuSayi,"
 					sorgu = sorgu & " t1.miktar,"
@@ -202,7 +203,7 @@ else
 									end if
 									Response.Write "</td>"
 									Response.Write "<td>" & rs("ad") & "</td>"
-									Response.Write "<td>" & rs("stokAd") & "</td>"
+									Response.Write "<td>" & rs("stokKodu") & " - " & rs("stokAd") & "</td>"
 									Response.Write "<td class=""text-right"">" & rs("miktar") & " " & rs("miktarBirim") & "</td>"
 									Response.Write "<td class=""text-right"">" & rs("isGucuSayi") & "</td>"
 									Response.Write "<td>"

@@ -19,6 +19,13 @@
 	lotSKT				=	Request.Form("lotSKT")
 	ajandaID			=	Request.Form("ajandaID")
 
+
+	sorgu = "SELECT stok.FN_birimIDBul('" & miktarBirim & "','K') as bid"
+	rs.open sorgu,sbsv5,1,3
+		birimID	=	rs("bid")
+	rs.close
+	
+
 	modulAd =   "Üretim"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -56,6 +63,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("stokKodu")				=	stokKodu
 				rs("miktar")				=	kullanimMiktar
 				rs("miktarBirim")			=	miktarBirim
+				rs("miktarBirimID")			=	birimID
 				rs("girisTarih")			=	date()
 				rs("stokHareketTuru")		=	stokHareketTuru
 				rs("depoID")				=	cikisDepoID
@@ -75,6 +83,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("stokKodu")				=	stokKodu
 				rs("miktar")				=	kullanimMiktar
 				rs("miktarBirim")			=	miktarBirim
+				rs("miktarBirimID")			=	birimID
 				rs("girisTarih")			=	date()
 				rs("stokHareketTuru")		=	"G"
 				rs("depoID")				=	surecDepoID

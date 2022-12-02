@@ -5,6 +5,7 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid		=	kidbul()
+    a		=   Request.QueryString("a")
     ID		=	Request.QueryString("ID")
     kid64	=	ID
     opener  =   Request.Form("opener")
@@ -16,6 +17,7 @@
     gorevID			=   Request.Form("gorevID")
 	silindi			=   Request.Form("silindi")
 	kkDepoGiris		=	Request.Form("kkDepoGiris")
+    anaBirimID      =   Request.Form("anaBirimID")
 	modulAd 		=   "Stok"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -29,14 +31,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 
-
-if stokKodu = "" then
-	hatamesaj = "Stok Kodu Yazın"
-	call logla(hatamesaj)
-	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
-	Response.End()
-end if
-
+	call rqKontrol(stokKodu,"Lütfen Stok Seçin","")
+	call rqKontrol(anaBirimID,"Lütfen ürüne ait ana birimi seçin","")
 
 if yetkiKontrol > 2 then
 
@@ -59,14 +55,17 @@ end if
                 rs("silindi")			=	silindi
 				rs("kkDepoGiris")		=	kkDepoGiris
                 rs("minStok")           =   minStok
+                rs("anaBirimID")        =   anaBirimID
             rs.update
             rs.close
 
 end if
 
 call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
-
-call jsac("/stok/stok_liste.asp")
+if a = "hareketKontrol" then
+else
+    call jsac("/stok/stok_liste.asp")
+end if
 modalkapat()
 
 

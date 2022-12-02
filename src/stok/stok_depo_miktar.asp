@@ -24,14 +24,14 @@ call logla("Stok Depo Miktarları Detay")
 yetkiKontrol = yetkibul(modulAd)
 
 
-            sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktar,"
-			sorgu = sorgu & " stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar, t3.depoAd, t2.lot, t2.miktarBirim"
+            sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktar,"
+			sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar, t3.depoAd, t2.lot, t2.miktarBirim"
 			sorgu = sorgu & " FROM stok.stok t1"
 			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t2.silindi = 0"
-			sorgu = sorgu & " AND stok.stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) > 0"
-			sorgu = sorgu & " AND stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) > 0"
+			sorgu = sorgu & " AND stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) > 0"
+			sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) > 0"
 			sorgu = sorgu & " GROUP BY t2.depoID, t1.stokKodu, t1.stokID, t3.depoAd, t1.stokAd, t2.lot, t2.miktarBirim"
 			rs.open sorgu, sbsv5, 1, 3
 

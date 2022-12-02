@@ -6,7 +6,7 @@
     call sessiontest()
     kid		=	kidbul()
 
-    girisDepoID		=   Request.Form("girisDepoID")
+    girisDepoID		=   Request.Form("girisDepoID") 
     depoID 			=   Request.Form("depoID")
     lot		 		=   Request.Form("lot")
 	lotSKT			=   Request.Form("lotSKT")
@@ -15,7 +15,15 @@
 	miktarBirim		=   Request.Form("miktarBirim")
 	stokID			=   Request.Form("stokID")
 	stokKodu		=   Request.Form("stokKodu")
+	ajandaID64		=   Request.Form("ajandaID64")
+	ajandaID		=	ajandaID64
+	ajandaID		=	base64_decode_tr(ajandaID)
 	modulAd 		=   "Depo"
+
+sorgu = "SELECT stok.FN_birimIDBul('" & miktarBirim & "','K') as bid"
+rs.open sorgu,sbsv5,1,3
+	birimID	=	rs("bid")
+rs.close
 
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -44,6 +52,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("stokKodu")			=	stokKodu
 					rs1("miktar")			=	aktarMiktar
 					rs1("miktarBirim")		=	miktarBirim
+					rs1("miktarBirimID")	=	birimID
 					rs1("girisTarih")		=	date()
 					rs1("stokHareketTuru")	=	"C"
 					rs1("depoID")			=	depoID
@@ -66,6 +75,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("stokKodu")			=	stokKodu
 					rs1("miktar")			=	aktarMiktar
 					rs1("miktarBirim")		=	miktarBirim
+					rs1("miktarBirimID")	=	birimID
 					rs1("girisTarih")		=	date()
 					rs1("stokHareketTuru")	=	"GB"
 					rs1("depoID")			=	girisDepoID
@@ -80,7 +90,12 @@ yetkiKontrol = yetkibul(modulAd)
 		'#### /yarı mamullerin hareketini stokHareket tablosuna üretim depoya G (giriş) olarak kaydet
 
 
-
+		'### Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
+			if isnumeric(ajandaID) then
+				sorgu = "UPDATE portal.ajanda SET tamamlandi = 1 WHERE id = " & ajandaID
+				rs.open sorgu, sbsv5,3,3
+			end if
+		'### /Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
 
 
 %><!--#include virtual="/reg/rs.asp" -->

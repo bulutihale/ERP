@@ -149,19 +149,19 @@ yetkiKontrol = yetkibul(modulAd)
 
 				if stokID <> "" then
 					sorgu = "SELECT "
-					sorgu = sorgu & " stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
+					sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
 					sorgu = sorgu & " FROM stok.stokHareket t1"
 					sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
 					sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & stokID & " AND t2.silindi = 0 AND t2.depoKategori IN ('malKabul','uretim')"
-					sorgu = sorgu & " AND stok.stokSayDepo(" & firmaID & ", t1.stokID, t1.depoID) > 0"
-					sorgu = sorgu & " AND stok.stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
+					sorgu = sorgu & " AND stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t1.depoID) > 0"
+					sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
 					sorgu = sorgu & " AND t1.silindi = 0"
 					sorgu = sorgu & " GROUP BY t1.depoID, t1.stokKodu, t1.stokID, t2.depoAd, t1.lot, t1.miktarBirim, t1.lotSKT"
 					rs.open sorgu, sbsv5, 1, 3
 						Response.Write "<div class=""row mt-1 text-center bold border-bottom mt-3"">"
 							Response.Write "<div class=""col-lg-3 col-sm-6"">Lot</div>"
-							Response.Write "<div class=""col-lg-2 col-sm-6"">Depodaki Miktar</div>"
-							Response.Write "<div class=""col-lg-4 col-sm-6"">Çıkış Depo</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6"">Bulunduğu Depo</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6"">Depodaki Miktar</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-6"">Aktarılacak Miktar</div>"
 							Response.Write "<div class=""col-lg-1""></div>"				
 						Response.Write "</div>"	
@@ -185,11 +185,11 @@ yetkiKontrol = yetkibul(modulAd)
 
 						Response.Write "<div class=""row mt-1 hoverGel rounded"&divClass&""">"
 							Response.Write "<div class=""col-lg-3 col-sm-6"">" & lot & "</div>"
-							Response.Write "<div class=""col-lg-2 col-sm-6 text-right"">" & lotMiktar & " " & miktarBirim & "</div>"
-							Response.Write "<div class=""col-lg-4 col-sm-6"">" & depoAd &"</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6"">" & depoAd &"</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-6 text-right pointer"" onclick=""$('#aktarMiktar_"&siraNo&"').val("&lotMiktar&")"">" & lotMiktar & " " & miktarBirim & "</div>"
 							if int(girisDepoID) <> int(depoID) then
 							Response.Write "<div class=""col-lg-2 col-sm-6"">"
-								call forminput("aktarMiktar","","","","","autocompleteOFF","aktarMiktar_"&siraNo&"","")
+								call forminput("aktarMiktar","","if(($('#girisDepoID').val())==null){swal('','Ürünün aktarılacağı Giriş depo seçimi yapılmamış.')}","","","autocompleteOFF","aktarMiktar_"&siraNo&"","")
 							Response.Write "</div>"
 							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "'," & lotMiktar & ");"">"
 								Response.Write "<i class=""mdi mdi-jira pointer bold""></i>"
@@ -229,7 +229,7 @@ yetkiKontrol = yetkibul(modulAd)
 						// handle Confirm button click
 						// result is an optional parameter, needed for modals with input
 
-					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID,lotMiktar:lotMiktar});
+					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID,lotMiktar:lotMiktar,ajandaID64:ajandaID64});
 					
 					girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64);
 

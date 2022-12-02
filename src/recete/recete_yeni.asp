@@ -81,7 +81,7 @@ call logla(divAd & " Ekranı Girişi")
 			Response.Write "<div class=""col-lg-12"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
 				if gorevID = "" then
-					call formselectv2("stokSec","","","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
+					call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
 				else
 					call formhidden("stokSec",stokID,"","","","","stokSec","")
 					call forminput("stokAd",stokAd,"","","","autocompleteOFF","stokAd","disabled")

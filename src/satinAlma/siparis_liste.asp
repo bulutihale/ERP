@@ -124,7 +124,7 @@ Response.Write "<div class=""card-body"">"
 							end if
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
-							Response.Write "<div class=""btn btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?siparisKalemID="&siparisKalemID&"')"">detay</div>"
+							Response.Write "<div class=""btn btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?stokID="&stokID&"&siparisKalemID="&siparisKalemID&"')"">detay</div>"
 						Response.Write "</td>"
 						Response.Write "<td>" & cariAd & "</td>"
 					Response.Write "</tr>"
