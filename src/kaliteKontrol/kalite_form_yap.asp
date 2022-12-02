@@ -53,7 +53,11 @@ end if
 		defDeger		=	kaliteFormID &"###"& kaliteFormText
 '###### select2 de inital value ve form içeriğini oluşturmak için
 
-	sorgu = "SELECT t1.landscapeDeger, t1.pdfKaynakYol, t1.pdfKaynakDosya, t1.formStyle, t1.formEngStyle, t1.sutunWidthArr FROM kalite.form t1 WHERE t1.formKod = " & formKod
+	sorgu = "SELECT t1.landscapeDeger, t1.pdfKaynakYol, t1.pdfKaynakDosya, t1.formStyle, t1.formEngStyle, t1.sutunWidthArr"
+	sorgu = sorgu & " FROM kalite.form t1 WHERE t1.formKod = " & formKod
+	if kaliteFormID > 0 then
+	 sorgu = sorgu & " AND t1.formID = " & kaliteFormID
+	end if
 	rs.open sorgu, sbsv5, 1, 3
 		landscapeDeger	=	rs("landscapeDeger")
 		pdfKaynakYol	=	rs("pdfKaynakYol")
@@ -151,7 +155,7 @@ end if
 			
 									Response.Write "<td style=""" & sutunStyle & """ colspan=""" & sutunSpan & """ rowspan=""" & satirSpan & """ class=""" & sutunClass & """>"
 										if sutunTur = "text" then
-											Response.Write sutunMetin									
+											Response.Write sutunMetin
 										elseif sutunTur = "drop" then
 											if pdf = "" then
 												call formselectv2("",deger,"","","ajSave border bg-warning","","",sutunDegerSabit,"data-sutunid="&sutunID&"")

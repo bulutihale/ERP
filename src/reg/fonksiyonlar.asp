@@ -3985,6 +3985,7 @@ function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byV
 	' 	ELSE 'Belirsiz'
 	' END
 
+
 	'###### grupID bulma
 		if isnumeric(grupID) = True then
 			personelGrupID = grupID
@@ -4008,8 +4009,22 @@ function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byV
 		personelGrupID = 0
 	end if
 
+
+
 	if fnhata = False then
 		if personelGrupID > 0 then
+			sorgu = "Select personelID from personel.personelGrupIndex where personelGrupID = " & personelGrupID
+			fn2.open sorgu, sbsv5, 1, 3
+			if fn2.recordcount > 0 then
+				for fi = 1 to fn2.recordcount
+					FNkid = fn2("personelID")
+					veri		=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
+					sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
+					fn1.open sorgu, sbsv5, 3, 3
+				fn2.movenext
+				next
+			end if
+			fn2.close
 		else
 			veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
 			sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"

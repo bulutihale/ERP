@@ -1,6 +1,16 @@
 ﻿<!--#include virtual="/reg/rs.asp" --><%
 
-Response.Flush()
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
+	Response.Charset	=	"utf-8"
+	Response.Flush()
+	Session("lngTimer")	=	Timer
+	site				=	Request.ServerVariables("HTTP_HOST")
+	kid					=	kidbul()
+	personelID			=	kid
+	hata				=	""
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
 
 yetkiIT = yetkibul("IT")
 yetkiGorev = yetkibul("gorev")
@@ -8,7 +18,7 @@ yetkiGorev = yetkibul("gorev")
 	Response.Write "<div class=""container-fluid"">"
 	Response.Write "<div class=""row"">"
 
-	call bildirim(kid,"Genel Bildirim","ERP girişi yaptınız",1,0,"","Depo","","","")
+	call bildirim(kid,"Genel Bildirim","Depo Grup Bildirimi" & second(now()),1,0,"Depo","","","","")
 
 if yetkiIT > 0 then
 		Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-3"">"
