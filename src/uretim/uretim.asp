@@ -46,7 +46,7 @@ yetkiKontrol = yetkibul(modulAd)
 			
 			Response.Write "<div class=""card-body"">"
 				Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col-lg-6"">"
+					Response.Write "<div class=""col-lg-6 col-md-12 col-sm-12"">"
 
 						if isTur = "uretimPlan" then	
 							sorgu = "SELECT t4.cariID, t3.stokID, t4.cariAd, t3.stokKodu, t3.stokAd, t1.miktar, t1.mikBirim, t5.siparisKalemID, t5.tamamlandi, t5.baslangicZaman,"
@@ -140,10 +140,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 					Response.Write "</div>"
-					Response.Write "<div class=""col-lg-3"">"
+					Response.Write "<div class=""col-lg-3 col-md-6 col-sm-6"">"
 						Response.Write "<div id=""btnDIV"" class=""row h-100 d-none"">"
 							if not isnull(baslangicZaman) then
-								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-sm-6"">İşlem Başlangıcı:<br> " & baslangicZaman & "</div>"
+								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-md-12 col-sm-12"">İşlem Başlangıcı:<br> " & baslangicZaman & "</div>"
 							elseif tamamlandi = 0 AND isnull(baslangicZaman) then
 								Response.Write "<button"
 								Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-sm-6 bold"""
@@ -157,14 +157,14 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "</div>"
 					Response.Write "</div>"
 
-					Response.Write "<div class=""col-lg-3"">"
+					Response.Write "<div class=""col-lg-3 col-md-6 col-sm-6"">"
 						Response.Write "<div id=""btnDIV2"" class=""row h-100 d-none"">"
 
 							if not isnull(bitisZaman) then
 								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-sm-6"">İşlem Sonu:<br> " & bitisZaman & "</div>"
 							elseif tamamlandi = 0 AND isnull(bitisZaman) AND not isnull(baslangicZaman) then
 								Response.Write "<button"
-								Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-sm-6 bold"""
+								Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-md-12 col-sm-12 bold"""
 								if yetkiKontrol > 6 then
 									Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBitir'," & uretilenMiktar & ")"""
 								else
@@ -253,7 +253,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "</div>"
 						Response.Write "</div>"
 						
-						Response.Write "<div class=""card-body""><div class=""row"">"
+						'Response.Write "<div class=""card-body""><div class=""row"">"
 					sorgu = ""
 					sorgu = sorgu & " SELECT stok.FN_stokSayDepo(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as hazirMiktar,"
 					sorgu = sorgu & " stok.FN_stokSayGB(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as GBmiktar,"
@@ -281,13 +281,13 @@ yetkiKontrol = yetkibul(modulAd)
 					if rs.recordcount = 0 then
 						Response.Write "Reçete Adımları Bulunamadı"
 					else
-						Response.Write "<div class=""table-responsive mt-3"">"
-						Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
+						Response.Write "<div class="" mt-3"">"
+						Response.Write "<table class=""table table-sm table-striped table-bordered table-hover""><thead class=""thead-dark""><tr class=""text-center"">"
 							Response.Write "<th class=""col-1"" scope=""col"">İşlem Tipi</th>"
-							Response.Write "<th class=""col-3"" scope=""col"">Stok Adı</th>"
+							Response.Write "<th class=""col-4"" scope=""col"">Stok Adı</th>"
 							Response.Write "<th class=""col-1"" scope=""col"">Birim Miktar</th>"
 							Response.Write "<th class=""col-1"" scope=""col"">İhtiyaç Miktar</th>"
-							Response.Write "<th class=""col-1"" scope=""col"">Temin Depo Miktar</th>"
+							Response.Write "<th class=""col-2"" scope=""col"">Temin Depo Miktar</th>"
 							Response.Write "<th class=""col-1"" scope=""col"">İşgücü Sayı</th>"
 							Response.Write "<th class=""col-2"" scope=""col"">LOT Seçimi</th>"
 						Response.Write "</tr></thead><tbody>"
@@ -298,7 +298,7 @@ yetkiKontrol = yetkibul(modulAd)
 								GBmiktar	=	rs("GBmiktar")
 								stokAd		=	rs("stokAd")
 								stokKodu	=	rs("stokKodu")
-								hazirMiktar	=	formatnumber(rs("hazirMiktar"),0)
+								hazirMiktar	=	rs("hazirMiktar")
 								
 							if not isnull(stokID) then
 
@@ -352,7 +352,7 @@ yetkiKontrol = yetkibul(modulAd)
 												stokHAreketTipi		=	rs1("stokHAreketTipi")
 												toplamLotMiktar		=	toplamLotMiktar + miktar
 												Response.Write "<div class=""row"">"
-													Response.Write "<div class=""col-1"""
+													Response.Write "<div class=""col-lg-1 col-md-1 col-sm-1"""
 													if stokHareketTipi = "T" then
 														Response.Write " onclick=""lotSil("&stokHareketID&","&secilenDepoID&","&secilenReceteID&")"""
 														cl1 = " text-danger "
@@ -363,8 +363,8 @@ yetkiKontrol = yetkibul(modulAd)
 													Response.Write ">"
 														Response.Write "<i class=""mdi mdi-minus-circle " & cl1 & " pointer""></i>"
 													Response.Write "</div>"
-													Response.Write "<div class=""col-11 text-left"">"
-														Response.Write lot & " - " &formatnumber(miktar,0)&" " & miktarBirim
+													Response.Write "<div class=""col-lg-10 col-md-10 col-sm-10 text-left"">"
+														Response.Write lot & " - " & miktar & " " & miktarBirim
 													Response.Write "</div>"
 												Response.Write "</div>"
 											rs1.movenext
@@ -395,7 +395,7 @@ yetkiKontrol = yetkibul(modulAd)
 							next
 						Response.Write "</tbody>"
 						Response.Write "</table>"
-						Response.Write "</div>"
+						'Response.Write "</div>"
 					end if
 					rs.close
 			Response.Write "</div></div></div>"

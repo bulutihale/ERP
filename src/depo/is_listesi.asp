@@ -71,7 +71,7 @@ call logla("Depo Günlük İş Listesi")
 
 					
 					Response.Write "<div class=""card"">"
-						Response.Write "<div class=""text-left card-body"">"
+						Response.Write "<div class=""card-body"">"
 						
 
 							'#### tarih, kayıtlı resmi tatiller arasında kayıtlı mı?
@@ -88,7 +88,7 @@ call logla("Depo Günlük İş Listesi")
 							
 							
 							'##### gün - ay - yıl göster
-								Response.Write "<div class=""card-title bold text-center border-bottom"">"
+								Response.Write "<div class=""row bold text-center border-bottom"">"
 									if fi = 2 then
 										Response.Write "<div id=""sabitBilgiler"""
 											Response.Write " class=""d-none"""
@@ -97,28 +97,28 @@ call logla("Depo Günlük İş Listesi")
 											Response.Write " data-sipariskalemid=""" & siparisKalemID & """"
 											Response.Write " data-yer=""" & yer & """"
 										Response.Write "></div>"
-										Response.Write "<div class=""row"">"
-											Response.Write "<div class=""col-1"">"
-												Response.Write "<i class=""fa fa-chevron-circle-left fa-2x text-success pointer gunHareket geri mr-2""></i>"
+										'Response.Write "<div class=""row"">"
+											Response.Write "<div class=""col-lg-2 col-md-2 col-sm-2 p-0"">"
+												Response.Write "<i class=""fa fa-chevron-circle-left fa-2x text-success pointer gunHareket geri""></i>"
 											Response.Write "</div>"
 									end if
 										if tarihsql2(yeniTarih) = tarihsql2(date()) AND fi = 2 then
-											tarihClass = " bg-warning col-10 "
+											tarihClass = " bg-warning col-lg-8 col-md-8 col-sm-8 "
 										elseif tarihsql2(yeniTarih) <> tarihsql2(date()) AND fi = 2 then
-											tarihClass = " col-10 "
+											tarihClass = " col-lg-8 col-md-8 col-sm-8 "
 										elseif tarihsql2(yeniTarih) = tarihsql2(date()) AND fi <> 2 then
-											tarihClass = " bg-warning col-12 "
+											tarihClass = " bg-warning col-lg-12 col-md-12 col-sm-12 "
 										else
-											tarihClass = " rounded col-12 "
+											tarihClass = " rounded col-lg-12 col-md-12 col-sm-12 "
 										end if
 											Response.Write "<div class=""text-center rounded" & tarihClass & """>"
 												Response.Write hangiGun & " - " & MonthName(hangiAy) & " -" & hangiYil & " - " & gunAd
 											Response.Write "</div>"
 									if fi = 2 then
-											Response.Write "<div class=""col-1"">"
-												Response.Write "<i class=""fa fa-chevron-circle-right fa-2x text-success pointer gunHareket ileri ml-2""></i>"
+											Response.Write "<div class=""col-lg-2 col-md-2 col-sm-2 p-0"">"
+												Response.Write "<i class=""fa fa-chevron-circle-right fa-2x text-success pointer gunHareket ileri""></i>"
 											Response.Write "</div>"
-										Response.Write "</div>"
+										'Response.Write "</div>"
 									end if
 								Response.Write "</div>"
 								Response.Write "<div class=""h5 bold text-center"">"
@@ -167,7 +167,7 @@ call logla("Depo Günlük İş Listesi")
 											end if
 											if tamamlandi = 1 then
 												deger 	=	0
-												divBG	=	" bg-success "
+												divBG	=	" bg-info "
 												ikon	=	" mdi mdi-calendar-check " 
 											else
 												deger 	=	1
@@ -175,12 +175,20 @@ call logla("Depo Günlük İş Listesi")
 												ikon	=	" mdi mdi-timer-sand "
 											end if
 									Response.Write "<div class=""row border  rounded mt-2"&kutuClass&""">" 'kutu içi satırlar
-										Response.Write "<div class=""col-11 text-left fontkucuk pointer hoverGel"""
+										Response.Write "<div class=""col-lg-10 col-md-10 col-sm-10 text-left fontkucuk pointer hoverGel"""
 										Response.Write " title=""" & icerik & """"
 											if isTur = "uretimPlan" then
-												Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
+												if tamamlandi = 0 then
+													Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
+												else
+													Response.Write " onclick=""swal('','İşlem yapılmış.')"""
+												end if
 											elseif isTur = "kesimPlan" then
-												Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Kesimhane','Kapat','','btn-danger','','','','','')"""
+												if tamamlandi = 0 then
+													Response.Write " onclick=""bootmodal('"&icerik&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Kesimhane','Kapat','','btn-danger','','','','','')"""
+												else
+													Response.Write " onclick=""swal('','İşlem yapılmış.')"""
+												end if
 											elseif isTur = "transfer" then
 												if tamamlandi = 0 then
 													Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
@@ -192,9 +200,9 @@ call logla("Depo Günlük İş Listesi")
 											Response.Write icerik
 										Response.Write "</div>"
 										if yetkiKontrol > 5 then
-										if isTur = "transfer" then
-											Response.Write "<div class=""col-1 text-center pointer hoverGel "&divBG&""" onclick=""hucreKaydet('id',"&ajandaID&",'tamamlandi','portal.ajanda',"&deger&")""><div class=""mt-3 align-middle""><i class="""&ikon&"""></i></div></div>"
-										end if
+										'if isTur = "transfer" then
+											Response.Write "<div class=""col-lg-2 col-md-2 col-sm-2 text-center pointer hoverGel "&divBG&""" onclick=""hucreKaydet('id',"&ajandaID&",'tamamlandi','portal.ajanda',"&deger&")""><div class=""mt-3 align-middle""><i class="""&ikon&"""></i></div></div>"
+										'end if
 										end if
 									Response.Write "</div>"'kutu içi satırlar
 										rs.movenext

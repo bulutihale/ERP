@@ -7,17 +7,16 @@ $(document).ready(function() {
 	$('.summernote').summernote({height: 300});
 	
 
-//popover aktifleştimrk için 
-$(function () {
-	//"html: true" popover içindeki html kodlarının çalışması için 
-	//"trigger:'focus'" popover dışında bir yere tıklandığında kapanması için
-  $('[data-toggle="popover"]').popover({html:true,trigger: 'focus',container: 'body'});
-})
-
-$(document).ajaxComplete(function() {
-	$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',placement:'bottom',container: 'body'});
-});
-//popover aktifleştimrk için 
+	//popover aktifleştimrk için 
+	$(function () {
+		//"html: true" popover içindeki html kodlarının çalışması için 
+		//"trigger:'focus'" popover dışında bir yere tıklandığında kapanması için
+	$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',container: 'body'});
+	})
+	$(document).ajaxComplete(function() {
+		$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',placement:'bottom',container: 'body'});
+	});
+	//popover aktifleştimrk için 
 
 
 	

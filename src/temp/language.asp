@@ -334,6 +334,10 @@ language_tr = language_tr & "||Posta Kodu=Posta Kodu"
 language_tr = language_tr & "||Email Adresi=Email Adresi"
 language_tr = language_tr & "||Posta Adresi=Posta Adresi"
 language_tr = language_tr & "||Şehir Ekle=Şehir Ekle"
+language_tr = language_tr & "||Şehir Adını Yazın=Şehir Adını Yazın"
+language_tr = language_tr & "||Teklif Ver=Teklif Ver"
+language_tr = language_tr & "||Cari Ad veya Kod=Cari Ad veya Kod"
+language_tr = language_tr & "||CARİ ARA=CARİ ARA"
 if klang = "" then
 klang = "tr"
 end if

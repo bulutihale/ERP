@@ -3971,6 +3971,7 @@ End Function
 function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal grupID, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
 	fnhata = False
     ' call bildirim(gorevID,"",yetkiAd & " yetki değişikliği",1,kid,"","","","","")
+	' call bildirim(kid,"Genel Bildirim","Depo Grup Bildirimi" & second(now()),1,0,"Depo","","","","")
 	' CASE portal.notification.onem
 	' 	WHEN 1 THEN 'Önemsiz'
 	' 	WHEN 2 THEN 'Önemsiz'
@@ -4118,6 +4119,55 @@ function pageFooter()
 	'##################################################
 	'##################################################
 end function
+
+
+function lotOlusturFunc(depoID)
+
+	if depoID <> "" then
+		if isnumeric(depoID) = True then
+			sorgu = "Select depoLotTemplate from stok.depo where id = " & depoID
+			rs.open sorgu,sbsv5,1,3
+			if rs.recordcount > 0 then
+				depoLotTemplate = rs("depoLotTemplate") & ""
+			end if
+			rs.close
+			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'T' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by stokHareketID desc"
+			rs.open sorgu,sbsv5,1,3
+			if rs.recordcount > 0 then
+				sonlot = rs("lot") & ""
+			else
+				sonlot = 0
+			end if
+			rs.close
+		end if
+	end if
+
+	if depoLotTemplate <> "" then
+		sonlot1 = instr(depoLotTemplate,"[") +1
+		sonlot2 = right(sonlot,(len(depoLotTemplate)-sonlot1))
+		sonlot2 = int(sonlot2)
+		yenilot = sonlot2+1
+		yenilotformat = depoLotTemplate
+		yenilotformat = replace(yenilotformat,"YYYY",yil)
+		yenilotformat = replace(yenilotformat,"YY",right(yil,2))
+		yenilotformat = replace(yenilotformat,"MM",right("0" & ay,2))
+		yenilotformat = replace(yenilotformat,"DD",right("0" & gun,2))
+		yenilotformat = Replace(yenilotformat,"[XXXX]",right("0000" & yenilot,4))
+		yenilotformat = Replace(yenilotformat,"[XXX]",right("000" & yenilot,3))
+		yenilotformat = Replace(yenilotformat,"[XX]",right("00" & yenilot,2))
+		yenilotformat = Replace(yenilotformat,"[X]",right("0" & yenilot,1))
+	else
+		yenilotformat	=	0
+	end if
+
+		lotOlusturFunc	=	yenilotformat
+end function
+
+
+
+
+
+
 
 
 

@@ -86,7 +86,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("miktarBirim")		=	"birimBUL"
 				rs("girisTarih")		=	now()
 				rs("stokHareketTuru")	=	"G"
-				rs("fisNo")			=	""
+				rs("fisNo")				=	""
 				rs("aciklama")			=	"Üretim"
 				rs("belgeNo")			=	null
 				rs("depoID")			=	surecSonuDepoID
@@ -125,12 +125,29 @@ yetkiKontrol = yetkibul(modulAd)
 				lotSKT			=	rs("lotSKT")
 				ajandaID		=	rs("ajandaID")
 				
-					sorgu = "INSERT INTO stok.stokHareket"
-					sorgu = sorgu & " (kid, firmaID, stokKodu, miktar, miktarBirim, miktarBirimID, girisTarih, stokHareketTuru, depoID, aciklama, stokID, siparisKalemID, lot, stokHareketTipi, prodHareketID, lotSKT, ajandaID)"
-					sorgu = sorgu & " VALUES("
-					sorgu = sorgu & kid & "," & firmaID & ",'" & stokKodu & "'," & miktar & ",'" & miktarBirim & "','" & miktarBirimID & "', getdate(), 'C'," & depoID & ", 'Üretim'," & stokID & "," & siparisKalemID & ",'" & lot & "','" & stokHareketTipi& "'," & yeniGirisID & ",'" & tarihsql(lotSKT) & "'," & ajandaID
-					sorgu = sorgu & ")"
-					rs1.open sorgu,sbsv5,3,3
+
+				sorgu = "SELECT * FROM stok.stokHareket"
+				rs1.open sorgu,sbsv5,1,3
+					rs1.addnew
+					rs1("kid")				=	kid
+					rs1("firmaID")			=	firmaID
+					rs1("stokKodu")			=	stokKodu
+					rs1("miktar")			=	miktar
+					rs1("miktarBirim")		=	miktarBirim
+					rs1("miktarBirimID")	=	miktarBirimID
+					rs1("girisTarih")		=	now()
+					rs1("stokHareketTuru")	=	"C"
+					rs1("depoID")			=	depoID
+					rs1("aciklama")			=	"Üretim"
+					rs1("stokID")			=	stokID
+					rs1("siparisKalemID")	=	siparisKalemID
+					rs1("lot")				=	lot
+					rs1("stokHareketTipi")	=	stokHareketTipi
+					rs1("prodHareketID")	=	yeniGirisID
+					rs1("lotSKT")			=	tarihsql(lotSKT)
+					rs1("ajandaID")			=	ajandaID
+					rs1.update
+					rs1.close
 				rs.movenext
 				next
 			rs.close
