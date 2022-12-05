@@ -94,6 +94,10 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("cevrim")			=	0
 				' rs("cariID")			=	cariID
 				rs("siparisKalemID")	=	siparisKalemID
+				turetilmisLot			=	lotOlusturFunc(surecSonuDepoID)
+				if turetilmisLot <> 0 then
+					lot	=	turetilmisLot
+				end if
 				rs("lot")				=	lot
 				rs("stokHareketTipi")	=	"T"
 				rs("refHareketID")		=	refHareketID

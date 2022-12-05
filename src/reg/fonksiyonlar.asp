@@ -4126,19 +4126,19 @@ function lotOlusturFunc(depoID)
 	if depoID <> "" then
 		if isnumeric(depoID) = True then
 			sorgu = "Select depoLotTemplate from stok.depo where id = " & depoID
-			rs.open sorgu,sbsv5,1,3
-			if rs.recordcount > 0 then
-				depoLotTemplate = rs("depoLotTemplate") & ""
+			fn1.open sorgu,sbsv5,1,3
+			if fn1.recordcount > 0 then
+				depoLotTemplate = fn1("depoLotTemplate") & ""
 			end if
-			rs.close
+			fn1.close
 			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'T' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by stokHareketID desc"
-			rs.open sorgu,sbsv5,1,3
-			if rs.recordcount > 0 then
-				sonlot = rs("lot") & ""
+			fn1.open sorgu,sbsv5,1,3
+			if fn1.recordcount > 0 then
+				sonlot = fn1("lot") & ""
 			else
 				sonlot = 0
 			end if
-			rs.close
+			fn1.close
 		end if
 	end if
 
