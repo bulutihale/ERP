@@ -4131,7 +4131,7 @@ function lotOlusturFunc(depoID)
 				depoLotTemplate = fn1("depoLotTemplate") & ""
 			end if
 			fn1.close
-			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'T' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by stokHareketID desc"
+			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'U' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by stokHareketID desc"
 			fn1.open sorgu,sbsv5,1,3
 			if fn1.recordcount > 0 then
 				sonlot = fn1("lot") & ""

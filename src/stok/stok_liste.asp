@@ -20,7 +20,7 @@
 '###### ANA TANIMLAMALAR
 
 
-call logla("Stok Listesi Ekranı")
+call logla("Stok Listesi Ekranı") 
 
 yetkiKontrol = yetkibul(modulAd)
 

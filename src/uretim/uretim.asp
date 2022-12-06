@@ -257,7 +257,7 @@ yetkiKontrol = yetkibul(modulAd)
 					sorgu = ""
 					sorgu = sorgu & " SELECT stok.FN_stokSayDepo(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as hazirMiktar,"
 					sorgu = sorgu & " stok.FN_stokSayGB(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as GBmiktar,"
-					sorgu = sorgu & " t1.receteAdimID,"
+					sorgu = sorgu & " t1.receteAdimID, t1.islemAciklama,"
 					sorgu = sorgu & " t2.ad,"
 					sorgu = sorgu & " t1.stokID,"
 					sorgu = sorgu & " t3.stokAd,"
@@ -292,14 +292,14 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<th class=""col-2"" scope=""col"">LOT Seçimi</th>"
 						Response.Write "</tr></thead><tbody>"
 							for i = 1 to rs.recordcount
-								stokID		=	rs("stokID") 
-								miktar		=	rs("miktar")
-								miktarBirim	=	rs("miktarBirim")
-								GBmiktar	=	rs("GBmiktar")
-								stokAd		=	rs("stokAd")
-								stokKodu	=	rs("stokKodu")
-								hazirMiktar	=	rs("hazirMiktar")
-								
+								stokID			=	rs("stokID") 
+								miktar			=	rs("miktar")
+								miktarBirim		=	rs("miktarBirim")
+								GBmiktar		=	rs("GBmiktar")
+								stokAd			=	rs("stokAd")
+								stokKodu		=	rs("stokKodu")
+								hazirMiktar		=	rs("hazirMiktar")
+								islemAciklama	=	rs("islemAciklama")
 							if not isnull(stokID) then
 
 								ihtiyacMiktar	=	miktar * sipMiktar * receteMiktar
@@ -323,7 +323,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 								Response.Write "<tr class=""" & trClass & """>"
 									Response.Write "<td class=""text-left"">" & rs("ad") & "</td>"
-									Response.Write "<td class=""text-left"">" & stokKodu & " - " & stokAd & "</td>"
+									Response.Write "<td class=""text-left"">"
+										Response.Write "<div>" & stokKodu & " - " & stokAd & "</div>"
+										Response.Write "<div class=""fonkucuk2 font-italic text-info pl-3"">" & islemAciklama & "</div>"
+									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
 									Response.Write "<td class=""text-right"">" & ihtiyacMiktar & " " & miktarBirim & "</td>"
 									Response.Write "<td class=""text-right"">" & hazirMiktarYaz & GBmiktarYaz & "</td>"
@@ -366,7 +369,7 @@ yetkiKontrol = yetkibul(modulAd)
 													Response.Write "<div class=""col-lg-10 col-md-10 col-sm-10 text-left"">"
 														Response.Write lot & " - " & miktar & " " & miktarBirim
 													Response.Write "</div>"
-												Response.Write "</div>"
+												Response.Write "</div>" 
 											rs1.movenext
 											next
 										end if

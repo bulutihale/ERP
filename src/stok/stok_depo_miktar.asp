@@ -50,6 +50,10 @@ yetkiKontrol = yetkibul(modulAd)
 			Response.Write "<div class=""col h3 text-info text-right bold"">" & stokAd & "</div>"
 		Response.Write "</div>"
 
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-12 text-danger fontkucuk2"">**Depo giriş onayı bekleyen ürünler GÖSTERİLMEZ.</div>"
+		Response.Write "</div>"
+
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 		Response.Write "<th scope=""col"">LOT</th>"

@@ -120,7 +120,7 @@ Response.Write "<form action=""/teklif/teklif_kaydet.asp"" method=""post"" class
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Türü : </div>"
-                                degerler = "--Teklif Türü--=|Kdv Dahil Toplamlı Teklif=1|Kdv Hariç Toplamlı Teklif=2|Genel Teklif=4|Mail Order=5|Taksitli Mail Order=6"
+                                degerler = "--Teklif Türü--=|Kdv Dahil Toplamlı Teklif=1|Kdv Hariç Toplamlı Teklif=2|Genel Teklif=4|Mail Order=5|Taksitli Mail Order=6|İhracat Teklifi=7|Proforma Fatura=8"
                                 call formselectv2("teklifTuru",teklifTuru,"","","","","teklifTuru",degerler,"")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"

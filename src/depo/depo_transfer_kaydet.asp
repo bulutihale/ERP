@@ -91,7 +91,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 		'### Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
-			if isnumeric(ajandaID) then
+		
+			if not isnull(ajandaID) then
 				sorgu = "UPDATE portal.ajanda SET tamamlandi = 1 WHERE id = " & ajandaID
 				rs.open sorgu, sbsv5,3,3
 			end if

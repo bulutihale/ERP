@@ -27,10 +27,12 @@ yetkiKontrol = yetkibul(modulAd)
 '####### SONUÇ TABLOSU
 	if hata = "" and yetkiKontrol > 0 then
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID"
+			sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo,"
+			sorgu = sorgu & " t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID, t5.depoAd as cikisDepo"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " INNER JOIN stok.depo t4 ON t1.depoID = t4.id"
+			sorgu = sorgu & " LEFT JOIN stok.depo t5 ON t5.id = (SELECT depoID FROM stok.stokHareket WHERE stokHareketID = t1.refHareketID)"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.silindi = 0 AND t1.stokHareketTuru = 'GB'"
 			sorgu = sorgu & " ORDER BY t1.girisTarih DESC"
 			rs.open sorgu, sbsv5, 1, 3
@@ -40,6 +42,17 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 		Response.Write "<div class=""container-fluid"">"
+
+			Response.Write "<div class=""card mb-3"">"
+				Response.Write "<div class=""card-body"">"
+					Response.Write "<div class=""row"">"
+						Response.Write "<div class=""col-12 bold"">"
+							Response.Write "Depo Girişi Bekleyen Ürünler"
+						Response.Write "</div>"
+					Response.Write "</div>"
+				Response.Write "</div>"
+			Response.Write "</div>"
+
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                 Response.Write "<div class=""card"">"
@@ -48,7 +61,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark text-center""><tr>"
-		Response.Write "<th scope=""col"">Depo Ad</th>"
+		Response.Write "<th scope=""col"">Çıkış Depo</th>"
+		Response.Write "<th scope=""col"">Giriş Depo</th>"
 		Response.Write "<th scope=""col"">Giriş Tarih</th>"
 		Response.Write "<th scope=""col"">Stok Kodu</th>"
 		Response.Write "<th scope=""col"">Ürün Adı</th>"
@@ -70,6 +84,7 @@ yetkiKontrol = yetkibul(modulAd)
 					stokHareketID64		=	base64_encode_tr(stokHareketID64)
 					girisTarih			=	rs("girisTarih")
 					depoAd				=	rs("depoAd")
+					cikisDepo			=	rs("cikisDepo")
 					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
 					miktar				=	rs("miktar")
@@ -83,7 +98,8 @@ yetkiKontrol = yetkibul(modulAd)
 					cariID64		 	=	cariID
 					cariID64			=	base64_encode_tr(cariID64)
 					Response.Write "<tr>"
-						Response.Write "<td>" & depoAd & "</td>"
+						Response.Write "<td class=""text-danger bold"">" & cikisDepo & "</td>"
+						Response.Write "<td class=""text-success bold"">" & depoAd & "</td>"
 						Response.Write "<td>" & girisTarih & "</td>"
 						Response.Write "<td>" & stokKodu & "</td>"
 						Response.Write "<td>" & stokAd & "</td>"

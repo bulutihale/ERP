@@ -31,9 +31,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 	if islemDurum = "islemBasla" then
 
-		sorgu = "SELECT icerik FROM portal.ajanda WHERE id = " & ajandaID
+		sorgu = "SELECT icerik, isTur FROM portal.ajanda WHERE id = " & ajandaID
 		rs.open sorgu,sbsv5,1,3
 			call logla("Üretim başlat: " & rs("icerik"))
+			isTur	=	rs("isTur")
 		rs.close
 
 			sorgu = "UPDATE stok.stokHareket SET stokHareketTipi = 'U' WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & " AND stokHareketTuru = 'G' AND silindi = 0"
@@ -41,6 +42,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 			sorgu = "UPDATE portal.ajanda SET baslangicZaman = getdate() WHERE id = " & ajandaID & " AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
+
 
 	elseif islemDurum = "islemBitir" then
 '########## stokHareket tablosundaki üretim veya kesim sürecindeki malzemeleri stoktan düş, üretilen yarı mamul veya mamulun stok girişini yap
@@ -94,12 +96,12 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("cevrim")			=	0
 				' rs("cariID")			=	cariID
 				rs("siparisKalemID")	=	siparisKalemID
-				turetilmisLot			=	lotOlusturFunc(surecSonuDepoID)
-				if turetilmisLot <> 0 then
-					lot	=	turetilmisLot
-				end if
+				'turetilmisLot			=	lotOlusturFunc(surecSonuDepoID)
+				'if turetilmisLot <> "" then
+					'lot	=	turetilmisLot
+				'end if
 				rs("lot")				=	lot
-				rs("stokHareketTipi")	=	"T"
+				rs("stokHareketTipi")	=	"U"
 				rs("refHareketID")		=	refHareketID
 				rs("lotSKT")			=	lotSKT
 				rs("ajandaID")			=	ajandaID
