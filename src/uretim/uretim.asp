@@ -468,7 +468,7 @@ yetkiKontrol = yetkibul(modulAd)
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
-				$('#ajax').load('/uretim/uretimBaslat.asp', {ajandaID:ajandaID, siparisKalemID:siparisKalemID, islemDurum:islemDurum, uretilenMiktar:uretilenMiktar});
+				$('#ajax').load('/uretim/uretimBaslat.asp', {ajandaID:ajandaID, siparisKalemID:siparisKalemID, islemDurum:islemDurum, uretilenMiktar:uretilenMiktar,teminDepoID:teminDepoID});
 				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *');
 				$('#btnDIV').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV > *');
 				$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');

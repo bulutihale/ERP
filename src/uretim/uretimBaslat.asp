@@ -9,6 +9,7 @@
 	ajandaID			=	Request.Form("ajandaID")
 	islemDurum			=	Request.Form("islemDurum")
 	uretilenMiktar		=	Request.Form("uretilenMiktar")
+	teminDepoID			=	Request.Form("teminDepoID")
 
 	modulAd =   "Üretim"
 '###### ANA TANIMLAMALAR
@@ -37,18 +38,27 @@ yetkiKontrol = yetkibul(modulAd)
 			isTur	=	rs("isTur")
 		rs.close
 
+
 			sorgu = "UPDATE stok.stokHareket SET stokHareketTipi = 'U' WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & " AND stokHareketTuru = 'G' AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
 
 			sorgu = "UPDATE portal.ajanda SET baslangicZaman = getdate() WHERE id = " & ajandaID & " AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
 
+			If istur = "uretimPlan" Then
+				turetilmisLot			=	lotOlusturFunc(teminDepoID)
+				sorgu = "UPDATE portal.ajanda SET uretimLot = '" & turetilmisLot & "' WHERE id = " & ajandaID & " AND silindi = 0"
+				rs.open sorgu,sbsv5,3,3
+			Else
+				' false
+			End if
+
 
 	elseif islemDurum = "islemBitir" then
 '########## stokHareket tablosundaki üretim veya kesim sürecindeki malzemeleri stoktan düş, üretilen yarı mamul veya mamulun stok girişini yap
 
 	'##### üretilen ürüne ait bilgileri al
-			sorgu = "SELECT t1.stokID, t1.isTur, t2.stokKodu, stok.FN_anaBirimIDBul(t2.stokID) as anaBirimID, stok.FN_anaBirimADBul(t2.stokID, 'kad') as anaBirimAD"
+			sorgu = "SELECT t1.stokID, t1.isTur, t2.stokKodu, stok.FN_anaBirimIDBul(t2.stokID) as anaBirimID, stok.FN_anaBirimADBul(t2.stokID, 'kad') as anaBirimAD, t1.uretimLot"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
@@ -58,6 +68,7 @@ yetkiKontrol = yetkibul(modulAd)
 				isTur				=	rs("isTur")
 				anaBirimID			=	rs("anaBirimID")
 				anaBirimAD			=	rs("anaBirimAD")
+				uretimLot			=	rs("uretimLot")
 			rs.close
 	'##### üretilen ürüne ait bilgileri al
 
@@ -96,10 +107,9 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("cevrim")			=	0
 				' rs("cariID")			=	cariID
 				rs("siparisKalemID")	=	siparisKalemID
-				'turetilmisLot			=	lotOlusturFunc(surecSonuDepoID)
-				'if turetilmisLot <> "" then
-					'lot	=	turetilmisLot
-				'end if
+				if uretimLot <> "" then
+					lot	=	uretimLot
+				end if
 				rs("lot")				=	lot
 				rs("stokHareketTipi")	=	"U"
 				rs("refHareketID")		=	refHareketID
