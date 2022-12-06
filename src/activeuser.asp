@@ -27,7 +27,7 @@
 '#### BİLDİRİM YÖNETİMİ
 '#### BİLDİRİM YÖNETİMİ
 if kid <> "" then
-    sorgu = "Select top 10 icerik,notificationID from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid = " & kid & " order by notificationID DESC"
+    sorgu = "Select top 300 icerik,notificationID from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid = " & kid & " order by notificationID DESC"
     rs.Open sorgu, sbsv5, 1, 3
         bildirimsayi = rs.recordcount
         'sayıyı güncelle
@@ -58,6 +58,9 @@ if kid <> "" then
                 komut = komut & "</h6></div></a>').insertBefore('.bildirimitemTum')"
                 komut = komut & "}"
                 call jsrun(komut)
+                if i = 10 then
+                    exit for
+                end if
             rs.movenext
             next
             '## eksik bildirim varsa ekle
