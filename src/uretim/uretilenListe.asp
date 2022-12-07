@@ -11,7 +11,7 @@
 	t3				=	Request.Form("t3")
 	t4				=	Request.Form("t4")
 	siparisNo		=	Request.Form("siparisNo")
-    modulAd 		=   "satis"
+    modulAd 		=   "Üretim"
 	
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 60 end if
@@ -40,12 +40,13 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "<th class=""col-2"" scope=""col"">Üretim Başlangıcı</th>"
 		Response.Write "<th class=""col-2"" scope=""col"">Üretim Bitişi</th>"
 		Response.Write "<th class=""col-4"" scope=""col"">Ürün Adı</th>"
+		Response.Write "<th></th>"
 		Response.Write "</tr></thead><tbody>"
 		
 		
             sorgu = "SELECT"
-			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd "
-			sorgu = sorgu & " "
+			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "
+			sorgu = sorgu & " t1.id as ajandaID"
 			sorgu = sorgu & " "
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
@@ -76,7 +77,9 @@ Response.Write "<div class=""card-body"">"
 					planTarih			=	tarihtr(rs("planTarih"))
 					baslangicZaman		=	rs("baslangicZaman")
 					bitisZaman			=	rs("bitisZaman")
-
+					ajandaID			=	rs("ajandaID")
+					ajandaID64			=	ajandaID
+					ajandaID64			=	base64_encode_tr(ajandaID64)
 					
 					Response.Write "<tr>"
 						Response.Write "<td class=""text-center"">" & planTarih & "</td>"
@@ -84,6 +87,7 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td class=""text-center"">" & bitisZaman & "</td>"
 						Response.Write "<td>" & stokKodu & " - " & stokAd & "</td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
+						Response.Write "<td><span onclick=""window.location.href = '/uretim/uretim/uretimPlan++"&ajandaID64&"'"" class=""badge badge-pill badge-success pointer mr-2""><i class=""mdi mdi-arrow-right-bold""></i></span></td>"
 					Response.Write "</tr>"
 					Response.Flush()
 				rs.movenext

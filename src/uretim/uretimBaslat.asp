@@ -81,13 +81,17 @@ yetkiKontrol = yetkibul(modulAd)
 	sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND t1.silindi = 0"
 	sorgu = sorgu & " ORDER BY t1.stokHareketID DESC"			
 	rs.open sorgu,sbsv5,1,3
-		lot				=	rs("lot")
-		lotSKT			=	rs("lotSKT")
-		refHareketID	=	rs("stokHareketID")
-		surecSonuDepoID	=	rs("surecSonuDepoID")
-		stokID			=	rs("stokID")
+	a=0
+		if rs.recordcount > 0 then
+			a				=	1
+			lot				=	rs("lot")
+			lotSKT			=	rs("lotSKT")
+			refHareketID	=	rs("stokHareketID")
+			surecSonuDepoID	=	rs("surecSonuDepoID")
+			stokID			=	rs("stokID")
+		end if
 	rs.close
-
+		if a = 1 then
 			sorgu = "SELECT * FROM stok.stokHareket"
 			rs.open sorgu,sbsv5,1,3
 			rs.addnew
@@ -182,7 +186,7 @@ yetkiKontrol = yetkibul(modulAd)
 			rs.open sorgu,sbsv5,1,3
 				call logla("Üretim bitti: " & rs("icerik"))
 			rs.close
-
+		end if
 		end if
 	else
 		call yetkisizGiris("","","")

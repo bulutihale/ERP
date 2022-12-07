@@ -75,12 +75,12 @@ yetkiKontrol = yetkibul(modulAd)
 							urtBtnYaz		=	"ÜRETİME BAŞLA"
 							urtBtnClass		=	" bg-success "
 							Response.Write "<div class=""row"">"
-								Response.Write "<div class=""col-lg-2 col-sm-3 bold"">Sipariş Veren</div>"
-								Response.Write "<div class=""col-lg-10 col-sm-9"">" & cariAd & "</div>"
+								Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Sipariş Veren</div>"
+								Response.Write "<div class=""col-lg-9 col-sm-9"">" & cariAd & "</div>"
 							Response.Write "</div>"
 							Response.Write "<div class=""row mt-2"">"
-								Response.Write "<div class=""col-lg-2 col-sm-3 bold"">Miktar</div>"
-								Response.Write "<div class=""col-lg-10 col-sm-9"">" & sipMiktar & " " & mikBirim & "</div>"
+								Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Miktar</div>"
+								Response.Write "<div class=""col-lg-9 col-sm-9"">" & sipMiktar & " " & mikBirim & "</div>"
 							Response.Write "</div>"
 
 						elseif isTur = "kesimPlan" then
@@ -117,30 +117,41 @@ yetkiKontrol = yetkibul(modulAd)
 						end if
 
 						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-lg-2 col-sm-3 bold"">Stok Kodu</div>"
-							Response.Write "<div class=""col-lg-10 col-sm-9"">" & stokKodu & "</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Stok Kodu</div>"
+							Response.Write "<div class=""col-lg-9 col-sm-9"">" & stokKodu & "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-lg-2 col-sm-3 bold"">Ürün</div>"
-							Response.Write "<div class=""col-lg-10 col-sm-9"">" & stokAd & "</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Ürün</div>"
+							Response.Write "<div class=""col-lg-9 col-sm-9"">" & stokAd & "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-lg-2 col-sm-3 bold"">Temin Depo</div>"
-							Response.Write "<div class=""col-10"">"
+							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Temin Depo</div>"
+							Response.Write "<div class=""col-9"">"
 								call formselectv2("teminDepoID","","receteSec();","","formSelect2 depoSec border","","teminDepoID","","data-holderyazi=""Yarı mamul temini yapılacak depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('uretim')""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-lg-2 col-sm-3 bold"">Teçhizat</div>"
-							Response.Write "<div class=""col-10"">"
+							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Teçhizat</div>"
+							Response.Write "<div class=""col-9"">"
 								call formselectv2("techizatSec","","","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('uretim')""")
 							Response.Write "</div>"
 						Response.Write "</div>"
-
-
-
 					Response.Write "</div>"
-					Response.Write "<div class=""col-lg-3 col-md-6 col-sm-6"">"
+
+			'#### üretim son ürün etiketi vs.
+			'#### üretim son ürün etiketi vs.
+					Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4 border"">"
+						Response.Write "<div class=""row"">"
+							'Response.Write "<div class=""col-12 fontkucuk2""><span class=""pointer"" onclick=""etiketGoster()"">Son Ürün Etiketi</span></div>"
+							Response.Write "<a target=""_blank"" href=""/uretim/etiketSonUrun.asp?receteID=43"">Son Ürün Etiketi</a>"
+						Response.Write "</div>"
+					Response.Write "</div>"
+			'#### /üretim son ürün etiketi vs.
+			'#### /üretim son ürün etiketi vs.
+
+			'#### üretim veya kesim BAŞLAT BUTONU
+			'#### üretim veya kesim BAŞLAT BUTONU
+					Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4"">"
 						Response.Write "<div id=""btnDIV"" class=""row h-100 d-none"">"
 							if not isnull(baslangicZaman) then
 								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-md-12 col-sm-12"">İşlem Başlangıcı:<br> " & baslangicZaman & "</div>"
@@ -156,12 +167,16 @@ yetkiKontrol = yetkibul(modulAd)
 							end if
 						Response.Write "</div>"
 					Response.Write "</div>"
+			'#### /üretim veya kesim BAŞLAT BUTONU
+			'#### /üretim veya kesim BAŞLAT BUTONU
 
-					Response.Write "<div class=""col-lg-3 col-md-6 col-sm-6"">"
+			'#### üretim veya kesim BİTİR BUTONU
+			'#### üretim veya kesim BİTİR BUTONU
+					Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4"">"
 						Response.Write "<div id=""btnDIV2"" class=""row h-100 d-none"">"
 
 							if not isnull(bitisZaman) then
-								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-sm-6"">İşlem Sonu:<br> " & bitisZaman & "</div>"
+								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-sm-12"">İşlem Sonu:<br> " & bitisZaman & "</div>"
 							elseif tamamlandi = 0 AND isnull(bitisZaman) AND not isnull(baslangicZaman) then
 								Response.Write "<button"
 								Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-md-12 col-sm-12 bold"""
@@ -174,6 +189,8 @@ yetkiKontrol = yetkibul(modulAd)
 							end if
 						Response.Write "</div>"
 					Response.Write "</div>"
+			'#### /üretim veya kesim BİTİR BUTONU
+			'#### /üretim veya kesim BİTİR BUTONU
 				Response.Write "</div>"
 			Response.Write "</div>"
 
@@ -506,5 +523,17 @@ yetkiKontrol = yetkibul(modulAd)
 			} //cancel buton yapılanlar		
 		);//swal sonu
 		}
+
+	function etiketGoster() {
+
+		var receteID = $('#receteID').val();
+		
+		if(receteID == 0){swal('','Reçete seçimi yapılmamış.'); return false};
+
+		modalajax('/uretim/etiketSonUrun.asp?receteID='+receteID);
+
+	}
+
+
 
 </script>
