@@ -36,7 +36,7 @@ yetkiKontrol = yetkibul(modulAd)
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 0 then
 
-
+Response.Write isTur&"jıohjıohıuohuıo"
 
 		Response.Write "<div class=""card"">"
 			Response.Write "<div class=""card-header text-white bg-info"">"
@@ -140,10 +140,19 @@ yetkiKontrol = yetkibul(modulAd)
 
 			'#### üretim son ürün etiketi vs.
 			'#### üretim son ürün etiketi vs.
-					Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4 border"">"
+					Response.Write "<div id=""linklerDIV"" class=""col-lg-2 col-md-4 col-sm-4 border"">"
 						Response.Write "<div class=""row"">"
-							'Response.Write "<div class=""col-12 fontkucuk2""><span class=""pointer"" onclick=""etiketGoster()"">Son Ürün Etiketi</span></div>"
-							Response.Write "<a target=""_blank"" href=""/uretim/etiketSonUrun.asp?receteID=43"">Son Ürün Etiketi</a>"
+							Response.Write "<div class=""p-1 col-12"">"
+								if secilenReceteID > 0 then
+									Response.Write "<a"
+									if not isnull(baslangicZaman) then
+										Response.Write " target=""_blank"" href=""/uretim/etiketSonUrun.asp?receteID=" & secilenReceteID & """"
+									else
+										Response.Write " onclick=""swal('','Üretim başlamadan ürüne ait LOT belirlenmez ve son ürün etiketi oluşturulamaz.','error')"""
+									end if
+								Response.Write "href=""#""><i class=""mdi mdi-label-outline""></i>Son Ürün Etiketi</a>"
+								end if
+							Response.Write "</div>"
 						Response.Write "</div>"
 					Response.Write "</div>"
 			'#### /üretim son ürün etiketi vs.
@@ -450,6 +459,7 @@ yetkiKontrol = yetkibul(modulAd)
 			$('#btnDIV, #btnDIV2').removeClass('d-none');
 			$('#receteBtn').removeClass('d-none');
 			$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *')	
+			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #linklerDIV > *')	
 	}
 
 	function uretimBasla(siparisKalemID, ajandaID, islemDurum, uretilenMiktar){

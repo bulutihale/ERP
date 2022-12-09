@@ -61,7 +61,7 @@ Response.Write "<div class=""card-body"">"
 			if t4 <> "" then
 				sorgu = sorgu & " AND t1.baslangicZaman <= '" & tarihsql(t4) &"'"	
 			end if
-			sorgu = sorgu & " AND t1.bitisZaman >= '" & tarihsql(t1) &"' AND t1.bitisZaman <= '" & tarihsql(t2) &"'"
+			sorgu = sorgu & " AND (t1.bitisZaman is null OR (t1.bitisZaman >= '" & tarihsql(t1) &"' AND t1.bitisZaman <= '" & tarihsql(t2) &"'))"
 			sorgu = sorgu & " AND t1.silindi = 0"
 			sorgu = sorgu & " ORDER BY t1.bitisZaman DESC"
 			rs.open sorgu, sbsv5, 1, 3

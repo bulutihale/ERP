@@ -4,10 +4,10 @@ Response.Charset="utf-8"
 Response.codepage=65001
 
 Response.Write "<style>"
-	Response.Write "page[size=""A6""] {"
-	Response.Write "width: 10.5cm;"
-	Response.Write "height: 14.8cm;"
-	Response.Write "}"
+	'Response.Write "page[size=""A6""] {"
+	'Response.Write "width: 10.5cm;"
+	'Response.Write "height: 14.8cm;"
+	'Response.Write "}"
 
 	Response.Write "page {background: white;"
 		Response.Write "display: block; margin: auto auto; margin-bottom: 0.5cm; box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);padding:0 1cm 0 0.5cm;"
@@ -15,8 +15,8 @@ Response.Write "<style>"
 		Response.Write "width: 10.5cm;"
 		Response.Write "background-color:#FFFFFF;}"
 
-Response.Write "@media print {"
-	Response.Write "body * {"
+	Response.Write "@media print {"
+		Response.Write "body * {"
     	Response.Write "visibility: hidden;"
 	Response.Write "}"
 
@@ -27,19 +27,18 @@ Response.Write "@media print {"
 
   Response.Write "#printSection {"
     Response.Write "position: absolute;"
-	Response.Write "top: 3cm;"
-	Response.Write "bottom: 3cm;"
+	'Response.Write "top: 3cm;"
+	'Response.Write "bottom: 3cm;"
     Response.Write "left: 0;"
     Response.Write "top: 0;"
     Response.Write "width: 100%;"
     Response.Write "height: 100%;"
-    Response.Write "background: yellow;"
   Response.Write "}"
 
   	Response.Write "@page {"
-		Response.Write "size: 5.5in 8.5in;"
-		Response.Write "margin-top: 20mm;"
-		Response.Write "font-size:2em;"
+		'Response.Write "size: 5.5in 8.5in;"
+		Response.Write "margin-top: 27mm;"
+		'Response.Write "font-size:2em;"
 	Response.Write "}"
 
 	Response.Write ".style1 {"
@@ -52,7 +51,14 @@ Response.Write "@media print {"
 	Response.Write "}"
 
 	Response.Write ".style3 {"
-		Response.Write "margin-top:7cm;"
+		'Response.Write "margin-top:7cm;"
+
+	Response.Write "position: absolute;"
+    Response.Write "left: 0;"
+    Response.Write "bottom: 0;"
+    'Response.Write "height: 50px;"
+    'Response.Write "width: 100%;"
+    'Response.Write "overflow:hidden;"
 	Response.Write "}"
 	
 Response.Write "}"
@@ -90,7 +96,7 @@ Response.Write "<page size=""A6"">"
 	rs.open sorgu,sbsv5,1,3
 		if rs.recordcount > 0 then
 		Response.Write "<div class=""page"" id=""printSection"">"
-			Response.Write "<table width=""100%"">"
+			Response.Write "<table width=""100%"" style=""height:350px;"">"
 				Response.Write "<thead><tr>"
 					Response.Write "<th class=""style2"" style=""text-align: center;text-decoration: underline;"">" & rs("stokAd") & "</th>"
 				Response.Write "</tr></thead>"
@@ -108,6 +114,7 @@ Response.Write "<page size=""A6"">"
 					Response.Write "</tr>"
 					rs.movenext
 					next
+					
 				Response.Write "</tbody>"
 			Response.Write "</table>"
 	
