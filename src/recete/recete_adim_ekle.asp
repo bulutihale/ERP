@@ -27,7 +27,7 @@
 	silindi				=	Request.Form("silindi")
 	etiketeEkle			=	Request.Form("etiketeEkle")
 	etiketAd			=	Request.Form("etiketAd")
-	
+	islemAciklama		=	Request.Form("islemAciklama")
 	
 
 	modulAd 		=   "Reçete"
@@ -101,6 +101,7 @@ end if
 				rs("silindi")			=	silindi
 				rs("etiketeEkle")		=	etiketeEkle
 				rs("etiketAd")			=	etiketAd
+				rs("islemAciklama")		=	islemAciklama
 				
 				if islem <> "edit" then 'editleniyorsa sıra değişmesin
 					rs("sira")				=	900' en son eklenen adım en son sıraya atılsın, recete_adim_sira.asp ye yönlendiğinde sıra numarası düzeltiliyor.

@@ -17,6 +17,10 @@
     gorevID			=   Request.Form("gorevID")
 	silindi			=   Request.Form("silindi")
 	kkDepoGiris		=	Request.Form("kkDepoGiris")
+    rafOmru         =	Request.Form("rafOmru")
+    if rafOmru = "" then
+        rafOmru = 0
+    end if
     anaBirimID      =   Request.Form("anaBirimID")
 	modulAd 		=   "Stok"
 '###### ANA TANIMLAMALAR
@@ -56,6 +60,7 @@ end if
 				rs("kkDepoGiris")		=	kkDepoGiris
                 rs("minStok")           =   minStok
                 rs("anaBirimID")        =   anaBirimID
+                rs("rafOmru")           =   rafOmru
             rs.update
             rs.close
 

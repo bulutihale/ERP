@@ -24,11 +24,20 @@ call logla("Yeni Reçete Adım Ekleme Ekranı Girişi")
 
 yetkiKontrol = yetkibul(modulAd)
 
+			if stokID <> "" then
+				sorgu = "SELECT stok.FN_anaBirimADBul(" & stokID & ",'uAd') as anaBirimAD, stok.FN_anaBirimADBul(" & stokID & ",'kAd') as anaBirimADkisa"
+				rs.open sorgu, sbsv5, 1, 3
+					anaBirimAD			=	rs("anaBirimAD")
+					anaBirimADkisa		=	rs("anaBirimADkisa")
+				rs.close	
+			end if
+
+
 if receteAdimID <> "" then
             sorgu = "SELECT t1.stokID, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID, t1.en, t1.boy, t1.enBoyBirim,"
 			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger, t5.receteAd as altReceteAd,  t6.uzunBirim as ebUzunBirim,"
 			sorgu = sorgu & " stok.FN_anaBirimIDBul(t1.stokID) as anaBirimID, stok.FN_anaBirimADBul(t1.stokID,'uAd') as anaBirimAD, t1.etiketeEkle, t1.etiketAd, t7.receteAd as anaReceteAd, t8.stokAd as esasStokAd,"
-			sorgu = sorgu & " stok.FN_anaBirimADBul(t1.stokID,'kAd') as anaBirimADkisa"
+			sorgu = sorgu & " stok.FN_anaBirimADBul(t1.stokID,'kAd') as anaBirimADkisa, t1.islemAciklama"
 			sorgu = sorgu & " FROM recete.receteAdim t1"
 			sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t1.receteISlemTipiID = t2.receteISlemTipiID"
 			sorgu = sorgu & " LEFT JOIN portal.birimler t4 ON t1.miktarBirim = t4.kisaBirim"
@@ -48,6 +57,7 @@ if receteAdimID <> "" then
 				anaBirimADkisa		=	rs("anaBirimADkisa")
                 miktar				=  	rs("miktar")
 				miktarBirim			=	rs("miktarBirim")
+				islemAciklama		=	rs("islemAciklama")
 				fire				=	rs("fire")
 				fireBirim			=	rs("fireBirim")
 				isGucuSayi			=	rs("isGucuSayi")
@@ -151,6 +161,12 @@ end if
 								call formselectv2("receteIslemTipiID","","","","formSelect2 receteIslemTipiID border inpReset","","receteIslemTipiID","","data-holderyazi=""İşlem Tipi"" data-jsondosya=""JSON_receteIslemTipi"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
+						Response.Write "<div class=""row mt-2"">"
+							Response.Write "<div class=""col-12"">"
+								Response.Write "<div class=""badge badge-secondary rounded-left"">İşlem Açıklaması</div>"
+								call forminput("islemAciklama",islemAciklama,"","","inpReset","autocompleteOFF","islemAciklama","")
+							Response.Write "</div>"
+						Response.Write "</div>"
 						'#### STOK - YARI MAMÜL
 						Response.Write "<div class=""row mt-2" & stokRow & """>"
 							Response.Write "<div class=""col-12" & stokClass & """>"
@@ -159,38 +175,38 @@ end if
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
-							Response.Write "<div class=""col-3"">"
+							Response.Write "<div class=""col-3" & stokClass & """>"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">En Uzunluğu</div>"
 								call forminput("enUzunluk",enUzunluk,"numara(this,true,false)","","inpReset","autocompleteOFF","enUzunluk","")
 							Response.Write "</div>"
-							Response.Write "<div class=""col-3"">"
+							Response.Write "<div class=""col-3" & stokClass & """>"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">Boy Uzunluğu</div>"
 								call forminput("boy",boy,"numara(this,true,false)","","inpReset","autocompleteOFF","boy","")
 							Response.Write "</div>"
-							Response.Write "<div class=""col-6"">"
+							Response.Write "<div class=""col-6" & stokClass & """>"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">En - Boy Birim</div>"
 								call formselectv2("enBoyBirim","","","","formSelect2 enBoyBirim border inpReset","","enBoyBirim","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger6&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
 							Response.Write "<div class=""col-lg-3 col-sm-4"">"
-								Response.Write "<div class=""badge badge-secondary rounded-left"">" & miktarYazi & "</div><span class=""pointer text-info"" onclick=""swal('','Üretilen ürünün hammaddesinden kullanılacak olan miktarı belirtir. Ana birim cinsinden girilmesi şarttır!')""><i class=""mdi mdi-information""></i></span>"
+								Response.Write "<div class=""badge badge-secondary rounded-left"">" & miktarYazi & "</div><span class=""pointer text-info" & stokClass & """ onclick=""swal('','Üretilen ürünün hammaddesinden kullanılacak olan miktarı belirtir. Ana birim cinsinden girilmesi şarttır!')""><i class=""mdi mdi-information""></i></span>"
 								call forminput("miktar",miktar,"numara(this,true,false)",mPlaceHolder,"inpReset","autocompleteOFF","miktar","")
 							Response.Write "</div>"
-							' Response.Write "<div class=""col-lg-3 col-sm-4"">"
-							' 	Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
-							' 	if anaBirimID > 0  then
-							' 		y	=	"t1.birimID="&anaBirimID&""
-							' 	end if
-							' 	call formselectv2("miktarBirim","","","","formSelect2 miktarBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger3&""" data-sartozel="""&y&"""")
-							' Response.Write "</div>"
-							Response.Write "<div class=""col-lg-3 col-sm-4 text-center"">"
-								Response.Write "<div class=""badge badge-secondary rounded"">Ana Birim</div><span class=""pointer text-info"" onclick=""swal('','Ürünün stok kartında tanımlanır ve ürün hareket gördükten sonra değiştirilemez!')""><i class=""mdi mdi-information""></i></span>"
-								Response.Write "<div class=""mt-2 bold text-danger"">" & anaBirimAD & "</div>"
-								call formhidden("miktarBirim",anaBirimADkisa,"","","","autocompleteOFF","miktarBirim","")
-							Response.Write "</div>"
+							if islemTur = "zaman" then
+								Response.Write "<div class=""col-lg-3 col-sm-4"">"
+									Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
+									call formselectv2("miktarBirim","","","","formSelect2 miktarBirim border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-defdeger="""&defDeger3&"""")
+								Response.Write "</div>"
+							else
+								Response.Write "<div class=""col-lg-3 col-sm-4 text-center" & stokClass & """>"
+									Response.Write "<div class=""badge badge-secondary rounded"">Ana Birim</div><span class=""pointer text-info"" onclick=""swal('','Ürünün stok kartında tanımlanır ve ürün hareket gördükten sonra değiştirilemez!')""><i class=""mdi mdi-information""></i></span>"
+									Response.Write "<div class=""mt-2 bold text-danger"">" & anaBirimAD & "</div>"
+									call formhidden("miktarBirim",anaBirimADkisa,"","","","autocompleteOFF","miktarBirim","")
+								Response.Write "</div>"
+							end if
 						'Response.Write "<div class=""row" & fireRow & """>"
-							Response.Write "<div class=""col-2"">"
+							Response.Write "<div class=""col-2" & stokClass & """>"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">" & fireYazi & "</div>"
 								call forminput("fire",fire,"numara(this,true,false)",fireYazi,"inpReset","autocompleteOFF","fire","")
 							Response.Write "</div>"

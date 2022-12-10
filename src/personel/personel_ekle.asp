@@ -20,7 +20,7 @@
 call logla("Personel Bilgileri Güncelleniyor")
 
 yetkiKontrol = yetkibul(modulAd)
-yetkiIT = yetkibul("IT")
+yetkiBilgiIslem = yetkibul("Bilgi İşlem")
 
 '###### FORM BİLGİLERİNİ AL
 '###### FORM BİLGİLERİNİ AL
@@ -30,6 +30,7 @@ yetkiIT = yetkibul("IT")
     email           =   Request.Form("email")
     gorev           =   Request.Form("gorev")
     expiration      =   Request.Form("expiration")
+    bildirimYontemi1     =   Request.Form("bildirimYontemi1")
 '###### FORM BİLGİLERİNİ AL
 '###### FORM BİLGİLERİNİ AL
 
@@ -75,27 +76,27 @@ end if
 	rs.Open sorgu, sbsv5, 1, 3
 		if personelID = "" then
             rs.addnew
-            SSOID   =   null
+            SSOID   =   ""
             rs("firmaID") = firmaID
         else
             SSOID = rs("SSOID")
         end if
-        if yetkiKontrol > 5 or yetkiIT > 5 then
+        if yetkiKontrol > 5 or yetkiBilgiIslem > 5 then
             rs("ad")                =   ad
         end if
         ceptelefon              =   Replace(ceptelefon," ","")
         rs("ceptelefon")        =   ceptelefon
-        if isnull(SSOID) = True then
+        ' if SSOID = "" then
             if password <> "" then
                 password	=	sqltemizle(password)
                 rs("password")          =   password
                 rs("passwordChangeDate")    =   date()
             end if
-        end if
-        if yetkiKontrol > 5 or yetkiIT > 5 then
+        ' end if
+        if yetkiKontrol > 5 or yetkiBilgiIslem > 5 then
             rs("email")          =   email
         end if
-        if yetkiKontrol > 5 or yetkiIT > 5 then
+        if yetkiKontrol > 5 or yetkiBilgiIslem > 5 then
             rs("gorev")         =   gorev
         end if
         if expiration = "" then
@@ -103,6 +104,7 @@ end if
         else
             rs("expiration") = expiration
         end if
+        rs("bildirimYontemi1")  =   bildirimYontemi1
     rs.update
     gorevID = rs("id")
     rs.close

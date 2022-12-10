@@ -9,6 +9,7 @@
 	ajandaID			=	Request.Form("ajandaID")
 	islemDurum			=	Request.Form("islemDurum")
 	uretilenMiktar		=	Request.Form("uretilenMiktar")
+	teminDepoID			=	Request.Form("teminDepoID")
 
 	modulAd =   "Üretim"
 '###### ANA TANIMLAMALAR
@@ -31,10 +32,12 @@ yetkiKontrol = yetkibul(modulAd)
 
 	if islemDurum = "islemBasla" then
 
-		sorgu = "SELECT icerik FROM portal.ajanda WHERE id = " & ajandaID
+		sorgu = "SELECT icerik, isTur FROM portal.ajanda WHERE id = " & ajandaID
 		rs.open sorgu,sbsv5,1,3
 			call logla("Üretim başlat: " & rs("icerik"))
+			isTur	=	rs("isTur")
 		rs.close
+
 
 			sorgu = "UPDATE stok.stokHareket SET stokHareketTipi = 'U' WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & " AND stokHareketTuru = 'G' AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
@@ -42,11 +45,20 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = "UPDATE portal.ajanda SET baslangicZaman = getdate() WHERE id = " & ajandaID & " AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
 
+			If istur = "uretimPlan" Then
+				turetilmisLot			=	lotOlusturFunc(teminDepoID)
+				sorgu = "UPDATE portal.ajanda SET uretimLot = '" & turetilmisLot & "' WHERE id = " & ajandaID & " AND silindi = 0"
+				rs.open sorgu,sbsv5,3,3
+			Else
+				' false
+			End if
+
+
 	elseif islemDurum = "islemBitir" then
 '########## stokHareket tablosundaki üretim veya kesim sürecindeki malzemeleri stoktan düş, üretilen yarı mamul veya mamulun stok girişini yap
 
 	'##### üretilen ürüne ait bilgileri al
-			sorgu = "SELECT t1.stokID, t1.isTur, t2.stokKodu, stok.FN_anaBirimIDBul(t2.stokID) as anaBirimID, stok.FN_anaBirimADBul(t2.stokID, 'kad') as anaBirimAD"
+			sorgu = "SELECT t1.stokID, t1.isTur, t2.stokKodu, stok.FN_anaBirimIDBul(t2.stokID) as anaBirimID, stok.FN_anaBirimADBul(t2.stokID, 'kad') as anaBirimAD, t1.uretimLot"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
@@ -56,6 +68,7 @@ yetkiKontrol = yetkibul(modulAd)
 				isTur				=	rs("isTur")
 				anaBirimID			=	rs("anaBirimID")
 				anaBirimAD			=	rs("anaBirimAD")
+				uretimLot			=	rs("uretimLot")
 			rs.close
 	'##### üretilen ürüne ait bilgileri al
 
@@ -68,13 +81,17 @@ yetkiKontrol = yetkibul(modulAd)
 	sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND t1.silindi = 0"
 	sorgu = sorgu & " ORDER BY t1.stokHareketID DESC"			
 	rs.open sorgu,sbsv5,1,3
-		lot				=	rs("lot")
-		lotSKT			=	rs("lotSKT")
-		refHareketID	=	rs("stokHareketID")
-		surecSonuDepoID	=	rs("surecSonuDepoID")
-		stokID			=	rs("stokID")
+	a=0
+		if rs.recordcount > 0 then
+			a				=	1
+			lot				=	rs("lot")
+			lotSKT			=	rs("lotSKT")
+			refHareketID	=	rs("stokHareketID")
+			surecSonuDepoID	=	rs("surecSonuDepoID")
+			stokID			=	rs("stokID")
+		end if
 	rs.close
-
+		if a = 1 then
 			sorgu = "SELECT * FROM stok.stokHareket"
 			rs.open sorgu,sbsv5,1,3
 			rs.addnew
@@ -86,7 +103,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("miktarBirim")		=	"birimBUL"
 				rs("girisTarih")		=	now()
 				rs("stokHareketTuru")	=	"G"
-				rs("fisNo")			=	""
+				rs("fisNo")				=	""
 				rs("aciklama")			=	"Üretim"
 				rs("belgeNo")			=	null
 				rs("depoID")			=	surecSonuDepoID
@@ -94,8 +111,11 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("cevrim")			=	0
 				' rs("cariID")			=	cariID
 				rs("siparisKalemID")	=	siparisKalemID
+				if uretimLot <> "" then
+					lot	=	uretimLot
+				end if
 				rs("lot")				=	lot
-				rs("stokHareketTipi")	=	"T"
+				rs("stokHareketTipi")	=	"U"
 				rs("refHareketID")		=	refHareketID
 				rs("lotSKT")			=	lotSKT
 				rs("ajandaID")			=	ajandaID
@@ -125,12 +145,29 @@ yetkiKontrol = yetkibul(modulAd)
 				lotSKT			=	rs("lotSKT")
 				ajandaID		=	rs("ajandaID")
 				
-					sorgu = "INSERT INTO stok.stokHareket"
-					sorgu = sorgu & " (kid, firmaID, stokKodu, miktar, miktarBirim, miktarBirimID, girisTarih, stokHareketTuru, depoID, aciklama, stokID, siparisKalemID, lot, stokHareketTipi, prodHareketID, lotSKT, ajandaID)"
-					sorgu = sorgu & " VALUES("
-					sorgu = sorgu & kid & "," & firmaID & ",'" & stokKodu & "'," & miktar & ",'" & miktarBirim & "','" & miktarBirimID & "', getdate(), 'C'," & depoID & ", 'Üretim'," & stokID & "," & siparisKalemID & ",'" & lot & "','" & stokHareketTipi& "'," & yeniGirisID & ",'" & tarihsql(lotSKT) & "'," & ajandaID
-					sorgu = sorgu & ")"
-					rs1.open sorgu,sbsv5,3,3
+
+				sorgu = "SELECT * FROM stok.stokHareket"
+				rs1.open sorgu,sbsv5,1,3
+					rs1.addnew
+					rs1("kid")				=	kid
+					rs1("firmaID")			=	firmaID
+					rs1("stokKodu")			=	stokKodu
+					rs1("miktar")			=	miktar
+					rs1("miktarBirim")		=	miktarBirim
+					rs1("miktarBirimID")	=	miktarBirimID
+					rs1("girisTarih")		=	now()
+					rs1("stokHareketTuru")	=	"C"
+					rs1("depoID")			=	depoID
+					rs1("aciklama")			=	"Üretim"
+					rs1("stokID")			=	stokID
+					rs1("siparisKalemID")	=	siparisKalemID
+					rs1("lot")				=	lot
+					rs1("stokHareketTipi")	=	stokHareketTipi
+					rs1("prodHareketID")	=	yeniGirisID
+					rs1("lotSKT")			=	tarihsql(lotSKT)
+					rs1("ajandaID")			=	ajandaID
+					rs1.update
+					rs1.close
 				rs.movenext
 				next
 			rs.close
@@ -149,7 +186,7 @@ yetkiKontrol = yetkibul(modulAd)
 			rs.open sorgu,sbsv5,1,3
 				call logla("Üretim bitti: " & rs("icerik"))
 			rs.close
-
+		end if
 		end if
 	else
 		call yetkisizGiris("","","")

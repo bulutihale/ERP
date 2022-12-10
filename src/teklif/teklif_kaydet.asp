@@ -1,0 +1,1 @@
+﻿teklif_kaydet

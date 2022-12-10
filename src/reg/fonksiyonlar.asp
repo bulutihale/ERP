@@ -3971,6 +3971,7 @@ End Function
 function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byVal FNgonderenKid,byVal grupID, byVal ek2, byVal ek3, byVal ek4, byVal ek5)
 	fnhata = False
     ' call bildirim(gorevID,"",yetkiAd & " yetki değişikliği",1,kid,"","","","","")
+	' call bildirim(kid,"Genel Bildirim","Depo Grup Bildirimi" & second(now()),1,0,"Depo","","","","")
 	' CASE portal.notification.onem
 	' 	WHEN 1 THEN 'Önemsiz'
 	' 	WHEN 2 THEN 'Önemsiz'
@@ -3984,6 +3985,7 @@ function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byV
 	' 	WHEN 10 THEN 'Önemli'
 	' 	ELSE 'Belirsiz'
 	' END
+
 
 	'###### grupID bulma
 		if isnumeric(grupID) = True then
@@ -4008,8 +4010,22 @@ function bildirim(byVal FNkid, byVal FNbaslik, byVal FNicerik, byVal FNonem, byV
 		personelGrupID = 0
 	end if
 
+
+
 	if fnhata = False then
 		if personelGrupID > 0 then
+			sorgu = "Select personelID from personel.personelGrupIndex where personelGrupID = " & personelGrupID
+			fn2.open sorgu, sbsv5, 1, 3
+			if fn2.recordcount > 0 then
+				for fi = 1 to fn2.recordcount
+					FNkid = fn2("personelID")
+					veri		=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
+					sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
+					fn1.open sorgu, sbsv5, 3, 3
+				fn2.movenext
+				next
+			end if
+			fn2.close
 		else
 			veri			=	FNkid & "," & firmaID & ",'" & FNbaslik & "','" & FNicerik & "'," & FNonem & "," & FNgonderenKid
 			sorgu		=	"INSERT INTO portal.notification (kid,firmaID,baslik,icerik,onem,gonderenKid) VALUES (" & veri & ")"
@@ -4103,6 +4119,55 @@ function pageFooter()
 	'##################################################
 	'##################################################
 end function
+
+
+function lotOlusturFunc(depoID)
+
+	if depoID <> "" then
+		if isnumeric(depoID) = True then
+			sorgu = "Select depoLotTemplate from stok.depo where id = " & depoID
+			fn1.open sorgu,sbsv5,1,3
+			if fn1.recordcount > 0 then
+				depoLotTemplate = fn1("depoLotTemplate") & ""
+			end if
+			fn1.close
+			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'U' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by stokHareketID desc"
+			fn1.open sorgu,sbsv5,1,3
+			if fn1.recordcount > 0 then
+				sonlot = fn1("lot") & ""
+			else
+				sonlot = 0
+			end if
+			fn1.close
+		end if
+	end if
+
+	if depoLotTemplate <> "" then
+		sonlot1 = instr(depoLotTemplate,"[") +1
+		sonlot2 = right(sonlot,(len(depoLotTemplate)-sonlot1))
+		sonlot2 = int(sonlot2)
+		yenilot = sonlot2+1
+		yenilotformat = depoLotTemplate
+		yenilotformat = replace(yenilotformat,"YYYY",yil)
+		yenilotformat = replace(yenilotformat,"YY",right(yil,2))
+		yenilotformat = replace(yenilotformat,"MM",right("0" & ay,2))
+		yenilotformat = replace(yenilotformat,"DD",right("0" & gun,2))
+		yenilotformat = Replace(yenilotformat,"[XXXX]",right("0000" & yenilot,4))
+		yenilotformat = Replace(yenilotformat,"[XXX]",right("000" & yenilot,3))
+		yenilotformat = Replace(yenilotformat,"[XX]",right("00" & yenilot,2))
+		yenilotformat = Replace(yenilotformat,"[X]",right("0" & yenilot,1))
+	else
+		yenilotformat	=	0
+	end if
+
+		lotOlusturFunc	=	yenilotformat
+end function
+
+
+
+
+
+
 
 
 

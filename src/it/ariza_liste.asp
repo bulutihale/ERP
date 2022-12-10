@@ -17,12 +17,13 @@
 	aramapersonelID		=	Request.Form("aramapersonelID")
 	listeiptal			=	Request.Form("listeiptal")
 	listebitmis			=	Request.Form("listebitmis")
+	etiketID			=	Request.Form("etiketID")
 	paginglimit			=	40
 	pagingorder			=	"tarih DESC"
 	pagingsayfa			=	Request.Form("pagingsayfa")
 	hata				=	""
 
-	yetkiIT = yetkibul("IT")
+	yetkiBilgiIslem = yetkibul("Bilgi İşlem")
 
 	if pagingsayfa = "" or pagingsayfa < 1 then
 		pagingsayfa		=	1
@@ -36,7 +37,7 @@
 	if listebitmis = "" then
 		listebitmis = Session("listebitmis")
 	end if
-	if yetkiIT > 0 then
+	if yetkiBilgiIslem > 0 then
 		if listeiptal = "" then
 			listeiptal = "off"
 		end if
@@ -61,7 +62,7 @@ call logla("Arıza Ekranı")
 
 
 ' if hata = "" then
-' 	if yetkiIT = False then
+' 	if yetkiBilgiIslem = False then
 ' 		' call yetkisizGiris("","","")
 ' 	end if
 ' end if
@@ -153,7 +154,7 @@ call logla("Arıza Ekranı")
 		' if GorevListeleHerkes = True then
 			Response.Write "<div class=""col-sm-3 my-1"">"
 			Response.Write "<label class=""sr-only"" for=""inlineFormInputName"">Durum</label>"
-			sorgu = "select personel.personel.id,personel.personel.ad from personel.personel inner join personel.personel_yetki on personel.personel.id = personel.personel_yetki.kid where personel.personel.firmaID = " & firmaID & " and personel.personel_yetki.yetkiAd = N'Bilgi İşlem' and personel.personel_yetki.yetkiParametre > 0"
+			sorgu = "select personel.personel.id,personel.personel.ad from personel.personel where personel.personel.firmaID = " & firmaID
 			rs.open sorgu,sbsv5,1,3
 				degerler = "Personel=|"
 				do while not rs.eof
@@ -169,6 +170,33 @@ call logla("Arıza Ekranı")
 			Response.Write "</div>"
 		' end if
 		'personel
+
+		'### ETİKETLER
+		'### ETİKETLER
+		if sb_etiketEklenebilsin = true then
+			Response.Write "<div class=""col-sm-3 my-1"">"
+			Response.Write "<label class=""sr-only"" for=""inlineFormInputName"">Etiket</label>"
+			if hata = "" then
+				sorgu = "Select etiketAd,etiketID from IT.etiket where firmaID = " & firmaID & " order by etiketAd ASC"
+				rs.open sorgu,sbsv5,1,3
+					etiketArrDiger = "Etiket Seçin=|"
+					do while not rs.eof
+						etiketArrDiger = etiketArrDiger & rs("etiketAd")
+						etiketArrDiger = etiketArrDiger & "="
+						etiketArrDiger = etiketArrDiger & rs("etiketID")
+						etiketArrDiger = etiketArrDiger & "|"
+					rs.movenext
+					loop
+					etiketArrDiger = left(etiketArrDiger,len(etiketArrDiger)-1)
+				rs.close
+				call formselectv2("etiketID",etiketID,"","","","","etiketID",etiketArrDiger,"")
+			end if
+			Response.Write "</div>"
+		end if
+		'### ETİKETLER
+		'### ETİKETLER
+
+
 		Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">ARA</button></div>"
 		Response.Write "</div>"
 		Response.Write "</form>"
@@ -271,12 +299,16 @@ call logla("Arıza Ekranı")
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Öncelik</th>"
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Oluşturan</th>"
 		Response.Write "<th scope=""col"">Görev</th>"
-		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T0</th>"
+		if sb_etiketEklenebilsin = true then
+			Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Etiket</th>"
+		end if
+		' Response.Write "<th scope=""col"" class=""d-none d-md-block"">T0</th>"
+		'//FIXME - bu kısmı sadece md de gözükecek şekilde düzenle
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T1</th>"
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T2</th>"
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Durum</th>"
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Personel</th>"
-		if yetkiIT > 0 then
+		if yetkiBilgiIslem > 0 then
 			Response.Write "<th scope=""col"">İşlem"
 			Response.Write "</th>"
 		end if
@@ -296,15 +328,28 @@ call logla("Arıza Ekranı")
 			sorgu = sorgu & " ,IT.ariza.tarihServis" & vbcrlf
 			sorgu = sorgu & " ,IT.ariza.olusturanAD" & vbcrlf
 			sorgu = sorgu & " ,IT.ariza.olusturanID" & vbcrlf
+			if sb_etiketEklenebilsin = true then
+				sorgu = sorgu & " ,IT.etiket.etiketAd" & vbcrlf
+			end if
 			sorgu = sorgu & " from IT.ariza " & vbcrlf
 			' sorgu = sorgu & " LEFT JOIN Musteri.Musteri on IT.ariza.musteriID = Musteri.Musteri.Id " & vbcrlf
 			if aramapersonelID <> "" then
 				sorgu = sorgu & " LEFT JOIN IT.arizaPersonel on IT.ariza.arizaID = IT.arizaPersonel.gorevID " & vbcrlf
 			end if
+			if sb_etiketEklenebilsin = true then
+				sorgu = sorgu & " LEFT JOIN IT.etiket on IT.ariza.etiketID = IT.etiket.etiketID " & vbcrlf
+			end if
 			sorgu = sorgu & " where IT.ariza.firmaID = " & firmaID & vbcrlf
 			if aramagorev = "" then
 			else
 				sorgu = sorgu & " and IT.ariza.ad like '%" & aramagorev & "%'" & vbcrlf
+			end if
+			if sb_etiketEklenebilsin = true then
+				if etiketID <> "" then
+				if etiketID > 0 then
+					sorgu = sorgu & " and IT.ariza.etiketID = " & etiketID & vbcrlf
+				end if
+				end if
 			end if
 			' if aramaunvan <> "" then
 			' 	sorgu = sorgu & " and IT.ariza.musteriID = " & aramaunvan & " " & vbcrlf
@@ -332,7 +377,7 @@ call logla("Arıza Ekranı")
 			end if
 			'durum sorguları
 
-			if yetkiIT = False then
+			if yetkiBilgiIslem = False then
 				sorgu = sorgu & " and IT.ariza.olusturanID = " & kid & " " & vbcrlf
 			end if
 
@@ -370,38 +415,46 @@ call logla("Arıza Ekranı")
 
 					Response.Write "<td class=""d-none d-sm-table-cell"" nowrap>" & rs("olusturanAD") & "</td>"
 					Response.Write "<td title=""" & rs("gorevAd") & """>" & rs("gorevAd") & "</td>"
-					Response.Write "<td class=""d-none d-sm-table-cell"">"
-					t0tarih = rs("tarihServis")
-                    if isnull(t0tarih) = True then
-                        t0tarih = rs("tarih")
-                    end if
-					'# tarih işlem
-						if cdate(t0tarih) = date() then
-							Response.Write "<span class=""badge badge-success"
-							if rs("durum") = "Bitti" then
-							else
-								Response.Write " blinking"
-							end if
-							Response.Write """>"
-                            t0tarih = Replace(t0tarih," - 00:00","")
-							Response.Write tarihgorev(t0tarih)
-							Response.Write "</span>"
-						elseif cdate(t0tarih) < date() and rs("durum") <> "Bitti" then
-							Response.Write "<span class=""badge badge-danger"
-							if rs("durum") = "Bitti" then
-							else
-								Response.Write " blinking"
-							end if
-							Response.Write """>"
-                            t0tarih = Replace(t0tarih," - 00:00","")
-							Response.Write tarihgorev(t0tarih)
-							Response.Write "</span>"
-						else
-                            t0tarih = Replace(t0tarih," - 00:00","")
-							Response.Write tarihgorev(t0tarih)
-						end if
-					'# tarih işlem
-					Response.Write "</td>"
+					if sb_etiketEklenebilsin = true then
+						Response.Write "<td scope=""col"" class=""d-none d-sm-table-cell"">" & rs("etiketAd") & "</td>"
+					end if
+
+
+
+
+'//FIXME - bu kısmı sadece md de gözükecek şekilde düzenle
+					' Response.Write "<td class=""d-none d-md-block"">"
+					' t0tarih = rs("tarihServis")
+                    ' if isnull(t0tarih) = True then
+                    '     t0tarih = rs("tarih")
+                    ' end if
+					' '# tarih işlem
+					' 	if cdate(t0tarih) = date() then
+					' 		Response.Write "<span class=""badge badge-success"
+					' 		if rs("durum") = "Bitti" then
+					' 		else
+					' 			Response.Write " blinking"
+					' 		end if
+					' 		Response.Write """>"
+                    '         t0tarih = Replace(t0tarih," - 00:00","")
+					' 		Response.Write tarihgorev(t0tarih)
+					' 		Response.Write "</span>"
+					' 	elseif cdate(t0tarih) < date() and rs("durum") <> "Bitti" then
+					' 		Response.Write "<span class=""badge badge-danger"
+					' 		if rs("durum") = "Bitti" then
+					' 		else
+					' 			Response.Write " blinking"
+					' 		end if
+					' 		Response.Write """>"
+                    '         t0tarih = Replace(t0tarih," - 00:00","")
+					' 		Response.Write tarihgorev(t0tarih)
+					' 		Response.Write "</span>"
+					' 	else
+                    '         t0tarih = Replace(t0tarih," - 00:00","")
+					' 		Response.Write tarihgorev(t0tarih)
+					' 	end if
+					' '# tarih işlem
+					' Response.Write "</td>"
 					Response.Write "<td title=""Gerçek Servis Başlama Saati"" class=""d-none d-sm-table-cell"">" & tarihgorev(rs("t1")) & "</td>"
 					Response.Write "<td title=""Gerçek Servis Bitiş Saati"" class=""d-none d-sm-table-cell"">" & tarihgorev(rs("t2")) & "</td>"
 					Response.Write "<td class=""d-none d-sm-table-cell"">"
@@ -425,7 +478,7 @@ call logla("Arıza Ekranı")
 					if mobil = False then
 '						Response.Write "<td>" & rs("adres") & "</td>"
 					end if
-					if yetkiIT > 0 then
+					if yetkiBilgiIslem > 0 then
 					Response.Write "<td class=""text-right"" nowrap>"
 						if rs("durum") = "Bitti" or rs("durum") = "İptal" then
 							Response.Write "<button type=""button"" title=""Görev Ayrıntıları"" class=""btn btn-sm"" onClick=""modalajax('/it/ariza_ayrinti.asp?gorevID=" & rs("gorevID") & "');""><i class=""fa fa-search""></i></button>"
@@ -433,26 +486,26 @@ call logla("Arıza Ekranı")
 							Response.Write "<button type=""button"" title=""Görev Ayrıntıları"" class=""btn btn-sm"" onClick=""document.location = '/it/ariza/" & gorevID64 & "';""><i class=""fa fa-search""></i></button>"
 						end if
 							if rs("durum") = "Yeni" then
-								if yetkiIT > 3 then
-									Response.Write "&nbsp;<button type=""button"" title=""Personele Görev Ata"" class=""btn btn-sm d-none d-sm-table-cell"" onClick=""modalajax('/it/ariza_personelata.asp?gorevID=" & rs("gorevID") & "');""><i class=""fa fa-user-plus""></i></button>"
+								if yetkiBilgiIslem > 3 then
+									Response.Write "&nbsp;<button type=""button"" title=""Personele Görev Ata"" class=""btn btn-sm d-sm-table-cell"" onClick=""modalajax('/it/ariza_personelata.asp?gorevID=" & rs("gorevID") & "');""><i class=""fa fa-user-plus""></i></button>"
 								end if
 							end if
 						
 						if instr(personelIDTemp,kid) > 0 then
 							if isnull(rs("t1")) = True then
-								Response.Write "&nbsp;<button title=""Göreve Başla"" class=""btn btn-sm d-none d-sm-table-cell"" onClick=""document.location = '/it/ariza_hizli_basla/" & gorevID64 & "';""><i class=""fa fa-play""></i></button>"
+								Response.Write "&nbsp;<button title=""Göreve Başla"" class=""btn btn-sm d-sm-table-cell"" onClick=""document.location = '/it/ariza_hizli_basla/" & gorevID64 & "';""><i class=""fa fa-play""></i></button>"
 							end if
 						end if
 
 						if kid = rs("olusturanID") or ( instr(personelIDTemp,kid) > 0 and isnull(rs("t1")) = False ) then
 							if rs("durum") <> "Bitti" then
-								Response.Write "&nbsp;<button title=""Görev Tamamla"" class=""btn btn-sm d-none d-sm-table-cell"" onClick=""document.location = '/it/ariza_hizli_tamamla/" & gorevID64 & "';""><i class=""fa fa-check""></i></button>"
+								Response.Write "&nbsp;<button title=""Görev Tamamla"" class=""btn btn-sm d-sm-table-cell"" onClick=""document.location = '/it/ariza_hizli_tamamla/" & gorevID64 & "';""><i class=""fa fa-check""></i></button>"
 							end if
 						end if
 
 						if kid = rs("olusturanID") or GorevSil = True then
 							if rs("durum") <> "Bitti" then
-								Response.Write "&nbsp;<button title=""Görevi Sil"" class=""btn btn-sm btn-danger d-none d-sm-table-cell"" onClick=""document.location = '/it/ariza_hizli_sil/" & gorevID64 & "';""><i class=""fa fa-trash""></i></button>"
+								Response.Write "&nbsp;<button title=""Görevi Sil"" class=""btn btn-sm btn-danger d-sm-table-cell"" onClick=""document.location = '/it/ariza_hizli_sil/" & gorevID64 & "';""><i class=""fa fa-trash""></i></button>"
 							end if
 						end if
 					Response.Write "</td>"

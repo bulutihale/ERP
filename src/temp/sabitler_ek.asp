@@ -22,38 +22,59 @@ if firmaID = 5 then
 	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
 	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
 	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
-	sb_activeuserUrl						=	"/activeuser.asp"
-	sb_activeuserTime						=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
+		sb_activeuserUrl					=	"/activeuser.asp"
+		sb_activeuserTime					=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
 	sb_konum								=	"izmir"		'hava durumu için
 	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
 	sb_ssl									=	1		'SSL var mı?
-	sb_fizikselPath							=	"C:\web\erp.sbstasarim.com\backup\"
-	sb_sqlYedekCompress						=	true
-	sb_sqlYedekCloudMail					=	"raptiye210@yahoo.com"
-	sb_sqlYedekAlGun						=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
-	sb_sqlYedekSilGun						=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
+		sb_fizikselPath						=	"C:\web\erp.sbstasarim.com\backup\"
+		sb_sqlYedekCompress					=	true
+		sb_sqlYedekCloudMail				=	"raptiye210@yahoo.com"
+		sb_sqlYedekAlGun					=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
+		sb_sqlYedekSilGun					=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
 
 	'## EMAIL
-	sb_mailserver		=	"212.68.61.84:587"
-	sb_mailsender		=	"teknik@sbstasarim.com"
-	sb_mailsenderPass	=	"sgxuewlv12!!@3"
-	sb_mailsenderAd		=	"TIO ERP"
-	' sb_portalMail		=	"portal@sbstasarim.com"
-	' sb_portalMailUser	=	"portal@sbstasarim.com"
-	' sb_portalMailPass	=	"portAl112!"
-	' sb_teklifMail		=	"satis@sbstasarim.com"
-	' sb_teklifMailUser	=	"satis@sbstasarim.com"
-	' sb_teklifMailPass	=	"Sati22^11"
+	'## EMAIL
+		sb_mailserver		=	"212.68.61.84:587"
+		sb_mailsender		=	"teknik@sbstasarim.com"
+		sb_mailsenderPass	=	"sgxuewlv12!!@3"
+		sb_mailsenderAd		=	"TIO ERP"
+	'## EMAIL
+	'## EMAIL
 
 	'## SSO
-	firmaSSO			=	""
-	firmaSSOAdres		=	""
-	firmaSSODomain		=	""
-	firmaSSOLdap		=	""
-	firmaSSOdb			=	"TIO2022"
+	'## SSO
+		firmaSSO			=	""
+		firmaSSOAdres		=	""
+		firmaSSODomain		=	""
+		firmaSSOLdap		=	""
+		firmaSSOdb			=	"TIO2022"
+	'## SSO
+	'## SSO
 
-    sb_TBLSTSABIT_cache	=   false
-    sb_iskontoSayisi	=   0
+	'## TEKLİF
+	'## TEKLİF
+		sb_TeklifCariAramaLimit	=	5		'arama formundan kaç adet cari dönsün
+	'## TEKLİF
+	'## TEKLİF
+
+
+
+
+
+
+
+
+
+
 end if
 
 if firmaID = 6 then
@@ -90,13 +111,6 @@ if firmaID = 6 then
     sb_TBLSTSABIT_cache    =   false
     sb_iskontoSayisi        =   0
 
-'    sb_datafiat1           =   "SATIS_FIAT1"
-'    sb_datafiat2           =   "SATIS_FIAT2"
-'    sb_datafiat3           =   ""
-'    sb_datafiat4           =   ""
-'    sb_birimfiyatDegistir   =   false
-'    sb_fiyatiSirifOlanStoklariGizle =   true
-
 end if
 
 
@@ -104,38 +118,63 @@ end if
 
 
 if firmaID = 4 then
-	sb_firmaAd="Belen Gıda Plasiyer Uygulaması"
-	sb_url=mainUrl
-    sb_logo=sb_mainUrlOnEk & mainUrl & "/template/images/belenlogo.jpg"
-	sb_logoMini=sb_mainUrlOnEk & mainUrl & "/template/images/belenlogo.jpg"
-	sb_logo128=sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
-	sb_cdnUrl=sb_mainUrlOnEk & mainUrl & "/cdn"
-	sb_activeuserUrl=sb_mainUrlOnEk & mainUrl & "/activeuser.asp"
-	sb_konum="izmir"
-	sb_yetkiliPersonel="Başar Sönmez|+905053376198"
-	sb_activeuserUrlTimeout="10000"
-	sb_ssl = 1
-	sb_panelKullanimTuru = "Arge"
+	sb_firmaAd								=	"Belen Gıda Plasiyer Uygulaması"
+	sb_url									=	mainUrl
+    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/belenlogo.jpg"
+	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/belenlogo.jpg"
+	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
+	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
+	' ## SERVİSLER
+	' ## SERVİSLER
+		sb_activeuserUrl					=	"/activeuser.asp"
+		sb_activeuserTime					=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
+	sb_konum								=	"izmir"		'hava durumu için
+	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
+	sb_ssl									=	1		'SSL var mı?
+	' ## YEDEKLEME
+	' ## YEDEKLEME
+		sb_fizikselPath						=	"C:\web\erp.sbstasarim.com\backup\"
+		sb_sqlYedekCompress					=	true
+		sb_sqlYedekCloudMail				=	"raptiye210@yahoo.com"
+		sb_sqlYedekAlGun					=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
+		sb_sqlYedekSilGun					=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
 
-	'## SMS
+	'## EMAIL
+	'## EMAIL
+		sb_mailserver		=	"212.68.61.84:587"
+		sb_mailsender		=	"teknik@sbstasarim.com"
+		sb_mailsenderPass	=	"sgxuewlv12!!@3"
+		sb_mailsenderAd		=	"TIO ERP"
+	'## EMAIL
+	'## EMAIL
 
 	'## SSO
-	firmaSSO		=	"NETSIS"
-	firmaSSOAdres	=	""
-	firmaSSODomain	=	""
-	firmaSSOLdap	=	""
-	firmaSSOdb		=	"BELEN2022"
+	'## SSO
+		firmaSSO		=	"NETSIS"
+		firmaSSOAdres	=	""
+		firmaSSODomain	=	""
+		firmaSSOLdap	=	""
+		firmaSSOdb		=	"BELEN2022"
+	'## SSO
+	'## SSO
+
+	'## SİPARİŞ MODULÜ İÇİN
+	'## SİPARİŞ MODULÜ İÇİN
+		sb_datafiat1           =   "FIYAT1"
+		sb_datafiat2           =   "FIYAT2"
+		sb_datafiat3           =   "FIYAT3"
+		sb_datafiat4           =   ""
+		sb_birimfiyatDegistir  =   false
+		sb_fiyatiSirifOlanStoklariGizle =   true
+    	sb_iskontoSayisi       =   4
+	'## SİPARİŞ MODULÜ İÇİN
+	'## SİPARİŞ MODULÜ İÇİN
 
     sb_TBLSTSABIT_cache    =   false
-    sb_iskontoSayisi        =   0
-
-    sb_datafiat1           =   "SATIS_FIAT1"
-    sb_datafiat2           =   "SATIS_FIAT2"
-    sb_datafiat3           =   ""
-    sb_datafiat4           =   ""
-    sb_birimfiyatDegistir   =   false
-    sb_fiyatiSirifOlanStoklariGizle =   true
-
 
 end if
 
@@ -145,42 +184,58 @@ end if
 if firmaID = 8 then
 	sb_firmaAd								=	"Cimax"
 	sb_url									=	mainUrl
-    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
-	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
+    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/cimax_logo.png"
+	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/cimax_logo.png"
 	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
 	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
-	sb_activeuserUrl						=	"/activeuser.asp"
-	sb_activeuserTime						=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
+		sb_activeuserUrl					=	"/activeuser.asp"
+		sb_activeuserTime					=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
 	sb_konum								=	"izmir"		'hava durumu için
 	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
 	sb_ssl									=	1		'SSL var mı?
-	sb_fizikselPath							=	"C:\web\erp.sbstasarim.com\backup\"
-	sb_sqlYedekCompress						=	true
-	sb_sqlYedekCloudMail					=	"raptiye210@yahoo.com"
-	sb_sqlYedekAlGun						=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
-	sb_sqlYedekSilGun						=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
+		sb_fizikselPath						=	"C:\web\erp.sbstasarim.com\backup\"
+		sb_sqlYedekCompress					=	true
+		sb_sqlYedekCloudMail				=	"raptiye210@yahoo.com"
+		sb_sqlYedekAlGun					=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
+		sb_sqlYedekSilGun					=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
 
 	'## EMAIL
-	sb_mailserver		=	"212.68.61.84:587"
-	sb_mailsender		=	"teknik@sbstasarim.com"
-	sb_mailsenderPass	=	"sgxuewlv12!!@3"
-	sb_mailsenderAd		=	"Cimax ERP"
-	' sb_portalMail		=	"portal@sbstasarim.com"
-	' sb_portalMailUser	=	"portal@sbstasarim.com"
-	' sb_portalMailPass	=	"portAl112!"
-	' sb_teklifMail		=	"satis@sbstasarim.com"
-	' sb_teklifMailUser	=	"satis@sbstasarim.com"
-	' sb_teklifMailPass	=	"Sati22^11"
+	'## EMAIL
+		sb_mailserver		=	"212.68.61.84:587"
+		sb_mailsender		=	"teknik@sbstasarim.com"
+		sb_mailsenderPass	=	"sgxuewlv12!!@3"
+		sb_mailsenderAd		=	"Cimax ERP"
+	'## EMAIL
+	'## EMAIL
 
 	'## SSO
-	firmaSSO			=	""
-	firmaSSOAdres		=	""
-	firmaSSODomain		=	""
-	firmaSSOLdap		=	""
-	firmaSSOdb			=	""
+	'## SSO
+		firmaSSO			=	""
+		firmaSSOAdres		=	""
+		firmaSSODomain		=	""
+		firmaSSOLdap		=	""
+		firmaSSOdb			=	""
+	'## SSO
+	'## SSO
 
-    sb_TBLSTSABIT_cache	=   false
-    sb_iskontoSayisi	=   0
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+		sb_cariyeGorevVerilsin	=	true
+		sb_etiketEklenebilsin	=	true
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+
+
+
+
 end if
 
 

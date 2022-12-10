@@ -184,8 +184,8 @@ end if
 									Response.Write "</td>"
 								rs1.movenext
 								next
-								rs1.close
 							End if
+								rs1.close
 							Response.Write "</tr>"
 				'##### page break denemesi	
 					if sayfaKes = 1 then

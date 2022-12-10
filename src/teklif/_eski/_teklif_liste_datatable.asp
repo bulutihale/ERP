@@ -1,4 +1,4 @@
-﻿<!--#include virtual="/reg/rs.asp" --><%
+<!--#include virtual="/reg/rs.asp" --><%
 
 
 '###### ANA TANIMLAMALAR
@@ -24,14 +24,33 @@ yetkiTeklif = yetkibul(modulAd)
 
 
 if yetkiTeklif > 0 then
-
-    '//FIXME - yeni teklif butonu
-
-    '//FIXME - teklif tablosu
-    ' call dataTableYap("deneme","Durum,Firma Adı,Teklif Sayı,Teklif Türü,Tarih,Personel,İşlemler","/teklif/json_teklif.asp","","","","","","","","","")
+    call dataTableYap("deneme","Durum,Firma Adı,Teklif Sayı,Teklif Türü,Tarih,Personel,İşlemler","/teklif/json_teklif.asp","","","","","","","","","")
 else
-    call yetkisizGiris("Teklifleri görmek için yeterli yetkiniz bulunmamaktadır","","")
+    call yetkisizGiris("","","")
 end if
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

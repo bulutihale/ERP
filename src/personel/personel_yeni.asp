@@ -51,7 +51,8 @@ yetkiPersonel = yetkibul("personel")
                     email		    =	rs("email")
                     LoginHatirla	=	rs("LoginHatirla")
                     language	    =   rs("language")
-                    SSOID           =   rs("SSOID")
+                    SSOID           =   rs("SSOID") & ""
+                    bildirimYontemi1 =  rs("bildirimYontemi1")
                     call logla("Personel Bilgileri : " & ad)
                 end if
                 rs.close
@@ -80,33 +81,30 @@ yetkiPersonel = yetkibul("personel")
 
 
 
-
-
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "<form action=""/personel/personel_ekle.asp"" method=""post"" class=""ajaxform"">"
 		call forminput("gorevID",gorevID,"","","gorevID","hidden","gorevID","")
 		Response.Write "<div class=""form-row align-items-center"">"
 		Response.Write "<div class=""col-sm-12 my-1"">"
-        Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Personel Adı Soyadı","","") & "</span>"
+        Response.Write "<span class=""badge badge-danger rounded-left"">" & translate("Personel Adı Soyadı","","") & "</span>"
         if yetkiPersonel >= 5 then
 		    call forminput("ad",ad,"otomatikbuyut('ad')","","ad","autocompleteOFF","ad","")
         else
             call forminput("ad",ad,"otomatikbuyut('ad')","","ad","readonly","ad","")
         end if
 		Response.Write "</div>"
-    
-		Response.Write "<div class=""col-sm-12 my-1"">"
-        Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("GSM","","") & "</span>"
+    		Response.Write "<div class=""col-sm-12 my-1"">"
+        Response.Write "<span class=""badge badge-danger rounded-left"">" & translate("GSM","","") & "</span>"
 		call forminput("ceptelefon",ceptelefon,"","","ceptelefon","autocompleteOFF","ceptelefon","")
 		Response.Write "</div>"
-        if isnull(SSOID) = true then
+        if SSOID = "" then
             Response.Write "<div class=""col-sm-12 my-1"">"
-            Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Şifre","","") & "</span>"
+            Response.Write "<span class=""badge badge-danger rounded-left"">" & translate("Şifre","","") & "</span>"
             call forminput("password","","","","password","autocompleteOFF","password","")
             Response.Write "</div>"
         end if
 		Response.Write "<div class=""col-sm-12 my-1"">"
-        Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Eposta Adresi","","") & "</span>"
+        Response.Write "<span class=""badge badge-danger rounded-left"">" & translate("Eposta Adresi","","") & "</span>"
         if yetkiPersonel >= 5 then
 		    call forminput("email",email,"","","email","autocompleteOFF","email","")
         else
@@ -122,28 +120,23 @@ yetkiPersonel = yetkibul("personel")
             call forminput("gorev",gorev,"","","gorev","readonly","gorev","")
         end if
 		Response.Write "</div>"
-
         if yetkiPersonel >= 5 then
             Response.Write "<div class=""col-sm-12 my-1"">"
             Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Son Kullanma Tarihi","","") & "</span>"
             call forminput("expiration",expiration,"","","tarih","autocompleteOFF","expiration","")
             Response.Write "</div>"
         end if
-
-call clearfix()
-
+        Response.Write "<div class=""col-sm-12 my-1"">"
+        Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Bildirim Yöntemi","","") & "</span>"
+        bildirimDegerler = "SMS > E-Mail=SMS > E-Mail|E-Mail > SMS=E-Mail > SMS|SMS=SMS|E-Mail=E-Mail"
+        call formselectv2("bildirimYontemi1",bildirimYontemi1,"","","","","bildirimYontemi1",bildirimDegerler,"")
+        Response.Write "</div>"
+        call clearfix()
 		Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("Kaydet","","") & "</button></div>"
 		Response.Write "</div>"
 		Response.Write "</form>"
 '###### ARAMA FORMU
 '###### ARAMA FORMU
-
-
-
-
-
-
-
 
 
 '### İŞLEM GEÇMİŞİ TABLOSU
@@ -164,7 +157,7 @@ call clearfix()
                                 Response.Write "<th>" & translate("İşlem","","") & "</th>"
                                 Response.Write "<th>" & translate("IP","","") & "</th>"
                                 Response.Write "</tr></thead><tbody>"
-                                sorgu = "Select top(1000) *,(Select personel.personel.ad from personel.personel where personel.personel.id = personel.personel_log.personelID) as kidAd from personel.personel_log where firmaID = " & firmaID & " and modulAd = '" & modulAd & "' and gorevID = " & gorevID
+                                sorgu = "Select top(10) *,(Select personel.personel.ad from personel.personel where personel.personel.id = personel.personel_log.personelID) as kidAd from personel.personel_log where firmaID = " & firmaID & " and modulAd = '" & modulAd & "' and gorevID = " & gorevID
                                 sorgu = sorgu & "order by id desc"
                                 rs.open sorgu,sbsv5,1,3
                                 if rs.recordcount > 0 then
@@ -192,10 +185,6 @@ call clearfix()
     end if
 '### İŞLEM GEÇMİŞİ TABLOSU
 '### İŞLEM GEÇMİŞİ TABLOSU
-
-
-
-
 
 
 %><!--#include virtual="/reg/rs.asp" -->

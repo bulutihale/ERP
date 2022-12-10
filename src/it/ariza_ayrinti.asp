@@ -11,15 +11,15 @@
 	hata				=	""
 	islem				=	Request.Form("islem")
 	gorevID				=	Request.QueryString("gorevID")
-	yetkiIT = yetkibul("IT")
+	' yetkiIT = yetkibul("IT")
     modulAd =   "ITAriza"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
 
-if yetkiIT = 0 then
-	hata = "Bu alana girmek için yeterli yetkiniz bulunmamaktadır"
-end if
+' if yetkiIT = 0 then
+' 	hata = "Bu alana girmek için yeterli yetkiniz bulunmamaktadır"
+' end if
 
 	call logla("Görev Ayrıntı Modal")
 

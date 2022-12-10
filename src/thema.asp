@@ -15,6 +15,7 @@
 '#### SSL
 
 
+
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 	Session("lngTimer")	=	Timer
@@ -322,6 +323,7 @@ end if
 Response.Write "</head>"
 Response.Write "<body>"
 
+
 if kid <> "" then
 	Response.Write "	<div class=""container-scroller"">"
 	Response.Write "		<nav class=""navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"">"
@@ -358,13 +360,13 @@ if kid <> "" then
 	'########### ÜST BAR
 	'########### ÜST BAR
 		Response.Write "<ul class=""navbar-nav navbar-nav-right"">"
-'				if PersonelIslem = True then
-'					Response.Write "<li class=""nav-item dropdown mr-1"">"
-'					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/personel/liste"">"
-'					Response.Write "<i class=""mdi mdi-account mx-0"" title=""Personel Listesi""></i>"
-'					Response.Write "</a>"
-'					Response.Write "</li>"
-'				end i
+				' if PersonelIslem = True then
+				' 	Response.Write "<li class=""nav-item dropdown mr-1"">"
+				' 	Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/personel/liste"">"
+				' 	Response.Write "<i class=""mdi mdi-account mx-0"" title=""Personel Listesi""></i>"
+				' 	Response.Write "</a>"
+				' 	Response.Write "</li>"
+				' end i
 				'##### MENÜLER
 				'##### MENÜLER
 				'##### MENÜLER
@@ -419,14 +421,13 @@ if kid <> "" then
 
 
 
-
-
-				' if GorevEkle = True then
-					' Response.Write "<li class=""nav-item dropdown mr-1"">"
-					' Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajax('/gorev/yeni_ajax.asp')"">"
-					' Response.Write "<i class=""mdi mdi-calendar-plus mx-0"" title=""Hızlı Görev Ekle""></i>"
-					' Response.Write "</a>"
-					' Response.Write "</li>"
+				' yetkiBilgiIslem = yetkibul("Bilgi İşlem")
+				' if yetkiBilgiIslem > 0 then
+					Response.Write "<li class=""nav-item dropdown mr-1"">"
+					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajaxfit('/it/arizaYeni_ajax.asp')"">"
+					Response.Write "<i class=""mdi mdi-calendar-plus mx-0"" title=""Hızlı Görev Ekle""></i>"
+					Response.Write "</a>"
+					Response.Write "</li>"
 				' end if
 
 				' if GorevEkle = True then
@@ -467,6 +468,24 @@ if kid <> "" then
 				Response.Write "</li>"
 			'## MESAJLAR
 			'## MESAJLAR
+
+
+			'## TEKLİF
+			'## TEKLİF
+			yetkiTeklif = yetkibul("Teklif")
+			if yetkiTeklif >= 3 then
+					Response.Write "<li class=""nav-item dropdown mr-1"">"
+					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"">"
+					Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""modalajaxfit('/teklif/teklif_yeni_modal.asp')""></i>"
+					' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
+					if yetkiTeklif >= 5 then
+						Response.Write "<div class=""badge badge-pill badge-warning"" onClick=""modalajaxfit('/teklif/teklif_onay_modal.asp')""><span class=""teklifOnaySayi"">0</span></div>"
+					end if
+					Response.Write "</a>"
+					Response.Write "</li>"
+			end if
+			'## TEKLİF
+			'## TEKLİF
 
 
 			'## MAİL
@@ -561,333 +580,184 @@ if kid <> "" then
 		Response.Write "<nav class=""sidebar sidebar-offcanvas"" id=""sidebar"">"
 		Response.Write "<ul class=""nav"">"
 
-
-			' Response.Write "<li class=""nav-item"">"
-			' 	Response.Write "<a class=""nav-link"" data-toggle=""collapse"" href=""#ui-basic"" aria-expanded=""false"" aria-controls=""ui-basic""><i class=""mdi mdi-circle-outline menu-icon""></i><span class=""menu-title"">Menü Çoklu</span><i class=""menu-arrow""></i></a>"
-			' 	Response.Write "<div class=""collapse"" id=""ui-basic"">"
-			' 	Response.Write "<ul class=""nav flex-column sub-menu"">"
-
-			' 		Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 1</a></li>"
-			' 		Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 2</a></li>"
-
-			' 	Response.Write "</ul>"
-			' 	Response.Write "</div>"
-			' Response.Write "</li>"
-
-
-
-
-
-
-
-
-
-'##### MENÜLER
-'##### MENÜLER
-'##### MENÜLER
-	sorgu = "select id,"
-	if klang = "tr" then
-		sorgu = sorgu & "ad"
-	else
-		sorgu = sorgu & "ad_en as ad"
-	end if
-	sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and (panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') or panelKullanimTuru is null) and menuYeri is null order by sira asc"
-	rs.open sorgu, sbsv5, 1, 3
-		for ri = 1 to rs.recordcount
-			ad		=	rs("ad")
-			link	=	rs("link")
-			icon	=	rs("icon")
-			target	=	rs("target") & ""
-			yetkigrup	=	rs("yetkigrup") & ""
-			if link = "#" or isnull(link) = True then
-				Response.Write "<li class=""nav-item""><a class=""nav-link"" data-toggle=""collapse"" href=""#ui-basic" & ri & """ aria-expanded=""false"" aria-controls=""ui-basic" & ri & """>"
-				Response.Write "<i class="""
-				Response.Write icon
-				Response.Write " menu-icon""></i>"
-				Response.Write "<span class=""menu-title"">"
-				Response.Write ad
-				Response.Write "</span><i class=""menu-arrow""></i></a>"
-				Response.Write "<div class=""collapse"" id=""ui-basic" & ri & """>"
-				Response.Write "<ul class=""nav flex-column sub-menu"">"
-					if yetkigrup = "Raporlar" then
-						'######### RAPORLAR
-						'######### RAPORLAR
-							sorgu = "Select raporID,raporAd,raporDosya,raporIcon,raporTuru from rapor.raporIndex where firmaID = " & firmaID & " and silinmis = 'False' order by siraMenu asc"
-							rs3.open sorgu, sbsv5, 1, 3
-								for riii = 1 to rs3.recordcount
-									raporAd		=	rs3("raporAd")
-									raporDosya	=	rs3("raporDosya")
-									raporIcon	=	rs3("raporIcon")
-									raporTuru	=	rs3("raporTuru")
-									raporID		=	rs3("raporID")
-									if raporTuru = "datatable" or raporTuru = "htmltable" then
-										raporID64	=	raporID
-										raporID64	=	base64_encode_tr(raporID64)
-										raporDosya	=	"rapor/genel/" & raporID64
-									end if
-									Response.Write "<li class=""nav-item"">"
-									Response.Write "<a href=""/"
-									Response.Write raporDosya
-									Response.Write """"
-									Response.Write """ class=""nav-link"">"
-									Response.Write "<i class="""
-									Response.Write raporIcon
-									Response.Write """></i>"
-									Response.Write "&nbsp;"
-									Response.Write raporAd
-									Response.Write "</a>"
-									Response.Write "</li>"
-								rs3.movenext
-								next
-							rs3.close
-						'######### RAPORLAR
-						'######### RAPORLAR
-					end if
+			'##### MENÜLER
+			'##### MENÜLER
+			'##### MENÜLER
 				sorgu = "select id,"
 				if klang = "tr" then
 					sorgu = sorgu & "ad"
 				else
 					sorgu = sorgu & "ad_en as ad"
 				end if
-				sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = " & rs("ID") & " and " & yetkisorgu & " order by sira asc"
-				rs2.open sorgu, sbsv5, 1, 3
-					for rii = 1 to rs2.recordcount
-						if gelenadres4 = link then
-							acikmenu = ri
-						end if
-						ad			=	rs2("ad")
-						link		=	rs2("link")
-						icon		=	rs2("icon")
-						target		=	rs2("target") & ""
-						if link = "#" then
-							Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""#"">"
+				sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and (panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') or panelKullanimTuru is null) and menuYeri is null order by sira asc"
+				rs.open sorgu, sbsv5, 1, 3
+					for ri = 1 to rs.recordcount
+						ad		=	rs("ad")
+						link	=	rs("link")
+						icon	=	rs("icon")
+						target	=	rs("target") & ""
+						yetkigrup	=	rs("yetkigrup") & ""
+						if link = "#" or isnull(link) = True then
+							Response.Write "<li class=""nav-item""><a class=""nav-link"" data-toggle=""collapse"" href=""#ui-basic" & ri & """ aria-expanded=""false"" aria-controls=""ui-basic" & ri & """>"
 							Response.Write "<i class="""
 							Response.Write icon
 							Response.Write " menu-icon""></i>"
+							Response.Write "<span class=""menu-title"">"
 							Response.Write ad
-							Response.Write "</a></li>"
+							Response.Write "</span><i class=""menu-arrow""></i></a>"
+							Response.Write "<div class=""collapse"" id=""ui-basic" & ri & """>"
+							Response.Write "<ul class=""nav flex-column sub-menu"">"
+								if yetkigrup = "Raporlar" then
+									'######### RAPORLAR
+									'######### RAPORLAR
+										sorgu = "Select raporID,raporAd,raporDosya,raporIcon,raporTuru from rapor.raporIndex where firmaID = " & firmaID & " and silinmis = 'False' order by siraMenu asc"
+										rs3.open sorgu, sbsv5, 1, 3
+											for riii = 1 to rs3.recordcount
+												raporAd		=	rs3("raporAd")
+												raporDosya	=	rs3("raporDosya")
+												raporIcon	=	rs3("raporIcon")
+												raporTuru	=	rs3("raporTuru")
+												raporID		=	rs3("raporID")
+												if raporTuru = "datatable" or raporTuru = "htmltable" then
+													raporID64	=	raporID
+													raporID64	=	base64_encode_tr(raporID64)
+													raporDosya	=	"rapor/genel/" & raporID64
+												end if
+												Response.Write "<li class=""nav-item"">"
+												Response.Write "<a href=""/"
+												Response.Write raporDosya
+												Response.Write """"
+												Response.Write """ class=""nav-link"">"
+												Response.Write "<i class="""
+												Response.Write raporIcon
+												Response.Write """></i>"
+												Response.Write "&nbsp;"
+												Response.Write raporAd
+												Response.Write "</a>"
+												Response.Write "</li>"
+											rs3.movenext
+											next
+										rs3.close
+									'######### RAPORLAR
+									'######### RAPORLAR
+								end if
+							sorgu = "select id,"
+							if klang = "tr" then
+								sorgu = sorgu & "ad"
+							else
+								sorgu = sorgu & "ad_en as ad"
+							end if
+							sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = " & rs("ID") & " and " & yetkisorgu & " order by sira asc"
+							rs2.open sorgu, sbsv5, 1, 3
+								for rii = 1 to rs2.recordcount
+									if gelenadres4 = link then
+										acikmenu = ri
+									end if
+									ad			=	rs2("ad")
+									link		=	rs2("link")
+									icon		=	rs2("icon")
+									target		=	rs2("target") & ""
+									if link = "#" then
+										Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""#"">"
+										Response.Write "<i class="""
+										Response.Write icon
+										Response.Write " menu-icon""></i>"
+										Response.Write ad
+										Response.Write "</a></li>"
+									else
+										Response.Write "<li class=""nav-item"">"
+										if target = "" then
+											Response.Write "<a href=""/"
+											Response.Write link
+											Response.Write """"
+										else
+											if target = "frameless" then
+												Response.Write "<a href=""/"
+												Response.Write link
+												Response.Write ".asp"""
+											elseif target = "framelessblank" then
+												Response.Write "<a href=""/"
+												Response.Write link
+												Response.Write ".asp"""
+												Response.Write " target="""
+												Response.Write target
+												Response.Write """"
+											else
+												Response.Write "<a href=""/"
+												Response.Write link
+												Response.Write """"
+												Response.Write " target="""
+												Response.Write target
+												Response.Write """"
+											end if
+										end if
+										Response.Write """ class=""nav-link""><i class="""
+										Response.Write icon
+										Response.Write """></i>&nbsp;"
+										Response.Write ad
+										Response.Write "</a>"
+										Response.Write "</li>"
+									end if
+								rs2.movenext
+								next
+							rs2.close
+							Response.Write "</ul>"
+							Response.Write "</div>"
+							Response.Write "</li>"
 						else
 							Response.Write "<li class=""nav-item"">"
 							if target = "" then
 								Response.Write "<a href=""/"
 								Response.Write link
 								Response.Write """"
+							elseif target = "frameless" then
+									Response.Write "<a href=""/"
+									Response.Write link
+									Response.Write ".asp"""
+							elseif target = "framelessblank" then
+									Response.Write "<a href=""/"
+									Response.Write link
+									Response.Write ".asp"""
+									Response.Write " target="""
+									Response.Write target
+									Response.Write """"
+							elseif target = "_blank" then
+									Response.Write "<a href="""
+									Response.Write link
+									Response.Write """"
+									Response.Write " target="""
+									Response.Write "_blank"
+									Response.Write """"
 							else
-								if target = "frameless" then
-									Response.Write "<a href=""/"
-									Response.Write link
-									Response.Write ".asp"""
-								elseif target = "framelessblank" then
-									Response.Write "<a href=""/"
-									Response.Write link
-									Response.Write ".asp"""
-									Response.Write " target="""
-									Response.Write target
-									Response.Write """"
-								else
 									Response.Write "<a href=""/"
 									Response.Write link
 									Response.Write """"
 									Response.Write " target="""
 									Response.Write target
 									Response.Write """"
-								end if
 							end if
-							Response.Write """ class=""nav-link""><i class="""
-							Response.Write icon
-							Response.Write """></i>&nbsp;"
+							Response.Write """ class=""nav-link"">"
+							if left(icon,1) = "/" then
+								Response.Write "<img src="""
+								Response.Write icon
+								Response.Write """/>"
+							else 
+								Response.Write "<i class="""
+								Response.Write icon
+								Response.Write """></i>"
+							end if
+							Response.Write "&nbsp;"
 							Response.Write ad
 							Response.Write "</a>"
 							Response.Write "</li>"
 						end if
-					rs2.movenext
+					rs.movenext
 					next
-				rs2.close
-				Response.Write "</ul>"
-				Response.Write "</div>"
-				Response.Write "</li>"
-			else
-				Response.Write "<li class=""nav-item"">"
-				if target = "" then
-					Response.Write "<a href=""/"
-					Response.Write link
-					Response.Write """"
-				elseif target = "frameless" then
-						Response.Write "<a href=""/"
-						Response.Write link
-						Response.Write ".asp"""
-				elseif target = "framelessblank" then
-						Response.Write "<a href=""/"
-						Response.Write link
-						Response.Write ".asp"""
-						Response.Write " target="""
-						Response.Write target
-						Response.Write """"
-				elseif target = "_blank" then
-						Response.Write "<a href="""
-						Response.Write link
-						Response.Write """"
-						Response.Write " target="""
-						Response.Write "_blank"
-						Response.Write """"
-				else
-						Response.Write "<a href=""/"
-						Response.Write link
-						Response.Write """"
-						Response.Write " target="""
-						Response.Write target
-						Response.Write """"
-				end if
-				Response.Write """ class=""nav-link"">"
-				if left(icon,1) = "/" then
-					Response.Write "<img src="""
-					Response.Write icon
-					Response.Write """/>"
-				else 
-					Response.Write "<i class="""
-					Response.Write icon
-					Response.Write """></i>"
-				end if
-				Response.Write "&nbsp;"
-				Response.Write ad
-				Response.Write "</a>"
-				Response.Write "</li>"
-			end if
-		rs.movenext
-		next
-	rs.close
-'##### MENÜLER
-'##### MENÜLER
-'##### MENÜLER
+				rs.close
+			'##### MENÜLER
+			'##### MENÜLER
+			'##### MENÜLER
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-' 			if MusteriListele = True then
-' 				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/musteri/liste""><i class=""mdi mdi-account-switch menu-icon""></i><span class=""menu-title"">Müşteri Listesi</span></a></li>"
-' 			end if
-' 			if GorevListele = True then
-' 				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/gorev/liste""><i class=""mdi mdi-calendar-text menu-icon""></i><span class=""menu-title"">Görev Listesi</span></a></li>"
-' 			end if
-' 			if PersonelIslem = True then
-' 				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/personel/liste""><i class=""mdi mdi-account menu-icon""></i><span class=""menu-title"">Personel Listesi</span></a></li>"
-' 			end if
-' 			if PersonelIslem = True then
-' 				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/log/liste""><i class=""mdi mdi-format-align-left menu-icon""></i><span class=""menu-title"">Log Listesi</span></a></li>"
-' 			end if
-' 			if StokListele = True then
-' 				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/stok/liste""><i class=""mdi mdi-hanger menu-icon""></i><span class=""menu-title"">Stoklar</span></a></li>"
-' 			end if
-' 			if TeklifListele = True then
-' 				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/teklif/liste""><i class=""mdi mdi-currency-usd menu-icon""></i><span class=""menu-title"">Teklif Listesi</span></a></li>"
-' 			end if
-' 			if GorevListele = True then
-' '				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/bakim/liste""><i class=""mdi mdi-calendar-multiple-check menu-icon""></i><span class=""menu-title"">Periyodik Bakım</span></a></li>"
-' 			end if
-
-			' Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/personel/gunlukFaaliyet""><i class=""mdi mdi-clock menu-icon""></i><span class=""menu-title"">Günlük Faaliyet"
-			' if gunlukFaaliyetRapor = True then
-			' 	Response.Write " Rapor"
-			' end if
-			' Response.Write "</span></a></li>"
-
-			' Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/personel/ekMesai_liste""><i class=""mdi mdi-checkbox-multiple-marked-outline menu-icon""></i><span class=""menu-title"">Ek Mesailer</span></a></li>"
-
-'			if PersonelIslem = True then
-'				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/uruntakip/liste""><i class=""mdi mdi-hanger menu-icon""></i><span class=""menu-title"">xÜrün Takip</span></a></li>"
-'			end if
-'			if GorevListele = True then
-'				Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/gorev/takvim""><i class=""mdi mdi-calendar-text menu-icon""></i><span class=""menu-title"">xRutin Görevler</span></a></li>"
-'			end if
-
-'			if GorevListele = True then
-				' Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/cihaz/liste""><i class=""mdi mdi-calendar-text menu-icon""></i><span class=""menu-title"">Cihaz Takip</span></a></li>"
-'			end if
-
-			' Response.Write "<li class=""nav-item""><a class=""nav-link"" href=""/dashboard/dashboard""><i class=""mdi mdi-view-dashboard menu-icon""></i><span class=""menu-title"">Dashboard</span></a></li>"
-
-
-
-
-
-
-
-	'		Response.Write "<li class=""nav-item"">"
-	'			Response.Write "<a class=""nav-link"" data-toggle=""collapse"" href=""#ui-basic"" aria-expanded=""false"" aria-controls=""ui-basic""><i class=""mdi mdi-circle-outline menu-icon""></i><span class=""menu-title"">Menü Çoklu</span><i class=""menu-arrow""></i></a>"
-	'			Response.Write "<div class=""collapse"" id=""ui-basic"">"
-	'			Response.Write "<ul class=""nav flex-column sub-menu"">"
-	'				Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 1</a></li>"
-	'				Response.Write "<li class=""nav-item""> <a class=""nav-link"" href=""/"">Menü 2</a></li>"
-	'			Response.Write "</ul>"
-	'			Response.Write "</div>"
-	'		Response.Write "</li>"
 		Response.Write "</ul>"
 		Response.Write "</nav>"
 	'########### SOL BAR
@@ -896,64 +766,54 @@ if kid <> "" then
 
 
 
-	Response.Write "<div class=""main-panel"">"
-	'########### ORTA ALAN
-	'########### ORTA ALAN
-		Response.Write "<div class=""content-wrapper"" id=""ortaalan"" style=""background:#f3f3f3 !important"">"
-		'### sayfayı ateşle
-		'### sayfayı ateşle
-			if sayfa3 = "" then
-'				if GorevListele = True then
-'					Server.Execute "/gorev/liste.asp"
-'				else
-				if passwordChangeFirstLogin = True then
-					Server.Execute "/personel/sifre.asp"
-				else
-					Server.Execute "/dashboard/dashboard.asp"
-				end if
-			end if
-			if sayfa5 <> "" or sayfa4 <> "" then
-				dosyaad = "/" & sayfa3 & "/" & sayfa4 & ".asp"
-				if dosyakontrol(dosyaad) = True then
-					Server.Execute dosyaad
-				end if
-			elseif sayfa3 <> "" then
-				dosyaad = "/" & sayfa3 & ".asp"
-				if dosyakontrol(dosyaad) = True then
-					Server.Execute dosyaad
-				end if
-			end if
-		'### sayfayı ateşle
-		'### sayfayı ateşle
+		Response.Write "<div class=""main-panel"">"
+			'########### ORTA ALAN
+			'########### ORTA ALAN
+				Response.Write "<div class=""content-wrapper"" id=""ortaalan"" style=""background:#f3f3f3 !important"">"
+				'### sayfayı ateşle
+				'### sayfayı ateşle
+					if sayfa3 = "" then
+						' if GorevListele = True then
+						' 	Server.Execute "/gorev/liste.asp"
+						' else
+						if passwordChangeFirstLogin = True then
+							Server.Execute "/personel/sifre.asp"
+						else
+							Server.Execute "/dashboard/dashboard.asp"
+						end if
+					end if
+					if sayfa5 <> "" or sayfa4 <> "" then
+						dosyaad = "/" & sayfa3 & "/" & sayfa4 & ".asp"
+						if dosyakontrol(dosyaad) = True then
+							Server.Execute dosyaad
+						end if
+					elseif sayfa3 <> "" then
+						dosyaad = "/" & sayfa3 & ".asp"
+						if dosyakontrol(dosyaad) = True then
+							Server.Execute dosyaad
+						end if
+					end if
+				'### sayfayı ateşle
+				'### sayfayı ateşle
+				Response.Write "</div>"
+			'########### ORTA ALAN
+			'########### ORTA ALAN
+			'########### ALT BAR
+			'########### ALT BAR
+				Response.Write "<footer class=""footer"">"
+				Response.Write "<div class=""d-sm-flex justify-content-center justify-content-sm-between"">"
+				Response.Write "<span class=""text-muted text-center text-sm-left d-block d-sm-inline-block"">Copyright © " & year(date()) & " <a href=""http://" & firmaURL & """ target=""_blank"">" & firmaAd & "</a>. " & translate("Her Hakkı Saklıdır","","") & ".</span>"
+				'Response.Write "<span class=""float-none float-sm-right d-block mt-1 mt-sm-0 text-center"">Hand-crafted & made with <i class=""mdi mdi-heart text-danger""></i></span>"
+				Response.Write "</div>"
+				Response.Write "</footer>"
+			'########### ALT BAR
+			'########### ALT BAR
 		Response.Write "</div>"
-	'########### ORTA ALAN
-	'########### ORTA ALAN
-
-
-
-
-
-
-
-	'########### ALT BAR
-	'########### ALT BAR
-		Response.Write "<footer class=""footer"">"
-		Response.Write "<div class=""d-sm-flex justify-content-center justify-content-sm-between"">"
-		Response.Write "<span class=""text-muted text-center text-sm-left d-block d-sm-inline-block"">Copyright © " & year(date()) & " <a href=""http://" & firmaURL & """ target=""_blank"">" & firmaAd & "</a>. " & translate("Her Hakkı Saklıdır","","") & ".</span>"
-		'Response.Write "<span class=""float-none float-sm-right d-block mt-1 mt-sm-0 text-center"">Hand-crafted & made with <i class=""mdi mdi-heart text-danger""></i></span>"
-		Response.Write "</div>"
-		Response.Write "</footer>"
-	'########### ALT BAR
-	'########### ALT BAR
-
-
-
-
-
-	Response.Write "</div>"
 	Response.Write "</div>"
 	Response.Write "</div>"
 else
+
+
 	call logla("Şifre Giriş Ekranı")
 	Response.Write "<div class=""container-fluid mt-5"">"
 	Response.Write "<div class=""row"">"
@@ -1067,4 +927,5 @@ Response.Write "<div class=""modal fade"" id=""modal-dialogfit"" role=""dialog""
 
 Response.Write "</body>"
 Response.Write "</html>"
-%>
+
+%><!--#include virtual="/reg/rs.asp" -->

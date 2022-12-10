@@ -10,6 +10,9 @@ Response.Flush()
     call logla(mesaj)
 
 
+'//FIXME - türünü okundu işaretle butonu ekle
+
+
 	'#### TABLO
 		Response.Write "<div class=""container-fluid"">"
 		Response.Write "<div class=""row"">"

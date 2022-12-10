@@ -40,6 +40,7 @@ if gorevID <> "" then
 				anaBirimID		=	rs("anaBirimID")
 				uzunBirim		=	rs("uzunBirim")
 				hareketKontrol	=	rs("hareketKontrol")
+				rafOmru			=	rs("rafOmru")
 				defDeger		=	anaBirimID & "###" & uzunBirim
             rs.close
 			
@@ -63,13 +64,17 @@ end if
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Ad</span>"
 				call forminput("stokAd",stokAd,"","","",inpKontrol,"stokAd","")
 			Response.Write "</div>"
-			Response.Write "<div class=""col-sm-6 my-1"">"
+			Response.Write "<div class=""col-sm-4 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Türü</span>"
 				call formselectv2("stokTuru",int(stokTuru),"","","stokTuru","","stokTuru",stokTipDegerler,"")
 			Response.Write "</div>"
-			Response.Write "<div class=""col-sm-6 my-1"">"
+			Response.Write "<div class=""col-sm-4 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Minumum Stok Miktarı</span>"
 				call forminput("minStok",minStok,"","","","","minStok","")
+			Response.Write "</div>"
+			Response.Write "<div class=""col-sm-4 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Raf Ömrü (Ay)</span>"
+				call forminput("rafOmru",rafOmru,"","ay cinsinden","","","rafOmru","")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-6 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Mal Kabulde İlk Giriş Kalite Kontrol Depoya</span>"
@@ -79,6 +84,7 @@ end if
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün ana birim</span>"
 				if hareketKontrol > 0 then
 					Response.Write "<div class=""mt-2"">" & uzunBirim & "<span class=""text-danger pointer ml-2"" onclick=""swal('Ürün hareket görmüş, birim değiştirilemez.','')""><i class=""mdi mdi-information-outline""></i></span></div>"
+					call formhidden("anaBirimID",anaBirimID,"","","","","anaBirimID","")
 				else
 					call formselectv2("anaBirimID","","","","formSelect2 anaBirimID border inpReset","","anaBirimID","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-idKullan=""evet"" data-defdeger="""&defDeger&"""")
 				end if

@@ -30,13 +30,6 @@ if ssoID = "" then
 end if
 
 
-
-
-
-
-
-
-
 server.ScriptTimeout = 3000
 
 Response.Flush()
@@ -97,38 +90,60 @@ Response.Write "<input type=""hidden"" name=""cariTur"" id=""cariTur"" value="""
                         'stok seç
                         'stok seç
                             Response.Write "<div class=""col-lg-4 col-xs-12 mt10"">"
-                            sorgu = "select STOK_KODU,STOK_ADI,SATIS_FIAT1,SATIS_FIAT2,SATIS_FIAT3,SATIS_FIAT4,OLCU_BR1,OLCU_BR2,GRUP_KODU,PAY_1,PAYDA_1,PAY2,PAYDA2 "
-                            sorgu = sorgu & ",STOK = ISNULL(((select sum(STHAR_GCMIK) FROM TBLSTHAR WHERE STOK_KODU = TBLSTSABIT.STOK_KODU and STHAR_GCKOD = 'G'and DEPO_KODU ='1')-(select sum(STHAR_GCMIK) FROM TBLSTHAR WHERE STOK_KODU = TBLSTSABIT.STOK_KODU and STHAR_GCKOD = 'C' and DEPO_KODU ='1')),0)"
-                            sorgu = sorgu & "from TBLSTSABIT "
+                            ' sorgu = "select STOK_KODU,STOK_ADI,SATIS_FIAT1,SATIS_FIAT2,SATIS_FIAT3,SATIS_FIAT4,OLCU_BR1,OLCU_BR2,GRUP_KODU,PAY_1,PAYDA_1,PAY2,PAYDA2 "
+                            ' sorgu = sorgu & ",STOK = ISNULL(((select sum(STHAR_GCMIK) FROM TBLSTHAR WHERE STOK_KODU = TBLSTSABIT.STOK_KODU and STHAR_GCKOD = 'G'and DEPO_KODU ='1')-(select sum(STHAR_GCMIK) FROM TBLSTHAR WHERE STOK_KODU = TBLSTSABIT.STOK_KODU and STHAR_GCKOD = 'C' and DEPO_KODU ='1')),0)"
+                            ' sorgu = sorgu & "from TBLSTSABIT "
+                            ' if sb_fiyatiSirifOlanStoklariGizle = true then
+                            '     sorgu = sorgu & " where (SATIS_FIAT1 > 0 or SATIS_FIAT2 > 0 or SATIS_FIAT3 > 0 or SATIS_FIAT4 > 0)"
+                            ' end if
+                            ' sorgu = sorgu & " ORDER BY STOK_ADI"
+                            sorgu = vbcrlf
+                            sorgu = sorgu & "select" & vbcrlf
+                            sorgu = sorgu & "SATIS_FIAT4 FIYAT1," & vbcrlf
+                            sorgu = sorgu & "SATIS_FIAT4 / (PAY_1/PAYDA_1 ) FIYAT2," & vbcrlf
+                            sorgu = sorgu & "SATIS_FIAT4 / (PAY2/PAYDA2 ) FIYAT3," & vbcrlf
+                            sorgu = sorgu & "STOK_KODU,STOK_ADI,SATIS_FIAT1,SATIS_FIAT2,SATIS_FIAT3,SATIS_FIAT4,OLCU_BR1,OLCU_BR2,OLCU_BR3,GRUP_KODU,PAY_1,PAYDA_1,PAY2,PAYDA2," & vbcrlf
+                            sorgu = sorgu & "STOK = ISNULL(((select sum(STHAR_GCMIK) FROM TBLSTHAR WHERE STOK_KODU = TBLSTSABIT.STOK_KODU and STHAR_GCKOD = 'G'and DEPO_KODU ='1')-(select sum(STHAR_GCMIK) FROM TBLSTHAR WHERE STOK_KODU = TBLSTSABIT.STOK_KODU and STHAR_GCKOD = 'C' and DEPO_KODU ='1')),0)" & vbcrlf
+                            sorgu = sorgu & " from TBLSTSABIT" & vbcrlf
                             if sb_fiyatiSirifOlanStoklariGizle = true then
-                                sorgu = sorgu & " where SATIS_FIAT1 > 0 or SATIS_FIAT2 > 0 or SATIS_FIAT3 > 0 or SATIS_FIAT4 > 0 "
+                                sorgu = sorgu & " where (SATIS_FIAT1 > 0 or SATIS_FIAT2 > 0 or SATIS_FIAT3 > 0 or SATIS_FIAT4 > 0)" & vbcrlf
                             end if
-                            sorgu = sorgu & " ORDER BY STOK_ADI"
+                            sorgu = sorgu & "ORDER BY STOK_ADI" & vbcrlf
                             rs.open sorgu,ssov5,1,3
                                 Response.Write "<span class=""badge badge-secondary"">" & translate("Stok Adı","","") & "</span>"
                                 Response.Write "<select name=""STOK_KODU"" id=""STOK_KODU"" class=""form-control"" onChange=""skfiyatbul();"">"
                                 Response.Write "<option value="""">--Stok Seçin--</option>"
                                 do while not rs.eof
-                                    Response.Write "<option value=""" & rs("STOK_KODU") & """ "
+                                    STOK_KODU       =   rs("STOK_KODU")
+                                    OLCU_BR1        =   rs("OLCU_BR1")
+                                    OLCU_BR2        =   rs("OLCU_BR2")
+                                    OLCU_BR3        =   rs("OLCU_BR3")
+                                    GRUP_KODU       =   rs("GRUP_KODU")
+                                    STOK            =   rs("STOK")
+                                    PAY_1           =   rs("PAY_1")
+                                    PAYDA_1         =   rs("PAYDA_1")
+                                    STOK_ADI        =   rs("STOK_ADI")
+                                    Response.Write "<option value=""" & STOK_KODU & """ "
                                     if sb_datafiat1 <> "" then
-                                        Response.Write " data-fiat1=""" & rs(sb_datafiat1) & """ "		'toptan adet
+                                        Response.Write " data-fiat1=""" & rs(sb_datafiat1) & """ "		'ölçü birim 1
                                     end if
                                     if sb_datafiat2 <> "" then
-                                        Response.Write " data-fiat2=""" & rs(sb_datafiat2) & """ "		'toptan koli
+                                        Response.Write " data-fiat2=""" & rs(sb_datafiat2) & """ "		'ölçü birim 2
                                     end if
                                     if sb_datafiat3 <> "" then
-                                        Response.Write " data-fiat3=""" & rs(sb_datafiat3) & """ "		'market adet
+                                        Response.Write " data-fiat3=""" & rs(sb_datafiat3) & """ "		'ölçü birim 3
                                     end if
                                     if sb_datafiat4 <> "" then
-                                        Response.Write " data-fiat4=""" & rs(sb_datafiat4) & """ "		'market koli
+                                        Response.Write " data-fiat4=""" & rs(sb_datafiat4) & """ "		'ölçü birim 4
                                     end if
-                                    Response.Write " data-olcu1=""" & rs("OLCU_BR1") & """ "
-                                    Response.Write " data-olcu2=""" & rs("OLCU_BR2") & """ "
-                                    Response.Write " data-GRUP_KODU=""" & rs("GRUP_KODU") & """ "
-                                    Response.Write " data-STOK=""" & rs("STOK") & """ "
-                                    Response.Write " data-PAY1=""" & rs("PAY_1") & """ "
-                                    Response.Write " data-PAYDA1=""" & rs("PAYDA_1") & """ "
-                                    Response.Write ">" & rs("STOK_ADI") & " /StokBakiye:" & rs("STOK") & "</option>"
+                                    Response.Write " data-olcu1=""" & OLCU_BR1 & """ "
+                                    Response.Write " data-olcu2=""" & OLCU_BR2 & """ "
+                                    Response.Write " data-olcu3=""" & OLCU_BR3 & """ "
+                                    Response.Write " data-GRUP_KODU=""" & GRUP_KODU & """ "
+                                    Response.Write " data-STOK=""" & STOK & """ "
+                                    Response.Write " data-PAY1=""" & PAY_1 & """ "
+                                    Response.Write " data-PAYDA1=""" & PAYDA_1 & """ "
+                                    Response.Write ">" & STOK_ADI & " /StokBakiye:" & STOK & "</option>"
                                 rs.movenext
                                 loop
                                 Response.Write "</select>"
@@ -148,7 +163,7 @@ Response.Write "<input type=""hidden"" name=""cariTur"" id=""cariTur"" value="""
                                 Response.Write "<option value="""">--Birim Seçin--</option>"
                                 do while not rs.eof
                                     Response.Write "<option value=""" & rs("OLCU_BR1") & """ "
-                                    Response.Write " class=""olb" & rs("OLCU_BR1") & """ "
+                                    Response.Write " class=""d-none olb" & rs("OLCU_BR1") & """ "
                                     Response.Write ">" & rs("OLCU_BR1") & "</option>"
                                 rs.movenext
                                 loop
@@ -376,14 +391,7 @@ Response.Write "{"
 		Response.Write "$('#cariTur').val(cariRaporKodu5);"
 		Response.Write "stokGrupKodu	=	$('#STOK_KODU').children('option:selected').attr('data-GRUP_KODU');"
 		Response.Write "val = $('#STOK_KODU').children('option:selected').val();"
-			'//if(cariRaporKodu5=='MARKET'&&stokGrupKodu=='DOGANAY') {
-			'//	datafiat1 = $('#STOK_KODU').children('option:selected').attr('data-fiat3');			// bu kısmı forbest için kullanmışız
-			'//	datafiat2 = $('#STOK_KODU').children('option:selected').attr('data-fiat4');
-			'//} else {
-		
-
 			Response.Write "if($('#adet').val()==''){$('#adet').val('0')};"
-
 			if sb_datafiat1 <> "" then
 				Response.Write "datafiat1 = $('#STOK_KODU').children('option:selected').attr('data-fiat1');"
 				Response.Write "console.log('datafiat1 : ' + datafiat1);"
@@ -392,54 +400,63 @@ Response.Write "{"
 				Response.Write "datafiat2 = $('#STOK_KODU').children('option:selected').attr('data-fiat2');"
 				Response.Write "console.log('datafiat2 : ' + datafiat2);"
 			end if
-		'//}
-
-' Response.Write "alert(cariRaporKodu5);"
-
-
-
-
-
-		Response.Write "dataolcu1 = $('#STOK_KODU').children('option:selected').attr('data-olcu1');"
-		Response.Write "dataolcu2 = $('#STOK_KODU').children('option:selected').attr('data-olcu2');"
-		'//adet = $('#adet').children('option:selected').val();
-		Response.Write "adet = $('#adet').val();"
+			if sb_datafiat3 <> "" then
+				Response.Write "datafiat3 = $('#STOK_KODU').children('option:selected').attr('data-fiat3');"
+				Response.Write "console.log('datafiat3 : ' + datafiat3);"
+			end if
+            Response.Write "dataolcu1 = $('#STOK_KODU').children('option:selected').attr('data-olcu1');"
+            Response.Write "dataolcu2 = $('#STOK_KODU').children('option:selected').attr('data-olcu2');"
+            Response.Write "dataolcu3 = $('#STOK_KODU').children('option:selected').attr('data-olcu3');"
+            Response.Write "adet = $('#adet').val();"
 	'// alanları topla
 	'// class gizleme
-		Response.Write "$('#OLCU_BR1').children('option').addClass('hide');"
+		Response.Write "$('#OLCU_BR1').children('option').addClass('d-none');"
 	'// class gizleme
 	'// ölçü birimi içerik güncelleme
-
 		if sb_datafiat1 <> "" then
 			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).html(dataolcu1 + ' / 1' + dataolcu1 + '=' + datafiat1 + ' TL');"
 			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).attr('data-fiat',datafiat1);"
-			'Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
-			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
+			'#Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
+			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('d-none');"
 			Response.Write "if(datafiat1==0){"
-				Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).addClass('hide');"'gizle
-				'Response.Write "$('#OLCU_BR1').val(dataolcu2);"'diğerini seç
+				Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).addClass('d-none');"'gizle
+				'#Response.Write "$('#OLCU_BR1').val(dataolcu2);"'diğerini seç
 			Response.Write "}else{"
-				'Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
-				'Response.Write "$('#OLCU_BR1').val(dataolcu1);"'kendini seç
+				'#Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
+				'#Response.Write "$('#OLCU_BR1').val(dataolcu1);"'kendini seç
 			Response.Write "};"
-			'Response.Write "if(datafiat1==0){$('#OLCU_BR1 > .olb' + dataolcu1).addClass('hide');};"
-			
+			'#Response.Write "if(datafiat1==0){$('#OLCU_BR1 > .olb' + dataolcu1).addClass('hide');};"
 		end if
 		if sb_datafiat2 <> "" then
 			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu2).html(dataolcu2 + ' / 1' + dataolcu2 + '=' + datafiat2 + ' TL');"
 			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu2).attr('data-fiat',datafiat2);"
-			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu2).removeClass('hide');"
-			'Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
+			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu2).removeClass('d-none');"
+			'#Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
 			Response.Write "if(datafiat2==0){"
-				Response.Write "$('#OLCU_BR1 > .olb' + dataolcu2).addClass('hide');"'gizle
-				'Response.Write "$('#OLCU_BR1').val(dataolcu1);"'diğerini seç
+				Response.Write "$('#OLCU_BR1 > .olb' + dataolcu2).addClass('d-none');"'gizle
+				'#Response.Write "$('#OLCU_BR1').val(dataolcu1);"'diğerini seç
 			Response.Write "}else{"
-				'Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
+				'#Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
 			Response.Write "};"
-			
 		end if
-
+		if sb_datafiat3 <> "" then
+			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu3).html(dataolcu3 + ' / 1' + dataolcu3 + '=' + datafiat3 + ' TL');"
+			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu3).attr('data-fiat',datafiat3);"
+			Response.Write "$('#OLCU_BR1 > .olb' + dataolcu3).removeClass('d-none');"
+			'#Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
+			Response.Write "if(datafiat3==0){"
+				Response.Write "$('#OLCU_BR1 > .olb' + dataolcu3).addClass('d-none');"'gizle
+				'#Response.Write "$('#OLCU_BR1').val(dataolcu1);"'diğerini seç
+			Response.Write "}else{"
+				'#Response.Write "$('#OLCU_BR1 > .olb' + dataolcu1).removeClass('hide');"
+			Response.Write "};"
+		end if
 	'// ölçü birimi içerik güncelleme
+
+
+
+
+
 	'// alanları düzenle
 	'//	datafiat1 = datafiat1.replace(',','.');
 	'//	datafiat2 = datafiat2.replace(',','.');

@@ -127,7 +127,7 @@ else
 						Response.Write "<div class=""card-body""><div class=""row"">"
 					sorgu = ""
 					sorgu = sorgu & "SELECT"
-					sorgu = sorgu & " t1.receteAdimID,"
+					sorgu = sorgu & " t1.receteAdimID, t1.etiketeEkle, t1.islemAciklama,"
 					sorgu = sorgu & " t2.ad,"
 					sorgu = sorgu & " t1.stokID,"
 					sorgu = sorgu & " t3.stokKodu,"
@@ -156,6 +156,7 @@ else
 							Response.Write "<th class=""col-1"" scope=""col""></th>"
 							Response.Write "<th class=""col-2"" scope=""col"">İşlem Tipi</th>"
 							Response.Write "<th class=""col-4"" scope=""col"">İşlem Açıklama</th>"
+							Response.Write "<th class=""col-1"" scope=""col"">Etiket</th>"
 							Response.Write "<th class=""col-1"" scope=""col"">Miktar</th>"
 							Response.Write "<th class=""col-1"" scope=""col"">İşgücü Sayı</th>"
 							Response.Write "<th class=""col-2"" scope=""col"">Alt Reçete</th>"
@@ -168,6 +169,8 @@ else
 							altReceteAd		=	rs("receteAd")
 							receteAdimID	=	rs("receteAdimID")
 							altReceteAdimID	=	rs("altReceteAdimID")
+							etiketeEkle		=	rs("etiketeEkle")
+							islemAciklama	=	rs("islemAciklama")
 								Response.Write "<tr>"
 									Response.Write "<td>"
 									if yetkiKontrol >= 5 then
@@ -203,8 +206,19 @@ else
 									end if
 									Response.Write "</td>"
 									Response.Write "<td>" & rs("ad") & "</td>"
-									Response.Write "<td>" & rs("stokKodu") & " - " & rs("stokAd") & "</td>"
-									Response.Write "<td class=""text-right"">" & rs("miktar") & " " & rs("miktarBirim") & "</td>"
+									Response.Write "<td>"
+										Response.Write "<div>" & rs("stokKodu") & " - " & rs("stokAd") & "</div>"
+										Response.Write "<div class=""fonkucuk2 font-italic text-info pl-3"">" & islemAciklama & "</div>"
+									Response.Write "</td>"
+									Response.Write "<td class=""text-center text-success"">"
+										if etiketeEkle = 1 then
+											Response.Write "<i class=""mdi mdi-checkbox-marked""></i>"
+										else
+										end if
+									Response.Write "</td>"
+									Response.Write "<td class=""text-right"">"
+										Response.Write "<div>" & rs("miktar") & " " & rs("miktarBirim") & "</div>"
+									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">" & rs("isGucuSayi") & "</td>"
 									Response.Write "<td>"
 										Response.Write "<div class=""pointer"" onclick=""modalajax('/recete/recete_adim_yeni.asp?islem=gor&receteAdimID=" & altReceteAdimID & "&receteID=" & altReceteID & "')"">"

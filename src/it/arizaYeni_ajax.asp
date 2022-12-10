@@ -11,13 +11,13 @@ Response.Flush()
 
 call logla("Arıza Bildirim Ekranı")
 
-yetkiIT = yetkibul("IT")
+yetkiBilgiIslem = yetkibul("Bilgi İşlem")
 
 
 '### PERSONELLER
 '### PERSONELLER
 	if hata = "" then
-		sorgu = "Select ad,Id from Personel.Personel where expiration is null and firmaID = " & firmaID & " and (gorev like N'%Bilgi İşlem%' or gorev like N'BİLGİ İŞLEM%') and (expiration >= '" & tarihsql(date()) & "' or expiration is null) order by Ad ASC"
+		sorgu = "Select ad,Id from Personel.Personel where firmaID = " & firmaID & " and (expiration >= '" & tarihsql(date()) & "' or expiration is null) order by Ad ASC"
 		rs.open sorgu,sbsv5,1,3
 			personelArr = "=|"
 			do while not rs.eof
@@ -39,7 +39,7 @@ yetkiIT = yetkibul("IT")
 '### PERSONELLER
 '### PERSONELLER
 	if hata = "" then
-		sorgu = "Select ad,Id from Personel.Personel where expiration is null and firmaID = " & firmaID & " and songiris >= '" & tarihsql(date()-150) & "' and (expiration >= '" & tarihsql(date()) & "' or expiration is null) order by Ad ASC"
+		sorgu = "Select ad,Id from Personel.Personel where firmaID = " & firmaID & " and (expiration >= '" & tarihsql(date()) & "' or expiration is null) order by Ad ASC"
 		rs.open sorgu,sbsv5,1,3
 			personelArrDiger = "=|"
 			do while not rs.eof
@@ -56,6 +56,24 @@ yetkiIT = yetkibul("IT")
 '### PERSONELLER
 
 
+'### ETİKETLER
+'### ETİKETLER
+	if hata = "" then
+		sorgu = "Select etiketAd,etiketID from IT.etiket where firmaID = " & firmaID & " order by etiketAd ASC"
+		rs.open sorgu,sbsv5,1,3
+			etiketArrDiger = "=|"
+			do while not rs.eof
+				etiketArrDiger = etiketArrDiger & rs("etiketAd")
+				etiketArrDiger = etiketArrDiger & "="
+				etiketArrDiger = etiketArrDiger & rs("etiketID")
+				etiketArrDiger = etiketArrDiger & "|"
+			rs.movenext
+			loop
+			etiketArrDiger = left(etiketArrDiger,len(etiketArrDiger)-1)
+		rs.close
+	end if
+'### ETİKETLER
+'### ETİKETLER
 
 
 
@@ -71,7 +89,7 @@ yetkiIT = yetkibul("IT")
 	Response.Write "<form action=""/it/arizaYeni_Kaydet.asp"" method=""post"" class=""ajaxform"">"
 		' Response.Write "<input type=""hidden"" name=""personelID"" value=""" & kid & """ />"
 			Response.Write "<div class=""row mt-2"">"
-				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs"">"
+				Response.Write "<div class=""col-lg-3 col-md-3 col-sm-3 col-xs"">"
 					Response.Write "<div class=""badge badge-danger"">" & translate("Öncelik","","") & "</div>"
 					degerler = ""
 					for i = 0 to ubound(oncelikArr)
@@ -84,28 +102,37 @@ yetkiIT = yetkibul("IT")
 				Response.Write "</div>"
 
 
-			if yetkiIT > 0 then
-				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs"">"
+			if yetkiBilgiIslem > 0 then
+				Response.Write "<div class=""col-lg-3 col-md-3 col-sm-3 col-xs"">"
 					'## PERSONEL 1
 					'## PERSONEL 1
-							Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
-							Response.Write "<div class=""badge badge-secondary"">" & translate("Kayıt Oluşturan Personel","","") & "</div>"
-								call formselectv2("olusturanID",olusturanID,"","","","","olusturanID",personelArrDiger,"")
-							Response.Write "</div>"
-					'## PERSONEL 1
-					'## PERSONEL 1
-				Response.Write "</div>"
-				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs"">"
-					'## PERSONEL 1
-					'## PERSONEL 1
-							Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
-							Response.Write "<div class=""badge badge-secondary"">" & translate("Sorumlu Personel","","") & "</div>"
-								call formselectv2("personelID",personelID,"","","","","personelID",personelArr,"")
-							Response.Write "</div>"
+						Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+						Response.Write "<div class=""badge badge-secondary"">" & translate("Kayıt Oluşturan Personel","","") & "</div>"
+							call formselectv2("olusturanID",olusturanID,"","","","","olusturanID",personelArrDiger,"")
+						Response.Write "</div>"
 					'## PERSONEL 1
 					'## PERSONEL 1
 				Response.Write "</div>"
 			end if
+				Response.Write "<div class=""col-lg-3 col-md-3 col-sm-3 col-xs"">"
+					'## PERSONEL 1
+					'## PERSONEL 1
+						Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+						Response.Write "<div class=""badge badge-secondary"">" & translate("Sorumlu Personel","","") & "</div>"
+							call formselectv2("personelID",personelID,"","","","","personelID",personelArr,"")
+						Response.Write "</div>"
+					'## PERSONEL 1
+					'## PERSONEL 1
+				Response.Write "</div>"
+				if sb_etiketEklenebilsin = true then
+					Response.Write "<div class=""col-lg-3 col-md-3 col-sm-3 col-xs"">"
+						Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+						Response.Write "<div class=""badge badge-secondary"">" & translate("Etiket","","") & "</div>"
+							call formselectv2("etiketID",etiketID,"","","","","etiketID",etiketArrDiger,"")
+						Response.Write "</div>"
+					Response.Write "</div>"
+				end if
+
 
 
 
