@@ -36,6 +36,10 @@ yetkiKontrol = yetkibul(modulAd)
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 0 then
 
+<<<<<<< HEAD
+=======
+Response.Write isTur&"jıohjıohıuohuıo"
+>>>>>>> 814fb75883890a3a685f0c6407dc458813d87f5b
 
 		Response.Write "<div class=""card"">"
 			Response.Write "<div class=""card-header text-white bg-info"">"
