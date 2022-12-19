@@ -66,15 +66,21 @@ if firmaID = 5 then
 	'## TEKLİF
 	'## TEKLİF
 
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+		sb_modulAdi				=	"Görev Takip"
+		sb_cariyeGorevVerilsin	=	false
+		sb_etiketEklenebilsin	=	true
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
 
-
-
-
-
-
-
-
-
+	' ## MODULLER
+	' ## MODULLER
+		sb_modul_gorevTakip		=	true
+		sb_modul_webmail		=	true
+		sb_modul_teklif			=	true
+	' ## MODULLER
+	' ## MODULLER
 end if
 
 if firmaID = 6 then
@@ -174,7 +180,36 @@ if firmaID = 4 then
 	'## SİPARİŞ MODULÜ İÇİN
 	'## SİPARİŞ MODULÜ İÇİN
 
-    sb_TBLSTSABIT_cache    =   false
+    ' sb_TBLSTSABIT_cache    =   false
+
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+		sb_modulAdi				=	"Görev Takip"
+		sb_cariyeGorevVerilsin	=	false
+		sb_etiketEklenebilsin	=	false
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+
+
+	' ## MODULLER
+	' ## MODULLER
+		sb_modul_gorevTakip		=	false
+		sb_modul_webmail		=	false
+		sb_modul_teklif			=	false
+	' ## MODULLER
+	' ## MODULLER
+
+
+
+
+
+
+
+
+
+
+
+
 
 end if
 
@@ -228,11 +263,20 @@ if firmaID = 8 then
 
 	' ## GÖREV TAKİP
 	' ## GÖREV TAKİP
+		sb_modulAdi				=	"Görev Takip"
 		sb_cariyeGorevVerilsin	=	true
 		sb_etiketEklenebilsin	=	true
 	' ## GÖREV TAKİP
 	' ## GÖREV TAKİP
 
+
+	' ## MODULLER
+	' ## MODULLER
+		sb_modul_gorevTakip		=	true
+		sb_modul_webmail		=	false
+		sb_modul_teklif			=	false
+	' ## MODULLER
+	' ## MODULLER
 
 
 

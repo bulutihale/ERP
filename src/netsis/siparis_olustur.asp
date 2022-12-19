@@ -1,7 +1,6 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
 
-
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
     call sessiontest()
@@ -20,7 +19,9 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
+
 call logla("Sipariş Oluşturuluyor")
+
 
 if ssoID = "" then
 	hatamesaj = "Plasiyer Kodu Bulunamadı"
@@ -44,234 +45,208 @@ end if
 
 '#### fiyatları yeniden hesapla
 '#### fiyatları yeniden hesapla
-	sorgu = "" & vbcrlf
-	sorgu = sorgu & "select " & vbcrlf
-	sorgu = sorgu & "netsis.siparisKalemTemp.sipno " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.adet " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.fiyat " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat_modifiye " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.tarih " & vbcrlf
-	
-	sorgu = sorgu & ",netsis.siparisKalemTemp.birim " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.OLCUBR " & vbcrlf
+	' if 1 = 2 then
+	' 	sorgu = "" & vbcrlf
+	' 	sorgu = sorgu & "select " & vbcrlf
+	' 	sorgu = sorgu & "netsis.siparisKalemTemp.sipno " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.adet " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.fiyat " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat_modifiye " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.tarih " & vbcrlf
+		
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.birim " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.OLCUBR " & vbcrlf
 
-	sorgu = sorgu & ",netsis.siparisKalemTemp.pay " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.payda " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.pay " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.payda " & vbcrlf
 
-	sorgu = sorgu & ",netsis.siparisKalemTemp.cariTur " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.cariTur " & vbcrlf
 
-	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto1 " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto2 " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto3 " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto4 " & vbcrlf
-	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto1 " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto2 " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto3 " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto4 " & vbcrlf
+	' 	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat " & vbcrlf
 
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_ADI " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT1 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT2 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT3 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT4 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.KDV_ORANI " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR1 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR2 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_ADI " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT1 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT2 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT3 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT4 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.KDV_ORANI " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR1 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR2 " & vbcrlf
 
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY_1 AS P1 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA_1 AS PD1 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY2 AS P2 " & vbcrlf
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA2 AS PD2 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY_1 AS P1 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA_1 AS PD1 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY2 AS P2 " & vbcrlf
+	' 	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA2 AS PD2 " & vbcrlf
 
-	sorgu = sorgu & "from netsis.siparisKalemTemp " & vbcrlf
-	sorgu = sorgu & "INNER JOIN " & firmaSSOdb & ".dbo.TBLSTSABIT on netsis.siparisKalemTemp.STOK_KODU = " & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU " & vbcrlf
-	sorgu = sorgu & "where netsis.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (netsis.siparisKalemTemp.sipno = '' or netsis.siparisKalemTemp.sipno is null)" & vbcrlf
+	' 	sorgu = sorgu & "from netsis.siparisKalemTemp " & vbcrlf
+	' 	sorgu = sorgu & "INNER JOIN " & firmaSSOdb & ".dbo.TBLSTSABIT on netsis.siparisKalemTemp.STOK_KODU = " & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU " & vbcrlf
+	' 	sorgu = sorgu & "where netsis.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (netsis.siparisKalemTemp.sipno = '' or netsis.siparisKalemTemp.sipno is null)" & vbcrlf
 
-	rs.open sorgu,sbsv5,1,3
-		toplamfiyat =	0
-		toplamkdv	=	0
-		for kalemsayisi = 1 to rs.recordcount
-			adet	    =	rs("adet")
-			birim	    =	rs("birim")
-			SATIS_FIAT1	=	rs("SATIS_FIAT1")
-			SATIS_FIAT2	=	rs("SATIS_FIAT2")
-			SATIS_FIAT3	=	rs("SATIS_FIAT3")
-			SATIS_FIAT4	=	rs("SATIS_FIAT4")
-			OLCU_BR1	=	rs("OLCU_BR1")
-			OLCU_BR2	=	rs("OLCU_BR2")
-			KDV_ORANI	=	rs("KDV_ORANI")
-			p1			=	rs("P1")
-			p2			=	rs("P2")
-			pd1			=	rs("PD1")
-			pd2			=	rs("PD2")
-			cariTur		=	rs("cariTur")
-			iskonto1	=	rs("iskonto1")
-			iskonto2	=	rs("iskonto2")
-			iskonto3	=	rs("iskonto3")
-			iskonto4	=	rs("iskonto4")
-			birimfiyat	=	rs("birimfiyat")
-			birimfiyat_modifiye	=	rs("birimfiyat_modifiye")
-			tarih		=	rs("tarih")
-            OLCUBR      =   rs("OLCUBR")
-            pay         =   rs("pay")
-            payda       =   rs("payda")
-			KDV_ORANI	=	str2int(KDV_ORANI)
+	' 	rs.open sorgu,sbsv5,1,3
+	' 		toplamfiyat =	0
+	' 		toplamkdv	=	0
+	' 		for kalemsayisi = 1 to rs.recordcount
+	' 			adet	    =	rs("adet")
+	' 			birim	    =	rs("birim")
+	' 			SATIS_FIAT1	=	rs("SATIS_FIAT1")
+	' 			SATIS_FIAT2	=	rs("SATIS_FIAT2")
+	' 			SATIS_FIAT3	=	rs("SATIS_FIAT3")
+	' 			SATIS_FIAT4	=	rs("SATIS_FIAT4")
+	' 			OLCU_BR1	=	rs("OLCU_BR1")
+	' 			OLCU_BR2	=	rs("OLCU_BR2")
+	' 			KDV_ORANI	=	rs("KDV_ORANI")
+	' 			p1			=	rs("P1")
+	' 			p2			=	rs("P2")
+	' 			pd1			=	rs("PD1")
+	' 			pd2			=	rs("PD2")
+	' 			cariTur		=	rs("cariTur")
+	' 			iskonto1	=	rs("iskonto1")
+	' 			iskonto2	=	rs("iskonto2")
+	' 			iskonto3	=	rs("iskonto3")
+	' 			iskonto4	=	rs("iskonto4")
+	' 			birimfiyat	=	rs("birimfiyat")
+	' 			birimfiyat_modifiye	=	rs("birimfiyat_modifiye")
+	' 			tarih		=	rs("tarih")
+	' 			OLCUBR      =   rs("OLCUBR")
+	' 			pay         =   rs("pay")
+	' 			payda       =   rs("payda")
+	' 			KDV_ORANI	=	str2int(KDV_ORANI)
 
-			if isnull(birimfiyat_modifiye) = True then
-				birimfiyat_modifiye = 0
-			end if
-			birimfiyat_modifiye = str2fiyat(birimfiyat_modifiye)
-'Response.Write OLCU_BR1
-'Response.End()
+	' 			if isnull(birimfiyat_modifiye) = True then
+	' 				birimfiyat_modifiye = 0
+	' 			end if
+	' 			birimfiyat_modifiye = str2fiyat(birimfiyat_modifiye)
 
+	' 			'## eski tarihli sipariş
+	' 			'## eski tarihli sipariş
+	' 			if tarih < date() then
+	' 			else
+	' 			end if
+	' 			'## eski tarihli sipariş
+	' 			'## eski tarihli sipariş
 
+	' 			'## fiyat hesapla
+	' 			if cariTur = "TOPTAN" then
+	' 				if birim = OLCU_BR1 then
+	' 					Response.Write "1"
+	' 					fiyat		=	formatnumber(SATIS_FIAT1,4)
+	' 					fiyat		=	str2fiyat(fiyat)
+	' 					'## birim fiyat değiştirilmiş
+	' 					if birimfiyat_modifiye > 0 then
+	' 						if fiyat < birimfiyat_modifiye then
+	' 							'yeni fiyat elle girilen fiyat olsun
+	' 							fiyat = birimfiyat_modifiye
+	' 						end if
+	' 					end if
+	' 					'## birim fiyat değiştirilmiş
+	' 					adet		=	int(adet)
+	' 					rs("birimfiyat")	=	fiyat
+	' 					fiyat		=	fiyat * adet
+	' 					rs("fiyat")	=	fiyat
+	' 					' rs("OLCUBR")=	1
+	' 					' rs("pay")	=	p1
+	' 					' rs("payda")	=	pd1
+	' 					rs.update
+	' 				elseif birim = OLCU_BR2 then
+	' 					Response.Write "2"
+	' 					fiyat		=	formatnumber(SATIS_FIAT2,4)
+	' 					fiyat		=	str2fiyat(fiyat)
+	' 					'## birim fiyat değiştirilmiş
+	' 					if birimfiyat_modifiye > 0 then
+	' 						if fiyat < birimfiyat_modifiye then
+	' 							'yeni fiyat elle girilen fiyat olsun
+	' 							fiyat = birimfiyat_modifiye
+	' 						end if
+	' 					end if
+	' 					'## birim fiyat değiştirilmiş
+	' 					adet		=	int(adet)
+	' 					rs("birimfiyat")	=	fiyat
+	' 					fiyat		=	fiyat * adet
+	' 					rs("fiyat")	=	fiyat
+	' 					' rs("OLCUBR")=	2
+	' 					' rs("pay")	=	p1
+	' 					' rs("payda")	=	pd1
+	' 					rs.update
+	' 				end if
+	' 			else
+	' 				if birim = OLCU_BR1 then
+	' 					Response.Write "3"
+	' 					fiyat		=	formatnumber(SATIS_FIAT3,4)
+	' 					fiyat		=	str2fiyat(fiyat)
+	' 					'## birim fiyat değiştirilmiş
+	' 					if birimfiyat_modifiye > 0 then
+	' 						if fiyat < birimfiyat_modifiye then
+	' 							'yeni fiyat elle girilen fiyat olsun
+	' 							fiyat = birimfiyat_modifiye
+	' 						end if
+	' 					end if
+	' 					'## birim fiyat değiştirilmiş
+	' 					adet		=	int(adet)
+	' 					rs("birimfiyat")	=	fiyat
+	' 					fiyat		=	fiyat * adet
+	' 					rs("fiyat")	=	fiyat
+	' 					' rs("OLCUBR")=	1
+	' 					' rs("pay")	=	p1
+	' 					' rs("payda")	=	pd1
+	' 					rs.update
+	' 				elseif birim = OLCU_BR2 then
+	' 					Response.Write "4"
+	' 					fiyat		=	formatnumber(SATIS_FIAT4,4)
+	' 					fiyat		=	str2fiyat(fiyat)
+	' 					'## birim fiyat değiştirilmiş
+	' 					if birimfiyat_modifiye > 0 then
+	' 					Response.Write birimfiyat_modifiye
+	' 						if fiyat < birimfiyat_modifiye then
+	' 							'yeni fiyat elle girilen fiyat olsun
+	' 							fiyat = birimfiyat_modifiye
+	' 						end if
+	' 					end if
+	' 					'## birim fiyat değiştirilmiş
+	' 					adet		=	int(adet)
+	' 					rs("birimfiyat")	=	fiyat
+	' 					fiyat		=	fiyat * adet
+	' 					rs("fiyat")	=	fiyat
+	' 					' rs("OLCUBR")=	2
+	' 					' rs("pay")	=	p1
+	' 					' rs("payda")	=	pd1
+	' 					rs.update
+	' 				end if
+	' 			end if
 
+	' 			'## fiyat hesapla
+	' 			'## İSKONTO HESAPLA
+	' 				if iskonto1 > 0 then
+	' 					fiyat = fiyat - (fiyat * (iskonto1 / 100))
+	' 					if iskonto2 > 0 then
+	' 						fiyat = fiyat - (fiyat * (iskonto2 / 100))
+	' 						if iskonto3 > 0 then
+	' 							fiyat = fiyat - (fiyat * (iskonto3 / 100))
+	' 							if iskonto4 > 0 then
+	' 								fiyat = fiyat - (fiyat * (iskonto4 / 100))
+	' 							end if
+	' 						end if
+	' 					end if
+	' 				end if
+	' 			'## İSKONTO HESAPLA
+	' 			'## kdv hesapla
+	' 				kdv = kdvhesapla(fiyat,KDV_ORANI)
+	' 			'## kdv hesapla
+	' 			toplamfiyat =	toplamfiyat + rs("fiyat")
+	' 			toplamkdv	=	toplamkdv + kdv
+	' 			toplambirimfiyat	=	toplambirimfiyat + (rs("fiyat") - fiyat)
 
-
-'## eski tarihli sipariş
-'## eski tarihli sipariş
-if tarih < date() then
-else
-end if
-'## eski tarihli sipariş
-'## eski tarihli sipariş
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			'## fiyat hesapla
-			if cariTur = "TOPTAN" then
-				if birim = OLCU_BR1 then
-					Response.Write "1"
-					fiyat		=	formatnumber(SATIS_FIAT1,4)
-					fiyat		=	str2fiyat(fiyat)
-					'## birim fiyat değiştirilmiş
-					if birimfiyat_modifiye > 0 then
-						if fiyat < birimfiyat_modifiye then
-							'yeni fiyat elle girilen fiyat olsun
-							fiyat = birimfiyat_modifiye
-						end if
-					end if
-					'## birim fiyat değiştirilmiş
-					adet		=	int(adet)
-					rs("birimfiyat")	=	fiyat
-					fiyat		=	fiyat * adet
-					rs("fiyat")	=	fiyat
-					' rs("OLCUBR")=	1
-					' rs("pay")	=	p1
-					' rs("payda")	=	pd1
-					rs.update
-				elseif birim = OLCU_BR2 then
-					Response.Write "2"
-					fiyat		=	formatnumber(SATIS_FIAT2,4)
-					fiyat		=	str2fiyat(fiyat)
-					'## birim fiyat değiştirilmiş
-					if birimfiyat_modifiye > 0 then
-						if fiyat < birimfiyat_modifiye then
-							'yeni fiyat elle girilen fiyat olsun
-							fiyat = birimfiyat_modifiye
-						end if
-					end if
-					'## birim fiyat değiştirilmiş
-					adet		=	int(adet)
-					rs("birimfiyat")	=	fiyat
-					fiyat		=	fiyat * adet
-					rs("fiyat")	=	fiyat
-					' rs("OLCUBR")=	2
-					' rs("pay")	=	p1
-					' rs("payda")	=	pd1
-					rs.update
-				end if
-			else
-				if birim = OLCU_BR1 then
-					Response.Write "3"
-					fiyat		=	formatnumber(SATIS_FIAT3,4)
-					fiyat		=	str2fiyat(fiyat)
-					'## birim fiyat değiştirilmiş
-					if birimfiyat_modifiye > 0 then
-						if fiyat < birimfiyat_modifiye then
-							'yeni fiyat elle girilen fiyat olsun
-							fiyat = birimfiyat_modifiye
-						end if
-					end if
-					'## birim fiyat değiştirilmiş
-					adet		=	int(adet)
-					rs("birimfiyat")	=	fiyat
-					fiyat		=	fiyat * adet
-					rs("fiyat")	=	fiyat
-					' rs("OLCUBR")=	1
-					' rs("pay")	=	p1
-					' rs("payda")	=	pd1
-					rs.update
-				elseif birim = OLCU_BR2 then
-					Response.Write "4"
-					fiyat		=	formatnumber(SATIS_FIAT4,4)
-					fiyat		=	str2fiyat(fiyat)
-					'## birim fiyat değiştirilmiş
-					if birimfiyat_modifiye > 0 then
-					Response.Write birimfiyat_modifiye
-						if fiyat < birimfiyat_modifiye then
-							'yeni fiyat elle girilen fiyat olsun
-							fiyat = birimfiyat_modifiye
-						end if
-					end if
-					'## birim fiyat değiştirilmiş
-					adet		=	int(adet)
-					rs("birimfiyat")	=	fiyat
-					fiyat		=	fiyat * adet
-					rs("fiyat")	=	fiyat
-					' rs("OLCUBR")=	2
-					' rs("pay")	=	p1
-					' rs("payda")	=	pd1
-					rs.update
-				end if
-			end if
-
-
-
-
-
-			'## fiyat hesapla
-			'## İSKONTO HESAPLA
-				if iskonto1 > 0 then
-					fiyat = fiyat - (fiyat * (iskonto1 / 100))
-					if iskonto2 > 0 then
-						fiyat = fiyat - (fiyat * (iskonto2 / 100))
-						if iskonto3 > 0 then
-							fiyat = fiyat - (fiyat * (iskonto3 / 100))
-							if iskonto4 > 0 then
-								fiyat = fiyat - (fiyat * (iskonto4 / 100))
-							end if
-						end if
-					end if
-				end if
-			'## İSKONTO HESAPLA
-			'## kdv hesapla
-				kdv = kdvhesapla(fiyat,KDV_ORANI)
-			'## kdv hesapla
-			toplamfiyat =	toplamfiyat + rs("fiyat")
-			toplamkdv	=	toplamkdv + kdv
-			toplambirimfiyat	=	toplambirimfiyat + (rs("fiyat") - fiyat)
-
-
-		rs.movenext
-		next
-		kalemsayisi = rs.recordcount
-	rs.close
-aciklama	=	""
+	' 		rs.movenext
+	' 		next
+	' 		kalemsayisi = rs.recordcount
+	' 	rs.close
+	' 	aciklama	=	""
+	' end if
 '#### fiyatları yeniden hesapla
 '#### fiyatları yeniden hesapla
-
-
-
 
 
 '#### sipariş oluştur
@@ -320,23 +295,19 @@ aciklama	=	""
 '#### sipariş oluştur
 '#### sipariş oluştur
 
+
 call logla("Sipariş Kaydı Eklendi : " & sipno)
 
 
-
-
-
-
-
 '#### siparişe ürünleri ekle
 '#### siparişe ürünleri ekle
-	sorgu = ""
-	sorgu = sorgu & "select "
-	sorgu = sorgu & "netsis.siparisKalemTemp.sipno "
-	sorgu = sorgu & ",netsis.siparisKalemTemp.adet "
-	sorgu = sorgu & ",netsis.siparisKalemTemp.fiyat "
-	sorgu = sorgu & ",netsis.siparisKalemTemp.birim "
-	sorgu = sorgu & ",netsis.siparisKalemTemp.OLCUBR "
+	sorgu = "" & vbcrlf
+	sorgu = sorgu & "select " & vbcrlf
+	sorgu = sorgu & "netsis.siparisKalemTemp.sipno " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.adet " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.fiyat " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.birim " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.OLCUBR " & vbcrlf
 	sorgu = sorgu & ",netsis.siparisKalemTemp.pay " & vbcrlf
 	sorgu = sorgu & ",netsis.siparisKalemTemp.payda " & vbcrlf
 
@@ -345,71 +316,132 @@ call logla("Sipariş Kaydı Eklendi : " & sipno)
 	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto3 " & vbcrlf
 	sorgu = sorgu & ",netsis.siparisKalemTemp.iskonto4 " & vbcrlf
 	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat " & vbcrlf
+	sorgu = sorgu & ",netsis.siparisKalemTemp.birimfiyat_modifiye " & vbcrlf
 
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_ADI "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT1 "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT2 "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT3 "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT4 "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.KDV_ORANI "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR1 "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR2 "
-	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU "
-	
-	sorgu = sorgu & "from netsis.siparisKalemTemp "
-	sorgu = sorgu & "INNER JOIN " & firmaSSOdb & ".dbo.TBLSTSABIT on netsis.siparisKalemTemp.STOK_KODU = " & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU "
-	sorgu = sorgu & "where netsis.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (netsis.siparisKalemTemp.sipno = '' or netsis.siparisKalemTemp.sipno is null)"
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_ADI " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT2 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT3 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.SATIS_FIAT4 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.KDV_ORANI " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.OLCU_BR2 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY_1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA_1 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAY2 " & vbcrlf
+	sorgu = sorgu & "," & firmaSSOdb & ".dbo.TBLSTSABIT.PAYDA2 " & vbcrlf
+
+	sorgu = sorgu & "from netsis.siparisKalemTemp " & vbcrlf
+	sorgu = sorgu & "INNER JOIN " & firmaSSOdb & ".dbo.TBLSTSABIT on netsis.siparisKalemTemp.STOK_KODU = " & firmaSSOdb & ".dbo.TBLSTSABIT.STOK_KODU " & vbcrlf
+	sorgu = sorgu & "where netsis.siparisKalemTemp.CARI_KOD = '" & CARI_KOD & "' and (netsis.siparisKalemTemp.sipno = '' or netsis.siparisKalemTemp.sipno is null) " & vbcrlf
 	rs.open sorgu,sbsv5,1,3
 		for kalemsayisi = 1 to rs.recordcount
 			'#### HAZIRLIK
 			'#### HAZIRLIK
-			vadegun	=	0
-			KDV_ORANI	=	rs("KDV_ORANI")
-			KDV_ORANI	=	str2fiyat(KDV_ORANI)
-			STOK_KODU	=	rs("STOK_KODU")
-			adet		=	rs("adet")
-			fiyat		=	rs("fiyat")
-			OLCUBR		=	rs("OLCUBR")
-			pay			=	rs("pay")
-			payda		=	rs("payda")
-			iskonto1	=	rs("iskonto1")
-			iskonto2	=	rs("iskonto2")
-			iskonto3	=	rs("iskonto3")
-			iskonto4	=	rs("iskonto4")
-			birimfiyat	=	rs("birimfiyat")
+				vadegun	=	0
+				KDV_ORANI	=	rs("KDV_ORANI")
+				KDV_ORANI	=	str2fiyat(KDV_ORANI)
+				STOK_KODU	=	rs("STOK_KODU")
+				adet		=	rs("adet")
+				fiyat		=	rs("fiyat")
+				OLCUBR		=	rs("OLCUBR")
+				pay			=	rs("pay")
+				payda		=	rs("payda")
+				iskonto1	=	rs("iskonto1")
+				iskonto2	=	rs("iskonto2")
+				iskonto3	=	rs("iskonto3")
+				iskonto4	=	rs("iskonto4")
+				birimfiyat	=	rs("birimfiyat")
+				birim		=	rs("birim")
+				PAY_1		=	rs("PAY_1")
+				PAYDA_1		=	rs("PAYDA_1")
+				PAY2		=	rs("PAY2")
+				PAYDA2		=	rs("PAYDA2")
+				birimfiyat_modifiye	=	rs("birimfiyat_modifiye")
+				SATIS_FIAT4	=	rs("SATIS_FIAT4")
+				SATIS_FIAT4	=	str2fiyat(SATIS_FIAT4)
+				PAY_1	=	str2fiyat(PAY_1)
+				PAYDA_1	=	str2fiyat(PAYDA_1)
+				PAY2	=	str2fiyat(PAY2)
+				PAYDA2	=	str2fiyat(PAYDA2)
 
-			'## İSKONTO HESAPLA
-				if iskonto1 > 0 then
-					fiyat = fiyat - (fiyat * (iskonto1 / 100))
-					if iskonto2 > 0 then
-						fiyat = fiyat - (fiyat * (iskonto2 / 100))
-						if iskonto3 > 0 then
-							fiyat = fiyat - (fiyat * (iskonto3 / 100))
-							if iskonto4 > 0 then
-								fiyat = fiyat - (fiyat * (iskonto4 / 100))
+
+				'## İSKONTO HESAPLA
+					fiyat	=	SATIS_FIAT4
+						if iskonto1 > 0 then
+							fiyat = fiyat - (fiyat * (iskonto1 / 100))
+							if iskonto2 > 0 then
+								fiyat = fiyat - (fiyat * (iskonto2 / 100))
+								if iskonto3 > 0 then
+									fiyat = fiyat - (fiyat * (iskonto3 / 100))
+									if iskonto4 > 0 then
+										fiyat = fiyat - (fiyat * (iskonto4 / 100))
+									end if
+								end if
 							end if
 						end if
+					SATIS_FIAT4 = fiyat
+				'## İSKONTO HESAPLA
+
+
+				'### birime göre pay payda hesaplama - 18 aralık 2022
+				'### birime göre pay payda hesaplama - 18 aralık 2022
+					if OLCUBR = 1  then
+						fiyat = SATIS_FIAT4
+						birimfiyat = fiyat
+						olcumOrani = 1
+						cevrim		=	1
+					elseif OLCUBR = 2 then
+						fiyat = SATIS_FIAT4 / (PAY_1/PAYDA_1)
+						birimfiyat = fiyat
+						olcumOrani = (adet * PAYDA_1) / PAY_1
+						olcumOrani = formatnumber(olcumOrani,7)
+						cevrim		=	PAY_1/PAYDA_1
+					elseif OLCUBR = 3 then
+						fiyat = SATIS_FIAT4 / (PAY2/PAYDA2)
+						birimfiyat = fiyat
+						olcumOrani = (adet * PAYDA2) / PAY2
+						olcumOrani = formatnumber(olcumOrani,7)
+						cevrim		=	PAY2/PAYDA2
 					end if
-				end if
-			'## İSKONTO HESAPLA
+				'### birime göre pay payda hesaplama - 18 aralık 2022
+				'### birime göre pay payda hesaplama - 18 aralık 2022
+
+
+				'## kdv hesapla
+					kdv			=	kdvhesapla(birimfiyat,KDV_ORANI)
+					' brutfiyat	=	birimfiyat + kdv
+					' brutfiyat	=	str2fiyat(brutfiyat)
+					brutfiyat	=	birimfiyat
+					netfiyat	=	brutfiyat - kdv
+				'## kdv hesapla
 
 
 
 
 
 
-        '##### ÖLÇÜM ORANI HESAPLAMA
-        '##### ÖLÇÜM ORANI HESAPLAMA
-            olcumOrani = (adet * payda) / pay
-        '##### ÖLÇÜM ORANI HESAPLAMA
-        '##### ÖLÇÜM ORANI HESAPLAMA
 
 
-			'## kdv hesapla
-				kdv		=	kdvhesapla(birimfiyat,KDV_ORANI)
-			'## kdv hesapla
-			brutfiyat	=	birimfiyat + kdv
-			brutfiyat	=	str2fiyat(brutfiyat)
+
+
+' Response.Write SATIS_FIAT4 & vbcrlf
+' Response.Write fiyat & vbcrlf
+' Response.Write brutfiyat & vbcrlf
+' Response.Write kdv & vbcrlf
+' Response.Write netfiyat & vbcrlf
+' Response.Write olcumOrani & vbcrlf
+' Response.Write cevrim & vbcrlf
+' Response.End()
+
+
+			'##### ÖLÇÜM ORANI HESAPLAMA
+			'##### ÖLÇÜM ORANI HESAPLAMA
+				' olcumOrani = (adet * payda) / pay
+			'##### ÖLÇÜM ORANI HESAPLAMA
+			'##### ÖLÇÜM ORANI HESAPLAMA
+
 			'#### HAZIRLIK
 			'#### HAZIRLIK
 			'#### OPERASYON
@@ -418,6 +450,10 @@ call logla("Sipariş Kaydı Eklendi : " & sipno)
 				rs2.addnew
 					rs2("STOK_KODU")		=	STOK_KODU
 					rs2("FISNO")			=	sipno
+					rs2("STHAR_GCMIK")		=	olcumOrani
+					rs2("STHAR_GCKOD")		=	"C"
+					rs2("DEPO_KODU")		=	1
+					rs2("STHAR_TARIH")		=	date()
 					'## kolideki adet x adet
 					' if OLCUBR = 1  then
 					' 	rs2("STHAR_GCMIK")	=	adet' * pay
@@ -426,7 +462,6 @@ call logla("Sipariş Kaydı Eklendi : " & sipno)
 					' elseif OLCUBR = 2 and pay > 1 then
 					' 	rs2("STHAR_GCMIK")	=	adet' * pay
 					' end if
-						rs2("STHAR_GCMIK")	=	olcumOrani
 					'## kolideki adet x adet
 					'## 1 / kolideki adet
 					' if OLCUBR = 1 and pay = 1 then
@@ -439,20 +474,17 @@ call logla("Sipariş Kaydı Eklendi : " & sipno)
 					' 	rs2("CEVRIM")		=	pay / payda
 					' end if
 					'## 1 / kolideki adet
-					rs2("CEVRIM")		    =	pay / payda
-					rs2("STHAR_GCKOD")		=	"C"
-					rs2("DEPO_KODU")		=	1
-					rs2("STHAR_TARIH")		=	date()
+					rs2("CEVRIM")		    =	cevrim
 					'## koli fiyat / kolideki adet
-					if OLCUBR = 1 then
-						rs2("STHAR_NF")		=	birimfiyat'fiyat
-						rs2("STHAR_BF")		=	birimfiyat'brutfiyat
-						rs2("LISTE_FIAT")	=	1							'bunu incele
-					else
-						rs2("STHAR_NF")		=	birimfiyat / payda'fiyat / payda
-						rs2("STHAR_BF")		=	birimfiyat / payda'brutfiyat / payda
-						rs2("LISTE_FIAT")	=	2
-					end if
+					' if OLCUBR = 1 then
+					' 	rs2("STHAR_NF")		=	birimfiyat'fiyat
+					' 	rs2("STHAR_BF")		=	birimfiyat'brutfiyat
+					' 	rs2("LISTE_FIAT")	=	1							'bunu incele
+					' else
+					rs2("STHAR_NF")			=	netfiyat'fiyat / payda
+					rs2("STHAR_BF")			=	brutfiyat'brutfiyat / payda
+					rs2("LISTE_FIAT")		=	OLCUBR
+					' end if
 					'## 100 / kolideki adet
 	'				rs2("STHAR_KOD1")		=	"Y"
 					rs2("STHAR_KDV")		=	KDV_ORANI

@@ -338,6 +338,9 @@ language_tr = language_tr & "||Şehir Adını Yazın=Şehir Adını Yazın"
 language_tr = language_tr & "||Teklif Ver=Teklif Ver"
 language_tr = language_tr & "||Cari Ad veya Kod=Cari Ad veya Kod"
 language_tr = language_tr & "||CARİ ARA=CARİ ARA"
+language_tr = language_tr & "||Seç=Seç"
+language_tr = language_tr & "||Bildirim Yöntemi=Bildirim Yöntemi"
+language_tr = language_tr & "||Etiket=Etiket"
 if klang = "" then
 klang = "tr"
 end if

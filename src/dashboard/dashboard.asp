@@ -12,131 +12,41 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
-yetkiIT = yetkibul("IT")
-yetkiGorev = yetkibul("gorev")
 
-	Response.Write "<div class=""container-fluid"">"
-	Response.Write "<div class=""row"">"
 
-	
-
-if yetkiIT > 0 then
-		Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-3"">"
-			Response.Write "<a class=""btn btn-success form-control"" href=""/it/ariza_liste"">ARIZA - GÖREV LİSTESİNE GİT</a>"
-		Response.Write "</div>"
-end if
-
-		'#### YEMEK LİSTESİ
-		'#### YEMEK LİSTESİ
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashDovizDiv""></div>"
+	sorgu = "Select" & vbcrlf
+	sorgu = sorgu & "* from portal.dashboard" & vbcrlf
+	sorgu = sorgu & "where personelID = " & kid & vbcrlf
+	sorgu = sorgu & "order by sira ASC" & vbcrlf
+	rs.Open sorgu, sbsv5, 1, 3
+	if rs.recordcount > 0 then
+		'### HTML KISMI
+			Response.Write "<div class=""container-fluid"">"
+			Response.Write "<div class=""row"">"
+			for i = 1 to rs.recordcount
+				modul = rs("modul")
+				Response.Write "<div class=""" & modulBilgiBul(modul,"boyut") & " mb-2"">"
+					Response.Write "<div class=""dash" & modul & "Div""></div>"
+				Response.Write "</div>"
+			rs.movenext
+			next
 			Response.Write "</div>"
-		'#### YEMEK LİSTESİ
-		'#### YEMEK LİSTESİ
-
-		'#### WEBMAİL
-		'#### WEBMAİL
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashMailDiv""></div>"
 			Response.Write "</div>"
-		'#### WEBMAİL
-		'#### WEBMAİL
-
-
-if firmaID = 2 then
-		'#### YEMEK LİSTESİ
-		'#### YEMEK LİSTESİ
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashYemekListesiDiv""></div>"
-			Response.Write "</div>"
-		'#### YEMEK LİSTESİ
-		'#### YEMEK LİSTESİ
-end if
-if firmaID = 2 then
-		'#### DUYURU
-		'#### DUYURU
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashDuyuruDiv""></div>"
-			Response.Write "</div>"
-		'#### DUYURU
-		'#### DUYURU
-end if
-if firmaID = 2 then
-		'#### DUYURU
-		'#### DUYURU
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashpdksDiv""></div>"
-			Response.Write "</div>"
-		'#### DUYURU
-		'#### DUYURU
-end if
-if firmaID = 2 then
-		'#### DUYURU
-		'#### DUYURU
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashDuyuruKDiv""></div>"
-			Response.Write "</div>"
-		'#### DUYURU
-		'#### DUYURU
-end if
-if firmaID = 2 then
-		'#### DOĞUM GÜNÜ
-		'#### DOĞUM GÜNÜ
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashDogumGunuDiv""></div>"
-			Response.Write "</div>"
-		'#### DOĞUM GÜNÜ
-		'#### DOĞUM GÜNÜ
-end if
-if firmaID = 3 then
-		'#### WHATS NEW
-		'#### WHATS NEW
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashWhatsNewDiv""></div>"
-			Response.Write "</div>"
-		'#### WHATS NEW
-		'#### WHATS NEW
-end if
-
-
-
-if yetkiIT > 0 then
-		'#### GÖREV - PERSONEL DAĞILIMI
-		'#### GÖREV - PERSONEL DAĞILIMI
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashGorevPersonelDiv""></div>"
-			Response.Write "</div>"
-		'#### GÖREV - PERSONEL DAĞILIMI
-		'#### GÖREV - PERSONEL DAĞILIMI
-end if
-if yetkiIT > 0 then
-		'#### GÖREV - DURUM DAĞILIMI
-		'#### GÖREV - DURUM DAĞILIMI
-			Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-				Response.Write "<div class=""dashGorevDurumDiv""></div>"
-			Response.Write "</div>"
-		'#### GÖREV - DURUM DAĞILIMI
-		'#### GÖREV - DURUM DAĞILIMI
-end if
-
-if yetkiIT > 0 then
-		'#### GÖREVLERİM
-		'#### GÖREVLERİM
-			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
-				Response.Write "<div class=""dashITariza""></div>"
-			Response.Write "</div>"
-		'#### GÖREVLERİM
-		'#### GÖREVLERİM
-end if
-if firmaID = 2 then
-		'#### AKADEMİ
-		'#### AKADEMİ
-			' Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-			' 	Response.Write "<div class=""dashAkademiDiv""><img src=""/template/images/akademi_logo.png"" /></div>"
-			' Response.Write "</div>"
-		'#### AKADEMİ
-		'#### AKADEMİ
-end if
+		'### HTML KISMI
+		'##### SCRIPT
+			Response.Write "<scr" & "ipt type=""text/javascript"">"
+			Response.Write "$(document).ready(function(){"
+			rs.movefirst
+			for i = 1 to rs.recordcount
+				modul = rs("modul")
+				Response.Write "setTimeout(function(){$('.dash" & modul & "Div').load('" & modulBilgiBul(modul,"dosya") & "');}, " & i * 1000 & ");"
+			rs.movenext
+			next
+			Response.Write "});"
+			Response.Write "</scr" & "ipt>"
+		'##### SCRIPT
+	end if
+	rs.close
 
 
 
@@ -146,92 +56,38 @@ end if
 
 
 
+function modulBilgiBul(byVal modul,byVal bilgi)
+	if modul = "doviz" then
+		if bilgi = "dosya" then
+			modulBilgiBul = "/portal/doviz_dashboard.asp"
+		elseif bilgi = "boyut" then
+			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
+		end if
+	elseif modul = "webmail" then
+		if bilgi = "dosya" then
+			modulBilgiBul = "/webmail/dashboard.asp"
+		elseif bilgi = "boyut" then
+			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
+		end if
+	elseif modul = "gorevPersonel" then
+		if bilgi = "dosya" then
+			modulBilgiBul = "/dashboard/it_gorevpersonel.asp"
+		elseif bilgi = "boyut" then
+			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
+		end if
+	elseif modul = "gorevDurum" then
+		if bilgi = "dosya" then
+			modulBilgiBul = "/dashboard/it_arizadurum.asp"
+		elseif bilgi = "boyut" then
+			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
+		end if
+	elseif modul = "gorevListesi" then
+		if bilgi = "dosya" then
+			modulBilgiBul = "/dashboard/it_ariza.asp"
+		elseif bilgi = "boyut" then
+			modulBilgiBul = "col-lg-8 col-md-8 col-sm-8 col-xs-12"
+		end if
+	end if
+end function
 
-
-
-		'#### NETSİS CARİ
-		'#### NETSİS CARİ
-			' Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-2"">"
-			' 	Response.Write "<div class=""dashNetsisCariDiv""></div>"
-			' Response.Write "</div>"
-		'#### NETSİS CARİ
-		'#### NETSİS CARİ
-
-	Response.Write "</div>"
-	Response.Write "</div>"
-
-
-
-
-
-
-
-
-
-
-
-
-
-'##### SCRIPT
-'##### SCRIPT
-	Response.Write "<scr" & "ipt type=""text/javascript"">"
-	Response.Write "$(document).ready(function(){"
-
-if yetkiIT > 0 then
-		' Response.Write "setTimeout(function(){$('.dashITariza').load('/otomatik/gunlukFaaliyetUyar.asp');}, 100);"
-end if
-
-
-	Response.Write "setTimeout(function(){$('.dashDovizDiv').load('/portal/doviz_dashboard.asp');}, 1000);"
-	Response.Write "setTimeout(function(){$('.dashMailDiv').load('/webmail/dashboard.asp');}, 2000);"
-
-
-
-if firmaID = 2 then
-	Response.Write "setTimeout(function(){$('.dashpdksDiv').load('/personel/pdks_dashboard.asp');}, 1000);"
-	Response.Write "setTimeout(function(){$('.dashYemekListesiDiv').load('/isletme/yemek_dashboard.asp');}, 1000);"
-	Response.Write "setTimeout(function(){$('.dashDogumGunuDiv').load('/personel/dogumgunu_dashboard.asp');}, 1500);"
-	Response.Write "setTimeout(function(){$('.dashDuyuruDiv').load('/duyuru/duyuru_dashboard.asp?tur=duyuru');}, 2000);"
-	Response.Write "setTimeout(function(){$('.dashDuyuruKDiv').load('/duyuru/duyuru_dashboard.asp?tur=kitap');}, 2500);"
-end if
-
-if yetkiIT > 0 then
-		Response.Write "setTimeout(function(){$('.dashITariza').load('/dashboard/it_ariza.asp');}, 1000);"
-end if
-if yetkiIT > 0 then
-		Response.Write "setTimeout(function(){$('.dashGorevPersonelDiv').load('/dashboard/it_gorevpersonel.asp');}, 2000);"
-end if
-if yetkiIT > 0 then
-		Response.Write "setTimeout(function(){$('.dashGorevDurumDiv').load('/dashboard/it_arizadurum.asp');}, 3000);"
-end if
-		 Response.Write "setTimeout(function(){$('.dashWhatsNewDiv').load('/dashboard/whatsnew.asp');}, 5000);"
-		' if entegrasyon = "netsis" then
-		' 	Response.Write "setTimeout(function(){$('.dashNetsisCariDiv').load('/dashboard/netsiscari.asp');}, 20000);"
-		' end if
-
-		Response.Write ""
-		Response.Write ""
-		Response.Write ""
-		Response.Write ""
-	Response.Write "});"
-	Response.Write "</scr" & "ipt>"
-'##### SCRIPT
-'##### SCRIPT
-
-
-
-
-
-
-
-'##### ENTEGRASYON VARSA GÜNCELLE
-'##### ENTEGRASYON VARSA GÜNCELLE
-	' if entegrasyon = "netsis" then
-	' 	call logla("Netsis Carileri Eşitleniyor")
-	' 	Server.Execute "/webservis/netsisCariSYNC.asp"
-	' end if
-'##### ENTEGRASYON VARSA GÜNCELLE
-'##### ENTEGRASYON VARSA GÜNCELLE
-
-
-%>
+%><!--#include virtual="/reg/rs.asp" -->

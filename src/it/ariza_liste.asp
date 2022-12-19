@@ -213,7 +213,7 @@ call logla("Arıza Ekranı")
 
 '####### PAGING
 '####### PAGING
-	if mobilkontrol() = False then
+	' if mobilkontrol() = False then
 	if hata = "" then
 		Response.Write "<form action=""/IT/ariza_liste"" method=""post"" id=""pagingform"">"
 		Response.Write "<input type=""hidden"" name=""pagingsayfa"" class=""pagingsayfa"" id=""pagingsayfa"" value=""" & pagingsayfa & """ />"
@@ -281,7 +281,7 @@ call logla("Arıza Ekranı")
 			Response.Write "</form>"
 		Response.Write "</div>"
 	end if
-	end if
+	' end if
 '####### PAGING
 '####### PAGING
 

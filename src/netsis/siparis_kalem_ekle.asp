@@ -167,6 +167,7 @@ else
 		rs("pay")			=	pay
 		rs("payda")			=	payda
 		rs("OLCUBR")		=	olcubr
+		rs("firmaID")		=	firmaID
 		'ek alanlar
 	rs.update
 	rs.close
@@ -178,7 +179,14 @@ end if
 
 
 
-sorgu = "Select * from netsis.siparisKalemTemp where CARI_KOD = '" & CARI_KOD & "' and (sipno = '' or sipno is null)"
+
+
+
+sorgu = "update netsis.siparisKalemTemp set silindi = 1 where (tarih < CAST(CAST(GETDATE() AS DATE) AS DATETIME)) and silindi = 0 and sipno is null"
+rs.open sorgu,sbsv5,3,3
+
+
+sorgu = "Select * from netsis.siparisKalemTemp where CARI_KOD = '" & CARI_KOD & "' and (sipno = '' or sipno is null) and silindi = 0 and firmaID = " & firmaID
 rs.open sorgu,sbsv5,1,3
 	if rs.recordcount > 0 then
             Response.Write "<div class=""container-fluid"">"

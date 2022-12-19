@@ -43,16 +43,16 @@
 		Response.Write "<div class=""row mb-3"">"
 			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
 				Response.Write "<div class=""card"">"
-				Response.Write "<div class=""card-header text-white bg-dark"">Aktif - Bekleyen Görevlerim</div>"
+				Response.Write "<div class=""card-header text-white bg-dark"">Bekleyen Görevlerim</div>"
 				Response.Write "<div class=""card-body"" style=""max-height:300px;overflow:auto;padding:0 !important"">"
 					Response.Write "<div class=""table-responsive"">"
 					Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 					Response.Write "<th scope=""col"">Öncelik</th>"
 					' Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Müşteri</th>"
 					Response.Write "<th scope=""col"">Görev</th>"
-					Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T0</th>"
-					Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T1</th>"
-					Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T2</th>"
+					' Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T0</th>"
+					' Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T1</th>"
+					' Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">T2</th>"
 					Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Durum</th>"
 					Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">Personel</th>"
 					Response.Write "</tr></thead><tbody>"
@@ -87,29 +87,29 @@
 							' 	Response.Write "<td class=""d-none d-sm-table-cell"">" & left(rs("firmaAd"),30) & "</td>"
 							' end if
 							Response.Write "<td title=""" & rs("gorevAd") & """>" & left(rs("gorevAd"),50) & "</td>"
-							Response.Write "<td title=""İstenilen Servis Başlama Saati"" class=""d-none d-sm-table-cell"">"
-							t0tarih = tarihgorev(rs("tarihServis")) & ""
-							t0tarih = Replace(t0tarih," - 00:00","")
-							'# tarih işlem
-							if isnull(rs("tarihServis")) = False then
-								if rs("tarihServis") = date() then
-									Response.Write "<span class=""badge badge-success blinking"">"
-									Response.Write t0tarih
-									Response.Write "</span>"
-								elseif rs("tarihServis") < date() then
-									Response.Write "<span class=""badge badge-danger blinking"">"
-									Response.Write t0tarih
-									Response.Write "</span>"
-								else
-									Response.Write t0tarih
-								end if
-							else
-								Response.Write t0tarih
-							end if
-							'# tarih işlem
-							Response.Write "</td>"
-							Response.Write "<td title=""Gerçek Servis Başlama Saati"" class=""d-none d-sm-table-cell"">" & tarihgorev(rs("t1")) & "</td>"
-							Response.Write "<td title=""Gerçek Servis Bitiş Saati"" class=""d-none d-sm-table-cell"">" & tarihgorev(rs("t2")) & "</td>"
+							' Response.Write "<td title=""İstenilen Servis Başlama Saati"" class=""d-none d-sm-table-cell"">"
+							' t0tarih = tarihgorev(rs("tarihServis")) & ""
+							' t0tarih = Replace(t0tarih," - 00:00","")
+							' '# tarih işlem
+							' if isnull(rs("tarihServis")) = False then
+							' 	if rs("tarihServis") = date() then
+							' 		Response.Write "<span class=""badge badge-success blinking"">"
+							' 		Response.Write t0tarih
+							' 		Response.Write "</span>"
+							' 	elseif rs("tarihServis") < date() then
+							' 		Response.Write "<span class=""badge badge-danger blinking"">"
+							' 		Response.Write t0tarih
+							' 		Response.Write "</span>"
+							' 	else
+							' 		Response.Write t0tarih
+							' 	end if
+							' else
+							' 	Response.Write t0tarih
+							' end if
+							' '# tarih işlem
+							' Response.Write "</td>"
+							' Response.Write "<td title=""Gerçek Servis Başlama Saati"" class=""d-none d-sm-table-cell"">" & tarihgorev(rs("t1")) & "</td>"
+							' Response.Write "<td title=""Gerçek Servis Bitiş Saati"" class=""d-none d-sm-table-cell"">" & tarihgorev(rs("t2")) & "</td>"
 							Response.Write "<td class=""d-none d-sm-table-cell"">"
 								Response.Write "<span class=""badge "
 								if rs("durum") = "Bitti" then
