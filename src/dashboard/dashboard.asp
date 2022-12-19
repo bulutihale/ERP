@@ -56,44 +56,26 @@
 
 
 
-function modulBilgiBul(byVal modul,byVal bilgi)
-	if modul = "doviz" then
-		if bilgi = "dosya" then
-			modulBilgiBul = "/portal/doviz_dashboard.asp"
-		elseif bilgi = "boyut" then
-			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
-		end if
-	elseif modul = "webmail" then
-		if bilgi = "dosya" then
-			modulBilgiBul = "/webmail/dashboard.asp"
-		elseif bilgi = "boyut" then
-			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
-		end if
-	elseif modul = "gorevPersonel" then
-		if bilgi = "dosya" then
-			modulBilgiBul = "/dashboard/it_gorevpersonel.asp"
-		elseif bilgi = "boyut" then
-			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
-		end if
-	elseif modul = "gorevDurum" then
-		if bilgi = "dosya" then
-			modulBilgiBul = "/dashboard/it_arizadurum.asp"
-		elseif bilgi = "boyut" then
-			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
-		end if
-	elseif modul = "gorevListesi" then
-		if bilgi = "dosya" then
-			modulBilgiBul = "/dashboard/it_ariza.asp"
-		elseif bilgi = "boyut" then
-			modulBilgiBul = "col-lg-8 col-md-8 col-sm-8 col-xs-12"
-		end if
-	elseif modul = "islemLog" then
-		if bilgi = "dosya" then
-			modulBilgiBul = "/dashboard/islemLog.asp"
-		elseif bilgi = "boyut" then
-			modulBilgiBul = "col-lg-8 col-md-8 col-sm-8 col-xs-12"
-		end if
-	end if
-end function
+if firmaID = 2 then
+	Response.Write "setTimeout(function(){$('.dashpdksDiv').load('/personel/pdks_dashboard.asp');}, 1000);"
+	Response.Write "setTimeout(function(){$('.dashYemekListesiDiv').load('/isletme/yemek_dashboard.asp');}, 1000);"
+	Response.Write "setTimeout(function(){$('.dashDogumGunuDiv').load('/personel/dogumgunu_dashboard.asp');}, 1500);"
+	Response.Write "setTimeout(function(){$('.dashDuyuruDiv').load('/duyuru/duyuru_dashboard.asp?tur=duyuru');}, 2000);"
+	Response.Write "setTimeout(function(){$('.dashDuyuruKDiv').load('/duyuru/duyuru_dashboard.asp?tur=kitap');}, 2500);"
+end if
+
+if yetkiIT > 0 then
+		Response.Write "setTimeout(function(){$('.dashITariza').load('/dashboard/it_ariza.asp');}, 1000);"
+end if
+if yetkiIT > 0 then
+		Response.Write "setTimeout(function(){$('.dashGorevPersonelDiv').load('/dashboard/it_gorevpersonel.asp');}, 2000);"
+end if
+if yetkiIT > 0 then
+		Response.Write "setTimeout(function(){$('.dashGorevDurumDiv').load('/dashboard/it_arizadurum.asp');}, 3000);"
+end if
+		 Response.Write "setTimeout(function(){$('.dashWhatsNewDiv').load('/dashboard/whatsnew.asp');}, 5000);"
+		' if entegrasyon = "netsis" then
+		' 	Response.Write "setTimeout(function(){$('.dashNetsisCariDiv').load('/dashboard/netsiscari.asp');}, 20000);"
+		' end if
 
 %><!--#include virtual="/reg/rs.asp" -->
