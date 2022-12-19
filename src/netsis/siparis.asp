@@ -208,25 +208,25 @@ Response.Write "<input type=""hidden"" name=""cariTur"" id=""cariTur"" value="""
                         'iskonto
                             if sb_iskontoSayisi > 0 then
                                 Response.Write "<div class=""col-lg-2 col-xs-12 mt10"">"
-                                Response.Write "<div class=""label label-warning"">İskonto 1 % [<span class=""iskontospan1"">0</span>]</div>"
+                                Response.Write "<div class=""badge badge-secondary"">İskonto 1 % [<span class=""iskontospan1"">0</span>]</div>"
                                 call forminput("iskonto1",iskonto1,"numara(this,false,'yok');iskontohesap();","iskonto1","","","iskonto1","")
                                 Response.Write "</div>"
                             end if
                             if sb_iskontoSayisi > 1 then
                                 Response.Write "<div class=""col-lg-2 col-xs-12 mt10"">"
-                                Response.Write "<div class=""label label-warning"">İskonto 2 % [<span class=""iskontospan2""></span>]</div>"
+                                Response.Write "<div class=""badge badge-secondary"">İskonto 2 % [<span class=""iskontospan2"">0</span>]</div>"
                                 call forminput("iskonto2",iskonto2,"numara(this,false,'yok');iskontohesap();","iskonto2","","","iskonto2","")
                                 Response.Write "</div>"
                             end if
                             if sb_iskontoSayisi > 2 then
                                 Response.Write "<div class=""col-lg-2 col-xs-12 mt10"">"
-                                Response.Write "<div class=""label label-warning"">İskonto 3 % [<span class=""iskontospan3""></span>]</div>"
+                                Response.Write "<div class=""badge badge-secondary"">İskonto 3 % [<span class=""iskontospan3"">0</span>]</div>"
                                 call forminput("iskonto3",iskonto3,"numara(this,false,'yok');iskontohesap();","iskonto3","","","iskonto3","")
                                 Response.Write "</div>"
                             end if
                             if sb_iskontoSayisi > 3 then
                                 Response.Write "<div class=""col-lg-2 col-xs-12 mt10"">"
-                                Response.Write "<div class=""label label-warning"">İskonto 4 % [<span class=""iskontospan4""></span>]</div>"
+                                Response.Write "<div class=""badge badge-secondary"">İskonto 4 % [<span class=""iskontospan4"">0</span>]</div>"
                                 call forminput("iskonto4",iskonto4,"numara(this,false,'yok');iskontohesap();","iskonto4","","","iskonto4","")
                                 Response.Write "</div>"
                             end if
@@ -236,7 +236,8 @@ Response.Write "<input type=""hidden"" name=""cariTur"" id=""cariTur"" value="""
                         'kaydet butonu
                         'kaydet butonu
                         'kaydet butonu
-                            Response.Write "<div class=""col-lg-2 col-xs-12 mt10"">"
+                            Response.Write "<div class=""col-lg-4 col-xs-12 mt10"">"
+                            Response.Write "<div class=""badge"">&nbsp;</div>"
                             Response.Write "<button type=""submit"" class=""btn btn-success form-control"">EKLE</button>"
                             Response.Write "</div>"
                         'kaydet butonu
@@ -342,6 +343,9 @@ function iskontohesap()
 			iskontoHesap2 = 0;
 			iskontoHesap3 = 0;
 			iskontoHesap4 = 0;
+            $('#iskonto2').val('0');
+            $('#iskonto3').val('0');
+            $('#iskonto4').val('0');
 		}
 		if(iskonto2>0){
 			iskonto2 = (parseInt(iskonto2) / 100);
@@ -351,6 +355,8 @@ function iskontohesap()
 			iskontoHesap2 = 0;
 			iskontoHesap3 = 0;
 			iskontoHesap4 = 0;
+            $('#iskonto3').val('0');
+            $('#iskonto4').val('0');
 		}
 		if(iskonto3>0){
 			iskonto3 = (parseInt(iskonto3) / 100);
@@ -359,6 +365,7 @@ function iskontohesap()
 		}else{
 			iskontoHesap3 = 0;
 			iskontoHesap4 = 0;
+            $('#iskonto4').val('0');
 		}
 		if(iskonto4>0){
 			iskonto4 = (parseInt(iskonto4) / 100);
@@ -373,6 +380,13 @@ function iskontohesap()
 		iskontoHesap3 = 0;
 		iskontoHesap4 = 0;
 	}
+
+
+    iskontoHesap1 = parseFloat(iskontoHesap1).toFixed(2);
+    if(iskontoHesap2>0){iskontoHesap2 = parseFloat(iskontoHesap2).toFixed(2)};
+    if(iskontoHesap3>0){iskontoHesap3 = parseFloat(iskontoHesap3).toFixed(2)};
+    if(iskontoHesap4>0){iskontoHesap4 = parseFloat(iskontoHesap4).toFixed(2)};
+
 	$('.iskontospan1').text(iskontoHesap1);
 	$('.iskontospan2').text(iskontoHesap2);
 	$('.iskontospan3').text(iskontoHesap3);

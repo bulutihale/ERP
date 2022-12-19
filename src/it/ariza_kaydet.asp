@@ -10,7 +10,7 @@
 	mobil				=	mobilkontrol()
 	hata				=	""
 	call sessiontest()
-	yetkiIT = yetkibul("IT")
+	' yetkiBilgiIslem		=	yetkibul("Bilgi İşlem")
 	modulAd =   "ITAriza"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -26,6 +26,7 @@
 	gorevID		=	Request.Form("gorevID")
 	tur			=	Request.Form("tur")
 	tarihServis	=	Request.Form("tarihServis")
+	etiketID	=	Request.Form("etiketID")
 '### GELEN FORM BİLGİLERİ
 '### GELEN FORM BİLGİLERİ
 
@@ -79,13 +80,15 @@ if gorevID = "" then
 	rs("olusturanAD")	=	personelAD
 	islem		=	"Görev Eklendi"
 else
-
 	if isnumeric(gorevID) = False then
 		gorevID = base64_decode_tr(gorevID)
 	end if
 	sorgu = "Select top 1 * from IT.ariza where arizaID = " & gorevID
 	rs.Open sorgu, sbsv5, 1, 3
 	islem		=	"Görev Güncellendi"
+	if rs("ad") <> ad then
+		islem		=	"Görev Güncellendi. Eski ad : " & rs("ad") & ", Yeni ad : " & ad
+	end if
 end if
 	rs("ad")		=	ad
 	rs("icerik")	=	icerik
@@ -99,6 +102,9 @@ end if
 	rs("tur")		=	tur
 	if tarihServis <> "" then
 		rs("tarihServis") = tarihServis
+	end if
+	if etiketID <> "" then
+		rs("etiketID") = etiketID
 	end if
 	rs.update
 rs.close

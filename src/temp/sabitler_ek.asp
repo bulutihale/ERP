@@ -66,15 +66,21 @@ if firmaID = 5 then
 	'## TEKLİF
 	'## TEKLİF
 
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+		sb_modulAdi				=	"Görev Takip"
+		sb_cariyeGorevVerilsin	=	false
+		sb_etiketEklenebilsin	=	true
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
 
-
-
-
-
-
-
-
-
+	' ## MODULLER
+	' ## MODULLER
+		sb_modul_gorevTakip		=	true
+		sb_modul_webmail		=	true
+		sb_modul_teklif			=	true
+	' ## MODULLER
+	' ## MODULLER
 end if
 
 if firmaID = 6 then
@@ -174,7 +180,36 @@ if firmaID = 4 then
 	'## SİPARİŞ MODULÜ İÇİN
 	'## SİPARİŞ MODULÜ İÇİN
 
-    sb_TBLSTSABIT_cache    =   false
+    ' sb_TBLSTSABIT_cache    =   false
+
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+		sb_modulAdi				=	"Görev Takip"
+		sb_cariyeGorevVerilsin	=	false
+		sb_etiketEklenebilsin	=	false
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+
+
+	' ## MODULLER
+	' ## MODULLER
+		sb_modul_gorevTakip		=	false
+		sb_modul_webmail		=	false
+		sb_modul_teklif			=	false
+	' ## MODULLER
+	' ## MODULLER
+
+
+
+
+
+
+
+
+
+
+
+
 
 end if
 
@@ -184,42 +219,67 @@ end if
 if firmaID = 8 then
 	sb_firmaAd								=	"Cimax"
 	sb_url									=	mainUrl
-    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
-	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
+    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/cimax_logo.png"
+	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/cimax_logo.png"
 	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
 	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
-	sb_activeuserUrl						=	"/activeuser.asp"
-	sb_activeuserTime						=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
+		sb_activeuserUrl					=	"/activeuser.asp"
+		sb_activeuserTime					=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
 	sb_konum								=	"izmir"		'hava durumu için
 	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
 	sb_ssl									=	1		'SSL var mı?
-	sb_fizikselPath							=	"C:\web\erp.sbstasarim.com\backup\"
-	sb_sqlYedekCompress						=	true
-	sb_sqlYedekCloudMail					=	"raptiye210@yahoo.com"
-	sb_sqlYedekAlGun						=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
-	sb_sqlYedekSilGun						=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
+		sb_fizikselPath						=	"C:\web\erp.sbstasarim.com\backup\"
+		sb_sqlYedekCompress					=	true
+		sb_sqlYedekCloudMail				=	"raptiye210@yahoo.com"
+		sb_sqlYedekAlGun					=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
+		sb_sqlYedekSilGun					=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
 
 	'## EMAIL
-	sb_mailserver		=	"212.68.61.84:587"
-	sb_mailsender		=	"teknik@sbstasarim.com"
-	sb_mailsenderPass	=	"sgxuewlv12!!@3"
-	sb_mailsenderAd		=	"Cimax ERP"
-	' sb_portalMail		=	"portal@sbstasarim.com"
-	' sb_portalMailUser	=	"portal@sbstasarim.com"
-	' sb_portalMailPass	=	"portAl112!"
-	' sb_teklifMail		=	"satis@sbstasarim.com"
-	' sb_teklifMailUser	=	"satis@sbstasarim.com"
-	' sb_teklifMailPass	=	"Sati22^11"
+	'## EMAIL
+		sb_mailserver		=	"212.68.61.84:587"
+		sb_mailsender		=	"teknik@sbstasarim.com"
+		sb_mailsenderPass	=	"sgxuewlv12!!@3"
+		sb_mailsenderAd		=	"Cimax ERP"
+	'## EMAIL
+	'## EMAIL
 
 	'## SSO
-	firmaSSO			=	""
-	firmaSSOAdres		=	""
-	firmaSSODomain		=	""
-	firmaSSOLdap		=	""
-	firmaSSOdb			=	""
+	'## SSO
+		firmaSSO			=	""
+		firmaSSOAdres		=	""
+		firmaSSODomain		=	""
+		firmaSSOLdap		=	""
+		firmaSSOdb			=	""
+	'## SSO
+	'## SSO
 
-    sb_TBLSTSABIT_cache	=   false
-    sb_iskontoSayisi	=   0
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+		sb_modulAdi				=	"Görev Takip"
+		sb_cariyeGorevVerilsin	=	true
+		sb_etiketEklenebilsin	=	true
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+
+
+	' ## MODULLER
+	' ## MODULLER
+		sb_modul_gorevTakip		=	true
+		sb_modul_webmail		=	false
+		sb_modul_teklif			=	false
+	' ## MODULLER
+	' ## MODULLER
+
+
+
 end if
 
 

@@ -35,8 +35,7 @@ Response.Write "<link rel=""stylesheet"" href=""/template/chart/Chart.min.css"" 
 
 
 
-sorgu = "Select Ad,(Select count(Id) from IT.arizaPersonel where pp.Id = IT.arizaPersonel.personelID ) as GorevVerilenSayi from Personel.Personel pp where (pp.gorev like N'Bilgi İşlem%' or pp.gorev like N'BİLGİ İŞLEM%') and firmaID = " & firmaID
-
+sorgu = "Select Ad,(Select count(Id) from IT.arizaPersonel where pp.Id = IT.arizaPersonel.personelID ) as GorevVerilenSayi from Personel.Personel pp where firmaID = " & firmaID
 rs.open sorgu,sbsv5,1,3
 	Response.Write "<scr" & "ipt>" & vbcrlf
 		'## grup 1

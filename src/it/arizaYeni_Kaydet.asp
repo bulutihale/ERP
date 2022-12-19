@@ -22,6 +22,7 @@
 	personelID	=	Request.Form("personelID")
 	olusturanID	=	Request.Form("olusturanID")
 	oncelik		=	Request.Form("oncelik")
+	etiketID	=	Request.Form("etiketID")
 	' if personelID = "" then
 	' 	personelID = kid
 	' end if
@@ -151,6 +152,11 @@ end if
 	if oncelik <> "" then
 		rs("oncelik")	=	oncelik
 	end if
+	if sb_etiketEklenebilsin = true then
+		rs("etiketID") = etiketID
+	end if
+
+
 	rs.update
 	arizaID =	rs("arizaID")
 	gorevID	=	rs("arizaID")

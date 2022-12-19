@@ -11,16 +11,16 @@
 	gorevID				=	Request.QueryString("gorevID")
 	hata				=	""
 	call logla("Görev Atama Ekranı")
-	yetkiIT = yetkibul("IT")
+	' yetkiIT = yetkibul("IT")
 	modulAd =   "ITAriza"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
 
 
-if yetkiIT <= 3 then
-	hata = "Bu alana girmek için yeterli yetkiniz bulunmamaktadır"
-end if
+' if yetkiIT <= 3 then
+' 	hata = "Bu alana girmek için yeterli yetkiniz bulunmamaktadır"
+' end if
 
 
 '### GÖREV AYRINTILARI
@@ -50,7 +50,7 @@ end if
 '### PERSONELLER
 '### PERSONELLER
 	if hata = "" then
-		sorgu = "Select ad,Id from Personel.Personel where expiration is null and firmaID = " & firmaID & " and (gorev like N'%Bilgi İşlem%' or gorev like N'BİLGİ İŞLEM%') order by Ad ASC"
+		sorgu = "Select ad,Id from Personel.Personel where firmaID = " & firmaID & " order by Ad ASC"
 		rs.open sorgu,sbsv5,1,3
 			personelArr = "=|"
 			do while not rs.eof

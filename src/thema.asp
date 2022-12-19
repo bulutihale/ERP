@@ -360,149 +360,103 @@ if kid <> "" then
 	'########### ÜST BAR
 	'########### ÜST BAR
 		Response.Write "<ul class=""navbar-nav navbar-nav-right"">"
-				' if PersonelIslem = True then
-				' 	Response.Write "<li class=""nav-item dropdown mr-1"">"
-				' 	Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/personel/liste"">"
-				' 	Response.Write "<i class=""mdi mdi-account mx-0"" title=""Personel Listesi""></i>"
-				' 	Response.Write "</a>"
-				' 	Response.Write "</li>"
-				' end i
-				'##### MENÜLER
-				'##### MENÜLER
-				'##### MENÜLER
-					sorgu = "select id,"
-					if klang = "tr" then
-						sorgu = sorgu & "ad"
-					else
-						sorgu = sorgu & "ad_en as ad"
-					end if
-					sorgu = sorgu & ",link,icon,target from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') and menuYeri = 'TopRight' order by sira asc"
-					rs.open sorgu, sbsv5, 1, 3
-						for ri = 1 to rs.recordcount
-							ad		=	rs("ad")
-							link	=	rs("link")
-							icon	=	rs("icon")
-							target	=	rs("target") & ""
-							if link = "#" or isnull(link) = True then
-							else
-								if target = "" then
-									Response.Write "<li class=""nav-item dropdown mr-1"">"
-									Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/" & link & """>"
-									Response.Write "<i class=""" & icon & """ title="""
-									if klang = "tr" then
-										Response.Write ad
-									else
-										Response.Write ad_en
-									end if
-									Response.Write """></i>"
-									Response.Write "</a>"
-									Response.Write "</li>"
-								elseif target = "modal" then
-									Response.Write "<li class=""nav-item dropdown mr-1"">"
-									Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajax('/" & link & "')"">"
-									Response.Write "<i class=""" & icon & """ title="""
-									if klang = "tr" then
-										Response.Write ad
-									else
-										Response.Write ad_en
-									end if
-									Response.Write """></i>"
-									Response.Write "</a>"
-									Response.Write "</li>"
+
+			'##### MENÜLER
+			'##### MENÜLER
+				sorgu = "select id,"
+				if klang = "tr" then
+					sorgu = sorgu & "ad"
+				else
+					sorgu = sorgu & "ad_en as ad"
+				end if
+				sorgu = sorgu & ",link,icon,target from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') and menuYeri = 'TopRight' order by sira asc"
+				rs.open sorgu, sbsv5, 1, 3
+					for ri = 1 to rs.recordcount
+						ad		=	rs("ad")
+						link	=	rs("link")
+						icon	=	rs("icon")
+						target	=	rs("target") & ""
+						if link = "#" or isnull(link) = True then
+						else
+							if target = "" then
+								Response.Write "<li class=""nav-item dropdown mr-1"">"
+								Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/" & link & """>"
+								Response.Write "<i class=""" & icon & """ title="""
+								if klang = "tr" then
+									Response.Write ad
+								else
+									Response.Write ad_en
 								end if
+								Response.Write """></i>"
+								Response.Write "</a>"
+								Response.Write "</li>"
+							elseif target = "modal" then
+								Response.Write "<li class=""nav-item dropdown mr-1"">"
+								Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajax('/" & link & "')"">"
+								Response.Write "<i class=""" & icon & """ title="""
+								if klang = "tr" then
+									Response.Write ad
+								else
+									Response.Write ad_en
+								end if
+								Response.Write """></i>"
+								Response.Write "</a>"
+								Response.Write "</li>"
 							end if
-						rs.movenext
-						next
-					rs.close
-				'##### MENÜLER
-				'##### MENÜLER
-				'##### MENÜLER
+						end if
+					rs.movenext
+					next
+				rs.close
+			'##### MENÜLER
+			'##### MENÜLER
 
-
-
-
-
-
-				' if GorevEkle = True then
-					' Response.Write "<li class=""nav-item dropdown mr-1"">"
-					' Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajax('/gorev/yeni_ajax.asp')"">"
-					' Response.Write "<i class=""mdi mdi-calendar-plus mx-0"" title=""Hızlı Görev Ekle""></i>"
-					' Response.Write "</a>"
-					' Response.Write "</li>"
-				' end if
-
-				' if GorevEkle = True then
-				' 	Response.Write "<li class=""nav-item dropdown mr-1"">"
-				' 	Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/gorev/yeni"">"
-				' 	Response.Write "<i class=""mdi mdi-calendar-clock mx-0"" title=""Ayrıntılı Görev Ekle""></i>"
-				' 	Response.Write "</a>"
-				' 	Response.Write "</li>"
-				' end if
-
-				' if GorevListele = True then
-				' 	Response.Write "<li class=""nav-item dropdown mr-1"">"
-				' 	Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/gorev/liste"">"
-				' 	Response.Write "<i class=""mdi mdi-calendar mx-0"" title=""Görev Listesi""></i>"
-				' 	Response.Write "</a>"
-				' 	Response.Write "</li>"
-				' end if
-
-
-
-
-			'## MESAJLAR
-			'## MESAJLAR
-				' Response.Write "<li class=""nav-item dropdown mr-1"">"
-				' Response.Write "<a class=""nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"" id=""messageDropdown"" href=""#"" data-toggle=""dropdown"">"
-				' Response.Write "<i class=""mdi mdi-bell mx-0""></i>"
-				' Response.Write "<span class=""count"">5</span>"
-				' Response.Write "</a>"
-				' Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""messageDropdown"">"
-				' Response.Write "<p class=""mb-0 font-weight-normal float-left dropdown-header"">Mesajlar</p>"
-				' Response.Write "<a class=""dropdown-item"">"
-				' Response.Write "<div class=""item-content flex-grow"">"
-				' Response.Write "<h6 class=""ellipsis font-weight-normal"">Başlık</h6>"
-				' Response.Write "<p class=""font-weight-light small-text text-muted mb-0"">Mesaj</p>"
-				' Response.Write "</div>"
-				' Response.Write "</a>"
-				' Response.Write "</div>"
-				Response.Write "</li>"
-			'## MESAJLAR
-			'## MESAJLAR
-
-
-			'## TEKLİF
-			'## TEKLİF
-			yetkiTeklif = yetkibul("Teklif")
-			if yetkiTeklif >= 3 then
+			'## GÖREV
+			'## GÖREV
+				if sb_modul_gorevTakip = true then
 					Response.Write "<li class=""nav-item dropdown mr-1"">"
-					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"">"
-					Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""modalajaxfit('/teklif/teklif_yeni_modal.asp')""></i>"
-					' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
-					if yetkiTeklif >= 5 then
-						Response.Write "<div class=""badge badge-pill badge-warning"" onClick=""modalajaxfit('/teklif/teklif_onay_modal.asp')""><span class=""teklifOnaySayi"">0</span></div>"
+					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajaxfit('/it/arizaYeni_ajax.asp')"">"
+					Response.Write "<i class=""mdi mdi-calendar-plus mx-0"" title=""Hızlı Görev Ekle""></i>"
+					Response.Write "</a>"
+					Response.Write "</li>"
+				end if
+			'## GÖREV
+			'## GÖREV
+
+			'## TEKLİF
+			'## TEKLİF
+				if sb_modul_teklif = true then
+					yetkiTeklif = yetkibul("Teklif")
+					if yetkiTeklif >= 3 then
+						Response.Write "<li class=""nav-item dropdown mr-1"">"
+						Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"">"
+						' Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""modalajaxfit('/teklif/teklif_yeni_modal.asp')""></i>"
+						Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""document.location = '/teklif/teklif_yeni_modal'""></i>"
+						' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
+						if yetkiTeklif >= 5 then
+							Response.Write "<div class=""badge badge-pill badge-warning"" onClick=""modalajaxfit('/teklif/teklif_onay_modal.asp')""><span class=""teklifOnaySayi"">0</span></div>"
+						end if
+						Response.Write "</a>"
+						Response.Write "</li>"
 					end if
-					Response.Write "</a>"
-					Response.Write "</li>"
-			end if
+				end if
 			'## TEKLİF
 			'## TEKLİF
 
-
 			'## MAİL
 			'## MAİL
-			if webmailUser <> "" then
-					Response.Write "<li class=""nav-item dropdown mr-1"">"
-					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/webmail/mail"">"
-					Response.Write "<i class=""mdi mdi-email-variant"" title=""E-Mail Listesi""></i>"
-					' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
-						Response.Write "<div class=""badge badge-pill badge-warning""><span class=""mailSayi"">0</span></div>"
-					Response.Write "</a>"
-					Response.Write "</li>"
-			end if
+				if sb_modul_webmail = true then
+					if webmailUser <> "" then
+						Response.Write "<li class=""nav-item dropdown mr-1"">"
+						Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/webmail/mail"">"
+						Response.Write "<i class=""mdi mdi-email-variant"" title=""E-Mail Listesi""></i>"
+						' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
+							Response.Write "<div class=""badge badge-pill badge-warning""><span class=""mailSayi"">0</span></div>"
+						Response.Write "</a>"
+						Response.Write "</li>"
+					end if
+				end if
 			'## MAİL
 			'## MAİL
-
 
 			'## BİLDİRİM ALANI
 			'## BİLDİRİM ALANI
@@ -545,22 +499,19 @@ if kid <> "" then
 			'## BİLDİRİM ALANI
 			'## BİLDİRİM ALANI
 
-
 			'## KULLANICI MENÜSÜ
 			'## KULLANICI MENÜSÜ
-			personel64 = kid
-			personel64 = base64_encode_tr(personel64)
-			Response.Write "<li class=""nav-item nav-profile dropdown"">"
-			Response.Write "<a class=""nav-link dropdown-toggle"" href=""#"" data-toggle=""dropdown"" id=""profileDropdown""><span class=""nav-profile-name"">" & personelAd & " " & personelSoyad & "</span></a>"
-			Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""profileDropdown"">"
-			Response.Write "<a class=""dropdown-item"" onClick=""modalajax('/personel/personel_yeni.asp?gorevID=" & personel64 & "');""><i class=""mdi mdi-settings text-primary""></i>" & translate("Ayarlar","","") & "</a>"
-			Response.Write "<a class=""dropdown-item"" href=""/personel/logout.asp""><i class=""mdi mdi-logout text-primary""></i>" & translate("Çıkış","","") & "</a>"
-			Response.Write "</div>"
-			Response.Write "</li>"
+				personel64 = kid
+				personel64 = base64_encode_tr(personel64)
+				Response.Write "<li class=""nav-item nav-profile dropdown"">"
+				Response.Write "<a class=""nav-link dropdown-toggle"" href=""#"" data-toggle=""dropdown"" id=""profileDropdown""><span class=""nav-profile-name"">" & personelAd & " " & personelSoyad & "</span></a>"
+				Response.Write "<div class=""dropdown-menu dropdown-menu-right navbar-dropdown"" aria-labelledby=""profileDropdown"">"
+				Response.Write "<a class=""dropdown-item"" onClick=""modalajax('/personel/personel_yeni.asp?gorevID=" & personel64 & "');""><i class=""mdi mdi-settings text-primary""></i>" & translate("Ayarlar","","") & "</a>"
+				Response.Write "<a class=""dropdown-item"" href=""/personel/logout.asp""><i class=""mdi mdi-logout text-primary""></i>" & translate("Çıkış","","") & "</a>"
+				Response.Write "</div>"
+				Response.Write "</li>"
 			'## KULLANICI MENÜSÜ
 			'## KULLANICI MENÜSÜ
-
-
 
 		Response.Write "</ul>"
 	'########### ÜST BAR

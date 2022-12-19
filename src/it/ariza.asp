@@ -11,8 +11,8 @@
 	hata				=	""
 	islem				=	Request.Form("islem")
 	gorevID				=	Request.Form("gorevID")
-	yetkiIT = yetkibul("IT")
-	modulAd =   "ITAriza"
+	yetkiBilgiIslem		=	yetkibul("Bilgi İşlem")
+	modulAd				=	"ITAriza"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -36,9 +36,9 @@
 
 
 
-if yetkiIT = 0 then
-	hata = "Bu alana girmek için yeterli yetkiniz bulunmamaktadır"
-end if
+' if yetkiIT = 0 then
+' 	hata = "Bu alana girmek için yeterli yetkiniz bulunmamaktadır"
+' end if
 
 
 '### SAYFA ID TESPİT ET
@@ -128,6 +128,7 @@ end if
 				tarihServis	=	rs("tarihServis")
 				olusturanID	=	rs("olusturanID")
 				tur			=	rs("tur")
+				etiketID	=	rs("etiketID")
 			end if
 			rs.close
 		end if
@@ -136,9 +137,30 @@ end if
 '### GÖREV AYRINTILARI
 
 
-if yetkiIT < 3 then
-	hata = "Görev Eklemek İçin Yetkiniz Yeterli Değil"
-end if
+' if yetkiIT < 3 then
+' 	hata = "Görev Eklemek İçin Yetkiniz Yeterli Değil"
+' end if
+
+
+'### ETİKETLER
+'### ETİKETLER
+	if hata = "" then
+		sorgu = "Select etiketAd,etiketID from IT.etiket where firmaID = " & firmaID & " order by etiketAd ASC"
+		rs.open sorgu,sbsv5,1,3
+			etiketArrDiger = "=|"
+			do while not rs.eof
+				etiketArrDiger = etiketArrDiger & rs("etiketAd")
+				etiketArrDiger = etiketArrDiger & "="
+				etiketArrDiger = etiketArrDiger & rs("etiketID")
+				etiketArrDiger = etiketArrDiger & "|"
+			rs.movenext
+			loop
+			etiketArrDiger = left(etiketArrDiger,len(etiketArrDiger)-1)
+		rs.close
+	end if
+'### ETİKETLER
+'### ETİKETLER
+
 
 
 '### GÖREV FORMU
@@ -215,7 +237,7 @@ end if
 '							if gorevID <> "" and oncelik > 0 then
 								Response.Write "<div class=""row mt-2"">"
 '								if gorevID <> "" and oncelik > 0 then
-									Response.Write "<div class=""col-lg-6 col-md-6 col-sm-6 col-xs"">"
+									Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs"">"
 									Response.Write "<div class=""badge badge-danger"">Öncelik</div>"
 									degerler = ""
 									for i = 0 to ubound(oncelikArr)
@@ -228,10 +250,18 @@ end if
 									Response.Write "</div>"
 '								end if
 '								if gorevID <> "" and isnull(tarihServis) = False then
-									Response.Write "<div class=""col-lg-6 col-md-6 col-sm-6 col-xs"">"
+									Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs"">"
 									Response.Write "<div class=""badge badge-danger"">İstenilen Görev Başlama Tarihi</div>"
 									call forminput("tarihServis",tarihServis,"","","tarih","autocompleteOFF","tarihServis","")
 									Response.Write "</div>"
+									if sb_etiketEklenebilsin = true then
+										Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs"">"
+											Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+											Response.Write "<div class=""badge badge-secondary"">" & translate("Etiket","","") & "</div>"
+												call formselectv2("etiketID",etiketID,"","","","","etiketID",etiketArrDiger,"")
+											Response.Write "</div>"
+										Response.Write "</div>"
+									end if
 '								end if
 								Response.Write "</div>"
 '							end if
@@ -356,7 +386,50 @@ end if
 
 
 
-
+'### İŞLEM GEÇMİŞİ TABLOSU
+'### İŞLEM GEÇMİŞİ TABLOSU
+		Response.Write "<div class=""container-fluid mt-3"">"
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+				Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-success"">Hareket Ayrıntıları : </div>"
+                    Response.Write "<div class=""card-body"">"
+                        Response.Write "<div class=""row"">"
+                            Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs mt-1"">"
+                            '#### TABLO
+                                Response.Write "<table class=""table table-striped table-bordered table-hover mt10""><thead><tr>"
+                                Response.Write "<th>Tarih</th>"
+                                Response.Write "<th>Kid</th>"
+                                Response.Write "<th>İşlem</th>"
+                                Response.Write "<th>ip</th>"
+                                Response.Write "</tr></thead><tbody>"
+                                sorgu = "Select top(1000) *,(Select personel.personel.ad from personel.personel where personel.personel.id = personel.personel_log.personelID) as kidAd from personel.personel_log where modulAd = 'ITAriza' and firmaID = " & firmaID & " and gorevID = " & gorevID & ""
+                                sorgu = sorgu & "order by id desc"
+                                rs.open sorgu,sbsv5,1,3
+                                if rs.recordcount > 0 then
+                                for ri = 1 to rs.recordcount
+                                    Response.Write "<tr>"
+                                    Response.Write "<td>" & rs("tarih") & "</td>"
+                                    Response.Write "<td>" & rs("kidAd") & "</td>"
+                                    Response.Write "<td>" & rs("islem") & "</td>"
+                                    Response.Write "<td>" & rs("ip") & "</td>"
+                                    Response.Write "</td>"
+                                    Response.Write "</tr>"
+                                rs.movenext
+                                next
+                                end if
+                                rs.close
+                                Response.Write "</table>"
+                            '#### TABLO
+                            Response.Write "</div>"
+                        Response.Write "</div>"
+                    Response.Write "</div>"
+                Response.Write "</div>"
+            Response.Write "</div>"
+        Response.Write "</div>"
+        Response.Write "</div>"
+'### İŞLEM GEÇMİŞİ TABLOSU
+'### İŞLEM GEÇMİŞİ TABLOSU
 
 
 
