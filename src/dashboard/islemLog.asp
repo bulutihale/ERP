@@ -15,7 +15,7 @@
 
 if hata = "" then
     Response.Write "<div class=""row"">"
-        Response.Write "<div class=""col-lg-6 col-md-6 col-sm-6 col-xs-6"">"
+        Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
             Response.Write "<div class=""card"">"
             Response.Write "<div class=""card-header text-white bg-dark"">İşlem Log</div>"
             Response.Write "<div class=""card-body"" style=""max-height:300px;overflow:auto;padding:0 !important"">"

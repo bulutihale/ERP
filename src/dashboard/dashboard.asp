@@ -92,7 +92,7 @@ function modulBilgiBul(byVal modul,byVal bilgi)
 		if bilgi = "dosya" then
 			modulBilgiBul = "/dashboard/islemLog.asp"
 		elseif bilgi = "boyut" then
-			modulBilgiBul = "col-lg-8 col-md-8 col-sm-8 col-xs-12"
+			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
 		end if
 	end if
 end function

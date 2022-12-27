@@ -10,7 +10,46 @@
 '###### ANA TANIMLAMALAR
 
 
-call logla("Yeni Teklif Ekranı")
+'### SAYFA ID TESPİT ET
+	if hata = "" then
+		if gorevID = "" then
+			gorevID64 = Session("sayfa5")
+
+			if gorevID64 = "" then
+			else
+				gorevID		=	gorevID64
+				gorevID		=	base64_decode_tr(gorevID)
+			end if
+		else
+			if isnumeric(gorevID) = False then
+				gorevID		=	base64_decode_tr(gorevID)
+			end if
+			gorevID		=	int(gorevID)
+			gorevID64	=	gorevID
+			gorevID64	=	base64_encode_tr(gorevID64)
+		end if
+	end if
+'### SAYFA ID TESPİT ET
+
+
+
+'### TEKLİF OLUŞTURMA
+    teklifID = gorevID
+    if teklifID = "" then
+        call logla("Yeni Teklif Ekranı")
+        sorgu = "Select top 1 * from teklif.teklif"
+        rs.open sorgu,sbsv5,1,3
+            rs.addnew
+                rs("firmaID")   =   firmaID
+                rs("kid")       =   kid
+            rs.update
+            teklifID = rs("teklifID")
+            gorevID = teklifID
+        rs.close
+    else
+        call logla("Teklif Ekranı")
+    end if
+'### TEKLİF OLUŞTURMA
 
 
 '### hata önleme
@@ -100,7 +139,7 @@ Response.Write "<form action=""/teklif/teklif_kaydet.asp"" method=""post"" class
                         Response.Write "<div class=""row"">"
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Veren Firma : </div>"
-                                    sorgu = "Select Ad,Id,logo from portal.firma where (Id = " & firmaID & " or anaFirmaID = " & firmaID & ") order by Ad ASC"
+                                    sorgu = "Select Ad,Id,logo from portal.firma where silindi = 0 and (Id = " & firmaID & " or anaFirmaID = " & firmaID & ") order by Ad ASC"
                                     rs.open sorgu,sbsv5,1,3
                                         Response.Write "<select name=""teklifFirmaId"" id=""teklifFirmaId"" class=""form-control"">"
                                         Response.Write "<option value="""">--Firma Seç--</option>"
@@ -161,7 +200,7 @@ Response.Write "<form action=""/teklif/teklif_kaydet.asp"" method=""post"" class
                         Response.Write "<div class=""row"">"
                             Response.Write "<div class=""col-lg-12"">"
                                 ' Response.Write "<div class=""badge badge-danger"">Hazır Üstyazı Seç</div>"
-                                    sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Üstü' order by onYaziID desc"
+                                    sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Üstü' order by onYaziID desc"
                                     rs.open sorgu,sbsv5,1,3
                                         Response.Write "<select name=""onUstYazi"" id=""onUstYazi"" class=""form-control"" onChange=""$('.ustyazi').val($('#onUstYazi').children('option:selected').attr('data-onUstYazi'))"">"
                                         Response.Write "<option value="""">--Hazır Yazı--</option>"
@@ -201,35 +240,46 @@ Response.Write "<form action=""/teklif/teklif_kaydet.asp"" method=""post"" class
 				Response.Write "<div class=""card-header text-white bg-primary"">Ürünler</div>"
 				Response.Write "<div class=""card-body"">"
                     '# form
+                    Response.Write "<div class=""row"">"
+                        Response.Write "<div class=""col-lg-4"">"
+                            Response.Write "<div class=""badge badge-danger"">Teklif Verilecek Ürün : </div>"
+                                sorgu = "Select stokID,stokKodu,stokAd from stok.stok where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 order by stokAd ASC"
+                                rs.open sorgu,sbsv5,1,3
+                                    Response.Write "<select name=""teklifStokID"" id=""teklifStokID"" class=""form-control"">"
+                                    Response.Write "<option value="""">--Stok Seç--</option>"
+                                    for oi = 1 to rs.recordcount
+                                        stokKodu    =	rs("stokKodu")
+                                        stokID      =	rs("stokID")
+                                        stokAd	    =	rs("stokAd")
+                                        Response.Write "<option value=""" & stokID & """ "
+                                        Response.Write ">"
+                                        Response.Write stokAd
+                                        Response.Write "</option>"
+                                    rs.movenext
+                                    next
+                                    Response.Write "</select>"
+                                rs.close
+                        Response.Write "</div>"
+                        Response.Write "<div class=""col-lg-1"">"
+                            Response.Write "<div class=""badge"">&nbsp;</div>"
+                            Response.Write "<button class=""btn btn-warning form-control"" onClick=""modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + $('#teklifStokID').val() + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"">Ekle</button>"
+                        Response.Write "</div>"
+                    Response.Write "</div>"
 
-Response.Write "<div class=""row"">"
+                    '### ürün listesi
+                        Response.Write "<div class=""row"">"
+                            Response.Write "<div class=""col-lg-12 cariliste mt-2"" id=""teklifUrunListe"">"
+                            Response.Write "</div>"
+                        Response.Write "</div>"
+                    '### ürün listesi
 
+                    ' '### hesaplama
+                    '     Response.Write "<div class=""row"">"
+                    '         Response.Write "<div class=""col-lg-12 cariliste mt-2"" id=""teklifHesaplama"">"
+                    '         Response.Write "</div>"
+                    '     Response.Write "</div>"
+                    ' '### hesaplama
 
-                            Response.Write "<div class=""col-lg-12"">"
-                                Response.Write "<div class=""badge badge-danger"">Teklif Verilecek Ürün : </div>"
-                                    ' sorgu = "Select stokID,stokKodu,stokAd from stok.stok where firmaID = " & firmaID & " and silindi = 0 order by stokAd ASC"
-                                    ' rs.open sorgu,sbsv5,1,3
-                                    '     Response.Write "<select name=""teklifFirmaId"" id=""teklifFirmaId"" class=""form-control formSelect2"">"
-                                    '     Response.Write "<option value="""">--Stok Seç--</option>"
-                                    '     for oi = 1 to rs.recordcount
-                                    '         stokKodu    =	rs("stokKodu")
-                                    '         stokID      =	rs("stokID")
-                                    '         stokAd	    =	rs("stokAd")
-                                    '         Response.Write "<option value=""" & stokID & """ "
-                                    '         Response.Write ">"
-                                    '         Response.Write stokAd
-                                    '         Response.Write "</option>"
-                                    '     rs.movenext
-                                    '     next
-                                    '     Response.Write "</select>"
-                                    ' rs.close
-                                    call formselectv2("stokSec","","$('#divStokRef').load('/stok/stok_ref_liste.asp',{stokID:$(this).val(), cariID:$('#cariSec').val()});","","formSelect2 stokSec border","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar""")
-				            Response.Write "</div>"
-Response.Write "</div>"
-
-
-                        Response.Write "üstte select2 ile ürün listesi. seçilince tablo ajax reload + hesaplama ajax reload<br />"
-                        Response.Write "ürün tablo ajax<br />"
                         Response.Write "hesaplama ajax"
                     '# form
 				Response.Write "</div>"
@@ -270,7 +320,7 @@ Response.Write "</div>"
 				Response.Write "<div class=""card-header text-white bg-primary"">Ticari Koşullar</div>"
 				Response.Write "<div class=""card-body"">"
                     '# form
-                        sorgu = "Select * from teklif.teklifKosul where firmaID = " & firmaID & " and silindi = 0 order by kosul ASC"
+                        sorgu = "Select * from teklif.teklifKosul where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 order by kosul ASC"
                         rs.open sorgu,sbsv5,1,3
                         if rs.recordcount > 0 then
                             Response.Write "<table class=""table table-striped table-bordered table-hover"">"
@@ -326,7 +376,7 @@ Response.Write "</div>"
                         Response.Write "<div class=""row"">"
                             Response.Write "<div class=""col-lg-12"">"
                                 ' Response.Write "<div class=""badge badge-danger"">Hazır Üstyazı Seç</div>"
-                                    sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Altı' order by onYaziID desc"
+                                    sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Altı' order by onYaziID desc"
                                     rs.open sorgu,sbsv5,1,3
                                         Response.Write "<select name=""onAltYazi"" id=""onAltYazi"" class=""form-control"" onChange=""$('.altYazi').val($('#onAltYazi').children('option:selected').attr('data-onAltYazi'))"">"
                                         Response.Write "<option value="""">--Hazır Yazı--</option>"
