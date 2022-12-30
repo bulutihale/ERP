@@ -63,12 +63,12 @@
 
 
 '### KAYDET
-      sorgu = "Select top 1 * from teklif.teklif"
+      sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
       rs.open sorgu,sbsv5,1,3
         rs.addnew
           rs("kid")                 =   kid
           rs("firmaID")             =   firmaID
-          rs("teklifID")            =   teklifID
+        '   rs("teklifID")            =   teklifID
           rs("cariAd")              =   cariAd
           rs("cariKodu")            =   cariKodu
           rs("teklifsayi")              =   teklifsayi

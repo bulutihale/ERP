@@ -170,14 +170,30 @@ call logla("Cari Listesi Ekranı")
 '####### SONUÇ TABLOSU
 
 
-
-
-
-
-
-
-
-
-
-
 %>
+
+
+<script>
+
+
+
+
+
+
+
+
+$( document ).ready(function() {
+alert();
+$(".demo").qrcode({
+
+   text:'https://www.jqueryscript.net',
+    mode: 1,
+    label:'jQueryScript.Net',
+    fontname:'sans',
+    fontcolor:'#000'
+
+});
+
+});
+
+</script>

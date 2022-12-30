@@ -92,6 +92,7 @@
 '###### CARİ ARAMA FORMU
 
 Response.Write "<form action=""/teklif/teklif_kaydet.asp"" method=""post"" class=""ajaxform"">"
+call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
 
 '###### Müşteri Bilgileri
 	if hata = "" then
@@ -262,7 +263,7 @@ Response.Write "<form action=""/teklif/teklif_kaydet.asp"" method=""post"" class
                         Response.Write "</div>"
                         Response.Write "<div class=""col-lg-1"">"
                             Response.Write "<div class=""badge"">&nbsp;</div>"
-                            Response.Write "<button class=""btn btn-warning form-control"" onClick=""modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + $('#teklifStokID').val() + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"">Ekle</button>"
+                            Response.Write "<button type=""button"" class=""btn btn-warning form-control"" onClick=""teklifUrunEkle();"">Ekle</button>"
                         Response.Write "</div>"
                     Response.Write "</div>"
 
@@ -429,6 +430,21 @@ Response.Write "$(document).ready(function() {"
         Response.Write "var cariform = {target:'#cariliste',type:'POST'};$('.cariform').ajaxForm(cariform);"
     '## cari arama
 Response.Write "});"
+
+
+Response.Write "function teklifUrunEkle() {"
+
+Response.Write "cariAd = $('#cariAd').val();"
+Response.Write "teklifStokID = $('#teklifStokID').val();"
+    Response.Write "if(cariAd==''){"
+        Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
+    Response.Write "} else if(teklifStokID=='') {"
+        Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
+    Response.Write "} else {"
+        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + $('#teklifStokID').val() + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
+    Response.Write "}"
+Response.Write "}"
+
 Response.Write "</script>"
 
 

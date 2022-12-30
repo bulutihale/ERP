@@ -850,6 +850,7 @@ Response.Write "<scr" & "ipt src=""/template/bootstrap-datepicker/locales/bootst
 Response.Write "<scr" & "ipt src=""/template/vendors/datatables.net/jquery.dataTables.js""></scr" & "ipt>"
 Response.Write "<scr" & "ipt src=""/template/vendors/datatables.net-bs4/dataTables.bootstrap4.js""></scr" & "ipt>"
 Response.Write "<scr" & "ipt src=""/template/js/off-canvas.js""></scr" & "ipt>"
+Response.Write "<scr" & "ipt src=""/template/js/jquery-qrcode.js""></scr" & "ipt>"
 'Response.Write "<scr" & "ipt src=""/template/js/hoverable-collapse.js""></scr" & "ipt>"
 'Response.Write "<scr" & "ipt src=""/template/js/template.js""></scr" & "ipt>"
 'Response.Write "<scr" & "ipt src=""/template/js/dashboard.js""></scr" & "ipt>"
