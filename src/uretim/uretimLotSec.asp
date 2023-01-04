@@ -135,8 +135,23 @@ yetkiKontrol = yetkibul(modulAd)
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
-				$('#ajax').load('/uretim/uretimLotKaydet.asp', {ajandaID:ajandaID,secilenDepoID:secilenDepoID, miktarBirim:miktarBirim, isTur:isTur, stokKodu:stokKodu, stokHareketTuru:stokHareketTuru, kullanimMiktar:kullanimMiktar, depoKategori:depoKategori, stokID:stokID, siparisKalemID:siparisKalemID, lot:lot, stokHareketTipi:stokHareketTipi, lotSKT:lotSKT});
-				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')	
+				$('#ajax').load('/uretim/uretimLotKaydet.asp', {
+					ajandaID:ajandaID,
+					secilenDepoID:secilenDepoID,
+					miktarBirim:miktarBirim,
+					isTur:isTur, 
+					stokKodu:stokKodu, 
+					stokHareketTuru:stokHareketTuru, 
+					kullanimMiktar:kullanimMiktar, 
+					depoKategori:depoKategori, 
+					stokID:stokID, 
+					siparisKalemID:siparisKalemID, 
+					lot:lot, 
+					stokHareketTipi:stokHareketTipi, 
+					lotSKT:lotSKT
+					}, function(){
+				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')
+				});
 				modalkapat();
 			}, //confirm buton yapılanlar
 			function(dismiss) {

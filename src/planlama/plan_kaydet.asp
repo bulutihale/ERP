@@ -177,9 +177,11 @@
 							altReceteOHDhes		=	onHazirlikDeger + altReceteOHD
 							altReceteOHT		=	rs1("altReceteOHT")
 
-				'####### receteAdeımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın
-							altRecKayitTar	=	tarihHesapla(planTarih, altReceteOHT, altReceteOHDhes)
 
+				'####### receteAdeımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın
+
+							altRecKayitTar	=	tarihHesapla(planTarih, altReceteOHT, altReceteOHDhes)
+							
 							hangiYil		=	datepart("yyyy",altRecKayitTar)
 							hangiAy			=	datepart("m",altRecKayitTar)
 							hangiGun		=	datepart("d",altRecKayitTar)

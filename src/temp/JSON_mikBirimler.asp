@@ -11,9 +11,10 @@
 	arananKelime		=	request.QueryString ("q")
 '##### şart ile gelen sorgu 
 '##### şart ile gelen sorgu 
-	sart		=	request.QueryString ("sart")
-	sartOzel	=	request.QueryString ("sartOzel")
-	idKullan	=	request.QueryString ("idKullan")
+	sart			=	request.QueryString ("sart")
+	sartOzel		=	request.QueryString ("sartOzel")
+	idKullan		=	request.QueryString ("idKullan")
+	anaBirimFiltre	=	request.QueryString ("anaBirimFiltre")
 '##### /şart ile gelen sorgu 
 '##### /şart ile gelen sorgu 
 
@@ -32,6 +33,9 @@
 			end if
 			if sartOzel <> "" then
 				sorgu = sorgu & " AND " & sartOzel
+			end if
+			if anaBirimFiltre <> "" then
+				sorgu = sorgu & " AND t1.uzunBirim = '" & anaBirimFiltre & "'"
 			end if
 			sorgu = sorgu & " ORDER BY t1.uzunBirim ASC"
 			rs.open sorgu, sbsv5, 1, 3

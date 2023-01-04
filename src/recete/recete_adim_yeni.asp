@@ -73,7 +73,7 @@ if receteAdimID <> "" then
 				etiketeEkle			=	rs("etiketeEkle")
 				etiketAd			=	rs("etiketAd")
 				onHazirlikTur		=	rs("onHazirlikTur")
-				if onHazirlikTur = "" then
+				if onHazirlikTur = "" OR isnull(onHazirlikTur) then
 					onHazirlikTur = "Saat"
 				end if
 				onHazirlikDeger		=	rs("onHazirlikDeger")

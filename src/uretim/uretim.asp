@@ -47,7 +47,10 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row"">"
 					Response.Write "<div class=""col-lg-6 col-md-12 col-sm-12"">"
 
-						if isTur = "uretimPlan" then	
+						if isTur = "uretimPlan" then
+
+							teminDepoKategori	=	"uretim"
+
 							sorgu = "SELECT t4.cariID, t3.stokID, t4.cariAd, t3.stokKodu, t3.stokAd, t1.miktar, t1.mikBirim, t5.siparisKalemID, t5.tamamlandi, t5.baslangicZaman,"
 							sorgu = sorgu & " t5.bitisZaman"
 							sorgu = sorgu & " FROM portal.ajanda t5"
@@ -83,6 +86,8 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "</div>"
 
 						elseif isTur = "kesimPlan" then
+
+							teminDepoKategori	=	"kesim"
 
 							sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
 							sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem"
@@ -126,13 +131,13 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<div class=""row mt-2"">"
 							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Temin Depo</div>"
 							Response.Write "<div class=""col-9"">"
-								call formselectv2("teminDepoID","","receteSec();","","formSelect2 depoSec border","","teminDepoID","","data-holderyazi=""Yarı mamul temini yapılacak depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('uretim')""")
+								call formselectv2("teminDepoID","","receteSec();","","formSelect2 depoSec border","","teminDepoID","","data-holderyazi=""Yarı mamul temini yapılacak depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2"">"
 							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Teçhizat</div>"
 							Response.Write "<div class=""col-9"">"
-								call formselectv2("techizatSec","","","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('uretim')""")
+								call formselectv2("techizatSec","","","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 					Response.Write "</div>"
@@ -455,7 +460,19 @@ yetkiKontrol = yetkibul(modulAd)
 			if(receteID > 0){
 				$('#recetelerDIV').hide('slow');
 			}
-			$('#btnDIV, #btnDIV2').removeClass('d-none');
+			
+			if(teminDepoID == 0 && receteID == undefined){
+				swal('','Temin Depo ve Reçete Seçimi Yapınız.')
+					}
+			else if(teminDepoID == 0){swal('','Temin Depo Seçimi Yapınız.')
+					}
+			else if(receteID == 0){swal('','Reçete Seçimi Yapınız.')
+					}
+			else{
+				$('#btnDIV, #btnDIV2').removeClass('d-none');
+				}
+				
+				
 			$('#receteBtn').removeClass('d-none');
 			$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *')	
 			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #linklerDIV > *')	
@@ -523,9 +540,9 @@ yetkiKontrol = yetkibul(modulAd)
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
-				$('#ajax').load('/uretim/uretimLotSil.asp', {stokHareketID:stokHareketID});
-				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')	
-				
+				$('#ajax').load('/uretim/uretimLotSil.asp', {stokHareketID:stokHareketID}, function(){
+					$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')	
+				});
 			}, //confirm buton yapılanlar
 			function(dismiss) {
 			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
