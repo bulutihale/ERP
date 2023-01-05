@@ -4,6 +4,7 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
     modulAd 		=   "satis"
+	listeTur		=	Request.QueryString("listeTur")
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -18,6 +19,7 @@
 	
 		Response.Write "<div class=""card-body"">"
 			Response.Write "<form action=""/uretim/uretilenListe.asp"" method=""post"" id=""filtreForm"">"
+			Response.Write "<input name=""listeTur"" type=""hidden"" value=""" & listeTur & """>"
 			Response.Write "<div class=""row"">"
 				Response.Write "<div class=""col-6"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left"">Sipariş No</div>"

@@ -76,6 +76,9 @@ if firmaID = 5 then
 		sb_TeklifFiyatiSirifOlanStoklariGizle =   false		'yazılacak
     	sb_TeklifIskontoSayisi  =   2							'teklif hazırlanırken kaç iskontoya izin verilsin
 		sb_TeklifOndalikSayi	=	2							'teklif toplamlarında tamsayıdan sonra kaç ondalık karakter olsun
+		sb_TeklifSayiFormatOn		=	"TeklifSayi"				'teklif sayısının önünde yer alır
+		sb_TeklifSayiFormatRakam	=	2						'kaç hane olacak
+		sb_TeklifSayiFormat			=	"on|4yil|2ay|2gun|rakam"						'bu kısmını yazmadım
 	'## TEKLİF
 	'## TEKLİF
 

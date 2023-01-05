@@ -33,7 +33,13 @@
 
 
 
-'### TEKLİF OLUŞTURMA
+'#### BİTMEMİŞ TEKLİFLERİ SİL
+    sorgu = "delete teklif.teklif where (teklifsayi = '' or teklifsayi is null) and tarih < getdate()"
+    rs.open sorgu,sbsv5,3,3
+'#### BİTMEMİŞ TEKLİFLERİ SİL
+
+
+'### TEKLİF OLUŞTURMA veya AÇMA
     teklifID = gorevID
     if teklifID = "" then
         call logla("Yeni Teklif Ekranı")
@@ -47,14 +53,63 @@
             gorevID = teklifID
         rs.close
     else
-        call logla("Teklif Ekranı")
+        call logla("Teklif Ekranı ID : " & teklifID)
+        sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount = 1 then
+          cariAd              =   rs("cariAd")
+          cariKodu            =   rs("cariKodu")
+          teklifsayi          =   rs("teklifsayi")
+          tekliftarih         =   rs("tekliftarih")
+          teklifFirmaId       =   rs("teklifFirmaId")
+          teklifTuru          =   rs("teklifTuru")
+          teklifDili          =   rs("teklifDili")
+          teklifParaBirimi    =   rs("teklifParaBirimi")
+          onUstYazi           =   rs("onUstYazi")
+          ustyazi             =   rs("ustyazi")
+          ozelNot             =   rs("ozelNot")
+          ozelkosultur1       =   rs("ozelkosultur1")
+          ozelkosulicerik1    =   rs("ozelkosulicerik1")
+          onAltYazi           =   rs("onAltYazi")
+          altYazi             =   rs("altYazi")
+          teklifKosul         =   rs("teklifKosul")
+        else
+            hata = "Kritik Hata Oluştu. Hatalı teklif"
+        end if
+        rs.close
     end if
-'### TEKLİF OLUŞTURMA
+'### TEKLİF OLUŞTURMA veya AÇMA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 '### hata önleme
     if tekliftarih = "" then
         tekliftarih  = date()
+    end if
+    if teklifDili = "" then
+        teklifDili  = "tr"
+    end if
+    if teklifParaBirimi = "" then
+        teklifParaBirimi  = "TL"
     end if
 '### hata önleme
 
@@ -143,7 +198,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                                     sorgu = "Select Ad,Id,logo from portal.firma where silindi = 0 and (Id = " & firmaID & " or anaFirmaID = " & firmaID & ") order by Ad ASC"
                                     rs.open sorgu,sbsv5,1,3
                                         Response.Write "<select name=""teklifFirmaId"" id=""teklifFirmaId"" class=""form-control"">"
-                                        Response.Write "<option value="""">--Firma Seç--</option>"
+                                        ' Response.Write "<option value="""">--Firma Seç--</option>"
                                         for oi = 1 to rs.recordcount
                                             teklifFirmaAd       =	rs("Ad")
                                             teklifFirmaId       =	rs("Id")
@@ -204,7 +259,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                                     sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Üstü' order by onYaziID desc"
                                     rs.open sorgu,sbsv5,1,3
                                         Response.Write "<select name=""onUstYazi"" id=""onUstYazi"" class=""form-control"" onChange=""$('.ustyazi').val($('#onUstYazi').children('option:selected').attr('data-onUstYazi'))"">"
-                                        Response.Write "<option value="""">--Hazır Yazı--</option>"
+                                        Response.Write "<option value=""0"">--Hazır Yazı--</option>"
                                         for oi = 1 to rs.recordcount
                                             onYazi      =	rs("onYazi")
                                             onYaziID	=	rs("onYaziID")
@@ -274,14 +329,6 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                         Response.Write "</div>"
                     '### ürün listesi
 
-                    ' '### hesaplama
-                    '     Response.Write "<div class=""row"">"
-                    '         Response.Write "<div class=""col-lg-12 cariliste mt-2"" id=""teklifHesaplama"">"
-                    '         Response.Write "</div>"
-                    '     Response.Write "</div>"
-                    ' '### hesaplama
-
-                        Response.Write "hesaplama ajax"
                     '# form
 				Response.Write "</div>"
 				Response.Write "</div>"
@@ -321,6 +368,15 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
 				Response.Write "<div class=""card-header text-white bg-primary"">Ticari Koşullar</div>"
 				Response.Write "<div class=""card-body"">"
                     '# form
+                        '## mevcut koşullar
+                            if isnull(teklifKosul) = False then
+                                if teklifKosul <> "" then
+                                    teklifKosul = teklifKosul
+                                    teklifKosul = replace(teklifKosul," ","")
+                                    teklifKosulArr = Split(teklifKosul,",")
+                                end if
+                            end if
+                        '## mevcut koşullar
                         sorgu = "Select * from teklif.teklifKosul where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 order by kosul ASC"
                         rs.open sorgu,sbsv5,1,3
                         if rs.recordcount > 0 then
@@ -333,11 +389,27 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                             Response.Write "</thead>"
                             Response.Write "<tbody>"
                             for i = 1 to rs.recordcount
+                                teklifKosulSonuc = false
+                                if isnull(teklifKosul) = False then
+                                    if teklifKosul <> "" then
+                                        for ki = 0 to ubound(teklifKosulArr)
+                                            if int(teklifKosulArr(ki)) = teklifKosulID then
+                                                teklifKosulSonuc = true
+                                                exit for
+                                            end if
+                                        next
+                                    end if
+                                end if
                                 teklifKosulID   =   rs("teklifKosulID")
                                 kosul           =   rs("kosul")
                                 icerik          =   rs("icerik")
                                 Response.Write "<tr>"
-                                Response.Write "<td nowrap><input style=""opacity:1;position:relative;"" type=""checkbox"" name=""kosul" & teklifKosulID & """ id=""kosul" & teklifKosulID & """ value=""" & teklifKosulID & """>&nbsp;" & kosul & "</td>"
+                                Response.Write "<td nowrap><input style=""opacity:1;position:relative;"" type=""checkbox"" name=""kosul"" id=""kosul" & teklifKosulID & """ value=""" & teklifKosulID & """"
+                                if teklifKosulSonuc = true then
+                                    Response.Write " checked=""checked"" "
+                                end if
+                                Response.Write ">&nbsp;" & kosul & "</td>"
+                                ' Response.Write "<td nowrap><input style=""opacity:1;position:relative;"" type=""checkbox"" name=""kosul" & teklifKosulID & """ id=""kosul" & teklifKosulID & """ value=""" & teklifKosulID & """>&nbsp;" & kosul & "</td>"
                                 Response.Write "<td>" & icerik & "</td>"
                                 Response.Write "</tr>"
                             rs.movenext
@@ -380,7 +452,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                                     sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Altı' order by onYaziID desc"
                                     rs.open sorgu,sbsv5,1,3
                                         Response.Write "<select name=""onAltYazi"" id=""onAltYazi"" class=""form-control"" onChange=""$('.altYazi').val($('#onAltYazi').children('option:selected').attr('data-onAltYazi'))"">"
-                                        Response.Write "<option value="""">--Hazır Yazı--</option>"
+                                        Response.Write "<option value=""0"">--Hazır Yazı--</option>"
                                         for oi = 1 to rs.recordcount
                                             onYazi      =	rs("onYazi")
                                             onYaziID	=	rs("onYaziID")
@@ -407,7 +479,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
 	end if
 '###### TEKLİF ALT YAZISI
 
-'//FIXME - ödeme bilgileri - taksit sayısı
+        '//FIXME - ödeme bilgileri - taksit sayısı
 
 
 		Response.Write "<div class=""container-fluid"">"
@@ -429,6 +501,9 @@ Response.Write "$(document).ready(function() {"
     '## cari arama
         Response.Write "var cariform = {target:'#cariliste',type:'POST'};$('.cariform').ajaxForm(cariform);"
     '## cari arama
+    '## mevcut sepetteki ürünleri getir
+        Response.Write "$('#teklifUrunListe').load('/teklif/teklif_urun_liste.asp?teklifID=" & teklifID & "');"
+    '## mevcut sepetteki ürünleri getir
 Response.Write "});"
 
 
@@ -445,8 +520,8 @@ Response.Write "teklifStokID = $('#teklifStokID').val();"
     Response.Write "}"
 Response.Write "}"
 
-Response.Write "</script>"
 
+Response.Write "</script>"
 
 
 

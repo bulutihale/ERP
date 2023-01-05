@@ -21,6 +21,14 @@
 		secilenReceteID = 0
 	end if
 	modulAd =   "Üretim"
+	if isTur = "uretimPlan" then
+		sayfaBaslik	=	"Üretim Süreç Kontrolü"
+		class1		=	" bg-info "
+	elseif isTur = "kesimPlan" then
+		sayfaBaslik	=	"Kesimhane Süreç Kontrolü"
+		class1		=	" bg-warning "
+	end if
+	
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -38,8 +46,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 		Response.Write "<div class=""card"">"
-			Response.Write "<div class=""card-header text-white bg-info"">"
-				Response.Write "Üretim Süreci"
+			Response.Write "<div class=""card-header text-white"&class1&""">"
+				Response.Write "<span class=""h4 text-dark"">" &sayfaBaslik & "</span>"
 				Response.Write "<span id=""receteBtn"" onclick=""$('#recetelerDIV').show('slow')"" class=""d-none ml-4 text-warning pointer mdi mdi-receipt"" title=""Reçeteleri göster""></span>"
 			Response.Write "</div>"
 			
@@ -134,12 +142,14 @@ yetkiKontrol = yetkibul(modulAd)
 								call formselectv2("teminDepoID","","receteSec();","","formSelect2 depoSec border","","teminDepoID","","data-holderyazi=""Yarı mamul temini yapılacak depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
 							Response.Write "</div>"
 						Response.Write "</div>"
+						if isTur = "kesimPlan" then
 						Response.Write "<div class=""row mt-2"">"
 							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Teçhizat</div>"
 							Response.Write "<div class=""col-9"">"
 								call formselectv2("techizatSec","","","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
 							Response.Write "</div>"
 						Response.Write "</div>"
+						end if
 					Response.Write "</div>"
 
 			'#### üretim son ürün etiketi vs.
