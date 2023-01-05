@@ -33,13 +33,13 @@ yetkiKontrol = yetkibul(modulAd)
 
 	if ajandaID <> "" then
 		'### sipariş miktar ve birimini bul
-			sorgu = "SELECT t2.miktar, t2.mikBirim"
+			sorgu = "SELECT t2.miktar, stok.FN_anaBirimADBul("&stokID&",'kad') as urunAnaBirim"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparisKalem t2 ON t2.id = (SELECT siparisKalemID FROM portal.ajanda t3 WHERE t3.id = t1.bagliAjandaID)"
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
 			rs.open sorgu, sbsv5, 1, 3
 				siparisMiktar	=	rs("miktar")
-				siparisBirim	=	rs("mikBirim")
+				siparisBirim	=	rs("urunAnaBirim")
 			rs.close
 		'### /sipariş miktar ve birimini bul
 	end if
@@ -104,7 +104,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "</div>"
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-lg-2 col-sm-6 bold"">Miktar</div>"
-					Response.Write "<div class=""col-lg-10 col-sm-6"">" & ihtiyacMiktar & " " & siparisBirim & "</div>"
+					Response.Write "<div class=""col-lg-10 col-sm-6 bold text-danger"">" & ihtiyacMiktar & " " & siparisBirim & "</div>"
 				Response.Write "</div>"
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-lg-2 col-sm-6 bold"">Giriş Depo</div>"

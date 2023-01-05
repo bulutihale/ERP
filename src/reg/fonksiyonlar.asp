@@ -3630,7 +3630,7 @@ function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 				Response.Write "<div class=""card"">"
 				Response.Write "<div class=""card-header text-white bg-primary"">" & gelenbaslik & "</div>"
 				Response.Write "<div class=""card-body text-center"">"
-				if gelenmetin = ""then
+				if gelenmetin = "" then
 					Response.Write "Bu alana girmek için yetkiniz yeterli değil."
 				else
 					Response.Write gelenmetin

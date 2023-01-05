@@ -6,6 +6,7 @@
     call sessiontest()
     kid				=	kidbul()
 	isTur			=	Request.QueryString("isTur")
+	ihtiyacMiktar	=	Request.QueryString("ihtiyacMiktar")
 	gorevID64		=	Request.QueryString("gorevID")
 	gorevID			=	gorevID64
 	ajandaID		=	base64_decode_tr(gorevID)
@@ -73,6 +74,9 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<tr class=""bold"">"
 							Response.Write "<td>" & stokKodu & "</td>"
 							Response.Write "<td>" & stokAd & "</td>"
+							Response.Write "<td></td>"
+							Response.Write "<td>İhtiyaç: " & ihtiyacMiktar & "</td>"
+							
 						Response.Write "</tr>"
 					if rs1.EOF then
 						Response.Write "<tr><td></td><td class=""text-danger font-weight-light font-italic"" colspan=""5"">Seçilen depoda bu ürün yok</td></tr>"
@@ -93,7 +97,7 @@ yetkiKontrol = yetkibul(modulAd)
 									call forminput("kullanimMiktar","","","","","autocompleteOFF","kullanimMiktar"&divSayi&"","")
 								Response.Write "</td>"
 								Response.Write "<td class=""text-center"">"
-									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','surecUretim',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&");"" class=""btn btn-info"">kullan</div>"
+									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','surecUretim',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&ihtiyacMiktar&");"" class=""btn btn-info"">kullan</div>"
 								Response.Write "</td>"
 							Response.Write "</tr>"
 						rs1.movenext
@@ -117,7 +121,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 %>
 <script>
-	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,depoKategori,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID){
+	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,depoKategori,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID,ihtiyacMiktar){
 
 		var kullanimMiktar		=	$('#kullanimMiktar'+divSayi).val();
 		if(kullanimMiktar == undefined){swal('miktar girişi yapılmalı',''); return false};
@@ -148,7 +152,8 @@ yetkiKontrol = yetkibul(modulAd)
 					siparisKalemID:siparisKalemID, 
 					lot:lot, 
 					stokHareketTipi:stokHareketTipi, 
-					lotSKT:lotSKT
+					lotSKT:lotSKT,
+					ihtiyacMiktar:ihtiyacMiktar
 					}, function(){
 				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')
 				});

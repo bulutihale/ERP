@@ -18,6 +18,7 @@
 	cikisDepoID			=	Request.Form("secilenDepoID")
 	lotSKT				=	Request.Form("lotSKT")
 	ajandaID			=	Request.Form("ajandaID")
+	ihtiyacMiktar		=	Request.Form("ihtiyacMiktar")
 
 
 	sorgu = "SELECT stok.FN_birimIDBul('" & miktarBirim & "','K') as bid"
@@ -30,6 +31,10 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
+if cdbl(ihtiyacMiktar) < cdbl(kullanimMiktar) then
+	call toastrCagir("Kullanım miktarı, ihtiyaç miktarından fazla olamaz.","HATA","center","error","otomatik","")
+	Response.End()
+end if
 
 Response.Flush()
 

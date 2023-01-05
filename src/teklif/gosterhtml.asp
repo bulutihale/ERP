@@ -44,6 +44,13 @@
 '### TEKLİF DATASINI ÇEK
 
 
+
+
+
+
+'//FIXME - alternatif firmaya göre ayrı teklif formatı getirilecek buradan... sonra ekle
+
+
 '### RAPOR FORMATINI ÇEK
     if hata = "" then
         sorgu = "Select raporIcerik from rapor.raporFormat where modul = 'Teklif' and firmaID = " & firmaID & " and silindi = 0 order by raporFormatID DESC"
@@ -81,24 +88,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function raporHead()
     font = "'Open Sans', sans-serif"
     Response.Write "<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">"
@@ -123,7 +112,48 @@ end function
 
 
 function raporBody()
-    Response.Write "body"
+    if raporIcerik = "" then
+        hata = "Teklif raporu formatu bulunamadı"
+        call logla(hata)
+    else
+        yeniIcerik = raporIcerik
+        yeniIcerik = Replace(yeniIcerik,"[cariAd]",cariAd)
+        yeniIcerik = Replace(yeniIcerik,"[cariKodu]",cariKodu)
+        yeniIcerik = Replace(yeniIcerik,"[teklifsayi]",teklifsayi)
+        yeniIcerik = Replace(yeniIcerik,"[tekliftarih]",tekliftarih)
+        yeniIcerik = Replace(yeniIcerik,"[teklifTuru]",teklifTuru)
+        yeniIcerik = Replace(yeniIcerik,"[teklifDili]",teklifDili)
+        yeniIcerik = Replace(yeniIcerik,"[teklifParaBirimi]",teklifParaBirimi)
+        yeniIcerik = Replace(yeniIcerik,"[ustyazi]",ustyazi)
+        yeniIcerik = Replace(yeniIcerik,"[ozelNot]",ozelNot)
+        yeniIcerik = Replace(yeniIcerik,"[ozelkosultur1]",ozelkosultur1)
+        yeniIcerik = Replace(yeniIcerik,"[ozelkosulicerik1]",ozelkosulicerik1)
+        yeniIcerik = Replace(yeniIcerik,"[altYazi]",altYazi)
+        yeniIcerik = Replace(yeniIcerik,"[teklifKosul]",teklifKosul)
+    end if
+
+
+Response.Write yeniIcerik
+
+
+    '## ALANLAR
+        ' [cariAd]
+        ' [cariKodu]
+        ' [teklifsayi]
+        ' [tekliftarih]
+        ' [teklifFirmaId]
+        ' [teklifTuru]
+        ' [teklifDili]
+        ' [teklifParaBirimi]
+        ' [ustyazi]
+        ' [ozelNot]
+        ' [ozelkosultur1]
+        ' [ozelkosulicerik1]
+        ' [altYazi]
+        ' [teklifKosul]
+        ' [teklifsayi]
+        ' [teklifsayi]
+    '## ALANLAR
 end function
 
 

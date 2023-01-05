@@ -157,7 +157,7 @@ yetkiKontrol = yetkibul(modulAd)
 					Response.Write "<div id=""linklerDIV"" class=""col-lg-2 col-md-4 col-sm-4 border"">"
 						Response.Write "<div class=""row"">"
 							Response.Write "<div class=""p-1 col-12"">"
-								if secilenReceteID > 0 then
+								if secilenReceteID > 0 AND isTur = "uretimPlan" then
 									Response.Write "<a"
 									if not isnull(baslangicZaman) then
 										Response.Write " target=""_blank"" href=""/uretim/etiketSonUrun.asp?receteID=" & secilenReceteID & """"
@@ -424,7 +424,7 @@ yetkiKontrol = yetkibul(modulAd)
 											btnRenk	=	" btn-secondary "
 											miktarKontrol	=	0
 										else
-											Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"');"""
+											Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?ihtiyacMiktar="&ihtiyacMiktar&"&isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"');"""
 											btnRenk	=	" btn-success "
 											miktarKontrol	=	0
 										end if

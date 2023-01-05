@@ -99,13 +99,18 @@ Response.Write "<div class=""card-body"">"
 					baslangicZaman		=	rs("baslangicZaman")
 					bitisZaman			=	rs("bitisZaman")
 					tamamlandi			=	rs("tamamlandi")
+					if tamamlandi = 1 then
+						trClass= " table-success "
+					else
+						trClass = ""
+					end if
 					ajandaID			=	rs("ajandaID")
 					ajandaID64			=	ajandaID
 					ajandaID64			=	base64_encode_tr(ajandaID64)
 					receteAdimID		=	rs("receteAdimID")
 					receteAdimID64		=	receteAdimID
 					receteAdimID64		=	base64_encode_tr(receteAdimID64)
-					Response.Write "<tr>"
+					Response.Write "<tr class="""&trClass&""">"
 						Response.Write "<td class=""text-center"">" & planTarih & "</td>"
 						Response.Write "<td class=""text-center"">" & baslangicZaman & "</td>"
 						Response.Write "<td class=""text-center"">" & bitisZaman & "</td>"
