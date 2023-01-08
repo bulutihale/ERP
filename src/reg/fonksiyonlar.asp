@@ -3298,6 +3298,24 @@ Function jsac(byVal adres)
 	Response.Write "</scr" & "ipt>"
 End Function
 
+Function focusinput(byVal inputAd)
+	call jsrun("$('#" & inputAd & "').focus();")
+        call jsrun("$('#" & inputAd & "').addClass('border-danger');")
+		call jsrun("setTimeout(function(){$('#" & inputAd & "').removeClass('border-danger');}, 1500 );")
+		sanipi = 1500
+		for iipi = 1 to 5
+			sanipi = sanipi + 150
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').addClass('border-danger');}, " & sanipi & ");")
+			sanipi = sanipi + 150
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').removeClass('border-danger');}, " & sanipi & ");")
+		next
+		for iipi = 1 to 30
+			sanipi = sanipi + 50
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').addClass('border-danger');}, " & sanipi & ");")
+			sanipi = sanipi + 50
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').removeClass('border-danger');}, " & sanipi & ");")
+		next
+end function
 
 Function jsacdelay(byVal adres,byVal saniye)
 	Response.Write "<scr" & "ipt type=""text/javascript"">"
@@ -3630,7 +3648,7 @@ function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 				Response.Write "<div class=""card"">"
 				Response.Write "<div class=""card-header text-white bg-primary"">" & gelenbaslik & "</div>"
 				Response.Write "<div class=""card-body text-center"">"
-				if gelenmetin = ""then
+				if gelenmetin = "" then
 					Response.Write "Bu alana girmek için yetkiniz yeterli değil."
 				else
 					Response.Write gelenmetin
@@ -4131,7 +4149,13 @@ function lotOlusturFunc(depoID)
 				depoLotTemplate = fn1("depoLotTemplate") & ""
 			end if
 			fn1.close
-			sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'U' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by stokHareketID desc"
+			'sorgu = "Select lot from stok.stokHareket WHERE stokHareketTuru = 'G' AND stokHareketTipi = 'U' AND depoID = " & depoID & " and tarih >= '" & tarihsql(bugun) & "' order by stokHareketID desc"
+			sorgu = "SELECT t1.lot"
+			sorgu = sorgu & " FROM stok.stokHareket t1"
+			sorgu = sorgu & " LEFT JOIN stok.stokHareket t2 ON t2.stokHareketID = t1.refHareketID"
+			sorgu = sorgu & " WHERE t1.stokHareketTuru = 'G'"
+			'sorgu = sorgu & " AND (t1.stokHareketTipi = 'U' OR t2.stokHareketTipi = 'A' )"
+			sorgu = sorgu & " AND t1.depoID = " & depoID & " AND t1.tarih >= '" & tarihsql(bugun) & "' ORDER BY t1.stokHareketID DESC"
 			fn1.open sorgu,sbsv5,1,3
 			if fn1.recordcount > 0 then
 				sonlot = fn1("lot") & ""
@@ -4161,6 +4185,7 @@ function lotOlusturFunc(depoID)
 	end if
 
 		lotOlusturFunc	=	yenilotformat
+		'lotOlusturFunc	=	sorgu
 end function
 
 

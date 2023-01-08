@@ -73,7 +73,7 @@ if receteAdimID <> "" then
 				etiketeEkle			=	rs("etiketeEkle")
 				etiketAd			=	rs("etiketAd")
 				onHazirlikTur		=	rs("onHazirlikTur")
-				if onHazirlikTur = "" then
+				if onHazirlikTur = "" OR isnull(onHazirlikTur) then
 					onHazirlikTur = "Saat"
 				end if
 				onHazirlikDeger		=	rs("onHazirlikDeger")
@@ -161,7 +161,7 @@ end if
 								call formselectv2("receteIslemTipiID","","","","formSelect2 receteIslemTipiID border inpReset","","receteIslemTipiID","","data-holderyazi=""İşlem Tipi"" data-jsondosya=""JSON_receteIslemTipi"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
-						Response.Write "<div class=""row mt-2"">"
+						Response.Write "<div class=""row mt-2"&kisiRow&""">"
 							Response.Write "<div class=""col-12"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">İşlem Açıklaması</div>"
 								call forminput("islemAciklama",islemAciklama,"","","inpReset","autocompleteOFF","islemAciklama","")
@@ -250,12 +250,12 @@ end if
 						Response.Write "</div>"
 						'#### KİŞİ SAYISI
 
-						Response.Write "<div class=""row mt-2"">"
+						Response.Write "<div class=""row mt-2"&stokClass&""">"
 							Response.Write "<div class=""col-6 my-1"">"
 								Response.Write "<span class=""badge badge-secondary rounded-left"">Ön Hazırlık Süre</span>"
 								call formselectv2("onHazirlikDeger",onHazirlikDeger,"","","onHazirlikDeger","","onHazirlikDeger",sayiDegerler,"")
 							Response.Write "</div>"
-							Response.Write "<div class=""col-6 my-1"">"
+							Response.Write "<div class=""col-6 my-1"&stokClass&""">"
 								Response.Write "<span class=""badge badge-secondary rounded-left"">Ön Hazırlık Birim</span>"
 								call formselectv2("onHazirlikTur",onHazirlikTur,"","","onHazirlikTur","","onHazirlikTur",hazTurDegerler,"")
 							Response.Write "</div>"						

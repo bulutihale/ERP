@@ -129,7 +129,7 @@ call logla("Depo Günlük İş Listesi")
 							'#### gün içine daha önce kayıt edilmiş olayları yaz.
 									sorgu = "SELECT id, kid, hangiYil, hangiAy, hangiGun, siparisKalemID, icerik, isTur, stokID, receteAdimID, tamamlandi"
 									sorgu = sorgu & " FROM portal.ajanda"
-									sorgu = sorgu & " WHERE silindi = 0 AND kid = " & kid & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & hangiGun
+									sorgu = sorgu & " WHERE silindi = 0 AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & hangiGun
 									rs.open sorgu, sbsv5,1,3
 								'Response.Write sorgu
 								'response.end

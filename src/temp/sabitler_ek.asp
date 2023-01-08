@@ -22,15 +22,19 @@ if firmaID = 5 then
 	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/tio.jpg"
 	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
 	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
+	sb_konum								=	"izmir"		'hava durumu için
+	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
+	sb_ssl									=	1		'SSL var mı?
+
+
+
 	' ## SERVİSLER
 	' ## SERVİSLER
 		sb_activeuserUrl					=	"/activeuser.asp"
 		sb_activeuserTime					=	30			'otomatik veri kontrolü için saniye
 	' ## SERVİSLER
 	' ## SERVİSLER
-	sb_konum								=	"izmir"		'hava durumu için
-	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
-	sb_ssl									=	1		'SSL var mı?
+
 	' ## YEDEKLEME
 	' ## YEDEKLEME
 		sb_fizikselPath						=	"C:\web\erp.sbstasarim.com\backup\"
@@ -63,6 +67,18 @@ if firmaID = 5 then
 	'## TEKLİF
 	'## TEKLİF
 		sb_TeklifCariAramaLimit	=	5		'arama formundan kaç adet cari dönsün
+		sb_TeklifFiyatSayi		=	2
+		sb_TeklifFiyatAd0		=	"Teklif Fiyatı"
+		sb_TeklifFiyatAd1		=	"Perakende Fiyat"
+		sb_TeklifFiyatAd2		=	"Toptan Fiyat"
+		sb_TeklifFiyatAd3		=	"Fiyat 3"
+		sb_TeklifFiyatAd4		=	"Fiyat 4"
+		sb_TeklifFiyatiSirifOlanStoklariGizle =   false		'yazılacak
+    	sb_TeklifIskontoSayisi  =   2							'teklif hazırlanırken kaç iskontoya izin verilsin
+		sb_TeklifOndalikSayi	=	2							'teklif toplamlarında tamsayıdan sonra kaç ondalık karakter olsun
+		sb_TeklifSayiFormatOn		=	"TeklifSayi"				'teklif sayısının önünde yer alır
+		sb_TeklifSayiFormatRakam	=	2						'kaç hane olacak
+		sb_TeklifSayiFormat			=	"on|4yil|2ay|2gun|rakam"						'bu kısmını yazmadım
 	'## TEKLİF
 	'## TEKLİF
 
@@ -116,7 +132,6 @@ if firmaID = 6 then
 
     sb_TBLSTSABIT_cache    =   false
     sb_iskontoSayisi        =   0
-
 end if
 
 
@@ -149,6 +164,7 @@ if firmaID = 4 then
 	' ## YEDEKLEME
 	' ## YEDEKLEME
 
+
 	'## EMAIL
 	'## EMAIL
 		sb_mailserver		=	"212.68.61.84:587"
@@ -157,6 +173,7 @@ if firmaID = 4 then
 		sb_mailsenderAd		=	"TIO ERP"
 	'## EMAIL
 	'## EMAIL
+
 
 	'## SSO
 	'## SSO
@@ -167,6 +184,7 @@ if firmaID = 4 then
 		firmaSSOdb		=	"BELEN2022"
 	'## SSO
 	'## SSO
+
 
 	'## SİPARİŞ MODULÜ İÇİN
 	'## SİPARİŞ MODULÜ İÇİN

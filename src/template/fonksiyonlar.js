@@ -23,14 +23,15 @@ $(document).ready(function() {
 		/////////////////////////// select2 
 			$('.formSelect2').on('mouseenter',function() {
 
-				var inputID		=	$(this).attr('id');
-				var holderYazi	=	$(this).attr('data-holderyazi');
-				var jsonDosya	=	$(this).attr('data-jsondosya');
-				var sart		=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
-				var sartOzel	=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
-				var idKullan	=	$(this).attr('data-idkullan');
-				var minInput	=	$(this).attr('data-miniput');
-				var defDeger	=	$(this).attr('data-defdeger');
+				var inputID			=	$(this).attr('id');
+				var holderYazi		=	$(this).attr('data-holderyazi');
+				var jsonDosya		=	$(this).attr('data-jsondosya');
+				var sart			=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
+				var sartOzel		=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
+				var anaBirimFiltre	=	$(this).attr('data-anabirimfiltre');//select2 sadece ürüne ait anabirim görüntülensin, birime ait select2 class ında "anaBirimFiltre" olmalı.
+				var idKullan		=	$(this).attr('data-idkullan');
+				var minInput		=	$(this).attr('data-miniput');
+				var defDeger		=	$(this).attr('data-defdeger');
 
 				$(this).select2({
 					
@@ -42,6 +43,7 @@ $(document).ready(function() {
 					  return {
 						 sart:sart,
 						 sartOzel:sartOzel,
+						 anaBirimFiltre:anaBirimFiltre,
 						 idKullan:idKullan,
 						q: params.term, // search term
 						page: params.page
@@ -123,14 +125,15 @@ jQuery(document).ajaxSuccess(
 		if($("select").hasClass('formSelect2')){
 			$('.formSelect2').on('mouseenter',function() {
 
-				var inputID		=	$(this).attr('id');
-				var holderYazi	=	$(this).attr('data-holderyazi');
-				var jsonDosya	=	$(this).attr('data-jsondosya');
-				var sart		=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
-				var sartOzel	=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
-				var idKullan	=	$(this).attr('data-idkullan');
-				var minInput	=	$(this).attr('data-miniput');
-				var defDeger	=	$(this).attr('data-defdeger');
+				var inputID			=	$(this).attr('id');
+				var holderYazi		=	$(this).attr('data-holderyazi');
+				var jsonDosya		=	$(this).attr('data-jsondosya');
+				var sart			=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
+				var sartOzel		=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
+				var anaBirimFiltre	=	$(this).attr('data-anabirimfiltre');//select2 sadece ürüne ait anabirim görüntülensin, birime ait select2 class ında "anaBirimFiltre" olmalı.
+				var idKullan		=	$(this).attr('data-idkullan');
+				var minInput		=	$(this).attr('data-miniput');
+				var defDeger		=	$(this).attr('data-defdeger');
 
 				$(this).select2({
 					
@@ -142,6 +145,7 @@ jQuery(document).ajaxSuccess(
 					  return {
 						 sart:sart,
 						 sartOzel:sartOzel,
+						 anaBirimFiltre:anaBirimFiltre,
 						 idKullan:idKullan,
 						q: params.term, // search term
 						page: params.page
@@ -358,17 +362,26 @@ function numara(nesne,para,uyari)
 	function anaBirimKontrol(stokID,inputID){
 	//anaBirimKontrol($(this).val(),$(this).attr('id')) --> kullanım
 		if(stokID == null){return false};
-		$.post("/portal/stokHareketKontrol.asp",
-		{
-		stokID: stokID
-		},
-		function(data, status){
-			if(data != 'tanimlanamaz')
+		$.post("/portal/stokHareketKontrol.asp", {stokID: stokID}, function(data, status){
+			gelenSonuc	=	data.split('|');
+			sonuc0		=	gelenSonuc[0];
+			sonuc1		=	gelenSonuc[1];
+			//if(data != 'tanimlanamaz')
+			if(!$.isNumeric(sonuc0))
 			{
 				$('#'+inputID).val(null).trigger('change');
 				swal('Ana birim tanımlı değil','açılan pencerden ürüne ait ana birim tanımlaması yapınız.');
-				modalajax(data)
-			}else{};
+				modalajax(sonuc0)
+			}else{
+			//select2 sadece ürüne ait anabirim görüntülensin, birime ait select2 class ında "anaBirimFiltre" olmalı.
+				if($('.anaBirimFiltre').hasClass('select2-hidden-accessible')){
+					$('.anaBirimFiltre').val(null).select2('destroy');
+				}
+				$('.anaBirimFiltre').removeAttr('data-anabirimfiltre');
+				$('.anaBirimFiltre').attr('data-anabirimfiltre',sonuc1);
+				toastr.info('birim listesine ana birim kuralı uygulandı','BİLGİ');
+			//select2 sadece ürüne ait anabirim görüntülensin, birime ait select2 class ında "anaBirimFiltre" olmalı.
+			};
 		});
 	}
 // sistemde seçilen bir ürürnün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.

@@ -11,6 +11,18 @@
 	t3				=	Request.Form("t3")
 	t4				=	Request.Form("t4")
 	siparisNo		=	Request.Form("siparisNo")
+	listeTur		=	session("sayfa5")
+	if listeTur = "" then
+		listeTur	=	Request.Form("listeTur")
+	end if
+
+	if listeTur = "uretimPlan" then
+		sayfaBaslik	=	"Üretim Listesi"
+	elseif listeTur = "kesimPlan" then
+		sayfaBaslik	=	"Kesim İşleri Listesi"
+	elseif listeTur = "transfer" then
+		sayfaBaslik	=	"Depolararası transfer edilecek ürünler listesi"
+	end if
     modulAd 		=   "Üretim"
 	
 	'####### varsayılan tarih sınırları
@@ -30,10 +42,19 @@
 call logla("Müşteri Siparişleri Listelendi")
 
 Response.Write "<div class=""card rounded-top"">"
-Response.Write "<div class=""card-header h5"">Üretim Listesi</div>"
+Response.Write "<div class=""card-header h5"">"
+Response.Write "<div class=""row"">"
+	Response.Write "<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/uretimPlan"">Üretim Listesi</a></span></div>" 
+	Response.Write "<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/kesimPlan"">Kesim Listesi</a></span></div>"
+	Response.Write "<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/transfer"">Transfer Listesi</a></span></div>"
+Response.Write "</div>"
+Response.Write "</div>"
 
 Response.Write "<div class=""card-body"">"
-		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/uretim/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/uretim/filtre.asp?listeTur="&listeTur&"')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
+			Response.Write "<div class=""col-6 h4"">" & sayfaBaslik & "</div>"
+		Response.Write "</div>"
 		Response.Write "<div class=""table-responsive mt-3"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
 		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Tarih</th>"
@@ -46,12 +67,12 @@ Response.Write "<div class=""card-body"">"
 		
             sorgu = "SELECT"
 			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "
-			sorgu = sorgu & " t1.id as ajandaID"
+			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID"
 			sorgu = sorgu & " "
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
-			sorgu = sorgu & " AND t1.isTur = 'uretimPlan'" 
+			sorgu = sorgu & " AND t1.isTur = '" & listeTur & "'" 
 			if stokID <> "" then
 				sorgu = sorgu & " AND t2.stokID = " & stokID & ""
 			end if
@@ -77,17 +98,37 @@ Response.Write "<div class=""card-body"">"
 					planTarih			=	tarihtr(rs("planTarih"))
 					baslangicZaman		=	rs("baslangicZaman")
 					bitisZaman			=	rs("bitisZaman")
+					tamamlandi			=	rs("tamamlandi")
+					if tamamlandi = 1 then
+						trClass= " table-success "
+					else
+						trClass = ""
+					end if
 					ajandaID			=	rs("ajandaID")
 					ajandaID64			=	ajandaID
 					ajandaID64			=	base64_encode_tr(ajandaID64)
-					
-					Response.Write "<tr>"
+					receteAdimID		=	rs("receteAdimID")
+					receteAdimID64		=	receteAdimID
+					receteAdimID64		=	base64_encode_tr(receteAdimID64)
+					Response.Write "<tr class="""&trClass&""">"
 						Response.Write "<td class=""text-center"">" & planTarih & "</td>"
 						Response.Write "<td class=""text-center"">" & baslangicZaman & "</td>"
 						Response.Write "<td class=""text-center"">" & bitisZaman & "</td>"
 						Response.Write "<td>" & stokKodu & " - " & stokAd & "</td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
-						Response.Write "<td><span onclick=""window.location.href = '/uretim/uretim/uretimPlan++"&ajandaID64&"'"" class=""badge badge-pill badge-success pointer mr-2""><i class=""mdi mdi-arrow-right-bold""></i></span></td>"
+						Response.Write "<td class=""text-right"">"
+										Response.Write "<div class=""badge badge-pill badge-success pointer mr-2"""
+											if listeTur = "transfer" then
+												if tamamlandi = 0 then
+													Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+												else
+													Response.Write " onclick=""swal('','Transfer işlemi yapılmış.')"""
+												end if
+											else
+												Response.Write "<div onclick=""window.location.href = '/uretim/uretim/"&listeTur&"++"&ajandaID64&"'"" class=""badge badge-pill badge-success pointer mr-2"""
+											end if
+										Response.Write "><i class=""mdi mdi-arrow-right-bold""></i></div>"
+						Response.Write "<td>"
 					Response.Write "</tr>"
 					Response.Flush()
 				rs.movenext

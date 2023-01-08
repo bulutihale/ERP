@@ -61,6 +61,10 @@ if isGucuSayi = "" then
 	isGucuSayi = 0
 end if
 
+if onHazirlikTur = "" then
+	onHazirlikTur = "Saat"
+end if
+
 
 if yetkiKontrol > 2 then
 

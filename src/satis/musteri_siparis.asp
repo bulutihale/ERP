@@ -11,7 +11,7 @@
     gorevID =   Request.QueryString("gorevID")
 	aramaad	=	Request.Form("aramaad")
     hata    =   ""
-    modulAd =   "satis"
+    modulAd =   "Satış"
     personelID =   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR

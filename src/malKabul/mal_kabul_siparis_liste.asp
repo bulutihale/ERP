@@ -83,7 +83,7 @@
 						
 						Response.Write "<td>" & stokKodu & "</td>"
 						Response.Write "<td>" & stokAd & "</td>"
-						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
+						Response.Write "<td class=""text-right pointer"" onclick=""$('#gelenMiktar').val('"&miktar&"');"">" & miktar & " " & mikBirim & "</td>"
 						Response.Write "<td class=""text-center bold"">"
 							Response.Write  "<span>" & teslimEdilen & " " & teslimBirim & "</span>"
 							Response.Write  "<span class=""text-danger""> / " & eksikMiktarKapat & " " & mikBirim & "</span>"

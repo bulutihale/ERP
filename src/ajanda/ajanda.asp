@@ -159,7 +159,9 @@ Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein card"">"
 			'#### gün içine daha önce kayıt edilmiş olayları yaz.
 				sorgu = "SELECT id, kid, hangiYil, hangiAy, hangiGun, siparisKalemID, icerik, isTur, bagliAjandaID, tamamlandi"
 				sorgu = sorgu & " FROM portal.ajanda"
-				sorgu = sorgu & " WHERE silindi = 0 AND kid = " & kid & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & zi
+				sorgu = sorgu & " WHERE silindi = 0"
+				'sorgu = sorgu & " AND kid = " & kid & ""
+				sorgu = sorgu & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & zi
 				rs.open sorgu, sbsv5,1,3
 				if rs.recordcount > 0 then
 					for di = 1 to rs.recordcount

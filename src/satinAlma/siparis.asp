@@ -70,7 +70,8 @@ yetkiKontrol = yetkibul(modulAd)
 									Response.Write "</div>"
 									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
-										call formselectv2("birimSec","","","","formSelect2 birimSec border inpReset","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0""")
+										call formselectv2("birimSec","","","","formSelect2 birimSec border inpReset anaBirimFiltre","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0""")
+										'call formselectv2("birimSec","","","","formSelect2 birimSec border inpReset ","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-sartOzel=""t1.uzunBirim='Adet'""")
 									Response.Write "</div>"
 								Response.Write "</div>"
 								Response.Write "<div class=""row mt-2 mb-2"">"
