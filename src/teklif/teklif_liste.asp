@@ -150,14 +150,15 @@ if yetkiTeklif > 0 then
                             end if
                             if yetkiTeklif >= 5 then
                                 '# teklif onay
-                                    teklif64 = teklifID
-                                    teklif64 =	base64_encode_tr(teklif64)
-                                    Response.Write "<a onClick="""
-                                    Response.Write "bootmodal('Teklifi Onaylıyor Musunuz?','custom','/teklif/teklif_onay.asp?islem=onay&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=red&teklifID=" & teklif64 & "','Onayla','Onaylama','btn-success','btn-danger','','ajax','3000','','');"
-                                    Response.Write """ title=""" & translate("Teklifi Onayla","","") & """ class=""ml-1"" >"
-                                    Response.Write "<i class=""icon tick"
-                                    Response.Write """></i>"
-                                    Response.Write "</a>"
+                                teklif64 = teklifID
+                                teklif64 =	base64_encode_tr(teklif64)
+                                Response.Write "<a href=""/teklif/teklif_yeni_modal/" & teklif64 & """ title=""" & translate("Teklif Düzenle","","") & """ class=""ml-1 badge badge-pill "
+                                Response.Write " badge-warning"
+                                Response.Write """"
+                                Response.Write " "">"
+                                Response.Write "<i class=""mdi mdi-file-pdf"
+                                Response.Write """></i>"
+                                Response.Write "</a>"
                                 '# teklif onay
                             end if
                             if yetkiTeklif >= 6 then
