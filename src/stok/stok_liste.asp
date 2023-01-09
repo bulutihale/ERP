@@ -105,7 +105,7 @@ yetkiKontrol = yetkibul(modulAd)
 
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.stokID, stok.FN_stokSay(" & firmaID & ", t1.stokID) as stokMiktar, t1.stokKodu, t1.stokAd, t1.stokBarcode," 
-			sorgu = sorgu & " CASE WHEN t1.silindi = 1 THEN '<span class=""text-danger"">PASİF</span>' ELSE 'AKTİF' END as durum,"
+			sorgu = sorgu & " CASE WHEN t1.silindi = 1 THEN '<span class=""text-danger"">PASİF</span>' ELSE 'AKTİF' END as durum, stok.FN_anaBirimADBul(t1.stokID,'kAd') as urunAnaBirim,"
 			sorgu = sorgu & " CASE WHEN t1.stokTuru = '1' THEN 'Mamul' WHEN t1.stokTuru = '2' THEN 'Yarı Mamul' WHEN t1.stokTuru = '3' THEN 'Bileşen' WHEN t1.stokTuru = '4' THEN 'Hammadde' END as stokTuru"
 			sorgu = sorgu & " FROM stok.stok t1" 
 			sorgu = sorgu & " WHERE firmaID = " & firmaID
@@ -131,6 +131,7 @@ yetkiKontrol = yetkibul(modulAd)
 					stokID64		=	base64_encode_tr(stokID64)
 					stokKodu		=	rs("stokKodu")
 					stokAd			=	rs("stokAd")
+					urunAnaBirim	=	rs("urunAnaBirim")
 					stokTuru		=	rs("stokTuru")
 					stokBarcode		=	rs("stokBarcode")
 					stokMiktar		=	rs("stokMiktar")
@@ -139,9 +140,9 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td>" & stokKodu & "</td>"
 						Response.Write "<td>" & stokAd & "</td>"
 						Response.Write "<td>" & stokBarcode & "</td>"
-						Response.Write "<td>" & stokMiktar & "</td>"
-						Response.Write "<td>" & stokTuru &  "</td>"
-						Response.Write "<td>" & durum &  "</td>"
+						Response.Write "<td class=""text-right"">" & stokMiktar & " " & urunAnaBirim &"</td>"
+						Response.Write "<td class=""text-center"">" & stokTuru &  "</td>"
+						Response.Write "<td class=""text-center"">" & durum &  "</td>"
 						Response.Write "<td class=""text-right"">"
 						if stokMiktar > 0 then
 						Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""

@@ -8,23 +8,23 @@
     modulAd =   "Teklif"
     Response.Flush()
     teklifID            =   Request.Form("teklifID")
-    cariAd        =   Request.Form("cariAd")
-    cariKodu    =   Request.Form("cariKodu")
-    teklifsayi              =   Request.Form("teklifsayi")
-    tekliftarih        =   Request.Form("tekliftarih")
-    teklifFirmaId            =   Request.Form("teklifFirmaId")
-    teklifTuru           =   Request.Form("teklifTuru")
-    teklifDili           =   Request.Form("teklifDili")
-    teklifParaBirimi            =   Request.Form("teklifParaBirimi")
-    onUstYazi            =   Request.Form("onUstYazi")
-    ustyazi            =   Request.Form("ustyazi")
-    ozelNot            =   Request.Form("ozelNot")
-    ozelkosultur1     =   Request.Form("ozelkosultur1")
-    ozelkosulicerik1     =   Request.Form("ozelkosulicerik1")
-    onAltYazi     =   Request.Form("onAltYazi")
-    kosul5     =   Request.Form("kosul5")
-    altYazi     =   Request.Form("altYazi")
-    teklifKosul     =   Request.Form("kosul")
+    cariAd              =   Request.Form("cariAd")
+    cariKodu            =   Request.Form("cariKodu")
+    teklifsayi          =   Request.Form("teklifsayi")
+    tekliftarih         =   Request.Form("tekliftarih")
+    teklifFirmaId       =   Request.Form("teklifFirmaId")
+    teklifTuru          =   Request.Form("teklifTuru")
+    teklifDili          =   Request.Form("teklifDili")
+    teklifParaBirimi    =   Request.Form("teklifParaBirimi")
+    onUstYazi           =   Request.Form("onUstYazi")
+    ustyazi             =   Request.Form("ustyazi")
+    ozelNot             =   Request.Form("ozelNot")
+    ozelkosultur1       =   Request.Form("ozelkosultur1")
+    ozelkosulicerik1    =   Request.Form("ozelkosulicerik1")
+    onAltYazi           =   Request.Form("onAltYazi")
+    kosul5              =   Request.Form("kosul5")
+    altYazi             =   Request.Form("altYazi")
+    teklifKosul         =   Request.Form("kosul")
 '###### ANA TANIMLAMALAR
 
 
@@ -38,18 +38,21 @@
     if teklifParaBirimi = "" then
         hatamesaj = "Lütfen para birimini seçin."
         call logla(hatamesaj)
+        call focusinput("teklifParaBirimi")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
     if teklifTuru = "" then
         hatamesaj = "Lütfen teklif türünü seçin"
         call logla(hatamesaj)
+        call focusinput("teklifTuru")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
     if cariAd = "" then
         hatamesaj = "Lütfen teklif verdiğiniz firma adını yazın veya cari seçin"
         call logla(hatamesaj)
+        call focusinput("cariAd")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
@@ -95,7 +98,7 @@
           rs("onAltYazi")           =   onAltYazi
           rs("altYazi")             =   altYazi
           rs("teklifKosul")         =   teklifKosul
-          rs("teklifSonuc")         =   1                 '1 = Teklif verildi
+          rs("teklifSonuc")         =   0                 '0 = Teklif verildi Beklemede
         rs.update
       rs.close
 '### KAYDET

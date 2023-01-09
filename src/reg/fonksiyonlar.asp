@@ -3298,6 +3298,24 @@ Function jsac(byVal adres)
 	Response.Write "</scr" & "ipt>"
 End Function
 
+Function focusinput(byVal inputAd)
+	call jsrun("$('#" & inputAd & "').focus();")
+        call jsrun("$('#" & inputAd & "').addClass('border-danger');")
+		call jsrun("setTimeout(function(){$('#" & inputAd & "').removeClass('border-danger');}, 1500 );")
+		sanipi = 1500
+		for iipi = 1 to 5
+			sanipi = sanipi + 150
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').addClass('border-danger');}, " & sanipi & ");")
+			sanipi = sanipi + 150
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').removeClass('border-danger');}, " & sanipi & ");")
+		next
+		for iipi = 1 to 30
+			sanipi = sanipi + 50
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').addClass('border-danger');}, " & sanipi & ");")
+			sanipi = sanipi + 50
+			call jsrun("setTimeout(function(){$('#" & inputAd & "').removeClass('border-danger');}, " & sanipi & ");")
+		next
+end function
 
 Function jsacdelay(byVal adres,byVal saniye)
 	Response.Write "<scr" & "ipt type=""text/javascript"">"

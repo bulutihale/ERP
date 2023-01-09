@@ -40,4 +40,9 @@ muhasebedbArr   =   Array("best2022","best2021")
 		next
 	'##### 0'dan 24'e sayilar
 
+	'##### TEKLİF MODULÜ
+		teklifSonucArr	=	Array("Bekliyor","Onaylanmış","Red","Silinmiş")
+	'##### TEKLİF MODULÜ
+
+
 %>

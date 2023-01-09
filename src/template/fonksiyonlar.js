@@ -252,7 +252,14 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 						label:cancelbaslik,
 						className: cancelstyle,
 						callback: function() {
-							if(cancelhedef||''){document.location=cancelhedef}
+							// if(cancelhedef||''){document.location=cancelhedef}
+							if(cancelhedef||''){
+								if(veriyollamaturu=='ajax'){
+									$('#ajax').load(cancelhedef)
+								}else{
+									document.location=cancelhedef
+								}
+							}
 						}
 					}
 				}
@@ -311,18 +318,16 @@ function otomatikbuyut(id){$('#'+id).keyup(function(){this.value = this.value.to
 
 
 
-// // cycle
-// // cycle
-if($("div").hasClass('cycle_s1')){$('.cycle_s1').cycle({fx:'blindX'});}
-if($("div").hasClass('cycle_s2')){$('.cycle_s2').cycle({fx:'blindY'});}
-if($("div").hasClass('cycle_s3')){$('.cycle_s3').cycle({fx:'blindZ'});}
-if($("div").hasClass('cycle_s4')){$('.cycle_s4').cycle({fx:'cover'});}
-$('.slide').cycle({ 
-	fx:      'turnDown', 
-	delay:   -4000 
-});
-// // cycle
-// // cycle
+// cycle
+	if($("div").hasClass('cycle_s1')){$('.cycle_s1').cycle({fx:'blindX'});}
+	if($("div").hasClass('cycle_s2')){$('.cycle_s2').cycle({fx:'blindY'});}
+	if($("div").hasClass('cycle_s3')){$('.cycle_s3').cycle({fx:'blindZ'});}
+	if($("div").hasClass('cycle_s4')){$('.cycle_s4').cycle({fx:'cover'});}
+	$('.slide').cycle({ 
+		fx:      'turnDown', 
+		delay:   -4000 
+	});
+// cycle
 
 
 

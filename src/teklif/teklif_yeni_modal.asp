@@ -109,7 +109,7 @@
         teklifDili  = "tr"
     end if
     if teklifParaBirimi = "" then
-        teklifParaBirimi  = "TL"
+        teklifParaBirimi  = "TRY"
     end if
 '### hata önleme
 
@@ -225,7 +225,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Para Birimi : </div>"
-                                degerler = "--Para Birimi--=|TL=TL|USD=USD|EUR=EUR"
+                                degerler = "--Para Birimi--=|TL=TRY|USD=USD|EUR=EUR|GBP=GBP"
                                 call formselectv2("teklifParaBirimi",teklifParaBirimi,"","","","","teklifParaBirimi",degerler,"")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
@@ -299,22 +299,23 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                     Response.Write "<div class=""row"">"
                         Response.Write "<div class=""col-lg-4"">"
                             Response.Write "<div class=""badge badge-danger"">Teklif Verilecek Ürün : </div>"
-                                sorgu = "Select stokID,stokKodu,stokAd from stok.stok where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 order by stokAd ASC"
-                                rs.open sorgu,sbsv5,1,3
-                                    Response.Write "<select name=""teklifStokID"" id=""teklifStokID"" class=""form-control"">"
-                                    Response.Write "<option value="""">--Stok Seç--</option>"
-                                    for oi = 1 to rs.recordcount
-                                        stokKodu    =	rs("stokKodu")
-                                        stokID      =	rs("stokID")
-                                        stokAd	    =	rs("stokAd")
-                                        Response.Write "<option value=""" & stokID & """ "
-                                        Response.Write ">"
-                                        Response.Write stokAd
-                                        Response.Write "</option>"
-                                    rs.movenext
-                                    next
-                                    Response.Write "</select>"
-                                rs.close
+                               ' sorgu = "Select stokID,stokKodu,stokAd from stok.stok where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 order by stokAd ASC"
+                               ' rs.open sorgu,sbsv5,1,3
+                                    ' Response.Write "<select name=""teklifStokID"" id=""teklifStokID"" class=""form-control"">"
+                                    ' Response.Write "<option value="""">--Stok Seç--</option>"
+                                    ' for oi = 1 to rs.recordcount
+                                    '     stokKodu    =	rs("stokKodu")
+                                    '     stokID      =	rs("stokID")
+                                    '     stokAd	    =	rs("stokAd")
+                                    '     Response.Write "<option value=""" & stokID & """ "
+                                    '     Response.Write ">"
+                                    '     Response.Write stokAd
+                                    '     Response.Write "</option>"
+                                    ' rs.movenext
+                                    ' next
+                                    ' Response.Write "</select>"
+                               ' rs.close
+call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
                         Response.Write "</div>"
                         Response.Write "<div class=""col-lg-1"">"
                             Response.Write "<div class=""badge"">&nbsp;</div>"
@@ -508,29 +509,36 @@ Response.Write "});"
 
 
 Response.Write "function teklifUrunEkle() {"
-
-Response.Write "cariAd = $('#cariAd').val();"
-Response.Write "teklifStokID = $('#teklifStokID').val();"
+    Response.Write "cariAd = $('#cariAd').val();"
+    Response.Write "teklifStokID = $('#stokSec').val();"
     Response.Write "if(cariAd==''){"
         Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
     Response.Write "} else if(teklifStokID=='') {"
         Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
     Response.Write "} else {"
-        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + $('#teklifStokID').val() + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
+        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
+    Response.Write "}"
+Response.Write "}"
+
+
+Response.Write "function teklifUrunEkle() {"
+    Response.Write "cariAd = $('#cariAd').val();"
+    Response.Write "if($('#stokSec').val()==null){"
+        Response.Write "teklifStokID = '';"
+    Response.Write "}else{"
+        Response.Write "teklifStokID = $('#stokSec').val();"
+    Response.Write "}"
+    Response.Write "if(cariAd==''){"
+        Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
+    Response.Write "} else if(teklifStokID=='') {"
+        Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
+    Response.Write "} else {"
+        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
     Response.Write "}"
 Response.Write "}"
 
 
 Response.Write "</script>"
-
-
-
-
-
-
-
-
-
 
 
 
@@ -554,16 +562,6 @@ Response.Write "</script>"
 ' 		Response.Write "</div>"
 ' 	end if
 ' '###### CARİ ARAMA FORMU
-
-  
-
-
-
-
-
-
-
-
 
 
 

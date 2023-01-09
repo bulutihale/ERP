@@ -51,7 +51,6 @@
 '##### HÜCRE EDIT
 '##### HÜCRE EDIT 
 
-		
 			response.Write sonuc
 
 %>

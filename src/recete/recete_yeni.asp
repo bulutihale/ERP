@@ -70,13 +70,7 @@ call logla(divAd & " Ekranı Girişi")
 			call formhidden("receteID",gorevID,"","","","","receteID","")
 			call formhidden("islem",islem,"","","","","islem","")
 			call formhidden("eskiReceteID",eskiReceteID,"","","","","eskiReceteID","")
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Reçete Ad</span>"
-				call forminput("receteAd",receteAd,"","","","autocompleteOFF","receteAd","")
-			Response.Write "</div>"
-		Response.Write "</div>"
-		
+
 		Response.Write "<div class=""row mt-2"">"
 			Response.Write "<div class=""col-lg-12"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
@@ -88,7 +82,14 @@ call logla(divAd & " Ekranı Girişi")
 				end if
 			Response.Write "</div>"
 		Response.Write "</div>"
-		
+			
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-sm-12 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Reçete Ad</span>"
+				call forminput("receteAd",receteAd,"","","","autocompleteOFF","receteAd","")
+			Response.Write "</div>"
+		Response.Write "</div>"
+				
 		Response.Write "<div class=""bg-warning rounded mt-2"">"
 			Response.Write "<div class=""row"">"	
 				Response.Write "<div class=""col-lg-3 my-1 rounded"">"
