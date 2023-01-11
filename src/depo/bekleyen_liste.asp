@@ -110,13 +110,13 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td class=""text-right"">"
 						'# transfer red
 						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""
-							Response.Write " onClick=""urunCevap('red','stokHareketID',"&stokHareketID&",'silindi','stok.stokHareket','1',"&refHareketID&",'depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','')"">"
+							Response.Write " onClick=""urunCevap('red','stokHareketID',"&stokHareketID&",'silindi','stok.stokHareket','1',"&refHareketID&",'depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','')"">"
 							Response.Write "<i class=""mdi mdi-window-close""></i>"
 						Response.Write "</div>"
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
-							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','')"">"
+							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','')"">"
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
 						'# /giriş onayla

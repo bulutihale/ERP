@@ -15,7 +15,7 @@
 	siparisKalemID		=	Request.Form("siparisKalemID")
 	lot					=	Request.Form("lot")
 	stokHareketTipi		=	Request.Form("stokHareketTipi")
-	cikisDepoID			=	Request.Form("secilenDepoID")
+	secilenDepoID		=	Request.Form("secilenDepoID")
 	lotSKT				=	Request.Form("lotSKT")
 	ajandaID			=	Request.Form("ajandaID")
 	ihtiyacMiktar		=	Request.Form("ihtiyacMiktar")
@@ -47,14 +47,7 @@ yetkiKontrol = yetkibul(modulAd)
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 0 then
 
-	sorgu = "SELECT id FROM stok.depo WHERE"
-		if isTur = "uretimPlan" then
-			sorgu = sorgu & " depoKategori = 'surecUretim'"
-		elseif isTur = "kesimPlan" then
-			sorgu = sorgu & " depoKategori = 'surecKesim'"
-		end if
-		'Response.Write sorgu
-		'response.end
+	sorgu = "SELECT id FROM stok.depo WHERE depoKategori = '" & depoKategori &"'"
 	rs.open sorgu, sbsv5, 1, 3
 		surecDepoID	=	rs("id")
 	rs.close
@@ -71,7 +64,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("miktarBirimID")			=	birimID
 				rs("girisTarih")			=	date()
 				rs("stokHareketTuru")		=	stokHareketTuru
-				rs("depoID")				=	cikisDepoID
+				rs("depoID")				=	secilenDepoID
 				rs("aciklama")				=	"Transfer"
 				rs("stokID")				=	stokID
 				rs("siparisKalemID")		=	siparisKalemID
@@ -97,7 +90,6 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("siparisKalemID")		=	siparisKalemID
 				rs("lot")					=	lot
 				rs("stokHareketTipi")		=	stokHareketTipi
-				rs("refHareketID")			=	cikisHareketID
 				rs("refHareketID")			=	cikisHareketID
 				rs("lotSKT")				=	lotSKT
 				rs("ajandaID")				=	ajandaID

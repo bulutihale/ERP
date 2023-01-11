@@ -13,6 +13,7 @@
     ajandaID64		=   Request.QueryString("ajandaID")
 	ajandaID		=	ajandaID64
 	ajandaID		=	base64_decode_tr(ajandaID)
+	secilenDepoID	=	Request.QueryString("secilenDepoID")
     stokID64		=   Request.QueryString("stokID")
 	stokID			=	stokID64
 	if not isnumeric(stokID) then
@@ -40,17 +41,20 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & " INNER JOIN teklif.siparisKalem t2 ON t2.id = (SELECT siparisKalemID FROM portal.ajanda t3 WHERE t3.id = t1.bagliAjandaID)"
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
 			rs.open sorgu, sbsv5, 1, 3
+			if rs.recordcount > 0 then
 				siparisMiktar	=	rs("miktar")
 				siparisBirim	=	rs("urunAnaBirim")
+			end if
 			rs.close
 		'### /sipariş miktar ve birimini bul
 	end if
 
 	if receteAdimID <> "" then
 		'### bileşenin reçetedeki miktarını  bul
-			sorgu = "SELECT miktar FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
+			sorgu = "SELECT miktar, receteID FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
 			rs.open sorgu, sbsv5, 1, 3
 				receteMiktar	=	rs("miktar")
+				receteID		=	rs("receteID")
 			rs.close
 		'### /bileşenin reçetedeki miktarını  bul
 
@@ -141,13 +145,13 @@ yetkiKontrol = yetkibul(modulAd)
 					if uretimYetkiKontrol >= 5 then 
 						'# transfer red
 						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""
-							Response.Write " onClick=""urunCevap('red','stokHareketID',"&rs("stokHareketID")&",'silindi','stok.stokHareket','1',"&rs("refHareketID")&",'depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&")"">"
+							Response.Write " onClick=""urunCevap('red','stokHareketID',"&rs("stokHareketID")&",'silindi','stok.stokHareket','1',"&rs("refHareketID")&",'depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&")"">"
 							Response.Write "<i class=""mdi mdi-window-close""></i>"
 						Response.Write "</div>"
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
-							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&rs("stokHareketID")&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&")"">"
+							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&rs("stokHareketID")&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&")"">"
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
 						'# /giriş onayla
@@ -254,9 +258,21 @@ yetkiKontrol = yetkibul(modulAd)
 						// handle Confirm button click
 						// result is an optional parameter, needed for modals with input
 
-					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID,lotMiktar:lotMiktar,ajandaID64:ajandaID64});
+					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{
+						lot:lot, 
+						lotSKT:lotSKT, 
+						aktarMiktar:aktarMiktar, 
+						miktarBirim:miktarBirim, 
+						depoID:depoID, 
+						stokID:stokID, 
+						stokKodu:stokKodu,
+						girisDepoID:girisDepoID,
+						lotMiktar:lotMiktar,
+						ajandaID64:ajandaID64}, function(){
+							$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID=<%=receteID%>&secilenDepoID=<%=secilenDepoID%> #receteAdim > *')
+							girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64, depoKategori);
+						});
 					
-					girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64, depoKategori);
 
 					// $('#tr_'+ajandaID).load('/uretim/uretilenListe.asp #tr_'+ajandaID+' >*', {listeTur:listeTur});
 					$('#listeTablo').load('/uretim/uretilenListe.asp #listeTablo >*', {listeTur:listeTur});
@@ -273,7 +289,7 @@ yetkiKontrol = yetkibul(modulAd)
 	// Giriş depo seçildiğinde deponun kendi kendine aktarımını engellemek için sayfayı post et
 		function girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64,depoKategori){
 			
-			$('#refreshDIV').load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+' #refreshDIV > *',{girisDepoID:girisDepoID})
+			$('#refreshDIV').load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+'&secilenDepoID=<%=secilenDepoID%> #refreshDIV > *',{girisDepoID:girisDepoID})
 		}
 	// Giriş depo seçildiğinde deponun kendi kendine aktarımını engellemek için sayfayı post et
 

@@ -316,7 +316,7 @@ yetkiKontrol = yetkibul(modulAd)
 					sorgu = sorgu & " LEFT JOIN recete.recete t4 ON  t4.receteID =  t1.altReceteID"
 					sorgu = sorgu & " WHERE t1.receteID = " & secilenReceteID
 					sorgu = sorgu & " AND t1.silindi = 0"
-					sorgu = sorgu & " ORDER BY t1.sira ASC"
+					sorgu = sorgu & " ORDER BY t1.sira ASC"					
 					rs.open sorgu, sbsv5, 1, 3
 
 
@@ -377,7 +377,7 @@ yetkiKontrol = yetkibul(modulAd)
 									Response.Write "<td class=""text-right"">" & ihtiyacMiktar & " " & miktarBirim & "</td>"
 									Response.Write "<td class=""text-right"">"
 										Response.Write "<div class=""row"">"
-										Response.Write "<div class=""col-4 text-left"" onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&isTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"">"
+										Response.Write "<div class=""col-4 text-left"" onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&isTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "&secilenDepoID="&secilenDepoID&"')"">"
 											Response.Write "<span class=""pointer bold btn btn-sm btn-info p-0 m-0"" title=""ürün talebi oluşturmak için tıklayınız."">talep</span>"
 										Response.Write "</div>"
 										Response.Write "<div class=""col-8"">"
@@ -396,7 +396,7 @@ yetkiKontrol = yetkibul(modulAd)
 										sorgu = sorgu & " AND t1.stokID = " & stokID & ""
 										sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID
 										rs1.open sorgu, sbsv5, 1, 3
-							'Response.Write sorgu
+
 										toplamLotMiktar	=	0
 
 										if rs1.recordcount > 0 then
