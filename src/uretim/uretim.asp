@@ -12,6 +12,7 @@
 	gorevID			=	gorevID64
 	gorevID			=	base64_decode_tr(gorevID)
 	ajandaID		=	gorevID
+	ajandaID64		=	gorevID64
 	secilenDepoID	=	Request.QueryString("secilenDepoID")
 	if secilenDepoID = "" or isnull(secilenDepoID) then
 		secilenDepoID = 0
@@ -57,10 +58,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 						if isTur = "uretimPlan" then
 
-							teminDepoKategori	=	"uretim"
 
 							sorgu = "SELECT t4.cariID, t3.stokID, t4.cariAd, t3.stokKodu, t3.stokAd, t1.miktar, t1.mikBirim, t5.siparisKalemID, t5.tamamlandi, t5.baslangicZaman,"
-							sorgu = sorgu & " t5.bitisZaman"
+							sorgu = sorgu & " t5.bitisZaman, t5.depoKategori"
 							sorgu = sorgu & " FROM portal.ajanda t5"
 							sorgu = sorgu & " INNER JOIN teklif.siparisKalem t1 ON t1.id = t5.siparisKalemID"
 							sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
@@ -68,18 +68,19 @@ yetkiKontrol = yetkibul(modulAd)
 							sorgu = sorgu & " INNER JOIN cari.cari t4 ON t2.cariID = t4.cariID"
 							sorgu = sorgu & " WHERE t5.id = " & gorevID
 							rs.Open sorgu, sbsv5, 1, 3
-								cariID			=	rs("cariID")
-								cariAd			=	rs("cariAd")
-								stokID			=	rs("stokID")
-								stokKodu		=	rs("stokKodu")
-								stokAd			=	rs("stokAd")
-								sipMiktar		=	rs("miktar")
-								uretilenMiktar	=	sipMiktar
-								mikBirim		=	rs("mikBirim")
-								siparisKalemID	=	rs("siparisKalemID")
-								tamamlandi		=	rs("tamamlandi")
-								baslangicZaman	=	rs("baslangicZaman")
-								bitisZaman		=	rs("bitisZaman")
+								cariID				=	rs("cariID")
+								cariAd				=	rs("cariAd")
+								stokID				=	rs("stokID")
+								stokKodu			=	rs("stokKodu")
+								stokAd				=	rs("stokAd")
+								sipMiktar			=	rs("miktar")
+								uretilenMiktar		=	sipMiktar
+								mikBirim			=	rs("mikBirim")
+								siparisKalemID		=	rs("siparisKalemID")
+								tamamlandi			=	rs("tamamlandi")
+								baslangicZaman		=	rs("baslangicZaman")
+								bitisZaman			=	rs("bitisZaman")
+								teminDepoKategori	=	rs("depoKategori")
 								receteMiktar 	= 	1 'uretimPlan işinde alt reçete miktarına ihtiyaç olmadığı için 1 tanımlandı, kesimPlan işinde lazım.
 							rs.close
 							urtBtnYaz		=	"ÜRETİME BAŞLA"
@@ -95,30 +96,30 @@ yetkiKontrol = yetkibul(modulAd)
 
 						elseif isTur = "kesimPlan" then
 
-							teminDepoKategori	=	"kesim"
 
 							sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
 							sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem"
 								sorgu = sorgu & " WHERE id = (SELECT siparisKalemID FROM portal.ajanda WHERE id = t4.bagliAjandaID)) as siparisMiktar, t4.tamamlandi, t4.baslangicZaman,"
-							sorgu = sorgu & " t4.bitisZaman"
+							sorgu = sorgu & " t4.bitisZaman, t4.depoKategori"
 							sorgu = sorgu & " FROM portal.ajanda t4"
 							sorgu = sorgu & " INNER JOIN recete.receteAdim t1 ON t4.receteAdimID = t1.receteAdimID"
 							sorgu = sorgu & " INNER JOIN recete.recete t2 ON t1.altReceteID = t2.receteID"
 							sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.stokID = t3.stokID"
 							sorgu = sorgu & " WHERE t4.id = " & gorevID
 							rs.Open sorgu, sbsv5, 1, 3
-								icerik			=	rs("icerik")
-								stokID			=	rs("stokID")
-								stokKodu		=	rs("stokKodu")
-								stokAd			=	rs("stokAd")
-								sipMiktar		=	rs("siparisMiktar")
-								receteMiktar	=	rs("receteMiktar")
-								uretilenMiktar	=	receteMiktar * sipMiktar
-								siparisKalemID	=	rs("siparisKalemID")
-								tamamlandi		=	rs("tamamlandi")
-								baslangicZaman	=	rs("baslangicZaman")
-								bitisZaman		=	rs("bitisZaman")
-								cariID			=	0
+								icerik				=	rs("icerik")
+								stokID				=	rs("stokID")
+								stokKodu			=	rs("stokKodu")
+								stokAd				=	rs("stokAd")
+								sipMiktar			=	rs("siparisMiktar")
+								receteMiktar		=	rs("receteMiktar")
+								uretilenMiktar		=	receteMiktar * sipMiktar
+								siparisKalemID		=	rs("siparisKalemID")
+								tamamlandi			=	rs("tamamlandi")
+								baslangicZaman		=	rs("baslangicZaman")
+								bitisZaman			=	rs("bitisZaman")
+								teminDepoKategori	=	rs("depoKategori")
+								cariID				=	0
 							rs.close
 							urtBtnYaz	=	"KESİME BAŞLA"
 							urtBtnClass	=	" bg-warning "
@@ -318,6 +319,7 @@ yetkiKontrol = yetkibul(modulAd)
 					sorgu = sorgu & " ORDER BY t1.sira ASC"
 					rs.open sorgu, sbsv5, 1, 3
 
+
 					if rs.recordcount = 0 then
 						Response.Write "Reçete Adımları Bulunamadı"
 					else
@@ -332,7 +334,9 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<th class=""col-2"" scope=""col"">LOT Seçimi</th>"
 						Response.Write "</tr></thead><tbody>"
 							for i = 1 to rs.recordcount
-								stokID			=	rs("stokID") 
+								stokID			=	rs("stokID")
+								stokID64		=	stokID
+								stokID64		=	base64_encode_tr(stokID64)
 								miktar			=	rs("miktar")
 								miktarBirim		=	rs("miktarBirim")
 								GBmiktar		=	rs("GBmiktar")
@@ -340,14 +344,16 @@ yetkiKontrol = yetkibul(modulAd)
 								stokKodu		=	rs("stokKodu")
 								hazirMiktar		=	rs("hazirMiktar")
 								islemAciklama	=	rs("islemAciklama")
+								receteAdimID	=	rs("receteAdimID")
+								receteAdimID64	=	receteAdimID
+								receteAdimID64	=	base64_encode_tr(receteAdimID64)
 							if not isnull(stokID) then
 
 								ihtiyacMiktar	=	miktar * sipMiktar * receteMiktar
 								trClass 		=	" bg-warning "
-
+								GBmiktarYaz		=	""
 								If secilenDepoID > 0 Then
 									hazirMiktarYaz		=	"<div class=""text-dark bold"" title=""Hazır miktar"">Hazır: " & hazirMiktar & " " & miktarBirim & "</div>"
-														
 									if GBmiktar > 0 then
 										GBmiktarYaz		=	"<div class=""text-dark bg-light rounded mt-2 bold pointer"" onclick=""window.location.href = '/depo/bekleyen_liste/uretim'"" title=""Giriş bekleyen miktar"">Bekleyen: " & GBmiktar & "</div>"
 									end if
@@ -369,7 +375,16 @@ yetkiKontrol = yetkibul(modulAd)
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
 									Response.Write "<td class=""text-right"">" & ihtiyacMiktar & " " & miktarBirim & "</td>"
-									Response.Write "<td class=""text-right"">" & hazirMiktarYaz & GBmiktarYaz & "</td>"
+									Response.Write "<td class=""text-right"">"
+										Response.Write "<div class=""row"">"
+										Response.Write "<div class=""col-4 text-left"" onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&isTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"">"
+											Response.Write "<span class=""pointer bold btn btn-sm btn-info p-0 m-0"" title=""ürün talebi oluşturmak için tıklayınız."">talep</span>"
+										Response.Write "</div>"
+										Response.Write "<div class=""col-8"">"
+										Response.Write hazirMiktarYaz & GBmiktarYaz
+										Response.Write "</div>"
+										Response.Write "</div>"
+									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">" & rs("isGucuSayi") & "</td>"
 									Response.Write "<td class=""text-center"">"
 									if not isnull(stokID) then

@@ -61,6 +61,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("stokHareketTipi")	=	"T"
 					rs1("lot")				=	lot
 					rs1("lotSKT")			=	lotSKT
+					rs1("ajandaID")			=	ajandaID
 				rs1.update
 				stokHareketID	=	rs1("stokHareketID")
 			rs1.close
@@ -85,16 +86,23 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("refHareketID")		=	stokHareketID
 					rs1("lot")				=	lot
 					rs1("lotSKT")			=	lotSKT
+					rs1("ajandaID")			=	ajandaID
 				rs1.update
 			rs1.close
 		'#### /yarı mamullerin hareketini stokHareket tablosuna üretim depoya G (giriş) olarak kaydet
 
 
 		'### Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
-		
 			if not isnull(ajandaID) then
-				sorgu = "UPDATE portal.ajanda SET tamamlandi = 1 WHERE id = " & ajandaID
-				rs.open sorgu, sbsv5,3,3
+			sorgu = "SELECT (stok.FN_receteMiktarBul("&ajandaID&") * stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar, stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar"
+			rs.open sorgu, sbsv5,1,3
+				toplamMiktar	=	rs("toplamMiktar")
+				transferMiktar	=	rs("transferMiktar")
+			rs.close
+				if cdbl(transferMiktar) >= cdbl(toplamMiktar) then
+					sorgu = "UPDATE portal.ajanda SET tamamlandi = 1 WHERE id = " & ajandaID
+					rs.open sorgu, sbsv5,3,3
+				end if
 			end if
 		'### /Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
 

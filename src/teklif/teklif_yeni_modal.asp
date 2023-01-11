@@ -225,7 +225,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Para Birimi : </div>"
-                                degerler = "--Para Birimi--=|TL=TRY|USD=USD|EUR=EUR|GBP=GBP"
+                                degerler = "--Para Birimi--=|TRY=TRY|USD=USD|EUR=EUR|GBP=GBP"
                                 call formselectv2("teklifParaBirimi",teklifParaBirimi,"","","","","teklifParaBirimi",degerler,"")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
@@ -509,11 +509,8 @@ Response.Write "});"
 
 
 Response.Write "function teklifUrunEkle() {"
-
-Response.Write "cariAd = $('#cariAd').val();"
-
-' Response.Write "teklifStokID = $('#teklifStokID').val();"
-Response.Write "teklifStokID = $('#stokSec').val();"
+    Response.Write "cariAd = $('#cariAd').val();"
+    Response.Write "teklifStokID = $('#stokSec').val();"
     Response.Write "if(cariAd==''){"
         Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
     Response.Write "} else if(teklifStokID=='') {"
@@ -522,6 +519,7 @@ Response.Write "teklifStokID = $('#stokSec').val();"
         Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
     Response.Write "}"
 Response.Write "}"
+
 
 
 Response.Write "function teklifUrunEkle() {"
@@ -544,28 +542,8 @@ Response.Write "}"
 Response.Write "</script>"
 
 
-Response.Write "function teklifUrunEkle() {"
-
-Response.Write "cariAd = $('#cariAd').val();"
-Response.Write "teklifStokID = $('#teklifStokID').val();"
-    Response.Write "if(cariAd==''){"
-        Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
-    Response.Write "} else if(teklifStokID=='') {"
-        Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
-    Response.Write "} else {"
-        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + $('#teklifStokID').val() + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
-    Response.Write "}"
-Response.Write "}"
 
 
-<<<<<<< HEAD
-=======
-Response.Write "</script>"
-
-
-
-
->>>>>>> 50b4b1e8cc038c542769699e37b5831721537854
 
 
 ' '###### CARİ ARAMA FORMU

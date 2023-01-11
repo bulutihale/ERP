@@ -36,14 +36,13 @@
 				hareketKontrol	=	rs("hareketKontrol")
 		rs.close
 	'## veritabanı
-
-		if anaBirimID = 0 AND hareketKontrol = 0 then
 			stokID64	=	stokID
 			stokID64	=	base64_encode_tr(stokID64)
+		if anaBirimID = 0 AND hareketKontrol = 0 then
 			sonuc		=	"/stok/stok_yeni.asp?a=hareketKontrol&gorevID=" & stokID64
 		else
 			'sonuc	=	"tanimlanamaz"
-			sonuc	=	anaBirimID&"|"&uzunBirim
+			sonuc	=	anaBirimID&"|"&uzunBirim&"|"&stokID64
 		end if
 
 

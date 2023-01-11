@@ -5,6 +5,8 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid		=	kidbul()
+	listeTur		=   Request.QueryString("listeTur")
+	depoKategori	=	listeTur
     receteAdimID64	=   Request.QueryString("receteAdimID")
 	receteAdimID	=	receteAdimID64
 	receteAdimID	=	base64_decode_tr(receteAdimID)
@@ -87,7 +89,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-12"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left"">Stok</div>"
-						call formselectv2("stokID","","girisDepoSec('" & girisDepoID & "','" & receteAdimID64 & "', '" & ajandaID64 & "',$(this).val())","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger&"""")
+						call formselectv2("stokID","","girisDepoSec('" & girisDepoID & "','" & receteAdimID64 & "', '" & ajandaID64 & "',$(this).val()),'" & depoKategori & "'","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger&"""")
 					Response.Write "</div>"
 				Response.Write "</div>"
 
@@ -109,7 +111,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-lg-2 col-sm-6 bold"">Giriş Depo</div>"
 					Response.Write "<div class=""col-lg-10 col-sm-6"">"
-						call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('uretim','sterilizasyon','kesim')""")
+						call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "','" & depoKategori & "')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('uretim','sterilizasyon','kesim')""")
 					Response.Write "</div>"
 				Response.Write "</div>"
 
@@ -117,7 +119,7 @@ yetkiKontrol = yetkibul(modulAd)
 	'#####seçilen depoda giriş bekleyenleri göster
 		if girisDepoID <> "" then
 				sorgu = "SELECT"
-				sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID, t1.cariID, t4.depoAd"
+				sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID"
 				sorgu = sorgu & " FROM stok.stokHareket t1"
 				sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 				sorgu = sorgu & " INNER JOIN stok.depo t4 ON t1.depoID = t4.id"
@@ -134,6 +136,23 @@ yetkiKontrol = yetkibul(modulAd)
 									Response.Write "<div class=""col"">" & rs("stokKodu") & "</div>"
 									Response.Write "<div class=""col"">" & rs("stokAd") & "</div>"
 									Response.Write "<div class=""col"">" & rs("miktar") & " " & rs("miktarBirim") & "</div>"
+									Response.Write "<div class=""col"">"
+					uretimYetkiKontrol = yetkibul("Üretim")
+					if uretimYetkiKontrol >= 5 then 
+						'# transfer red
+						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""
+							Response.Write " onClick=""urunCevap('red','stokHareketID',"&rs("stokHareketID")&",'silindi','stok.stokHareket','1',"&rs("refHareketID")&",'depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&")"">"
+							Response.Write "<i class=""mdi mdi-window-close""></i>"
+						Response.Write "</div>"
+						'# transfer red
+						'# giriş onayla
+						Response.Write "<div class=""badge badge-pill badge-success pointer"""
+							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&rs("stokHareketID")&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&")"">"
+							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
+						Response.Write "</div>"
+						'# /giriş onayla
+					end if
+									Response.Write "</div>"
 								Response.Write "</div>"
 							rs.movenext
 							next
@@ -149,6 +168,10 @@ yetkiKontrol = yetkibul(modulAd)
 	
 '//FIXME - aktarım yapılacak olan depoKategori sorguya manuel yazıldı dinamikleştirilmesi gerekir.
 				if stokID <> "" then
+
+					call formhidden("listeTur",listeTur,"","","","","listeTur","")
+
+
 					sorgu = "SELECT "
 					sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
 					sorgu = sorgu & " FROM stok.stokHareket t1"
@@ -192,7 +215,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<div class=""col-lg-2 col-sm-6"">"
 								call forminput("aktarMiktar","","if(($('#girisDepoID').val())==null){swal('','Ürünün aktarılacağı Giriş depo seçimi yapılmamış.')}","","","autocompleteOFF","aktarMiktar_"&siraNo&"","")
 							Response.Write "</div>"
-							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "'," & lotMiktar & ");"">"
+							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "'," & lotMiktar & "," & ajandaID &",'"&depoKategori&"');"">"
 								Response.Write "<i class=""mdi mdi-jira pointer bold""></i>"
 							Response.Write "</div>"
 							end if
@@ -214,7 +237,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 	<script>
 	// transfer işlemleri		
-		function depoTransfer(siraNo,lot,lotSKT,miktarBirim,depoID,stokID,stokKodu,receteAdimID64,ajandaID64,stokID64,lotMiktar){
+		function depoTransfer(siraNo,lot,lotSKT,miktarBirim,depoID,stokID,stokKodu,receteAdimID64,ajandaID64,stokID64,lotMiktar,ajandaID,depoKategori){
+			var listeTur	=	$('#listeTur').val();
 			var girisDepoID	=	$('#girisDepoID').val();
 			var aktarMiktar	=	$('#aktarMiktar_'+siraNo).val();
 					swal({
@@ -232,7 +256,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 					$('#ajax').load('/depo/depo_transfer_kaydet.asp',{lot:lot, lotSKT:lotSKT, aktarMiktar:aktarMiktar, miktarBirim:miktarBirim, depoID:depoID, stokID:stokID, stokKodu:stokKodu,girisDepoID:girisDepoID,lotMiktar:lotMiktar,ajandaID64:ajandaID64});
 					
-					girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64);
+					girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64, depoKategori);
+
+					// $('#tr_'+ajandaID).load('/uretim/uretilenListe.asp #tr_'+ajandaID+' >*', {listeTur:listeTur});
+					$('#listeTablo').load('/uretim/uretilenListe.asp #listeTablo >*', {listeTur:listeTur});
 
 					  }, //confirm buton yapılanlar
 					  function(dismiss) {
@@ -244,9 +271,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 	// Giriş depo seçildiğinde deponun kendi kendine aktarımını engellemek için sayfayı post et
-		function girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64){
+		function girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64,depoKategori){
 			
-			$('#refreshDIV').load('/depo/depo_transfer.asp?receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+' #refreshDIV > *',{girisDepoID:girisDepoID})
+			$('#refreshDIV').load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+' #refreshDIV > *',{girisDepoID:girisDepoID})
 		}
 	// Giriş depo seçildiğinde deponun kendi kendine aktarımını engellemek için sayfayı post et
 

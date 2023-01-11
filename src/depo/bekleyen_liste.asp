@@ -60,7 +60,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row"">"
 
 		Response.Write "<div class=""table-responsive"">"
-		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark text-center""><tr>"
+		Response.Write "<table id=""tabloBekleyen"" class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark text-center""><tr>"
 		Response.Write "<th scope=""col"">Çıkış Depo</th>"
 		Response.Write "<th scope=""col"">Giriş Depo</th>"
 		Response.Write "<th scope=""col"">Giriş Tarih</th>"
@@ -110,13 +110,13 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td class=""text-right"">"
 						'# transfer red
 						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""
-							Response.Write " onClick=""urunCevap('red','stokHareketID',"&stokHareketID&",'silindi','stok.stokHareket','1',"&refHareketID&",'depoRed')"">"
+							Response.Write " onClick=""urunCevap('red','stokHareketID',"&stokHareketID&",'silindi','stok.stokHareket','1',"&refHareketID&",'depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','')"">"
 							Response.Write "<i class=""mdi mdi-window-close""></i>"
 						Response.Write "</div>"
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
-							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed')"">"
+							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','')"">"
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
 						'# /giriş onayla
@@ -147,44 +147,4 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 %>
-	<script>
 
-	// Bekleyen girişi onayla ve depoya giriş kaydet
-		function urunCevap(cevap,idAlan,stokHareketID,alan,tablo,deger,refHareketID,ntfDeger){
-
-			if(cevap == 'kabul'){
-				var baslik = 'Ürünün kesin kabulü yapılsın mı?'
-				var durum = 'success'
-			}else if(cevap == 'red'){
-				var baslik= 'Ürün trasferi red edilsin mi?'
-				var durum = 'error'
-			}
-					swal({
-					title: baslik,
-					type: durum,
-					showCancelButton: true,
-					  confirmButtonColor: '#DD6B55',
-					  confirmButtonText: 'Devam',
-					  cancelButtonText: 'İptal'
-					}).then(
-					  function(result) {
-						// handle Confirm button click
-						// result is an optional parameter, needed for modals with input
-						
-						$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:stokHareketID,alan:alan,tablo:tablo,deger:deger,ntfDeger:ntfDeger})
-
-				//eğer transfer kabul edilmeyecekse diğer depodan çıkış işlemi iptal edilsin
-					if(cevap == 'red'){$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:refHareketID,alan:alan,tablo:tablo,deger:deger})}
-				//eğer transfer kabul edilmeyecekse diğer depodan çıkış işlemi iptal edilsin
-
-						document.location = ('/depo/bekleyen_liste/uretim');
-
-					  }, //confirm buton yapılanlar
-					  function(dismiss) {
-						// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-					  } //cancel buton yapılanlar		
-					);//swal sonu
-			
-		}
-	// Bekleyen girişi onayla ve depoya giriş kaydet
-	</script>

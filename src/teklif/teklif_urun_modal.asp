@@ -36,7 +36,7 @@
 
 
 '### ÜRÜN BİLGİLERİNİ AL
-      sorgu = "Select stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur from stok.stok where silindi = 0 and stokID = " & teklifStokID
+      sorgu = "Select stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
           stokAd  =   rs("stokAd")
@@ -45,6 +45,7 @@
           fiyat2  =   rs("fiyat2")
           fiyat3  =   rs("fiyat3")
           fiyat4  =   rs("fiyat4")
+          paraBirimID  =   rs("paraBirimID")
           birimTur  = rs("birimTur") & ""
           stokAciklama  = rs("stokAciklama") & ""
           stokToplamFiyat = stokFiyat
@@ -75,10 +76,27 @@
       end if
       rs.close
     end if
+    '#### PARA BİRİMİNİ AYARLA
+      if paraBirimID <> "" then
+        sorgu = "Select TOP 1 uzunBirim from portal.birimler where silindi = 0 and birimID = " & paraBirimID
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount > 0 then
+            stokParaBirim =   rs("uzunBirim")
+        end if
+        rs.close
+      end if
+    '#### PARA BİRİMİNİ AYARLA
 '### BİRİMLERİ BUL
 
 
+if teklifParaBirimi <> stokParaBirim then
+  Response.Write "<div class=""text-center h3 mt-2 mb-3"">Teklif para birimi (" & teklifParaBirimi & ") ile stok para birimi (" & stokParaBirim & ") farklılar</div>"
 
+  '### STOK PARA BİRİMİNİ DÖNÜŞTÜR
+    hesaplanacakParaBirimi = teklifParaBirimi & stokParaBirim
+    Response.Write hesaplanacakParaBirimi
+  '### STOK PARA BİRİMİNİ DÖNÜŞTÜR
+end if
 
 '### ANA FORM
   Response.Write "<form id=""teklifUrunModal"" class=""ajaxform"" method=""post"" action=""/teklif/teklif_urun_modal_kaydet.asp"">"
