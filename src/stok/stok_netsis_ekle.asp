@@ -30,14 +30,13 @@
 
 Response.Flush()
 
-call logla("Stok Güncelleme: " & stokKodu & "")
 
 yetkiKontrol = yetkibul(modulAd)
 
 
 
-	call rqKontrol(stokKodu,"Lütfen Stok Seçin","")
-	call rqKontrol(anaBirimID,"Lütfen ürüne ait ana birimi seçin","")
+	'call rqKontrol(stokKodu,"Lütfen Stok Seçin","")
+	'call rqKontrol(anaBirimID,"Lütfen ürüne ait ana birimi seçin","")
 
 if yetkiKontrol > 2 then
 
@@ -45,28 +44,23 @@ if gorevID = "" then
     gorevID = 0
 end if
 
-            sorgu = "Select top 1 * from stok.stok where stokKodu = '" & stokKodu & "'"
-			rs.open sorgu, sbsv5, 1, 3
-            if rs.recordcount = 0 then
-                rs.addnew
-				call logla("Yeni Stok Ekleniyor: " & stokKodu & "")
+            sorgu = "Select  * from TBLSTSABIT where STOK_KODU = '" & stokKodu & "'"
+			rsS.open sorgu, rsStok, 1, 3
+            if rsS.recordcount = 0 then
+                rsS.addnew
+				call logla("NETSİS veritabanına Yeni Stok Ekleniyor: " & stokKodu & "")
 			else
-				call logla("Stok Güncelleniyor: " & stokKodu & "")
+				call logla("NETSİS veritabanında Stok Güncelleniyor: " & stokKodu & "")
             end if
-				rs("firmaID")			=	firmaID
-                rs("stokKodu")			=	stokKodu
-                rs("stokAd")			=	stokAd
-                rs("stokTuru")			=	stokTuru
-                rs("silindi")			=	silindi
-				rs("kkDepoGiris")		=	kkDepoGiris
-                rs("minStok")           =   minStok
-                rs("anaBirimID")        =   anaBirimID
-                rs("rafOmru")           =   rafOmru
-            rs.update
-            rs.close
+                rsS("STOK_KODU")		=	stokKodu
+                rsS("STOK_ADI")			=	stokAd
+                rsS("SUBE_KODU")		=	-1
+                rsS("ISLETME_KODU")     =   1
+            rsS.update
+            rsS.close
 
 end if
-
+Response.Write "OK"
 call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
 if a = "hareketKontrol" then
 else

@@ -80,6 +80,29 @@ else
 		end if
 	'### SSO Başka DB ise
 	'### SSO Başka DB ise
+
+	'### CARİ'leri dış DB'den alıyorsa
+	'### CARİ'leri dış DB'den alıyorsa
+		if firmaCariDBvar = 1 then
+			set rsCari=Server.CreateObject("ADODB.Connection")
+			cariDBbaglanti = "Provider=SQLOLEDB;Data Source=" & firmaCariSunucu & ";Initial Catalog=" & firmaCariDB & ";User Id=" & firmaCaridbUSR & ";Password=" & firmaCaridbPass & ";"
+			rsCari.Open cariDBbaglanti
+			Set rsC = Server.CreateObject("ADODB.Recordset")
+		end if
+	'### CARİ'leri dış DB'den alıyorsa
+	'### CARİ'leri dış DB'den alıyorsa
+
+	'### STOK'ları dış DB'den alıyorsa
+	'### STOK'ları dış DB'den alıyorsa
+		if firmaStokDBvar = 1 then
+			set rsStok=Server.CreateObject("ADODB.Connection")
+			stokDBbaglanti = "Provider=SQLOLEDB;Data Source=" & firmaStokSunucu & ";Initial Catalog=" & firmaStokDB & ";User Id=" & firmaStokdbUSR & ";Password=" & firmaStokdbPass & ";"
+			rsStok.Open stokDBbaglanti
+			Set rsS = Server.CreateObject("ADODB.Recordset")
+		end if
+	'### STOK'ları dış DB'den alıyorsa
+	'### STOK'ları dış DB'den alıyorsa
+	
 	'### DİL
 	'### DİL
 	%><!--#include virtual="/temp/language.asp" --><%

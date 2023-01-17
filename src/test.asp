@@ -1,38 +1,30 @@
-﻿
-<div class="demo">
-
-</div>
+﻿<!--#include virtual="/reg/rs.asp" --><%
 
 
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
+    call sessiontest()
+    kid			=	kidbul()
+    ID			=	Request.QueryString("ID")
+    kid64		=	ID
+    opener  	=   Request.Form("opener")
+    gorevID 	=   Request.QueryString("gorevID")
+	a			=   Request.QueryString("a")
+	stokID64	=	gorevID
+	gorevID64	=	gorevID
+	gorevID		=	base64_decode_tr(gorevID64)
+	modulAd 	=   "stok"
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
 
-<script>
 
 
 
 
+ sorgu = "SELECT * FROM tblstsabit"
+ rsS.open sorgu, rsCari, 1, 3
+     Response.Write rsS("STOK_KODU")
+ rsS.close
 
 
-
-
-$( document ).ready(function() {
-
-$(".demo").qrcode({
-
-    text:'8680110153746(0)24.12.2022(1)24.12.2026(2)SDAF4524574857',
-    mode: 0,
-    label:'TIO MEDIKAL',
-    fontname:'sans',
-    fontcolor:'#000',
-    size:50
-
-});
-
-});
-    // try {
-    //     var network = new ActiveXObject('WScript.Network');
-    //     // Show a pop up if it works
-    //     alert(network.computerName);
-    // }
-    // catch (e) { }
-
-</script>
+%>

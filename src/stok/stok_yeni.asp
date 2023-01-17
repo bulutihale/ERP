@@ -88,7 +88,7 @@ end if
 			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-4 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Türü</span>"
-				call formselectv2("stokTuru",int(stokTuru),"","","stokTuru","","stokTuru",stokTipDegerler,"")
+				call formselectv2("stokTuru",stokTuru,"","","stokTuru","","stokTuru",stokTipDegerler,"")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-4 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Minumum Stok Miktarı</span>"
@@ -118,6 +118,9 @@ end if
 			Response.Write "</div>"
 		end if
 			Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">KAYDET</button></div>"
+			if gorevID <> "" then
+				Response.Write "<div class=""col-auto my-1""><div class=""btn btn-warning"" onclick=""netsisKayit()"">NETSİS KAYIT</div></div>"
+			end if
 		Response.Write "</div>"
 		Response.Write "</form>"
 	Response.Write "</div>"
@@ -258,7 +261,16 @@ Response.Write "</div>"
 		);//swal sonu
 		}
 
+	function netsisKayit(){
+		var stokKodu		=	$('#stokKodu').val();
+		var stokAd			=	$('#stokAd').val();
 
+		$.post("/stok/stok_netsis_ekle.asp", {
+			stokKodu:stokKodu,
+			stokAd:stokAd
+		});
+
+		}
 </script>
 
 

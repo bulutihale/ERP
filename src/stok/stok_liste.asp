@@ -42,7 +42,8 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "</div>"
 							Response.Write "<div class=""col-lg-1 col-sm-1 my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 							if yetkiKontrol >= 8 then
-								Response.Write "<div class=""col-lg-9 col-sm-6 my-1 text-right"">"
+								Response.Write "<div class=""col-lg-9 col-sm-3 my-1 text-right"">"
+									Response.Write "<div class=""btn btn-warning m-2"" onClick=""netsisSenk('"&firmaStokDB&"')"">NETSİS SENK</div>" 
 									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/stok/stok_yeni.asp')"">YENİ ÜRÜN EKLE</button>&nbsp;" 
 								Response.Write "</div>"
 							end if
@@ -186,11 +187,16 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 
-
-
-
-
-
-
-
 %>
+
+<script>
+	function netsisSenk(netsisStdb) {
+		$.post("/stok/stok_netsis_getir.asp", {
+			netsisStdb:netsisStdb
+
+		});
+		
+	}
+
+
+</script>

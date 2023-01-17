@@ -109,7 +109,11 @@ if yetkiKontrol > 2 then
 					stokKontroluYap		=	rs("stokKontroluYap")
 					receteIslemTipiID	=	rs("receteIslemTipiID")
 					isGucuSayi			=	rs("isGucuSayi")
-					
+					onHazirlikTur		=	rs("onHazirlikTur")
+					onHazirlikDeger		=	rs("onHazirlikDeger")
+					etiketeEkle			=	rs("etiketeEkle")
+					etiketAd			=	rs("etiketAd")
+					islemAciklama		=	rs("islemAciklama")
 					
 					sorgu = "SELECT * FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
 					rs1.open sorgu, sbsv5, 1, 3
@@ -124,6 +128,14 @@ if yetkiKontrol > 2 then
 						rs1("stokKontroluYap")	=	stokKontroluYap
 						rs1("receteIslemTipiID")=	receteIslemTipiID
 						rs1("isGucuSayi")		=	isGucuSayi
+						rs1("onHazirlikTur")	=	onHazirlikTur
+						rs1("onHazirlikDeger")	=	onHazirlikDeger
+						rs1("etiketeEkle")		=	etiketeEkle
+						rs1("etiketAd")			=	etiketAd
+						rs1("islemAciklama")	=	islemAciklama
+
+
+
 					rs1.update
 					rs1.close
 					
