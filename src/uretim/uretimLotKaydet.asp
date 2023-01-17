@@ -10,7 +10,7 @@
 	stokHareketTuru		=	Request.Form("stokHareketTuru")
 	kullanimMiktar		=	Request.Form("kullanimMiktar")
 	miktarBirim			=	Request.Form("miktarBirim")
-	depoKategori		=	Request.Form("depoKategori")
+	surecDepoID		=	Request.Form("surecDepoID")
 	stokID				=	Request.Form("stokID")
 	siparisKalemID		=	Request.Form("siparisKalemID")
 	lot					=	Request.Form("lot")
@@ -47,9 +47,12 @@ yetkiKontrol = yetkibul(modulAd)
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 0 then
 
-	sorgu = "SELECT id FROM stok.depo WHERE depoKategori = '" & depoKategori &"'"
+	sorgu = "SELECT stok.FN_depoSinifBul("&surecDepoID&") as a, stok.FN_depoSinifBul("&secilenDepoID&") as b"
 	rs.open sorgu, sbsv5, 1, 3
-		surecDepoID	=	rs("id")
+		if rs("a") <> rs("b")  then
+			call toastrCagir("Temin depo ile seçilen süreç UYUMSUZ!","HATA","center","error","otomatik","")
+			Response.End()
+		end if
 	rs.close
 	
 

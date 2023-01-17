@@ -165,8 +165,13 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                                 call forminput("cariKodu",cariKodu,"","","cariKodu","hidden","cariKodu","")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-4"">"
+                            if teklifsayi = "" then
                                 Response.Write "<div class=""badge badge-success"">Sayı : (Boş bırakırsanız otomatik oluşur)</div>"
                                 call forminput("teklifsayi",teklifsayi,"","","","autocompleteOFF","teklifsayi","")
+                            else
+                                Response.Write "<div class=""badge badge-success"">Sayı :</div>"
+                                call forminput("teklifsayi",teklifsayi,"","","","readonly","teklifsayi","")
+                            end if
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-4"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Tarihi : </div>"
@@ -315,7 +320,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                                     ' next
                                     ' Response.Write "</select>"
                                ' rs.close
-call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+                            call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
                         Response.Write "</div>"
                         Response.Write "<div class=""col-lg-1"">"
                             Response.Write "<div class=""badge"">&nbsp;</div>"

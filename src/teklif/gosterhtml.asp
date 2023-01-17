@@ -180,14 +180,16 @@ function raporBody()
                                 kosulIcerik = kosulIcerik & "</tr>"
                             rs.movenext
                             next
-                                kosulIcerik = kosulIcerik & "<tr>"
-                                kosulIcerik = kosulIcerik & "<td align=""left"" style=""border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;""><strong>"
-                                    kosulIcerik = kosulIcerik & ozelkosultur1
-                                kosulIcerik = kosulIcerik & "</strong></td>"
-                                kosulIcerik = kosulIcerik & "<td align=""left"" style=""border-top: 1px solid #000;border-right: 1px solid #000;"">"
-                                    kosulIcerik = kosulIcerik & ozelkosulicerik1
-                                kosulIcerik = kosulIcerik & "</td>"
-                                kosulIcerik = kosulIcerik & "</tr>"
+                                if ozelkosultur1 <> "" then
+                                    kosulIcerik = kosulIcerik & "<tr>"
+                                    kosulIcerik = kosulIcerik & "<td align=""left"" style=""border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;""><strong>"
+                                        kosulIcerik = kosulIcerik & ozelkosultur1
+                                    kosulIcerik = kosulIcerik & "</strong></td>"
+                                    kosulIcerik = kosulIcerik & "<td align=""left"" style=""border-top: 1px solid #000;border-right: 1px solid #000;"">"
+                                        kosulIcerik = kosulIcerik & ozelkosulicerik1
+                                    kosulIcerik = kosulIcerik & "</td>"
+                                    kosulIcerik = kosulIcerik & "</tr>"
+                                end if
                             kosulIcerik = kosulIcerik & "</tbody>"
                             kosulIcerik = kosulIcerik & "</table>"
                         end if
@@ -224,6 +226,7 @@ function raporBody()
                     '## verileri al
                         teklifStokID        =   rs("teklifStokID")
                         teklifParaBirimi    =   rs("teklifParaBirimi")
+                        stokParaBirim       =   rs("stokParaBirim")
                         stokAd              =   rs("stokAd")
                         stokAciklama        =   rs("stokAciklama")
                         stokAdet            =   rs("stokAdet")
@@ -237,10 +240,11 @@ function raporBody()
                         birimAd             =   rs("birimAd")
                         teklifKalemID       =   rs("teklifKalemID")
                         stokKdv             =   rs("stokKdv")
+                        dovizKuru           =   rs("dovizKuru")
                     '## verileri al
 
                     '## hesaplamaları yap
-                        teklifSatirToplami      =   stokFiyat * stokAdet
+                        teklifSatirToplami      =   stokFiyat * stokAdet * dovizKuru
                         teklifToplam            =   teklifToplam + teklifSatirToplami
                         teklifSatirIskonto      =   teklifSatirToplami - stokToplamFiyat
                         teklifIskontoToplam     =   teklifIskontoToplam + teklifSatirIskonto
@@ -256,15 +260,15 @@ function raporBody()
                             ' urunListesi = urunListesi & "<img src=""http://teklif.sbstasarim.com/resim.asp?id=1140"" align=""left"" style=""max-width:50px;max-height:50px;"" width=""50"">"
                             urunListesi = urunListesi & "<strong>" & stokAd & "</strong></td>"
                             urunListesi = urunListesi & "<td width=""50"" align=""center"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;border-right:0px;"">" & stokAdet & " " & birimAd & "</td>"
-                            urunListesi = urunListesi & "<td width=""100"" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;border-right:0px;"">" & stokFiyat & " " & teklifParaBirimi & "</td>"
-                            urunListesi = urunListesi & "<td width=""100"" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;"">" & stokToplamFiyat & " " & teklifParaBirimi & "</td>"
+                            urunListesi = urunListesi & "<td width=""100"" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;border-right:0px;"">" & stokFiyat & " " & stokParaBirim & "</td>"
+                            urunListesi = urunListesi & "<td width=""100"" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;"">" & formatnumber(stokToplamFiyat,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                         urunListesi = urunListesi & "</tr>"
                     '## Ürün listesi
 
 				rs.movenext
 				next
                 urunListesi = urunListesi & "<tr>"
-                urunListesi = urunListesi & "<td width=""400"" rowspan=""5"" style="""">&nbsp;</td>"
+                urunListesi = urunListesi & "<td width=""400"" rowspan=""6"" style="""">&nbsp;</td>"
                 urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-left: 1px solid;height:20px;""><b>&nbsp;&nbsp;Toplam</b></td>"
                 urunListesi = urunListesi & "<td width=""100"" align=""right"" valign=""middle"" style=""border-left: 1px solid;border-right: 1px solid;"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                 urunListesi = urunListesi & "</tr>"
@@ -281,8 +285,12 @@ function raporBody()
                 urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;border-bottom:0px;"">" & formatnumber(teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                 urunListesi = urunListesi & "</tr>"
                 urunListesi = urunListesi & "<tr>"
-                urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-right:0px;""><b>&nbsp;&nbsp;</b><strong>Genel Toplam</strong></td>"
+                urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-right:0px;""><b>&nbsp;&nbsp;</b><strong>Toplam</strong></td>"
                 urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;""><strong>" & formatnumber(teklifGenelToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
+                urunListesi = urunListesi & "</tr>"
+                urunListesi = urunListesi & "<tr>"
+                urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-right:0px;""><b>&nbsp;&nbsp;</b><strong>Genel Toplam</strong></td>"
+                urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;""><strong>" & formatnumber(teklifGenelToplam+teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
                 urunListesi = urunListesi & "</tr>"
                 urunListesi = urunListesi & "</tbody></table>"
                 urunListesi = urunListesi & "</div>"

@@ -19,9 +19,9 @@
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 		Response.Write "<th scope=""col"">Stok Adı</th>"
-		Response.Write "<th scope=""col"">Birim Fiyat</th>"
-		Response.Write "<th scope=""col"">Adet</th>"
-		Response.Write "<th scope=""col"">Satır Toplamı</th>"
+		Response.Write "<th scope=""col"" class=""text-right"">Birim Fiyat</th>"
+		Response.Write "<th scope=""col"" class=""text-right"">Adet</th>"
+		Response.Write "<th scope=""col"" class=""text-right"">Satır Toplamı</th>"
 		Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 		Response.Write "</tr></thead><tbody>" 
             sorgu = "Select *,(Select kisaBirim from portal.birimler where birimID = teklif.teklif_urun.stokBirim) as birimAd,(Select kdv from stok.stok where stokID = teklif.teklif_urun.teklifStokID) as stokKdv from teklif.teklif_urun where silindi = 0 and teklifID = " & teklifID & " order by teklifKalemID ASC"
@@ -38,6 +38,7 @@
                         teklifStokID        =   rs("teklifStokID")
                         teklifID            =   rs("teklifID")
                         teklifParaBirimi    =   rs("teklifParaBirimi")
+                        stokParaBirim       =   rs("stokParaBirim")
                         stokAd              =   rs("stokAd")
                         stokAciklama        =   rs("stokAciklama")
                         stokAdet            =   rs("stokAdet")
@@ -51,9 +52,10 @@
                         birimAd             =   rs("birimAd")
                         teklifKalemID       =   rs("teklifKalemID")
                         stokKdv             =   rs("stokKdv")
+                        dovizKuru           =   rs("dovizKuru")
                     '## verileri al
                     '## hesaplamaları yap
-                        teklifSatirToplami      =   stokFiyat * stokAdet
+                        teklifSatirToplami      =   stokFiyat * stokAdet * dovizKuru
                         teklifToplam            =   teklifToplam + teklifSatirToplami
                         teklifSatirIskonto      =   teklifSatirToplami - stokToplamFiyat
                         teklifIskontoToplam     =   teklifIskontoToplam + teklifSatirIskonto
@@ -64,9 +66,9 @@
                     '## hesaplamaları yap
 					Response.Write "<tr>"
 						Response.Write "<td>" & stokAd & "</td>"
-						Response.Write "<td class=""text-right"">" & stokFiyat & " " & teklifParaBirimi & "</td>"
+						Response.Write "<td class=""text-right"">" & stokFiyat & " " & stokParaBirim & "</td>"
 						Response.Write "<td class=""text-right"">" & stokAdet & " " & birimAd & "</td>"
-						Response.Write "<td class=""text-right"">" & stokToplamFiyat & " " & teklifParaBirimi & "</td>"
+						Response.Write "<td class=""text-right"">" & formatnumber(stokToplamFiyat,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
 						Response.Write "<td class=""text-right"" nowrap>"
 						'# cari kullan
                             Response.Write "<a title=""" & translate("Seç","","") & """ class=""ml-1 badge badge-pill "
@@ -114,8 +116,12 @@
                             Response.Write "<td class=""text-right"">" & formatnumber(teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                         Response.Write "</tr>"
                         Response.Write "<tr>"
-                            Response.Write "<td class="""">Genel Toplam</td>"
+                            Response.Write "<td class="""">Toplam</td>"
                             Response.Write "<td class=""text-right"">" & formatnumber(teklifGenelToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                        Response.Write "</tr>"
+                        Response.Write "<tr>"
+                            Response.Write "<td class="""">Genel Toplam</td>"
+                            Response.Write "<td class=""text-right"">" & formatnumber((teklifGenelToplam+teklifKdv),sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                         Response.Write "</tr>"
                     Response.Write "</tbody>"
                     Response.Write "</table>"

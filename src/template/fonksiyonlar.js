@@ -411,7 +411,7 @@ function numara(nesne,para,uyari)
 //stok ana kartını aç
 
 	// DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
-	function urunCevap(cevap,idAlan,stokHareketID,alan,tablo,deger,refHareketID,ntfDeger,depoKategori,refreshDIV,refreshFile,receteAdimID64,ajandaID64,stokID64,girisDepoID,secilenReceteID,secilenDepoID){
+	function urunCevap(cevap,idAlan,stokHareketID,alan,tablo,deger,refHareketID,ntfDeger,depoKategori,refreshDIV,refreshFile,receteAdimID64,ajandaID64,stokID64,girisDepoID,secilenReceteID,secilenDepoID,surecDepoID){
 
 	if(cevap == 'kabul'){
 		var baslik = 'Ürünün kesin kabulü yapılsın mı?'
@@ -449,8 +449,8 @@ function numara(nesne,para,uyari)
 				if(refreshFile == 'bekleyenListe'){
 					$('#'+refreshDIV).load('/depo/bekleyen_liste/'+depoKategori+' #'+refreshDIV+' >*');
 				}else if(refreshFile == 'depoTransfer'){
-					$('#'+refreshDIV).load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+'&secilenDepoID='+secilenDepoID+' #'+refreshDIV+' >*', {girisDepoID:girisDepoID});
-					$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')
+					$('#'+refreshDIV).load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #'+refreshDIV+' >*', {girisDepoID:girisDepoID});
+					$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')
 				}
 			});
 		}, //confirm buton yapılanlar
@@ -462,5 +462,25 @@ function numara(nesne,para,uyari)
 // DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
 
 
+//alan hesapla
+	//function alanHesap(enUzunluk,boyUzunluk,enBoyBirimID,sonucBirim){
+		function alanHesap(enUzunlukID,boyUzunlukID,enBoyBirimAlanID,sonucBirimAlanID,sonucAlanID){
+		
+		var enUzunluk	= 	$('#'+enUzunlukID).val().replace(',','.');
+		var boyUzunluk	= 	$('#'+boyUzunlukID).val().replace(',','.');
+		var enBoyBirim	=	$('#'+enBoyBirimAlanID).val();
+		var sonucBirim	=	$('#'+sonucBirimAlanID).val();
 
+		if($.isNumeric(enUzunluk) && $.isNumeric(boyUzunluk)){
+			if(enBoyBirim == 'MT' && sonucBirim == 'M2' ){
+				var hamHesap		=	enUzunluk * boyUzunluk
+			}else if(enBoyBirim == 'CM' && sonucBirim == 'M2' ){
+				var hamHesap = (enUzunluk * boyUzunluk) / 10000
+			}
+			var hamHesap = hamHesap.toString().replace('.',',')
+			$('#'+sonucAlanID).val(hamHesap);
+		}
+		
+	}
+//alan hesapla
 

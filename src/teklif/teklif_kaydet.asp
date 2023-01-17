@@ -62,7 +62,7 @@
 
 '##### teklifsayi
   if teklifsayi = "" then
-      sorgu = "Select top 1 teklifsayi from teklif.teklif where firmaID = " & firmaID & " and silindi = 0 and teklifsayi <> '' and teklifID <> " & teklifID & " order by teklifID desc"
+      sorgu = "Select top 1 teklifsayi from teklif.teklif where firmaID = " & firmaID & " and silindi = 0 and teklifsayi like '" & sb_TeklifSayiFormatOn & "%' and teklifID <> " & teklifID & " order by teklifID desc"
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
         sonteklifsayi = Replace(rs("teklifsayi"),sb_TeklifSayiFormatOn,"")
@@ -80,6 +80,20 @@
 '### KAYDET
       sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
       rs.open sorgu,sbsv5,1,3
+          teklifsayi1               =   rs("teklifsayi") & ""
+          if teklifsayi1 = "" then
+            rs("teklifParaBirimi")    =   teklifParaBirimi
+          else
+            teklifParaBirimi1 = rs("teklifParaBirimi")
+            if teklifParaBirimi1 = teklifParaBirimi then
+            else
+              hatamesaj = "Teklife ait para birimini sonradan değiştiremezsiniz."
+              call logla(hatamesaj)
+              call focusinput("cariAd")
+              call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+              Response.End()
+            end if
+          end if
           rs("kid")                 =   kid
           rs("firmaID")             =   firmaID
           rs("cariAd")              =   cariAd
@@ -89,7 +103,6 @@
           rs("teklifFirmaId")       =   teklifFirmaId
           rs("teklifTuru")          =   teklifTuru
           rs("teklifDili")          =   teklifDili
-          rs("teklifParaBirimi")    =   teklifParaBirimi
           rs("onUstYazi")           =   onUstYazi
           rs("ustyazi")             =   ustyazi
           rs("ozelNot")             =   ozelNot
@@ -99,12 +112,18 @@
           rs("altYazi")             =   altYazi
           rs("teklifKosul")         =   teklifKosul
           rs("teklifSonuc")         =   0                 '0 = Teklif verildi Beklemede
+          
         rs.update
       rs.close
 '### KAYDET
 
         hatamesaj = "Teklif Kaydedildi"
         call logla(hatamesaj)
-        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-success","","","","","")
+
+
+      jsrun("$('#teklifsayi').val('" & teklifsayi & "');")
+
+
 
 %><!--#include virtual="/reg/rs.asp" -->

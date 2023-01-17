@@ -99,9 +99,11 @@ yetkiKontrol = yetkibul(modulAd)
 				toplamMiktar	=	rs("toplamMiktar")
 				transferMiktar	=	rs("transferMiktar")
 			rs.close
-				if cdbl(transferMiktar) >= cdbl(toplamMiktar) then
-					sorgu = "UPDATE portal.ajanda SET tamamlandi = 1 WHERE id = " & ajandaID
-					rs.open sorgu, sbsv5,3,3
+				if not ISNULL(toplamMiktar) then
+					if cdbl(transferMiktar) >= cdbl(toplamMiktar) then
+						sorgu = "UPDATE portal.ajanda SET tamamlandi = 1 WHERE id = " & ajandaID
+						rs.open sorgu, sbsv5,3,3
+					end if
 				end if
 			end if
 		'### /Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.

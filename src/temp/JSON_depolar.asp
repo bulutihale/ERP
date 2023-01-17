@@ -13,6 +13,7 @@
 '##### ajax ile gelen sorgu 
 	arananKelime		=	request.QueryString ("q")
 	sart				=	request.QueryString ("sart")
+	sartOzel			=	request.QueryString ("sartOzel")
 '##### /ajax ile gelen sorgu 
 '##### /ajax ile gelen sorgu 
 
@@ -32,6 +33,9 @@
 				sorgu = sorgu & " AND t1.redGirisizin = 1"
 			elseif sart <> "" then
 				sorgu = sorgu & " AND t1.depoKategori IN "&sart&""
+			end if
+			if sartOzel <> "" then
+				sorgu = sorgu & " AND " & sartOzel
 			end if
 			sorgu = sorgu & " ORDER BY t1.depoKod ASC"
 			rs.open sorgu, sbsv5, 1, 3

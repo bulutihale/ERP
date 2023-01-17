@@ -431,6 +431,7 @@ if kid <> "" then
 						Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"">"
 						' Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""modalajaxfit('/teklif/teklif_yeni_modal.asp')""></i>"
 						Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""document.location = '/teklif/teklif_yeni_modal'""></i>"
+						' Response.Write "<i class=""icon basket-add parmak"" title=""Yeni Teklif Oluştur"" onClick=""document.location = '/teklif/teklif_yeni_modal'""></i>"
 						' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
 						if yetkiTeklif >= 5 then
 							Response.Write "<div class=""badge badge-pill badge-warning"" onClick=""modalajaxfit('/teklif/teklif_onay_modal.asp')""><span class=""teklifOnaySayi"">0</span></div>"

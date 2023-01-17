@@ -15,6 +15,10 @@
 	if secilenDepoID = "" or isnull(secilenDepoID) then
 		secilenDepoID = 0
 	end if
+	surecDepoID		=	Request.QueryString("surecDepoID")
+	if surecDepoID = "" or isnull(surecDepoID) then
+		surecDepoID = 0
+	end if
 	secilenReceteID	=	Request.QueryString("secilenReceteID")
 	if secilenReceteID = "" then
 		secilenReceteID = 0
@@ -97,7 +101,7 @@ yetkiKontrol = yetkibul(modulAd)
 									call forminput("kullanimMiktar","","","","","autocompleteOFF","kullanimMiktar"&divSayi&"","")
 								Response.Write "</td>"
 								Response.Write "<td class=""text-center"">"
-									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','surecUretim',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&ihtiyacMiktar&");"" class=""btn btn-info"">kullan</div>"
+									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','"&surecDepoID&"',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&ihtiyacMiktar&","&surecDepoID&");"" class=""btn btn-info"">kullan</div>"
 								Response.Write "</td>"
 							Response.Write "</tr>"
 						rs1.movenext
@@ -121,7 +125,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 %>
 <script>
-	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,depoKategori,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID,ihtiyacMiktar){
+	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,surecDepoID,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID,ihtiyacMiktar,surecDepoID){
 
 		var kullanimMiktar		=	$('#kullanimMiktar'+divSayi).val();
 		if(kullanimMiktar == undefined){swal('miktar girişi yapılmalı',''); return false};
@@ -147,7 +151,7 @@ yetkiKontrol = yetkibul(modulAd)
 					stokKodu:stokKodu, 
 					stokHareketTuru:stokHareketTuru, 
 					kullanimMiktar:kullanimMiktar, 
-					depoKategori:depoKategori, 
+					surecDepoID:surecDepoID, 
 					stokID:stokID, 
 					siparisKalemID:siparisKalemID, 
 					lot:lot, 
@@ -155,7 +159,7 @@ yetkiKontrol = yetkibul(modulAd)
 					lotSKT:lotSKT,
 					ihtiyacMiktar:ihtiyacMiktar
 					}, function(){
-				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')
+				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')
 				});
 				modalkapat();
 			}, //confirm buton yapılanlar

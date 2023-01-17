@@ -14,8 +14,12 @@
 	ajandaID		=	gorevID
 	ajandaID64		=	gorevID64
 	secilenDepoID	=	Request.QueryString("secilenDepoID")
+	surecDepoID		=	Request.QueryString("surecDepoID")
 	if secilenDepoID = "" or isnull(secilenDepoID) then
 		secilenDepoID = 0
+	end if
+	if surecDepoID = "" or isnull(surecDepoID) then
+		surecDepoID = 0
 	end if
 	secilenReceteID	=	Request.QueryString("secilenReceteID")
 	if secilenReceteID = "" then
@@ -81,7 +85,7 @@ yetkiKontrol = yetkibul(modulAd)
 								baslangicZaman		=	rs("baslangicZaman")
 								bitisZaman			=	rs("bitisZaman")
 								teminDepoKategori	=	rs("depoKategori")
-								receteMiktar 	= 	1 'uretimPlan işinde alt reçete miktarına ihtiyaç olmadığı için 1 tanımlandı, kesimPlan işinde lazım.
+								receteMiktar 		= 	1 'uretimPlan işinde alt reçete miktarına ihtiyaç olmadığı için 1 tanımlandı, kesimPlan işinde lazım.
 							rs.close
 							urtBtnYaz		=	"ÜRETİME BAŞLA"
 							urtBtnClass		=	" bg-success "
@@ -141,6 +145,12 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Temin Depo</div>"
 							Response.Write "<div class=""col-9"">"
 								call formselectv2("teminDepoID","","receteSec();","","formSelect2 depoSec border","","teminDepoID","","data-holderyazi=""Yarı mamul temini yapılacak depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
+							Response.Write "</div>"
+						Response.Write "</div>"
+						Response.Write "<div class=""row mt-2"">"
+							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Başlayacak Olan Süreç</div>"
+							Response.Write "<div class=""col-9"">"
+								call formselectv2("surecDepoID","","receteSec();","","formSelect2 depoSec border","","surecDepoID","","data-holderyazi=""Başlayacak olan süreç seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sartOzel=""t1.depoTuru =2""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						if isTur = "kesimPlan" then
@@ -377,7 +387,7 @@ yetkiKontrol = yetkibul(modulAd)
 									Response.Write "<td class=""text-right"">" & ihtiyacMiktar & " " & miktarBirim & "</td>"
 									Response.Write "<td class=""text-right"">"
 										Response.Write "<div class=""row"">"
-										Response.Write "<div class=""col-4 text-left"" onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&isTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "&secilenDepoID="&secilenDepoID&"')"">"
+										Response.Write "<div class=""col-4 text-left"" onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&isTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "&secilenDepoID="&secilenDepoID&"&surecDepoID="&surecDepoID&"')"">"
 											Response.Write "<span class=""pointer bold btn btn-sm btn-info p-0 m-0"" title=""ürün talebi oluşturmak için tıklayınız."">talep</span>"
 										Response.Write "</div>"
 										Response.Write "<div class=""col-8"">"
@@ -412,7 +422,7 @@ yetkiKontrol = yetkibul(modulAd)
 												Response.Write "<div class=""row"">"
 													Response.Write "<div class=""col-lg-1 col-md-1 col-sm-1"""
 													if stokHareketTipi = "T" then
-														Response.Write " onclick=""lotSil("&stokHareketID&","&secilenDepoID&","&secilenReceteID&")"""
+														Response.Write " onclick=""lotSil("&stokHareketID&","&secilenDepoID&","&secilenReceteID&","&surecDepoID&")"""
 														cl1 = " text-danger "
 													elseif stokHareketTipi = "U" then
 														Response.Write " onclick=""swal('','Üretim başlatılmış, LOT girişleri silinemez.');"""
@@ -439,7 +449,7 @@ yetkiKontrol = yetkibul(modulAd)
 											btnRenk	=	" btn-secondary "
 											miktarKontrol	=	0
 										else
-											Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?ihtiyacMiktar="&ihtiyacMiktar&"&isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"');"""
+											Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?ihtiyacMiktar="&ihtiyacMiktar&"&isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"&surecDepoID="&surecDepoID&"');"""
 											btnRenk	=	" btn-success "
 											miktarKontrol	=	0
 										end if
@@ -478,8 +488,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 		if(receteID == undefined){var receteID = $('#receteID').val();};
 		teminDepoID	=	$('#teminDepoID').val();
+		surecDepoID	=	$('#surecDepoID').val();
 
 		if(teminDepoID == null){var teminDepoID = 0};
+		if(surecDepoID == null){var surecDepoID = 0};
 
 			working('receteAdim',80,80);
 			if(receteID > 0){
@@ -499,8 +511,8 @@ yetkiKontrol = yetkibul(modulAd)
 				
 				
 			$('#receteBtn').removeClass('d-none');
-			$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *')	
-			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #linklerDIV > *')	
+			$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')	
+			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #linklerDIV > *')	
 	}
 
 	function uretimBasla(siparisKalemID, ajandaID, islemDurum, uretilenMiktar){
@@ -551,7 +563,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 
-	function lotSil(stokHareketID,secilenDepoID,secilenReceteID){
+	function lotSil(stokHareketID,secilenDepoID,secilenReceteID,surecDepoID){
 	//	alert(secilenReceteID)
 		swal({
 			title: 'LOT kaydı silinsin mi?',
@@ -566,7 +578,7 @@ yetkiKontrol = yetkibul(modulAd)
 			// result is an optional parameter, needed for modals with input
 			
 				$('#ajax').load('/uretim/uretimLotSil.asp', {stokHareketID:stokHareketID}, function(){
-					$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+' #receteAdim > *')	
+					$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')	
 				});
 			}, //confirm buton yapılanlar
 			function(dismiss) {
