@@ -18,7 +18,6 @@
 '###### ANA TANIMLAMALAR
 
 
-
 '##### HATA ÖNLEME
     if teklifStokID = "" then
         hatamesaj = "Hatalı Stok!"
@@ -36,7 +35,7 @@
 
 
 '### ÜRÜN BİLGİLERİNİ AL
-      sorgu = "Select stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur from stok.stok where silindi = 0 and stokID = " & teklifStokID
+      sorgu = "Select stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
           stokAd  =   rs("stokAd")
@@ -45,6 +44,7 @@
           fiyat2  =   rs("fiyat2")
           fiyat3  =   rs("fiyat3")
           fiyat4  =   rs("fiyat4")
+          paraBirimID  =   rs("paraBirimID")
           birimTur  = rs("birimTur") & ""
           stokAciklama  = rs("stokAciklama") & ""
           stokToplamFiyat = stokFiyat
@@ -75,7 +75,98 @@
       end if
       rs.close
     end if
+    '#### PARA BİRİMİNİ AYARLA
+      if paraBirimID <> "" then
+        sorgu = "Select TOP 1 uzunBirim from portal.birimler where silindi = 0 and birimID = " & paraBirimID
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount > 0 then
+            stokParaBirim =   rs("uzunBirim")
+        end if
+        rs.close
+      end if
+    '#### PARA BİRİMİNİ AYARLA
 '### BİRİMLERİ BUL
+
+
+'###### PARA BİRİMİNİ TESBİT ET
+  if teklifParaBirimi <> stokParaBirim then
+    Response.Write "<div class=""text-center h3 mt-2 mb-3"">Teklif para birimi (" & teklifParaBirimi & ") ile stok para birimi (" & stokParaBirim & ") farklılar</div>"
+    '### STOK PARA BİRİMİNİ DÖNÜŞTÜR
+      if teklifParaBirimi = "TRY" then
+        hesaplanacakParaBirimi = stokParaBirim & teklifParaBirimi
+      else
+        hesaplanacakParaBirimi = teklifParaBirimi & stokParaBirim
+      end if
+    '### STOK PARA BİRİMİNİ DÖNÜŞTÜR
+  else
+      hesaplanacakParaBirimi = ""
+  end if
+'###### PARA BİRİMİNİ TESBİT ET
+
+
+
+'### DÖVİZ KONUSU 
+  if hesaplanacakParaBirimi <> "" then
+    if instr(hesaplanacakParaBirimi,"TRY") > 0 then
+      '## içinde TL geçen çevrimler
+        sorgu = "Select " & hesaplanacakParaBirimi & "," & hesaplanacakParaBirimi & "Custom from portal.doviz where firmaID = " & firmaID & " order by dovizID desc"
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount > 0 then
+            ParaBirim1 =   rs(0)
+            ParaBirim2 =   rs(1)
+            if ParaBirim2 = 0 then
+              paraBirimSonuc = ParaBirim1
+            else
+              paraBirimSonuc = ParaBirim2
+            end if
+            '## TL Dönüşümü
+              if stokParaBirim = "TRY" then
+                paraBirimSonuc = 1 / paraBirimSonuc
+                paraBirimSonuc = formatnumber(paraBirimSonuc,7)
+              end if
+            '## TL Dönüşümü
+            stokToplamFiyatTPB = paraBirimSonuc * stokFiyat
+            dovizKuru = paraBirimSonuc
+            paraBirimSonuc = replace(paraBirimSonuc,",",".")
+        end if
+        rs.close
+      '## içinde TL geçen çevrimler
+    elseif instr(hesaplanacakParaBirimi,"EUR") > 0 and instr(hesaplanacakParaBirimi,"USD") > 0 then
+      '## eur/usd
+        sorgu = "Select usdtry,usdtryCustom,eurtry,eurtryCustom from portal.doviz where firmaID = " & firmaID & " order by dovizID desc"
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount > 0 then
+            usd1 =   rs(0)
+            usd2 =   rs(1)
+            if usd2 = 0 then
+              usdsonuc = usd1
+            else
+              usdsonuc = usd2
+            end if
+            eur1 =   rs(2)
+            eur2 =   rs(3)
+            if eur2 = 0 then
+              eursonuc = eur1
+            else
+              eursonuc = eur2
+            end if
+            if teklifParaBirimi = "EUR" then
+              paraBirimSonuc = usdsonuc / eursonuc
+            else
+              paraBirimSonuc = eursonuc / usdsonuc
+            end if
+            stokToplamFiyatTPB = paraBirimSonuc * stokFiyat
+            dovizKuru = paraBirimSonuc
+            paraBirimSonuc = replace(paraBirimSonuc,",",".")
+        end if
+        rs.close
+      '## eur/usd
+    end if
+  end if
+  if dovizKuru = "" then
+    dovizKuru = 1
+  end if
+'### DÖVİZ KONUSU
 
 
 
@@ -85,6 +176,8 @@
     Response.Write "<input type=""hidden"" value=""" & teklifID & """ name=""teklifID"" />"
     Response.Write "<input type=""hidden"" value=""" & teklifStokID & """ name=""teklifStokID"" />"
     Response.Write "<input type=""hidden"" value=""" & teklifParaBirimi & """ name=""teklifParaBirimi"" />"
+    Response.Write "<input type=""hidden"" value=""" & stokParaBirim & """ name=""stokParaBirim"" />"
+    Response.Write "<input type=""hidden"" value=""" & dovizKuru & """ name=""dovizKuru"" />"
     Response.Write "<table width=""100%"" border=""0"" cellspacing=""1"" cellpadding=""1"">"
     'Stok Ad
       Response.Write "<tr><td width=""100"">Ürün Adı</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
@@ -181,14 +274,34 @@
             'iskonto
       Response.Write "</tr>"
     'iskonto
-    'Toplam Fiyat
+    'Toplam Fiyat stokParaBirim
       Response.Write "<tr>"
         Response.Write "<td>Toplam Fiyat</td>"
         Response.Write "<td>"
-          call forminput("stokToplamFiyat",stokToplamFiyat,"","","mt-2","","stokToplamFiyat","")
+          Response.Write "<div class=""input-group mt-2"">"
+            call forminput("stokToplamFiyat",stokToplamFiyat,"","","","","stokToplamFiyat","")
+            Response.Write "<div class=""input-group-append"">"
+              Response.Write "<span class=""input-group-text pt-2 pb-2"" style="""">" & stokParaBirim & "</span>"
+            Response.Write "</div>"
+          Response.Write "</div>"
         Response.Write "</td>"
       Response.Write "</tr>"
-    'Toplam Fiyat
+    'Toplam Fiyat stokParaBirim
+    if hesaplanacakParaBirimi <> "" then
+    'Toplam Fiyat teklifParaBirimi
+      Response.Write "<tr>"
+        Response.Write "<td>Toplam Fiyat</td>"
+        Response.Write "<td>"
+          Response.Write "<div class=""input-group mt-2"">"
+            call forminput("stokToplamFiyatTPB",stokToplamFiyatTPB,"","","border-danger","","stokToplamFiyatTPB","")
+            Response.Write "<div class=""input-group-append"">"
+              Response.Write "<span class=""input-group-text pt-2 pb-2 border-danger"" style="""">" & teklifParaBirimi & "</span>"
+            Response.Write "</div>"
+          Response.Write "</div>"
+        Response.Write "</td>"
+      Response.Write "</tr>"
+    'Toplam Fiyat teklifParaBirimi
+    end if
     Response.Write "</table>"
     'kaydet butonu
         Response.Write "<div class=""col-lg-12 col-xs-12 mt-3"">"
@@ -244,6 +357,10 @@ Response.Write "<scr" & "ipt>"
       Response.Write "toplamfiyat = iskontoHesap4;"
     end if
     Response.Write "$('#stokToplamFiyat').val(toplamfiyat);"
+    if hesaplanacakParaBirimi <> "" then
+        Response.Write "pbhesap = (toplamfiyat*" & paraBirimSonuc & ");"
+      Response.Write "$('#stokToplamFiyatTPB').val(pbhesap);"
+    end if
   Response.Write "}"
 Response.Write "</scr" & "ipt>"
 

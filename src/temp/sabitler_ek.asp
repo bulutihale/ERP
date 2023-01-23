@@ -64,6 +64,27 @@ if firmaID = 5 then
 	'## SSO
 	'## SSO
 
+	'#### STOK bilgieri dış db den çekilecekse
+	'#### STOK bilgieri dış db den çekilecekse
+		firmaStokDBvar		=	1
+		firmaStokSunucu		=	"."
+		firmaStokDB			=	"TIO2022"
+		firmaStokdbUSR		=	"sbs_bulutihale"
+		firmaStokdbPass		=	"FVDFG@@!!wer3232"
+	'#### STOK bilgieri dış db den çekilecekse
+	'#### STOK bilgieri dış db den çekilecekse
+
+	'#### CARİ bilgieri dış db den çekilecekse
+	'#### CARİ bilgieri dış db den çekilecekse
+		firmaCariDBvar		=	1
+		firmaCariSunucu		=	"."
+		firmaCariDB			=	"TIO2022"
+		firmaCaridbUSR		=	"sbs_bulutihale"
+		firmaCaridbPass		=	"FVDFG@@!!wer3232"
+	'#### CARİ bilgieri dış db den çekilecekse
+	'#### CARİ bilgieri dış db den çekilecekse
+
+	
 	'## TEKLİF
 	'## TEKLİF
 		sb_TeklifCariAramaLimit	=	5		'arama formundan kaç adet cari dönsün

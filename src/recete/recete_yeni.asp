@@ -23,10 +23,11 @@ Response.Flush()
 yetkiKontrol = yetkibul(modulAd)
 
 if gorevID <> "" then
-            sorgu = "SELECT t1.receteAd, t1.ozelRecete, t1.receteTipi, t1.silindi, t2.cariID, t2. cariAd, t3.stokID, t3.stokAd"
+            sorgu = "SELECT t1.receteAd, t1.ozelRecete, t1.receteTipi, t1.silindi, t2.cariID, t2. cariAd, t3.stokID, t3.stokAd, ISNULL(t1.istasyonID,0) as istasyonID, t4.istasyonAd"
 			sorgu = sorgu & " FROM recete.recete t1"
 			sorgu = sorgu & " LEFT JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 			sorgu = sorgu & " LEFT JOIN stok.stok t3 ON t1.stokID = t3.stokID"
+			sorgu = sorgu & " LEFT JOIN isletme.istasyon t4 ON t1.istasyonID = t4.istasyonID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND receteID = " & gorevID
 			rs.open sorgu, sbsv5, 1, 3
                 receteAd		=  	rs("receteAd")
@@ -36,9 +37,12 @@ if gorevID <> "" then
 				cariID			=	rs("cariID")
 				stokID			=	rs("stokID")
 				stokAd			=	rs("stokAd")
+				istasyonID		=	rs("istasyonID")
+				istasyonAd		=	rs("istasyonAd")
 				silindi			=	rs("silindi")
 				defDeger		=	cariID&"###"&cariAd
 				defDeger1		=	stokID&"###"&stokAd
+				defDeger2		=	istasyonID&"###"&istasyonAd
             rs.close
 			
 			chckDurum		=	chckKontrol(ozelRecete,1)
@@ -70,13 +74,7 @@ call logla(divAd & " Ekranı Girişi")
 			call formhidden("receteID",gorevID,"","","","","receteID","")
 			call formhidden("islem",islem,"","","","","islem","")
 			call formhidden("eskiReceteID",eskiReceteID,"","","","","eskiReceteID","")
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Reçete Ad</span>"
-				call forminput("receteAd",receteAd,"","","","autocompleteOFF","receteAd","")
-			Response.Write "</div>"
-		Response.Write "</div>"
-		
+
 		Response.Write "<div class=""row mt-2"">"
 			Response.Write "<div class=""col-lg-12"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
@@ -88,7 +86,21 @@ call logla(divAd & " Ekranı Girişi")
 				end if
 			Response.Write "</div>"
 		Response.Write "</div>"
-		
+			
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-sm-12 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Reçete Ad</span>"
+				call forminput("receteAd",receteAd,"","","","autocompleteOFF","receteAd","")
+			Response.Write "</div>"
+		Response.Write "</div>"
+
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-sm-12 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">İşlem İstasyonu</span>"
+				call formselectv2("istasyonSec",cint(istasyonID),"","","formSelect2 istasyonID border","","istasyonSec","","data-holderyazi=""İşlem İstasyonu"" data-jsondosya=""JSON_istasyon"" data-miniput=""0"" data-defdeger="""&defDeger2&"""")
+			Response.Write "</div>"
+		Response.Write "</div>"
+				
 		Response.Write "<div class=""bg-warning rounded mt-2"">"
 			Response.Write "<div class=""row"">"	
 				Response.Write "<div class=""col-lg-3 my-1 rounded"">"
@@ -130,7 +142,7 @@ call logla(divAd & " Ekranı Girişi")
 
 <script>
 	$(document).ready(function() {
-		$('#cariID, #stokSec').trigger('mouseenter');
+		$('#cariID, #stokSec, #istasyonSec').trigger('mouseenter');
 	});
 	 
 </script>

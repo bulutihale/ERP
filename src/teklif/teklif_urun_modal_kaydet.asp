@@ -10,6 +10,7 @@
     teklifStokID        =   Request.Form("teklifStokID")
     teklifID            =   Request.Form("teklifID")
     teklifParaBirimi    =   Request.Form("teklifParaBirimi")
+    stokParaBirim       =   Request.Form("stokParaBirim")
     stokAd              =   Request.Form("stokAd")
     stokAciklama        =   Request.Form("stokAciklama")
     stokAdet            =   Request.Form("stokAdet")
@@ -19,7 +20,9 @@
     iskonto2            =   Request.Form("iskonto2")
     iskonto3            =   Request.Form("iskonto3")
     iskonto4            =   Request.Form("iskonto4")
+    dovizKuru           =   Request.Form("dovizKuru")
     stokToplamFiyat     =   Request.Form("stokToplamFiyat")
+    stokToplamFiyatTPB  =   Request.Form("stokToplamFiyatTPB")
 '###### ANA TANIMLAMALAR
 
 
@@ -76,13 +79,27 @@
           rs("iskonto2")            =   iskonto2
           rs("iskonto3")            =   iskonto3
           rs("iskonto4")            =   iskonto4
-          rs("stokToplamFiyat")     =   stokToplamFiyat
+          rs("stokToplamFiyatOrj")  =   stokToplamFiyat
+          rs("stokParaBirim")       =   stokParaBirim
+          rs("dovizKuru")           =   dovizKuru
+          if stokToplamFiyatTPB = "" then
+            rs("stokToplamFiyat")     =   stokToplamFiyat
+            rs("stokToplamFiyatTPB")  =   0
+          else
+            stokToplamFiyatTPB = Replace(stokToplamFiyatTPB,".",",")
+            rs("stokToplamFiyat")     =   stokToplamFiyatTPB
+            rs("stokToplamFiyatTPB")  =   stokToplamFiyatTPB
+          end if
         rs.update
       rs.close
 '### KAYDET
 
 
-  call logla("Teklife ürün eklendi : " & stokAd)
+if stokToplamFiyatTPB <> "" then
+    call logla("Teklife dövizli ürün eklendi : " & stokAd)
+else
+    call logla("Teklife ürün eklendi : " & stokAd)
+end if
 
 
 call jsrun("$('#teklifUrunListe').load('/teklif/teklif_urun_liste.asp?teklifID=" & teklifID & "');")

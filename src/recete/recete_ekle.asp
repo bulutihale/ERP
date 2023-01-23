@@ -15,6 +15,7 @@
 	cariID			=	Request.Form("cariID")
 	silindi			=   Request.Form("silindi")
 	ozelRecete		=	Request.Form("ozelRecete")
+	istasyonID		=	Request.Form("istasyonSec")
 	if ozelRecete = "" then
 		ozelRecete	=	0
 		cariID 		=	0
@@ -61,7 +62,13 @@ if yetkiKontrol > 2 then
 			sorgu = "SELECT *, (SELECT receteID FROM recete.receteAdim WHERE altReceteID = t1.receteID AND silindi = 0) as kullananReceteID"
 			sorgu = sorgu & " FROM recete.recete t1 WHERE t1.receteID = " & receteID
 			rs.open sorgu, sbsv5, 1, 3
-	if isnull(rs("kullananReceteID")) OR rs.recordcount = 0 then
+			 
+			if rs.recordcount > 0 then
+				if not isnull(rs("kullananReceteID")) AND silindi = 1 then
+					call toastrCagir("Reçete, alt reçete olarak kullanımda olduğu için pasifleştirilemez!", "OK", "right", "error", "otomatik", "")
+					Response.End()
+				end if
+			end if
 				if rs.recordcount = 0 then
 					rs.addnew
 					call logla("Yeni Reçete Ekleniyor: " & receteAd & "")
@@ -77,6 +84,7 @@ if yetkiKontrol > 2 then
 					rs("ozelRecete")		=	ozelRecete
 					rs("cariID")			=	cariID
 					rs("eskiReceteID")		=	eskiReceteID
+					rs("istasyonID")		=	istasyonID
 					rs("silindi")			=	silindi
 				rs.update
 					yeniReceteID			=	rs("receteID")
@@ -101,7 +109,11 @@ if yetkiKontrol > 2 then
 					stokKontroluYap		=	rs("stokKontroluYap")
 					receteIslemTipiID	=	rs("receteIslemTipiID")
 					isGucuSayi			=	rs("isGucuSayi")
-					
+					onHazirlikTur		=	rs("onHazirlikTur")
+					onHazirlikDeger		=	rs("onHazirlikDeger")
+					etiketeEkle			=	rs("etiketeEkle")
+					etiketAd			=	rs("etiketAd")
+					islemAciklama		=	rs("islemAciklama")
 					
 					sorgu = "SELECT * FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
 					rs1.open sorgu, sbsv5, 1, 3
@@ -116,6 +128,14 @@ if yetkiKontrol > 2 then
 						rs1("stokKontroluYap")	=	stokKontroluYap
 						rs1("receteIslemTipiID")=	receteIslemTipiID
 						rs1("isGucuSayi")		=	isGucuSayi
+						rs1("onHazirlikTur")	=	onHazirlikTur
+						rs1("onHazirlikDeger")	=	onHazirlikDeger
+						rs1("etiketeEkle")		=	etiketeEkle
+						rs1("etiketAd")			=	etiketAd
+						rs1("islemAciklama")	=	islemAciklama
+
+
+
 					rs1.update
 					rs1.close
 					
@@ -130,9 +150,6 @@ if yetkiKontrol > 2 then
 	call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
 
 
-	else
-		call toastrCagir("Reçete, alt reçete olarak kullanımda olduğu için pasifleştirilemez!", "OK", "right", "error", "otomatik", "")
-	end if
 
 end if
 

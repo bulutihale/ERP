@@ -52,7 +52,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 								Response.Write "<div class=""row mt-2 mb-2"">"
 									Response.Write "<div id=""divCariSec"" class=""col-lg-9 col-md-6 col-sm-6"">"
-										Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
+										Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>" 
+										Response.Write "<div class=""badge badge-warning rounded pointer"" onclick=""stokKartAc($('#stokSec').attr('data-secilenstokid'));"">Stok Kartı</div>"
 				'//NOTE - anaBirimKontrol kod örneği 
 										call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
 									Response.Write "</div>"
@@ -66,6 +67,7 @@ yetkiKontrol = yetkibul(modulAd)
 								Response.Write "<div class=""row mt-2"">"
 									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Miktar</div>"
+										Response.Write "<div class=""badge badge-warning rounded pointer"" onclick=""anaBirimMiktarHesap('miktar',$('#stokSec').val())"">Hesap</div>"
 										call forminput("miktar",miktar,"numara(this,true,false)","miktar","inpReset","","miktar","")
 									Response.Write "</div>"
 									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"

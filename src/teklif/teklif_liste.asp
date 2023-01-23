@@ -84,6 +84,7 @@ if yetkiTeklif > 0 then
                 sorgu = sorgu & " *" & vbcrlf
                 sorgu = sorgu & " FROM teklif.teklif" & vbcrlf
                 sorgu = sorgu & " WHERE firmaID = " & firmaID & vbcrlf
+                sorgu = sorgu & " and silindi = 0" & vbcrlf
                 if aramaad = "" then
                 else
                     ' sorgu = sorgu & " and (t1.cariAd like N'%" & aramaad & "%' OR t1.vergiNo like N'%" & aramaad & "%' OR t1.cariKodu like N'%" & aramaad & "%')"
@@ -113,15 +114,16 @@ if yetkiTeklif > 0 then
                             Response.Write "<td>" & cariAd & "</td>"
                             Response.Write "<td>" & teklifTuru &  "</td>"
                             Response.Write "<td>" & teklifParaBirimi &  "</td>"
-                            Response.Write "<td>" & teklifSonuc &  "</td>"
+                            Response.Write "<td>" & teklifSonucArr(teklifSonuc) &  "</td>"
                         if yetkiTeklif >= 3 then
                             Response.Write "<td class=""text-right"" nowrap>"
                             if yetkiTeklif >= 2 then
                                 '# ÖN İZLEME
                                     teklif64 = teklifID
                                     teklif64 =	base64_encode_tr(teklif64)
-                                    Response.Write "<a target=""_blank"" href=""/teklif/gosterhtml/" & teklif64 & """ title=""" & translate("Önizleme","","") & """ class=""ml-2"" >"
-                                    Response.Write "<i class=""icon page-white-find"
+                                    '//FIXME - bunu modal da yapabiliriz
+                                    Response.Write "<a href=""/teklif/gosterhtml/" & teklif64 & """ title=""" & translate("Önizleme","","") & """ class=""ml-2"" >"
+                                    Response.Write "<i title=""" & translate("Önizleme","","") & """ class=""icon page-white-find"
                                     Response.Write """></i>"
                                     Response.Write "</a>"
                                 '# ÖN İZLEME
@@ -130,12 +132,21 @@ if yetkiTeklif > 0 then
                                 '# PDF
                                     teklif64 = teklifID
                                     teklif64 =	base64_encode_tr(teklif64)
-                                    ' Response.Write "<a href=""/portal/pdf.asp?modul=teklif&id=" & teklifID & """ title=""" & translate("PDF","","") & """ class=""ml-2"" >"
                                     Response.Write "<a href=""/teklif/teklif_pdfolustur/" & teklifID64 & """ title=""" & translate("PDF Oluştur","","") & """ class=""ml-2"" >"
                                     Response.Write "<i class=""icon page-white-acrobat"
                                     Response.Write """></i>"
                                     Response.Write "</a>"
                                 '# PDF
+                            end if
+                            if yetkiTeklif >= 2 then
+                                '# EMAIL
+                                    teklif64 = teklifID
+                                    teklif64 =	base64_encode_tr(teklif64)
+                                    Response.Write "<a onClick=""modalajax('/teklif/teklif_email.asp?teklifID=" & teklifID64 & "')"" title=""" & translate("Email Gönder","","") & """ class=""ml-2"" >"
+                                    Response.Write "<i class=""icon email-go"
+                                    Response.Write """></i>"
+                                    Response.Write "</a>"
+                                '# EMAIL
                             end if
                             if yetkiTeklif >= 3 then
                                 '# teklif düzenle
@@ -149,28 +160,26 @@ if yetkiTeklif > 0 then
                             end if
                             if yetkiTeklif >= 5 then
                                 '# teklif onay
-                                teklif64 = teklifID
-                                teklif64 =	base64_encode_tr(teklif64)
-                                Response.Write "<a href=""/teklif/teklif_yeni_modal/" & teklif64 & """ title=""" & translate("Teklif Düzenle","","") & """ class=""ml-1 badge badge-pill "
-                                Response.Write " badge-warning"
-                                Response.Write """"
-                                Response.Write " "">"
-                                Response.Write "<i class=""mdi mdi-file-pdf"
-                                Response.Write """></i>"
-                                Response.Write "</a>"
+                                    teklif64 = teklifID
+                                    teklif64 =	base64_encode_tr(teklif64)
+                                    Response.Write "<a onClick="""
+                                    Response.Write "bootmodal('Teklifi Onaylıyor Musunuz?','custom','/teklif/teklif_onay.asp?islem=onay&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=red&teklifID=" & teklif64 & "','Teklifi Onayla','Teklifi Reddet','btn-danger','btn-success','','ajax','3000','','');"
+                                    Response.Write """ title=""" & translate("Teklifi Onayla","","") & """ class=""ml-1"" >"
+                                    Response.Write "<i class=""icon tick"
+                                    Response.Write """></i>"
+                                    Response.Write "</a>"
                                 '# teklif onay
                             end if
                             if yetkiTeklif >= 6 then
                                 '# teklif sil
-                                teklif64 = teklifID
-                                teklif64 =	base64_encode_tr(teklif64)
-                                Response.Write "<a href=""/teklif/teklif_yeni_modal/" & teklif64 & """ title=""" & translate("Teklif Düzenle","","") & """ class=""ml-1 badge badge-pill "
-                                Response.Write " badge-warning"
-                                Response.Write """"
-                                Response.Write " "">"
-                                Response.Write "<i class=""mdi mdi-basket-unfill"
-                                Response.Write """></i>"
-                                Response.Write "</a>"
+                                    teklif64 = teklifID
+                                    teklif64 =	base64_encode_tr(teklif64)
+                                    Response.Write "<a onClick="""
+                                    Response.Write "bootmodal('Teklifi Silmek Mi İstiyorsunuz?','custom','/teklif/teklif_onay.asp?islem=sil&teklifID=" & teklif64 & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
+                                    Response.Write """ title=""" & translate("Teklifi Sil","","") & """ class=""ml-1"" >"
+                                    Response.Write "<i class=""icon delete"
+                                    Response.Write """></i>"
+                                    Response.Write "</a>"
                                 '# teklif sil
                             end if
                             Response.Write "</td>"

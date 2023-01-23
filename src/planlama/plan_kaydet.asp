@@ -40,14 +40,14 @@
 			sorgu = sorgu & " INNER JOIN stok.stok t4 ON t1.stokID = t4.stokID"
 			sorgu = sorgu & " WHERE t1.id = " & siparisKalemID
 			rs.open sorgu, sbsv5,1,3
-				cariID		=	rs("cariID")
-				cariAd		=	rs("cariAd")
-				stokID 		= 	rs("stokID")
-				stokKodu	=	rs("stokKodu")
-				stokAd		=	rs("stokAd")
-				sipMiktar	=	rs("miktar")
-				sipMikBirim	=	rs("mikBirim")
-				inpicerik	=	"<b>Ürün</b>: " & stokAd & " | <b>Miktar</b>: " & sipMiktar & " " & sipMikBirim & " | <b>Cari</b>: " & cariAd
+				cariID			=	rs("cariID")
+				cariAd			=	rs("cariAd")
+				stokID 			= 	rs("stokID")
+				stokKodu		=	rs("stokKodu")
+				stokAd			=	rs("stokAd")
+				sipMiktar		=	rs("miktar")
+				sipMikBirim		=	rs("mikBirim")
+				inpicerik		=	"<b>Ürün</b>: " & stokAd & " | <b>Miktar</b>: " & sipMiktar & " " & sipMikBirim & " | <b>Cari</b>: " & cariAd
 			rs.close
 
 
@@ -92,7 +92,9 @@
 						ekSorgu		=	" AND t1.cariID = " & cariID
 						ekSorgu2	=	" AND t1.cariID = 0"
 
-					sorgu = "SELECT t1.receteID FROM recete.recete t1 WHERE t1.stokID = " & stokID & " AND t1.silindi = 0 AND t1.firmaID = " & firmaID
+					sorgu = "SELECT t1.receteID"
+					sorgu = sorgu & " FROM recete.recete t1"
+					sorgu = sorgu & " WHERE t1.stokID = " & stokID & " AND t1.silindi = 0 AND t1.firmaID = " & firmaID
 					ilkSorgu 	=	sorgu & ekSorgu
 					ikinciSorgu	=	sorgu & ekSorgu2
 					rs.open ilkSorgu, sbsv5,1,3
@@ -101,7 +103,9 @@
 							rs.open ikinciSorgu, sbsv5,1,3
 						end if
 						if rs.recordcount > 0 then
-							receteID	=	rs("receteID")
+							receteID		=	rs("receteID")
+							sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
+							rs1.open sorgu, sbsv5,3,3
 						else
 							receteID = 0
 							call jsrun("swal('','Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.')")
@@ -109,8 +113,9 @@
 					rs.close
 				'### /cari için  özel reçete var mı? yoksa normal reçeteyi al
 
-					sorgu = "SELECT t1.onHazirlikDeger, t1.onHazirlikTur, t1.stokID as receteStokID, t1.miktar as receteMiktar, t1.miktarBirim as receteBirim,"
-					sorgu = sorgu & " t2.stokAd as receteStokAd, t2.stokKodu as receteStokKodu, t1.receteAdimID,t1.altReceteID"
+					sorgu = "SELECT "
+					sorgu = sorgu & " t1.onHazirlikDeger, t1.onHazirlikTur, t1.stokID as receteStokID, t1.miktar as receteMiktar, t1.miktarBirim as receteBirim,"
+					sorgu = sorgu & " t2.stokAd as receteStokAd, t2.stokKodu as receteStokKodu, t1.receteAdimID, t1.altReceteID"
 					sorgu = sorgu & " FROM recete.receteAdim t1"
 					sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 					sorgu = sorgu & " WHERE t1.receteID = " & receteID & " AND t1.stokID is not null AND t1.silindi = 0"
@@ -159,7 +164,7 @@
 
 
 
-					sorgu = "SELECT t1.stokID as altReceteStokID, t2.stokAd as altReceteStokAd,"
+					sorgu = "SELECT t1.stokID as altReceteStokID, t2.stokAd as altReceteStokAd, stok.FN_depoKategoriBul(t1.receteID) as depoKategori,"
 					sorgu = sorgu & " t1.onHazirlikDeger as altReceteOHD, t1.onHazirlikTur altReceteOHT, t2.stokKodu as altReceteStokKodu, t1.receteAdimID as altAdimID"
 					sorgu = sorgu & " FROM recete.receteAdim t1"
 					sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
@@ -169,6 +174,7 @@
 					'response.end
 					
 						if rs1.recordcount > 0 then
+							depoKategori		=	rs1("depoKategori")
 							altAdimID			=	rs1("altAdimID")
 							altReceteStokID		=	rs1("altReceteStokID")
 							altReceteStokAd		=	rs1("altReceteStokAd")
@@ -189,18 +195,19 @@
 							sorgu = "SELECT * FROM portal.ajanda"
 							rs2.open sorgu, sbsv5,1,3
 								rs2.addnew
-									rs2("kid")				=	kid
-									rs2("firmaID")			=	firmaID
-									rs2("hangiGun")			=	hangiGun
-									rs2("hangiAy")			=	hangiAy
-									rs2("hangiYil")			=	hangiYil
-									rs2("icerik")			=	altReceteStokKodu & " " & altReceteStokAd & " kullarak " & topReceteMiktar & " " & receteBirim & " " & receteStokKodu & " - " & receteStokAd &" Yarı mamul üret.<br>(" & planTarih & " planlanmış " & stokKodu & " - " & stokAd & " üretimi için.)"  
-									'rs2("stokID")			=	altReceteStokID
-									rs2("stokID")			=	receteStokID
+									rs2("kid")					=	kid
+									rs2("firmaID")				=	firmaID
+									rs2("hangiGun")				=	hangiGun
+									rs2("hangiAy")				=	hangiAy
+									rs2("hangiYil")				=	hangiYil
+									rs2("icerik")				=	altReceteStokKodu & " " & altReceteStokAd & " kullarak " & topReceteMiktar & " " & receteBirim & " " & receteStokKodu & " - " & receteStokAd &" Yarı mamul üret.<br>(" & planTarih & " planlanmış " & stokKodu & " - " & stokAd & " üretimi için.)"  
+									'rs2("stokID")				=	altReceteStokID
+									rs2("stokID")				=	receteStokID
 									'rs2("receteAdimID")		=	altAdimID
-									rs2("receteAdimID")		=	receteAdimID
-									rs2("bagliAjandaID")	=	ajandaID
-									rs2("isTur")			=	"kesimPlan"
+									rs2("receteAdimID")			=	receteAdimID
+									rs2("bagliAjandaID")		=	ajandaID
+									rs2("isTur")				=	"kesimPlan"
+									rs2("depoKategori")			=	depoKategori
 								rs2.update
 							rs2.close
 				'####### /receteAdeımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın

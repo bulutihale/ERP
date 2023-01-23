@@ -252,7 +252,14 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 						label:cancelbaslik,
 						className: cancelstyle,
 						callback: function() {
-							if(cancelhedef||''){document.location=cancelhedef}
+							// if(cancelhedef||''){document.location=cancelhedef}
+							if(cancelhedef||''){
+								if(veriyollamaturu=='ajax'){
+									$('#ajax').load(cancelhedef)
+								}else{
+									document.location=cancelhedef
+								}
+							}
 						}
 					}
 				}
@@ -311,18 +318,16 @@ function otomatikbuyut(id){$('#'+id).keyup(function(){this.value = this.value.to
 
 
 
-// // cycle
-// // cycle
-if($("div").hasClass('cycle_s1')){$('.cycle_s1').cycle({fx:'blindX'});}
-if($("div").hasClass('cycle_s2')){$('.cycle_s2').cycle({fx:'blindY'});}
-if($("div").hasClass('cycle_s3')){$('.cycle_s3').cycle({fx:'blindZ'});}
-if($("div").hasClass('cycle_s4')){$('.cycle_s4').cycle({fx:'cover'});}
-$('.slide').cycle({ 
-	fx:      'turnDown', 
-	delay:   -4000 
-});
-// // cycle
-// // cycle
+// cycle
+	if($("div").hasClass('cycle_s1')){$('.cycle_s1').cycle({fx:'blindX'});}
+	if($("div").hasClass('cycle_s2')){$('.cycle_s2').cycle({fx:'blindY'});}
+	if($("div").hasClass('cycle_s3')){$('.cycle_s3').cycle({fx:'blindZ'});}
+	if($("div").hasClass('cycle_s4')){$('.cycle_s4').cycle({fx:'cover'});}
+	$('.slide').cycle({ 
+		fx:      'turnDown', 
+		delay:   -4000 
+	});
+// cycle
 
 
 
@@ -366,6 +371,7 @@ function numara(nesne,para,uyari)
 			gelenSonuc	=	data.split('|');
 			sonuc0		=	gelenSonuc[0];
 			sonuc1		=	gelenSonuc[1];
+			sonuc2		=	gelenSonuc[2];
 			//if(data != 'tanimlanamaz')
 			if(!$.isNumeric(sonuc0))
 			{
@@ -377,6 +383,7 @@ function numara(nesne,para,uyari)
 				if($('.anaBirimFiltre').hasClass('select2-hidden-accessible')){
 					$('.anaBirimFiltre').val(null).select2('destroy');
 				}
+				$('#'+inputID).attr('data-secilenstokid',sonuc2);
 				$('.anaBirimFiltre').removeAttr('data-anabirimfiltre');
 				$('.anaBirimFiltre').attr('data-anabirimfiltre',sonuc1);
 				toastr.info('birim listesine ana birim kuralı uygulandı','BİLGİ');
@@ -386,5 +393,94 @@ function numara(nesne,para,uyari)
 	}
 // sistemde seçilen bir ürürnün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.
 
+//stok ana kartını aç
+	function stokKartAc(stokID64){
+		if(stokID64 != undefined){
+			modalajax('/stok/stok_yeni.asp?gorevID='+stokID64);
+		}else{swal('ürün seçimi yapmadınız.','');}
+	}
+//stok ana kartını aç
 
+//farklı birim miktarlarını anaBirim miktarına çevir
+	function anaBirimMiktarHesap(inputID, stokID){
+
+		if(stokID != undefined){
+			modalajax("/portal/birimMiktarHesap.asp?stokID="+stokID+"&inputID="+inputID);
+		}else{swal('ürün seçimi yapmadınız.','');}
+	}
+//stok ana kartını aç
+
+	// DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
+	function urunCevap(cevap,idAlan,stokHareketID,alan,tablo,deger,refHareketID,ntfDeger,depoKategori,refreshDIV,refreshFile,receteAdimID64,ajandaID64,stokID64,girisDepoID,secilenReceteID,secilenDepoID,surecDepoID){
+
+	if(cevap == 'kabul'){
+		var baslik = 'Ürünün kesin kabulü yapılsın mı?'
+		var durum = 'success'
+	}else if(cevap == 'red'){
+		var baslik= 'Ürün trasferi red edilsin mi?'
+		var durum = 'error'
+	}
+		swal({
+		title: baslik,
+		type: durum,
+		showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'Devam',
+			cancelButtonText: 'İptal'
+		}).then(
+			function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			
+			$('#ajax').load('/portal/hucre_kaydet.asp',{
+				idAlan:idAlan,
+				id:stokHareketID,
+				alan:alan,
+				tablo:tablo,
+				deger:deger,
+				ntfDeger:ntfDeger}, function(){
+			if(cevap == 'red'){
+				$('#ajax').load('/portal/hucre_kaydet.asp',{
+					idAlan:idAlan,
+					id:refHareketID,
+					alan:alan,
+					tablo:tablo,
+					deger:deger})} //kabul edilmeyecekse ise çıkışı iptal et
+				if(refreshFile == 'bekleyenListe'){
+					$('#'+refreshDIV).load('/depo/bekleyen_liste/'+depoKategori+' #'+refreshDIV+' >*');
+				}else if(refreshFile == 'depoTransfer'){
+					$('#'+refreshDIV).load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #'+refreshDIV+' >*', {girisDepoID:girisDepoID});
+					$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')
+				}
+			});
+		}, //confirm buton yapılanlar
+			function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			} //cancel buton yapılanlar		
+		);//swal sonu
+	}
+// DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
+
+
+//alan hesapla
+	//function alanHesap(enUzunluk,boyUzunluk,enBoyBirimID,sonucBirim){
+		function alanHesap(enUzunlukID,boyUzunlukID,enBoyBirimAlanID,sonucBirimAlanID,sonucAlanID){
+		
+		var enUzunluk	= 	$('#'+enUzunlukID).val().replace(',','.');
+		var boyUzunluk	= 	$('#'+boyUzunlukID).val().replace(',','.');
+		var enBoyBirim	=	$('#'+enBoyBirimAlanID).val();
+		var sonucBirim	=	$('#'+sonucBirimAlanID).val();
+
+		if($.isNumeric(enUzunluk) && $.isNumeric(boyUzunluk)){
+			if(enBoyBirim == 'MT' && sonucBirim == 'M2' ){
+				var hamHesap		=	enUzunluk * boyUzunluk
+			}else if(enBoyBirim == 'CM' && sonucBirim == 'M2' ){
+				var hamHesap = (enUzunluk * boyUzunluk) / 10000
+			}
+			var hamHesap = hamHesap.toString().replace('.',',')
+			$('#'+sonucAlanID).val(hamHesap);
+		}
+		
+	}
+//alan hesapla
 

@@ -27,6 +27,7 @@
 '###### ANA TANIMLAMALAR
 
 
+
 Response.Flush()
 
 call logla("Stok Güncelleme: " & stokKodu & "")

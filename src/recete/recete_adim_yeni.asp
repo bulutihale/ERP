@@ -191,7 +191,7 @@ end if
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
 							Response.Write "<div class=""col-lg-3 col-sm-4"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">" & miktarYazi & "</div><span class=""pointer text-info" & stokClass & """ onclick=""swal('','Üretilen ürünün hammaddesinden kullanılacak olan miktarı belirtir. Ana birim cinsinden girilmesi şarttır!')""><i class=""mdi mdi-information""></i></span>"
-								call forminput("miktar",miktar,"numara(this,true,false)",mPlaceHolder,"inpReset","autocompleteOFF","miktar","")
+								call forminput("miktar",miktar,"numara(this,true,false);alanHesap('enUzunluk','boy','enBoyBirim','miktarBirim','miktar')",mPlaceHolder,"inpReset","autocompleteOFF","miktar","")
 							Response.Write "</div>"
 							if islemTur = "zaman" then
 								Response.Write "<div class=""col-lg-3 col-sm-4"">"
