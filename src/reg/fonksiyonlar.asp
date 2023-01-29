@@ -4292,6 +4292,42 @@ function mailGonderToplu(byVal gonderimID)
 	' end if
 end function
 
+'################## mail gonder CDO kullan
+	function mailGonderCDO(byVal mailBaslik, byVal mailicerik, byVal dosyaAdres, byVal CDOalicilar)
+		Set objMail = Server.CreateObject("CDO.Message")
+
+		Set objConfig = CreateObject("CDO.Configuration")
+
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "SMTP.office365.com" '---> smtp.gmail.com
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") 	= 25 '---> gmail'de tls->465 veya ssl->587 oluyor
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    	= 2
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      	= True
+		'objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusetls")      = True
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    	= "musteri.destek1@egemen.com.tr"
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    	= "jjjjj0000098"
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
+
+		objConfig.Fields.Update
+
+		Set objMail.Configuration = objConfig
+
+		objMail.From     = "musteri.destek1@egemen.com.tr"
+		'objMail.To       = "info@bulutihale.com"
+		objMail.To       = CDOalicilar
+
+		objMail.Subject  = mailBaslik
+		objMail.AddAttachment dosyaAdres
+		objMail.TextBody = "Test EMAIL"
+		objMail.HTMLBody = mailicerik
+
+		objMail.Send
+		Set objMail = Nothing
+
+	end function
+
+
+'################## //mail gonder CDO kullan
 
 
 
