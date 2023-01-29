@@ -58,7 +58,10 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 				Response.Write "<div class=""card"">"
 				Response.Write "<div class=""card-body"">"
 				Response.Write "<div class=""row"">"
-					sorgu = "Select top 30 * from toplumail.sablon where firmaID = " & firmaID & " and silindi = 0"
+					sorgu = "Select top 30 sablonID,tarih,sablonBaslik" & vbcrlf
+					sorgu = sorgu & ",(select count(gonderimID) from toplumail.gonderim where sablonID = toplumail.sablon.sablonID and durum = 'Beklemede') as Beklemede" & vbcrlf
+					sorgu = sorgu & ",(select count(gonderimID) from toplumail.gonderim where sablonID = toplumail.sablon.sablonID and durum = 'Gönderildi') as Gonderildi" & vbcrlf
+					sorgu = sorgu & "from toplumail.sablon where firmaID = " & firmaID & " and silindi = 0" & vbcrlf
 					if aramaad = "" then
 					else
 						sorgu = sorgu & " and (sablonBaslik like N'%" & aramaad & "%')" & vbcrlf
@@ -70,9 +73,8 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 							Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 							Response.Write "<th scope=""col"">Tarih</th>"
 							Response.Write "<th scope=""col"">Başlık</th>"
-							Response.Write "<th scope=""col"">Gönderim</th>"
-							Response.Write "<th scope=""col"">Giden</th>"
-							Response.Write "<th scope=""col"">Kalan</th>"
+							Response.Write "<th scope=""col"">Beklemede</th>"
+							Response.Write "<th scope=""col"">Gönderildi</th>"
 							if yetkiTM >= 3 then
 								Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 							end if
@@ -81,6 +83,8 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 									sablonID			=	rs("sablonID")
 									tarih				=	rs("tarih")
 									sablonBaslik		=	rs("sablonBaslik")
+									Beklemede			=	rs("Beklemede")
+									Gonderildi			=	rs("Gonderildi")
 									sablonID64          =   sablonID
 									sablonID64          =   base64_encode_tr(sablonID64)
 									gonderimSayi		=	0
@@ -89,16 +93,19 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 									Response.Write "<tr>"
 										Response.Write "<td>" & tarih & "</td>"
 										Response.Write "<td>" & sablonBaslik & "</td>"
-										Response.Write "<td>" & gonderimSayi &  "</td>"
-										Response.Write "<td>" & gonderilenSayi &  "</td>"
-										Response.Write "<td>" & kalanSayi &  "</td>"
+										Response.Write "<td"
+										if Beklemede > 0 then
+											Response.Write " class=""bg-warning"""
+										end if
+										Response.Write ">" & Beklemede &  "</td>"
+										Response.Write "<td>" & Gonderildi &  "</td>"
 									if yetkiTM >= 3 then
 										Response.Write "<td class=""text-right"" nowrap>"
 										if yetkiTM >= 5 then
 											'# Mail Gönder
 												sablonID64 =	sablonID
 												sablonID64 =	base64_encode_tr(sablonID64)
-												Response.Write "<a href=""/toplumail/gonder/" & sablonID64 & "|"" title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
+												Response.Write "<a href=""/toplumail/gonder/" & sablonID64 & "$"" title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
 												Response.Write "<i class=""icon email-go"
 												Response.Write """></i>"
 												Response.Write "</a>"

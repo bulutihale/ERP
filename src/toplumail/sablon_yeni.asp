@@ -38,7 +38,7 @@ if yetkiTM >= 3 then
         rs.open sorgu, sbsv5, 1, 3
         if rs.recordcount > 0 then
             sablonBaslik    =   rs("sablonBaslik")
-            sablonIcerik    =  rs("sablonIcerik")
+            sablonIcerik    =   rs("sablonIcerik")
         else
             hata = 1
         end if

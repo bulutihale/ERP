@@ -322,4 +322,108 @@ if firmaID = 8 then
 end if
 
 
+
+if firmaID = 11 then
+	sb_firmaAd								=	"KAPP"
+	sb_url									=	mainUrl
+    sb_logo									=	sb_mainUrlOnEk & mainUrl & "/template/images/kapp.png"
+	sb_logoMini								=	sb_mainUrlOnEk & mainUrl & "/template/images/kapp.png"
+	sb_logo128								=	sb_mainUrlOnEk & mainUrl & "/cdn/image/logo_128.png"
+	sb_cdnUrl								=	sb_mainUrlOnEk & mainUrl & "/cdn"
+	sb_konum								=	"izmir"		'hava durumu için
+	sb_yetkiliPersonel						=	"Başar Sönmez|+905053376198"			'destek personeli için
+	sb_ssl									=	1		'SSL var mı?
+
+
+
+	' ## SERVİSLER
+	' ## SERVİSLER
+		sb_activeuserUrl					=	"/activeuser.asp"
+		sb_activeuserTime					=	30			'otomatik veri kontrolü için saniye
+	' ## SERVİSLER
+	' ## SERVİSLER
+
+	' ## YEDEKLEME
+	' ## YEDEKLEME
+		sb_fizikselPath						=	"C:\web\erp.sbstasarim.com\backup\"
+		sb_sqlYedekCompress					=	true
+		sb_sqlYedekCloudMail				=	"raptiye210@yahoo.com"
+		sb_sqlYedekAlGun					=	7		'dashboard üzerinden otomatik yedek alma. yazılacak
+		sb_sqlYedekSilGun					=	30		'yetki sorunu veriyor. onar
+	' ## YEDEKLEME
+	' ## YEDEKLEME
+
+	'## EMAIL
+	'## EMAIL
+		sb_mailserver		=	"212.68.61.84:587"
+		sb_mailsender		=	"teknik@sbstasarim.com"
+		sb_mailsenderPass	=	"sgxuewlv12!!@3"
+		sb_mailsenderAd		=	"KAPP ERP"
+	'## EMAIL
+	'## EMAIL
+
+	'## SSO
+	'## SSO
+		firmaSSO			=	""
+		firmaSSOAdres		=	""
+		firmaSSODomain		=	""
+		firmaSSOLdap		=	""
+		firmaSSOdb			=	""
+	'## SSO
+	'## SSO
+
+	'#### STOK bilgieri dış db den çekilecekse
+	'#### STOK bilgieri dış db den çekilecekse
+		firmaStokDBvar		=	0
+		firmaStokSunucu		=	""
+		firmaStokDB			=	""
+		firmaStokdbUSR		=	""
+		firmaStokdbPass		=	""
+	'#### STOK bilgieri dış db den çekilecekse
+	'#### STOK bilgieri dış db den çekilecekse
+
+	'#### CARİ bilgieri dış db den çekilecekse
+	'#### CARİ bilgieri dış db den çekilecekse
+		firmaCariDBvar		=	0
+		firmaCariSunucu		=	""
+		firmaCariDB			=	""
+		firmaCaridbUSR		=	""
+		firmaCaridbPass		=	""
+	'#### CARİ bilgieri dış db den çekilecekse
+	'#### CARİ bilgieri dış db den çekilecekse
+	
+	'## TEKLİF
+	'## TEKLİF
+		sb_TeklifCariAramaLimit	=	5		'arama formundan kaç adet cari dönsün
+		sb_TeklifFiyatSayi		=	2
+		sb_TeklifFiyatAd0		=	"Teklif Fiyatı"
+		sb_TeklifFiyatAd1		=	"Perakende Fiyat"
+		sb_TeklifFiyatAd2		=	"Toptan Fiyat"
+		sb_TeklifFiyatAd3		=	"Fiyat 3"
+		sb_TeklifFiyatAd4		=	"Fiyat 4"
+		sb_TeklifFiyatiSirifOlanStoklariGizle =   false		'yazılacak
+    	sb_TeklifIskontoSayisi  =   2							'teklif hazırlanırken kaç iskontoya izin verilsin
+		sb_TeklifOndalikSayi	=	2							'teklif toplamlarında tamsayıdan sonra kaç ondalık karakter olsun
+		sb_TeklifSayiFormatOn		=	"TeklifSayi"				'teklif sayısının önünde yer alır
+		sb_TeklifSayiFormatRakam	=	2						'kaç hane olacak
+		sb_TeklifSayiFormat			=	"on|4yil|2ay|2gun|rakam"						'bu kısmını yazmadım
+	'## TEKLİF
+	'## TEKLİF
+
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+		sb_modulAdi				=	"Görev Takip"
+		sb_cariyeGorevVerilsin	=	false
+		sb_etiketEklenebilsin	=	true
+	' ## GÖREV TAKİP
+	' ## GÖREV TAKİP
+
+	' ## MODULLER
+	' ## MODULLER
+		sb_modul_gorevTakip		=	false
+		sb_modul_webmail		=	false
+		sb_modul_teklif			=	false
+	' ## MODULLER
+	' ## MODULLER
+end if
 %>

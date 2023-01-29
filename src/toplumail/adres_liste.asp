@@ -1,16 +1,4 @@
-﻿grubun adı
-
-textarea import
-
-arama kutusu
-
-tablo ile Liste
-
-
-
-
-
-<!--#include virtual="/reg/rs.asp" --><%
+﻿<!--#include virtual="/reg/rs.asp" --><%
 
 
 '###### ANA TANIMLAMALAR
@@ -100,11 +88,15 @@ end if
 	if yetkiTM > 0 then
         if hata = "" then
             Response.Write "<form action=""/toplumail/adres_liste_ekle.asp"" method=""post"" class=""ajaxform"">"
+            call forminput("islem","Ekle","","","islem","hidden","islem","")
+            call forminput("altModul","Adres Liste","","","altModul","hidden","altModul","")
+            call forminput("tur","email","","","tur","hidden","tur","")
+            call forminput("adresGrupID",gorevID,"","","adresGrupID","hidden","adresGrupID","")
             Response.Write "<div class=""container-fluid scroll-ekle3"">"
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Gruba Adres Ekleme : " & adresGrupAd & "</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">Listeye Adres Ekleme</div>"
                     Response.Write "<div class=""card-body"">"
                     Response.Write "<div class=""row"">"
                         Response.Write "<div class=""col-sm-12 my-1"">"
@@ -113,6 +105,7 @@ end if
                         Response.Write "</div>"
                         Response.Write "<div class=""col-auto my-1"">"
                             Response.Write "<button type=""submit"" class=""btn btn-primary"">Ekle</button>"
+                            Response.Write "<div id=""progressDiv"" class=""ml-3""></div>"
                         Response.Write "</div>"
                     Response.Write "</div>"
                     Response.Write "</div>"
@@ -130,7 +123,6 @@ end if
 
 
 
-
 '####### ADRES LİSTESİ
 	if yetkiTM > 0 then
         if hata = "" then
@@ -138,12 +130,13 @@ end if
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                     Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-primary"">Listede Bulunan Adresler</div>"
                     Response.Write "<div class=""card-body"">"
                     Response.Write "<div class=""row"">"
-                        sorgu = "Select top 30 * from toplumail.adresGrup where firmaID = " & firmaID & " and silindi = 0"
+                        sorgu = "Select top 30 * from toplumail.adres where firmaID = " & firmaID & " and adresGrupID = " & gorevID
                         if aramaad = "" then
                         else
-                            sorgu = sorgu & " and (adresGrupAd like N'%" & aramaad & "%')" & vbcrlf
+                            sorgu = sorgu & " and (adres like N'%" & aramaad & "%')" & vbcrlf
                         end if
                         sorgu = sorgu & "order by tarih desc"
                         rs.Open sorgu, sbsv5, 1, 3
@@ -151,69 +144,70 @@ end if
                                 Response.Write "<div class=""table-responsive"">"
                                 Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
                                 Response.Write "<th scope=""col"">Tarih</th>"
-                                Response.Write "<th scope=""col"">Grup Adı</th>"
-                                Response.Write "<th scope=""col"">Grup Açıklaması</th>"
-                                if yetkiTM >= 3 then
-                                    Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
-                                end if
+                                Response.Write "<th scope=""col"">Adres</th>"
+                                Response.Write "<th scope=""col"">Kaynak</th>"
+                                ' if yetkiTM >= 3 then
+                                '     Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
+                                ' end if
                                 Response.Write "</tr></thead><tbody>" 
                                     for i = 1 to rs.recordcount
-                                        adresGrupID			=	rs("adresGrupID")
+                                        ' adresGrupID       =	rs("blacklistID")
+                                        ' adresGrupID64     =   adresGrupID
+                                        ' adresGrupID64     =   base64_encode_tr(adresGrupID64)
                                         tarih				=	rs("tarih")
-                                        adresGrupAd		    =	rs("adresGrupAd")
-                                        adresGrupAciklama   =	rs("adresGrupAciklama")
-                                        adresGrupID64       =   adresGrupID
-                                        adresGrupID64       =   base64_encode_tr(adresGrupID64)
+                                        adres               =	rs("adres")
+                                        kaynak              =	rs("kaynak")
                                         Response.Write "<tr>"
                                             Response.Write "<td>" & tarih & "</td>"
-                                            Response.Write "<td>" & adresGrupAd & "</td>"
-                                            Response.Write "<td>" & adresGrupAciklama &  "</td>"
-                                        if yetkiTM >= 3 then
-                                            Response.Write "<td class=""text-right"" nowrap>"
-                                            if yetkiTM >= 5 then
-                                                '# Adresleri İncele
-                                                    adresGrupID64 =	adresGrupID
-                                                    adresGrupID64 =	base64_encode_tr(adresGrupID64)
-                                                    Response.Write "<a href=""/toplumail/adres_liste/" & adresGrupID64 & """ title=""" & translate("Grup içindeki adresleri incele","","") & """ class=""ml-2"" >"
-                                                    Response.Write "<i class=""icon user-add"
-                                                    Response.Write """></i>"
-                                                    Response.Write "</a>"
-                                                '# Adresleri İncele
-                                            end if
-                                            if yetkiTM >= 5 then
-                                                '# Mail Gönder
-                                                    adresGrupID64 =	adresGrupID
-                                                    adresGrupID64 =	base64_encode_tr(adresGrupID64)
-                                                    Response.Write "<a href=""/toplumail/gonder/|" & adresGrupID64 & "|"" title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
-                                                    Response.Write "<i class=""icon email-go"
-                                                    Response.Write """></i>"
-                                                    Response.Write "</a>"
-                                                '# Mail Gönder
-                                            end if
-                                            if yetkiTM >= 3 then
-                                                '# Şablon düzenle
-                                                    adresGrupID64 =	adresGrupID
-                                                    adresGrupID64 =	base64_encode_tr(adresGrupID64)
-                                                    Response.Write "<a onClick=""modalajax('/toplumail/adres_yeni.asp?adresGrupID=" & adresGrupID64 & "')"" title=""" & translate("Adres Grubunu Düzenle","","") & """ class=""ml-2"" >"
-                                                    Response.Write "<i class=""icon page-white-edit"
-                                                    Response.Write """></i>"
-                                                    Response.Write "</a>"
-                                                '# Şablon düzenle
-                                            end if
-                                            if yetkiTM >= 6 then
-                                                '# Şablon sil
-                                                    adresGrupID64 =	adresGrupID
-                                                    adresGrupID64 =	base64_encode_tr(adresGrupID64)
-                                                    Response.Write "<a onClick="""
-                                                    Response.Write "bootmodal('Adres Grubunu Silmek Mi İstiyorsunuz?','custom','/toplumail/adres_onay.asp?islem=sil&adresGrupID=" & adresGrupID64 & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
-                                                    Response.Write """ title=""" & translate("Adres Grubunu Sil","","") & """ class=""ml-1"" >"
-                                                    Response.Write "<i class=""icon delete"
-                                                    Response.Write """></i>"
-                                                    Response.Write "</a>"
-                                                '# Şablon sil
-                                            end if
-                                            Response.Write "</td>"
-                                        end if
+                                            Response.Write "<td>" & kvkkMaske(adres,2,yetkiTM) & "</td>"
+                                            ' Response.Write "<td>" & adres & "</td>"
+                                            Response.Write "<td>" & kaynak & "</td>"
+                                        ' if yetkiTM >= 3 then
+                                        '     Response.Write "<td class=""text-right"" nowrap>"
+                                        '     if yetkiTM >= 5 then
+                                        '         '# Adresleri İncele
+                                        '             adresGrupID64 =	adresGrupID
+                                        '             adresGrupID64 =	base64_encode_tr(adresGrupID64)
+                                        '             Response.Write "<a href=""/toplumail/adres_liste/" & adresGrupID64 & """ title=""" & translate("Grup içindeki adresleri incele","","") & """ class=""ml-2"" >"
+                                        '             Response.Write "<i class=""icon user-add"
+                                        '             Response.Write """></i>"
+                                        '             Response.Write "</a>"
+                                        '         '# Adresleri İncele
+                                        '     end if
+                                        '     if yetkiTM >= 5 then
+                                        '         '# Mail Gönder
+                                        '             adresGrupID64 =	adresGrupID
+                                        '             adresGrupID64 =	base64_encode_tr(adresGrupID64)
+                                        '             Response.Write "<a href=""/toplumail/gonder/|" & adresGrupID64 & "|"" title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
+                                        '             Response.Write "<i class=""icon email-go"
+                                        '             Response.Write """></i>"
+                                        '             Response.Write "</a>"
+                                        '         '# Mail Gönder
+                                        '     end if
+                                        '     if yetkiTM >= 3 then
+                                        '         '# Şablon düzenle
+                                        '             adresGrupID64 =	adresGrupID
+                                        '             adresGrupID64 =	base64_encode_tr(adresGrupID64)
+                                        '             Response.Write "<a onClick=""modalajax('/toplumail/adres_yeni.asp?adresGrupID=" & adresGrupID64 & "')"" title=""" & translate("Adres Grubunu Düzenle","","") & """ class=""ml-2"" >"
+                                        '             Response.Write "<i class=""icon page-white-edit"
+                                        '             Response.Write """></i>"
+                                        '             Response.Write "</a>"
+                                        '         '# Şablon düzenle
+                                        '     end if
+                                        '     if yetkiTM >= 6 then
+                                        '         '# Şablon sil
+                                        '             adresGrupID64 =	adresGrupID
+                                        '             adresGrupID64 =	base64_encode_tr(adresGrupID64)
+                                        '             Response.Write "<a onClick="""
+                                        '             Response.Write "bootmodal('Adres Grubunu Silmek Mi İstiyorsunuz?','custom','/toplumail/adres_onay.asp?islem=sil&adresGrupID=" & adresGrupID64 & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
+                                        '             Response.Write """ title=""" & translate("Adres Grubunu Sil","","") & """ class=""ml-1"" >"
+                                        '             Response.Write "<i class=""icon delete"
+                                        '             Response.Write """></i>"
+                                        '             Response.Write "</a>"
+                                        '         '# Şablon sil
+                                        '     end if
+                                        '     Response.Write "</td>"
+                                        ' end if
                                         Response.Write "</tr>"
                                         Response.Flush()
                                     rs.movenext
@@ -222,7 +216,7 @@ end if
                                 Response.Write "</table>"
                                 Response.Write "</div>"
                             else
-                                call yetkisizGiris("Şablon Bulunamadı","","")
+                                call yetkisizGiris("Listeye eklenmiş adres bulunamadı","","")
                             end if
                         rs.close
                     Response.Write "</div>"
@@ -232,7 +226,7 @@ end if
             Response.Write "</div>"
             Response.Write "</div>"
         else
-            call yetkisizGiris("Adres Gruplarını görmek için yeterli yetkiniz bulunmamaktadır","","")
+            call yetkisizGiris("Listeyi görmek için yeterli yetkiniz bulunmamaktadır","","")
         end if
 	end if
 '####### ADRES LİSTESİ

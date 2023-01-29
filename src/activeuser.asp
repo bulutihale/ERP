@@ -5,11 +5,13 @@
 '###### ANA TANIMLAMALAR
     kid		=	kidbul()
     hata    =   ""
-    modulAd =   "Personel"
     Response.Flush()
+    uniq    =   rastgele(9,1)
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
+' call mailGonderToplu(8)
+' Response.End()
 
 '#### ZAMANLANMIŞ GÖREVLER
 '#### ZAMANLANMIŞ GÖREVLER
@@ -73,32 +75,43 @@ end if
 
 '#### MAİL
 '#### MAİL
-if kid <> "" then
-    sorgu = "Select webmailUser,webmailPass,webmailIP from personel.personel where firmaID = " & firmaID & " and id = " & kid
-    rs.Open sorgu, sbsv5, 1, 3
-    if rs.recordcount > 0 then
-        webmailUser =   rs("webmailUser")
-        webmailPass =   rs("webmailPass")
-        webmailIP =   rs("webmailIP")
+    if uniq mod 2 = 0 then
+        if kid <> "" then
+            sorgu = "Select webmailUser,webmailPass,webmailIP from personel.personel where firmaID = " & firmaID & " and id = " & kid
+            rs.Open sorgu, sbsv5, 1, 3
+            if rs.recordcount > 0 then
+                webmailUser =   rs("webmailUser")
+                webmailPass =   rs("webmailPass")
+                webmailIP =   rs("webmailIP")
+            end if
+            rs.close
+            if webmailUser <> "" and webmailPass <> "" and webmailIP <> "" then
+                Set pop3 = Server.CreateObject("JMail.POP3")
+                pop3.Connect webmailUser, webmailPass, webmailIP
+                mailSayisi = pop3.count
+                pop3.Disconnect
+                    '## sayıyı güncelle
+                        komut = "$('.mailSayi').text('" & mailSayisi & "');"
+                        call jsrun(komut)
+                    '## sayıyı güncelle
+                    '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
+                    '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
+                    
+                    '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
+                    '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
+            end if
+        end if
     end if
-    rs.close
-    if webmailUser <> "" and webmailPass <> "" and webmailIP <> "" then
-        Set pop3 = Server.CreateObject("JMail.POP3")
-        pop3.Connect webmailUser, webmailPass, webmailIP
-        mailSayisi = pop3.count
-        pop3.Disconnect
-            '## sayıyı güncelle
-                komut = "$('.mailSayi').text('" & mailSayisi & "');"
-                call jsrun(komut)
-            '## sayıyı güncelle
-            '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
-            '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
-            
-            '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
-            '## EĞER AÇIK OLAN SAYFA MAİL İSE SAYFAYI GÜNCELLE
-    end if
-end if
 '#### MAİL
 '#### MAİL
+
+
+'#### TOPLU MAİL
+    if uniq mod 2 = 0 then
+        call mailGonderToplu("")
+        call jsconsole("Toplu Mail")
+    end if
+'#### TOPLU MAİL
+
 
 %>

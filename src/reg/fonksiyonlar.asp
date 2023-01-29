@@ -4083,34 +4083,31 @@ function pageHeader()
 	'##################################################
 	'##################################################
 		Response.Write "<!DOCTYPE html>"
-		Response.Write "<html lang=""en"" ng-app=""app"">"
-		Response.Write "<!--[if IE 8]><html class=""no-js lt-ie9""><![endif]-->"
-		Response.Write "<!--[if IE 9]><html class=""no-js lt-ie10""><![endif]-->"
-		Response.Write "<!--[if gt IE 8]><!--><html class=""no-js""><!--<![endif]-->"
+		Response.Write "<html lang=""en"">"
 		Response.Write "<head>"
 		Response.Write "<meta charset=""utf-8"">"
+		Response.Write "<meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=no"">"
 		Response.Write "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"" />"
-		Response.Write "<title>" & sb_firmaAd & " Panel</title>"
+		Response.Write "<title></title>"
 		Response.Write "<meta name=""robots"" content=""noindex"" />"
-		Response.Write "<meta name=""author"" content=""" & sb_firmaAd & """ />"
+		' Response.Write "<meta name=""author"" content=""" & sb_firmaAd & """ />"
 		Response.Write "<link rel=""shortcut icon"" href=""/favicon.ico"" />"
-		Response.Write "<meta name=""viewport"" content=""width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"">"
 		Response.Write "<meta name=""apple-mobile-web-app-capable"" content=""yes"">"
-		Response.Write "<link rel=""stylesheet"" href=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.css"" />"
-		Response.Write "<link rel=""stylesheet"" href=""/cimax/ots.css"" />"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/modernizr-2.7.1-respond-1.4.2.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery-2.1.1.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery.form-3.4.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootbox/bootbox.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""/cimax/ots.js""></scr" & "ipt>"
-		Response.Write "<style type=""text/css"">"
-		Response.Write "@import url('" & sb_cdnUrl & "/fonts/font-awesome-4.4.0/css/font-awesome.min.css');"
-		Response.Write ".cezaeviEkranSimge {min-height:214px;}"
-		Response.Write "body{touch-action: manipulation;}"
-		Response.Write "table tr td,table tr {padding-top:0 !important;padding-bottom:0 !important}"
-		Response.Write "</style>"
-		Response.Write "<meta http-equiv=""refresh"" content=""360"">"
+		Response.Write "<link rel=""stylesheet"" href=""/template/css/style.css"">"
+		
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/modernizr-2.7.1-respond-1.4.2.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery-2.1.1.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery.form-3.4.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootbox/bootbox.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""/cimax/ots.js""></scr" & "ipt>"
+		' Response.Write "<style type=""text/css"">"
+		' ' Response.Write "@import url('" & sb_cdnUrl & "/fonts/font-awesome-4.4.0/css/font-awesome.min.css');"
+		' Response.Write ".cezaeviEkranSimge {min-height:214px;}"
+		' Response.Write "body{touch-action: manipulation;}"
+		' Response.Write "table tr td,table tr {padding-top:0 !important;padding-bottom:0 !important}"
+		' Response.Write "</style>"
+		' Response.Write "<meta http-equiv=""refresh"" content=""360"">"
 		Response.Write "</head>"
 		Response.Write "<body>"
 	'##################################################
@@ -4189,47 +4186,226 @@ function lotOlusturFunc(depoID)
 end function
 
 
+function mailGonderToplu(byVal gonderimID)
+	' call mailGonderToplu(byVal gonderimID)
+	' if gonderimID <> "" then
+		sorgu = "Select top 1" & vbcrlf
+		sorgu = sorgu & "durum" & vbcrlf
+		sorgu = sorgu & ",toplumail.sablon.sablonBaslik" & vbcrlf
+		sorgu = sorgu & ",toplumail.sablon.sablonIcerik" & vbcrlf
+		sorgu = sorgu & ",toplumail.adres.adres" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.gonderenAd" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.gonderenAdres" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.gonderenAdresSifre" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.smtpAdres" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.smtpPort" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.smtpSSL" & vbcrlf
+		sorgu = sorgu & ",(Select count(blacklistID) from toplumail.blacklist where adres = toplumail.adres.adres and firmaID = " & firmaID & ") as blacklist" & vbcrlf
+		sorgu = sorgu & "from toplumail.gonderim" & vbcrlf
+		sorgu = sorgu & "LEFT JOIN toplumail.sablon on toplumail.sablon.sablonID = toplumail.gonderim.sablonID" & vbcrlf
+		sorgu = sorgu & "LEFT JOIN toplumail.adres on toplumail.adres.adresID = toplumail.gonderim.adresID" & vbcrlf
+		sorgu = sorgu & "LEFT JOIN toplumail.mailAccount on toplumail.mailAccount.mailAccountID = toplumail.gonderim.mailAccountID" & vbcrlf
+		sorgu = sorgu & "where toplumail.gonderim.firmaID = " & firmaID & vbcrlf
+		sorgu = sorgu & "and toplumail.gonderim.durum = 'Beklemede'" & vbcrlf
+		if gonderimID <> "" then
+			sorgu = sorgu & "and toplumail.gonderim.gonderimID = " & gonderimID & vbcrlf
+		end if
+		fn1.open sorgu, sbsv5, 1, 3
+		if fn1.recordcount > 0 then
+			mg_sablonBaslik = fn1("sablonBaslik")
+			mg_sablonIcerik = fn1("sablonIcerik")
+			mg_adres = fn1("adres")
+			mg_gonderenAd = fn1("gonderenAd")
+			mg_gonderenAdres = fn1("gonderenAdres")
+			mg_gonderenAdresSifre = fn1("gonderenAdresSifre")
+			mg_smtpAdres = fn1("smtpAdres")
+			mg_smtpPort = fn1("smtpPort")
+			mg_smtpSSL = fn1("smtpSSL")
+			mg_blacklist = fn1("blacklist")
+			'## içerik düzenleme
+				sablonIcerik	=	mg_sablonIcerik
+				mailadresi		=	mg_adres
+				mailadresi64	=	mailadresi
+				mailadresi64	=	base64_encode_tr(mailadresi64)
+				sablonIcerik    =   Replace(sablonIcerik,"[mailAdresi]",mailadresi)
+				sablonIcerik    =   Replace(sablonIcerik,"[buraya]","<a href=""" & sb_mainUrlOnEk & mainUrl & "/unsubscribe.asp?a=" & mailadresi64 & """>buraya</a>")
+				mg_sablonIcerik	=	sablonIcerik
+				sablonIcerik = "<!doctype html>"
+				sablonIcerik = sablonIcerik & "<html xmlns=""http://www.w3.org/1999/xhtml"" xmlns:v=""urn:schemas-microsoft-com:vml"" xmlns:o=""urn:schemas-microsoft-com:office:office"">"
+					sablonIcerik = sablonIcerik & "<head>"
+						sablonIcerik = sablonIcerik & "<meta charset=""UTF-8"">"
+						sablonIcerik = sablonIcerik & "<meta http-equiv=""X-UA-Compatible"" content=""IE=edge"">"
+						sablonIcerik = sablonIcerik & "<meta name=""viewport"" content=""width=device-width, initial-scale=1"">"
+						sablonIcerik = sablonIcerik & "<title>" & mg_sablonBaslik & "</title>"
+					sablonIcerik = sablonIcerik & "</head>"
+					sablonIcerik = sablonIcerik & "<body style=""height: 100%;margin: 0;padding: 0;width: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FAFAFA;"">"
+						sablonIcerik = sablonIcerik & mg_sablonIcerik
+					sablonIcerik = sablonIcerik & "</body>"
+				sablonIcerik = sablonIcerik & "</html>"
+				mg_sablonIcerik	=	sablonIcerik
+			'## içerik düzenleme
+			if mg_blacklist = 0 then
+				if mg_smtpSSL = true then
+					'CDO
+						Set objMail = Server.CreateObject("CDO.Message")
+							Set objBodyPart = objMail.BodyPart
+							objBodyPart.Charset = "UTF-8"
+							'## parametreler
+								Set objConfig = CreateObject("CDO.Configuration")
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver")		= mg_smtpAdres
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport")	= mg_smtpPort
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    	= 2
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      	= True
+								'objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusetls")      = True
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    	= mg_gonderenAdres
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    	= mg_gonderenAdresSifre
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
+								objConfig.Fields.Update
+								Set objMail.Configuration = objConfig
+							'## parametreler
+							'## mail bilgileri
+								objMail.From			=	mg_gonderenAdres
+								'objMail.To       = "info@bulutihale.com"
+								objMail.To				=	mg_adres
+								objMail.Subject			=	mg_sablonBaslik
+								' objMail.AddAttachment dosyaAdres
+								' objMail.TextBody = "Test EMAIL"
+								objMail.HTMLBody		=	mg_sablonIcerik
+								objMail.TextBodyPart.CharSet = "UTF-8"
+								' objMail.BodyPart.Charset = "utf-8"
+							'## mail bilgileri
+							objMail.Send
+						Set objMail = Nothing
+					'CDO
+					fn1("durum") = "Gönderildi"
+					fn1.update
+					call jsconsole("Gönderildi : " & kvkkMaske(mg_adres,"",""))
+				end if
+			else
+				fn1("durum") = "Blacklist"
+				fn1.update
+				call jsconsole("Blacklist : " & kvkkMaske(mg_adres,"",""))
+			end if
+		end if
+		fn1.close
+	' end if
+end function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 '################## mail gonder CDO kullan
 	function mailGonderCDO(byVal mailBaslik, byVal mailicerik, byVal dosyaAdres, byVal CDOalicilar)
+
+
+
 		Set objMail = Server.CreateObject("CDO.Message")
-
-		Set objConfig = CreateObject("CDO.Configuration")
-
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "SMTP.office365.com" '---> smtp.gmail.com
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") 	= 25 '---> gmail'de tls->465 veya ssl->587 oluyor
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    	= 2
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      	= True
-		'objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusetls")      = True
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    	= "musteri.destek1@egemen.com.tr"
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    	= "jjjjj0000098"
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
-
-		objConfig.Fields.Update
-
-		Set objMail.Configuration = objConfig
-
-		objMail.From     = "musteri.destek1@egemen.com.tr"
-		'objMail.To       = "info@bulutihale.com"
-		objMail.To       = CDOalicilar
-
-		objMail.Subject  = mailBaslik
-		objMail.AddAttachment dosyaAdres
-		objMail.TextBody = "Test EMAIL"
-		objMail.HTMLBody = mailicerik
-
-		objMail.Send
+			'## parametreler
+				Set objConfig = CreateObject("CDO.Configuration")
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "SMTP.office365.com" '---> smtp.gmail.com
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") 	= 25 '---> gmail'de tls->465 veya ssl->587 oluyor
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    	= 2
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      	= True
+				'objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusetls")      = True
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    	= "musteri.destek1@egemen.com.tr"
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    	= "jjjjj0000098"
+				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
+				objConfig.Fields.Update
+				Set objMail.Configuration = objConfig
+			'## parametreler
+			'## mail bilgileri
+				objMail.From     = "musteri.destek1@egemen.com.tr"
+				'objMail.To       = "info@bulutihale.com"
+				objMail.To       = CDOalicilar
+				objMail.Subject  = mailBaslik
+				objMail.AddAttachment dosyaAdres
+				objMail.TextBody = "Test EMAIL"
+				objMail.HTMLBody = mailicerik
+			'## mail bilgileri
+			objMail.Send
 		Set objMail = Nothing
-
 	end function
-
-
 '################## //mail gonder CDO kullan
 
 
 
 
+
+
+'##### yetkisi olmayan için kelimeyi maskeler
+'##### yetkisi olmayan için kelimeyi maskeler
+'## call kvkkMaske("deneme",2,4)
+	function kvkkMaske(byVal kelime,byVal minYetki,byVal mevcutYetki)
+		if minYetki = "" then
+			minYetki = 1
+		end if
+		if mevcutYetki = "" then
+			mevcutYetki = 0
+		end if
+		if kelime <> "" then
+			if mevcutYetki >= minYetki then
+				'göster
+				kvkkMaske = kelime
+			else
+				'gizle
+				kvkkMaske = left(kelime,2)
+				for fnki = 1 to len(kelime)
+					kvkkMaske = kvkkMaske & "*"
+				next
+				kvkkMaske = kvkkMaske & right(kelime,2)
+			end if
+		else
+			kvkkMaske = ""
+		end if
+	end function
+'##### yetkisi olmayan için kelimeyi maskeler
+'##### yetkisi olmayan için kelimeyi maskeler
+
+
+
+
+'##### YÜKLEME ESNASINDA YÜZDELİK KISMI GÖSTERECEK FONKSİYON -- HENÜZ BİTMEDİ
+	' Response.Write "<div id=""progressDiv"" class=""ml-3""></div>"
+	'##### yukarıdaki div sayfaya eklenmeli
+	function progressDurum(byVal toplamKayit,byVal mevcutKayit)
+		progressIcerik = mevcutKayit
+		call jsrun("$('#progressDiv').html('" & progressIcerik & "');")
+		Response.Flush()
+	end function
+'##### YÜKLEME ESNASINDA YÜZDELİK KISMI GÖSTERECEK FONKSİYON
 
 
 %>
