@@ -351,7 +351,6 @@ language_tr = language_tr & "||Teklifi Sil=Teklifi Sil"
 language_tr = language_tr & "||Email Gönder=Email Gönder"
 language_tr = language_tr & "||Mail Gönderimi=Mail Gönderimi"
 language_tr = language_tr & "||Mail Gönder=Mail Gönder"
-<<<<<<< HEAD
 language_tr = language_tr & "||Şablonu Düzenle=Şablonu Düzenle"
 language_tr = language_tr & "||Şablonu Sil=Şablonu Sil"
 language_tr = language_tr & "||Ek Dosya=Ek Dosya"
@@ -360,8 +359,6 @@ language_tr = language_tr & "||Adres Grubunu Sil=Adres Grubunu Sil"
 language_tr = language_tr & "||Grup içindeki adresleri incele=Grup içindeki adresleri incele"
 language_tr = language_tr & "||Koşulu Sil=Koşulu Sil"
 language_tr = language_tr & "||Gönder=Gönder"
-=======
->>>>>>> 2ec3edb0d16218232c0f8098acffe33d2fcb39f8
 if klang = "" then
 klang = "tr"
 end if

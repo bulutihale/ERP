@@ -101,4 +101,10 @@ tur             =   Request.Form("tur")
             end if
     	end if
 
+
+adresGrupID64   =   adresGrupID
+adresGrupID64   =   base64_encode_tr(adresGrupID64)
+call jsac("/toplumail/adres_liste.asp?adresGrupID64=" & adresGrupID64)
+
+
 %><!--#include virtual="/reg/rs.asp" -->

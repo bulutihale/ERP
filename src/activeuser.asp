@@ -114,4 +114,11 @@ end if
 '#### TOPLU MAİL
 
 
+
+'#### LOGLARI TXT YE AKTAR
+    if saat = 16 and dakika = 50 then
+        Server.Execute "/portal/log2txt.asp"
+    end if
+'#### LOGLARI TXT YE AKTAR
+
 %>

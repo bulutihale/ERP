@@ -7,6 +7,7 @@
     hata    =   ""
     modulAd =   "Teklif"
     Response.Flush()
+    teklifTuru        =   Request.QueryString("teklifTuru")
     teklifStokID      =   Request.QueryString("teklifStokID")
     teklifID          =   Request.QueryString("teklifID")
     teklifParaBirimi  =   Request.QueryString("teklifParaBirimi")
@@ -35,9 +36,10 @@
 
 
 '### ÜRÜN BİLGİLERİNİ AL
-      sorgu = "Select stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
+      sorgu = "Select kdv,stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
+          stokkdv =   rs("kdv")
           stokAd  =   rs("stokAd")
           stokFiyat = rs("fiyat1")
           fiyat1  =   rs("fiyat1")
@@ -58,6 +60,15 @@
 '### ÜRÜN BİLGİLERİNİ AL
 
   call logla("Teklife ürün ekleniyor : " & stokAd)
+
+
+'#### TEKLİF TÜRÜNE GÖRE HESAPLAMA
+  if teklifTuru = 2 then
+    stokFiyat = stokFiyat-((stokFiyat*stokkdv)/100)
+  end if
+'#### TEKLİF TÜRÜNE GÖRE HESAPLAMA
+
+
 
 '### BİRİMLERİ BUL
     if birimTur <> "" then
@@ -210,7 +221,11 @@
           Response.Write "<td>Birim Fiyat</td>"
         '### fiyat
           Response.Write "<td class=""pr-2"">"
-          Response.Write "<div class=""badge badge-danger"">" & sb_TeklifFiyatAd0 & "</div>"
+          Response.Write "<div class=""badge badge-danger"">" & sb_TeklifFiyatAd0
+          if teklifTuru = 2 then
+            Response.Write " KDV Hariç"
+          end if
+          Response.Write "</div>"
           call forminput("stokFiyat",stokFiyat,"numara(this,true,false);fiyathesapla();","","stokFiyat mb-2","autocompleteOFF","stokFiyat","")
           Response.Write "</td>"
         '### fiyat

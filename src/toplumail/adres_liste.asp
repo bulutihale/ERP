@@ -11,10 +11,12 @@
 '###### ANA TANIMLAMALAR
 ' |Toplu Mail#Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6
 
-
 yetkiTM = yetkibul(modulAd)
 
+adresGrupID64 = Request.QueryString("adresGrupID64")
+
 '### SAYFA ID TESPİT ET
+if adresGrupID64 = "" then
 	if hata = "" then
 		if gorevID = "" then
 			gorevID64 = Session("sayfa5")
@@ -33,6 +35,11 @@ yetkiTM = yetkibul(modulAd)
 			gorevID64	=	base64_encode_tr(gorevID64)
 		end if
 	end if
+else
+    adresGrupID = adresGrupID64
+    adresGrupID = base64_decode_tr(adresGrupID)
+    gorevID = adresGrupID
+end if
 '### SAYFA ID TESPİT ET
 
 
