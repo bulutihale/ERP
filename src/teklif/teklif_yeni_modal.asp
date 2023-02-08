@@ -7,6 +7,8 @@
     hata    =   ""
     modulAd =   "Teklif"
     Response.Flush()
+    teklifTurleriArr = Array("--Teklif Türü--","Kdv Dahil Toplamlı Teklif","Kdv Hariç Toplamlı Teklif","","Genel Teklif","Mail Order","Taksitli Mail Order","İhracat Teklif","Proforma Fatura")
+    ' degerler = "--Teklif Türü--=|Kdv Dahil Toplamlı Teklif=1|Kdv Hariç Toplamlı Teklif=2|Genel Teklif=4|Mail Order=5|Taksitli Mail Order=6|İhracat Teklif=7|Proforma Fatura=8"
 '###### ANA TANIMLAMALAR
 
 
@@ -220,8 +222,17 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Türü : </div>"
-                                degerler = "--Teklif Türü--=|Kdv Dahil Toplamlı Teklif=1|Kdv Hariç Toplamlı Teklif=2|Genel Teklif=4|Mail Order=5|Taksitli Mail Order=6|İhracat Teklif=7|Proforma Fatura=8"
-                                call formselectv2("teklifTuru",teklifTuru,"","","","","teklifTuru",degerler,"")
+                                    degerler = ""
+                                    for ti = 0 to ubound(teklifTurleriArr)
+                                        if teklifTurleriArr(ti) <> "" then
+                                            degerler = degerler & teklifTurleriArr(ti)
+                                            degerler = degerler & "="
+                                            degerler = degerler & ti
+                                            degerler = degerler & "|"
+                                        end if
+                                    next
+                                    degerler = left(degerler,len(degerler)-1)
+                                call formselectv2("teklifTuru",teklifTuru,"$('#teklifUrunListe').load('/teklif/teklif_urun_liste.asp?teklifTuru=' + this.value + '&teklifID=" & teklifID & "');","","","","teklifTuru",degerler,"")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Dili : </div>"
@@ -513,17 +524,17 @@ Response.Write "$(document).ready(function() {"
 Response.Write "});"
 
 
-Response.Write "function teklifUrunEkle() {"
-    Response.Write "cariAd = $('#cariAd').val();"
-    Response.Write "teklifStokID = $('#stokSec').val();"
-    Response.Write "if(cariAd==''){"
-        Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
-    Response.Write "} else if(teklifStokID=='') {"
-        Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
-    Response.Write "} else {"
-        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
-    Response.Write "}"
-Response.Write "}"
+' Response.Write "function teklifUrunEkle() {"
+'     Response.Write "cariAd = $('#cariAd').val();"
+'     Response.Write "teklifStokID = $('#stokSec').val();"
+'     Response.Write "if(cariAd==''){"
+'         Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
+'     Response.Write "} else if(teklifStokID=='') {"
+'         Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
+'     Response.Write "} else {"
+'         Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val() + '&teklifTuru=' + $('#teklifTuru').val());"
+'     Response.Write "}"
+' Response.Write "}"
 
 
 
@@ -539,7 +550,7 @@ Response.Write "function teklifUrunEkle() {"
     Response.Write "} else if(teklifStokID=='') {"
         Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
     Response.Write "} else {"
-        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val());"
+        Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val() + '&teklifTuru=' + $('#teklifTuru').val());"
     Response.Write "}"
 Response.Write "}"
 

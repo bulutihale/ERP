@@ -192,11 +192,11 @@ yetkiKontrol = yetkibul(modulAd)
 							elseif tamamlandi = 0 AND isnull(baslangicZaman) then
 								Response.Write "<button"
 								Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-sm-6 bold"""
-							if yetkiKontrol > 6 then
-								Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBasla')"""
-							else
-								Response.Write " onclick=""swal('YETKİ YOK','Üretim başlatmak için yetkiniz yeterli değil!')"""
-							end if
+									if yetkiKontrol > 6 then
+										Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBasla')"""
+									else
+										Response.Write " onclick=""swal('YETKİ YOK','Üretim başlatmak için yetkiniz yeterli değil!')"""
+									end if
 								Response.Write ">" & urtBtnYaz & "</button>"
 							end if
 						Response.Write "</div>"
@@ -215,11 +215,23 @@ yetkiKontrol = yetkibul(modulAd)
 								Response.Write "<button"
 								Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-md-12 col-sm-12 bold"""
 								if yetkiKontrol > 6 then
-									Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBitir'," & uretilenMiktar & ")"""
+									uretilmisMiktar	=	""
+									btnYazi			=	""
+									if isTur = "kesimPlan" then
+										Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBitir'," & uretilenMiktar & ")"""
+									elseif isTur = "uretimPlan" then
+										sorgu = "SELECT stok.FN_uretilmisMiktarBul(" & ajandaID & ", " & stokID & ", " & firmaID & ") as uretilmisMiktar"
+										rs.open sorgu,sbsv5,1,3
+											uretilmisMiktar		=	rs("uretilmisMiktar")
+										rs.close
+										uretimOran	=	formatpercent(uretilmisMiktar/sipMiktar,2)
+										btnYazi		=	"<span style=""font-size:30px"">" & uretimOran & "</span><br><span class=""fontkucuk"">(" & uretilmisMiktar & " / " & sipMiktar & " " & mikBirim & ")</span><br>"
+										Response.Write " onclick=""modalajax('/uretim/uretimBitirModal.asp?siparisKalemID="&siparisKalemID&"&ajandaID="&ajandaID&"&islemDurum=islemBitir&teminDepoID="&secilenDepoID&"&secilenReceteID="&secilenReceteID&"');"""
+									end if
 								else
 									Response.Write " onclick=""swal('YETKİ YOK','Üretim başlatmak için yetkiniz yeterli değil!')"""
 								end if
-									Response.Write ">BİTİR</button>"
+									Response.Write ">" & btnYazi & " <span style=""font-size:30px"">BİTİR</span></button>"
 							end if
 						Response.Write "</div>"
 					Response.Write "</div>"
@@ -359,7 +371,7 @@ yetkiKontrol = yetkibul(modulAd)
 								receteAdimID64	=	base64_encode_tr(receteAdimID64)
 							if not isnull(stokID) then
 
-								ihtiyacMiktar	=	miktar * sipMiktar * receteMiktar
+								ihtiyacMiktar	=	cdbl(miktar) * cdbl(sipMiktar) * cdbl(receteMiktar)
 								trClass 		=	" bg-warning "
 								GBmiktarYaz		=	""
 								If secilenDepoID > 0 Then
@@ -440,7 +452,7 @@ yetkiKontrol = yetkibul(modulAd)
 										end if
 										rs1.close
 										Response.Write "<span class=""pointer"""
-										if toplamLotMiktar >= ihtiyacMiktar then
+										if cdbl(toplamLotMiktar) >= cdbl(ihtiyacMiktar) then
 											Response.Write " onclick=""swal('Yeterli seçim yapıldı.','')"""
 											btnRenk			=	" btn-secondary "
 											miktarKontrol	=	1
@@ -497,7 +509,6 @@ yetkiKontrol = yetkibul(modulAd)
 			if(receteID > 0){
 				$('#recetelerDIV').hide('slow');
 			}
-			
 			if(teminDepoID == 0 && receteID == undefined){
 				swal('','Temin Depo ve Reçete Seçimi Yapınız.')
 					}
@@ -512,7 +523,8 @@ yetkiKontrol = yetkibul(modulAd)
 				
 			$('#receteBtn').removeClass('d-none');
 			$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')	
-			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #linklerDIV > *')	
+			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #linklerDIV > *')
+			$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
 	}
 
 	function uretimBasla(siparisKalemID, ajandaID, islemDurum, uretilenMiktar){

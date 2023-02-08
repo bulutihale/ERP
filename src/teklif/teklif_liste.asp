@@ -14,8 +14,11 @@
     modulAd =   "Teklif"
     personelID =   gorevID
     Response.Flush()
+    teklifTurleriArr = Array("--Teklif Türü--","Kdv Dahil Toplamlı Teklif","Kdv Hariç Toplamlı Teklif","","Genel Teklif","Mail Order","Taksitli Mail Order","İhracat Teklif","Proforma Fatura")
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
+
+' Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9
 
 
 call logla("Teklif Listesi Ekranı")
@@ -93,7 +96,7 @@ if yetkiTeklif > 0 then
                 rs.open sorgu, sbsv5, 1, 3
                 if rs.recordcount > 0 then
 
-                    ' Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9
+                    
 
                     for i = 1 to rs.recordcount
                         teklifID			=	rs("teklifID")
@@ -112,7 +115,7 @@ if yetkiTeklif > 0 then
                             Response.Write "<td>" & teklifsayi & "</td>"
                             Response.Write "<td>" & teklifDili & "</td>"
                             Response.Write "<td>" & cariAd & "</td>"
-                            Response.Write "<td>" & teklifTuru &  "</td>"
+                            Response.Write "<td>" & teklifTurleriArr(teklifTuru) &  "</td>"
                             Response.Write "<td>" & teklifParaBirimi &  "</td>"
                             Response.Write "<td>" & teklifSonucArr(teklifSonuc) &  "</td>"
                         if yetkiTeklif >= 3 then

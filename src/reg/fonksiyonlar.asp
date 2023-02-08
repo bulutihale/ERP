@@ -4083,34 +4083,31 @@ function pageHeader()
 	'##################################################
 	'##################################################
 		Response.Write "<!DOCTYPE html>"
-		Response.Write "<html lang=""en"" ng-app=""app"">"
-		Response.Write "<!--[if IE 8]><html class=""no-js lt-ie9""><![endif]-->"
-		Response.Write "<!--[if IE 9]><html class=""no-js lt-ie10""><![endif]-->"
-		Response.Write "<!--[if gt IE 8]><!--><html class=""no-js""><!--<![endif]-->"
+		Response.Write "<html lang=""en"">"
 		Response.Write "<head>"
 		Response.Write "<meta charset=""utf-8"">"
+		Response.Write "<meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=no"">"
 		Response.Write "<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"" />"
-		Response.Write "<title>" & sb_firmaAd & " Panel</title>"
+		Response.Write "<title></title>"
 		Response.Write "<meta name=""robots"" content=""noindex"" />"
-		Response.Write "<meta name=""author"" content=""" & sb_firmaAd & """ />"
+		' Response.Write "<meta name=""author"" content=""" & sb_firmaAd & """ />"
 		Response.Write "<link rel=""shortcut icon"" href=""/favicon.ico"" />"
-		Response.Write "<meta name=""viewport"" content=""width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"">"
 		Response.Write "<meta name=""apple-mobile-web-app-capable"" content=""yes"">"
-		Response.Write "<link rel=""stylesheet"" href=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.css"" />"
-		Response.Write "<link rel=""stylesheet"" href=""/cimax/ots.css"" />"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/modernizr-2.7.1-respond-1.4.2.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery-2.1.1.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery.form-3.4.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootbox/bootbox.min.js""></scr" & "ipt>"
-		Response.Write "<scr" & "ipt type=""text/javascript"" src=""/cimax/ots.js""></scr" & "ipt>"
-		Response.Write "<style type=""text/css"">"
-		Response.Write "@import url('" & sb_cdnUrl & "/fonts/font-awesome-4.4.0/css/font-awesome.min.css');"
-		Response.Write ".cezaeviEkranSimge {min-height:214px;}"
-		Response.Write "body{touch-action: manipulation;}"
-		Response.Write "table tr td,table tr {padding-top:0 !important;padding-bottom:0 !important}"
-		Response.Write "</style>"
-		Response.Write "<meta http-equiv=""refresh"" content=""360"">"
+		Response.Write "<link rel=""stylesheet"" href=""/template/css/style.css"">"
+		
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/modernizr-2.7.1-respond-1.4.2.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery-2.1.1.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootstrap/bootstrap.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/core/jquery.form-3.4.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""" & sb_cdnUrl & "/bootbox/bootbox.min.js""></scr" & "ipt>"
+		' Response.Write "<scr" & "ipt type=""text/javascript"" src=""/cimax/ots.js""></scr" & "ipt>"
+		' Response.Write "<style type=""text/css"">"
+		' ' Response.Write "@import url('" & sb_cdnUrl & "/fonts/font-awesome-4.4.0/css/font-awesome.min.css');"
+		' Response.Write ".cezaeviEkranSimge {min-height:214px;}"
+		' Response.Write "body{touch-action: manipulation;}"
+		' Response.Write "table tr td,table tr {padding-top:0 !important;padding-bottom:0 !important}"
+		' Response.Write "</style>"
+		' Response.Write "<meta http-equiv=""refresh"" content=""360"">"
 		Response.Write "</head>"
 		Response.Write "<body>"
 	'##################################################
@@ -4189,44 +4186,367 @@ function lotOlusturFunc(depoID)
 end function
 
 
+function mailGonderToplu(byVal gonderimID)
+	' call mailGonderToplu(byVal gonderimID)
+	' if gonderimID <> "" then
+		sorgu = "Select top 1" & vbcrlf
+		sorgu = sorgu & "durum" & vbcrlf
+		sorgu = sorgu & ",toplumail.sablon.sablonBaslik" & vbcrlf
+		sorgu = sorgu & ",toplumail.sablon.sablonIcerik" & vbcrlf
+		sorgu = sorgu & ",toplumail.adres.adres" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.gonderenAd" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.gonderenAdres" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.gonderenAdresSifre" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.smtpAdres" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.smtpPort" & vbcrlf
+		sorgu = sorgu & ",toplumail.mailAccount.smtpSSL" & vbcrlf
+		sorgu = sorgu & ",(Select count(blacklistID) from toplumail.blacklist where adres = toplumail.adres.adres and firmaID = " & firmaID & ") as blacklist" & vbcrlf
+		sorgu = sorgu & "from toplumail.gonderim" & vbcrlf
+		sorgu = sorgu & "LEFT JOIN toplumail.sablon on toplumail.sablon.sablonID = toplumail.gonderim.sablonID" & vbcrlf
+		sorgu = sorgu & "LEFT JOIN toplumail.adres on toplumail.adres.adresID = toplumail.gonderim.adresID" & vbcrlf
+		sorgu = sorgu & "LEFT JOIN toplumail.mailAccount on toplumail.mailAccount.mailAccountID = toplumail.gonderim.mailAccountID" & vbcrlf
+		sorgu = sorgu & "where toplumail.gonderim.firmaID = " & firmaID & vbcrlf
+		sorgu = sorgu & "and toplumail.gonderim.durum = 'Beklemede'" & vbcrlf
+		if gonderimID <> "" then
+			sorgu = sorgu & "and toplumail.gonderim.gonderimID = " & gonderimID & vbcrlf
+		end if
+		fn1.open sorgu, sbsv5, 1, 3
+		if fn1.recordcount > 0 then
+			mg_sablonBaslik = fn1("sablonBaslik")
+			mg_sablonIcerik = fn1("sablonIcerik")
+			mg_adres = fn1("adres")
+			mg_gonderenAd = fn1("gonderenAd")
+			mg_gonderenAdres = fn1("gonderenAdres")
+			mg_gonderenAdresSifre = fn1("gonderenAdresSifre")
+			mg_smtpAdres = fn1("smtpAdres")
+			mg_smtpPort = fn1("smtpPort")
+			mg_smtpSSL = fn1("smtpSSL")
+			mg_blacklist = fn1("blacklist")
+			'## içerik düzenleme
+				sablonIcerik	=	mg_sablonIcerik
+				mailadresi		=	mg_adres
+				mailadresi64	=	mailadresi
+				mailadresi64	=	base64_encode_tr(mailadresi64)
+				sablonIcerik    =   Replace(sablonIcerik,"[mailAdresi]",mailadresi)
+				sablonIcerik    =   Replace(sablonIcerik,"[buraya]","<a href=""" & sb_mainUrlOnEk & mainUrl & "/unsubscribe.asp?a=" & mailadresi64 & """>buraya</a>")
+				mg_sablonIcerik	=	sablonIcerik
+				sablonIcerik = "<!doctype html>"
+				sablonIcerik = sablonIcerik & "<html xmlns=""http://www.w3.org/1999/xhtml"" xmlns:v=""urn:schemas-microsoft-com:vml"" xmlns:o=""urn:schemas-microsoft-com:office:office"">"
+					sablonIcerik = sablonIcerik & "<head>"
+						sablonIcerik = sablonIcerik & "<meta charset=""UTF-8"">"
+						sablonIcerik = sablonIcerik & "<meta http-equiv=""X-UA-Compatible"" content=""IE=edge"">"
+						sablonIcerik = sablonIcerik & "<meta name=""viewport"" content=""width=device-width, initial-scale=1"">"
+						sablonIcerik = sablonIcerik & "<title>" & mg_sablonBaslik & "</title>"
+					sablonIcerik = sablonIcerik & "</head>"
+					sablonIcerik = sablonIcerik & "<body style=""height: 100%;margin: 0;padding: 0;width: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FAFAFA;"">"
+						sablonIcerik = sablonIcerik & mg_sablonIcerik
+					sablonIcerik = sablonIcerik & "</body>"
+				sablonIcerik = sablonIcerik & "</html>"
+				mg_sablonIcerik	=	sablonIcerik
+			'## içerik düzenleme
+			if mg_blacklist = 0 then
+				if mg_smtpSSL = true then
+					'CDO
+						Set objMail = Server.CreateObject("CDO.Message")
+							Set objBodyPart = objMail.BodyPart
+							objBodyPart.Charset = "UTF-8"
+							'## parametreler
+								Set objConfig = CreateObject("CDO.Configuration")
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver")		= mg_smtpAdres
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport")	= mg_smtpPort
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    	= 2
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      	= True
+								'objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusetls")      = True
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    	= mg_gonderenAdres
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    	= mg_gonderenAdresSifre
+								objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
+								objConfig.Fields.Update
+								Set objMail.Configuration = objConfig
+							'## parametreler
+							'## mail bilgileri
+								objMail.From			=	mg_gonderenAdres
+								'objMail.To       = "info@bulutihale.com"
+								objMail.To				=	mg_adres
+								objMail.Subject			=	mg_sablonBaslik
+								' objMail.AddAttachment dosyaAdres
+								' objMail.TextBody = "Test EMAIL"
+								objMail.HTMLBody		=	mg_sablonIcerik
+								objMail.TextBodyPart.CharSet = "UTF-8"
+								' objMail.BodyPart.Charset = "utf-8"
+							'## mail bilgileri
+							objMail.Send
+						Set objMail = Nothing
+					'CDO
+					fn1("durum") = "Gönderildi"
+					fn1.update
+					call jsconsole("Gönderildi : " & kvkkMaske(mg_adres,"",""))
+				end if
+			else
+				fn1("durum") = "Blacklist"
+				fn1.update
+				call jsconsole("Blacklist : " & kvkkMaske(mg_adres,"",""))
+			end if
+		end if
+		fn1.close
+	' end if
+end function
 
-'################## mail gonder CDO kullan
-	function mailGonderCDO(byVal mailBaslik, byVal mailicerik, byVal dosyaAdres, byVal CDOalicilar)
-		Set objMail = Server.CreateObject("CDO.Message")
 
-		Set objConfig = CreateObject("CDO.Configuration")
 
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "SMTP.office365.com" '---> smtp.gmail.com
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") 	= 25 '---> gmail'de tls->465 veya ssl->587 oluyor
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    	= 2
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      	= True
-		'objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusetls")      = True
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    	= "musteri.destek1@egemen.com.tr"
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    	= "jjjjj0000098"
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
 
-		objConfig.Fields.Update
 
-		Set objMail.Configuration = objConfig
 
-		objMail.From     = "musteri.destek1@egemen.com.tr"
-		'objMail.To       = "info@bulutihale.com"
-		objMail.To       = CDOalicilar
 
-		objMail.Subject  = mailBaslik
-		objMail.AddAttachment dosyaAdres
-		objMail.TextBody = "Test EMAIL"
-		objMail.HTMLBody = mailicerik
 
-		objMail.Send
-		Set objMail = Nothing
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'##### yetkisi olmayan için kelimeyi maskeler
+'##### yetkisi olmayan için kelimeyi maskeler
+'## call kvkkMaske("deneme",2,4)
+	function kvkkMaske(byVal kelime,byVal minYetki,byVal mevcutYetki)
+		if minYetki = "" then
+			minYetki = 1
+		end if
+		if mevcutYetki = "" then
+			mevcutYetki = 0
+		end if
+		if kelime <> "" then
+			if mevcutYetki >= minYetki then
+				'göster
+				kvkkMaske = kelime
+			else
+				'gizle
+				kvkkMaske = left(kelime,2)
+				for fnki = 1 to len(kelime)
+					kvkkMaske = kvkkMaske & "*"
+				next
+				kvkkMaske = kvkkMaske & right(kelime,2)
+			end if
+		else
+			kvkkMaske = ""
+		end if
 	end function
+'##### yetkisi olmayan için kelimeyi maskeler
+'##### yetkisi olmayan için kelimeyi maskeler
 
 
-'################## //mail gonder CDO kullan
 
+
+'##### YÜKLEME ESNASINDA YÜZDELİK KISMI GÖSTERECEK FONKSİYON -- HENÜZ BİTMEDİ
+	' Response.Write "<div id=""progressDiv"" class=""ml-3""></div>"
+	'##### yukarıdaki div sayfaya eklenmeli
+	function progressDurum(byVal toplamKayit,byVal mevcutKayit)
+		progressIcerik = mevcutKayit
+		call jsrun("$('#progressDiv').html('" & progressIcerik & "');")
+		Response.Flush()
+	end function
+'##### YÜKLEME ESNASINDA YÜZDELİK KISMI GÖSTERECEK FONKSİYON
+
+
+
+
+
+
+function js2decere(jsbilgi)
+	js2decere		=	jsbilgi
+	js2decerearr	=	Split(js2decere,".")
+	js2decere		=	js2decerearr(0)
+	set js2decerearr = Nothing
+end function
+
+function havadurumucek(konum,donem)
+
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+		if konum <> "" then
+			if donem = "" then
+				sontarih = now()
+				sontarih = dateadd("n",-60,sontarih)
+				sontarih = tarihsaatsql(sontarih)
+				sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & konum & "' and tarih >= '" & sontarih & "' and donem = N'anlık' order by tarih desc"
+			else
+				sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & konum & "' and donem = N'" & donem & "' order by tarih desc"
+			end if
+			fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount > 0 then
+'				jsicon		=	fn1("icon")
+'				jsdesc		=	fn1("desc")
+'				jsstatus	=	fn1("stats")
+				jsmin		=	fn1("min")
+'				jsmax		=	fn1("max")
+'				jsgece		=	fn1("gece")
+'				jsnem		=	fn1("nem")
+'				jsdegree	=	fn1("guncel")
+				derece		=	jsmin
+'				dbtarih		=	fn1("tarih")
+			end if
+			fn1.close
+		end if
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+
+	'#### HAVADURUMU VERİ GÖNDER
+	'#### HAVADURUMU VERİ GÖNDER
+		if derece = "" then
+			adres = "https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=" & konum
+			Set SrvHTTPS = Server.CreateObject("MSXML2.ServerXMLHTTP")
+			SrvHTTPS.open "GET", adres, false
+			SrvHTTPS.setRequestHeader "content-type","application/json"
+			SrvHTTPS.setRequestHeader "authorization","apikey 4JcW7MVqBh8YVluW277whk:6nOl4gLMYViBS2VDroNiSd"
+			SrvHTTPS.send
+			gelenveriHD	=	SrvHTTPS.responseText
+		end if
+	'#### HAVADURUMU VERİ GÖNDER
+	'#### HAVADURUMU VERİ GÖNDER
+
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+			if gelenveriHD <> "" then
+				'### ESKİ VERİLERİ SİL
+				'### ESKİ VERİLERİ SİL
+					sorgu = "Delete portal.havaDurumu where konumAd = N'" & konum & "'"
+					fn1.open sorgu, sbsv5, 3, 3
+				'### ESKİ VERİLERİ SİL
+				'### ESKİ VERİLERİ SİL
+				gelenveriHD		=	jsonveri(gelenveriHD)
+				gelenveriHD		=	Replace(gelenveriHD,"{success:true,city:" & konum & ",result:[","")
+				gelenGunlerArr	=	Split(gelenveriHD,"},{")
+				for vi = 0 to ubound(gelenGunlerArr)
+					'## OKU
+					'## OKU
+					gelenGunAyrintiArr	=	gelenGunlerArr(vi)
+					gelenGunAyrintiArr	=	Replace(gelenGunAyrintiArr,"{","")
+					gelenGunAyrintiArr	=	Split(gelenGunAyrintiArr,",")
+					jstarih				=	Replace(gelenGunAyrintiArr(0),"date:","")
+					jsgun				=	gelenGunAyrintiArr(1)
+					jsicon				=	Replace(gelenGunAyrintiArr(2),"icon:","")
+					jsdesc				=	Replace(gelenGunAyrintiArr(3),"description:","")
+					jsstatus			=	Replace(gelenGunAyrintiArr(4),"status:","")
+					jsdegree			=	js2decere(Replace(gelenGunAyrintiArr(5),"degree:",""))
+					jsmin				=	js2decere(Replace(gelenGunAyrintiArr(6),"min:",""))
+					jsmax				=	js2decere(Replace(gelenGunAyrintiArr(7),"max:",""))
+					jsgece				=	js2decere(Replace(gelenGunAyrintiArr(8),"night:",""))
+					jsnem				=	Replace(gelenGunAyrintiArr(9),"humidity:","")
+					jsnem				=	Replace(jsnem,"}]}","")
+					jsdesc				=	turkcele(jsdesc)
+					set gelenGunAyrintiArr = Nothing
+					'## OKU
+					'## OKU
+					'## KAYDET
+					'## KAYDET
+					sorgu = "Select top 1 * from portal.havaDurumu"
+					fn1.open sorgu, sbsv5, 1, 3
+						fn1.addnew
+						fn1("icon")		=	jsicon
+						fn1("desc")		=	jsdesc
+						fn1("stats")	=	jsstatus
+						fn1("guncel")	=	jsdegree
+						fn1("min")		=	jsmin
+						fn1("max")		=	jsmax
+						fn1("gece")		=	jsgece
+						fn1("nem")		=	jsnem
+						fn1("tarih")	=	now()
+						fn1("gun")		=	jstarih
+						fn1("konumAd")	=	konum
+						if vi = 0 then
+							fn1("donem")	=	"anlık"
+						else
+							fn1("donem")	=	jstarih
+						end if
+						fn1.update
+					fn1.close
+					'## KAYDET
+					'## KAYDET
+				next
+				set gelenGunlerArr = Nothing
+			end if
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+		if sb_konum <> "" and donem <> "" then
+			sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & sb_konum & "' and donem = N'" & donem & "' order by tarih desc"
+			fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount > 0 then
+				jsicon		=	fn1("icon")
+				jsdesc		=	fn1("desc")
+				jsstatus	=	fn1("stats")
+				jsmin		=	fn1("min")
+				jsmax		=	fn1("max")
+				jsgece		=	fn1("gece")
+				jsnem		=	fn1("nem")
+				jsdegree	=	fn1("guncel")
+				derece		=	jsmin
+				dbtarih		=	fn1("tarih")
+			end if
+			fn1.close
+		end if
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+
+	'#### HAVADURUMU İCON BUL
+	'#### HAVADURUMU İCON BUL
+		' yerelicon = jsicon
+		' yerelicon = Replace(yerelicon,"https://image.flaticon.com/icons/svg/143/","")
+		' yerelicon = "/template/havadurumu/" & yerelicon
+		' yerelicon = Replace(yerelicon,".svg",".png")
+		' Response.Write yerelicon
+		iconfile = "/template/havadurumu/" & lcase(jsstatus) & ".png"
+		if dosyakontrol(iconfile) = True then
+		' 	iconfile = yerelicon
+		else
+			iconfile = jsstatus
+		end if
+	'#### HAVADURUMU İCON BUL
+	'#### HAVADURUMU İCON BUL
+
+
+	'#### VERİLERİ YOLLA
+	'#### VERİLERİ YOLLA
+		havadurumudesc		=	jsdesc
+		havadurumuicon		=	iconfile
+		havadurumuguncel	=	jsdegree
+		havadurumumin		=	jsmin
+		havadurumumax		=	jsmax
+		havadurumunem		=	jsnem
+		havadurumugece		=	jsgece
+		havadurumutarih		=	dbtarih
+	'#### VERİLERİ YOLLA
+	'#### VERİLERİ YOLLA
+end function
+'##############HAVADURUMU
 
 
 

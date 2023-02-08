@@ -13,18 +13,15 @@
 	stokID64	=	gorevID
 	gorevID64	=	gorevID
 	gorevID		=	base64_decode_tr(gorevID64)
-	modulAd 	=   "stok"
+	modulAd 	=   "test"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
 
+call havadurumucek("izmir","anlık")
 
 
 
- sorgu = "SELECT * FROM tblstsabit"
- rsS.open sorgu, rsCari, 1, 3
-     Response.Write rsS("STOK_KODU")
- rsS.close
 
 
 %>

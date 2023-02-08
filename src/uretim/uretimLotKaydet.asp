@@ -10,7 +10,7 @@
 	stokHareketTuru		=	Request.Form("stokHareketTuru")
 	kullanimMiktar		=	Request.Form("kullanimMiktar")
 	miktarBirim			=	Request.Form("miktarBirim")
-	surecDepoID		=	Request.Form("surecDepoID")
+	surecDepoID			=	Request.Form("surecDepoID")
 	stokID				=	Request.Form("stokID")
 	siparisKalemID		=	Request.Form("siparisKalemID")
 	lot					=	Request.Form("lot")

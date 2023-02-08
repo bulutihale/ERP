@@ -28,6 +28,7 @@
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 60 end if
 		if t2 = "" then t2 = date() end if
+		t2 = t2+1
 	'####### /varsayılan tarih sınırları
 	
 
@@ -39,7 +40,7 @@
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
 
-call logla("Müşteri Siparişleri Listelendi")
+call logla("Üretim İşleri Listelendi")
 
 Response.Write "<div class=""card rounded-top"">"
 Response.Write "<div class=""card-header h5"">"
@@ -70,7 +71,7 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
-			sorgu = sorgu & " LEFT JOIN recete.recete t3 ON t1.stokID = t3.stokID"
+			'sorgu = sorgu & " LEFT JOIN recete.recete t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
 			sorgu = sorgu & " AND t1.isTur = '" & listeTur & "'" 
 			if stokID <> "" then
@@ -82,11 +83,11 @@ Response.Write "<div class=""card-body"">"
 			if t4 <> "" then
 				sorgu = sorgu & " AND t1.baslangicZaman <= '" & tarihsql(t4) &"'"	
 			end if
+			'sorgu = sorgu & " AND (t1.bitisZaman is null OR (CONVERT(varchar,t1.bitisZaman,103) >= '" & tarihsql(t1) &"' AND CONVERT(varchar, t1.bitisZaman, 103) <= '" & tarihsql(t2) &"'))"
 			sorgu = sorgu & " AND (t1.bitisZaman is null OR (t1.bitisZaman >= '" & tarihsql(t1) &"' AND t1.bitisZaman <= '" & tarihsql(t2) &"'))"
 			sorgu = sorgu & " AND t1.silindi = 0"
 			sorgu = sorgu & " ORDER BY t1.bitisZaman DESC"
 			rs.open sorgu, sbsv5, 1, 3
-
 
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount

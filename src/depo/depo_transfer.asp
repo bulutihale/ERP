@@ -70,6 +70,8 @@ yetkiKontrol = yetkibul(modulAd)
 		'### /bileşenin reçetedeki miktarını  bul
 
 		ihtiyacMiktar	=	siparisMiktar * receteMiktar
+	else
+		receteID	=	0
 	end if
 
 	if stokID <> "" then
@@ -97,6 +99,7 @@ yetkiKontrol = yetkibul(modulAd)
 	
 
 	if yetkiKontrol > 2 then
+
 
 		Response.Write "<div class=""card"">"
 			Response.Write "<div class=""card-header text-white bg-info"">Depolar Arası Transfer</div>"
@@ -182,12 +185,14 @@ yetkiKontrol = yetkibul(modulAd)
 	'##### /seçilen depoda giriş bekleyenleri göster
 	
 '//FIXME - aktarım yapılacak olan depoKategori sorguya manuel yazıldı dinamikleştirilmesi gerekir.
+
 				if stokID <> "" then
 
 					call formhidden("listeTur",listeTur,"","","","","listeTur","")
 
 
-					sorgu = "SELECT portal.FN_sipariscariAdbul(" & firmaID & ",t1.ajandaID) as cariAd,"
+					sorgu = "SELECT DISTINCT"
+					'sorgu = sorgu & " portal.FN_sipariscariAdbul(" & firmaID & ",t1.ajandaID) as cariAd,"
 					sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) as lotMiktar, t2.depoAd, t1.depoID, t1.lot, t1.miktarBirim, t1.lotSKT"
 					sorgu = sorgu & " FROM stok.stokHareket t1"
 					sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
@@ -196,10 +201,11 @@ yetkiKontrol = yetkibul(modulAd)
 					sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
 					sorgu = sorgu & " AND t1.silindi = 0"
 					sorgu = sorgu & " AND t1.stokHareketTuru ='G'"
-					sorgu = sorgu & " GROUP BY t1.depoID, t1.stokKodu, t1.stokID, t2.depoAd, t1.lot, t1.miktarBirim, t1.lotSKT, t1.ajandaID"
+					sorgu = sorgu & " GROUP BY t1.depoID, t1.stokKodu, t1.stokID, t2.depoAd, t1.lot, t1.miktarBirim, t1.lotSKT"
+					'sorgu = sorgu & " , t1.ajandaID"
 					rs.open sorgu, sbsv5, 1, 3
 						Response.Write "<div class=""row mt-1 text-center bold border-bottom mt-3"">"
-							Response.Write "<div class=""col-lg-2 col-sm-6"">Cari</div>"
+							'Response.Write "<div class=""col-lg-2 col-sm-6"">Cari</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-6"">Lot</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-6"">Bulunduğu Depo</div>"
 							Response.Write "<div class=""col-lg-3 col-sm-6"">Depodaki Miktar</div>"
@@ -212,7 +218,7 @@ yetkiKontrol = yetkibul(modulAd)
 						siraNo		=	0
 					do until rs.EOF
 						siraNo	=	siraNo + 1
-						cariAd			=	rs("cariAd")
+						'cariAd			=	rs("cariAd")
 						depoID			=	rs("depoID")
 						depoAd			=	rs("depoAd")
 						lotMiktar		=	rs("lotMiktar")
@@ -226,7 +232,7 @@ yetkiKontrol = yetkibul(modulAd)
 						end if
 
 						Response.Write "<div class=""row mt-1 hoverGel rounded"&divClass&""">"
-							Response.Write "<div class=""col-lg-2 col-sm-6 fontkucuk2"">" & cariAd & "</div>"
+							'Response.Write "<div class=""col-lg-2 col-sm-6 fontkucuk2"">" & cariAd & "</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-6"">" & lot & "</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-6"">" & depoAd &"</div>"
 							Response.Write "<div class=""col-lg-3 col-sm-6 text-right pointer"" onclick=""$('#aktarMiktar_"&siraNo&"').val("&lotMiktar&")"">" & lotMiktar & " " & miktarBirim & "</div>"

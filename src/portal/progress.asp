@@ -1,0 +1,1 @@
+﻿progress bar için yaptık. ileride yazılacak

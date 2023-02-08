@@ -101,7 +101,7 @@ yetkiKontrol = yetkibul(modulAd)
 									call forminput("kullanimMiktar","","","","","autocompleteOFF","kullanimMiktar"&divSayi&"","")
 								Response.Write "</td>"
 								Response.Write "<td class=""text-center"">"
-									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','"&surecDepoID&"',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&ihtiyacMiktar&","&surecDepoID&");"" class=""btn btn-info"">kullan</div>"
+									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','"&surecDepoID&"',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&surecDepoID&");"" class=""btn btn-info"">kullan</div>"
 								Response.Write "</td>"
 							Response.Write "</tr>"
 						rs1.movenext
@@ -125,9 +125,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 %>
 <script>
-	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,surecDepoID,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID,ihtiyacMiktar,surecDepoID){
+	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,surecDepoID,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID,surecDepoID){
 
-		var kullanimMiktar		=	$('#kullanimMiktar'+divSayi).val();
+	var kullanimMiktar		=	$('#kullanimMiktar'+divSayi).val();
 		if(kullanimMiktar == undefined){swal('miktar girişi yapılmalı',''); return false};
 
 	//	alert(secilenReceteID)
@@ -157,7 +157,7 @@ yetkiKontrol = yetkibul(modulAd)
 					lot:lot, 
 					stokHareketTipi:stokHareketTipi, 
 					lotSKT:lotSKT,
-					ihtiyacMiktar:ihtiyacMiktar
+					ihtiyacMiktar:'<%=ihtiyacMiktar%>'
 					}, function(){
 				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')
 				});

@@ -3,7 +3,7 @@
 
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
-    modulAd 		=   "satis"
+    modulAd 		=   "Üretim"
 	listeTur		=	Request.QueryString("listeTur")
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR

@@ -28,7 +28,7 @@
 			sorgu = sorgu & " t1.stokKodu,"
 			sorgu = sorgu & " t1.stokAd, t1.stokBarcode" 
 			sorgu = sorgu & " FROM stok.stok t1" 
-			sorgu = sorgu & " WHERE (t1.stokAd like N'%" & arananKelime & "%' OR t1.stokBarcode like N'%" & arananKelime & "%' OR t1.stokKodu like N'%" & arananKelime & "%')"
+			sorgu = sorgu & " WHERE t1.silindi = 0 AND (t1.stokAd like N'%" & arananKelime & "%' OR t1.stokBarcode like N'%" & arananKelime & "%' OR t1.stokKodu like N'%" & arananKelime & "%')"
 			sorgu = sorgu & " ORDER BY t1.stokAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
 			

@@ -102,7 +102,23 @@ jQuery(document).ajaxSuccess(
 		var ortaform = {target:'#ortaalan',type:'POST'};$('.ortaform').ajaxForm(ortaform);
 		$('.tarih').datepicker({format: "dd.mm.yyyy",weekStart: 1,maxViewMode: 2,language: "tr",keyboardNavigation: false,daysOfWeekHighlighted: "0,6",autoclose: true,todayHighlight: true});
 		if($("div").hasClass('cycle_s1')){$('.cycle_s1').cycle({fx:'blindX'});}
-		if($("textarea").hasClass('summernote')){$('.summernote').summernote({height: 200});}
+		if($("textarea").hasClass('summernote')){$('.summernote').summernote({height: 200,spellCheck: false,
+		
+			toolbar: [
+				// [groupName, [list of button]]
+				['style', ['bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontname', ['fontname']],
+				['fontsize', ['fontsize']],
+				['color', ['color']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']]
+				['table', ['table']],
+				['insert', ['link', 'picture', 'video']],
+				['view', ['fullscreen', 'codeview', 'help']],
+			]
+		
+		});}
 
 	// hem normal #ortalan'da hem de modal içinde kullanılan sayfalar için modalkapat butonu göster/gizle (ör:/ajanda/ajanda.asp)
 		// ortak sayfanın en üstüne koyulacak kapat butonunu gösteren kod
@@ -338,7 +354,7 @@ function numara(nesne,para,uyari)
 //Kullanımı : numara(this,true,true)
 //Kullanımı : numara(this,false,'Bu alana sadece rakam yazılabilir')
 {
-	if(para==true){var ValidChars = "0123456789,";}else{var ValidChars = "0123456789+";}
+	if(para==true){var ValidChars = "0123456789,.";}else{var ValidChars = "0123456789+";}
 	var IsNumber=true;
 	var Char;
 		for (i = 0; i < nesne.value.length && IsNumber == true; i++)
