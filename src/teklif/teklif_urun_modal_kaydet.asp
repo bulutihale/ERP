@@ -3,10 +3,10 @@
 
 '###### ANA TANIMLAMALAR
     call sessiontest()
-    kid		=	kidbul()
-    hata    =   ""
-    modulAd =   "Teklif"
     Response.Flush()
+    kid		            =	kidbul()
+    hata                =   ""
+    modulAd             =   "Teklif"
     teklifStokID        =   Request.Form("teklifStokID")
     teklifID            =   Request.Form("teklifID")
     teklifParaBirimi    =   Request.Form("teklifParaBirimi")
@@ -23,6 +23,8 @@
     dovizKuru           =   Request.Form("dovizKuru")
     stokToplamFiyat     =   Request.Form("stokToplamFiyat")
     stokToplamFiyatTPB  =   Request.Form("stokToplamFiyatTPB")
+    teklifTuru          =   Request.Form("teklifTuru")
+    stokkdv             =   Request.Form("stokkdv")
 '###### ANA TANIMLAMALAR
 
 
@@ -57,6 +59,7 @@
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
+    stokFiyat = Replace(stokFiyat,".",",")
     stokToplamFiyat = Replace(stokToplamFiyat,".",",")
 '##### HATA ÖNLEME
 
@@ -65,31 +68,48 @@
       sorgu = "Select top 1 * from teklif.teklif_urun"
       rs.open sorgu,sbsv5,1,3
         rs.addnew
-          rs("kid")                 =   kid
-          rs("firmaID")             =   firmaID
-          rs("teklifID")            =   teklifID
-          rs("teklifStokID")        =   teklifStokID
-          rs("teklifParaBirimi")    =   teklifParaBirimi
-          rs("stokAd")              =   stokAd
-          rs("stokAciklama")        =   stokAciklama
-          rs("stokAdet")            =   stokAdet
-          rs("stokBirim")           =   stokBirim
-          rs("stokFiyat")           =   stokFiyat
-          rs("iskonto1")            =   iskonto1
-          rs("iskonto2")            =   iskonto2
-          rs("iskonto3")            =   iskonto3
-          rs("iskonto4")            =   iskonto4
-          rs("stokToplamFiyatOrj")  =   stokToplamFiyat
-          rs("stokParaBirim")       =   stokParaBirim
-          rs("dovizKuru")           =   dovizKuru
-          if stokToplamFiyatTPB = "" then
-            rs("stokToplamFiyat")     =   stokToplamFiyat
-            rs("stokToplamFiyatTPB")  =   0
-          else
-            stokToplamFiyatTPB = Replace(stokToplamFiyatTPB,".",",")
-            rs("stokToplamFiyat")     =   stokToplamFiyatTPB
-            rs("stokToplamFiyatTPB")  =   stokToplamFiyatTPB
-          end if
+            rs("kid")                 =   kid
+            rs("firmaID")             =   firmaID
+            rs("teklifID")            =   teklifID
+            rs("teklifStokID")        =   teklifStokID
+            rs("teklifParaBirimi")    =   teklifParaBirimi
+            rs("stokAd")              =   stokAd
+            rs("stokAciklama")        =   stokAciklama
+            rs("stokAdet")            =   stokAdet
+            rs("stokBirim")           =   stokBirim
+            rs("stokFiyat")           =   stokFiyat
+            rs("iskonto1")            =   iskonto1
+            rs("iskonto2")            =   iskonto2
+            rs("iskonto3")            =   iskonto3
+            rs("iskonto4")            =   iskonto4
+            rs("stokToplamFiyatOrj")  =   stokToplamFiyat
+            rs("stokParaBirim")       =   stokParaBirim
+            rs("dovizKuru")           =   dovizKuru
+            if stokToplamFiyatTPB = "" then
+                rs("stokToplamFiyat")     =   stokToplamFiyat
+                rs("stokToplamFiyatTPB")  =   0
+            else
+                stokToplamFiyatTPB = Replace(stokToplamFiyatTPB,".",",")
+                rs("stokToplamFiyat")     =   stokToplamFiyatTPB
+                rs("stokToplamFiyatTPB")  =   stokToplamFiyatTPB
+            end if
+            'her şartta kdv dönüşümleri için hesapla
+            if teklifTuru = 1 then
+                'kdv dahil
+                rs("stokFiyatKD")           =   stokFiyat
+                rs("stokToplamFiyatKD")     =   stokToplamFiyat
+                'kdv hariç
+                rs("stokFiyatKH")           =   stokFiyat / (1+(stokkdv/100))
+                rs("stokToplamFiyatKH")     =   stokToplamFiyat / (1+(stokkdv/100))
+            elseif teklifTuru = 2 then
+                'kdv dahil
+                rs("stokFiyatKH")           =   stokFiyat
+                rs("stokToplamFiyatKH")     =   stokToplamFiyat
+                'kdv hariç
+                rs("stokFiyatKD")           =   stokFiyat * (1+(stokkdv/100))
+                rs("stokToplamFiyatKD")     =   stokToplamFiyat * (1+(stokkdv/100))
+            end if
+            'her şartta kdv dönüşümleri için hesapla
         rs.update
       rs.close
 '### KAYDET

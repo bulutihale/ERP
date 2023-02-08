@@ -354,7 +354,7 @@ function numara(nesne,para,uyari)
 //Kullanımı : numara(this,true,true)
 //Kullanımı : numara(this,false,'Bu alana sadece rakam yazılabilir')
 {
-	if(para==true){var ValidChars = "0123456789,";}else{var ValidChars = "0123456789+";}
+	if(para==true){var ValidChars = "0123456789,.";}else{var ValidChars = "0123456789+";}
 	var IsNumber=true;
 	var Char;
 		for (i = 0; i < nesne.value.length && IsNumber == true; i++)

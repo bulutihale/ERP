@@ -66,6 +66,10 @@
                         teklifKalemID       =   rs("teklifKalemID")
                         stokKdv             =   rs("stokKdv")
                         dovizKuru           =   rs("dovizKuru")
+                        stokFiyatKD         =   rs("stokFiyatKD")
+                        stokFiyatKH         =   rs("stokFiyatKH")
+                        stokToplamFiyatKD   =   rs("stokToplamFiyatKD")
+                        stokToplamFiyatKH   =   rs("stokToplamFiyatKH")
                     '## verileri al
                     '## hesaplamaları yap
                         if teklifTuru = 1 then
@@ -80,7 +84,11 @@
                             teklifGenelToplam       =   teklifToplam - teklifKdv - teklifIskontoToplam
                         elseif teklifTuru = 2 then
                             'kdv hariç
-                            stokFiyat               =   stokFiyat - (stokFiyat * stokKdv) / 100
+                            teklifSatirToplami      =   stokFiyat * stokAdet * dovizKuru
+                            teklifToplam            =   teklifToplam + teklifSatirToplami
+                            teklifSatirIskonto      =   teklifSatirToplami - stokToplamFiyat
+                            teklifIskontoToplam     =   teklifIskontoToplam + teklifSatirIskonto
+                            teklifGenelToplam       =   teklifToplam - teklifIskontoToplam
                         end if
                     '## hesaplamaları yap
 					Response.Write "<tr>"

@@ -4326,40 +4326,6 @@ end function
 
 
 
-'################## mail gonder CDO kullan
-	function mailGonderCDO(byVal mailBaslik, byVal mailicerik, byVal dosyaAdres, byVal CDOalicilar)
-
-
-
-		Set objMail = Server.CreateObject("CDO.Message")
-			'## parametreler
-				Set objConfig = CreateObject("CDO.Configuration")
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") = "SMTP.office365.com" '---> smtp.gmail.com
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") 	= 25 '---> gmail'de tls->465 veya ssl->587 oluyor
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    	= 2
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") = 1
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      	= True
-				'objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusetls")      = True
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    	= "musteri.destek1@egemen.com.tr"
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")    	= "jjjjj0000098"
-				objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout") = 60
-				objConfig.Fields.Update
-				Set objMail.Configuration = objConfig
-			'## parametreler
-			'## mail bilgileri
-				objMail.From     = "musteri.destek1@egemen.com.tr"
-				'objMail.To       = "info@bulutihale.com"
-				objMail.To       = CDOalicilar
-				objMail.Subject  = mailBaslik
-				objMail.AddAttachment dosyaAdres
-				objMail.TextBody = "Test EMAIL"
-				objMail.HTMLBody = mailicerik
-			'## mail bilgileri
-			objMail.Send
-		Set objMail = Nothing
-	end function
-'################## //mail gonder CDO kullan
-
 
 
 
@@ -4406,6 +4372,184 @@ end function
 		Response.Flush()
 	end function
 '##### YÜKLEME ESNASINDA YÜZDELİK KISMI GÖSTERECEK FONKSİYON
+
+
+
+
+
+
+function js2decere(jsbilgi)
+	js2decere		=	jsbilgi
+	js2decerearr	=	Split(js2decere,".")
+	js2decere		=	js2decerearr(0)
+	set js2decerearr = Nothing
+end function
+
+function havadurumucek(konum,donem)
+
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+		if konum <> "" then
+			if donem = "" then
+				sontarih = now()
+				sontarih = dateadd("n",-60,sontarih)
+				sontarih = tarihsaatsql(sontarih)
+				sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & konum & "' and tarih >= '" & sontarih & "' and donem = N'anlık' order by tarih desc"
+			else
+				sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & konum & "' and donem = N'" & donem & "' order by tarih desc"
+			end if
+			fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount > 0 then
+'				jsicon		=	fn1("icon")
+'				jsdesc		=	fn1("desc")
+'				jsstatus	=	fn1("stats")
+				jsmin		=	fn1("min")
+'				jsmax		=	fn1("max")
+'				jsgece		=	fn1("gece")
+'				jsnem		=	fn1("nem")
+'				jsdegree	=	fn1("guncel")
+				derece		=	jsmin
+'				dbtarih		=	fn1("tarih")
+			end if
+			fn1.close
+		end if
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
+
+	'#### HAVADURUMU VERİ GÖNDER
+	'#### HAVADURUMU VERİ GÖNDER
+		if derece = "" then
+			adres = "https://api.collectapi.com/weather/getWeather?data.lang=tr&data.city=" & konum
+			Set SrvHTTPS = Server.CreateObject("MSXML2.ServerXMLHTTP")
+			SrvHTTPS.open "GET", adres, false
+			SrvHTTPS.setRequestHeader "content-type","application/json"
+			SrvHTTPS.setRequestHeader "authorization","apikey 4JcW7MVqBh8YVluW277whk:6nOl4gLMYViBS2VDroNiSd"
+			SrvHTTPS.send
+			gelenveriHD	=	SrvHTTPS.responseText
+		end if
+	'#### HAVADURUMU VERİ GÖNDER
+	'#### HAVADURUMU VERİ GÖNDER
+
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+			if gelenveriHD <> "" then
+				'### ESKİ VERİLERİ SİL
+				'### ESKİ VERİLERİ SİL
+					sorgu = "Delete portal.havaDurumu where konumAd = N'" & konum & "'"
+					fn1.open sorgu, sbsv5, 3, 3
+				'### ESKİ VERİLERİ SİL
+				'### ESKİ VERİLERİ SİL
+				gelenveriHD		=	jsonveri(gelenveriHD)
+				gelenveriHD		=	Replace(gelenveriHD,"{success:true,city:" & konum & ",result:[","")
+				gelenGunlerArr	=	Split(gelenveriHD,"},{")
+				for vi = 0 to ubound(gelenGunlerArr)
+					'## OKU
+					'## OKU
+					gelenGunAyrintiArr	=	gelenGunlerArr(vi)
+					gelenGunAyrintiArr	=	Replace(gelenGunAyrintiArr,"{","")
+					gelenGunAyrintiArr	=	Split(gelenGunAyrintiArr,",")
+					jstarih				=	Replace(gelenGunAyrintiArr(0),"date:","")
+					jsgun				=	gelenGunAyrintiArr(1)
+					jsicon				=	Replace(gelenGunAyrintiArr(2),"icon:","")
+					jsdesc				=	Replace(gelenGunAyrintiArr(3),"description:","")
+					jsstatus			=	Replace(gelenGunAyrintiArr(4),"status:","")
+					jsdegree			=	js2decere(Replace(gelenGunAyrintiArr(5),"degree:",""))
+					jsmin				=	js2decere(Replace(gelenGunAyrintiArr(6),"min:",""))
+					jsmax				=	js2decere(Replace(gelenGunAyrintiArr(7),"max:",""))
+					jsgece				=	js2decere(Replace(gelenGunAyrintiArr(8),"night:",""))
+					jsnem				=	Replace(gelenGunAyrintiArr(9),"humidity:","")
+					jsnem				=	Replace(jsnem,"}]}","")
+					jsdesc				=	turkcele(jsdesc)
+					set gelenGunAyrintiArr = Nothing
+					'## OKU
+					'## OKU
+					'## KAYDET
+					'## KAYDET
+					sorgu = "Select top 1 * from portal.havaDurumu"
+					fn1.open sorgu, sbsv5, 1, 3
+						fn1.addnew
+						fn1("icon")		=	jsicon
+						fn1("desc")		=	jsdesc
+						fn1("stats")	=	jsstatus
+						fn1("guncel")	=	jsdegree
+						fn1("min")		=	jsmin
+						fn1("max")		=	jsmax
+						fn1("gece")		=	jsgece
+						fn1("nem")		=	jsnem
+						fn1("tarih")	=	now()
+						fn1("gun")		=	jstarih
+						fn1("konumAd")	=	konum
+						if vi = 0 then
+							fn1("donem")	=	"anlık"
+						else
+							fn1("donem")	=	jstarih
+						end if
+						fn1.update
+					fn1.close
+					'## KAYDET
+					'## KAYDET
+				next
+				set gelenGunlerArr = Nothing
+			end if
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+	'#### HAVADURUMU GELEN VERİYİ AYRIŞTIR
+
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+		if sb_konum <> "" and donem <> "" then
+			sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & sb_konum & "' and donem = N'" & donem & "' order by tarih desc"
+			fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount > 0 then
+				jsicon		=	fn1("icon")
+				jsdesc		=	fn1("desc")
+				jsstatus	=	fn1("stats")
+				jsmin		=	fn1("min")
+				jsmax		=	fn1("max")
+				jsgece		=	fn1("gece")
+				jsnem		=	fn1("nem")
+				jsdegree	=	fn1("guncel")
+				derece		=	jsmin
+				dbtarih		=	fn1("tarih")
+			end if
+			fn1.close
+		end if
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
+
+	'#### HAVADURUMU İCON BUL
+	'#### HAVADURUMU İCON BUL
+		' yerelicon = jsicon
+		' yerelicon = Replace(yerelicon,"https://image.flaticon.com/icons/svg/143/","")
+		' yerelicon = "/template/havadurumu/" & yerelicon
+		' yerelicon = Replace(yerelicon,".svg",".png")
+		' Response.Write yerelicon
+		iconfile = "/template/havadurumu/" & lcase(jsstatus) & ".png"
+		if dosyakontrol(iconfile) = True then
+		' 	iconfile = yerelicon
+		else
+			iconfile = jsstatus
+		end if
+	'#### HAVADURUMU İCON BUL
+	'#### HAVADURUMU İCON BUL
+
+
+	'#### VERİLERİ YOLLA
+	'#### VERİLERİ YOLLA
+		havadurumudesc		=	jsdesc
+		havadurumuicon		=	iconfile
+		havadurumuguncel	=	jsdegree
+		havadurumumin		=	jsmin
+		havadurumumax		=	jsmax
+		havadurumunem		=	jsnem
+		havadurumugece		=	jsgece
+		havadurumutarih		=	dbtarih
+	'#### VERİLERİ YOLLA
+	'#### VERİLERİ YOLLA
+end function
+'##############HAVADURUMU
+
+
+
 
 
 %>

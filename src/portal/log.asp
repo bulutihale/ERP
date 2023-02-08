@@ -34,7 +34,11 @@ yetki = yetkibul("manager")
 		for ri = 1 to rs.recordcount
 			Response.Write "<tr>"
 			Response.Write "<td>" & rs("tarih") & "</td>"
-			Response.Write "<td>" & rs("kidAd") & "</td>"
+			Response.Write "<td>"
+			if kid = rs("personelID") then
+				Response.Write "<i class=""icon medal-gold-1 mr-1""></i>"
+			end if
+			Response.Write rs("kidAd") & "</td>"
 			Response.Write "<td>" & rs("islem") & "</td>"
 			Response.Write "<td>" & rs("ip") & "</td>"
 			Response.Write "</td>"

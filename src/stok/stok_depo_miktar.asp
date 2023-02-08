@@ -24,7 +24,7 @@ call logla("Stok Depo Miktarları Detay")
 yetkiKontrol = yetkibul(modulAd)
 
 
-            sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktar,"
+            sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayGB(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktarGB,"
 			sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar, t3.depoAd, t2.lot, t2.miktarBirim"
 			sorgu = sorgu & " FROM stok.stok t1"
 			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
@@ -61,17 +61,15 @@ yetkiKontrol = yetkibul(modulAd)
 		' Response.Write "<th scope=""col"">Depo Miktar</th>"
 		Response.Write "<th scope=""col"">Depo Ad</th>"
 		Response.Write "</tr></thead><tbody>"
-
+					
 				do until rs.EOF
 					depoAd			=	rs("depoAd")
 					lot				=	rs("lot")
 					lotMiktar		=	rs("lotMiktar")
-					stokMiktar		=	rs("stokMiktar")
 					miktarBirim		=	rs("miktarBirim")
 					Response.Write "<tr>"
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td class=""text-right"">" & lotMiktar & " " & miktarBirim & " </td>"
-						' Response.Write "<td class=""text-right"">" & stokMiktar & " " & miktarBirim & " </td>"
 						Response.Write "<td>" & depoAd & "</td>"
 					Response.Write "</tr>"
 					Response.Flush()

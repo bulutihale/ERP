@@ -55,6 +55,7 @@
 	.none {cursor: none;}
 	.not-allowed {cursor: not-allowed;}
 	.pointer {cursor: pointer;}
+	.parmak {cursor: pointer;}
 	.progress {cursor: progress;}
 	.row-resize {cursor: row-resize;}
 	.s-resize {cursor: s-resize;}
@@ -67,4 +68,5 @@
 	.zoom-in {cursor: zoom-in;}
 	.zoom-out {cursor: zoom-out;}
 /*cursor listesi*/
+
 

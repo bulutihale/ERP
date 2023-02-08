@@ -70,6 +70,8 @@ yetkiKontrol = yetkibul(modulAd)
 		'### /bileşenin reçetedeki miktarını  bul
 
 		ihtiyacMiktar	=	siparisMiktar * receteMiktar
+	else
+		receteID	=	0
 	end if
 
 	if stokID <> "" then

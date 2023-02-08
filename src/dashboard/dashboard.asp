@@ -9,14 +9,20 @@
 	kid					=	kidbul()
 	personelID			=	kid
 	hata				=	""
+	islem				=	Request.QueryString("islem")
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
+
+	call logla("Welcome Dashboard")
+
+
+Response.Write "<i onClick=""modalajax('/dashboard/dashboard_duzenle.asp');"" style=""position:fixed;right:4px;"" class=""icon layout-add parmak"" title=""" & translate("Dashboard dizilimini değiştir","","") & """></i>"
 
 
 	sorgu = "Select" & vbcrlf
 	sorgu = sorgu & "* from portal.dashboard" & vbcrlf
-	sorgu = sorgu & "where personelID = " & kid & vbcrlf
+	sorgu = sorgu & "where (personelID = " & kid & " or personelID = 0)" & vbcrlf
 	sorgu = sorgu & "order by sira ASC" & vbcrlf
 	rs.Open sorgu, sbsv5, 1, 3
 	if rs.recordcount > 0 then
@@ -45,6 +51,28 @@
 			Response.Write "});"
 			Response.Write "</scr" & "ipt>"
 		'##### SCRIPT
+	else
+		if islem = "" then
+			'varsayılan dashboard oluştur
+			rs.addnew
+				rs("kid")			=	kid
+				rs("firmaID")		=	firmaID
+				rs("personelID")	=	kid
+				rs("modul")			=	"doviz"
+				rs("modulAd")		=	"Döviz Bilgileri"
+				rs("sira")			=	99
+			rs.update
+			rs.addnew
+				rs("kid")			=	kid
+				rs("firmaID")		=	firmaID
+				rs("personelID")	=	kid
+				rs("modul")			=	"havaDurumu"
+				rs("modulAd")		=	"Hava Durumu"
+				rs("sira")			=	99
+			rs.update
+			'varsayılan dashboard oluştur
+			call jsac("/dashboard/dashboard.asp")
+		end if
 	end if
 	rs.close
 
@@ -91,6 +119,18 @@ function modulBilgiBul(byVal modul,byVal bilgi)
 	elseif modul = "islemLog" then
 		if bilgi = "dosya" then
 			modulBilgiBul = "/dashboard/islemLog.asp"
+		elseif bilgi = "boyut" then
+			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
+		end if
+	elseif modul = "havaDurumu" then
+		if bilgi = "dosya" then
+			modulBilgiBul = "/dashboard/havadurumu.asp"
+		elseif bilgi = "boyut" then
+			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
+		end if
+	elseif modul = "teklifDurum" then
+		if bilgi = "dosya" then
+			modulBilgiBul = "/dashboard/teklif_durum.asp"
 		elseif bilgi = "boyut" then
 			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
 		end if

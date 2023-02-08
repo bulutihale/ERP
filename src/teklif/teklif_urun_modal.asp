@@ -64,10 +64,15 @@
 
 '#### TEKLİF TÜRÜNE GÖRE HESAPLAMA
   if teklifTuru = 2 then
-    stokFiyat = stokFiyat-((stokFiyat*stokkdv)/100)
+    stokFiyat = stokFiyat / (1+(stokkdv/100))
+    fiyat1 = fiyat1 / (1+(stokkdv/100))
+    fiyat2 = fiyat2 / (1+(stokkdv/100))
+
+    stokFiyat = formatnumber(stokFiyat,4)
+    fiyat1 = formatnumber(fiyat1,4)
+    fiyat2 = formatnumber(fiyat2,4)
   end if
 '#### TEKLİF TÜRÜNE GÖRE HESAPLAMA
-
 
 
 '### BİRİMLERİ BUL
@@ -189,6 +194,8 @@
     Response.Write "<input type=""hidden"" value=""" & teklifParaBirimi & """ name=""teklifParaBirimi"" />"
     Response.Write "<input type=""hidden"" value=""" & stokParaBirim & """ name=""stokParaBirim"" />"
     Response.Write "<input type=""hidden"" value=""" & dovizKuru & """ name=""dovizKuru"" />"
+    Response.Write "<input type=""hidden"" value=""" & teklifTuru & """ name=""teklifTuru"" />"
+    Response.Write "<input type=""hidden"" value=""" & stokkdv & """ name=""stokkdv"" />"
     Response.Write "<table width=""100%"" border=""0"" cellspacing=""1"" cellpadding=""1"">"
     'Stok Ad
       Response.Write "<tr><td width=""100"">Ürün Adı</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
@@ -226,12 +233,14 @@
             Response.Write " KDV Hariç"
           end if
           Response.Write "</div>"
+          stokFiyat = replace(stokFiyat,",",".")
           call forminput("stokFiyat",stokFiyat,"numara(this,true,false);fiyathesapla();","","stokFiyat mb-2","autocompleteOFF","stokFiyat","")
           Response.Write "</td>"
         '### fiyat
           if sb_TeklifFiyatSayi > 0 then
             Response.Write "<td class=""pr-2"">"
             Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd1 & "</div>"
+            fiyat1 = replace(fiyat1,",",".")
             call forminput("fiyat1",fiyat1,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat1 parmak","readonly","fiyat1","")
             Response.Write "</td>"
           end if
@@ -239,6 +248,7 @@
           if sb_TeklifFiyatSayi > 1 then
             Response.Write "<td class=""pr-2"">"
               Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd2 & "</div>"
+              fiyat2 = replace(fiyat2,",",".")
               call forminput("fiyat2",fiyat2,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat2 parmak","readonly","fiyat2","")
             Response.Write "</td>"
           end if
@@ -246,6 +256,7 @@
           if sb_TeklifFiyatSayi > 2 then
             Response.Write "<td class=""pr-2"">"
               Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd3 & "</div>"
+              fiyat3 = replace(fiyat3,",",".")
               call forminput("fiyat3",fiyat3,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat3 parmak","readonly","fiyat3","")
             Response.Write "</td>"
           end if
@@ -253,6 +264,7 @@
           if sb_TeklifFiyatSayi > 3 then
             Response.Write "<td>"
               Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd4 & "</div>"
+              fiyat4 = replace(fiyat4,",",".")
               call forminput("fiyat4",fiyat4,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat4 parmak","readonly","fiyat4","")
             Response.Write "</td>"
           end if
@@ -340,7 +352,7 @@ Response.Write "<scr" & "ipt>"
       Response.Write "iskonto1 = (parseInt(iskonto1) / 100);"
       Response.Write "iskonto1 = toplamfiyat * iskonto1;"
       Response.Write "iskontoHesap1 = toplamfiyat - iskonto1;"
-      Response.Write "iskontoHesap1 = parseFloat(iskontoHesap1).toFixed(2);"
+      Response.Write "iskontoHesap1 = parseFloat(iskontoHesap1).toFixed(4);"
       Response.Write "$('.iskontospan1').text(iskontoHesap1);"
       Response.Write "toplamfiyat = iskontoHesap1;"
     end if
@@ -349,7 +361,7 @@ Response.Write "<scr" & "ipt>"
       Response.Write "iskonto2 = (parseInt(iskonto2) / 100);"
       Response.Write "iskonto2 = toplamfiyat * iskonto2;"
       Response.Write "iskontoHesap2 = toplamfiyat - iskonto2;"
-      Response.Write "iskontoHesap2 = parseFloat(iskontoHesap2).toFixed(2);"
+      Response.Write "iskontoHesap2 = parseFloat(iskontoHesap2).toFixed(4);"
       Response.Write "$('.iskontospan2').text(iskontoHesap2);"
       Response.Write "toplamfiyat = iskontoHesap2;"
     end if
@@ -358,7 +370,7 @@ Response.Write "<scr" & "ipt>"
       Response.Write "iskonto3 = (parseInt(iskonto3) / 100);"
       Response.Write "iskonto3 = toplamfiyat * iskonto3;"
       Response.Write "iskontoHesap3 = toplamfiyat - iskonto3;"
-      Response.Write "iskontoHesap3 = parseFloat(iskontoHesap3).toFixed(3);"
+      Response.Write "iskontoHesap3 = parseFloat(iskontoHesap3).toFixed(4);"
       Response.Write "$('.iskontospan3').text(iskontoHesap3);"
       Response.Write "toplamfiyat = iskontoHesap3;"
     end if
@@ -378,5 +390,9 @@ Response.Write "<scr" & "ipt>"
     end if
   Response.Write "}"
 Response.Write "</scr" & "ipt>"
+
+
+call jsrun("fiyathesapla();")
+
 
 %><!--#include virtual="/reg/rs.asp" -->
