@@ -33,11 +33,6 @@
 	if hata = "" then
         '### ŞABLONLAR
             sorgu = "Select * from toplumail.sablon where firmaID = " & firmaID & " and silindi = 0"
-            ' if sablonID <> "" then
-            '     if isnumeric(sablonID) = True then
-            '         sorgu = sorgu & " and sablonID = " & sablonID
-            '     end if
-            ' end if
             sorgu = sorgu & " order by sablonBaslik ASC"
             rs.open sorgu,sbsv5,1,3
             if rs.recordcount > 0 then
@@ -113,6 +108,11 @@
 							Response.Write "<div class=""col-lg-2 col-sm-2 my-1"">"
                                 Response.Write "<div class=""badge badge-info"">Gönderen</div>"
                                 call formselectv2("mailAccountID",mailAccountID,"","","","","mailAccountID",degerlerSmtpGrup,"")
+							Response.Write "</div>"
+							Response.Write "<div class=""col-lg-2 col-sm-2 my-1"">"
+                                Response.Write "<div class=""badge badge-info"">Koruma</div>"
+                                degerlertekrar = "Tekrar Koruması Aktif=|Tekrar Koruması Pasif=evet"
+                                call formselectv2("tekrarGonderim",tekrarGonderim,"","","","","tekrarGonderim",degerlertekrar,"")
 							Response.Write "</div>"
 							Response.Write "<div class=""col-lg-2 col-sm-2 my-1"">"
                                 Response.Write "<div class=""badge"">&nbsp;</div>"

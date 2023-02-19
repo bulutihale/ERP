@@ -28,6 +28,7 @@ if gorevID <> "" then
             sorgu = "SELECT t1.techizatID, t1.techizatNo, t1.techizatAd, t1.marka, t1.uretici, t1.seriNo, t1.lokasyon, t1.aciklama, t1.silindi"
 			sorgu = sorgu & " FROM isletme.techizat t1"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.techizatID = " & gorevID
+			sorgu = sorgu & " and t1.tur = 'Makine'"
 			rs.open sorgu, sbsv5, 1, 3
                 techizatID		=  	rs("techizatID")
                 techizatNo		=  	rs("techizatNo")

@@ -26,6 +26,9 @@
 	if ozelDepo = "" then
 		ozelDepo = 0
 	end if
+	if surecSonuDepoID = "" then
+		surecSonuDepoID = 0
+	end if
 
 	cariID			=	Request.Form("cariID")
 	modulAd 		=   "Depo"
@@ -58,7 +61,7 @@ if ozelDepo = "1" AND depoKategori <> "satis" then
 	Response.End()
 end if
 
-if depoTuru = 2 AND surecSonuDepoID = "" then
+if depoTuru = 2 AND surecSonuDepoID = 0 then
 	hatamesaj = "Depo kategorisi olarak SÜREÇ seçilmiş ise ""süreç sonu ürün giriş deposu seçilmelidir."""
 	call logla(hatamesaj)
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")

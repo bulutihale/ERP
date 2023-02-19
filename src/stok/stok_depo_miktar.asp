@@ -57,7 +57,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 		Response.Write "<th scope=""col"">LOT</th>"
-		Response.Write "<th scope=""col"">Lot Miktar</th>"
+		Response.Write "<th scope=""col"" class=""text-center"">Lot Miktar</th>"
 		' Response.Write "<th scope=""col"">Depo Miktar</th>"
 		Response.Write "<th scope=""col"">Depo Ad</th>"
 		Response.Write "</tr></thead><tbody>"

@@ -82,6 +82,7 @@ call logla("Toplu mail gönderim listesi ekranı")
         sorgu = sorgu & "order by toplumail.gonderim.tarih desc"
 					rs.Open sorgu, sbsv5, 1, 3
 						if rs.recordcount > 0 then
+							bekleyen = 0
 							Response.Write "<div class=""table-responsive"">"
 							Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 							Response.Write "<th scope=""col"">Tarih</th>"
@@ -118,6 +119,7 @@ call logla("Toplu mail gönderim listesi ekranı")
 												Response.Write "</a>"
 											'# Mail Gönder
                                             Response.Write "</td>"
+											bekleyen = 1
                                         else
                                             Response.Write "<td>"
                                             Response.Write "&nbsp;"
@@ -141,6 +143,19 @@ call logla("Toplu mail gönderim listesi ekranı")
 			Response.Write "</div>"
 		Response.Write "</div>"
 		Response.Write "</div>"
+
+
+if bekleyen > 0 then
+	call jsacdelay("/toplumail/gonderim_liste.asp",10000)
+else
+	call jsacdelay("/toplumail/gonderim_liste.asp",60000)
+end if
+
+
+
+
+
+
 	else
 		call yetkisizGiris("Gönderim listesini görmek için yeterli yetkiniz bulunmamaktadır","","")
 	end if

@@ -29,7 +29,8 @@ inpKontrol		=	""
 
 if gorevID <> "" then
 
-            sorgu = "SELECT TOP 1 *, stok.FN_stokHareketKontrol("&firmaID&", "&gorevID&") as hareketKontrol"
+            sorgu = "SELECT t1.stokKodu, t1.stokAd, t1.stokTuru, t1.minStok, t1.stokBarcode, t1.kkDepoGiris, ISNULL(t1.silindi,0) as silindi, t1.anaBirimID, t2.uzunBirim, t1.rafOmru,"
+			sorgu = sorgu & " stok.FN_stokHareketKontrol("&firmaID&", "&gorevID&") as hareketKontrol"
 			sorgu = sorgu & " FROM stok.stok t1"
 			sorgu = sorgu & " LEFT JOIN portal.birimler t2 ON t1.anaBirimID = t2.birimID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID
@@ -67,6 +68,9 @@ end if
     Response.Write "</li>"
     Response.Write "<li class=""nav-item"">"
       Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#ekTanimlar"">Ek Tanımlar</a>"
+    Response.Write "</li>"
+    Response.Write "<li class=""nav-item"">"
+      Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#koliTanimlari"">Koli Tanımları</a>"
     Response.Write "</li>"
   Response.Write "</ul>"
 
@@ -199,6 +203,65 @@ end if
 	end if
 	Response.Write "</div>"
 
+	Response.Write "<div id=""koliTanimlari"" class=""container tab-pane fade mt-4"">"
+		Response.Write "<div class=""col-sm-12 my-1"">"
+			Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Ad</span>"
+			call forminput("stokAd",stokAd,"","","",inpKontrol,"","")
+		Response.Write "</div>"
+		Response.Write "<div class=""col-sm-12 my-1"">"
+			Response.Write "<span class=""badge badge-secondary rounded-left"">Seçilen Koli</span>"
+			call formselectv2("koliSec","","","","formSelect2 koliSec border inpReset","","koliSec","","data-holderyazi=""kullanılacak ham koli seçimi"" data-jsondosya=""JSON_koliler"" data-miniput=""3"" data-defdeger=""""")
+		Response.Write "</div>"
+		Response.Write "<div class=""col-sm-4 my-1"">"
+			Response.Write "<span class=""badge badge-secondary rounded-left"">Koli İçi Ürün Miktarı</span>"
+			call forminput("koliUrunMiktar",koliUrunMiktar,"","Koli içi ürün miktarı","","","koliUrunMiktar","")
+		Response.Write "</div>"
+		if yetkiKontrol >= 8 then
+			Response.Write "<div class=""col-sm-4 my-1"">"
+				Response.Write "<div id=""koliTanimKayit"" onclick=""koliTanimKayit('yeniKayit',0)"" class=""col-12 btn btn-info text-center rounded"">EKLE</div>"
+			Response.Write "</div>"
+		end if
+
+		sorgu = "SELECT t1.koliIndexID, t2.ad as koliAd, t1.koliUrunMiktar, t3.stokAd as kullanilanKoliAd"
+		sorgu = sorgu & " FROM stok.koliIndex t1"
+		sorgu = sorgu & " INNER JOIN stok.koli t2 ON t1.koliID = t2.koliID"
+		sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.hamKoliStokID = t3.stokID"
+		sorgu = sorgu & " WHERE t1.silindi = 0"
+		rs.open sorgu, sbsv5, 1, 3
+
+			Response.Write "<table class=""table table-sm table-striped"">"
+				Response.Write "<thead class=""thead-dark"">"
+					Response.Write "<th scope=""col""></th>"
+					Response.Write "<th scope=""col"">Koli Adı</th>"
+					Response.Write "<th scope=""col"">Kullanılan Koli Adı</th>"
+					Response.Write "<th scope=""col"">Koli içi miktar</th>"
+				Response.Write "</thead><tbody>"
+		
+		for zi = 1 to rs.recordcount
+			if rs.recordcount > 0 then
+				koliIndexID			=	rs("koliIndexID")
+				kullanilanKoliAd	=	rs("kullanilanKoliAd")
+				koliAd				=	rs("koliAd")
+				koliUrunMiktar		=	rs("koliUrunMiktar")
+			end if
+				
+			Response.Write "<tr>"
+				Response.Write "<td scope=""col"">"
+				if yetkiKontrol >= 8 then
+					Response.Write "<i onclick=""koliTanimKayit('silinecek',"&koliIndexID&")"" class=""mdi mdi-delete-forever pointer""></i>"
+				end if
+				Response.Write "</td>"
+				Response.Write "<td scope=""col"">" & koliAd & "</td>"
+				Response.Write "<td scope=""col"">" & kullanilanKoliAd & "</td>"
+				Response.Write "<td scope=""col"" class=""text-center"">" & koliUrunMiktar & "</td>"
+			Response.Write "</tr>"
+		rs.movenext
+		next
+			Response.Write "</tbody></table>"
+		rs.close
+
+	Response.Write "</div>"
+
 Response.Write "</div>"
 
 	end if
@@ -260,6 +323,47 @@ Response.Write "</div>"
 			} //cancel buton yapılanlar		
 		);//swal sonu
 		}
+
+
+	function koliTanimKayit(islem,koliIndexID){
+		stokID64		=	$('#stokID64').val();
+		stokID			=	$('#stokID').val();
+		koliID			=	$('#koliSec').val();
+		koliUrunMiktar	=	$('#koliUrunMiktar').val();
+
+if(islem == 'silinecek'){var baslik = 'Kayıt silinsin mi?'}else{var baslik = 'Koli bilgileri kayıt edilsin mi?'};
+	//	alert(secilenReceteID)
+		swal({
+			title: baslik,
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(
+			function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			
+				$.post("/stok/koliIndexEkle.asp", {
+					islem:islem,
+					koliIndexID:koliIndexID,
+					stokID:stokID,
+					koliID:koliID,
+					koliUrunMiktar:koliUrunMiktar}, function(data){
+						$('#koliTanimlari').load('/stok/stok_yeni.asp?gorevID='+stokID64+' #koliTanimlari > *');
+						toastr.success(data);
+					});
+				
+				
+}, //confirm buton yapılanlar
+			function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			} //cancel buton yapılanlar		
+		);//swal sonu
+		}
+
+
 
 	function netsisKayit(){
 		var stokKodu		=	$('#stokKodu').val();

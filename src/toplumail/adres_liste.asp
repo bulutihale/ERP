@@ -140,7 +140,7 @@ end if
                     Response.Write "<div class=""card-header text-white bg-primary"">Listede Bulunan Adresler</div>"
                     Response.Write "<div class=""card-body"">"
                     Response.Write "<div class=""row"">"
-                        sorgu = "Select top 30 * from toplumail.adres where firmaID = " & firmaID & " and adresGrupID = " & gorevID
+                        sorgu = "Select top 30 * from toplumail.adres where silindi = 0 and firmaID = " & firmaID & " and adresGrupID = " & gorevID
                         if aramaad = "" then
                         else
                             sorgu = sorgu & " and (adres like N'%" & aramaad & "%')" & vbcrlf
@@ -154,7 +154,7 @@ end if
                                 Response.Write "<th scope=""col"">Adres</th>"
                                 Response.Write "<th scope=""col"">Kaynak</th>"
                                 ' if yetkiTM >= 3 then
-                                '     Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
+                                    Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
                                 ' end if
                                 Response.Write "</tr></thead><tbody>" 
                                     for i = 1 to rs.recordcount
@@ -164,13 +164,14 @@ end if
                                         tarih				=	rs("tarih")
                                         adres               =	rs("adres")
                                         kaynak              =	rs("kaynak")
+                                        adresID             =   rs("adresID")
                                         Response.Write "<tr>"
                                             Response.Write "<td>" & tarih & "</td>"
                                             Response.Write "<td>" & kvkkMaske(adres,2,yetkiTM) & "</td>"
                                             ' Response.Write "<td>" & adres & "</td>"
                                             Response.Write "<td>" & kaynak & "</td>"
                                         ' if yetkiTM >= 3 then
-                                        '     Response.Write "<td class=""text-right"" nowrap>"
+                                            Response.Write "<td class=""text-right"" nowrap>"
                                         '     if yetkiTM >= 5 then
                                         '         '# Adresleri İncele
                                         '             adresGrupID64 =	adresGrupID
@@ -202,18 +203,16 @@ end if
                                         '         '# Şablon düzenle
                                         '     end if
                                         '     if yetkiTM >= 6 then
-                                        '         '# Şablon sil
-                                        '             adresGrupID64 =	adresGrupID
-                                        '             adresGrupID64 =	base64_encode_tr(adresGrupID64)
-                                        '             Response.Write "<a onClick="""
-                                        '             Response.Write "bootmodal('Adres Grubunu Silmek Mi İstiyorsunuz?','custom','/toplumail/adres_onay.asp?islem=sil&adresGrupID=" & adresGrupID64 & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
-                                        '             Response.Write """ title=""" & translate("Adres Grubunu Sil","","") & """ class=""ml-1"" >"
-                                        '             Response.Write "<i class=""icon delete"
-                                        '             Response.Write """></i>"
-                                        '             Response.Write "</a>"
-                                        '         '# Şablon sil
+                                                '# Şablon sil
+                                                    Response.Write "<a onClick="""
+                                                    Response.Write "bootmodal('Adresi listeden kaldırmak mı istiyorsunuz?','custom','/toplumail/adres_liste_sil.asp?islem=sil&adresGrupID=" & gorevID & "&adresID=" & adresID & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
+                                                    Response.Write """ title=""" & translate("Adresi Listeden Kaldır","","") & """ class=""ml-1"" >"
+                                                    Response.Write "<i class=""icon delete"
+                                                    Response.Write """></i>"
+                                                    Response.Write "</a>"
+                                                '# Şablon sil
                                         '     end if
-                                        '     Response.Write "</td>"
+                                            Response.Write "</td>"
                                         ' end if
                                         Response.Write "</tr>"
                                         Response.Flush()

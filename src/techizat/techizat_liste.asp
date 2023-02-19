@@ -74,6 +74,7 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & " CASE WHEN silindi= 1 THEN '<span class=""text-danger bold"">PASİF</span>' ELSE 'AKTİF' END as durum"
 			sorgu = sorgu & " FROM isletme.techizat t1"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
+			sorgu = sorgu & " and t1.tur = 'Makine'"
 			if aramaad = "" then
 			else
 				sorgu = sorgu & " and (t1.techizatAd like N'%" & aramaad & "%' OR t1.marka like N'%" & aramaad & "%' OR t1.uretici like N'%" & aramaad & "%')"

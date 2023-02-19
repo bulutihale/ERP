@@ -14,7 +14,7 @@ muhasebedbArr   =   Array("best2022","best2021")
 	'##### Depo Tipleri
 	
 	'##### Depo Kategorileri
-				depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis|Üretim Süreç=surecUretim|Kesimhane Süreç=surecKesim"
+				depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis|Üretim Süreç=surecUretim|Kesimhane Süreç=surecKesim|Sterilizasyon Sarf=sterilizasyonSarf"
 	'##### Depo Kategorileri
 	
 	'##### EVET - HAYIR

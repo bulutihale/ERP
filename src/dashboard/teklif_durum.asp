@@ -26,7 +26,7 @@
 				Response.Write "<div class=""card-header text-white bg-dark"">"
                     Response.Write "<div class=""row"">"
                         Response.Write "<div class=""col-lg-6 col-sm-6 my-1"">"
-                            Response.Write "<a href=""/portal/doviz"" style=""color:white"">" & translate("Teklifler","","") & "</a>"
+                            Response.Write "<a href=""/teklif/teklif_liste"" style=""color:white"">" & translate("Teklifler","","") & "</a>"
                         Response.Write "</div>"
                         Response.Write "<div class=""col-lg-6 col-sm-6 my-1 text-right"">"
                             Response.Write "<a style=""border:1px solid white"" class=""text-small parmak p-1"" onClick=""$('.dashteklifDurumDiv').load('/dashboard/teklif_durum.asp?tgun=3000');"">" & translate("Tümü","","") & "</a>"

@@ -4386,11 +4386,11 @@ function js2decere(jsbilgi)
 end function
 
 function havadurumucek(konum,donem)
-
+	'$$$$ aylık 2500 tanesi beleş
 	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
 	'#### HAVADURUMU MEVCUT BİLGİLERİ KONTROL ET
 		if konum <> "" then
-			if donem = "" then
+			if donem = "" or donem = "anlık" then
 				sontarih = now()
 				sontarih = dateadd("n",-60,sontarih)
 				sontarih = tarihsaatsql(sontarih)
@@ -4407,8 +4407,8 @@ function havadurumucek(konum,donem)
 '				jsmax		=	fn1("max")
 '				jsgece		=	fn1("gece")
 '				jsnem		=	fn1("nem")
-'				jsdegree	=	fn1("guncel")
-				derece		=	jsmin
+				jsdegree	=	fn1("guncel")
+				derece		=	jsdegree
 '				dbtarih		=	fn1("tarih")
 			end if
 			fn1.close
@@ -4463,6 +4463,17 @@ function havadurumucek(konum,donem)
 					set gelenGunAyrintiArr = Nothing
 					'## OKU
 					'## OKU
+					'## degree -0 hatasını düzelt
+						if jsdegree = "-0" then
+							jsdegree = "0"
+						end if
+						if jsmin = "-0" then
+							jsmin = "0"
+						end if
+						if jsmax = "-0" then
+							jsmax = "0"
+						end if
+					'## degree -0 hatasını düzelt
 					'## KAYDET
 					'## KAYDET
 					sorgu = "Select top 1 * from portal.havaDurumu"
@@ -4497,7 +4508,7 @@ function havadurumucek(konum,donem)
 	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
 	'#### HAVADURUMU İSTENİLEN BİLGİLERİ BUL
 		if sb_konum <> "" and donem <> "" then
-			sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & sb_konum & "' and donem = N'" & donem & "' order by tarih desc"
+			sorgu = "Select top 1 * from portal.havaDurumu where konumAd = '" & konum & "' and donem = N'" & donem & "' order by tarih desc"
 			fn1.open sorgu, sbsv5, 1, 3
 			if fn1.recordcount > 0 then
 				jsicon		=	fn1("icon")
@@ -4508,7 +4519,6 @@ function havadurumucek(konum,donem)
 				jsgece		=	fn1("gece")
 				jsnem		=	fn1("nem")
 				jsdegree	=	fn1("guncel")
-				derece		=	jsmin
 				dbtarih		=	fn1("tarih")
 			end if
 			fn1.close
@@ -4518,12 +4528,15 @@ function havadurumucek(konum,donem)
 
 	'#### HAVADURUMU İCON BUL
 	'#### HAVADURUMU İCON BUL
-		' yerelicon = jsicon
-		' yerelicon = Replace(yerelicon,"https://image.flaticon.com/icons/svg/143/","")
-		' yerelicon = "/template/havadurumu/" & yerelicon
-		' yerelicon = Replace(yerelicon,".svg",".png")
-		' Response.Write yerelicon
-		iconfile = "/template/havadurumu/" & lcase(jsstatus) & ".png"
+		if donem = "anlık" then
+			if saat > 6 and saat < 19 then
+				iconfile = "/template/havadurumu/" & lcase(jsstatus) & ".png"
+			else
+				iconfile = "/template/havadurumu/" & lcase(jsstatus) & "-night.png"
+			end if
+		else
+			iconfile = "/template/havadurumu/" & lcase(jsstatus) & ".png"
+		end if
 		if dosyakontrol(iconfile) = True then
 		' 	iconfile = yerelicon
 		else
@@ -4546,7 +4559,7 @@ function havadurumucek(konum,donem)
 	'#### VERİLERİ YOLLA
 	'#### VERİLERİ YOLLA
 end function
-'##############HAVADURUMU
+'############## HAVADURUMU
 
 
 

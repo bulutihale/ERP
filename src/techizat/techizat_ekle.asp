@@ -65,6 +65,7 @@ end if
 				rs("lokasyon")			=	lokasyon
 				rs("aciklama")			=	aciklama
                 rs("silindi")			=	silindi
+				rs("tur")				=	"Makine"
             rs.update
             rs.close
 

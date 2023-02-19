@@ -242,7 +242,12 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Para Birimi : </div>"
                                 degerler = "--Para Birimi--=|TRY=TRY|USD=USD|EUR=EUR|GBP=GBP"
-                                call formselectv2("teklifParaBirimi",teklifParaBirimi,"","","","","teklifParaBirimi",degerler,"")
+                                ' if teklifParaBirimi = "-" then
+                                    call formselectv2("teklifParaBirimi",teklifParaBirimi,"","","","","teklifParaBirimi",degerler,"")
+                                ' else
+                                    ' degerler = teklifParaBirimi & "=" & teklifParaBirimi
+                                    ' call formselectv2("teklifParaBirimi",teklifParaBirimi,"","","","readonly","teklifParaBirimi",degerler,"")
+                                ' end if
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-3"">"
                                 Response.Write "<div class=""badge badge-danger"">Teklif Tasarımı : </div>"

@@ -102,7 +102,7 @@ call logla("Toplu Mail Adres Grubu Listesi Ekranı")
 											'# Mail Gönder
 												adresGrupID64 =	adresGrupID
 												adresGrupID64 =	base64_encode_tr(adresGrupID64)
-												Response.Write "<a href=""/toplumail/gonder/|" & adresGrupID64 & "|"" title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
+												Response.Write "<a href=""/toplumail/gonder/$" & adresGrupID64 & """ title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
 												Response.Write "<i class=""icon email-go"
 												Response.Write """></i>"
 												Response.Write "</a>"
