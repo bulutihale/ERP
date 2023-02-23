@@ -137,4 +137,14 @@ function modulBilgiBul(byVal modul,byVal bilgi)
 	end if
 end function
 
+	on error resume next
+	veri = "localIP=" & Request.ServerVariables("REMOTE_ADDR") & "&kid=" & kid & "&firmaID=" & firmaID
+	sonuc = xmlverigonder("https://erp.sbstasarim.com/whereiam.asp",veri,"POST","text","","","","","")
+	if sonuc = "1" then
+		'sabit de aynı fikirde mi?
+		'sabitleri yeniden oluştur
+	elseif sonuc = "0" then
+	end if
+	on error goto 0
+
 %><!--#include virtual="/reg/rs.asp" -->

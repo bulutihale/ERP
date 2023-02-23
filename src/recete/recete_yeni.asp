@@ -106,10 +106,6 @@ call logla(divAd & " Ekranı Girişi")
 		Response.Write "</div>"
 
 		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-lg-4 col-md-12 col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">İşlem Sonunda Üretilen Ürün Miktar</span>"
-				call forminput("ciktiUrunMiktar",ciktiUrunMiktar,"","","bold","autocompleteOFF","ciktiUrunMiktar","")
-			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-3 col-sm-4 text-center my-1"">"
 				Response.Write "<div class=""badge badge-secondary rounded"">Ana Birim</div><span class=""pointer text-info"" onclick=""swal('','Ürünün stok kartında tanımlanır ve ürün hareket gördükten sonra değiştirilemez!')""><i class=""mdi mdi-information""></i></span>"
 				Response.Write "<div class=""mt-2 bold text-danger"">" & uzunBirim & "</div>"

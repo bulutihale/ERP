@@ -2412,6 +2412,8 @@ function xmlverigonder(byVal sunucu, byVal veri, byVal yontem, byVal verituru, b
 		verituru = "xml"
 	elseif verituru = "json" then
 		kontenttype = "application/json"
+	elseif verituru = "text" then
+		kontenttype = "application/x-www-form-urlencoded"
 	end if
 
 	Set SrvHTTPS = Server.CreateObject("MSXML2.ServerXMLHTTP")
@@ -2421,7 +2423,6 @@ function xmlverigonder(byVal sunucu, byVal veri, byVal yontem, byVal verituru, b
 	end if
 	SrvHTTPS.setRequestHeader "Content-Type",kontenttype
 	SrvHTTPS.send veri
-
 	if verituru = "xml" then
 		xmlverigonder = SrvHTTPS.responseXML.xml
 	else

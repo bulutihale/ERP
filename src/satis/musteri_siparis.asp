@@ -23,6 +23,7 @@ call logla("Doğrudan Müşteri Siparişi Oluşturma Ekranı")
 yetkiKontrol = yetkibul(modulAd)
 
 
+
 	if hata = "" and opener = "" and yetkiKontrol > 0 then
 
 		Response.Write "<div class=""container-fluid"">"
