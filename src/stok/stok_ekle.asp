@@ -62,6 +62,7 @@ end if
                 rs("minStok")           =   minStok
                 rs("anaBirimID")        =   anaBirimID
                 rs("rafOmru")           =   rafOmru
+                rs("manuelKayit")       =   1
             rs.update
             rs.close
 

@@ -49,7 +49,7 @@ if gorevID <> "" then
 				defDeger		=	anaBirimID & "###" & uzunBirim
             rs.close
 			
-			inpKontrol	=	"readonly"
+			inpKontrol	=	""
 
 end if
 
@@ -372,6 +372,8 @@ if(islem == 'silinecek'){var baslik = 'Kayıt silinsin mi?'}else{var baslik = 'K
 		$.post("/stok/stok_netsis_ekle.asp", {
 			stokKodu:stokKodu,
 			stokAd:stokAd
+		}).done(function(data) {
+			if(data == 'OK'){alert();}
 		});
 
 		}

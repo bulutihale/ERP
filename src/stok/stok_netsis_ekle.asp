@@ -61,7 +61,7 @@ end if
 
 end if
 Response.Write "OK"
-call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
+'call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
 if a = "hareketKontrol" then
 else
     call jsac("/stok/stok_liste.asp")
