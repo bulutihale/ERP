@@ -16,6 +16,7 @@
 	silindi			=   Request.Form("silindi")
 	ozelRecete		=	Request.Form("ozelRecete")
 	istasyonID		=	Request.Form("istasyonSec")
+	ciktiUrunMiktar	=	Request.Form("ciktiUrunMiktar")
 	if ozelRecete = "" then
 		ozelRecete	=	0
 		cariID 		=	0
@@ -47,7 +48,9 @@ end if
 
 call rqKontrol(receteTipi,"Lütfen Reçete Tipini Seçiniz.","")
 
-
+if not isNumeric(ciktiUrunMiktar) then
+	ciktiUrunMiktar = 1
+end if
 
 
 if yetkiKontrol > 2 then
@@ -85,6 +88,7 @@ if yetkiKontrol > 2 then
 					rs("cariID")			=	cariID
 					rs("eskiReceteID")		=	eskiReceteID
 					rs("istasyonID")		=	istasyonID
+					rs("ciktiUrunMiktar")	=	ciktiUrunMiktar
 					rs("silindi")			=	silindi
 				rs.update
 					yeniReceteID			=	rs("receteID")

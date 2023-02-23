@@ -100,7 +100,7 @@
 
 '### RAPOR FORMATINI ÇEK
     if hata = "" then
-        sorgu = "Select raporIcerik from rapor.raporFormat where modul = 'Teklif' and modul2 = " & teklifTuru & " and firmaID = " & teklifFirmaId & " and silindi = 0 order by raporFormatID DESC"
+        sorgu = "Select raporIcerik from rapor.raporFormat where modul = 'Teklif' and modul2 = " & teklifTuru & " and firmaID = " & firmaID & " and silindi = 0 order by raporFormatID DESC"
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
             raporIcerik = rs("raporIcerik")
