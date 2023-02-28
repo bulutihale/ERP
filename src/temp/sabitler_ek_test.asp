@@ -36,8 +36,8 @@ if firmaID = 1 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -106,8 +106,8 @@ if firmaID = 2 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -176,8 +176,8 @@ if firmaID = 3 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -246,8 +246,8 @@ if firmaID = 4 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -316,8 +316,8 @@ if firmaID = 5 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -410,8 +410,8 @@ if firmaID = 6 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -480,8 +480,8 @@ if firmaID = 7 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -550,8 +550,8 @@ if firmaID = 8 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -620,8 +620,8 @@ if firmaID = 11 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -690,8 +690,8 @@ if firmaID = 9 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
@@ -760,8 +760,8 @@ if firmaID = 10 then
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
 		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
-		sb_sqlYedekAlGun = "7"
-		sb_sqlYedekSilGun = "30"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 

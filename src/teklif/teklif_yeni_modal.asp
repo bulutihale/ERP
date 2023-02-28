@@ -60,6 +60,7 @@
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
           cariAd              =   rs("cariAd")
+          cariID              =   rs("cariID")
           cariKodu            =   rs("cariKodu")
           teklifsayi          =   rs("teklifsayi")
           tekliftarih         =   rs("tekliftarih")
@@ -165,6 +166,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                                 Response.Write "<div class=""badge badge-danger"">Sayın : </div>"
                                 call forminput("cariAd",cariAd,"","","cariAd","autocompleteOFF","cariAd","")
                                 call forminput("cariKodu",cariKodu,"","","cariKodu","hidden","cariKodu","")
+                                call forminput("cariID",cariID,"","","cariID","hidden","cariID","")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-4"">"
                             if teklifsayi = "" then

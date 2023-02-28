@@ -7,6 +7,7 @@
     kid				=	kidbul()
     stokHareketID	=	Request.QueryString("stokHareketID")
 	techizatID  	=   Request.QueryString("techizatID")
+	sterilCevrimID	=	Request.QueryString("sterilCevrimID")
 	modulAd 		=	"Sterilizasyon"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -38,9 +39,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-			Response.Write "<th scope=""col"">Makine Adı</th>"
 			Response.Write "<th scope=""col"">Marka</th>"
 			Response.Write "<th scope=""col"">Kapasite</th>"
+			Response.Write "<th scope=""col"">Makine Adı</th>"
 		Response.Write "</tr></thead><tbody>"
 					
 		for zi = 1 to rs.recordcount
@@ -49,11 +50,23 @@ yetkiKontrol = yetkibul(modulAd)
 		marka			=	rs("marka")
 		kapasite		=	rs("kapasite")
 		kapasiteBirim	=	rs("kapasiteBirim")
+
+		sorgu = "SELECT sterilCevrimID FROM stok.sterilCevrim WHERE cevrimBaslangic is not null AND cevrimBitis is null AND techizatID = " & techizatID
+		rs1.open sorgu, sbsv5, 1, 3
+			acikCevrim		=	rs1.recordcount
+			if rs1.recordcount > 0 then
+				sterilCevrimID	=	rs1("sterilCevrimID")
+			end if
+		rs1.close
 			Response.Write "<tr>"
-				Response.Write "<td>" & techizatAd & "</td>"
 				Response.Write "<td>" & marka & "</td>"
 				Response.Write "<td>" & kapasite & " " & kapasiteBirim & "</td>"
-				Response.Write "<td><div class=""btn btn-sm btn-info"" onclick=""sterilizatorDIVyukle(" & stokHareketID & "," & techizatID & "); modalkapat();"">SEÇ</div></td>"
+				Response.Write "<td class=""text-center bold"">" & techizatAd & "</td>"
+				if acikCevrim = 0 then
+					Response.Write "<td><div class=""btn btn-sm btn-info"" onclick=""sterilizatorDIVyukle(" & stokHareketID & "," & techizatID & "," & sterilCevrimID & "); modalkapat();"">SEÇ</div></td>"
+				else
+					Response.Write "<td><div class=""btn btn-sm btn-danger"" onclick=""sterilizatorDIVyukle(0," & techizatID & "," & sterilCevrimID & "); modalkapat();"">Sterilizasyon Süreci Aktif!</div></td>"
+				end if
 			Response.Write "</tr>"
 			Response.Flush()
 		rs.movenext
@@ -76,9 +89,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 <script>
 
-	function sterilizatorDIVyukle(stokHareketID, techizatID) {
+	function sterilizatorDIVyukle(stokHareketID, techizatID, sterilCevrimID) {
 		working('surecDIV2',20,20);
-		$('#surecDIV2').load("/sterilizasyon/cihaz_yukle.asp", {stokHareketID:stokHareketID, techizatID:techizatID,}, function(){
+		$('#surecDIV2').load("/sterilizasyon/cihaz_yukle.asp", {stokHareketID:stokHareketID, techizatID:techizatID, sterilCevrimID:sterilCevrimID}, function(){
 					$('#surecDIV1').load('/sterilizasyon/sterilizasyon_surec.asp #surecDIV1 > *')		
 				});		
 	}

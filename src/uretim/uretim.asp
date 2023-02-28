@@ -224,6 +224,9 @@ yetkiKontrol = yetkibul(modulAd)
 										rs.open sorgu,sbsv5,1,3
 											uretilmisMiktar		=	rs("uretilmisMiktar")
 										rs.close
+										if isnull(uretilmisMiktar) then
+											uretilmisMiktar = 0 
+										end if
 										uretimOran	=	formatpercent(uretilmisMiktar/sipMiktar,2)
 										btnYazi		=	"<span style=""font-size:30px"">" & uretimOran & "</span><br><span class=""fontkucuk"">(" & uretilmisMiktar & " / " & sipMiktar & " " & mikBirim & ")</span><br>"
 										Response.Write " onclick=""modalajax('/uretim/uretimBitirModal.asp?siparisKalemID="&siparisKalemID&"&ajandaID="&ajandaID&"&islemDurum=islemBitir&teminDepoID="&secilenDepoID&"&secilenReceteID="&secilenReceteID&"');"""

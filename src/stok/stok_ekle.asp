@@ -18,6 +18,7 @@
 	silindi			=   Request.Form("silindi")
 	kkDepoGiris		=	Request.Form("kkDepoGiris")
     rafOmru         =	Request.Form("rafOmru")
+    lotTakip        =   Request.Form("lotTakip")
     if rafOmru = "" then
         rafOmru = 0
     end if
@@ -62,6 +63,7 @@ end if
                 rs("minStok")           =   minStok
                 rs("anaBirimID")        =   anaBirimID
                 rs("rafOmru")           =   rafOmru
+                rs("lotTakip")          =   lotTakip
             rs.update
             rs.close
 

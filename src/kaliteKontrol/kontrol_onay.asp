@@ -25,7 +25,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 
 if gorevID <> "" then
-            sorgu = "SELECT t1.stokHareketID, t1.girisTarih, t1.belgeNo, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t2.stokKodu, t2.stokAd"
+            sorgu = "SELECT t1.stokHareketID, t1.girisTarih, t1.belgeNo, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t2.stokKodu, t2.stokAd, t2.lotTakip"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokHareketID = " & gorevID & " AND t1.silindi = 0"
@@ -40,44 +40,13 @@ if gorevID <> "" then
 					miktarBirim		=	rs("miktarBirim")
 					gelenLot		=	rs("lot")
 					lotSKT			=	rs("lotSKT")
+					lotTakip		=	rs("lotTakip")
 				else
 					hata = 1
 				end if
             rs.close
 			
 
-		if hata = "" then
-'		'############ son atananLOT belirle sadece 4 id ye sahip mal kabul depoya olan girişlere göre hesap yapıldı
-'			sorgu = "SELECT TOP(1) lot FROM stok.stokHareket t1"
-'			sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id AND t2.silindi = 0"
-'			sorgu = sorgu & " WHERE t2.id = 4 AND t1.stokHareketTuru = 'G' AND t1.stokHareketTipi = 'T' AND t1.silindi = 0"
-'			sorgu = sorgu & " ORDER BY t1.stokHareketID DESC"
-'			rs.open sorgu, sbsv5, 1, 3
-'
-'
-'			bugunTarihT		=	tarihjp(date())
-'			bugunTarihT		=	replace(bugunTarihT,"-","")
-'				if rs.recordcount > 0 then
-'					sonGirisLot		=	rs("lot")
-'
-'					lotArr			=	split(sonGirisLot,"-")
-'					lotBolum0		=	lotArr(0)
-'					lotBolum1		=	lotArr(1)
-'					if bugunTarihT = lotBolum0 then
-'						lotBolum1	=	cint(lotBolum1) + 1
-'						if lotBolum1 < 10 then
-'							lotBolum1	=	"0"&lotBolum1
-'						end if
-'						atananLot	=	bugunTarihT & "-" & lotBolum1
-'					else
-'						atananLot	=	bugunTarihT & "-01"
-'					end if
-'				else
-'					atananLot	=	bugunTarihT & "-01"
-'				end if
-'			rs.close
-'		'############ /son atananLOT belirle sadece 4 id ye sahip mal kabul depoya olan girişlere göre hesap yapıldı
-		end if
 end if
 
 
@@ -86,6 +55,7 @@ end if
 	if hata = "" and yetkiKontrol > 2 then
 		Response.Write "<form action=""/kaliteKontrol/urun_gir.asp"" method=""post"" class=""ajaxform"">"
 				call formhidden("stokHareketID",stokHareketID,"","","","","stokHareketID","")
+				call formhidden("lotTakip",lotTakip,"","","","","lotTakip","")
 		Response.Write "<div class=""form-row align-items-left"">"
 			Response.Write "<div class=""col-lg-3 col-sm-6 col-xs-6 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Giriş Tarihi</span>"
@@ -163,7 +133,9 @@ end if
 <script>
 	$(document).ready(function() {
 		$('#girisDepoID').on('change', function(){
-			var depoID	=	$('#girisDepoID').val();
+			var depoID		=	$('#girisDepoID').val();
+			var lotTakip	=	$('#lotTakip').val();
+			if(lotTakip == 1){
 			$.ajax({
 				url:"/depo/lotolustur.asp",
 				type:'post',
@@ -172,6 +144,9 @@ end if
 					$('#atananLot').val(result);
 				}
 			});
+			}else{
+					$('#atananLot').val('lotTakibiYok');
+				}
 		});
    });
    

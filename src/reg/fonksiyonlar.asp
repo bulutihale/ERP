@@ -4153,7 +4153,7 @@ function lotOlusturFunc(depoID)
 			sorgu = sorgu & " LEFT JOIN stok.stokHareket t2 ON t2.stokHareketID = t1.refHareketID"
 			sorgu = sorgu & " WHERE t1.stokHareketTuru = 'G'"
 			'sorgu = sorgu & " AND (t1.stokHareketTipi = 'U' OR t2.stokHareketTipi = 'A' )"
-			sorgu = sorgu & " AND t1.depoID = " & depoID & " AND t1.tarih >= '" & tarihsql(bugun) & "' ORDER BY t1.stokHareketID DESC"
+			sorgu = sorgu & " AND t1.lot <> 'lotTakibiYok' AND t1.depoID = " & depoID & " AND t1.tarih >= '" & tarihsql(bugun) & "' ORDER BY t1.stokHareketID DESC"
 			fn1.open sorgu,sbsv5,1,3
 			if fn1.recordcount > 0 then
 				sonlot = fn1("lot") & ""

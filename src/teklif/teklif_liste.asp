@@ -88,6 +88,7 @@ if yetkiTeklif > 0 then
                 sorgu = sorgu & " FROM teklif.teklif" & vbcrlf
                 sorgu = sorgu & " WHERE firmaID = " & firmaID & vbcrlf
                 sorgu = sorgu & " and silindi = 0" & vbcrlf
+                sorgu = sorgu & " and teklifTuru is not null" & vbcrlf
                 if aramaad = "" then
                 else
                     ' sorgu = sorgu & " and (t1.cariAd like N'%" & aramaad & "%' OR t1.vergiNo like N'%" & aramaad & "%' OR t1.cariKodu like N'%" & aramaad & "%')"

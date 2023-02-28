@@ -1,4 +1,4 @@
-<%
+﻿<%
 '##### OTOMATİK SSL
 '##### OTOMATİK SSL
 	mainUrl = Request.ServerVariables("HTTP_HOST")

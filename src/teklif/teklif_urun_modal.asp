@@ -35,12 +35,33 @@
 '##### HATA ÖNLEME
 
 
+
+
+
+'###### TEKLİF BİLGİLERİNİ AL
+        sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount = 1 then
+          teklifDili          =   rs("teklifDili")
+        end if
+        rs.close
+'###### TEKLİF BİLGİLERİNİ AL
+
+
+
+
+
+
+
+
+
 '### ÜRÜN BİLGİLERİNİ AL
-      sorgu = "Select kdv,stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
+      sorgu = "Select kdv,stokAd,stokAdEn,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
           stokkdv =   rs("kdv")
           stokAd  =   rs("stokAd")
+          stokAdEn  =   rs("stokAdEn")
           stokFiyat = rs("fiyat1")
           fiyat1  =   rs("fiyat1")
           fiyat2  =   rs("fiyat2")
@@ -60,6 +81,13 @@
 '### ÜRÜN BİLGİLERİNİ AL
 
   call logla("Teklife ürün ekleniyor : " & stokAd)
+
+  '### ECNEBİCE
+      if teklifDili = "en" then
+          stokAd = stokAdEn
+      end if
+  '### ECNEBİCE
+
 
 
 '#### TEKLİF TÜRÜNE GÖRE HESAPLAMA
@@ -204,7 +232,7 @@
     'Stok Ad
     'Stok Açıklama
       Response.Write "<tr><td width=""100"">Ürün Notu</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
-      call forminput("stokAciklama",stokAciklama,"","","stokAciklama mb-2","autocompleteOFF","stokAciklama","")
+      call formtextarea("stokAciklama",stokAciklama,"","","stokAciklama mb-2 height-100","autocompleteOFF","stokAciklama","")
       Response.Write "</td></tr>"
     'Stok Açıklama
     'Adet

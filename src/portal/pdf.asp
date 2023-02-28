@@ -54,7 +54,29 @@
 '### SAYFA ID TESPİT ET
 
 
+
+
+if id <> "" then
+    if modul = "teklif" then
+        '###### TEKLİF BİLGİLERİNİ AL
+            sorgu = "Select top 1 * from teklif.teklif where teklifID = " & id
+            rs.open sorgu,sbsv5,1,3
+            if rs.recordcount = 1 then
+                sayfaYonu          =   rs("sayfaYonu")
+            end if
+            rs.close
+        '###### TEKLİF BİLGİLERİNİ AL
+    end if
+end if
+
+
+
 if id <> "" and modul <> "" then
+    if sayfaYonu= "" then
+        sayfaYonu = "portrait"'landscape
+    end if
+
+
     dosyaadi = modul & "_" & tarihjp(date()) & "-" & id
     call logla("PDF Yapılıyor : " & modul & " - " & dosyaadi)
     Server.ScriptTimeout = 60
@@ -68,9 +90,15 @@ if id <> "" and modul <> "" then
             Doc.Producer = "erp.sbstasarim.com"
             Set Page = Doc.Pages.Add
             Set Font = Doc.Fonts.LoadFromFile(Server.MapPath("/template/fonts/OpenSans-Regular.ttf"))
-	        acilanLink = sb_mainUrlOnEk & sb_url & "/teklif/gosterhtml.asp?teklifID=" & id
-		    Doc.ImportFromUrl acilanLink,"PageHeight=820;BottomMargin=20;"
-		    Page.Canvas.DrawText "Sayfa : 1/1", "x=0; y=30; width=600; alignment=center; size=10", Font
+            if modul = "teklif" then
+	            acilanLink = sb_mainUrlOnEk & sb_url & "/teklif/gosterhtml.asp?teklifID=" & id
+            end if
+            if sayfaYonu = "landscape" then
+		        Doc.ImportFromUrl acilanLink,"landscape=true,LeftMargin=10,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1"
+            else
+		        Doc.ImportFromUrl acilanLink,"PageHeight=820;BottomMargin=20;"
+		        Page.Canvas.DrawText "Sayfa : 1/1", "x=0; y=30; width=600; alignment=center; size=10", Font
+            end if
 		    Filename = Doc.Save( Server.MapPath("/temp/" & modul & "/" & dosyaadi & ".pdf"), True )
 		    Set Doc = Nothing
 		'######### PDF OLUŞTUR ###########

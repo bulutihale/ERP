@@ -76,6 +76,7 @@ call logla("Cari Listesi Ajax")
 						Response.Write " onClick="""
 						Response.Write "$('.cariAd').val('" & cariAd & "');"
 						Response.Write "$('.cariKodu').val('" & cariKodu & "');"
+						Response.Write "$('.cariID').val('" & cariID & "');"
 						Response.Write "$('.cariliste').html('');"
 						Response.Write """>"
 						Response.Write "<i class=""mdi mdi-basket-unfill"

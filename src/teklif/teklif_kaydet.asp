@@ -9,6 +9,7 @@
     Response.Flush()
     teklifID            =   Request.Form("teklifID")
     cariAd              =   Request.Form("cariAd")
+    cariID              =   Request.Form("cariID")
     cariKodu            =   Request.Form("cariKodu")
     teklifsayi          =   Request.Form("teklifsayi")
     tekliftarih         =   Request.Form("tekliftarih")
@@ -112,6 +113,9 @@
           rs("altYazi")             =   altYazi
           rs("teklifKosul")         =   teklifKosul
           rs("teklifSonuc")         =   0                 '0 = Teklif verildi Beklemede
+          if cariID <> "" then
+            rs("cariID")            =   cariID
+          end if
           
         rs.update
       rs.close

@@ -5,10 +5,9 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid			=	kidbul()
-	'ID			=	Request.QueryString("ID")
-	'kid64		=	ID
 	stokHareketID  	=   Request.Form("stokHareketID")
 	techizatID  	=   Request.Form("techizatID")
+	sterilCevrimID	=	Request.Form("sterilCevrimID")
     hata    	=   ""
     modulAd 	=   "Sterilizasyon"
     Response.Flush()
@@ -24,23 +23,8 @@ yetkiKontrol = yetkibul(modulAd)
 	rs.open sorgu,sbsv5,1,3
 		techizatAd	=	rs("techizatAd")
 	rs.close
-'###### ARAMA FORMU
-'###### ARAMA FORMU
-	if yetkiKontrol > 0 then
 
 		
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""card"">"
-				Response.Write "<span class=""h4 text-danger bold"">" & techizatAd & " Ürün Listesi</span>"
-			Response.Write "</div>"
-		Response.Write "</div>"
-		
-	else
-		call yetkisizGiris("","","")
-		hata = 1
-	end if
-'###### ARAMA FORMU
-'###### ARAMA FORMU
 
 
 '####### SONUÇ TABLOSU
@@ -50,7 +34,13 @@ yetkiKontrol = yetkibul(modulAd)
 		'#### yeni çevrim başlat
 			sorgu = "SELECT *"
 			sorgu = sorgu & " FROM stok.sterilCevrim t1"
-			sorgu = sorgu & " WHERE t1.techizatID = " & techizatID & " AND t1.cevrimBaslangic is null" 
+			sorgu = sorgu & " WHERE t1.sterilCevrimID is not null"
+			if sterilCevrimID > 0 then
+				sorgu = sorgu & " AND t1.sterilCevrimID = " & sterilCevrimID
+			elseif techizatID <> "" then
+				sorgu = sorgu & " AND t1.techizatID = " & techizatID & ""
+			end if
+			sorgu = sorgu & " AND t1.cevrimBitis is null"
 			rs.open sorgu, sbsv5, 1, 3
 
 			if rs.recordcount = 0 then
@@ -58,13 +48,30 @@ yetkiKontrol = yetkibul(modulAd)
 				rs.addnew
 					rs("firmaID")				=	firmaID
 					rs("techizatID")			=	techizatID
-
 				rs.update
-					sterilCevrimID		=	rs("sterilCevrimID")
-			else
-					sterilCevrimID		=	rs("sterilCevrimID")
 			end if
+
+				sterilCevrimID		=	rs("sterilCevrimID")
+				cevrimBaslangic		=	rs("cevrimBaslangic")
+				cevrimBitis			=	rs("cevrimBitis")
+			
 			rs.close
+
+		Response.Write "<div class=""row container-fluid"">"
+			'Response.Write "<div class=""card"">"
+				Response.Write "<div class=""h4 text-danger bold col-6"">" & techizatAd & " Ürün Listesi</div>"
+				if isnull(cevrimBaslangic) then
+					Response.Write "<div class=""btn btn-success text-danger bold col-3"" onclick=""sterCevrimBaslat(" & sterilCevrimID & ", " & techizatID & ", 'baslat')"">BAŞLAT</div>"
+				else
+					Response.Write "<div class=""btn text-danger bold col-3 border border-dark""><span class=""text-success"">Başlangıç<br>" & cevrimBaslangic & "</span></div>"
+				end if
+				if not isnull(cevrimBaslangic) AND isnull(cevrimBitis) then
+					Response.Write "<div class=""btn btn-success text-danger bold col-3"" onclick=""modalajax('/sterilizasyon/cevrim_bitir_modal.asp?sterilCevrimID="&sterilCevrimID&"');"">BİTİR</div>"
+				else
+					Response.Write "<div class=""btn text-danger bold col-3 border border-dark""><span class=""text-danger"">BİTİŞ<br>" & cevrimBitis & "</span></div>"
+				end if
+			'Response.Write "</div>"
+		Response.Write "</div>"
 
 		'##### tespit edilen sterilCevrimID değerini stokHareket tablosuna kaydet
 		if stokHareketID > 0 then
@@ -106,7 +113,11 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 					Response.Write "<tbody class=""hoverGel pointer fontkucuk2"">"
+					if isnull(cevrimBaslangic) then
 						Response.Write "<td onclick=""sterUrunCikar(" & stokHareketID & ", " & techizatID & ")""><i class=""icon server-delete""></i></td>"
+					else
+						Response.Write "<td onclick=""swal('','çevrim başlamış, ürün çıkarılamaz!')""><i class=""icon server-delete""></i></td>"
+					end if
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td>" & stokKodu & " " & stokAd & "</td>"
 						Response.Write "<td>" & miktar & " " & kisaBirim & "</td>"
@@ -155,4 +166,32 @@ yetkiKontrol = yetkibul(modulAd)
 			} //cancel buton yapılanlar		
 		);//swal sonu
 		}
+
+
+	function sterCevrimBaslat(sterilCevrimID, techizatID, islem){
+	//	alert(secilenReceteID)
+	if(islem == 'baslat'){var baslik = 'Sterilizasyon çevrimi başlatılsın mı?'}else if(islem=='bitir'){var baslik = 'Çevrim sonlandırılsın mı?'}
+		swal({
+			title: baslik,
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(
+			function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			
+				$('#ajax').load('/sterilizasyon/cevrim_baslat.asp', {sterilCevrimID:sterilCevrimID,islem:islem}, function(){
+					$('#surecDIV2').load('/sterilizasyon/cihaz_yukle.asp', {techizatID:techizatID});
+					//$('#surecDIV1').load('/sterilizasyon/sterilizasyon_surec.asp #surecDIV1 > *')		
+				});
+			}, //confirm buton yapılanlar
+			function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			} //cancel buton yapılanlar		
+		);//swal sonu
+		}
+		
 </script>
