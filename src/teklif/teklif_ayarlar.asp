@@ -55,7 +55,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                                     adresGrupID64 =	adresGrupID
                                                     adresGrupID64 =	base64_encode_tr(adresGrupID64)
                                                     Response.Write "<a onClick="""
-                                                    Response.Write "bootmodal('Koşulu Silmek Mi İstiyorsunuz?','custom','/teklif/teklif_ayarlar_islem.asp?islem=sil&gorevID=" & adresGrupID64 & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
+                                                    Response.Write "bootmodal('Koşulu silmek mi istiyorsunuz?','custom','/teklif/teklif_ayarlar_islem.asp?formtur=teklifKosul&islem=sil&gorevID=" & adresGrupID64 & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
                                                     Response.Write """ title=""" & translate("Koşulu Sil","","") & """ class=""ml-1"" >"
                                                     Response.Write "<i class=""icon delete"
                                                     Response.Write """></i>"

@@ -250,6 +250,9 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 				title: '',
 				onEscape: function() {},
 				backdrop: true,
+				// value:'xx',
+				// container:'body',
+				// inputType:'text',
 				buttons: {
 					success: {
 						label:okbaslik,
@@ -257,7 +260,16 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 						callback: function() {
 							if(okhedef||''){
 								if(veriyollamaturu=='ajax'){
-									$('#ajax').load(okhedef)
+									if(formverileri.length==0){
+									//if($('#'+formverileri).length==0){
+										//form verisi kullanılmadıysa
+										$('#ajax').load(okhedef)
+									}else{
+										//form verisi kullanıldıysa
+										formverileri=$('#'+formverileri).val();
+										formverileri = formverileri.replaceAll(' ','%27');
+										$('#ajax').load(okhedef + '&customformverileri=' + formverileri)
+									}
 								}else{
 									document.location=okhedef
 								}
@@ -271,7 +283,16 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 							// if(cancelhedef||''){document.location=cancelhedef}
 							if(cancelhedef||''){
 								if(veriyollamaturu=='ajax'){
-									$('#ajax').load(cancelhedef)
+									if(formverileri.length==0){
+										//if($('#'+formverileri).length==0){
+											//form verisi kullanılmadıysa
+										$('#ajax').load(cancelhedef)
+									}else{
+										//form verisi kullanıldıysa
+										formverileri=$('#'+formverileri).val();
+										formverileri = formverileri.replaceAll(' ','%27');
+										$('#ajax').load(cancelhedef + '&customformverileri=' + formverileri)
+									}
 								}else{
 									document.location=cancelhedef
 								}

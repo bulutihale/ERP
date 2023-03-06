@@ -26,6 +26,8 @@
     kosul5              =   Request.Form("kosul5")
     altYazi             =   Request.Form("altYazi")
     teklifKosul         =   Request.Form("kosul")
+    urunKatalogKodu       =   Request.Form("urunKatalogKodu")
+    urunStokRefKodu       =   Request.Form("urunStokRefKodu")
 '###### ANA TANIMLAMALAR
 
 
@@ -56,6 +58,12 @@
         call focusinput("cariAd")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
+    end if
+    if urunKatalogKodu = "" then
+      urunKatalogKodu = 0
+    end if
+    if urunStokRefKodu = "" then
+      urunStokRefKodu = 0
     end if
 '##### HATA ÖNLEME
 
@@ -116,7 +124,8 @@
           if cariID <> "" then
             rs("cariID")            =   cariID
           end if
-          
+          rs("urunKatalogKodu")           =   urunKatalogKodu
+          rs("urunStokRefKodu")           =   urunStokRefKodu
         rs.update
       rs.close
 '### KAYDET

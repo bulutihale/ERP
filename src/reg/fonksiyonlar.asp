@@ -3513,7 +3513,7 @@ function formselectv2(byVal formad,byVal formdeger, byVal formonclick, byVal for
 end function
 
 function clearfix()
-	Response.Write "<div class=""clearfix""></div>"
+	Response.Write "<div class=""clearfix d-none""></div>"
 end function
 
 
@@ -3664,6 +3664,7 @@ end function
 
 
 function translate(byVal kelime, byVal kelime2, byVal kelime3)
+	' {%1} için <strong>{%2}</strong> cinsinden ödeme bilgilerini yazın
 	if kelime <> "" then
 		for li = 0 to ubound(languageSozluk)
 			languageKelime = Split(languageSozluk(li),"=")

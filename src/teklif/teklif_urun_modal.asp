@@ -11,6 +11,7 @@
     teklifStokID      =   Request.QueryString("teklifStokID")
     teklifID          =   Request.QueryString("teklifID")
     teklifParaBirimi  =   Request.QueryString("teklifParaBirimi")
+    teklifKalemID     =   Request.QueryString("teklifKalemID")
     iskonto1          =   0
     iskonto2          =   0
     iskonto3          =   0
@@ -20,6 +21,7 @@
 
 
 '##### HATA ÖNLEME
+  if teklifKalemID = "" then
     if teklifStokID = "" then
         hatamesaj = "Hatalı Stok!"
         call logla(hatamesaj)
@@ -32,6 +34,7 @@
         Response.Write hatamesaj
         Response.End()
     end if
+  end if
 '##### HATA ÖNLEME
 
 
@@ -43,12 +46,23 @@
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
           teklifDili          =   rs("teklifDili")
+          teklifParaBirimi    =   rs("teklifParaBirimi")
+          teklifTuru          =   rs("teklifTuru")
         end if
         rs.close
 '###### TEKLİF BİLGİLERİNİ AL
 
 
-
+if teklifKalemID <> "" then
+  '###### TEKLİF BİLGİLERİNİ AL
+      sorgu = "Select top 1 * from teklif.teklif_urun where teklifKalemID = " & teklifKalemID
+      rs.open sorgu,sbsv5,1,3
+      if rs.recordcount = 1 then
+        teklifStokID      =   rs("teklifStokID")
+      end if
+      rs.close
+  '###### TEKLİF BİLGİLERİNİ AL
+end if
 
 
 
@@ -80,13 +94,28 @@
       rs.close
 '### ÜRÜN BİLGİLERİNİ AL
 
+
+if teklifKalemID = "" then
   call logla("Teklife ürün ekleniyor : " & stokAd)
+else
+  call logla("Teklifdeki ürün güncelleniyor : " & stokAd)
+end if
 
   '### ECNEBİCE
       if teklifDili = "en" then
           stokAd = stokAdEn
       end if
   '### ECNEBİCE
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -211,6 +240,38 @@
     dovizKuru = 1
   end if
 '### DÖVİZ KONUSU
+
+
+
+
+
+
+if teklifKalemID <> "" then
+  '###### TEKLİF BİLGİLERİNİ AL
+      sorgu = "Select top 1 * from teklif.teklif_urun where teklifKalemID = " & teklifKalemID
+      rs.open sorgu,sbsv5,1,3
+      if rs.recordcount = 1 then
+        iskonto1          =   rs("iskonto1")
+        iskonto2          =   rs("iskonto2")
+        iskonto3          =   rs("iskonto3")
+        iskonto4          =   rs("iskonto4")
+        stokAdet          =   rs("stokAdet")
+        stokBirim         =   rs("stokBirim")
+        stokAciklama      =   rs("stokAciklama") & ""
+        stokAd            =   rs("stokAd")
+        stokFiyat         =   rs("stokFiyat")
+        stokToplamFiyat   =   rs("stokToplamFiyatOrj")
+      end if
+      rs.close
+  '###### TEKLİF BİLGİLERİNİ AL
+end if
+
+
+
+
+
+
+
 
 
 
@@ -419,8 +480,8 @@ Response.Write "<scr" & "ipt>"
   Response.Write "}"
 Response.Write "</scr" & "ipt>"
 
-
-call jsrun("fiyathesapla();")
-
+if teklifKalemID = "" then
+  call jsrun("fiyathesapla();")
+end if
 
 %><!--#include virtual="/reg/rs.asp" -->

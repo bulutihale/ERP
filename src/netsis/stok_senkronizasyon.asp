@@ -20,42 +20,61 @@
 
 call logla("Stok Senkronizasyonu Başladı")
 
-yetkiManager = yetkibul("manager")
+yetkiManager = yetkibul("Bilgi İşlem")
 
 
 
-sorgu       =   ""
-sorgu		=	sorgu & "SELECT t1.STOK_KODU,"_
-	&" " & firmaSSOdb & ".dbo.TRK(t1.STOK_ADI) as STOK_ADI,"_
-	&" t2.INGISIM as stokBarcode"_
-	&" FROM " & firmaSSOdb & ".DBO.TBLSTSABIT t1"_
-	&" LEFT JOIN " & firmaSSOdb & ".dbo.TBLSTSABITEK t2 ON t1.STOK_KODU = t2.STOK_KODU"_
-	&" ORDER BY t1.STOK_KODU asc" & vbcrlf
-
-rs.open sorgu,sbsv5,1,3
+	sorgu = "SELECT [" & firmaSSOdb & "].[dbo].TBLSTHAR.STOK_KODU,"
+	sorgu = sorgu & " SUM(CASE WHEN STHAR_GCKOD = 'G' THEN STHAR_GCMIK ELSE -1 * STHAR_GCMIK END) AS stokMiktar"
+	sorgu = sorgu & " FROM TBLSTHAR  WITH(NOLOCK)"
+	sorgu = sorgu & " INNER JOIN TBLSTSABIT  ON TBLSTSABIT.STOK_KODU = TBLSTHAR.STOK_KODU"
+	sorgu = sorgu & " GROUP BY TBLSTHAR.STOK_KODU"
+	Response.Write sorgu
+	Response.End
+	rs.open sorgu,sbsv5,1,3
 
 for zi = 1 to rs.recordcount
 	STOK_KODU	=	rs("STOK_KODU")
-	STOK_ADI	=	rs("STOK_ADI")
-	stokBarcode	=	rs("stokBarcode")
-	
-	sorgu = "SELECT * FROM stok.stok WHERE stokKodu = '" & STOK_KODU & "'"
+	stokMiktar	=	rs("stokMiktar")
+
+	sorgu = "SELECT t1.stokID, stok.FN_anaBirimIDBul(t1.stokID) as anabirimID, stok.FN_anaBirimADBul(t1.stokID,'kAD') as anaBirimAd FROM stok.stok WHERE stokKodu = '" & STOK_KODU & "'"
 	rs1.open sorgu,sbsv5,1,3
-	if rs1.recordcount = 0 then
-		rs1.addnew
-		call logla("Stok Senkronizasyonu " & STOK_KODU & " Ürün Eklendi")
-	end if
-		rs1("firmaID")		=	firmaID
-		rs1("stokKodu")		=	STOK_KODU
-		rs1("stokAd")		=	STOK_ADI
-		rs1("stokBarcode")	=	stokBarcode
-		rs1("netsisDonem")	=	firmaSSOdb
-	rs1.update
+		stokID		=	rs1("stokID")
+		anabirimID	=	rs1("anabirimID")
+		anaBirimAd	=	rs1("anaBirimAd")
 	rs1.close
+Response.Write stokID&"<br>"
+			sorgu = "SELECT * FROM stok.stokHareket"
+			rs.open sorgu,sbsv5,1,3
+			'rs.addnew
+				rs("kid")				=	kid
+				rs("firmaID")			=	firmaID
+				rs("stokKodu")			=	STOK_KODU
+				rs("miktar")			=	stokMiktar
+				rs("miktarBirim")		=	anaBirimAd
+				rs("miktarBirimID")		=	anabirimID
+				rs("girisTarih")		=	now()
+				rs("stokHareketTuru")	=	"G"
+				rs("depoID")			=	4
+				rs("fisNo")				=	null
+				rs("aciklama")			=	"netsis"
+				rs("belgeNo")			=	null
+				rs("belgeTarih")		=	null
+				rs("cevrim")			=	0
+				rs("stokID")			=	stokID
+				rs("cariID")			=	null
+				rs("siparisKalemID")	=	null
+				rs("lot")				=	ilkGiris
+				rs("stokHareketTipi")	=	"A"
+				rs("refHareketID")		=	null
+				rs("lotSKT")			=	null
+				rs("ajandaID")			=	null
+			'rs1.update
+			rs1.close
 rs.movenext
 next
 rs.close
-call logla("Stok Senkronizasyonu Bitti")
+call logla("Stok Miktar Aktarımı Bitti")
 
 
 

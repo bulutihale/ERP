@@ -19,7 +19,7 @@
     formname = Request.Form("formname")
     formicerik = Request.Form("formicerik")
     gorevID = Request.Form("gorevID")
-    formtur = Request.Form("formtur")
+    formtur = Request("formtur")
     yaziYeri = Request.Form("yaziYeri")
     onYazi = Request.Form("onYazi")
 '#### gelenler
@@ -32,7 +32,7 @@
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
-    call rqKontrol(formtur,"Bir hata oluştu. Form verileri alınamadı. Lütfen yeniden deneyin!","")
+    call rqKontrol(formtur,"00Bir hata oluştu. Form verileri alınamadı. Lütfen yeniden deneyin!","")
 '##### HATA ÖNLEME
 
 if formtur = "teklifKosul" then

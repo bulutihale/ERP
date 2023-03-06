@@ -362,6 +362,7 @@ yetkiKontrol = yetkibul(modulAd)
 								stokID			=	rs("stokID")
 								stokID64		=	stokID
 								stokID64		=	base64_encode_tr(stokID64)
+								isGucuSayi		=	rs("isGucuSayi")
 								miktar			=	rs("miktar")
 								miktarBirim		=	rs("miktarBirim")
 								GBmiktar		=	rs("GBmiktar")
@@ -372,9 +373,11 @@ yetkiKontrol = yetkibul(modulAd)
 								receteAdimID	=	rs("receteAdimID")
 								receteAdimID64	=	receteAdimID
 								receteAdimID64	=	base64_encode_tr(receteAdimID64)
+								ihtiyacMiktar	=	cdbl(miktar) * cdbl(sipMiktar) * cdbl(receteMiktar)
+
 							if not isnull(stokID) then
 
-								ihtiyacMiktar	=	cdbl(miktar) * cdbl(sipMiktar) * cdbl(receteMiktar)
+								
 								trClass 		=	" bg-warning "
 								GBmiktarYaz		=	""
 								If secilenDepoID > 0 Then
@@ -387,7 +390,7 @@ yetkiKontrol = yetkibul(modulAd)
 								End if
 							else
 								GBmiktarYaz		=	""
-								ihtiyacMiktar	=	""
+								'ihtiyacMiktar	=	""
 								trClass 		=	""
 								hazirMiktarYaz		=	"-"
 							end if
@@ -410,7 +413,7 @@ yetkiKontrol = yetkibul(modulAd)
 										Response.Write "</div>"
 										Response.Write "</div>"
 									Response.Write "</td>"
-									Response.Write "<td class=""text-right"">" & rs("isGucuSayi") & "</td>"
+									Response.Write "<td class=""text-right"">" & isGucuSayi & "</td>"
 									Response.Write "<td class=""text-center"">"
 									if not isnull(stokID) then
 										sorgu = "SELECT t1.stokHareketID, t1.lot, t1.miktar, t1.miktarBirim, t1.stokHareketTipi"
@@ -508,22 +511,31 @@ yetkiKontrol = yetkibul(modulAd)
 		if(teminDepoID == null){var teminDepoID = 0};
 		if(surecDepoID == null){var surecDepoID = 0};
 
-			working('receteAdim',80,80);
+			
 			if(receteID > 0){
 				$('#recetelerDIV').hide('slow');
 			}
 			if(teminDepoID == 0 && receteID == undefined){
 				swal('','Temin Depo ve Reçete Seçimi Yapınız.')
 					}
-			else if(teminDepoID == 0){swal('','Temin Depo Seçimi Yapınız.')
+			else if(teminDepoID == 0){
+				$('#linklerDIV').html('<span class="bg-danger">Temin Depo Seçimi Yapınız.</span>');
+				return false;
 					}
-			else if(receteID == 0){swal('','Reçete Seçimi Yapınız.')
+			else if(surecDepoID == 0){
+				$('#linklerDIV').html('<span class="bg-danger">Başlayacak olan süreç seçimi yapınız.</span>');
+				return false;
+					}
+			else if(receteID == 0){
+				//swal('','Reçete Seçimi Yapınız.')
+				$('#linklerDIV').html('<span class="bg-danger ">Reçete Seçimi Yapınız.</span>');
+				return false;
 					}
 			else{
 				$('#btnDIV, #btnDIV2').removeClass('d-none');
 				}
 				
-				
+			working('receteAdim',80,80);
 			$('#receteBtn').removeClass('d-none');
 			$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')	
 			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #linklerDIV > *')

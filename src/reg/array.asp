@@ -41,8 +41,6 @@ muhasebedbArr   =   Array("best2022","best2021")
 	'##### 0'dan 24'e sayilar
 
 	'##### TEKLİF MODULÜ
-		teklifSonucArr	=	Array("Bekliyor","Onaylanmış","Red","Silinmiş")
+		teklifSonucArr	=	Array("Hazırlanıyor","Amir Onayında","Amir Onaylı","Amir Red","Müşteriye Gönderildi","Müşteri Red","Satış Gerçekleşti","Ödeme Bekleniyor","Sevkiyatta")
 	'##### TEKLİF MODULÜ
-
-
 %>

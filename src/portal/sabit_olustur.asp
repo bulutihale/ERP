@@ -129,6 +129,7 @@
                 objStream.WriteText vbtab & vbtab & "sb_TeklifSayiFormatOn = """ & rs1("TeklifSayiFormatOn") & """" & vbcrlf				'teklif sayısının önünde yer alır
                 objStream.WriteText vbtab & vbtab & "sb_TeklifSayiFormatRakam = " & rs1("TeklifSayiFormatRakam") & "" & vbcrlf								'kaç hane olacak
                 objStream.WriteText vbtab & vbtab & "sb_TeklifSayiFormat = """ & rs1("TeklifSayiFormat") & """" & vbcrlf	'bu kısmını yazmadım
+                objStream.WriteText vbtab & vbtab & "sb_kosulFontSize = """ & rs1("kosulFontSize") & """" & vbcrlf	
                 objStream.WriteText vbtab & "'#### TEKLİF" & vbcrlf
                 objStream.WriteText vbcrlf & vbcrlf
         rs1.movenext

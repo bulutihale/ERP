@@ -59,7 +59,7 @@
 if id <> "" then
     if modul = "teklif" then
         '###### TEKLİF BİLGİLERİNİ AL
-            sorgu = "Select top 1 * from teklif.teklif where teklifID = " & id
+            sorgu = "Select top 1 * from teklif.teklif t1 INNER JOIN rapor.raporFormat t2 ON t1.teklifTuru = t2.modul2 where t1.teklifID = " & id
             rs.open sorgu,sbsv5,1,3
             if rs.recordcount = 1 then
                 sayfaYonu          =   rs("sayfaYonu")
@@ -94,9 +94,9 @@ if id <> "" and modul <> "" then
 	            acilanLink = sb_mainUrlOnEk & sb_url & "/teklif/gosterhtml.asp?teklifID=" & id
             end if
             if sayfaYonu = "landscape" then
-		        Doc.ImportFromUrl acilanLink,"landscape=true,LeftMargin=10,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1"
+		        Doc.ImportFromUrl acilanLink,"landscape=true,LeftMargin=5,RightMargin=3,TopMargin=5,BottomMargin=5"
             else
-		        Doc.ImportFromUrl acilanLink,"PageHeight=820;BottomMargin=20;"
+		        Doc.ImportFromUrl acilanLink,"PageHeight=820;BottomMargin=5;"
 		        Page.Canvas.DrawText "Sayfa : 1/1", "x=0; y=30; width=600; alignment=center; size=10", Font
             end if
 		    Filename = Doc.Save( Server.MapPath("/temp/" & modul & "/" & dosyaadi & ".pdf"), True )

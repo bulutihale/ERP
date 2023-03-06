@@ -371,6 +371,12 @@ language_tr = language_tr & "||Departman=Departman"
 language_tr = language_tr & "||Hava Durumu=Hava Durumu"
 language_tr = language_tr & "||Dashboard dizilimini değiştir=Dashboard dizilimini değiştir"
 language_tr = language_tr & "||Modulü Sil=Modulü Sil"
+language_tr = language_tr & "||Adresi Listeden Kaldır=Adresi Listeden Kaldır"
+language_tr = language_tr & "||Teklifi Amir Onaylına Gönder=Teklifi Amir Onaylına Gönder"
+language_tr = language_tr & "||Teklif sonucunu seçiniz=Teklif sonucunu seçiniz"
+language_tr = language_tr & "||Grup Atamaları=Grup Atamaları"
+language_tr = language_tr & "||Grup Adı=Grup Adı"
+language_tr = language_tr & "||{%1} için grup abonelikleri={%1} için grup abonelikleri"
 if klang = "" then
 klang = "tr"
 end if
