@@ -137,7 +137,7 @@ yetkiKontrol = yetkibul(modulAd)
 	'#####seçilen depoda giriş bekleyenleri göster
 		if girisDepoID <> "" then
 				sorgu = "SELECT"
-				sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID"
+				sorgu = sorgu & " t1.kid as transferKid, t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID"
 				sorgu = sorgu & " FROM stok.stokHareket t1"
 				sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 				sorgu = sorgu & " INNER JOIN stok.depo t4 ON t1.depoID = t4.id"
@@ -150,13 +150,17 @@ yetkiKontrol = yetkibul(modulAd)
 								Response.Write "<div class=""col-lg-12 bold"">Bu Depo İçin Giriş Bekleyen Ürünler</div>"
 							Response.Write "</div>"
 							for ti = 1 to rs.recordcount
+								transferKid		=	rs("transferKid")
+
 								Response.Write "<div class=""row m-2"">"
 									Response.Write "<div class=""col"">" & rs("stokKodu") & "</div>"
 									Response.Write "<div class=""col"">" & rs("stokAd") & "</div>"
 									Response.Write "<div class=""col"">" & rs("miktar") & " " & rs("miktarBirim") & "</div>"
 									Response.Write "<div class=""col"">"
-					uretimYetkiKontrol = yetkibul("Üretim")
-					if uretimYetkiKontrol >= 5 then 
+
+					depoYetkiKontrol = yetkibul("Depo")
+
+					if depoYetkiKontrol >= 6 then 
 						'# transfer red
 						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""
 							Response.Write " onClick=""urunCevap('red','stokHareketID',"&rs("stokHareketID")&",'silindi','stok.stokHareket','1',"&rs("refHareketID")&",'depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&","&surecDepoID&")"">"
@@ -165,7 +169,11 @@ yetkiKontrol = yetkibul(modulAd)
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
+						if transferKid <> kid then
 							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&rs("stokHareketID")&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&","&surecDepoID&")"">"
+						else
+							Response.Write " onClick=""swal('','Çıkışını yaptığınız transferin girişini onaylayamazsınız.','error')"">"
+						end if
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
 						'# /giriş onayla

@@ -29,7 +29,8 @@ inpKontrol		=	""
 
 if gorevID <> "" then
 
-            sorgu = "SELECT t1.stokKodu, t1.stokAd, t1.stokTuru, t1.minStok, t1.stokBarcode, t1.kkDepoGiris, ISNULL(t1.silindi,0) as silindi, t1.anaBirimID, t2.uzunBirim, t1.rafOmru,"
+            sorgu = "SELECT t1.stokKodu, t1.stokAd, t1.stokTuru, t1.minStok, t1.stokBarcode, t1.kkDepoGiris, ISNULL(t1.silindi,0) as silindi,"
+			sorgu = sorgu & " t1.anaBirimID, t2.uzunBirim, t1.rafOmru, t1.stokAdEn,"
 			sorgu = sorgu & " stok.FN_stokHareketKontrol("&firmaID&", "&gorevID&") as hareketKontrol, t1.lotTakip"
 			sorgu = sorgu & " FROM stok.stok t1"
 			sorgu = sorgu & " LEFT JOIN portal.birimler t2 ON t1.anaBirimID = t2.birimID"
@@ -47,6 +48,7 @@ if gorevID <> "" then
 				hareketKontrol	=	rs("hareketKontrol")
 				rafOmru			=	rs("rafOmru")
 				lotTakip		=	rs("lotTakip")
+				stokAdEn		=	rs("stokAdEn")
 				defDeger		=	anaBirimID & "###" & uzunBirim
             rs.close
 			
@@ -64,22 +66,21 @@ end if
 			Response.Write "<div class=""text-right col-2""><span onclick=""modalkapat()"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "</div>"
 
-  Response.Write "<ul class=""nav nav-tabs"" role=""tablist"">"
-    Response.Write "<li class=""nav-item"">"
-      Response.Write "<a class=""nav-link active"" data-toggle=""tab"" href=""#home"">Ana Kart</a>"
-    Response.Write "</li>"
-    Response.Write "<li class=""nav-item"">"
-      Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#ekTanimlar"">Ek Tanımlar</a>"
-    Response.Write "</li>"
-    Response.Write "<li class=""nav-item"">"
-      Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#koliTanimlari"">Koli Tanımları</a>"
-    Response.Write "</li>"
-  Response.Write "</ul>"
+		Response.Write "<ul class=""nav nav-tabs"" role=""tablist"">"
+			Response.Write "<li class=""nav-item"">"
+				Response.Write "<a class=""nav-link active"" data-toggle=""tab"" href=""#home"">Ana Kart</a>"
+			Response.Write "</li>"
+			Response.Write "<li class=""nav-item"">"
+				Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#ekTanimlar"">Ek Tanımlar</a>"
+			Response.Write "</li>"
+			Response.Write "<li class=""nav-item"">"
+				Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#koliTanimlari"">Koli Tanımları</a>"
+			Response.Write "</li>"
+		Response.Write "</ul>"
 
-  Response.Write "<div class=""tab-content"">"
+Response.Write "<div class=""tab-content"">"
 	Response.Write "<div id=""home"" class=""container tab-pane active"">"
   		Response.Write "<form action=""/stok/stok_ekle.asp?a="&a&""" method=""post"" class=""ajaxform"">"
-
 		Response.Write "<div class=""align-items-left"">"
 			call formhidden("stokID64",stokID64,"","","","","stokID64","")
 			call formhidden("stokID",gorevID,"","","","","stokID","")
@@ -93,6 +94,12 @@ end if
 				Response.Write "<div class=""col-sm-12 my-1"">"
 					Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Ad</span>"
 					call forminput("stokAd",stokAd,"","","",inpKontrol,"stokAd","")
+				Response.Write "</div>"
+			Response.Write "</div>"
+			Response.Write "<div class=""row"">"
+				Response.Write "<div class=""col-sm-12 my-1"">"
+					Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün İngilizce Ad</span>"
+					call forminput("stokAdEn",stokAdEn,"","","",inpKontrol,"stokAdEn","")
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""row"">"
@@ -148,7 +155,6 @@ end if
 
 	Response.Write "<div id=""ekTanimlar"" class=""container tab-pane fade mt-4"">"
 	if gorevID <> "" then
-
 
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-2 text-center"">"

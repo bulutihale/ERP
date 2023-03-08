@@ -27,7 +27,7 @@ yetkiKontrol = yetkibul(modulAd)
 '####### SONUÇ TABLOSU
 	if hata = "" and yetkiKontrol > 0 then
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo,"
+			sorgu = sorgu & " t1.kid as transferKid, t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo,"
 			sorgu = sorgu & " t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID, t5.depoAd as cikisDepo"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
@@ -78,6 +78,7 @@ yetkiKontrol = yetkibul(modulAd)
 			
 
 				for i = 1 to rs.recordcount
+					transferKid			=	rs("transferKid")
 					stokHareketID		=	rs("stokHareketID")
 					refHareketID		=	rs("refHareketID")
 					stokHareketID64	 	=	stokHareketID
@@ -116,7 +117,11 @@ yetkiKontrol = yetkibul(modulAd)
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
+						if transferKid <> kid then
 							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','')"">"
+						else
+							Response.Write " onClick=""swal('','Çıkışını yaptığınız transferin girişini onaylayamazsınız.','error')"">"
+						end if
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
 						'# /giriş onayla
