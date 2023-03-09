@@ -8,7 +8,7 @@
 	stokID			=	Request.Form("stokID")
 	t1				=	Request.Form("t1")
 	t2				=	Request.Form("t2")
-	siparisNo		=	Request("siparisNo")
+	siparisNo		=	Request.Form("siparisNo")
     modulAd 		=   "Satın alma"
 	
 	'####### varsayılan tarih sınırları
@@ -36,25 +36,26 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "<div class=""table-responsive mt-3"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
 		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Tarih</th>"
+		Response.Write "<th class=""col-1"" scope=""col"">Talep Eden</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Kod</th>"
 		Response.Write "<th class=""col-3"" scope=""col"">Ürün Adı</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Miktar</th>"
-		Response.Write "<th class=""col-1"" scope=""col"">Fiyat</th>"
-		Response.Write "<th class=""col-1"" scope=""col""><span>Gelen</span> / <span class=""text-danger"">İptal</span></th>"
 		Response.Write "<th class=""col-1"" scope=""col""></th>"
-		Response.Write "<th class=""col-4"" scope=""col"">Tedarikçi</th>"
+		Response.Write "<th class=""col-1"" scope=""col""></th>"
+		Response.Write "<th class=""col-1"" scope=""col""></th>"
+		Response.Write "<th class=""col-4"" scope=""col""></th>"
 		Response.Write "</tr></thead><tbody>"
 		
 		
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, t1.mikBirim, ISNULL(t1.birimFiyat,0) as birimFiyat, t1.paraBirim, t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih,"
-			sorgu = sorgu & " ISNULL((SELECT SUM(t4.miktar) FROM stok.stokHareket t4 WHERE t4.siparisKalemID = t1.id AND t4.silindi = 0),0) as teslimEdilen,"
-			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id) as teslimBirim, t4.cariAd, t2.siparisNo,"
-			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat"
+			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, t1.mikBirim, t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih,"
+			sorgu = sorgu & " t4.cariAd, t2.siparisNo, t5.ad as talepEden, t1.acilanSipKalemID, t6.siparisNo as acilanSipNo"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " LEFT JOIN cari.cari t4 ON t2.cariID = t4.cariID"
+			sorgu = sorgu & " INNER JOIN personel.personel t5 ON t1.kid = t5.id"
+			sorgu = sorgu & " LEFT JOIN teklif.siparis t6 ON t6.sipID = (SELECT siparisID FROM teklif.siparisKalem WHERE id = t1.acilanSipKalemID)"
 			sorgu = sorgu & " WHERE t2.firmaID = " & firmaID
 			if stokID <> "" then
 				sorgu = sorgu & " AND t3.stokID = " & stokID & ""
@@ -66,7 +67,7 @@ Response.Write "<div class=""card-body"">"
 				sorgu = sorgu & " AND t2.siparisNo = '" & siparisNo & "'"
 			end if
 			sorgu = sorgu & " AND t2.siparisTarih >= '" & tarihsql2(t1) &"' AND t2.siparisTarih <= '" & tarihsql2(t2) &"'"
-			sorgu = sorgu & " AND t2.siparisTur = 'SA'"
+			sorgu = sorgu & " AND t2.siparisTur = 'SAT'"
 			sorgu = sorgu & " ORDER BY t2.siparisTarih DESC"
 			rs.open sorgu, sbsv5, 1, 3
 'response.Write sorgu
@@ -74,6 +75,7 @@ Response.Write "<div class=""card-body"">"
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
 					siparisKalemID		=	rs("siparisKalemID")
+					talepEden			=	rs("talepEden")
 					siparisNo			=	rs("siparisNo")
 					stokID				=	rs("stokID")
 					stokKodu			=	rs("stokKodu")
@@ -82,49 +84,40 @@ Response.Write "<div class=""card-body"">"
 					kalemNot			=	rs("kalemNot")
 					miktar				=	rs("miktar")
 					mikBirim			=	rs("mikBirim")
-					teslimEdilen		=	rs("teslimEdilen")
-					teslimBirim			=	rs("teslimBirim")
-					birimFiyat			=	formatNumber(rs("birimFiyat"),2)
-					paraBirim			=	rs("paraBirim")
+					acilanSipKalemID	=	rs("acilanSipKalemID")
+					acilanSipNo			=	rs("acilanSipNo")
+					
 					siparisTarih		=	rs("siparisTarih")
-					eksikMiktarKapat	=	rs("eksikMiktarKapat")
-					bakiye				=	cdbl(teslimEdilen) + cdbl(eksikMiktarKapat)
+					
+					
 
 					teslimDurum	=	""
 					satirClass	=	""
 					butonDurum	=	""
-					if cdbl(miktar) = cdbl(bakiye) then
-						teslimDurum	=	"tam"
-						satirClass 	= 	" table-success "
-						butonDurum	=	"gizli"
-					elseif cdbl(miktar) > cdbl(bakiye) then
-						teslimDurum	=	"eksik"
-					end if
-					
 					Response.Write "<tr class=""" & satirClass & """>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write siparisTarih
 							Response.Write "<hr class=""p-0 m-0"">"
-							Response.Write "<div class=""pointer"" onclick=""$('#ortaalan').load('/satinAlma/siparis_liste.asp',{siparisNo:'" & siparisNo & "'})"">"
+							Response.Write "<div class=""pointer"" onclick=""$('#ortaalan').load('/satinAlmaTalep/talep_liste.asp',{siparisNo:'" & siparisNo & "'})"">"
 								Response.Write siparisNo
 							Response.Write "</div>"
 						Response.Write "</td>"
+						Response.Write "<td>" & talepEden & "</td>"
 						Response.Write "<td>" & stokKodu & "</td>"
-						Response.Write "<td>" & stokAd & "</td>"
+						Response.Write "<td><div>" & stokAd & "</div><div class=""fontkucuk2 ml-3 text-danger""><em>" & kalemNot & "</em></div></td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
-						Response.Write "<td class=""text-right"">" & birimFiyat & " " & paraBirim & "</td>"
+						Response.Write "<td class=""text-right""></td>"
 						Response.Write "<td class=""text-center bold"">"
-							Response.Write  "<span>" & teslimEdilen & " " & teslimBirim & "</span>"
-							Response.Write  "<span class=""text-danger""> / " & eksikMiktarKapat & " " & mikBirim & "</span>"
-							Response.Write  "<div class=""w-100 p-0""></div>"
-							if yetkiKontrol >= 8 then
-							if teslimDurum = "eksik" then
-								Response.Write  "<span class=""btn btn-sm border p-0 bg-warning rounded fontkucuk2 btnEksikKapat"" data-islem=""kapama"" data-deger="""&siparisKalemID&""">bakiye kapat</span>"
-							end if
-							end if
+						if acilanSipKalemID = 0 then 
+							Response.Write "<div class=""btn btn-warning border rounded"" onclick=""modalajaxfit('/satinAlma/siparis.asp?talep=evet&siparisKalemID="&siparisKalemID&"')"">Sipariş Aç</div>"
+						else
+							'Response.Write "<div class=""bg-success border rounded pointer"" onclick=""$('#ortaalan').load('/satinAlma/siparis_liste.asp',{siparisNo:'" & acilanSipNo & "'})"">"
+							Response.Write "<div class=""bg-success border rounded pointer"" onclick=""modalajaxfit('/satinAlma/siparis_liste.asp?siparisNo="&acilanSipNo&"')"">"
+								Response.Write "Sipariş Verilmiş"
+							Response.Write "</div>"
+						end if
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
-							Response.Write "<div class=""btn btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?stokID="&stokID&"&siparisKalemID="&siparisKalemID&"')"">detay</div>"
 						Response.Write "</td>"
 						Response.Write "<td>" & cariAd & "</td>"
 					Response.Write "</tr>"

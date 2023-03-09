@@ -90,8 +90,18 @@ $(document).ready(function() {
 				});	
 		//////////////////////// select2 
 	
-	
-	
+	//////modal içinde modal açılmasını sağlayan kodlar	
+	//////modal içinde modal açılmasını sağlayan kodlar	
+		//'//NOTE modalları kapatırken sadece 2.modalın kapanması için kapatmak için tıkladığın elemente "data-dismiss="modal"  kullan
+
+		$(document).on('show.bs.modal', '.modal', function() {
+			const zIndex = 1040 + 10 * $('.modal:visible').length;
+			$(this).css('z-index', zIndex);
+			setTimeout(() => $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack'));
+		  });	
+	//////modal içinde modal açılmasını sağlayan kodlar
+	//////modal içinde modal açılmasını sağlayan kodlar	
+
 });
 
 
@@ -349,6 +359,8 @@ function modalajax(t){$('#modal-dialog .modal-body').load(t);$('#modal-dialog').
 function modalajaxfit(t){$('#modal-dialogfit .modal-body').load(t);$('#modal-dialogfit').modal('show')}
 function modalajaxfitozelKapat(t){$('#modal-dialogfit .modal-body').load(t);$('#modal-dialogfit').modal({ backdrop: 'static', keyboard: false });$('#modal-dialogfit').modal('show')}
 function modalkapat(){$('.modal').modal('hide');}
+
+
 function otomatikbuyut(id){$('#'+id).keyup(function(){this.value = this.value.toUpperCase();});}
 
 
@@ -433,6 +445,7 @@ function numara(nesne,para,uyari)
 //stok ana kartını aç
 	function stokKartAc(stokID64){
 		if(stokID64 != undefined){
+			modalkapat();
 			modalajax('/stok/stok_yeni.asp?gorevID='+stokID64);
 		}else{swal('ürün seçimi yapmadınız.','');}
 	}

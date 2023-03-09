@@ -34,7 +34,8 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 							Response.Write "<div class=""col-lg-1 col-sm-1 my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 							if yetkiTM >= 3 then
 								Response.Write "<div class=""col-lg-9 col-sm-3 my-1 text-right"">"
-									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/toplumail/sablon_yeni.asp')"">Yeni Şablon Ekle</button>&nbsp;" 
+									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/toplumail/sablon_yeni.asp?tur=mail')"">" & translate("Yeni Mail Şablonu Ekle","","") & "</button>&nbsp;" 
+									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/toplumail/sablon_yeni.asp?tur=sms')"">" & translate("Yeni SMS Şablonu Ekle","","") & "</button>&nbsp;" 
 								Response.Write "</div>"
 							end if
 						Response.Write "</div>"

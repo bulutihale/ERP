@@ -13,7 +13,7 @@
 
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
-		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "<div class=""text-right"" data-dismiss=""modal""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
 		Response.Write "<th scope=""col""></th>"

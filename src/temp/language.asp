@@ -377,6 +377,11 @@ language_tr = language_tr & "||Teklif sonucunu seçiniz=Teklif sonucunu seçiniz
 language_tr = language_tr & "||Grup Atamaları=Grup Atamaları"
 language_tr = language_tr & "||Grup Adı=Grup Adı"
 language_tr = language_tr & "||{%1} için grup abonelikleri={%1} için grup abonelikleri"
+language_tr = language_tr & "||Banka Düzenle=Banka Düzenle"
+language_tr = language_tr & "||Yeni Mail Şablonu Ekle=Yeni Mail Şablonu Ekle"
+language_tr = language_tr & "||Yeni SMS Şablonu Ekle=Yeni SMS Şablonu Ekle"
+language_tr = language_tr & "||Başlık=Başlık"
+language_tr = language_tr & "||İçerik=İçerik"
 if klang = "" then
 klang = "tr"
 end if

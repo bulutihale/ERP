@@ -25,12 +25,12 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 	if gorevID <> "" then
-		sorgu = "SELECT t1.bankaID, t1.bankaAd, t1.paraBirimID, t1.subeAd, t1.subeNo, t1.hesapNo, t1.iban, t1.silindi, t2.kisaBirim as paraBirim, t1.swiftKod"
+		sorgu = "SELECT t1.bankalarID, t1.bankaAd, t2.birimID as paraBirimID, t1.subeAd, t1.subeNo, t1.hesapNo, t1.iban, t1.silindi, t2.kisaBirim as paraBirim, t1.swiftKod"
 		sorgu = sorgu & " FROM portal.bankalar t1"
-		sorgu = sorgu & " LEFT JOIN portal.birimler t2 ON t1.paraBirimID = t2.birimlerID"
-		sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.bankalar = " & gorevID
+		sorgu = sorgu & " LEFT JOIN portal.birimler t2 ON t1.paraBirim = t2.kisaBirim"
+		sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.bankalarID = " & gorevID
 		rs.open sorgu, sbsv5, 1, 3
-			bankaID				=  	rs("bankaID")
+			bankaID				=  	rs("bankalarID")
 			bankaAd				=  	rs("bankaAd")
 			paraBirimID			=	rs("paraBirimID")
 			paraBirim			=	rs("paraBirim")

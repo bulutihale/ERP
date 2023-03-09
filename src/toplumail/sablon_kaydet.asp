@@ -7,8 +7,6 @@
     modulAd =   "Toplu Mail"
     modul = modulAd
     Response.Flush()
-    gorevID = Request.QueryString("gorevID")
-    islem = Request.QueryString("islem")
 '###### ANA TANIMLAMALAR
 
 	Set Upload		=	Server.CreateObject("Persits.Upload")
@@ -17,21 +15,54 @@
 	Upload.Save
 	Set resim1      =   Upload.Files("resim1")
 	gorevID         =	Upload.Form("gorevID")
+	tur             =	Upload.Form("tur")
 	sablonBaslik    =	Upload.Form("sablonBaslik")
 	sablonIcerik    =	Upload.Form("sablonIcerik")
+	smsBaslikID     =	Upload.Form("smsBaslikID")
 
     Response.Flush()
 
 yetkiTM = yetkibul(modulAd)
 
-if sablonBaslik = "" or sablonIcerik = "" then
-	hatamesaj = "Lütfen eksik alanları doldurun" & icerik
-	call logla(hatamesaj)
-	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
-	Response.End()
+if tur = "mail" then
+    if sablonBaslik = "" or sablonIcerik = "" then
+        hatamesaj = "Lütfen eksik alanları doldurun" & icerik
+        call logla(hatamesaj)
+        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+        Response.End()
+    end if
+elseif tur = "sms" then
+    if smsBaslikID = "" or sablonIcerik = "" then
+        hatamesaj = "Lütfen eksik alanları doldurun" & icerik
+        call logla(hatamesaj)
+        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+        Response.End()
+    end if
 end if
 
 call logla("Yeni Şablon Eklendi")
+
+
+
+if tur = "sms" then
+    sorgu = "Select * from toplumail.smsBaslik where firmaID = " & firmaID & " and silindi = 0 and smsBaslikID = " & smsBaslikID
+    rs.open sorgu,sbsv5,1,3
+    if rs.recordcount > 0 then
+        sablonBaslik = rs("baslik")
+    end if
+    rs.close
+elseif tur = "mail" then
+    smsBaslikID = 0
+end if
+
+
+
+
+
+
+
+
+
 
 if yetkiTM >= 3 then
     if gorevID = "" then
@@ -44,6 +75,7 @@ if yetkiTM >= 3 then
         end if
         rs("sablonIcerik")  =   sablonIcerik
         rs("sablonBaslik")  =   sablonBaslik
+        rs("smsBaslikID")   =   smsBaslikID
         rs("kid")           =   kid
         rs("firmaID")       =   firmaID
     rs.update
