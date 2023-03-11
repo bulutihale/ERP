@@ -72,13 +72,15 @@ yetkiKontrol = yetkibul(modulAd)
 			bantStokKodu		=	rs("bantStokKodu")
 			bantAnaBirimID		=	rs("bantAnaBirimID")
 			bantAnaBirimAd		=	rs("bantAnaBirimAd")
-			bilgiBant			=	bantStokID & "|" & bantStokKodu & "|" & ihtiyacBantMt & "|" & bantAnaBirimID & "|" & bantAnaBirimAd
+			lot					=	"lotTakibiYok"
+			bilgiBant			=	bantStokID & "|" & bantStokKodu & "|" & ihtiyacBantMt & "|" & bantAnaBirimID & "|" & bantAnaBirimAd & "|" & lot
 
 			hamKoliStokID		=	rs("hamKoliStokID")
 			hamKoliStokKodu		=	rs("hamKoliStokKodu")
 			koliAnaBirimID		=	rs("koliAnaBirimID")
 			koliAnaBirimAd		=	rs("koliAnaBirimAd")
-			bilgiKoli			=	hamKoliStokID & "|" & hamKoliStokKodu & "|" & ihtiyacKoliSayi & "|" & koliAnaBirimID & "|" & koliAnaBirimAd
+			lot					=	"lotTakibiYok"
+			bilgiKoli			=	hamKoliStokID & "|" & hamKoliStokKodu & "|" & ihtiyacKoliSayi & "|" & koliAnaBirimID & "|" & koliAnaBirimAd & "|" & lot
 		rs.close
 
 		bilgiArr	=	Array(bilgiBant, bilgiKoli)
@@ -93,6 +95,7 @@ yetkiKontrol = yetkibul(modulAd)
 			miktar			=	altBilgiArr(2)
 			miktarBirimID	=	altBilgiArr(3)
 			miktarBirim		=	altBilgiArr(4)
+			lot				=	altBilgiArr(5)
 		next
 
 		sorgu = "SELECT * FROM stok.stokHareket"
@@ -107,6 +110,7 @@ yetkiKontrol = yetkibul(modulAd)
 			rs("miktarBirim")		=	miktarBirim
 			rs("girisTarih")		=	now()
 			rs("stokHareketTuru")	=	"C"
+			rs("lot")				=	lot
 			rs("depoID")			=	sarfDepoID
 			rs("aciklama")			=	"Kullanım"
 			rs("siparisKalemID")	=	siparisKalemID

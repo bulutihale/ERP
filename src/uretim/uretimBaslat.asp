@@ -74,9 +74,9 @@ yetkiKontrol = yetkibul(modulAd)
 			rs.close
 	'##### /üretilen ürüne ait bilgileri al
 
-			sorgu = "SELECT stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&") as uretilmisMiktar,"
-			sorgu = sorgu & " CASE WHEN stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&") + " & uretilenMiktar & " = stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") THEN 'tamam'"
-			sorgu = sorgu & " WHEN stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&") + " & uretilenMiktar & " > stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") THEN 'fazla'"
+			sorgu = "SELECT ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) as uretilmisMiktar,"
+			sorgu = sorgu & " CASE WHEN ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & " = stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") THEN 'tamam'"
+			sorgu = sorgu & " WHEN ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & " > stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") THEN 'fazla'"
 			sorgu = sorgu & " ELSE 'eksik' END as miktarTamamKontrol"
 			rs.open sorgu,sbsv5,1,3
 				uretilmisMiktar		=	rs("uretilmisMiktar")

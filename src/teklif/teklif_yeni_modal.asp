@@ -6,6 +6,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
     teklifTurleriArr = Array("--Teklif Türü--","Kdv Dahil Toplamlı Teklif","Kdv Hariç Toplamlı Teklif","","Genel Teklif","Mail Order","Taksitli Mail Order","İhracat Teklif","Proforma Fatura")
     ' degerler = "--Teklif Türü--=|Kdv Dahil Toplamlı Teklif=1|Kdv Hariç Toplamlı Teklif=2|Genel Teklif=4|Mail Order=5|Taksitli Mail Order=6|İhracat Teklif=7|Proforma Fatura=8"
@@ -59,22 +60,25 @@
         sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
-          cariAd              =   rs("cariAd")
-          cariKodu            =   rs("cariKodu")
-          teklifsayi          =   rs("teklifsayi")
-          tekliftarih         =   rs("tekliftarih")
-          teklifFirmaId       =   rs("teklifFirmaId")
-          teklifTuru          =   rs("teklifTuru")
-          teklifDili          =   rs("teklifDili")
-          teklifParaBirimi    =   rs("teklifParaBirimi")
-          onUstYazi           =   rs("onUstYazi")
-          ustyazi             =   rs("ustyazi")
-          ozelNot             =   rs("ozelNot")
-          ozelkosultur1       =   rs("ozelkosultur1")
-          ozelkosulicerik1    =   rs("ozelkosulicerik1")
-          onAltYazi           =   rs("onAltYazi")
-          altYazi             =   rs("altYazi")
-          teklifKosul         =   rs("teklifKosul")
+            cariAd              =   rs("cariAd")
+            cariID              =   rs("cariID")
+            cariKodu            =   rs("cariKodu")
+            teklifsayi          =   rs("teklifsayi")
+            tekliftarih         =   rs("tekliftarih")
+            teklifFirmaId       =   rs("teklifFirmaId")
+            teklifTuru          =   rs("teklifTuru")
+            teklifDili          =   rs("teklifDili")
+            teklifParaBirimi    =   rs("teklifParaBirimi")
+            onUstYazi           =   rs("onUstYazi")
+            ustyazi             =   rs("ustyazi")
+            ozelNot             =   rs("ozelNot")
+            ozelkosultur1       =   rs("ozelkosultur1")
+            ozelkosulicerik1    =   rs("ozelkosulicerik1")
+            onAltYazi           =   rs("onAltYazi")
+            altYazi             =   rs("altYazi")
+            teklifKosul         =   rs("teklifKosul")
+            urunKatalogKodu       =   rs("urunKatalogKodu")
+            urunStokRefKodu       =   rs("urunStokRefKodu")
         else
             hata = "Kritik Hata Oluştu. Hatalı teklif"
         end if
@@ -165,6 +169,7 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
                                 Response.Write "<div class=""badge badge-danger"">Sayın : </div>"
                                 call forminput("cariAd",cariAd,"","","cariAd","autocompleteOFF","cariAd","")
                                 call forminput("cariKodu",cariKodu,"","","cariKodu","hidden","cariKodu","")
+                                call forminput("cariID",cariID,"","","cariID","hidden","cariID","")
 				            Response.Write "</div>"
                             Response.Write "<div class=""col-lg-4"">"
                             if teklifsayi = "" then
@@ -314,7 +319,19 @@ call forminput("teklifID",teklifID,"","","teklifID","hidden","teklifID","")
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
 				Response.Write "<div class=""card"">"
-				Response.Write "<div class=""card-header text-white bg-primary"">Ürünler</div>"
+				Response.Write "<div class=""card-header text-white bg-primary"">"
+                    Response.Write "<div class=""row"">"
+                        Response.Write "<div class=""col-lg-8"">Ürünler</div>"
+                        Response.Write "<div class=""col-lg-2"">"
+                            Response.Write "<div class=""badge badge-info"">Katalog Kodu: </div>"
+                            call formselectv2("urunKatalogKodu",urunKatalogKodu,"","","","","urunKatalogKodu",HEdegerler,"")
+                        Response.Write "</div>"
+                        Response.Write "<div class=""col-lg-2"">"
+                            Response.Write "<div class=""badge badge-info"">Müşteri Referans Kodu: </div>"
+                            call formselectv2("urunStokRefKodu",urunStokRefKodu,"","","","","urunStokRefKodu",HEdegerler,"")
+                        Response.Write "</div>"
+                    Response.Write "</div>"
+                Response.Write "</div>"
 				Response.Write "<div class=""card-body"">"
                     '# form
                     Response.Write "<div class=""row"">"

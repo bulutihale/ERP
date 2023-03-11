@@ -6,9 +6,11 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Toplu Mail"
+    modulID =   "137"
     Response.Flush()
     gorevID = Request.QueryString("sablonID")
     islem = Request.QueryString("islem")
+    tur = Request.QueryString("tur")
 '###### ANA TANIMLAMALAR
 
 call logla("Yeni Toplu Mail Şablonu Ekleme Ekranı")
@@ -27,11 +29,6 @@ yetkiTM = yetkibul(modulAd)
 '### SAYFA ID TESPİT ET
 
 
-
-
-
-
-
 if yetkiTM >= 3 then
     if gorevID <> "" then
         sorgu = "Select top 1 * from toplumail.sablon where firmaID = " & firmaID & " and sablonID = " & gorevID
@@ -47,30 +44,77 @@ if yetkiTM >= 3 then
 end if
 
 
+
+
+        '### ŞABLONLAR
+            sorgu = "Select * from toplumail.smsBaslik where firmaID = " & firmaID & " and silindi = 0"
+            sorgu = sorgu & " order by baslik ASC"
+            rs.open sorgu,sbsv5,1,3
+            if rs.recordcount > 0 then
+                degerler = "=|"
+                for oi = 1 to rs.recordcount
+                    if sablonBaslik = rs("baslik") then
+                        smsBaslikID = rs("smsBaslikID")
+                    end if
+                    degerler = degerler & rs("baslik")
+                    degerler = degerler & "="
+                    degerler = degerler & rs("smsBaslikID")
+                    degerler = degerler & "|"
+                rs.movenext
+                next
+                degerlerSablon = left(degerler,len(degerler)-1)
+            end if
+            rs.close
+        '### ŞABLONLAR
+
+
+
+
+
+
+
+
 if yetkiTM >= 3 then
     if hata = "" then
 		Response.Write "<form action=""/toplumail/sablon_kaydet.asp"" method=""post"" class=""ajaxform"" enctype=""multipart/form-data"">"
         call forminput("gorevID",gorevID,"","","gorevID","hidden","gorevID","")
+        call forminput("tur",tur,"","","tur","hidden","tur","")
 		Response.Write "<div class=""form-row align-items-center"">"
 		Response.Write "<div class=""col-sm-12 my-1"">"
-        Response.Write "<span class=""badge badge-secondary"">Başlık</span>"
+        Response.Write "<span class=""badge badge-secondary"">" & translate("Başlık","","") & "</span>"
+        if tur = "mail" then
 		    call forminput("sablonBaslik",sablonBaslik,"","","","autocompleteOFF","sablonBaslik","")
+        elseif tur = "sms" then
+            call formselectv2("smsBaslikID",smsBaslikID,"","","","","smsBaslikID",degerlerSablon,"")
+        end if
 		Response.Write "</div>"
 		Response.Write "<div class=""col-sm-12 my-1"">"
-        Response.Write "<span class=""badge badge-secondary"">İçerik</span>"
+        if tur = "mail" then
+            Response.Write "<span class=""badge badge-secondary"">" & translate("İçerik","","") & "</span>"
+            call clearfix()
             Response.Write "<textarea class=""summernote sablonIcerik"" name=""sablonIcerik"">" & sablonIcerik & "</textarea>"
+        elseif tur = "sms" then
+            Response.Write "<span class=""badge badge-secondary"">" & translate("İçerik","","") & " [<span id=""smslength"">" & len(sablonIcerik) & "</span>]</span>"
+            call clearfix()
+            Response.Write "<textarea class=""sablonIcerik form-control"" name=""sablonIcerik"" onKeyUp=""$('#smslength').text(this.value.length)"">" & sablonIcerik & "</textarea>"
+        end if
 		Response.Write "</div>"
 
-		Response.Write "<div class=""col-sm-12 my-1"">"
-        Response.Write "<span class=""badge badge-secondary"">" & translate("Ek Dosya","","") & "</span>"
-        Response.Write "<div><input type=""file"" name=""resim1"" /></div>"
-		Response.Write "</div>"
+        if tur = "mail" then
+            Response.Write "<div class=""col-sm-12 my-1"">"
+                Response.Write "<span class=""badge badge-secondary"">" & translate("Ek Dosya","","") & "</span>"
+                Response.Write "<div><input type=""file"" name=""resim1"" /></div>"
+            Response.Write "</div>"
+        end if
 
-		Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"" onClick=""$('.summernote').summernote('code');$('.summernote').summernote('destroy');"">KAYDET</button></div>"
+        if tur = "mail" then
+		    Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"" onClick=""$('.summernote').summernote('code');$('.summernote').summernote('destroy');"">" & translate("Kaydet","","") & "</button></div>"
+        elseif tur = "sms" then
+		    Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("Kaydet","","") & "</button></div>"
+        end if
 		Response.Write "</div>"
 		Response.Write "</form>"
 	end if
 end if
-
 
 %><!--#include virtual="/reg/rs.asp" -->

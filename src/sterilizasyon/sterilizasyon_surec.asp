@@ -71,12 +71,16 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & " LEFT JOIN stok.sterilCevrim t4 ON t1.sterilCevrimID = t4.sterilCevrimID"
 			sorgu = sorgu & " WHERE t2.depoKategori = '" & depoKategori & "' AND t1.silindi = 0"
 			sorgu = sorgu & " AND stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) > 0"
+			sorgu = sorgu & " AND t4.cevrimBitis is null"
 			rs.open sorgu, sbsv5, 1, 3	
 
 		Response.Write "<div class=""card-deck"">"
 			Response.Write "<div class=""card" & class1 & """ id=""surecDIV1"">"
 				Response.Write "<div class=""card-body"">"
-				Response.Write "<h5 class=""card-title"">Ürün Listesi</h5>"
+				Response.Write "<div class=""row justify-content-between mb-3"">"
+					Response.Write "<div class=""bold"">Ürün Listesi</div>"
+					Response.Write "<button class=""btn btn-sm bg-warning p-0"" onclick=""modalajaxfit('/sterilizasyon/cihaz_sec.asp?stokHareketID=0&techizatID="&techizatID&"')"">Sterilizatörler</button>"
+				Response.Write "</div>"
 				Response.Write "<table class=""table table-sm"">"	
 					Response.Write "<thead class=""thead-dark"">"
 						Response.Write "<th>LOT</th>"
@@ -108,7 +112,7 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td>" & miktar & " " & kisaBirim & "</td>"
 						Response.Write "<td>" & koliSayi & "</td>"
 						Response.Write "<td>" & toplamHacimLt & " m3</td>"
-						Response.Write "<td onclick=""modalajaxfit('/sterilizasyon/cihaz_sec.asp?stokHareketID="&stokHareketID&"&techizatID="&techizatID&"')"">"
+						Response.Write "<td onclick=""modalajaxfit('/sterilizasyon/cihaz_sec.asp?stokHareketID="&stokHareketID&"&techizatID="&techizatID&"&sterilCevrimID="&sterilCevrimID&"')"">"
 							if sterilCevrimID > 0 then
 								Response.Write "<i class=""icon tick""></i>"
 							else

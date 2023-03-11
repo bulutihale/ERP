@@ -6,9 +6,11 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
     teklifID            =   Request.Form("teklifID")
     cariAd              =   Request.Form("cariAd")
+    cariID              =   Request.Form("cariID")
     cariKodu            =   Request.Form("cariKodu")
     teklifsayi          =   Request.Form("teklifsayi")
     tekliftarih         =   Request.Form("tekliftarih")
@@ -25,6 +27,8 @@
     kosul5              =   Request.Form("kosul5")
     altYazi             =   Request.Form("altYazi")
     teklifKosul         =   Request.Form("kosul")
+    urunKatalogKodu       =   Request.Form("urunKatalogKodu")
+    urunStokRefKodu       =   Request.Form("urunStokRefKodu")
 '###### ANA TANIMLAMALAR
 
 
@@ -55,6 +59,12 @@
         call focusinput("cariAd")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
+    end if
+    if urunKatalogKodu = "" then
+      urunKatalogKodu = 0
+    end if
+    if urunStokRefKodu = "" then
+      urunStokRefKodu = 0
     end if
 '##### HATA ÖNLEME
 
@@ -112,7 +122,11 @@
           rs("altYazi")             =   altYazi
           rs("teklifKosul")         =   teklifKosul
           rs("teklifSonuc")         =   0                 '0 = Teklif verildi Beklemede
-          
+          if cariID <> "" then
+            rs("cariID")            =   cariID
+          end if
+          rs("urunKatalogKodu")           =   urunKatalogKodu
+          rs("urunStokRefKodu")           =   urunStokRefKodu
         rs.update
       rs.close
 '### KAYDET

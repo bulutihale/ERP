@@ -25,7 +25,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 
             sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayGB(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktarGB,"
-			sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar, t3.depoAd, t2.lot, t2.miktarBirim"
+			sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar,"
+			sorgu = sorgu & " t3.depoAd, t2.lot, t2.miktarBirim"
 			sorgu = sorgu & " FROM stok.stok t1"
 			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"

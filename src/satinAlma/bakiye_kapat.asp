@@ -9,7 +9,8 @@
 	
 	siparisKalemID	=	Request.Form("gitDeger")
 	islem			=	Request.Form("islem")
-	modulAd 		=   "depo"
+    modulAd =   "Satın Alma"
+    modulID =   "88"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

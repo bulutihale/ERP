@@ -43,12 +43,12 @@
                     Response.Write """>"
 
                                 sorgu = "select" & vbcrlf
-                                sorgu = sorgu & "bekliyor = (select count(teklifID) from teklif.teklif where firmaID = 5 and teklifSonuc=0 and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
-                                sorgu = sorgu & "onay = (select count(teklifID) from teklif.teklif where firmaID = 5 and teklifSonuc=1 and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
-                                sorgu = sorgu & "red = (select count(teklifID) from teklif.teklif where firmaID = 5 and teklifSonuc=2 and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
-                                sorgu = sorgu & "try = (select count(teklifID) from teklif.teklif where firmaID = 5 and teklifParaBirimi='TRY' and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
-                                sorgu = sorgu & "eur = (select count(teklifID) from teklif.teklif where firmaID = 5 and teklifParaBirimi='EUR' and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
-                                sorgu = sorgu & "usd = (select count(teklifID) from teklif.teklif where firmaID = 5 and teklifParaBirimi='USD' and tekliftarih > getdate()-" & tgun & ")" & vbcrlf
+                                sorgu = sorgu & "bekliyor = (select count(teklifID) from teklif.teklif where teklifTuru is not null and firmaID = " & firmaID & " and teklifSonuc=0 and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
+                                sorgu = sorgu & "onay = (select count(teklifID) from teklif.teklif where teklifTuru is not null and firmaID = " & firmaID & " and teklifSonuc=1 and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
+                                sorgu = sorgu & "red = (select count(teklifID) from teklif.teklif where teklifTuru is not null and firmaID = " & firmaID & " and teklifSonuc=2 and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
+                                sorgu = sorgu & "try = (select count(teklifID) from teklif.teklif where teklifTuru is not null and firmaID = " & firmaID & " and teklifParaBirimi='TRY' and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
+                                sorgu = sorgu & "eur = (select count(teklifID) from teklif.teklif where teklifTuru is not null and firmaID = " & firmaID & " and teklifParaBirimi='EUR' and tekliftarih > getdate()-" & tgun & ")," & vbcrlf
+                                sorgu = sorgu & "usd = (select count(teklifID) from teklif.teklif where teklifTuru is not null and firmaID = " & firmaID & " and teklifParaBirimi='USD' and tekliftarih > getdate()-" & tgun & ")" & vbcrlf
                                 rs.Open sorgu, sbsv5, 1, 3
                                     bekliyor    =   rs(0)
                                     onay        =   rs(1)

@@ -101,6 +101,7 @@
 						if rs.recordcount  = 0 then
 							rs.close
 							rs.open ikinciSorgu, sbsv5,1,3
+							call jsrun("swal('','Cari için özel reçete kayıt edilmemiş stok için oluşturulmuş genel reçeteye göre işlem kayıtları oluşturuldu.','warning')")
 						end if
 						if rs.recordcount > 0 then
 							receteID		=	rs("receteID")
@@ -108,7 +109,7 @@
 							rs1.open sorgu, sbsv5,3,3
 						else
 							receteID = 0
-							call jsrun("swal('','Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.')")
+							call jsrun("swal('Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.','Bu durum üretim adımlarının ve kullanılacak hammaddelerin plan kayıtlarını engeller. Takvim kaydını silerek reçete oluşturduktan sonra işlem yapmanız tavsiye edilir.')")
 						end if
 					rs.close
 				'### /cari için  özel reçete var mı? yoksa normal reçeteyi al

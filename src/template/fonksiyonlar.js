@@ -90,8 +90,18 @@ $(document).ready(function() {
 				});	
 		//////////////////////// select2 
 	
-	
-	
+	//////modal içinde modal açılmasını sağlayan kodlar	
+	//////modal içinde modal açılmasını sağlayan kodlar	
+		//'//NOTE modalları kapatırken sadece 2.modalın kapanması için kapatmak için tıkladığın elemente "data-dismiss="modal"  kullan
+
+		$(document).on('show.bs.modal', '.modal', function() {
+			const zIndex = 1040 + 10 * $('.modal:visible').length;
+			$(this).css('z-index', zIndex);
+			setTimeout(() => $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack'));
+		  });	
+	//////modal içinde modal açılmasını sağlayan kodlar
+	//////modal içinde modal açılmasını sağlayan kodlar	
+
 });
 
 
@@ -250,6 +260,9 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 				title: '',
 				onEscape: function() {},
 				backdrop: true,
+				// value:'xx',
+				// container:'body',
+				// inputType:'text',
 				buttons: {
 					success: {
 						label:okbaslik,
@@ -257,7 +270,16 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 						callback: function() {
 							if(okhedef||''){
 								if(veriyollamaturu=='ajax'){
-									$('#ajax').load(okhedef)
+									if(formverileri.length==0){
+									//if($('#'+formverileri).length==0){
+										//form verisi kullanılmadıysa
+										$('#ajax').load(okhedef)
+									}else{
+										//form verisi kullanıldıysa
+										formverileri=$('#'+formverileri).val();
+										formverileri = formverileri.replaceAll(' ','%27');
+										$('#ajax').load(okhedef + '&customformverileri=' + formverileri)
+									}
 								}else{
 									document.location=okhedef
 								}
@@ -271,7 +293,16 @@ function bootmodal(mesaj,tur,okhedef,cancelhedef,okbaslik,cancelbaslik,okstyle,c
 							// if(cancelhedef||''){document.location=cancelhedef}
 							if(cancelhedef||''){
 								if(veriyollamaturu=='ajax'){
-									$('#ajax').load(cancelhedef)
+									if(formverileri.length==0){
+										//if($('#'+formverileri).length==0){
+											//form verisi kullanılmadıysa
+										$('#ajax').load(cancelhedef)
+									}else{
+										//form verisi kullanıldıysa
+										formverileri=$('#'+formverileri).val();
+										formverileri = formverileri.replaceAll(' ','%27');
+										$('#ajax').load(cancelhedef + '&customformverileri=' + formverileri)
+									}
 								}else{
 									document.location=cancelhedef
 								}
@@ -328,6 +359,8 @@ function modalajax(t){$('#modal-dialog .modal-body').load(t);$('#modal-dialog').
 function modalajaxfit(t){$('#modal-dialogfit .modal-body').load(t);$('#modal-dialogfit').modal('show')}
 function modalajaxfitozelKapat(t){$('#modal-dialogfit .modal-body').load(t);$('#modal-dialogfit').modal({ backdrop: 'static', keyboard: false });$('#modal-dialogfit').modal('show')}
 function modalkapat(){$('.modal').modal('hide');}
+
+
 function otomatikbuyut(id){$('#'+id).keyup(function(){this.value = this.value.toUpperCase();});}
 
 
@@ -412,6 +445,7 @@ function numara(nesne,para,uyari)
 //stok ana kartını aç
 	function stokKartAc(stokID64){
 		if(stokID64 != undefined){
+			modalkapat();
 			modalajax('/stok/stok_yeni.asp?gorevID='+stokID64);
 		}else{swal('ürün seçimi yapmadınız.','');}
 	}

@@ -11,7 +11,8 @@
     gorevID =   Request.Form("gorevID")
     hastaID =   Request.Form("hastaID")
     hata    =   ""
-    modulAd =   "personel"
+    modulAd =   "Personel"
+    modulID =   "84"
     personelID =   kid
     Response.Flush()
 '###### ANA TANIMLAMALAR

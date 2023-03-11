@@ -12,6 +12,7 @@
 	aramaad	=	Request.Form("aramaad")
     hata    =   ""
     modulAd =   "Personel"
+    modulID =   "84"
     personelID =   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR
@@ -122,21 +123,23 @@ yetkiKontrol = yetkibul(modulAd)
 						'# personel bilgileri
 						personelID64 = personelID
 						personelID64= base64_encode_tr(personelID64)
-						Response.Write "<div title=""" & translate("Personel Yetkileri","","") & """ class=""badge badge-pill "
-						Response.Write " badge-info"
-						Response.Write """"
-						Response.Write " onClick=""modalajax('/personel/yetki.asp?gorevID=" & personelID64 & "');"">"
-						Response.Write "<i class=""mdi mdi-lock"
+						Response.Write "<a title=""" & translate("Grup Atamaları","","") & """"
+						Response.Write " onClick=""modalajax('/personel/grup_modal.asp?gorevID=" & personelID64 & "');"">"
+						Response.Write "<i class=""icon group mr-2 parmak"
 						Response.Write """></i>"
-						Response.Write "</div>&nbsp;"
+						Response.Write "</a>"
 
-						Response.Write "<div title=""" & translate("Personel Düzenle","","") & """ class=""badge badge-pill "
-						Response.Write " badge-success"
-						Response.Write """"
-						Response.Write " onClick=""modalajax('/personel/personel_yeni.asp?gorevID=" & personelID64 & "');"">"
-						Response.Write "<i class=""mdi mdi-account-convert"
+						Response.Write "<a title=""" & translate("Personel Yetkileri","","") & """"
+						Response.Write " onClick=""modalajax('/personel/yetki.asp?gorevID=" & personelID64 & "');"">"
+						Response.Write "<i class=""icon lock mr-2 parmak"
 						Response.Write """></i>"
-						Response.Write "</div>"
+						Response.Write "</a>"
+
+						Response.Write "<a title=""" & translate("Personel Düzenle","","") & """"
+						Response.Write " onClick=""modalajax('/personel/personel_yeni.asp?gorevID=" & personelID64 & "');"">"
+						Response.Write "<i class=""icon user-edit parmak"
+						Response.Write """></i>"
+						Response.Write "</a>"
 						'# personel bilgileri
 						Response.Write "</td>"
 					end if

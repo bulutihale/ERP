@@ -6,6 +6,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
     teklifID    =   Request.QueryString("teklifID")
     teklifTuru  =   Request.QueryString("teklifTuru")
@@ -97,17 +98,23 @@
 						Response.Write "<td class=""text-right"">" & stokAdet & " " & birimAd & "</td>"
 						Response.Write "<td class=""text-right"">" & formatnumber(stokToplamFiyat,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
 						Response.Write "<td class=""text-right"" nowrap>"
-						'# cari kullan
-                            Response.Write "<a title=""" & translate("Seç","","") & """ class=""ml-1 badge badge-pill "
-                            Response.Write " badge-warning"
-                            Response.Write """"
+                        ' # EDİT
+                            Response.Write "<a onClick=""modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifKalemID=" & teklifKalemID & "')"" title=""" & translate("Düzenle","","") & """ class=""ml-2 parmak"" >"
+                            Response.Write "<i class=""icon basket-edit"
+                            Response.Write """></i>"
+                            Response.Write "</a>"
+                        ' # EDİT
+
+
+						'# KALEM SİL
+                            Response.Write "<a title=""" & translate("Seç","","") & """ class=""ml-2 parmak"""
                             Response.Write " onClick="""
                             Response.Write "$('#ajax').load('/teklif/teklif_urun_modal_sil.asp?teklifKalemID=" & teklifKalemID & "');"
                             Response.Write """>"
-                            Response.Write "<i class=""mdi mdi-delete"
+                            Response.Write "<i class=""icon cancel"
                             Response.Write """></i>"
                             Response.Write "</a>"
-						'# cari kullan
+						'# KALEM SİL
 						Response.Write "</td>"
 					Response.Write "</tr>"
 					Response.Flush()
@@ -128,14 +135,28 @@
                     Response.Write "<div class=""col-lg-4 mt-2"">"
                         Response.Write "<table class=""table table-striped table-bordered table-hover table-sm"">"
                         Response.Write "<tbody>"
-                            Response.Write "<tr>"
-                                Response.Write "<td class="""">Toplam</td>"
-                                Response.Write "<td class=""text-right"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                            Response.Write "</tr>"
-                            Response.Write "<tr>"
-                                Response.Write "<td class="""">Toplam İskonto</td>"
-                                Response.Write "<td class=""text-right"">" & formatnumber(teklifIskontoToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                            Response.Write "</tr>"
+                            if teklifTuru = 1 then
+                                Response.Write "<tr>"
+                                    Response.Write "<td class="""">Toplam</td>"
+                                    Response.Write "<td class=""text-right"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                Response.Write "</tr>"
+                            end if
+                            if teklifTuru = 2 then
+                                if teklifIskontoToplam <> 0 then
+                                    Response.Write "<tr>"
+                                        Response.Write "<td class="""">Toplam</td>"
+                                        Response.Write "<td class=""text-right"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                    Response.Write "</tr>"
+                                end if
+                            end if
+                            if teklifTuru = 1 or teklifTuru = 2 then
+                                if teklifIskontoToplam <> 0 then
+                                    Response.Write "<tr>"
+                                        Response.Write "<td class="""">Toplam İskonto</td>"
+                                        Response.Write "<td class=""text-right"">" & formatnumber(teklifIskontoToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                    Response.Write "</tr>"
+                                end if
+                            end if
                             if teklifTuru = 1 then
                                 Response.Write "<tr>"
                                     Response.Write "<td class="""">Ara Toplam</td>"
@@ -154,10 +175,12 @@
                                     Response.Write "<td class=""text-right"">" & formatnumber(teklifGenelToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                 Response.Write "</tr>"
                             end if
-                            Response.Write "<tr>"
-                                Response.Write "<td class="""">Genel Toplam</td>"
-                                Response.Write "<td class=""text-right"">" & formatnumber((teklifGenelToplam+teklifKdv),sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                            Response.Write "</tr>"
+                            if teklifTuru = 1 or teklifTuru = 2 then
+                                Response.Write "<tr>"
+                                    Response.Write "<td class="""">Genel Toplam</td>"
+                                    Response.Write "<td class=""text-right"">" & formatnumber((teklifGenelToplam+teklifKdv),sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                Response.Write "</tr>"
+                            end if
                         Response.Write "</tbody>"
                         Response.Write "</table>"
                     Response.Write "</div>"

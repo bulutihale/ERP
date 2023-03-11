@@ -9,6 +9,8 @@
 	personelID			=	kid
 	mobil				=	mobilkontrol()
 	hata				=	""
+    modulAd =   "Personel"
+    modulID =   "84"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

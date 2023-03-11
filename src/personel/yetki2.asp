@@ -12,7 +12,8 @@
     yetkiAd   =   Request.QueryString("yetkiAd")
     gorevID64 = gorevID
     hata    =   ""
-    modulAd =   "personel"
+    modulAd =   "Personel"
+    modulID =   "84"
     hastaID =   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR

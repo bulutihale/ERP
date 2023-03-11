@@ -6,6 +6,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
 '###### ANA TANIMLAMALAR
 
@@ -87,6 +88,7 @@
 				Response.Write "<div class=""card-header text-white bg-warning"">" & translate("Mail Gönderimi","","") & "</div>"
 				Response.Write "<div class=""card-body"">"
                     Response.Write "<form action=""/teklif/teklif_email2.asp"" method=""post"" class=""ajaxform"">"
+                        call formhidden("teklifID",teklifID,"","","","","teklifID","")
                         Response.Write "<div class=""row"">"
                             Response.Write "<div class=""col-lg-4"">"
                                 Response.Write "<div class=""badge badge-warning"">Gönderici Adres : </div>"

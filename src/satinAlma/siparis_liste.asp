@@ -8,9 +8,12 @@
 	stokID			=	Request.Form("stokID")
 	t1				=	Request.Form("t1")
 	t2				=	Request.Form("t2")
-	siparisNo		=	Request.Form("siparisNo")
-    modulAd 		=   "Satın alma"
-	
+	siparisNo		=	Request("siparisNo")
+    modulAd =   "Satın Alma"
+    modulID =   "88"
+    call sessiontest()
+    kid		=	kidbul()
+
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 30 end if
 		if t2 = "" then t2 = date() end if
@@ -54,7 +57,7 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
-			sorgu = sorgu & " INNER JOIN cari.cari t4 ON t2.cariID = t4.cariID"
+			sorgu = sorgu & " LEFT JOIN cari.cari t4 ON t2.cariID = t4.cariID"
 			sorgu = sorgu & " WHERE t2.firmaID = " & firmaID
 			if stokID <> "" then
 				sorgu = sorgu & " AND t3.stokID = " & stokID & ""

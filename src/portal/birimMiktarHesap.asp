@@ -52,7 +52,7 @@
 					Response.Write "<span class=""bold h2 col-3"">=</span>"
 				Response.Write "</div>"
 				call forminput("anaBirimMiktar","","","","col-3","autocompleteOFF","anaBirimMiktar","readonly")
-				Response.Write "<div class=""btn btn-info pointer"" onclick=""$('#"&updateInputID&"').val($('#anaBirimMiktar').val());modalkapat();"">Kullan</div>"
+				Response.Write "<div class=""btn btn-info pointer"" data-dismiss=""modal"" onclick=""$('#"&updateInputID&"').val($('#anaBirimMiktar').val());"">Kullan</div>"
 		else
 			Response.Write "<div class=""h3"">Çevrim işlemi için birim eklenmemiş.</div>"
 		end if

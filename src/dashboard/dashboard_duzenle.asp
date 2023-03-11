@@ -4,6 +4,8 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid         =	kidbul()
+    modulAd =   "Dashboard"
+    modulID =   "158"
     islem       =   Request.QueryString("islem")
     modul       =   Request.QueryString("modul")
     modulArr    =   Array("","doviz","webmail","gorevPersonel","gorevDurum","gorevListesi","islemLog","havaDurumu","teklifDurum")

@@ -2412,6 +2412,8 @@ function xmlverigonder(byVal sunucu, byVal veri, byVal yontem, byVal verituru, b
 		verituru = "xml"
 	elseif verituru = "json" then
 		kontenttype = "application/json"
+	elseif verituru = "text" then
+		kontenttype = "application/x-www-form-urlencoded"
 	end if
 
 	Set SrvHTTPS = Server.CreateObject("MSXML2.ServerXMLHTTP")
@@ -2421,7 +2423,6 @@ function xmlverigonder(byVal sunucu, byVal veri, byVal yontem, byVal verituru, b
 	end if
 	SrvHTTPS.setRequestHeader "Content-Type",kontenttype
 	SrvHTTPS.send veri
-
 	if verituru = "xml" then
 		xmlverigonder = SrvHTTPS.responseXML.xml
 	else
@@ -3275,10 +3276,13 @@ function logla(byVal islem)
 	if FNpersonelID = "" then
 		FNpersonelID = 0
 	end if
+	if modulID = "" then
+		modulID = 0
+	end if
 	if modulAd = "" then
 		modulAd = ""			'burayı ileride doldururum
 	end if
-	veri			=	"'" & FNtarih & "','" & FNpersonelID & "','" & FNip & "','" & FNgorevID & "','" & FNislem & "','" & firmaID & "','','" & modulAd & "'"
+	veri			=	"'" & FNtarih & "','" & FNpersonelID & "','" & FNip & "','" & FNgorevID & "','" & FNislem & "','" & firmaID & "','','" & modulAd & "','" & modulID & "'"
 	sorgu		=	"INSERT INTO personel.personel_log VALUES (" & veri & ")"
 	fn1.open sorgu, sbsv5, 3, 3
 end function
@@ -3512,7 +3516,7 @@ function formselectv2(byVal formad,byVal formdeger, byVal formonclick, byVal for
 end function
 
 function clearfix()
-	Response.Write "<div class=""clearfix""></div>"
+	Response.Write "<div class=""clearfix d-none""></div>"
 end function
 
 
@@ -3663,6 +3667,7 @@ end function
 
 
 function translate(byVal kelime, byVal kelime2, byVal kelime3)
+	' {%1} için <strong>{%2}</strong> cinsinden ödeme bilgilerini yazın
 	if kelime <> "" then
 		for li = 0 to ubound(languageSozluk)
 			languageKelime = Split(languageSozluk(li),"=")
@@ -4152,7 +4157,7 @@ function lotOlusturFunc(depoID)
 			sorgu = sorgu & " LEFT JOIN stok.stokHareket t2 ON t2.stokHareketID = t1.refHareketID"
 			sorgu = sorgu & " WHERE t1.stokHareketTuru = 'G'"
 			'sorgu = sorgu & " AND (t1.stokHareketTipi = 'U' OR t2.stokHareketTipi = 'A' )"
-			sorgu = sorgu & " AND t1.depoID = " & depoID & " AND t1.tarih >= '" & tarihsql(bugun) & "' ORDER BY t1.stokHareketID DESC"
+			sorgu = sorgu & " AND t1.lot <> 'lotTakibiYok' AND t1.depoID = " & depoID & " AND t1.tarih >= '" & tarihsql(bugun) & "' ORDER BY t1.stokHareketID DESC"
 			fn1.open sorgu,sbsv5,1,3
 			if fn1.recordcount > 0 then
 				sonlot = fn1("lot") & ""

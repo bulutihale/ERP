@@ -11,7 +11,8 @@
     gorevID 		=	Request.QueryString("gorevID")
 	gorevID64		=	gorevID
 	gorevID			=	base64_decode_tr(gorevID64)
-	modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -23,11 +24,13 @@ Response.Flush()
 yetkiKontrol = yetkibul(modulAd)
 
 if gorevID <> "" then
-            sorgu = "SELECT t1.receteAd, t1.ozelRecete, t1.receteTipi, t1.silindi, t2.cariID, t2. cariAd, t3.stokID, t3.stokAd, ISNULL(t1.istasyonID,0) as istasyonID, t4.istasyonAd"
+            sorgu = "SELECT t1.receteAd, t1.ozelRecete, t1.receteTipi, t1.silindi, t2.cariID, t2. cariAd, t3.stokID, t3.stokAd,"
+			sorgu = sorgu & " ISNULL(t1.istasyonID,0) as istasyonID, t4.istasyonAd, t1.ciktiUrunMiktar, t5.uzunBirim"
 			sorgu = sorgu & " FROM recete.recete t1"
 			sorgu = sorgu & " LEFT JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 			sorgu = sorgu & " LEFT JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " LEFT JOIN isletme.istasyon t4 ON t1.istasyonID = t4.istasyonID"
+			sorgu = sorgu & " LEFT JOIN portal.birimler t5 ON t3.anaBirimID = t5.birimID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND receteID = " & gorevID
 			rs.open sorgu, sbsv5, 1, 3
                 receteAd		=  	rs("receteAd")
@@ -40,6 +43,8 @@ if gorevID <> "" then
 				istasyonID		=	rs("istasyonID")
 				istasyonAd		=	rs("istasyonAd")
 				silindi			=	rs("silindi")
+				ciktiUrunMiktar	=	rs("ciktiUrunMiktar")
+				uzunBirim		=	rs("uzunBirim")
 				defDeger		=	cariID&"###"&cariAd
 				defDeger1		=	stokID&"###"&stokAd
 				defDeger2		=	istasyonID&"###"&istasyonAd
@@ -98,6 +103,13 @@ call logla(divAd & " Ekranı Girişi")
 			Response.Write "<div class=""col-sm-12 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">İşlem İstasyonu</span>"
 				call formselectv2("istasyonSec",cint(istasyonID),"","","formSelect2 istasyonID border","","istasyonSec","","data-holderyazi=""İşlem İstasyonu"" data-jsondosya=""JSON_istasyon"" data-miniput=""0"" data-defdeger="""&defDeger2&"""")
+			Response.Write "</div>"
+		Response.Write "</div>"
+
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-lg-3 col-sm-4 text-center my-1"">"
+				Response.Write "<div class=""badge badge-secondary rounded"">Ana Birim</div><span class=""pointer text-info"" onclick=""swal('','Ürünün stok kartında tanımlanır ve ürün hareket gördükten sonra değiştirilemez!')""><i class=""mdi mdi-information""></i></span>"
+				Response.Write "<div class=""mt-2 bold text-danger"">" & uzunBirim & "</div>"
 			Response.Write "</div>"
 		Response.Write "</div>"
 				

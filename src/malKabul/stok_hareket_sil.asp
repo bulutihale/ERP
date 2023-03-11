@@ -8,7 +8,8 @@
 	
 	
 	stokHareketID	=	Request.Querystring("stokHareketID")
-	modulAd 		=   "depo"
+    modulAd =   "Mal Kabul"
+    modulID =   "89"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

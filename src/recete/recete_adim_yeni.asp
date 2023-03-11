@@ -13,7 +13,8 @@
 	end if
 	stokID				=	Request.Form("stokID")
     receteISlemTipiID  	=	Request.Form("receteISlemTipiID")
-	modulAd 			=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

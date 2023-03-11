@@ -20,7 +20,8 @@
 		ozelRecete	=	0
 		cariID 		=	0
 	end if
-	modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -46,7 +47,6 @@ if ozelRecete = 1 AND cariID = "" then
 end if
 
 call rqKontrol(receteTipi,"Lütfen Reçete Tipini Seçiniz.","")
-
 
 
 

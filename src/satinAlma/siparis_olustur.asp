@@ -8,6 +8,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Satın Alma"
+    modulID =   "88"
     Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -69,7 +70,7 @@ yetkiKontrol = yetkibul(modulAd)
 	rs.close
 	
 	
-	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim"
+	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim, t1.talepSipKalemID"
 	sorgu = sorgu & " FROM teklif.siparisKalemTemp t1"
 	sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & ""
 	sorgu = sorgu & " AND siparisTur = 'satinalma'"
@@ -84,24 +85,31 @@ yetkiKontrol = yetkibul(modulAd)
 			mikBirimID		=	rs("mikBirimID")
 			birimFiyat		=	rs("birimFiyat")
 			paraBirim		=	rs("paraBirim")
+			talepSipKalemID	=	rs("talepSipKalemID")
 			
 			
 			sorgu = "SELECT * FROM teklif.siparisKalem"
 			rs1.open sorgu, sbsv5,1,3
 			rs1.addnew
-				rs1("firmaID")		=	firmaID
-				rs1("kid")			=	kid
-				rs1("tempKayitKID")	=	tempKayitKID
-				rs1("siparisID")	=	sipID
-				rs1("stokID")		=	stokID
-				rs1("kalemNot")		=	kalemNot
-				rs1("miktar")		=	miktar
-				rs1("mikBirim")		=	mikBirim
-				rs1("mikBirimID")	=	mikBirimID
-				rs1("birimFiyat")	=	birimFiyat
-				rs1("paraBirim")	=	paraBirim
+				rs1("firmaID")			=	firmaID
+				rs1("kid")				=	kid
+				rs1("tempKayitKID")		=	tempKayitKID
+				rs1("siparisID")		=	sipID
+				rs1("stokID")			=	stokID
+				rs1("kalemNot")			=	kalemNot
+				rs1("miktar")			=	miktar
+				rs1("mikBirim")			=	mikBirim
+				rs1("mikBirimID")		=	mikBirimID
+				rs1("birimFiyat")		=	birimFiyat
+				rs1("paraBirim")		=	paraBirim
+				rs1("talepSipKalemID")	=	talepSipKalemID
 			rs1.update
+			yeniID = rs1("id")
 			rs1.close
+			if talepSipKalemID > 0 then
+				sorgu = "UPDATE teklif.siparisKalem SET acilanSipKalemID = " & yeniID & " WHERE id = " & talepSipKalemID & ""
+				rs1.open sorgu, sbsv5,3,3
+			end if
 		rs.movenext
 		next
 	rs.close

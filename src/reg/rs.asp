@@ -64,6 +64,8 @@ else
 			Session("firmaID")	=	firmaID
 			Session("firmaSSO")	=	firmaSSO
 		end if
+
+
 	'### YAPICAK BİŞİ YOK :(
 	'### YAPICAK BİŞİ YOK :(
 	'### Site sabitlerini çek
@@ -74,9 +76,14 @@ else
 	'### SSO Başka DB ise
 	'### SSO Başka DB ise
 		if firmaSSO = "NETSIS" then
-			set ssov5=Server.CreateObject("ADODB.Connection")
-			baglantibilgileri2 = "Provider=SQLOLEDB;Data Source=" & sb_dbsunucu & ";Initial Catalog=" & firmaSSOdb & ";User Id=" & sb_dbuser & ";Password=" & sb_dbpass & ";"
-			ssov5.Open baglantibilgileri2
+			if sb_dbsunucu = "" or firmaSSOdb = "" or sb_dbuser = "" or sb_dbpass = "" then
+				call yetkisizGiris("Netsis Baglanti Ayarlarinda Kritik Hata!!!","Kritik Hata","")
+				Response.End()
+			else
+				set ssov5=Server.CreateObject("ADODB.Connection")
+				baglantibilgileri2 = "Provider=SQLOLEDB;Data Source=" & sb_dbsunucu & ";Initial Catalog=" & firmaSSOdb & ";User Id=" & sb_dbuser & ";Password=" & sb_dbpass & ";"
+				ssov5.Open baglantibilgileri2
+			end if
 		end if
 	'### SSO Başka DB ise
 	'### SSO Başka DB ise
@@ -84,10 +91,15 @@ else
 	'### CARİ'leri dış DB'den alıyorsa
 	'### CARİ'leri dış DB'den alıyorsa
 		if firmaCariDBvar = 1 then
-			set rsCari=Server.CreateObject("ADODB.Connection")
-			cariDBbaglanti = "Provider=SQLOLEDB;Data Source=" & firmaCariSunucu & ";Initial Catalog=" & firmaCariDB & ";User Id=" & firmaCaridbUSR & ";Password=" & firmaCaridbPass & ";"
-			rsCari.Open cariDBbaglanti
-			Set rsC = Server.CreateObject("ADODB.Recordset")
+			if firmaCariSunucu = "" or firmaCariDB = "" or firmaCaridbUSR = "" or firmaCaridbPass = "" then
+				call yetkisizGiris("Cari Baglanti Ayarlarinda Kritik Hata!!!","Kritik Hata","")
+				Response.End()
+			else
+				set rsCari=Server.CreateObject("ADODB.Connection")
+				cariDBbaglanti = "Provider=SQLOLEDB;Data Source=" & firmaCariSunucu & ";Initial Catalog=" & firmaCariDB & ";User Id=" & firmaCaridbUSR & ";Password=" & firmaCaridbPass & ";"
+				rsCari.Open cariDBbaglanti
+				Set rsC = Server.CreateObject("ADODB.Recordset")
+			end if
 		end if
 	'### CARİ'leri dış DB'den alıyorsa
 	'### CARİ'leri dış DB'den alıyorsa
@@ -95,10 +107,15 @@ else
 	'### STOK'ları dış DB'den alıyorsa
 	'### STOK'ları dış DB'den alıyorsa
 		if firmaStokDBvar = 1 then
-			set rsStok=Server.CreateObject("ADODB.Connection")
-			stokDBbaglanti = "Provider=SQLOLEDB;Data Source=" & firmaStokSunucu & ";Initial Catalog=" & firmaStokDB & ";User Id=" & firmaStokdbUSR & ";Password=" & firmaStokdbPass & ";"
-			rsStok.Open stokDBbaglanti
-			Set rsS = Server.CreateObject("ADODB.Recordset")
+			if firmaStokSunucu = "" or firmaStokDB = "" or firmaStokdbUSR = "" or firmaStokdbPass = "" then
+				call yetkisizGiris("Stok Baglanti Ayarlarinda Kritik Hata!!!","Kritik Hata","")
+				Response.End()
+			else
+				set rsStok=Server.CreateObject("ADODB.Connection")
+				stokDBbaglanti = "Provider=SQLOLEDB;Data Source=" & firmaStokSunucu & ";Initial Catalog=" & firmaStokDB & ";User Id=" & firmaStokdbUSR & ";Password=" & firmaStokdbPass & ";"
+				rsStok.Open stokDBbaglanti
+				Set rsS = Server.CreateObject("ADODB.Recordset")
+			end if
 		end if
 	'### STOK'ları dış DB'den alıyorsa
 	'### STOK'ları dış DB'den alıyorsa

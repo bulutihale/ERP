@@ -6,9 +6,11 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
     teklifID64 = Request.QueryString("teklifID")
     islem = Request.QueryString("islem")
+    customformverileri = Request.QueryString("customformverileri")
 '###### ANA TANIMLAMALAR
 
 
@@ -29,17 +31,44 @@
 
 
 
-      sorgu = "Select top 1 teklifSonuc,silindi from teklif.teklif where teklifID = " & teklifID
+
+      sorgu = "Select top 1 teklifSonuc,silindi,sonucAciklama,sonucTarih from teklif.teklif where teklifID = " & teklifID
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
-        if islem = "onay" then
+        if islem = "0" then
+            rs("teklifSonuc") = 0
+            hatamesaj = "Teklif hazırlık aşamasında olarak işaretlendi"
+            call logla(hatamesaj)
+            call toastrCagir(hatamesaj, "OK", "right", "error", "otomatik", "")
+        elseif islem = "1" then
             rs("teklifSonuc") = 1
-            hatamesaj = "Teklif Onaylandı"
-            call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-success","","","","","")
-        elseif islem = "red" then
+            hatamesaj = "Teklif amir onayına gönderildi"
+            call logla(hatamesaj)
+            call toastrCagir(hatamesaj, "OK", "right", "success", "otomatik", "")
+        elseif islem = "2" then
             rs("teklifSonuc") = 2
-            hatamesaj = "Teklif Reddedildi"
-            call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+            rs("sonucAciklama") =   customformverileri
+            hatamesaj = "Teklifi onayladınız"
+            call logla(hatamesaj & ". Onay notu : " & customformverileri)
+            call toastrCagir(hatamesaj, "OK", "right", "success", "otomatik", "")
+        elseif islem = "3" then
+            rs("teklifSonuc") = 3
+            rs("sonucAciklama") =   customformverileri
+            hatamesaj = "Teklifi reddettiniz"
+            call logla(hatamesaj & ". Red sebebi : " & customformverileri)
+            call toastrCagir(hatamesaj, "OK", "right", "error", "otomatik", "")
+        elseif islem = "5" then
+            rs("teklifSonuc") = 5
+            rs("sonucAciklama") =   customformverileri
+            hatamesaj = "Müşteri reddetti"
+            call logla(hatamesaj & ". Red sebebi : " & customformverileri)
+            call toastrCagir(hatamesaj, "OK", "right", "error", "otomatik", "")
+        elseif islem = "6" then
+            rs("teklifSonuc") = 6
+            rs("sonucAciklama") =   customformverileri
+            hatamesaj = "Satış gerçekleşti"
+            call logla(hatamesaj & ". Satış notu : " & customformverileri)
+            call toastrCagir(hatamesaj, "OK", "right", "success", "otomatik", "")
         elseif islem = "sil" then
             rs("teklifSonuc") = 3
             rs("silindi") = 1

@@ -1,6 +1,9 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
 sessiontest()
+    modulAd =   "Satın Alma"
+    modulID =   "88"
+	kid = kidbul()
 
 'eklemek için
 
@@ -12,6 +15,7 @@ miktar			=	Request.Form("miktar")
 mikBirim		=	Request.Form("birimSec")
 paraBirim		=	Request.Form("pBirimSec")
 birimfiyat		=	Request.Form("birimfiyat")
+talepSipKalemID	=	Request.Form("talepSipKalemID")
 
 
 sorgu = "SELECT stok.FN_birimIDBul('" & mikBirim & "','K') as bid"
@@ -85,18 +89,19 @@ else
 	sorgu		=	"SELECT top(1) * FROM teklif.siparisKalemTemp"
 	rs.open sorgu,sbsv5,1,3
 	rs.addnew
-		rs("firmaID")		=	firmaID
-		rs("kid")			=	kid
-		rs("kalemNot")		=	kalemNot
-		rs("siparisTarih")	=	siparisTarih
-		rs("cariID")		=	cariID
-		rs("stokID")		=	stokID
-		rs("miktar")		=	miktar
-		rs("mikBirim")		=	mikBirim
-		rs("mikBirimID")	=	birimID
-		rs("birimfiyat")	=	birimfiyat
-		rs("paraBirim")		=	paraBirim
-		rs("siparisTur")	=	"satinAlma"
+		rs("firmaID")			=	firmaID
+		rs("kid")				=	kid
+		rs("kalemNot")			=	kalemNot
+		rs("siparisTarih")		=	siparisTarih
+		rs("cariID")			=	cariID
+		rs("stokID")			=	stokID
+		rs("miktar")			=	miktar
+		rs("mikBirim")			=	mikBirim
+		rs("mikBirimID")		=	birimID
+		rs("birimfiyat")		=	birimfiyat
+		rs("paraBirim")			=	paraBirim
+		rs("siparisTur")		=	"satinAlma"
+		rs("talepSipKalemID")	=	talepSipKalemID
 
 	rs.update
 	rs.close
@@ -211,7 +216,7 @@ rs.open sorgu,sbsv5,1,3
 rs.close
 
 
-call jsrun("$('.inpReset').val('');$('.inpReset').val(null).trigger('change');")
+'call jsrun("$('.inpReset').val('');$('.inpReset').val(null).trigger('change');")
 
 
 %><!--#include virtual="/reg/rs.asp" -->

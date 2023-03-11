@@ -6,11 +6,13 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
     teklifTuru        =   Request.QueryString("teklifTuru")
     teklifStokID      =   Request.QueryString("teklifStokID")
     teklifID          =   Request.QueryString("teklifID")
     teklifParaBirimi  =   Request.QueryString("teklifParaBirimi")
+    teklifKalemID     =   Request.QueryString("teklifKalemID")
     iskonto1          =   0
     iskonto2          =   0
     iskonto3          =   0
@@ -20,6 +22,7 @@
 
 
 '##### HATA ÖNLEME
+  if teklifKalemID = "" then
     if teklifStokID = "" then
         hatamesaj = "Hatalı Stok!"
         call logla(hatamesaj)
@@ -32,15 +35,48 @@
         Response.Write hatamesaj
         Response.End()
     end if
+  end if
 '##### HATA ÖNLEME
 
 
+
+
+
+'###### TEKLİF BİLGİLERİNİ AL
+        sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount = 1 then
+          teklifDili          =   rs("teklifDili")
+          teklifParaBirimi    =   rs("teklifParaBirimi")
+          teklifTuru          =   rs("teklifTuru")
+        end if
+        rs.close
+'###### TEKLİF BİLGİLERİNİ AL
+
+
+if teklifKalemID <> "" then
+  '###### TEKLİF BİLGİLERİNİ AL
+      sorgu = "Select top 1 * from teklif.teklif_urun where teklifKalemID = " & teklifKalemID
+      rs.open sorgu,sbsv5,1,3
+      if rs.recordcount = 1 then
+        teklifStokID      =   rs("teklifStokID")
+      end if
+      rs.close
+  '###### TEKLİF BİLGİLERİNİ AL
+end if
+
+
+
+
+
+
 '### ÜRÜN BİLGİLERİNİ AL
-      sorgu = "Select kdv,stokAd,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
+      sorgu = "Select kdv,stokAd,stokAdEn,stokAciklama,fiyat1,fiyat2,fiyat3,fiyat4,(Select birimTur from portal.birimler where birimID = stok.stok.anaBirimID) as birimTur,paraBirimID from stok.stok where silindi = 0 and stokID = " & teklifStokID
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
           stokkdv =   rs("kdv")
           stokAd  =   rs("stokAd")
+          stokAdEn  =   rs("stokAdEn")
           stokFiyat = rs("fiyat1")
           fiyat1  =   rs("fiyat1")
           fiyat2  =   rs("fiyat2")
@@ -59,7 +95,29 @@
       rs.close
 '### ÜRÜN BİLGİLERİNİ AL
 
+
+if teklifKalemID = "" then
   call logla("Teklife ürün ekleniyor : " & stokAd)
+else
+  call logla("Teklifdeki ürün güncelleniyor : " & stokAd)
+end if
+
+  '### ECNEBİCE
+      if teklifDili = "en" then
+          stokAd = stokAdEn
+      end if
+  '### ECNEBİCE
+
+
+
+
+
+
+
+
+
+
+
 
 
 '#### TEKLİF TÜRÜNE GÖRE HESAPLAMA
@@ -187,6 +245,38 @@
 
 
 
+
+
+if teklifKalemID <> "" then
+  '###### TEKLİF BİLGİLERİNİ AL
+      sorgu = "Select top 1 * from teklif.teklif_urun where teklifKalemID = " & teklifKalemID
+      rs.open sorgu,sbsv5,1,3
+      if rs.recordcount = 1 then
+        iskonto1          =   rs("iskonto1")
+        iskonto2          =   rs("iskonto2")
+        iskonto3          =   rs("iskonto3")
+        iskonto4          =   rs("iskonto4")
+        stokAdet          =   rs("stokAdet")
+        stokBirim         =   rs("stokBirim")
+        stokAciklama      =   rs("stokAciklama") & ""
+        stokAd            =   rs("stokAd")
+        stokFiyat         =   rs("stokFiyat")
+        stokToplamFiyat   =   rs("stokToplamFiyatOrj")
+      end if
+      rs.close
+  '###### TEKLİF BİLGİLERİNİ AL
+end if
+
+
+
+
+
+
+
+
+
+
+
 '### ANA FORM
   Response.Write "<form id=""teklifUrunModal"" class=""ajaxform"" method=""post"" action=""/teklif/teklif_urun_modal_kaydet.asp"">"
     Response.Write "<input type=""hidden"" value=""" & teklifID & """ name=""teklifID"" />"
@@ -204,7 +294,7 @@
     'Stok Ad
     'Stok Açıklama
       Response.Write "<tr><td width=""100"">Ürün Notu</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
-      call forminput("stokAciklama",stokAciklama,"","","stokAciklama mb-2","autocompleteOFF","stokAciklama","")
+      call formtextarea("stokAciklama",stokAciklama,"","","stokAciklama mb-2 height-100","autocompleteOFF","stokAciklama","")
       Response.Write "</td></tr>"
     'Stok Açıklama
     'Adet
@@ -391,8 +481,8 @@ Response.Write "<scr" & "ipt>"
   Response.Write "}"
 Response.Write "</scr" & "ipt>"
 
-
-call jsrun("fiyathesapla();")
-
+if teklifKalemID = "" then
+  call jsrun("fiyathesapla();")
+end if
 
 %><!--#include virtual="/reg/rs.asp" -->
