@@ -12,7 +12,6 @@
 	aramaad	=	Request.Form("aramaad")
     hata    =   ""
     modulAd =   "Personel"
-    modulID =   "84"
     personelID =   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR

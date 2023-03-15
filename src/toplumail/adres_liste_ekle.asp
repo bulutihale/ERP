@@ -6,7 +6,6 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Toplu Mail"
-    modulID =   "137"
     Response.Flush()
 '###### ANA TANIMLAMALAR
 ' |Toplu Mail#Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6
@@ -45,15 +44,26 @@ tur             =   Request.Form("tur")
 					adresListesiArr(si) = Replace(adresListesiArr(si)," ","")
                     if tur = "email" or tur = "sms" then
                         if len(adresListesiArr(si)) > 7 then
-                            if (instr(adresListesiArr(si),"@") > 0 and instr(adresListesiArr(si),".") > 0) or ((len(adresListesiArr(si)) = 10 or len(adresListesiArr(si)) = 11) and (left(adresListesiArr(si),1) = "0" or left(adresListesiArr(si),1) = "5")) then
-                                eklemeProcess = true
-                                if (len(adresListesiArr(si)) = 10 or len(adresListesiArr(si)) = 11) and (left(adresListesiArr(si),1) = "0" or left(adresListesiArr(si),1) = "5") then
+                            if instr(adresListesiArr(si),"@") > 0 then
+                            else
+                                'mail adresi olmayanlar sms demektir. temizlik yap
+                                    adresListesiArr(si) = replace(adresListesiArr(si),".","")
+                                    adresListesiArr(si) = replace(adresListesiArr(si),",","")
+                                    adresListesiArr(si) = replace(adresListesiArr(si)," ","")
+                                    adresListesiArr(si) = replace(adresListesiArr(si),"-","")
+                                    adresListesiArr(si) = replace(adresListesiArr(si),"+90","")
+                                    if isnumeric(adresListesiArr(si)) = false then
+                                        adresListesiArr(si) = ""
+                                    end if
                                     adresListesiArr(si) = right(adresListesiArr(si),10)
-                                end if
-Response.Write altModul
+                                'mail adresi olmayanlar sms demektir. temizlik yap
+                            end if
+                            if (instr(adresListesiArr(si),"@") > 0 and instr(adresListesiArr(si),".") > 0) or (len(adresListesiArr(si)) = 10 and left(adresListesiArr(si),1) = "5") then
+                                eklemeProcess = true
+                                ' if (len(adresListesiArr(si)) = 10 or len(adresListesiArr(si)) = 11) and (left(adresListesiArr(si),1) = "0" or left(adresListesiArr(si),1) = "5") then
+                                ' end if
                                 if altModul = "Kara Liste" then
                                     sorgu = "Select * from toplumail.blacklist where adres = '" & adresListesiArr(si) & "' and firmaID = " & firmaID
-Response.Write sorgu
                                     rs.open sorgu,sbsv5,1,3
                                     if rs.recordcount = 0 then
                                         rs.addnew
@@ -77,7 +87,6 @@ Response.Write sorgu
                                         sorgu = "Select * from toplumail.adres where adres = '" & adresListesiArr(si) & "' and adresGrupID = " & adresGrupID
                                         rs.open sorgu,sbsv5,1,3
                                         if rs.recordcount = 0 then
-                                            ' Response.Write adresListesiArr(si) & vbcrlf
                                             rs.addnew
                                             rs("adres") = adresListesiArr(si)
                                             rs("kaynak") = "Toplu Yükleme"

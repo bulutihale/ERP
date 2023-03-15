@@ -6,7 +6,6 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Toplu Mail"
-    modulID =   "137"
     Response.Flush()
     gorevID = Request.QueryString("sablonID")
     islem = Request.QueryString("islem")

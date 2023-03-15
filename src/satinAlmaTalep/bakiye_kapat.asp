@@ -9,12 +9,8 @@
 	
 	siparisKalemID	=	Request.Form("gitDeger")
 	islem			=	Request.Form("islem")
-<<<<<<< HEAD
     modulAd =   "Satın Alma"
     modulID =   "88"
-=======
-	modulAd 		=   "depo"
->>>>>>> 2ec0c88fad841fbe6ccde9e69af41c60651d566b
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -22,11 +18,7 @@
 Response.Flush()
 
 
-<<<<<<< HEAD
 yetkiKontrol = yetkibul("depo")
-=======
-yetkiKontrol = yetkibul(modulAd)
->>>>>>> 2ec0c88fad841fbe6ccde9e69af41c60651d566b
 
 
 

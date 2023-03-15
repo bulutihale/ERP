@@ -10,8 +10,7 @@
     opener  =   Request.Form("opener")
     gorevID =   Request.QueryString("gorevID")
     hata    =   ""
-    modulAd =   "Personel"
-    modulID =   "84"
+    modulAd =   "personel"
     hastaID =   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR

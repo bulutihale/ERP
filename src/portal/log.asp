@@ -4,6 +4,7 @@ call sessiontest()
 
 kid = kidbul()
 
+Server.ScriptTimeout = 60000
 Response.Flush()
 
 yetki = yetkibul("manager")
@@ -23,9 +24,10 @@ yetki = yetkibul("manager")
 		Response.Write "<th>&nbsp;</th>"
 		Response.Write "<th>İşlem</th>"
 		Response.Write "<th>ip</th>"
+		Response.Write "<th>Konum</th>"
 		Response.Write "</tr></thead><tbody>"
 			sorgu = "Select" & vbcrlf
-			sorgu = sorgu & "top(1000)" & vbcrlf
+			sorgu = sorgu & "top(400)" & vbcrlf
 			sorgu = sorgu & "personel.personel_log.Tarih" & vbcrlf
 			sorgu = sorgu & ",personel.personel.ad as kidAd" & vbcrlf
 			sorgu = sorgu & ",personel.personel_log.personelID" & vbcrlf
@@ -34,6 +36,7 @@ yetki = yetkibul("manager")
 			sorgu = sorgu & ",personel.personel_log.modulID" & vbcrlf
 			sorgu = sorgu & ",personel.personel_log.islem" & vbcrlf
 			sorgu = sorgu & ",personel.personel_log.IP" & vbcrlf
+			sorgu = sorgu & ",personel.personel_log.geoIPdistrict" & vbcrlf
 			sorgu = sorgu & "from personel.personel_log" & vbcrlf
 			sorgu = sorgu & "LEFT JOIN personel.personel on personel.personel.id = personel.personel_log.personelID" & vbcrlf
 			sorgu = sorgu & "LEFT JOIN portal.menuler on portal.menuler.id = personel.personel_log.modulID" & vbcrlf
@@ -46,6 +49,7 @@ yetki = yetkibul("manager")
 			sorgu = sorgu & "order by personel.personel_log.id DESC" & vbcrlf
 		rs.open sorgu,sbsv5,1,3
 		if rs.recordcount > 0 then
+		gi = 0
 		for ri = 1 to rs.recordcount
 			'icon tamir
 				if rs("modulAd") <> "" and rs("modulID") = null then
@@ -75,8 +79,21 @@ yetki = yetkibul("manager")
 			end if
 			Response.Write "<td>" & rs("islem") & "</td>"
 			Response.Write "<td>" & rs("ip") & "</td>"
+			if rs("geoIPdistrict") = "" or isnull(rs("geoIPdistrict")) = true then
+				geoIPdistrict = geoIP("ilçe",rs("ip"))
+				sorgu = "update personel.personel_log set geoIPdistrict = '" & geoIPdistrict & "' where ip = '" & rs("ip") & "'"
+				rs2.open sorgu,sbsv5,3,3
+				Response.Write "<td>" & geoIPdistrict & "</td>"
+				gi = gi + 1
+				if gi = 20 then
+					exit for
+				end if
+			else
+				Response.Write "<td>" & rs("geoIPdistrict") & "</td>"
+			end if
 			Response.Write "</td>"
 			Response.Write "</tr>"
+			Response.Flush()
 		rs.movenext
 		next
 		end if

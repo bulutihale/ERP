@@ -6,7 +6,6 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Toplu Mail"
-    modulID =   "137"
 	aramaad	=	Request.Form("aramaad")
     Response.Flush()
 '###### ANA TANIMLAMALAR
@@ -117,7 +116,7 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 											'# Şablon düzenle
 												sablonID64 =	sablonID
 												sablonID64 =	base64_encode_tr(sablonID64)
-												Response.Write "<a onClick=""modalajax('/toplumail/sablon_yeni.asp?sablonID=" & sablonID64 & "')"" title=""" & translate("Şablonu Düzenle","","") & """ class=""ml-2"" >"
+												Response.Write "<a onClick=""modalajaxfit('/toplumail/sablon_yeni.asp?sablonID=" & sablonID64 & "')"" title=""" & translate("Şablonu Düzenle","","") & """ class=""ml-2"" >"
 												Response.Write "<i class=""icon page-white-edit"
 												Response.Write """></i>"
 												Response.Write "</a>"

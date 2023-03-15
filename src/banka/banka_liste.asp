@@ -70,7 +70,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""table-responsive"">"
 		
 		
-            sorgu = "Select t1.bankalarID, t1.bankaAd, t1.paraBirim, t1.subeAd, t1.subeNo, t1.hesapNo, t1.iban, t1.silindi, t2.kisaBirim as dovizTuru, t1.swiftKod"
+            sorgu = "Select t1.bankalarID, t1.hesapAd, t1.bankaAd, t1.paraBirim, t1.subeAd, t1.subeNo, t1.hesapNo, t1.iban, t1.silindi, t2.kisaBirim as dovizTuru, t1.swiftKod"
 			sorgu = sorgu & " FROM portal.bankalar t1"
 			sorgu = sorgu & " INNER JOIN portal.birimler t2 ON t1.paraBirim = t2.kisaBirim AND t2.birimTur = 'para'"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
@@ -91,6 +91,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark"">"
 			Response.Write "<tr>"
+					Response.Write "<th scope=""col"">Hesap Adı</th>"
 					Response.Write "<th scope=""col"">Banka Adı</th>"
 					Response.Write "<th scope=""col"">Döviz Türü</th>"
 					Response.Write "<th scope=""col"">Şube Kodu</th>"
@@ -104,7 +105,7 @@ yetkiKontrol = yetkibul(modulAd)
 			
 					
 					for i = 1 to rs.recordcount
-					
+					hesapAd			=	rs("hesapAd")
 					bankaID			=	rs("bankalarID")
 					bankaAd			=	rs("bankaAd")
 					bankaID64	 	=	bankaID
@@ -117,6 +118,7 @@ yetkiKontrol = yetkibul(modulAd)
 					swiftKod		=	rs("swiftKod")
 					
 			Response.Write "<tr>"
+				Response.Write "<td class="""">" & hesapAd & "</td>"
 				Response.Write "<td class="""">" & bankaAd & "</td>"
 				Response.Write "<td class="""">" & dovizTuru & "</td>"
 				Response.Write "<td class="""">" & subeNo & "</td>"

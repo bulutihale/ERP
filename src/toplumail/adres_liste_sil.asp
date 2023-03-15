@@ -5,7 +5,6 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Toplu Mail"
-    modulID =   "137"
     modul = modulAd
     Response.Flush()
 '###### ANA TANIMLAMALAR
