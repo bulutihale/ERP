@@ -6,6 +6,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
     teklifID64 = Request.QueryString("teklifID")
     islem = Request.QueryString("islem")

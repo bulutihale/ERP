@@ -10,6 +10,8 @@
 	personelID			=	kid
 	hata				=	""
 	islem				=	Request.QueryString("islem")
+    modulAd =   "Dashboard"
+    modulID =   "158"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

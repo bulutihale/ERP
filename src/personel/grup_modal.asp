@@ -5,7 +5,8 @@
     kid         =	kidbul()
     gorevID		=	Request.QueryString("gorevID")
     hata        =   ""
-    modulAd     =   "personel"
+    modulAd =   "Personel"
+    modulID =   "84"
     Response.Flush()
 '###### ANA TANIMLAMALAR
 

@@ -12,6 +12,7 @@
 	aramaad	=	Request.Form("aramaad")
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     personelID =   gorevID
     Response.Flush()
     teklifTurleriArr = Array("--Teklif Türü--","Kdv Dahil Toplamlı Teklif","Kdv Hariç Toplamlı Teklif","","Genel Teklif","Mail Order","Taksitli Mail Order","İhracat Teklif","Proforma Fatura")

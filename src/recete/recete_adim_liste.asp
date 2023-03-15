@@ -7,7 +7,8 @@
     kid				=	kidbul()
 	cariID			=	Request.Form("cariID")
 	gorevID			=	Request.QueryString("gorevID")
-    modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 	
 	
 
@@ -171,39 +172,20 @@ else
 							altReceteAdimID	=	rs("altReceteAdimID")
 							etiketeEkle		=	rs("etiketeEkle")
 							islemAciklama	=	rs("islemAciklama")
+							sira			=	rs("sira")
 								Response.Write "<tr>"
 									Response.Write "<td>"
+										Response.Write "<input"
+										Response.Write " value="""&sira&""""
+										Response.Write " type=""text"""
+										Response.Write " class=""m-0 p-0 form-control text-center bold"""
+										Response.Write " onInput=""numara(this,false,false)"""
 									if yetkiKontrol >= 5 then
-										'## UP
-										Response.Write "<div title=""" & translate("Yukarı Taşı","","") & """ class=""badge badge-pill"
-										if rs("sira") < 2 then
-											Response.Write " badge-secondary not-allowed"
-											Response.Write """>"
-										else
-											Response.Write " pointer badge-info"
-											Response.Write """"
-											Response.Write " onClick=""$('#ajax').load('/recete/recete_adim_sira.asp?receteAdimID=" & rs("receteAdimID") & "&adimDirection=up')"">"
-										end if
-										Response.Write "<i class=""mdi mdi-arrow-up-bold"
-										Response.Write """></i>"
-										Response.Write "</div>"
-										'## UP
-										
-										'## DOWN
-										Response.Write "<div title=""" & translate("Aşağı Taşı","","") & """ class=""badge badge-pill"
-										if rs.recordcount <= i then
-											Response.Write " badge-secondary not-allowed"
-											Response.Write """>"
-										else
-											Response.Write " pointer badge-info"
-											Response.Write """"
-											Response.Write " onClick=""$('#ajax').load('/recete/recete_adim_sira.asp?receteAdimID=" & rs("receteAdimID") & "&adimDirection=down')"">"
-										end if
-										Response.Write "<i class=""mdi mdi-arrow-down-bold"
-										Response.Write """></i>"
-										Response.Write "</div>"
-										'## DOWN
+										Response.Write " onChange=""siraDegistir($(this).val(),"&receteAdimID&")"""
+									else
+										Response.Write " disabled "
 									end if
+										Response.Write ">"
 									Response.Write "</td>"
 									Response.Write "<td>" & rs("ad") & "</td>"
 									Response.Write "<td>"
@@ -261,7 +243,13 @@ else
 end if
 %>
 
+<script>
+	function siraDegistir(yeniSira,receteAdimID){
+		$('#ajax').load('/recete/recete_adim_sira.asp?siraDeger='+yeniSira+'&receteAdimID='+receteAdimID+'&adimDirection=0')
+		}
 
+
+</script>
 
 
 

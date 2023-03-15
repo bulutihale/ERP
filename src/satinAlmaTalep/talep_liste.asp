@@ -9,8 +9,11 @@
 	t1				=	Request.Form("t1")
 	t2				=	Request.Form("t2")
 	siparisNo		=	Request.Form("siparisNo")
-    modulAd 		=   "Satın alma"
-	
+    modulAd =   "Satın Alma"
+    modulID =   "88"
+    call sessiontest()
+    kid		=	kidbul()
+
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 30 end if
 		if t2 = "" then t2 = date() end if
@@ -108,8 +111,14 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
 						Response.Write "<td class=""text-right""></td>"
 						Response.Write "<td class=""text-center bold"">"
-						if acilanSipKalemID = 0 then 
-							Response.Write "<div class=""btn btn-warning border rounded"" onclick=""modalajaxfit('/satinAlma/siparis.asp?talep=evet&siparisKalemID="&siparisKalemID&"')"">Sipariş Aç</div>"
+						if acilanSipKalemID = 0 then
+							Response.Write "<div class=""btn btn-warning border rounded"""
+							if yetkiKontrol >= 5 then 
+								Response.Write " onclick=""modalajaxfit('/satinAlma/siparis.asp?talep=evet&siparisKalemID="&siparisKalemID&"')"""
+							else
+								Response.Write " onclick=""swal('Bu alana giriş yetkiniz yok.','')"""
+							end if
+							Response.Write ">Sipariş Aç</div>"
 						else
 							'Response.Write "<div class=""bg-success border rounded pointer"" onclick=""$('#ortaalan').load('/satinAlma/siparis_liste.asp',{siparisNo:'" & acilanSipNo & "'})"">"
 							Response.Write "<div class=""bg-success border rounded pointer"" onclick=""modalajaxfit('/satinAlma/siparis_liste.asp?siparisNo="&acilanSipNo&"')"">"

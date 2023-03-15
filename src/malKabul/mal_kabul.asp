@@ -11,7 +11,8 @@
     gorevID =   Request.QueryString("gorevID")
 	aramaad	=	Request.Form("aramaad")
     hata    =   ""
-    modulAd =   "Depo"
+    modulAd =   "Mal Kabul"
+    modulID =   "89"
     Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR

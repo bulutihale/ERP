@@ -1,6 +1,14 @@
 ﻿<!--#include virtual="/reg/rs.asp" --><%
 
 
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
+    modulAd =   "Personel"
+    modulID =   "84"
+'###### ANA TANIMLAMALAR
+'###### ANA TANIMLAMALAR
+
+
 '### FORM VERİLERİNİ TOPLA
 '### FORM VERİLERİNİ TOPLA
 	username	=	Request.Form("email") 

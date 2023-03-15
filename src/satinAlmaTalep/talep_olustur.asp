@@ -8,6 +8,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Satın Alma"
+    modulID =   "88"
     Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -113,6 +114,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 '#### siparişe ürünleri ekle
 '#### siparişe ürünleri ekle
+
+call bildirim(2,"Ürün Bildirimi",stokKodu & " Ürün girişi yapıldı",1,kid,"","","","","")
 
 call jsrun("$('#siparislistesi').html('<h3 class=""text-center text-danger"">TALEP OLUŞTURULDU.<br />Talep No : " & siparisNo & "</h3>')")
 

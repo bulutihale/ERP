@@ -1,6 +1,9 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
-sessiontest()
+    modulAd =   "Satın Alma"
+    modulID =   "88"
+    call sessiontest()
+    kid		=	kidbul()
 
 call logla("Sipariş Kalemi Silindi")
 

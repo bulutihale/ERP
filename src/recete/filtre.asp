@@ -3,7 +3,8 @@
 
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
-    modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

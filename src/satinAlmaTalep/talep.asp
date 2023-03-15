@@ -12,6 +12,7 @@
 	aramaad	=	Request.Form("aramaad")
     hata    =   ""
     modulAd =   "Satın Alma"
+    modulID =   "88"
     personelID =   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR
@@ -25,7 +26,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 '###### ARAMA FORMU
 '###### ARAMA FORMU
-	if hata = "" and opener = "" and yetkiKontrol > 0 then
+	if hata = "" and opener = "" and yetkiKontrol >= 5 then
 
 		Response.Write "<div class=""container-fluid"">"
 		Response.Write "<div class=""row"">"

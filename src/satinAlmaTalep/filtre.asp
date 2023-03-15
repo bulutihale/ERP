@@ -3,7 +3,10 @@
 
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
-    modulAd 		=   "Satın Alma"
+    modulAd =   "Satın Alma"
+    modulID =   "88"
+    call sessiontest()
+    kid		=	kidbul()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

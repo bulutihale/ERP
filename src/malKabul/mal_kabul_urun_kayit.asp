@@ -26,7 +26,8 @@
 	lot				=	Request.Form("lot")
 	lotSKT			=	Request.Form("lotSKT")
 	
-    modulAd =   "depo"
+    modulAd =   "Mal Kabul"
+    modulID =   "89"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

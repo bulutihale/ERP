@@ -6,6 +6,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
+    modulID =   "109"
     Response.Flush()
     teklifKalemID        =   Request.QueryString("teklifKalemID")
 '###### ANA TANIMLAMALAR

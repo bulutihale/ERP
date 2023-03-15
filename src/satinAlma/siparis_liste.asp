@@ -9,8 +9,11 @@
 	t1				=	Request.Form("t1")
 	t2				=	Request.Form("t2")
 	siparisNo		=	Request("siparisNo")
-    modulAd 		=   "Satın alma"
-	
+    modulAd =   "Satın Alma"
+    modulID =   "88"
+    call sessiontest()
+    kid		=	kidbul()
+
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 30 end if
 		if t2 = "" then t2 = date() end if

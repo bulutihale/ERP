@@ -11,7 +11,8 @@
     gorevID 		=	Request.QueryString("gorevID")
 	gorevID64		=	gorevID
 	gorevID			=	base64_decode_tr(gorevID64)
-	modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

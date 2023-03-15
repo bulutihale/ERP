@@ -5,12 +5,13 @@
 '###### ANA TANIMLAMALAR
 	siparisKalemID	=	Request.Querystring("siparisKalemID")
 	stokID			=	Request.Querystring("stokID")
-    modulAd 		=   "Depo"
+    modulAd =   "Mal Kabul"
+    modulID =   "89"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
-	yetkiKontrol	 = yetkibul(modulAd)
-
+	yetkiKontrol	= yetkibul(modulAd)
+	satinalmaYetki	= yetkibul("Satın Alma")
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
 		Response.Write "<div class=""text-right"" data-dismiss=""modal""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
@@ -84,7 +85,8 @@
 						Response.Write "<td class=""text-center"">İptal Sipariş:</td>"
 						Response.Write "<td class=""text-center"">" & eksikMiktarKapat & "</td>"
 						Response.Write "<td class=""text-center"">"
-						if yetkiKontrol > 5 then
+						
+						if satinalmaYetki > 5 then
 							Response.Write "<span class=""btn btn-sm border rounded fontkucuk2 btnEksikKapat bg-danger"" data-islem=""kapamaiptal"" data-deger="""&siparisKalemID&"""><i class=""mdi mdi-delete-forever""></i></span>"
 						end if
 						Response.Write "</td>"

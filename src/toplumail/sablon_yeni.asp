@@ -12,10 +12,9 @@
     tur = Request.QueryString("tur")
 '###### ANA TANIMLAMALAR
 
+
 call logla("Yeni Toplu Mail Şablonu Ekleme Ekranı")
-
 yetkiTM = yetkibul(modulAd)
-
 
 
 '### SAYFA ID TESPİT ET
@@ -35,6 +34,11 @@ if yetkiTM >= 3 then
         if rs.recordcount > 0 then
             sablonBaslik    =   rs("sablonBaslik")
             sablonIcerik    =   rs("sablonIcerik")
+            if isnull(rs("smsBaslikID")) = true then
+                tur = "mail"
+            elseif rs("smsBaslikID") = 0 then
+                tur = "mail"
+            end if
         else
             hata = 1
         end if

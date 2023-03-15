@@ -29,8 +29,8 @@
 	etiketAd			=	Request.Form("etiketAd")
 	islemAciklama		=	Request.Form("islemAciklama")
 	
-
-	modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

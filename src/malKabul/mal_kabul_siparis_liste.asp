@@ -5,7 +5,8 @@
 '###### ANA TANIMLAMALAR
 	cariID			=	Request.Form("cariID")
 	kalemSec		=	Request.Form("kalemSec")
-    modulAd 		=   "depo"
+    modulAd =   "Mal Kabul"
+    modulID =   "89"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

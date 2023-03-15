@@ -7,7 +7,8 @@
     kid				=	kidbul()
 	cariID			=	Request.Form("cariID")
 	stokID			=	Request.Form("stokID")
-    modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

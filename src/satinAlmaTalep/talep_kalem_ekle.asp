@@ -1,6 +1,11 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
-sessiontest()
+'###### ANA TANIMLAMALAR
+    modulAd =   "Satın Alma"
+    modulID =   "88"
+    call sessiontest()
+    kid		=	kidbul()
+'###### ANA TANIMLAMALAR
 
 'eklemek için
 

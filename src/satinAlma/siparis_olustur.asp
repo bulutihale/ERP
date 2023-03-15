@@ -8,6 +8,7 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Satın Alma"
+    modulID =   "88"
     Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR

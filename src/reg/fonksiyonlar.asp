@@ -3276,10 +3276,13 @@ function logla(byVal islem)
 	if FNpersonelID = "" then
 		FNpersonelID = 0
 	end if
+	if modulID = "" then
+		modulID = 0
+	end if
 	if modulAd = "" then
 		modulAd = ""			'burayı ileride doldururum
 	end if
-	veri			=	"'" & FNtarih & "','" & FNpersonelID & "','" & FNip & "','" & FNgorevID & "','" & FNislem & "','" & firmaID & "','','" & modulAd & "'"
+	veri			=	"'" & FNtarih & "','" & FNpersonelID & "','" & FNip & "','" & FNgorevID & "','" & FNislem & "','" & firmaID & "','','" & modulAd & "','" & modulID & "',''"
 	sorgu		=	"INSERT INTO personel.personel_log VALUES (" & veri & ")"
 	fn1.open sorgu, sbsv5, 3, 3
 end function
@@ -4563,6 +4566,174 @@ function havadurumucek(konum,donem)
 end function
 '############## HAVADURUMU
 
+
+
+
+
+
+
+function geoIP(byVal alan,byVal gelenIP)
+	'##### KULLANIMI
+		' Response.Write geoIP("şehir","")
+		' Response.Write geoIP("ilçe","")
+		' Response.Write geoIP("konum","")
+		' Response.Write geoIP("şehir","212.68.61.88")
+	'##### KULLANIMI
+    if gelenIP = "" then
+        gelenIP = Request.ServerVariables("REMOTE_ADDR")
+    end if
+    IParr = Split(gelenIP,".")
+    IPSub = IParr(0) & "." & IParr(1) & "." & IParr(2) & "."
+	set IParr = Nothing
+    sorgu = "Select top 1 v3,v4,v5,v6 from portal.geoIP where IP1 like '" & IPSub & "%'"
+    fn1.open sorgu, sbsv5,1,3
+        if fn1.recordcount > 0 then
+            if alan = "şehir" or alan = "sehir" then
+                geoIP = fn1("v3")
+            elseif alan = "ilçe" or alan = "ilce" then
+                geoIP = fn1("v4")
+            elseif alan = "konum" then
+                geoIP = fn1("v5") & "," & fn1("v6")
+            else
+                geoIP = ""
+            end if
+        else
+            geoIP = ""
+        end if
+    fn1.close
+end function
+
+
+
+function classbelirle(byVal classListe, byVal kisimIhale, byVal ihaleTipi, byVal grup, byVal bayi, byVal uruniptal, byVal uhde, byVal YMgoster, byVal yerliOranGoster, byVal miktarArttirimi, byVal bayiDosyaTipi, byVal ek9, byVal ek10)
+
+	'classliste		: 	gelen class listesi d-none veya başkaları bu gelen listeye eklenecek.
+	'kisimIhale		: 	veritabanındaki "ihale tablosu kisimIhale alanı" değeri.
+	'ihaleTipi		: 	veritabanındaki "ihale tablosu ihaleTipi alanı" değeri.
+	'grup			: 	gelen alan grup ihalelerde gösterilecek/gösterilmeyecek (gruptaVar/gruptaYok olarak gelsin)
+	'bayi			:	sadece bayi fiyatı dosyalarında gösterilecek olan alanlar için. (sadeceBayi) şeklinde gelsin.
+	'uruniptal		:	ihale_urun tablosu "iptal" alanı değerini gönder, ürün iptal edilmiş ise aşağıda "bg-danger" ekle.
+	'uhde			:	ihale_urun tablosu "uhde" alanı. Ürün uhdemizde kalmışsa "bg-warning" ekle.
+	'YMgoster		:	Yaklaşık Maliyet Sütunu gösterilsin gösterilmesin, Ana Veri sekmesinden değiştirilir "ihale" tablosuna kayıt edilir.
+	'YerliOranGoster:	Yerli Malı Oran gösterilsin gösterilmesin, Ana Veri sekmesinden değiştirilir "ihale" tablosuna kayıt edilir.
+	'miktarArttirimi:	İş Arttırımı adeti gösterilsin gösterilmesin, Ana Veri sekmesinden değiştirilir "ihale" tablosuna kayıt edilir.
+	'bayiDosyaTipi	:	bayiDosyaTipi "stok" ise bayi marjı ve tavsiye fiyat alanları gösterilmesin.
+
+	gelenClassListe = classListe
+	
+	if kisimIhale = False AND grup = "gruptaVar" then
+		classListe = classListe & " d-none"
+	end if
+	
+	if kisimIhale = True AND grup = "gruptaYok" then
+		classListe = classListe & " gruptaYok"
+	end if
+	
+	if ihaleTipi <> "bayi" AND bayi = "sadeceBayi" then
+		classListe = classListe & " d-none"
+	end if
+	
+	if uruniptal = True then
+		classListe = classListe & " bg-danger"
+	end if
+	
+	if uhde = True AND uruniptal = False then
+		classListe = classListe & " bg-warning"
+	end if
+	
+	if YMgoster = "0" then
+		classListe = classListe & " d-none"
+	end if
+	
+	if yerliOranGoster = "0" then
+		classListe = classListe & " d-none"
+	end if
+	
+	if miktarArttirimi = "0" OR isnull(miktarArttirimi) then
+		classListe = classListe & " d-none"
+	end if
+
+	if bayiDosyaTipi = "stok" then
+		classListe = classListe & " d-none"
+	end if
+
+	classbelirle = classListe
+	
+	'classbelirle = gelenClassListe
+
+end function
+
+function classbelirle2(byVal classListe, byVal tabloID, byVal tablo, byVal islem, byVal ek1, byVal ek2)
+
+	'classliste		: 	gelen class listesi d-none veya başkaları bu gelen listeye eklenecek.
+	'tabloID		: 	işlem yapılacak tablo ID, ihaleID gibi.
+	'tablo			: 	işlem yapılacak tablo. 
+	'islem			: 	yapılacak olan iş tanımı.
+	
+	
+		sorgu = "SELECT * FROM " & tablo & " WHERE id = " & tabloID
+		fn1.open sorgu,sbsv5,1,3
+			if tablo = "ihale" then
+				durum = fn1("durum")
+			end if
+			if tablo = "ihale_urun" then
+				durum = fn1("YMiptal")
+			end if
+		fn1.close
+		
+	if islem = "durumSorgu" AND durum = "kurumIptal" then
+		classListe = replace(classListe, " fontkucuk2", "")
+		classListe = classListe & " bg-danger"
+	elseif islem = "durumSorgu" AND durum = "zarfIptal" then
+		classListe = replace(classListe, " fontkucuk2", "")
+		classListe = classListe & " bg-info"
+	elseif islem = "durumSorgu" AND durum = "urunKalmadi" then
+		classListe = replace(classListe, " fontkucuk2", "")
+		classListe = classListe & " bg-secondary"
+	elseif islem = "YMiptalkontrol" AND durum = "True" then
+		classListe = classListe & " bg-warning"
+	end if
+
+	classbelirle2 = classListe
+
+end function
+
+
+function para_basamak(byVal para)
+	if isnull(para) OR para = "" then
+		para = 0
+	end if
+	para	=	formatnumber((para),4)
+	pararr	=	Split(para,",")
+	for pi = 1 to 5
+		if right(pararr(1),1) = "0" then
+			pararr(1) = left(pararr(1),len(pararr(1))-1)
+		end if
+	next	
+	if pararr(1) = "" then
+		para	=	formatnumber(pararr(0),2)
+	else
+		if len(pararr(1)) = 1 then
+			pararr(1) = pararr(1) & "0"
+		end if
+		para	=	pararr(0) & "," & pararr(1)
+	end if
+	set pararr = Nothing
+	para_basamak = para
+end function
+
+
+Function dosyaSay(adres)
+	Set FSO = Server.CreateObject("Scripting.FileSystemObject")
+	if fso.FolderExists(Server.Mappath(adres)) = True then
+	if adres = "" then
+	else
+		Set Klasor = FSO.GetFolder(Server.MapPath(adres))
+		dosyaSay = Klasor.Files.Count
+	end if
+	end if
+	Set FSO = Nothing
+end function
 
 
 

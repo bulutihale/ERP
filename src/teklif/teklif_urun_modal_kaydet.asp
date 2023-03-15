@@ -6,7 +6,8 @@
     Response.Flush()
     kid		            =	kidbul()
     hata                =   ""
-    modulAd             =   "Teklif"
+    modulAd =   "Teklif"
+    modulID =   "109"
     teklifStokID        =   Request.Form("teklifStokID")
     teklifID            =   Request.Form("teklifID")
     teklifParaBirimi    =   Request.Form("teklifParaBirimi")

@@ -136,10 +136,6 @@ end if
             Response.Write "<div class=""container-fluid scroll-ekle3"">"
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
-                    Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Listede Bulunan Adresler</div>"
-                    Response.Write "<div class=""card-body"">"
-                    Response.Write "<div class=""row"">"
                         sorgu = "Select top 30 * from toplumail.adres where silindi = 0 and firmaID = " & firmaID & " and adresGrupID = " & gorevID
                         if aramaad = "" then
                         else
@@ -147,11 +143,21 @@ end if
                         end if
                         sorgu = sorgu & "order by tarih desc"
                         rs.Open sorgu, sbsv5, 1, 3
+                            if rs.recordcount >= 30 then
+                                listemesaj = "Listede Bulunan Adresler (ilk 30 adres gösteriliyor)"
+                            else
+                                listemesaj = "Listede Bulunan Adresler"
+                            end if
+                    Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & listemesaj & "</div>"
+                    Response.Write "<div class=""card-body"">"
+                    Response.Write "<div class=""row"">"
                             if rs.recordcount > 0 then
                                 Response.Write "<div class=""table-responsive"">"
                                 Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
                                 Response.Write "<th scope=""col"">Tarih</th>"
                                 Response.Write "<th scope=""col"">Adres</th>"
+                                Response.Write "<th scope=""col"">Tür</th>"
                                 Response.Write "<th scope=""col"">Kaynak</th>"
                                 ' if yetkiTM >= 3 then
                                     Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
@@ -169,6 +175,12 @@ end if
                                             Response.Write "<td>" & tarih & "</td>"
                                             Response.Write "<td>" & kvkkMaske(adres,2,yetkiTM) & "</td>"
                                             ' Response.Write "<td>" & adres & "</td>"
+                                            if instr(adres,"@") > 0 then
+                                                tur = "Email"
+                                            else
+                                                tur = "SMS"
+                                            end if
+                                            Response.Write "<td>" & tur & "</td>"
                                             Response.Write "<td>" & kaynak & "</td>"
                                         ' if yetkiTM >= 3 then
                                             Response.Write "<td class=""text-right"" nowrap>"

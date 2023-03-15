@@ -20,7 +20,8 @@
 		ozelRecete	=	0
 		cariID 		=	0
 	end if
-	modulAd 		=   "Reçete"
+    modulAd =   "Reçete"
+    modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 

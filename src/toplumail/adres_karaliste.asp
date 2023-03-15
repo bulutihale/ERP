@@ -91,7 +91,7 @@ yetkiTM = yetkibul(modulAd)
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Kara Listede Bulunan Adresler</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">Kara Listede Bulunan Adresler (Kara listeye eklenen adresler silinemezler)</div>"
                     Response.Write "<div class=""card-body"">"
                     Response.Write "<div class=""row"">"
                         sorgu = "Select top 30 * from toplumail.blacklist where firmaID = " & firmaID
@@ -106,6 +106,7 @@ yetkiTM = yetkibul(modulAd)
                                 Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
                                 Response.Write "<th scope=""col"">Tarih</th>"
                                 Response.Write "<th scope=""col"">Adres</th>"
+                                Response.Write "<th scope=""col"">Tür</th>"
                                 Response.Write "<th scope=""col"">Kaynak</th>"
                                 ' if yetkiTM >= 3 then
                                 '     Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
@@ -121,6 +122,12 @@ yetkiTM = yetkibul(modulAd)
                                         Response.Write "<tr>"
                                             Response.Write "<td>" & tarih & "</td>"
                                             Response.Write "<td>" & kvkkMaske(adres,2,yetkiTM) & "</td>"
+                                            if instr(adres,"@") > 0 then
+                                                tur = "Email"
+                                            else
+                                                tur = "SMS"
+                                            end if
+                                            Response.Write "<td>" & tur & "</td>"
                                             ' Response.Write "<td>" & adres & "</td>"
                                             Response.Write "<td>" & kaynak & "</td>"
                                         ' if yetkiTM >= 3 then
