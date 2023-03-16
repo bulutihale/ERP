@@ -27,7 +27,7 @@ Response.Write "</button>"
 
 
 
-Response.Write "<form action=""/teklif2/hucre_kaydet.asp"" method=""post"" class=""ajaxform"">"
+'Response.Write "<form action=""/teklif2/hucre_kaydet.asp"" method=""post"" class=""ajaxform"">"
 Response.Write "<input type=""hidden"" name=""alan"" value=""stoklarID"" />"
 Response.Write "<input type=""hidden"" name=""tabloID"" value=""" & id & """ />"
 Response.Write "<input type=""hidden"" name=""ihaleID"" value=""" & ihaleID & """ />"
@@ -40,11 +40,11 @@ Response.Write "<input type=""hidden"" name=""tablo"" value=""ihale_urun"" />"
 		Response.Write "</div>"
 
 		Response.Write "<div class=""col-lg-12"">"
-		Response.Write "<button type=""submit"" class=""btn form-control btn-success"" onClick=""modalkapat();"">Değiştir</button>"
+		Response.Write "<button type="""" class=""btn form-control btn-success"" onClick=""ajSave('stoklarID','dosya.ihale_urun',"&id&",$('#deger').val())"">Değiştir</button>"
 			call clearfix()
 		Response.Write "</div>"
 	Response.Write "</div>"
-Response.Write "</form>"
+'Response.Write "</form>"
 
 
 %>

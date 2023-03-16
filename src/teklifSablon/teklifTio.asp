@@ -306,12 +306,16 @@ end if
 		Response.Write "<td style=""text-align:center;"" class="""">"
 		if iskontoOran > 0 then
 			Response.Write "%" & iskontoOran
+		else
+			Response.Write "&nbsp;"
 		end if
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:right;"" class="""">"
-		if iskontoTutar > 0 then
-			Response.Write iskontoTutar & " " & firmamParaBirim
-		end if
+			if iskontoTutar > 0 then
+				Response.Write iskontoTutar & " " & firmamParaBirim
+			else
+				Response.Write "&nbsp;"
+			end if
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:right;"" class="""">"
 			Response.Write iskontoSonraTutar & " " & firmamParaBirim
@@ -456,7 +460,7 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 	rs.open sorgu,sbsv5,1,3
 	if rs.recordcount > 0 then
 	Response.Write "<div style=""font-size: 11px;margin-top:5px;"">"
-		Response.Write "<table width=""100%"" border=""1"" cellspacing=""1"" cellpadding=""1"">"
+		Response.Write "<table style=""font-family:calibri; font-size:12px;"" width=""100%"" border=""1"" cellspacing=""1"" cellpadding=""1"">"
 			Response.Write "<thead>"
 				Response.Write "<tr style=""text-align:center;"">"
 					Response.Write "<th>Banka Adı</th>"
