@@ -47,7 +47,7 @@ if yetkiKontrol  >= 2 then
 	'##### ANA VERİ ÇEK
 	'##### ANA VERİ ÇEK
 		sorgu = "Select i.id, i.ad, i.ikn, i.teslimatKosul, i.odemeKosul, i.tarih_ihale, i.firmaID, i.cariID, i.durum, i.sipDurum, i.grupIhale, i.ihaleTipi,"
-		sorgu = sorgu & " i.dosyaNo, i.dosyaSorumlu, i.odemeVade, i.teklifGecerlik, i.teslimatSure, i.yeniCariVergiNo, i.satirKDV,"
+		sorgu = sorgu & " i.dosyaNo, i.dosyaSorumlu, i.odemeVade, i.teklifGecerlik, i.teslimatSure, i.yeniCariVergiNo, i.satirKDV, i.catKodGoster, i.mustKodGoster,"
 		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster,"
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
 		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar,"
@@ -104,6 +104,8 @@ if yetkiKontrol  >= 2 then
 			satirKDV			=	rs("satirKDV")
 			altTopGoster		=	rs("altTopGoster")
 			bankalar			=	rs("bankalar")
+			catKodGoster		=	rs("catKodGoster")
+			mustKodGoster		=	rs("mustKodGoster")
 			yeniCariVergiNo		=	rs("yeniCariVergiNo")
 			yeniCariAd			=	rs("yeniCariAd")
 			a = instr(yeniCariAd,"<div>")
@@ -511,15 +513,20 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Sıra Numarası</div>" 
-					call forminput("siraNo",siraNo,"","Sıra No","","","siraNo","")
+					call forminput("siraNo",siraNo,"","Sıra No","","autocompleteOFF","siraNo","")
 				Response.Write "</div>"
 			Response.Write "<div class=""col-lg-5"">"
+			if ihaleTipi = "proforma" then
+				stokSart = "english"
+			else
+				stokSart = ""
+			end if
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ürün Seçimi</div>" 
-				call formselectv2("urunSec","","","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+				call formselectv2("urunSec","","","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-sart="""&stokSart&""" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-5"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Ürünün Teklifte Görünecek  Adı</div>" 
-				call forminput("urunAd",urunAd,"","Ürünün Listedeki Adı","","","urunAd","")
+				call forminput("urunAd",urunAd,"","Ürünün Listedeki Adı","","autocompleteOFF","urunAd","")
 			Response.Write "</div>"
 		Response.Write "</div>"
 
@@ -527,7 +534,7 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<div class=""row mt-2"">"
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Miktar</div>" 
-				call forminput("miktar",miktar,"","Miktar","","","miktar","")
+				call forminput("miktar",miktar,"","Miktar","","autocompleteOFF","miktar","")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Birim</div>" 
@@ -771,7 +778,25 @@ Response.Write "<div class=""card-body row"">"
 		chckDurum5		=	""
 	end if
 	
-			
+	if catKodGoster = True then
+		catKodDurum = 	0
+		chckDurum7		=	" checked"
+	else
+		catKodDurum = 1
+		chckDurum7		=	""
+	end if
+
+	if mustKodGoster = True then
+		mustKodDurum = 	0
+		chckDurum8		=	" checked"
+	else
+		mustKodDurum = 1
+		chckDurum8		=	""
+	end if
+
+
+
+	
 		Response.Write "<div class=""tab-pane"" id=""teklif"" role=""tabpanel"">"
 	
 	
@@ -782,7 +807,7 @@ Response.Write "<div class=""card-body row"">"
 						Response.Write "<input type=""hidden"" name=""alan"" value=""teklifNot"" />"
 						Response.Write "<input type=""hidden"" name=""ihaleID"" value=""" & id & """ />"
 						Response.Write "<input type=""hidden"" name=""ihaleID64"" value=""" & id64 & """ />"
-						Response.Write "<input type=""hidden"" name=""tablo"" value=""ihale"" />"
+						Response.Write "<input type=""hidden"" name=""tablo"" value=""dosya.ihale"" />"
 						
 						Response.Write "<div class=""container-fluid row text-left"">"
 							Response.Write "<div class=""col-lg-12"">"
@@ -820,12 +845,18 @@ Response.Write "<div class=""card text-center"">"
 			Response.Write "<li class=""nav-item"">"
 			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#bankalar"" role=""tab"" aria-controls=""banka"">Bankalar</a>"
 			Response.Write "</li>"
+
+			Response.Write "<li class=""nav-item"">"
+			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#kolonlar"" role=""tab"" aria-controls=""kolonlar"">Kolonlar</a>"
+			Response.Write "</li>"
 			
 		Response.Write "</ul>"
 	Response.Write "</div>"
 	Response.Write "<div class=""card-body"">"
 		Response.Write "<div class=""tab-content"">"
 
+		'######### ANTET - KAŞE
+		'######### ANTET - KAŞE
 			Response.Write "<div class=""active tab-pane"" id=""antet"" role=""tabpanel"">"
 				Response.Write "<div class=""row"">"
 					Response.Write "<div class=""col-1 text-left"">"
@@ -872,7 +903,11 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "</div>"						
 				Response.Write "</div>"
 			Response.Write "</div>"
+		'######### ANTET - KAŞE
+		'######### ANTET - KAŞE
 
+		'######### KUR - VADE
+		'######### KUR - VADE
 			Response.Write "<div class=""tab-pane"" id=""vade"" role=""tabpanel"">"
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
@@ -908,8 +943,13 @@ Response.Write "<div class=""card text-center"">"
 						Response.Write "<input id=""vade4"" class=""form-control col-12"" value=""- Teslimat süresi " & teslimatSure & " gündür.&#10; &#13;"">"
 				Response.Write "</div>"
 			Response.Write "</div>"
+		'######### KUR - VADE
+		'######### KUR - VADE
 
+		'######### KOŞULLAR
+		'######### KOŞULLAR
 			Response.Write "<div class=""tab-pane"" id=""kosullar"" role=""tabpanel"">"
+			if ihaleTipi <> "proforma" then
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+$('#yazi0').val());""></i></span>"
@@ -965,8 +1005,48 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "</div>"
 						Response.Write "<input id=""yazi7"" class=""form-control col-12"" value=""- Cihaz kurulumu firmamıza aittir."">"
 				Response.Write "</div>"
-			Response.Write "</div>"
+			elseif ihaleTipi = "proforma" then
+				Response.Write "<div class=""input-group mb-3"">"
+					Response.Write "<div class=""input-group-prepend"">"
+						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#pr0').val());""></i></span>"
+					Response.Write "</div>"
+						Response.Write "<input id=""pr0"" class=""form-control col-12"" value=""- All our products conform to international standarts.&#10; &#13;"">"
+				Response.Write "</div>"
 
+				Response.Write "<div class=""input-group mb-3"">"
+					Response.Write "<div class=""input-group-prepend"">"
+						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#pr1').val());""></i></span>"
+					Response.Write "</div>"
+						Response.Write "<input id=""pr1"" class=""form-control col-12"" value=""- All of our prices are valid for 45 days.&#10; &#13;"">"
+				Response.Write "</div>"
+
+				Response.Write "<div class=""input-group mb-3"">"
+					Response.Write "<div class=""input-group-prepend"">"
+						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#pr2').val());""></i></span>"
+					Response.Write "</div>"
+						Response.Write "<input id=""pr2"" class=""form-control col-12"" value=""- Indicated delivery date is valid if the prepayment is made within 7 days. Please ask for updated delivery date in case of delayed payment.&#10; &#13;"">"
+				Response.Write "</div>"
+
+				Response.Write "<div class=""input-group mb-3"">"
+					Response.Write "<div class=""input-group-prepend"">"
+						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#pr3').val());""></i></span>"
+					Response.Write "</div>"
+						Response.Write "<input id=""pr3"" class=""form-control col-12"" value=""- We suggest an insurance to be made for your shipment. Un insured shipments are at importers risk.&#10; &#13;"">"
+				Response.Write "</div>"
+
+				Response.Write "<div class=""input-group mb-3"">"
+					Response.Write "<div class=""input-group-prepend"">"
+						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#pr4').val());""></i></span>"
+					Response.Write "</div>"
+						Response.Write "<input id=""pr4"" class=""form-control col-12"" value=""- The bank charges are not included in our prices. Any bank transfer costs will be demanded in case of short payment.&#10; &#13;"">"
+				Response.Write "</div>"
+			end if
+			Response.Write "</div>"
+		'######### KOŞULLAR
+		'######### KOŞULLAR
+
+		'######### BANKALAR
+		'######### BANKALAR
 			Response.Write "<div class=""tab-pane"" id=""bankalar"" role=""tabpanel"">"
 				
 				sorgu = "SELECT * FROM portal.bankalar WHERE firmaID = " & firmaID
@@ -993,7 +1073,35 @@ Response.Write "<div class=""card text-center"">"
 						next
 					end if
 			Response.Write "</div>"
+		'######### BANKALAR
+		'######### BANKALAR
 
+		'######### KOLONLAR
+		'######### KOLONLAR
+			Response.Write "<div class=""tab-pane"" id=""kolonlar"" role=""tabpanel"">"
+				'###### İHRACAT PROFORMA için SÜTUN AYARLARI
+				if ihaleTipi = "proforma" then
+				Response.Write "<div class=""row"">"
+					Response.Write "<div class=""col-1 text-left"">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('catKodGoster','dosya.ihale',"&id&"," & catKodDurum & ");"" class="" chck30 form-control"" " & chckDurum7 & ">"
+					Response.Write "</div>"
+					Response.Write "<div class=""col-2 text-left"">"
+						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte katalog kodu sütunu göster.</div>"
+					Response.Write "</div>"	
+				Response.Write "</div>"
+				Response.Write "<div class=""row"">"
+					Response.Write "<div class=""col-1 text-left"">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('mustKodGoster','dosya.ihale',"&id&"," & mustKodDurum & ");"" class="" chck30 form-control"" " & chckDurum8 & ">"
+					Response.Write "</div>"
+					Response.Write "<div class=""col-2 text-left"">"
+						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte ""CUST. Code"" sütunu göster.</div>"
+					Response.Write "</div>"	
+				Response.Write "</div>"
+				end if
+				'###### İHRACAT PROFORMA için SÜTUN AYARLARI
+			Response.Write "</div>"
+		'######### KOLONLAR
+		'######### KOLONLAR
 		Response.Write "</div>"
 	Response.Write "</div>"
 Response.Write "</div>"
@@ -1004,8 +1112,6 @@ Response.Write "</div>"
 
 
 
-					Response.Write "<div id=""teklifChck"" class=""row"">"
-					Response.Write "</div>"
 					
 					
 				Response.Write "</div>"

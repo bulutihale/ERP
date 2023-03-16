@@ -12,6 +12,8 @@
 '##### ajax ile gelen sorgu 
 '##### ajax ile gelen sorgu 
 	arananKelime		=	request.QueryString ("q")
+	sart				=	request.QueryString ("sart")
+
 '	arananKelime 		=	Replace(arananKelime,"Ş","þ")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
 '	arananKelime 		=	Replace(arananKelime,"İ","Ý")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
 '	arananKelime 		=	Replace(arananKelime,"Ğ","Ð")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
@@ -26,7 +28,7 @@
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.stokID,"
 			sorgu = sorgu & " t1.stokKodu,"
-			sorgu = sorgu & " t1.stokAd, t1.stokBarcode" 
+			sorgu = sorgu & " t1.stokAd, t1.stokAdEn, t1.stokBarcode" 
 			sorgu = sorgu & " FROM stok.stok t1" 
 			sorgu = sorgu & " WHERE t1.silindi = 0 AND (t1.stokAd like N'%" & arananKelime & "%' OR t1.stokBarcode like N'%" & arananKelime & "%' OR t1.stokKodu like N'%" & arananKelime & "%')"
 			sorgu = sorgu & " ORDER BY t1.stokAd ASC"
@@ -50,6 +52,10 @@
 		'####### chr13 ve chr10 temizle json patlamasın
 					stokBarcode		=	rs("stokBarcode")
 					stokAd			=	rs("stokAd")
+					stokAdEN		=	rs("stokAdEN")
+					if sart = "english" AND not isnull(stokAdEN) then
+						stokAd = stokAdEn
+					end if
 					stokKodu		=	rs("stokKodu")
 					kontrolString	= 	stokBarcode & stokAd & stokKodu
 			

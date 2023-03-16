@@ -109,12 +109,12 @@
 		Response.End()
 	end if
 	
-	if ikn = "" and tip <> "yaklasik_mal" and tip <> "dog_temin" and tip <> "ozel_hast" and tip <> "bayi" then
-		hatamesaj = "İKN girilmemiş."
-		call logla(hatamesaj)
-		call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
-		Response.End()
-	end if
+	' if ikn = "" and tip <> "yaklasik_mal" and tip <> "dog_temin" and tip <> "ozel_hast" and tip <> "bayi" then
+	' 	hatamesaj = "İKN girilmemiş."
+	' 	call logla(hatamesaj)
+	' 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+	' 	Response.End()
+	' end if
 	
 	
 	

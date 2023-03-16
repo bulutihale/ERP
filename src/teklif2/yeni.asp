@@ -139,6 +139,11 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<li class=""nav-item"">"
 				Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#ozel_hast"" role=""tab"" aria-controls=""ozel_hast"">Özel Hastane</a>"
 			Response.Write "</li>"			
+
+			Response.Write "<li class=""nav-item"">"
+				Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#proforma"" role=""tab"" aria-controls=""proforma"">İhracat Proforma</a>"
+			Response.Write "</li>"			
+			
 		Response.Write "</ul>"
 '##### /SEKMELER
 '##### /SEKMELER
@@ -264,7 +269,31 @@ Response.Write "<div class=""card-body row"">"
 '##### /ÖZEL HASTANE
 
 
+'##### İHRACAT PROFORMA
+'##### İHRACAT PROFORMA
 
+	Response.Write "<div class=""tab-pane"" id=""proforma"" role=""tabpanel"">"
+		Response.Write "<div class=""jumbotron border border-info"">"
+			Response.Write "<h2 class=""text-center"">İhracat Teklifi</h2>"
+			Response.Write "<div class=""container row mt-2"">"
+				Response.Write "<div id=""tarih2_proforma"" class=""col-lg-2"">"
+					Response.Write "<div class=""badge badge-secondary rounded-left"">Teklif Tarihi</div>"
+					call forminput("tarih_ihale_bayi",tarih_ihale,"","Alım Tarihi","tarih","","tarih_ihale_bayi","AutCompOff")
+				Response.Write "</div>"
+			Response.Write "</div>"
+			Response.Write "<div class=""container row"">"
+				Response.Write "<div class=""col-lg-12 mt-2"">"
+					Response.Write "<div class=""badge badge-secondary rounded-left"">Teklif Adı</div>"
+					call forminput("ad_proforma",ad,"","Alım Adı","","","ad_bayi","")
+				Response.Write "</div>"
+			Response.Write "</div>"
+				Response.Write "<div class=""col-lg-12 mt-4"">"
+					Response.Write "<button name=""proforma"" class=""btn-block btn-primary"" type=""submit"" onClick=""$('#tip').val('proforma');"">kaydet</button>"
+				Response.Write "</div>"
+		Response.Write "</div>"
+	Response.Write "</div>"
+'##### /İHRACAT PROFORMA
+'##### /İHRACAT PROFORMA
 
 
 
