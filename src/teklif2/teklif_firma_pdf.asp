@@ -33,8 +33,8 @@ response.codepage=65001
 		
 		footerBilgiA =	firmaAd
 		footerBilgiB =	adres & " " & ilce & " / " & sehir & " - " & vergiDairesi & " - " & vergiNo & " TEL: " & telefon & " - FAKS: " & faks
-		footerBilgiC =	firmaEposta & " - " & iletisimEposta
-		footerBilgiD =	webSite
+		footerBilgiC =	firmaEposta & " - " & iletisimEposta & " - " & webSite
+		'footerBilgiD =	webSite
 	'########## PDF için footer bilgilerini oluştur
 		
 
@@ -85,7 +85,7 @@ asp_dosya	=	asp_dosya & id &"&pdf=yes"
 
 
 
-Doc.ImportFromUrl asp_dosya,"LeftMargin=10,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1,landscape=false"
+Doc.ImportFromUrl asp_dosya,"LeftMargin=30,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1,landscape=false"
 
 if klasorkontrol("/temp/dosya/" & firmaID) = True then
 else
@@ -115,10 +115,10 @@ end if
 dosyaAd		=	id64 & "_" & dosyaAdEki & ".pdf"
 
 '########## footer bilgisi
-	Page.Canvas.DrawText footerBilgiA, "x=250, y=44; size=5", Doc.Fonts("Arial")
+	Page.Canvas.DrawText footerBilgiA, "x=290, y=50; size=10", Doc.Fonts("Arial")
 	Page.Canvas.DrawText footerBilgiB, "x=180, y=37; size=5", Doc.Fonts("Arial")
 	Page.Canvas.DrawText footerBilgiC, "x=270, y=31; size=5", Doc.Fonts("Arial")
-	Page.Canvas.DrawText footerBilgiD, "x=280, y=25; size=5", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText footerBilgiD, "x=280, y=25; size=5", Doc.Fonts("Arial")
 	Page.Canvas.DrawText "FR-21 / Rev.No:01 / 05.12.17", "x=40, y=20; size=8", Doc.Fonts("Arial")
 '########## footer bilgisi
 

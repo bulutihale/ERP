@@ -4735,6 +4735,27 @@ Function dosyaSay(adres)
 	Set FSO = Nothing
 end function
 
+function dovizBulTarih(byVal birim, byVal tarih)
+	'USD için birim = "usdtry" - EUR için birim = "eurtry" gelmeli
+
+		if not isnull(tarih) then
+			kurTarih	=	tarihsql(tarih)
+			
+			sorgu = "SELECT " & birim & " FROM portal.doviz WHERE tarih = " & "'" & kurTarih & "'"
+			rs.open sorgu,sbsv5,1,3
+				if not rs.EOF then
+					birimKur	=	rs(0)
+				end if
+			rs.close			
+		else
+			birimKur 	= 0
+		end if
+		dovizBulTarih	=	birimKur
+end function
+
+
+
+
 
 
 

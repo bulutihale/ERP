@@ -41,7 +41,7 @@ end if
 '##### HÜCRE EDIT
 '##### HÜCRE EDIT
 	'## veritabanı
-		sorgu = "SELECT * FROM dosya." & tablo & " WHERE id = " & tabloID
+		sorgu = "SELECT * FROM " & tablo & " WHERE id = " & tabloID
 		rs.open sorgu, sbsv5,1,3
 		
 		

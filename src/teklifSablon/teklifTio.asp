@@ -48,7 +48,7 @@ Response.Write "</style>"
 
 sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun, f.adres as firmamAdres, f.telefon as firmamTel, f.ilce, f.sehir, c1.il as ilAd,"_
 &" c2.cariAd as kurumCariAD, c1.adres as teklifCariAdres, i.tarih_ihale, i.dosyaNo, i.ikn, i.bayiDosyaTipi, i.teklifRevNo, i.teklifKase, i.teklifAntet, f.iletisimEposta, f.webSite,"_
-&" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster,"_
+&" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD"_
 &" FROM dosya.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
@@ -82,9 +82,7 @@ rs.open sorgu,sbsv5,1,3
 	kasePath			=	rs("kasePath")
 	kaseWidth			=	rs("kaseWidth")
 	kaseHeight			=	rs("kaseHeight")
-	'banka1Ad			=	rs("banka1Ad")
-	'iban1				=	rs("iban1")
-	'iban2				=	rs("iban2")
+	satirKDV			=	rs("satirKDV")
 	firmaTanimlayiciNo	=	rs("firmaTanimlayiciNo")
 	vergiDairesi		=	rs("vergiDairesi")
 	vergiNo				=	rs("vergiNo")
@@ -130,9 +128,9 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 	Response.Write "<tr>"
 		Response.Write "<td style=""width:50%;"" class=""b-all"">"
 			Response.Write "<div style=""height:120px; padding:10px;"""
-					Response.Write " data-tabloid=""" & id & """"
-					Response.Write " data-tablo=""ihale"""
-					Response.Write " data-alan=""yeniCariAd"""
+				Response.Write " data-tabloid=""" & id & """"
+				Response.Write " data-tablo=""ihale"""
+				Response.Write " data-alan=""yeniCariAd"""
 			Response.Write " contenteditable=""true"" class=""ajSaveBlur"">" & teklifCariAD & "</div>"
 		Response.Write "</td>"
 		Response.Write "<td style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;"">"
@@ -157,10 +155,17 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 Response.Write "</table>"
 
 Response.Write "<br>"
-
-Response.Write "<div style=""text-align:center; font-size:20px;""><b>FİYAT TEKLİF FORMU (PROFORMA)</b></div>"
-
-Response.Write "<br><br>"
+'###################### ÜST YAZI
+'###################### ÜST YAZI
+	Response.Write "<div style=""text-align:center; font-size:20px;font-family:calibri""><b>TEKLİF</b></div>"
+	Response.Write "<div style=""text-align:justify; font-size:12px;font-family:calibri"">"
+		onYazi = "<p>Ürünlerimiz ile ilgili fiyat teklifimizi değerlendirdiğiniz için teşekkür ederiz. Teklifimizin en iyi fiyat ve kalite dengesini yansıttığına inanıyoruz."
+		onYazi = onYazi & " Herhangi bir sorunuz varsa lütfen bize ulaşmaktan çekinmeyin, sorularınızı cevaplamaktan mutluluk duyacağız."
+		onYazi = onYazi & " <br>Teklifimizin olumlu karşılanacağını temmeni eder çalışmalarınızda kolaylıklar dileriz.</p>"
+		Response.Write onYazi
+	Response.Write "</div>"
+'###################### /ÜST YAZI
+'###################### /ÜST YAZI
 
 Response.Write "<table class=""table-responsive-sm"" border=""1"" style=""width:100%;border-collapse:collapse;font-family:calibri;"" class=""container-fluid table-bordered"">"
 Response.Write "<thead><tr style=""font-size:x-small;"" class=""text-center fontkucuk2 style1"">"
@@ -169,17 +174,14 @@ Response.Write "<thead><tr style=""font-size:x-small;"" class=""text-center font
 		Response.Write "Kısım No"
 		Response.Write "</th>"
 	end if
-Response.Write "<th class=""bg-secondary"">"
-Response.Write "Ürün Kodu"
-Response.Write "</th>"
-Response.Write "<th class=""bg-secondary"">"
-Response.Write "Ürün & Hizmet Tanımı"
-Response.Write "</th>"
-Response.Write "<th class=""bg-secondary"">"
-Response.Write "Miktar"
-Response.Write "</th>"
-	Response.Write "<th class=""bg-secondary"">Birim Fiyat</th>"
-
+Response.Write "<th class=""bg-secondary"">Sıra</th>"	
+Response.Write "<th class=""bg-secondary"">Ürün Kodu</th>"
+Response.Write "<th class=""bg-secondary"">Ürün & Hizmet Tanımı</th>"
+if satirKDV = True then
+Response.Write "<th class=""bg-secondary"">KDV</th>"
+end if
+Response.Write "<th class=""bg-secondary"">Miktar</th>"
+Response.Write "<th class=""bg-secondary"">Birim Fiyat</th>"
 Response.Write "<th class=""bg-secondary"">Brüt Tutar</th>"
 	
 	if iskontoKontrol > 0 then
@@ -240,14 +242,16 @@ if birimYok > 0 then
 		response.Write "<script>$(document).ready(function() {toastr.options.positionClass = 'toast-bottom-right';toastr.error('Para Birimi tanımlanmamış kalem(ler) var.','Eksik Bilgi!');});</script>"
 end if
 
-sorgu = "SELECT iu.id as ihaleUrunID, iu.grupNo, iu.siraNo, iu.ad as iuAD, iu.miktar, iu.birim, iu.stoklarListeFiyat, iu.stoklarListeFiyatPB,"_
-&" ISNULL(iu.iskontoOran,0) as iskontoOran, iu.bayiAlis, iu.bayiAlisPB, iu.tavsiyeFiyat, iu.tavsiyeBirim, ISNULL(iu.stoklarID,0) as stoklarID,"_
-&" (iu.firmamFiyat * iu.miktar) - (((iu.firmamFiyat * iu.miktar)*ISNULL(iu.iskontoOran,0))/100) as iskontoSonraTutar, ((iu.firmamFiyat * iu.miktar)*ISNULL(iu.iskontoOran,0))/100 as iskontoTutar, "_
-&" tavsiyeFiyat * iu.miktar as tavsiyeTutar, iu.firmamFiyat, iu.firmamParaBirim, iu.firmamFiyat * iu.miktar as firmamTutar, iu.stoklarListeFiyat * iu.miktar as listeTutar,"_
-&" ISNULL(bayiAlis,0) * iu.miktar as bayiTutar, s.katalogKodu, ISNULL(s.stokBarcode,'') as ubbKod"_
-&" FROM dosya.ihale_urun iu"_
-&" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"_
-&" WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
+sorgu = "SELECT iu.id as ihaleUrunID, iu.grupNo, iu.siraNo, iu.ad as iuAD, iu.miktar, iu.birim, iu.stoklarListeFiyat, iu.stoklarListeFiyatPB,"
+sorgu = sorgu &" ISNULL(iu.iskontoOran,0) as iskontoOran, iu.bayiAlis, iu.bayiAlisPB, iu.tavsiyeFiyat, iu.tavsiyeBirim, ISNULL(iu.stoklarID,0) as stoklarID,"
+sorgu = sorgu &" (iu.firmamFiyat * iu.miktar) - (((iu.firmamFiyat * iu.miktar)*ISNULL(iu.iskontoOran,0))/100) as iskontoSonraTutar,"
+sorgu = sorgu &" ((iu.firmamFiyat * iu.miktar)*ISNULL(iu.iskontoOran,0))/100 as iskontoTutar,"
+sorgu = sorgu &" tavsiyeFiyat * iu.miktar as tavsiyeTutar, iu.firmamFiyat, iu.firmamParaBirim,"
+sorgu = sorgu &" iu.firmamFiyat * iu.miktar as firmamTutar, iu.stoklarListeFiyat * iu.miktar as listeTutar,"
+sorgu = sorgu &" ISNULL(bayiAlis,0) * iu.miktar as bayiTutar, s.katalogKodu, ISNULL(s.stokBarcode,'') as ubbKod, s.stokKodu, s.kdv"
+sorgu = sorgu &" FROM dosya.ihale_urun iu"
+sorgu = sorgu &" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"
+sorgu = sorgu &" WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
 rs.open sorgu,sbsv5,1,3
 
 toplam_tavsiye_tutar 	= 	0
@@ -256,6 +260,9 @@ toplam_iskonto_tutar	= 	0
 toplam_firmam_tutar		=	0
 
 for i = 1 to rs.recordcount
+	stokKodu			=	rs("stokKodu")
+	kdv					=	rs("kdv")
+	siraNo				=	rs("siraNo")
 	ubbKod				=	rs("ubbKod")
 	iskontoOran			=	rs("iskontoOran")
 	iskontoSonraTutar	=	para_basamak(rs("iskontoSonraTutar"))
@@ -270,9 +277,8 @@ if grupIhale = "True" then
 	Response.Write rs("grupNo")
 	Response.Write "</td>"
 end if
-	Response.Write "<td style=""text-align:center;"" class=""text-center"">"
-	Response.Write muhStokKod
-	Response.Write "</td>"
+	Response.Write "<td style=""text-align:center;"" class=""text-center"">" & siraNo & "</td>"
+	Response.Write "<td style=""text-align:center;"" class=""text-center"">" & stokKodu & "</td>"
 	Response.Write "<td>"
 		Response.Write rs("iuAD") & "<br>"
 		if len(ubbKod) > 0 then
@@ -282,6 +288,9 @@ end if
 			Response.Write "<br>" & sutKodu
 		end if
 	Response.Write "</td>"
+	if satirKDV = True then
+		Response.Write "<td style=""text-align:center;"" class=""text-center"">" & kdv & "</td>"
+	end if
 	Response.Write "<td style=""text-align:right;"" class=""text-right"">"
 	Response.Write formatnumber(rs("miktar"),0)&" "&rs("birim")
 	Response.Write "</td>"
@@ -295,12 +304,20 @@ end if
 	Response.Write "</td>"
 	if iskontoKontrol > 0 then
 		Response.Write "<td style=""text-align:center;"" class="""">"
+		if iskontoOran > 0 then
 			Response.Write "%" & iskontoOran
+		else
+			Response.Write "&nbsp;"
+		end if
 		Response.Write "</td>"
-		Response.Write "<td style=""text-align:center;"" class="""">"
-			Response.Write iskontoTutar & " " & firmamParaBirim
+		Response.Write "<td style=""text-align:right;"" class="""">"
+			if iskontoTutar > 0 then
+				Response.Write iskontoTutar & " " & firmamParaBirim
+			else
+				Response.Write "&nbsp;"
+			end if
 		Response.Write "</td>"
-		Response.Write "<td style=""text-align:center;"" class="""">"
+		Response.Write "<td style=""text-align:right;"" class="""">"
 			Response.Write iskontoSonraTutar & " " & firmamParaBirim
 		Response.Write "</td>"
 		toplam_iskonto_tutar = toplam_iskonto_tutar + iskontoTutar
@@ -310,9 +327,9 @@ rs.movenext
 next
 rs.close
 Response.Write "</tbody></table>"
-Response.Write "<br><br>"
+Response.Write "<br>"
 
-	sorgu = "SELECT s.kdv, SUM(iu.miktar*iu.firmamFiyat) as kdvToplam"_
+	sorgu = "SELECT s.kdv, SUM(iu.miktar*(iu.firmamFiyat-((ISNULL(iu.iskontoOran,0)/100)*iu.firmamFiyat))) as kdvToplam "_
 		&" FROM dosya.ihale_urun iu"_
 		&" INNER JOIN stok.stok s ON iu.stoklarID = s.stokID"_
 		&" WHERE ihaleID = "& id &""_
@@ -324,7 +341,7 @@ Response.Write "<br><br>"
 			do until rs.EOF
 				kdvOran 		=	rs("kdv")
 				kdvToplam		=	rs("kdvToplam")
-				kdvHesap		=	(kdvToplam - toplam_iskonto_tutar) * (kdvOran/100)
+				kdvHesap		=	(kdvToplam) * (kdvOran/100)
 				toplamKdvHesap	=	toplamKdvHesap + kdvHesap
 
 				kdvSatir = kdvSatir & "<tr style=""text-align:right;"" class=""text-right d-flex"">"
@@ -341,27 +358,23 @@ Response.Write "<br><br>"
 			loop
 		rs.close
 if paraBirim <> "mix" AND altTopGoster = "True" then'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
-	Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;"" class=""container-fluid"">"
+	Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;font-size:11px"">"
 		Response.Write "<tr style=""text-align:right;"" class=""text-right d-flex"">"
-		Response.Write "<td style=""width:60%"">&nbsp;</td>"
-		Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">"
-		Response.Write "Brüt Tutar"
-		Response.Write "</td>"
-		Response.Write "<td style=""width:20%"" class=""b-top b-right b-bottom"">"
-		para_deger = para_basamak(toplam_firmam_tutar)
-		Response.Write para_deger & " " & paraBirim
-		Response.Write "</td>"
+			Response.Write "<td style=""width:60%"">&nbsp;</td>"
+			Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">Brüt Tutar</td>"
+			Response.Write "<td style=""width:20%"" class=""b-top b-right b-bottom"">"
+				para_deger = para_basamak(toplam_firmam_tutar)
+				Response.Write para_deger & " " & paraBirim
+			Response.Write "</td>"
 		Response.Write "</tr>"
 	if iskontoKontrol > 0 then
 		Response.Write "<tr style=""text-align:right;"" class=""text-right d-flex"">"
-		Response.Write "<td style=""width:60%"">&nbsp;</td>"
-		Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">"
-		Response.Write "Toplam İskonto"
-		Response.Write "</td>"
-		Response.Write "<td style=""width:20%"" class=""b-top b-right b-bottom"">"
-		pisk = para_basamak(toplam_iskonto_tutar)
-		Response.Write "(-" & pisk & " " & paraBirim & ")"
-		Response.Write "</td>"
+			Response.Write "<td style=""width:60%"">&nbsp;</td>"
+			Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">Toplam İskonto</td>"
+			Response.Write "<td style=""width:20%"" class=""b-top b-right b-bottom"">"
+				pisk = para_basamak(toplam_iskonto_tutar)
+				Response.Write "(-" & pisk & " " & paraBirim & ")"
+			Response.Write "</td>"
 		Response.Write "</tr>"
 	end if
 	if teklifKDV = true then
@@ -389,76 +402,120 @@ if paraBirim <> "mix" AND altTopGoster = "True" then'tüm kalemlerin para birimi
 end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 
 
-sorgu = "SELECT REPLACE(REPLACE(teklifNot,CHAR(13),'<br>'),CHAR(10),'<br>') as teklifNot, odemeVade, teklifGecerlik, teslimatSure FROM dosya.ihale WHERE id = " & id
-rs.open sorgu,sbsv5,1,3
+'################# TEKLİF ALT BİLGİLERİ
+'################# TEKLİF ALT BİLGİLERİ
+	sorgu = "SELECT REPLACE(REPLACE(teklifNot,CHAR(13),'<br>'),CHAR(10),'<br>') as teklifNot,"
+	sorgu = sorgu & " odemeVade, teklifGecerlik, teslimatSure, bankalar"
+	sorgu = sorgu & " FROM dosya.ihale WHERE id = " & id
+	rs.open sorgu,sbsv5,1,3
 
-teklifNot		=	rs("teklifNot")
-odemeVade		=	rs("odemeVade")
-teklifGecerlik	=	rs("teklifGecerlik")
-teslimatSure	=	rs("teslimatSure")
+				
+		bankalar		=	rs("bankalar")
+		if LEN(bankalar) > 1 then
+			bankalar 		= 	LEFT(bankalar,(LEN(bankalar)-1))
+			bankalar 		= 	RIGHT(bankalar,(LEN(bankalar)-1))
+		else
+			bankalar = 0
+		end if
+		teklifNot		=	rs("teklifNot")
+		odemeVade		=	rs("odemeVade")
+		teklifGecerlik	=	rs("teklifGecerlik")
+		teslimatSure	=	rs("teslimatSure")
 
-rs.close
+	rs.close
 
-	'USDkurArr	=	dovizKuruBul(tarih_ihale, "USD")
-	'USDkurTarih	=	USDkurArr(1)
-	'USDkur		=	USDkurArr(0)
+		USDkur		=	dovizBulTarih("usdtry", tarih_ihale)
 
-sorgu = "SELECT iu.grupNo, iu.siraNo, iu.kalemNot, iu.kalemNotTeklifEkle FROM dosya.ihale_urun iu WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
-rs.open sorgu,sbsv5,1,3
+	sorgu = "SELECT iu.grupNo, iu.siraNo, iu.kalemNot, iu.kalemNotTeklifEkle FROM dosya.ihale_urun iu WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
+	rs.open sorgu,sbsv5,1,3
 
-Response.Write "<br>"
-		Response.Write "<table>"
-			Response.Write "<tr>"
-			Response.Write "<td style=""width:70%"">"
-				Response.Write "<b><u>AÇIKLAMA</u></b>"
-Response.Write "<br>"
-			Response.Write "- <b>Kur Tarih:</b> " & USDkurTarih & " / <b>1 USD =</b> " & USDkur & " TL<br>"
-			if odemeVade > 0 then
-				Response.Write "- Ödeme "&odemeVade&" gündür.<br>"
-			end if
-			if teklifGecerlik > 0 then
-				Response.Write "- Teklif geçerlilik süresi "&teklifGecerlik&" gündür.<br>"
-			end if
-			if teslimatSure > 0 then
-				Response.Write "- Teslimat süresi "&teslimatSure&" gündür.<br>"
-			end if
-			Response.Write teklifNot&"<br>"
-			
-			for t = 1 to rs.recordcount
-				if len(rs("kalemNot")) > 0 AND rs("kalemNotTeklifEkle") = 1 then
-					if rs("grupNo") > 0 then
-						Response.Write "<b>Kısım "&rs("grupNo") &" - Sıra "& rs("siraNo")&":</b>"
-					else
-						Response.Write "<b>Sıra "&rs("siraNo")&":</b>"
+			Response.Write "<table style=""font-family:calibri; font-size:12px;"">"
+				Response.Write "<tr>"
+				Response.Write "<td style=""width:70%"">"
+					Response.Write "<b><u>AÇIKLAMA</u></b>"
+
+				Response.Write teklifNot & "<br>"
+				
+				for t = 1 to rs.recordcount
+					if len(rs("kalemNot")) > 0 AND rs("kalemNotTeklifEkle") = 1 then
+						if rs("grupNo") > 0 then
+							Response.Write "<b>Kısım "&rs("grupNo") &" - Sıra "& rs("siraNo")&":</b>"
+						else
+							Response.Write "<b> - Sıra No "&rs("siraNo")&" için:</b>"
+						end if
+					Response.Write " "&rs("kalemNot")&"<br>"
 					end if
-				Response.Write " "&rs("kalemNot")&"<br>"
-				end if
+				rs.movenext
+				next
+				rs.close
+				Response.Write "</td>"
+				Response.Write "</tr>"
+			Response.Write "</table>"
+'################# /TEKLİF ALT BİLGİLERİ
+'################# /TEKLİF ALT BİLGİLERİ
+
+'################## banka bilgileri tablosu
+'################## banka bilgileri tablosu
+	sorgu = "SELECT * FROM portal.bankalar WHERE bankalarID IN ("&bankalar&")"
+	rs.open sorgu,sbsv5,1,3
+	if rs.recordcount > 0 then
+	Response.Write "<div style=""font-size: 11px;margin-top:5px;"">"
+		Response.Write "<table style=""font-family:calibri; font-size:12px;"" width=""100%"" border=""1"" cellspacing=""1"" cellpadding=""1"">"
+			Response.Write "<thead>"
+				Response.Write "<tr style=""text-align:center;"">"
+					Response.Write "<th>Banka Adı</th>"
+					Response.Write "<th>IBAN</th>"
+					Response.Write "<th>SWIFT</th>"
+					Response.Write "<th>Döviz Tür</th>"
+				Response.Write "</tr>"
+			Response.Write "</thead>"
+			Response.Write "<tbody>"
+			for zi = 1 to rs.recordcount
+			bankaAd		=	rs("bankaAd")
+			iban		=	rs("iban")
+			swiftKod	=	rs("swiftKod")
+			dovizTur	=	rs("paraBirim")
+				Response.Write "<tr style=""text-align:center;"">"
+					Response.Write "<td style=""border: 1px solid #000;"">"&bankaAd&"</td>"
+					Response.Write "<td style=""border: 1px solid #000;"">"&iban&"</td>"
+					Response.Write "<td style=""border: 1px solid #000;"">"&swiftKod&"</td>"
+					Response.Write "<td style=""border: 1px solid #000;"">"&dovizTur&"</td>"
+				Response.Write "</tr>"
 			rs.movenext
 			next
-			Response.Write "</td>"
-			Response.Write "</tr>"
+			Response.Write "</tbody>"
 		Response.Write "</table>"
-	
-Response.Write "<table border=""0"" style=""width:100%;margin-top:10px"" border=""0"">"
-	Response.Write "<tr>"
-		Response.Write "<td style=""width:50%;text-align:center""><u><b>MED TIP ONAYI</b></u></td>"
-		Response.Write "<td style=""width:50%;text-align:center""><u><b>MÜŞTERİ ONAYI</b></u></td>"
-	Response.Write "</tr>"
-	Response.Write "<tr>"
-		Response.Write "<td style=""text-align:center"">"
+	Response.Write "</div>"
+	end if
+'################## /banka bilgileri tablosu
+'################## /banka bilgileri tablosu
+	Response.Write "<br>"
+	Response.Write "<div style=""font-size: 11px;"">"
+		Response.Write "<table width=""100%"" border=""0"" cellspacing=""1"" cellpadding=""1"">"
+			Response.Write "<tbody>"
+				Response.Write "<tr>"
+					Response.Write "<td align=""center"" style=""border: 1px solid #000;""><strong>Fatura Bilgileriniz</strong></td>"
+					Response.Write "<td align=""center"" style=""border: 1px solid #000;""><strong>Teslimat Adresi</strong></td>"
+					Response.Write "<td align=""center"" style=""border: 1px solid #000;""><strong>Onay<br>"
+					Response.Write "</strong>Yetkili İmza ve Kaşe</td>"
+				Response.Write "</tr>"
+				Response.Write "<tr>"
+					Response.Write "<td height=""80"" style=""border: 1px solid #000;"">&nbsp;</td>"
+					Response.Write "<td height=""80"" style=""border: 1px solid #000;"">&nbsp;</td>"
+					Response.Write "<td height=""80"" style=""border: 1px solid #000;"">&nbsp;</td>"
+				Response.Write "</tr>"
+			Response.Write "</tbody>"
+		Response.Write "</table>"
+	Response.Write "</div>"
+
 			if teklifKase = True then
 						Response.Write "<img src=""" & kasePath & """ width=""" & kaseWidth & """ height=""" & kaseHeight & """>"
 			end if
-		Response.Write "</td>"
-		Response.Write "<td>&nbsp;</td>"
-	Response.Write "</tr>"
-Response.Write "</table>"
-
 
 
 
 if fiyatOnay <> "OK" then
-	Response.Write "<div class=""text-danger""><h1>Onaylanmamış fiyat var, PDF oluşturulamaz!</h1></div>"
+	Response.Write "<div class=""text-danger""><h3>Onaylanmamış fiyat var, PDF oluşturulamaz!</h3></div>"
 end if
 
 Response.Write "</page>"

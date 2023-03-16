@@ -14,6 +14,7 @@
 		bankaID = 0
 	end if
     bankaAd		 		=   Request.Form("bankaAd")
+	hesapAd				=	Request.Form("hesapAd")
 	paraBirim			=   Request.Form("paraBirim")
 	subeAd				=   Request.Form("subeAd")
 	subeNo				=	Request.Form("subeNo")
@@ -33,8 +34,8 @@ Response.Flush()
 
 yetkiKontrol = yetkibul(modulAd) 
 
-
 	call rqKontrol(bankaAd,"Lütfen Banka adını yazınız","")
+	call rqKontrol(hesapAd,"Lütfen hesap için ad yazınız","")
 	call rqKontrol(paraBirim,"Lütfen döviz tipini seçiniz.","")
 	call rqKontrol(subeAd,"Lütfen Şube adını yazınız.","")
 	call rqKontrol(subeNo,"Lütfen Şube kodunu yazınız.","")
@@ -58,6 +59,7 @@ if yetkiKontrol > 2 then
 			'#####tanımlandıktan sonra depo kodu ve depo adı değişmesin
 				rs("firmaID")			=	firmaID
 				rs("bankaAd")			=	bankaAd
+				rs("hesapAd")			=	hesapAd
                 rs("paraBirim")			=	paraBirim
                 rs("subeAd")			=	subeAd
                 rs("subeNo")			=	subeNo
