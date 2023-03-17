@@ -69,7 +69,7 @@ yetkiKontrol = yetkibul(modulAd)
 	rs.close
 	
 	
-	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim  FROM teklif.siparisKalemTemp t1 WHERE t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & ""
+	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim, t1.iuID  FROM teklif.siparisKalemTemp t1 WHERE t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & ""
 	rs.open sorgu, sbsv5,1,3
 
 		for zi = 1 to rs.recordcount
@@ -81,6 +81,7 @@ yetkiKontrol = yetkibul(modulAd)
 			mikBirimID		=	rs("mikBirimID")
 			birimFiyat		=	rs("birimFiyat")
 			paraBirim		=	rs("paraBirim")
+			iuID			=	rs("iuID")
 			
 			
 			sorgu = "SELECT * FROM teklif.siparisKalem"
@@ -96,6 +97,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs1("mikBirimID")	=	mikBirimID
 				rs1("birimFiyat")	=	birimFiyat
 				rs1("paraBirim")	=	paraBirim
+				rs1("iuID")			=	iuID
 			rs1.update
 			rs1.close
 		rs.movenext

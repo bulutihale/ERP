@@ -45,12 +45,11 @@ end if
 		rs.open sorgu, sbsv5,1,3
 		
 		
-		if tablo = "ihale_urun" then
+		if tablo = "dosya.ihale_urun" then
 		'####### fiyat onaylanmış ise teklif kalemi ile ilgili bir şey değiştirilemesin
 		'####### fiyat onaylanmış ise teklif kalemi ile ilgili bir şey değiştirilemesin
-
 			if alan <> "fiyatOnay" AND rs("fiyatOnay") = True then
-				Response.Write "hata|Fiyat onaylanmış kalemde değişiklik yapılamaz."
+				Response.Write "hata|Fiyatı onaylanmış kalemde değişiklik yapılamaz."
 				Response.End()
 			end if
 		'####### fiyat onaylanmış ise teklif kalemi ile ilgili bir şey değiştirilemesin

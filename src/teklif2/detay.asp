@@ -41,7 +41,7 @@
 '##### YETKİ BUL
 '##### YETKİ BUL
 
-if yetkiKontrol  >= 2 then
+if yetkiKontrol  >= 3 then
 		
 		response.Flush()
 	'##### ANA VERİ ÇEK
@@ -586,11 +586,13 @@ Response.Write "<div class=""card-body row"">"
 			&" iu.miktar, ISNULL(iu.miktar,0) as miktar, ISNULL(iu.arttirimMiktar,0) as arttirimMiktar, ISNULL(iu.eksiltimMiktar,0) as eksiltimMiktar, iu.birim, iu.stoklarID, ISNULL(iu.yaklasikMaliyetPB,'TL') as yaklasikMaliyetPB,"_
 			&" iu.bayiMarj, ISNULL(iu.bayiAlisPB,'TL') as bayiAlisPB, iu.stoklarListeFiyat, iu.stoklarListeFiyatPB, iu.listeFiyatTarih, iu.iskontoOran,"_
 			&" iu.id as ihaleUrunID, iu.ad as urunAd, iu.kalemNot, iu.kalemNotTeklifEkle, s.stokAd as stoklarAD, i.id as ihaleID, i.ihaleTipi, i.firmaID,"_
-			&" r.cariUrunRef, r.cariUrunAd"_
+			&" r.cariUrunRef, r.cariUrunAd, t5.id as sipTempID, t6.id as sipKalemID"_
 			&" FROM dosya.ihale_urun iu"_
 			&" INNER JOIN dosya.ihale i ON iu.ihaleID = i.id"_
 			&" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"_
 			&" LEFT JOIN stok.stokRef r ON iu.stoklarID = r.stokID AND r.cariID = " & cariID & ""_
+			&" LEFT JOIN teklif.siparisKalemTemp t5 ON t5.iuID = iu.ID"_
+			&" LEFT JOIN teklif.siparisKalem t6 ON t6.iuID = iu.ID"_
 			&" WHERE i.firmaID = " & firmaID & " and ihaleID = " & id & " order by grupNo ASC, siraNo ASC"
 			rs.open sorgu,sbsv5,1,3
 			for i = 1 to rs.recordcount
@@ -605,13 +607,30 @@ Response.Write "<div class=""card-body row"">"
 				iskontoOran		=	rs("iskontoOran")
 				cariUrunRef		=	rs("cariUrunRef")
 				cariUrunAd		=	rs("cariUrunAd")
+				uhde			=	rs("uhde")
+				sipTempID		=	rs("sipTempID")
+				sipKalemID		=	rs("sipKalemID")
+				if not isnull(sipTempID) then
+					sipClass = " bg-info "
+				elseif not isnull(sipKalemID) then
+					sipClass = " bg-success "
+				else
+					sipClass = ""
+				end if
 	Response.Write "<tr>"
-		Response.Write "<td width=""5%"" class=""align-middle text-center"">"
-			if fiyatOnay = True then
-			Response.Write "<div class=""pointer"" onclick=""swal('fiyat onaylanmış kalem silinemez.','')""><i class=""fa fa-trash-o""></i></div>"
-			else
-			Response.Write "<a id="""&rs("ihaleUrunID")&"|ihale_urun"&""" class=""btn ajSil pt-0 pb-0 pl-0"" role=""button""><i class=""fa fa-trash-o""></i></a>"
-			end if
+		Response.Write "<td width=""5%"" class=""align-middle text-center "&sipClass&""">"
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col"">"
+				if fiyatOnay = True then
+				Response.Write "<div class=""pointer"" onclick=""swal('fiyat onaylanmış kalem silinemez.','')""><i class=""fa fa-trash-o""></i></div>"
+				else
+				Response.Write "<a id="""&rs("ihaleUrunID")&"|ihale_urun"&""" class=""btn ajSil pt-0 pb-0 pl-0"" role=""button""><i class=""fa fa-trash-o""></i></a>"
+				end if
+			Response.Write "</div>"
+			Response.Write "<div class=""col"">"
+				Response.Write "<span class=""icon cart-put pointer"" onclick=""modalajax('/teklif2/sipYaz_modal.asp?iuID="&ihaleUrunID&"')""></span>"
+			Response.Write "</div>"
+		Response.Write "</div>"
 		Response.Write "</td>"
 		
 		Response.Write "<td  width=""5%"" class=""align-middle text-center"">"

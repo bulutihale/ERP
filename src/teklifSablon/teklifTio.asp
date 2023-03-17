@@ -23,11 +23,6 @@ Response.Write "@media print {@page {size:A4 portrait;background: white;}body{vi
 Response.Write "</style>"
 
 
-'###### yetki bul
-    modulAd		=   "Teklif"
-	yetkiKontrol = 	yetkibul(modulAd)
-'###### yetki bul
-
 
 	pdf 					=	request.QueryString("pdf")
 	id						=	request.QueryString("ihaleid")
@@ -519,6 +514,8 @@ if fiyatOnay <> "OK" then
 end if
 
 Response.Write "</page>"
+
+
 %>
 <script>
 	$(document).ready(function() {
