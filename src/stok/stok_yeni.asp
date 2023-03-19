@@ -85,9 +85,13 @@ Response.Write "<div class=""tab-content"">"
 			call formhidden("stokID64",stokID64,"","","","","stokID64","")
 			call formhidden("stokID",gorevID,"","","","","stokID","")
 			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-lg-12 col-sm-12 my-1"">"
+				Response.Write "<div class=""col-lg-6 col-sm-12 my-1"">"
 					Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Kodu</span>"
 					call forminput("stokKodu",stokKodu,"","","",inpKontrol,"stokKodu","")
+				Response.Write "</div>"
+				Response.Write "<div class=""col-lg-6 col-sm-12 my-1"">"
+					Response.Write "<span class=""badge badge-secondary rounded-left"">Katalog Kodu</span>"
+					call forminput("katalogKodu",katalogKodu,"","","",inpKontrol,"katalogKodu","")
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""row"">"

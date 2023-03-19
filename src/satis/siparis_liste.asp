@@ -11,7 +11,7 @@
 	t3				=	Request.Form("t3")
 	t4				=	Request.Form("t4")
 	siparisNo		=	Request.Form("siparisNo")
-    modulAd 		=   "satis"
+    modulAd 		=   "Satış"
 	
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 60 end if

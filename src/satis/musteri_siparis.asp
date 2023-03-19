@@ -4,15 +4,22 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
     call sessiontest()
-    kid		=	kidbul()
-    ID		=	Request.QueryString("ID")
-    kid64	=	ID
-    opener  =   Request.Form("opener")
-    gorevID =   Request.QueryString("gorevID")
-	aramaad	=	Request.Form("aramaad")
-    hata    =   ""
-    modulAd =   "Satış"
-    personelID =   gorevID
+    kid				=	kidbul()
+    ID				=	Request.QueryString("ID")
+    kid64			=	ID
+    opener  		=   Request.Form("opener")
+    gorevID 		=   Request.QueryString("gorevID")
+	taslakDurum		=	Request.QueryString("taslakDurum")
+	sayfa5Kontrol	=	Session("sayfa5")
+	if taslakDurum = "evet" OR sayfa5Kontrol = "taslak" then
+		taslakKontrol = "taslak"
+	else
+		taslakKontrol = ""
+	end if
+	aramaad			=	Request.Form("aramaad")
+    hata    		=   ""
+    modulAd 		=   "Satış"
+    personelID 		=   gorevID
     Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -29,7 +36,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""container-fluid"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
-                Response.Write "<div class=""card"">"
+                Response.Write "<div class=""card container"">"
 					Response.Write "<div class=""card-header"">"
 						Response.Write "<div class=""row"">"
 							Response.Write "<div class=""col-lg-9 col-md-6 col-sm-6 h4 text-left"">Müşteri Siparişi Oluşturma</div>"
@@ -52,6 +59,27 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write """>Kayıtlı Cari</div>"
 						Response.Write "</div>"
 					Response.Write "</div>"
+
+			'###### TASLAK SİPARİŞLERİ LİSTELEMEK İÇİN
+			'###### TASLAK SİPARİŞLERİ LİSTELEMEK İÇİN
+				if taslakKontrol = "taslak" then
+
+					sorgu = "SELECT DISTINCT t1.cariID, t2.cariAd"
+					sorgu = sorgu & " FROM teklif.siparisKalemTemp t1"
+					sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.cariID = t2.cariID"
+					sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
+					rs.open sorgu, sbsv5, 1, 3
+					if not rs.EOF then
+						do until rs.EOF
+							cariID		=	rs("cariID")
+							cariAd		=	rs("cariAd")
+							Response.Write "<div class=""row mt-3 hoverGel pointer sipRow rounded container"" onclick=""$('#tempUrunListesi').load('/satis/musteri_siparis_kalem_ekle.asp?taslakDurum=evet&islem=kontrol&siphash=" & cariID & "');$('.sipRow').removeClass('bg-warning');$(this).addClass('bg-warning')"">"
+								Response.Write "<div class=""col-7 bold"">" & cariAd & "</div>"
+							Response.Write "</div>"
+						rs.movenext
+						loop
+					end if
+				else
 					Response.Write "<form action=""/satis/musteri_siparis_kalem_ekle.asp"" method=""post"" id=""siparisForm"">"
 
 					Response.Write "<div class=""card-body"">"
@@ -109,7 +137,7 @@ yetkiKontrol = yetkibul(modulAd)
 									Response.Write "</div>"
 									Response.Write "<div class=""col-lg-3 col-sm-6 col-md-6 mt-2"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Birim</div>"
-										call formselectv2("birimSec","","","","formSelect2 birimSec border","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0""")
+										call formselectv2("birimSec","","","","formSelect2 birimSec border anaBirimFiltre","","birimSec","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0""")
 									Response.Write "</div>"
 									Response.Write "<div class=""col-lg-3 col-sm-6 col-md-6 mt-2"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Fiyat</div>"
@@ -134,6 +162,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 					Response.Write "</div>"
 					Response.Write "</form>"
+				end if
 				Response.Write "</div>"
 			Response.Write "</div>"
 		Response.Write "</div>"

@@ -20,6 +20,7 @@
     rafOmru         =	Request.Form("rafOmru")
     lotTakip        =   Request.Form("lotTakip")
     stokAdEn        =   Request.Form("stokAdEn")
+    katalogKodu     =   Request.Form("katalogKodu")
     if rafOmru = "" then
         rafOmru = 0
     end if
@@ -66,6 +67,7 @@ end if
                 rs("rafOmru")           =   rafOmru
                 rs("lotTakip")          =   lotTakip
                 rs("stokAdEn")          =   stokAdEn
+                rs("katalogKodu")       =   katalogKodu
             rs.update
             rs.close
 

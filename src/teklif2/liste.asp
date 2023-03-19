@@ -110,7 +110,7 @@ Response.Write "<div class=""card"">"
 Response.Write "<div class=""card-header""><i class=""fa fa-align-justify""></i> " & sayfaadi & filtreDash &"</div>"
 Response.Write "<div class=""card-body"">"
 
-Response.Write "<form action=""/dosya/liste"" method=""post"" id=""paging"">"
+Response.Write "<form action=""/teklif2/liste"" method=""post"" id=""paging"">"
 Response.Write "<input type=""hidden"" name=""page"" value=""" & page & """ id=""page"" />"
 Response.Write "<div class=""row"">"
 Response.Write "<div class=""col-lg-8 col-md-8 col-sm-9 col-xs-6"">"
@@ -138,7 +138,7 @@ Response.Write "<thead><tr class="" text-center"">"
 Response.Write "<th>Sorumlu</th>"
 Response.Write "<th>Dosya No</th>"
 Response.Write "<th>Tarih</th>"
-Response.Write "<th>İl</th>"
+Response.Write "<th>Konum</th>"
 Response.Write "<th>Cari</th>"
 Response.Write "<th>Alım</th>"
 'Response.Write "<th>Durum/İKN</th>"
@@ -294,7 +294,7 @@ if rs.recordcount > 0 then
 			' 	'Response.Write "<a class=""btn fontkucuk2 p-0 m-0"" onClick=""modalajax('','/dilekce/dilekce_modal.asp?ihaleID="& ihaleID64 & "');""><i class=""p-0 m-0 fa fa-arrow-circle-o-right"" aria-hidden=""true""></i></a>"
 					
 			' Response.Write "</td>"
-			Response.Write "<td class=""align-middle text-center"">"
+			Response.Write "<td class=""align-middle text-left"">"
 				Response.Write "<a class=""btn btn-success rounded px-1 py-0"" href=""/teklif2/detay/" & ihaleID64 & """><i class=""fa fa-edit""></i></a>"
 				
 	'############## POPOVER ile işlemler listesi gösterimi

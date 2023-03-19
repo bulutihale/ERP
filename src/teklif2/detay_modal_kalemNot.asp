@@ -40,7 +40,7 @@ Response.Write "<form action=""/teklif2/hucre_kaydet.asp"" method=""post"" class
 Response.Write "<input type=""hidden"" name=""alan"" value=""kalemNot"" />"
 Response.Write "<input type=""hidden"" name=""tabloID"" value=""" & id & """ />"
 Response.Write "<input type=""hidden"" name=""ihaleID"" value=""" & ihaleID & """ />"
-Response.Write "<input type=""hidden"" name=""tablo"" value=""ihale_urun"" />"
+Response.Write "<input type=""hidden"" name=""tablo"" value=""dosya.ihale_urun"" />"
 
 	Response.Write "<div class=""container-fluid row"">"
 		Response.Write "<div class=""col-lg-12"">"

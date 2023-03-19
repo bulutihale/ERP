@@ -9,7 +9,12 @@ id64 = Request.QueryString("id")
 			id						=	base64_decode_tr(id)
 
 
+'###### yetki bul
+    modulAd		=   "Teklif"
+	yetkiKontrol = 	yetkibul(modulAd)
+'###### yetki bul
 
+if yetkiKontrol  >= 3 then
 
 
 Response.Write "<div class=""container-fluid"">"
@@ -52,4 +57,10 @@ end if
 
 Response.Write "</div>"
 Response.Write "</div>"
+
+
+	else
+		call yetkisizGiris("","","")
+	end if
+
 %>
