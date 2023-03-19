@@ -35,15 +35,17 @@ yetkiPersonel = yetkibul("personel")
 
 '###### FİRMAYI BUL
 '###### FİRMAYI BUL
-	sorgu = "Select modulListesi,modulListesiSecenekler from portal.Firma where Id = " & firmaID
-	rs.Open sorgu, sbsv5, 1, 3
-	if rs.recordcount = 0 then
-		Response.Write "Tanımsız Firma"
-		Response.End()
-	elseif rs.recordcount = 1 then
-		firmamodulListesi		        =	rs("modulListesi")
+	' sorgu = "Select modulListesi,modulListesiSecenekler from portal.Firma where Id = " & firmaID
+	' rs.Open sorgu, sbsv5, 1, 3
+	' if rs.recordcount = 0 then
+	' 	Response.Write "Tanımsız Firma"
+	' 	Response.End()
+	' elseif rs.recordcount = 1 then
+		' firmamodulListesi		        =	rs("modulListesi")
+		firmamodulListesi		        =	sb_modul
         firmamodulListesiArr            =   Split(firmamodulListesi,",")
-        firmamodulListesiSecenekler     =   rs("modulListesiSecenekler")
+        ' firmamodulListesiSecenekler     =   rs("modulListesiSecenekler")
+        firmamodulListesiSecenekler     =   sb_moduller
         firmamodulListesiSecenekler     =   Split(firmamodulListesiSecenekler,"|")
         for i = 0 to ubound(firmamodulListesiSecenekler)
             fmArr = firmamodulListesiSecenekler(i)
@@ -52,8 +54,8 @@ yetkiPersonel = yetkibul("personel")
             ' Response.Write fmArr(1)
             ' Response.Write "<br />"
         next
-	end if
-	rs.close
+	' end if
+	' rs.close
 '###### FİRMAYI BUL
 '###### FİRMAYI BUL
 

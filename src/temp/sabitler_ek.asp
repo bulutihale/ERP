@@ -81,6 +81,10 @@ if firmaID = 1 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -151,6 +155,10 @@ if firmaID = 2 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -221,6 +229,10 @@ if firmaID = 3 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -291,6 +303,10 @@ if firmaID = 4 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -386,6 +402,10 @@ if firmaID = 5 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -456,6 +476,10 @@ if firmaID = 6 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -526,6 +550,10 @@ if firmaID = 7 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -596,6 +624,10 @@ if firmaID = 8 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -666,6 +698,84 @@ if firmaID = 11 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
+end if
+
+
+if firmaID = 12 then
+	'## TEMEL TANIMLAR
+		sb_firmaAd =	"Polimek Teklif Uygulaması"
+		sb_url =	mainUrl
+		sb_logo = sb_mainUrlOnEk & mainUrl & "/template/images/polimek_logo.jpg"
+		sb_logoMini = sb_mainUrlOnEk & mainUrl & "/template/images/polimek_logo.jpg"
+		sb_logo128 = sb_mainUrlOnEk & mainUrl & "/template/images/polimek_logo.jpg"
+		sb_cdnUrl = sb_mainUrlOnEk & mainUrl & "/cdn"
+		sb_konum =	"Izmir"
+		sb_yetkiliPersonel = ""
+		sb_ssl = False
+		'## SERVİSLER
+			sb_activeuserUrl =	"/activeuser.asp"
+			sb_activeuserTime = 30
+		'## SERVİSLER
+	'## TEMEL TANIMLAR
+
+
+	'## YEDEKLEME
+		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
+		sb_sqlYedekCompress = True
+		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
+		sb_sqlYedekAlGun = 7
+		sb_sqlYedekSilGun = 30
+	'## YEDEKLEME
+
+
+	'## EMAIL
+		sb_mailserver = ""
+		sb_mailsender = ""
+		sb_mailsenderPass = ""
+		sb_mailsenderAd = ""
+	'## EMAIL
+
+
+	'## SSO
+		firmaSSO = ""
+		firmaSSOAdres = ""
+		firmaSSODomain = ""
+		firmaSSOLdap = ""
+		firmaSSOdb = ""
+	'## SSO
+
+
+	'#### STOK bilgieri dış db den çekilecekse
+		firmaStokDBvar = 0
+		firmaStokSunucu = ""
+		firmaStokDB = ""
+		firmaStokdbUSR = ""
+		firmaStokdbPass = ""
+	'#### STOK bilgieri dış db den çekilecekse
+
+
+	'#### CARİ bilgieri dış db den çekilecekse
+		firmaCariDBvar = 0
+		firmaCariSunucu = ""
+		firmaCariDB = ""
+		firmaCaridbUSR = ""
+		firmaCaridbPass = ""
+	'#### CARİ bilgieri dış db den çekilecekse
+
+
+	'#### MODULLER
+		sb_modul_gorevTakip = true
+		sb_modul_webmail = true
+		sb_modul_teklif = true
+	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -736,6 +846,10 @@ if firmaID = 9 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
@@ -806,6 +920,10 @@ if firmaID = 10 then
 		sb_modul_webmail = true
 		sb_modul_teklif = true
 	'#### MODULLER
+	'#### PERSONEL YETKİLER
+		sb_modul="Cari,Depo,Gelişmiş Teklif,Görev Takip,Kalite Kontrol,Kesimhane,Lojistik,Personel,Planlama,Raporlar,Reçete,Satın Alma,Satış,Sterilizasyon,Stok,Teklif,Toplu Mail,Üretim,ÜTS"
+		sb_moduller="Cari##Giriş Yapamaz=0,Yönetici=9|Depo##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Gelişmiş Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Görev Takip##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Görevi Silebilir=6,Bölüm Yöneticisi=7,Genel Yönetici=9|Kalite Kontrol##Giriş Yapamaz=0,Yönetici=9|Kesimhane##Giriş Yapamaz=0,Görüntüleyebilir=1,Kesim Başlatabilir=7,Yönetici=9|Lojistik##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Personel##Giriş Yapamaz=0,Personelleri Listeleyebilir=1,Yeni Personel Ekleyebilir=2,Personel Bilgilerini Düzenleyebilir=4,Personel Silebilir=6,Yetkileri Düzenleyebilir=7,Yönetici=9|Planlama##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=3,Onay Verebilir=6,Silebilir=8,Yönetici=9|Raporlar##Giriş Yapamaz=0,Görebilir=1,Yeni Rapor Ekleyebilir=4,Kendi Eklediği Raporu Düzenleyebilir=5,Tüm Raporları Düzenleyebilir=7,Silebilir=8,Yönetici=9|Reçete##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Satın Alma##Giriş Yapamaz=0,Talepleri Görebilir=1,Talep Oluşturabilir=2,Sipariş Açabilir=5,Yönetici=9|Satış##Giriş Yapamaz=0,Yönetici=9|Sterilizasyon##Giriş Yapamaz=0,Görüntüleyebilir=1,Sterilizasyon Başlatabilir=7,Yönetici=9|Stok##Giriş Yapamaz=0,Görebilir=1,Düzenleyebilir=5,Silebilir=8,Yönetici=9|Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9|Toplu Mail##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6|Üretim##Giriş Yapamaz=0,Görüntüleyebilir=1,Üretim Başlatabilir=7,Yönetici=9|ÜTS##Giriş Yapamaz=0,Yönetici=9"
+	'#### PERSONEL YETKİLER
 end if
 
 
