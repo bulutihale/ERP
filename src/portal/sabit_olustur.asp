@@ -223,5 +223,5 @@
 Response.Write now()
 
 
-Response.Redirect "/"
+' Response.Redirect "/"
 %>
