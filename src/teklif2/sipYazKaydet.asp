@@ -73,8 +73,8 @@
 <script>
 $.get('/teklif2/detay/<%=ihaleID64%>', function(data){
 											var $data = $(data);
-											$('#siparisInput').html($data.find('#siparisInput').html());
-											$('#siparisTablo').html($data.find('#siparisTablo').html());
+											$('#urunlerTablo').html($data.find('#urunlerTablo').html());
 								});//tablolar güncellendi
+			modalkapat();
 </script>
 

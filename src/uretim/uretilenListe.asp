@@ -86,7 +86,7 @@ Response.Write "<div class=""card-body"">"
 			'sorgu = sorgu & " AND (t1.bitisZaman is null OR (CONVERT(varchar,t1.bitisZaman,103) >= '" & tarihsql(t1) &"' AND CONVERT(varchar, t1.bitisZaman, 103) <= '" & tarihsql(t2) &"'))"
 			sorgu = sorgu & " AND (t1.bitisZaman is null OR (t1.bitisZaman >= '" & tarihsql(t1) &"' AND t1.bitisZaman <= '" & tarihsql(t2) &"'))"
 			sorgu = sorgu & " AND t1.silindi = 0"
-			sorgu = sorgu & " ORDER BY t1.bitisZaman DESC"
+			sorgu = sorgu & " ORDER BY DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) DESC"
 			rs.open sorgu, sbsv5, 1, 3
 
 			if rs.recordcount > 0 then

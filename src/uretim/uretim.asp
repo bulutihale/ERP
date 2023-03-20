@@ -47,7 +47,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 '###### ARAMA FORMU
 '###### ARAMA FORMU
-	if hata = "" and yetkiKontrol > 0 then
+	if hata = "" and yetkiKontrol > 2 then
 
 
 		Response.Write "<div class=""card"">"
@@ -148,7 +148,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Başlayacak Olan Süreç</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-3 bold default""  data-toggle=""tooltip"" title=""Tooltip on top"">Başlayacak Olan Süreç</div>"
 							Response.Write "<div class=""col-9"">"
 								call formselectv2("surecDepoID","","receteSec();","","formSelect2 depoSec border","","surecDepoID","","data-holderyazi=""Başlayacak olan süreç seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sartOzel=""t1.depoTuru =2""")
 							Response.Write "</div>"
@@ -157,7 +157,7 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<div class=""row mt-2"">"
 							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Teçhizat</div>"
 							Response.Write "<div class=""col-9"">"
-								call formselectv2("techizatSec","","","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
+								call formselectv2("techizatSec","","receteSec();","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						end if
@@ -507,11 +507,12 @@ yetkiKontrol = yetkibul(modulAd)
 		if(receteID == undefined){var receteID = $('#receteID').val();};
 		teminDepoID	=	$('#teminDepoID').val();
 		surecDepoID	=	$('#surecDepoID').val();
-
+		if($('#techizatID').length > 0){var techizatID = $('#techizatID').val();}else{var techizatID='yok'}; 
+		
 		if(teminDepoID == null){var teminDepoID = 0};
 		if(surecDepoID == null){var surecDepoID = 0};
+		if(techizatID == null){var techizatID = 0};
 
-			
 			if(receteID > 0){
 				$('#recetelerDIV').hide('slow');
 			}
@@ -519,16 +520,19 @@ yetkiKontrol = yetkibul(modulAd)
 				swal('','Temin Depo ve Reçete Seçimi Yapınız.')
 					}
 			else if(teminDepoID == 0){
-				$('#linklerDIV').html('<span class="bg-danger">Temin Depo Seçimi Yapınız.</span>');
+				$('#linklerDIV').html('<span class="bg-info rounded">Temin Depo Seçimi Yapınız.</span>');
 				return false;
 					}
 			else if(surecDepoID == 0){
-				$('#linklerDIV').html('<span class="bg-danger">Başlayacak olan süreç seçimi yapınız.</span>');
+				$('#linklerDIV').html('<span class="bg-warning rounded">Başlayacak olan süreç seçimi yapınız.</span>');
+				return false;
+					}
+			else if(techizatID == 0){
+				$('#linklerDIV').html('<span class="bg-success rounded">Kullanılacak teçhizat seçimi yapınız.</span>');
 				return false;
 					}
 			else if(receteID == 0){
-				//swal('','Reçete Seçimi Yapınız.')
-				$('#linklerDIV').html('<span class="bg-danger ">Reçete Seçimi Yapınız.</span>');
+				$('#linklerDIV').html('<span class="bg-danger rounded ">Reçete Seçimi Yapınız.</span>');
 				return false;
 					}
 			else{
@@ -557,6 +561,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 		teminDepoID		=	$('#teminDepoID').val();
 		secilenReceteID	=	$('#receteID').val();
+		techizatID		=	$('#techizatID').val();
 		if(islemDurum == 'islemBasla')
 			{var baslik = 'İşlem başlatılsın mı?'}
 		else
@@ -575,7 +580,7 @@ yetkiKontrol = yetkibul(modulAd)
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
-				$('#ajax').load('/uretim/uretimBaslat.asp', {ajandaID:ajandaID, siparisKalemID:siparisKalemID, islemDurum:islemDurum, uretilenMiktar:uretilenMiktar,teminDepoID:teminDepoID});
+				$('#ajax').load('/uretim/uretimBaslat.asp', {ajandaID:ajandaID, siparisKalemID:siparisKalemID, islemDurum:islemDurum, uretilenMiktar:uretilenMiktar,teminDepoID:teminDepoID,techizatID:techizatID});
 				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *');
 				$('#btnDIV').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV > *');
 				$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
@@ -623,7 +628,5 @@ yetkiKontrol = yetkibul(modulAd)
 		modalajax('/uretim/etiketSonUrun.asp?receteID='+receteID);
 
 	}
-
-
 
 </script>

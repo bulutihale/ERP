@@ -9,6 +9,8 @@
 '###### ANA TANIMLAMALAR
 
 	arananKelime		=	request.QueryString ("q")
+	arananKelime		=	TRIM(arananKelime)
+	arananKelime		=	replace(arananKelime,Chr(9),"")
 '##### şart ile gelen sorgu 
 '##### şart ile gelen sorgu 
 	sart			=	request.QueryString ("sart")

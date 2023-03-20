@@ -48,9 +48,9 @@ if yetkiKontrol  >= 3 then
 	'##### ANA VERİ ÇEK
 		sorgu = "Select i.id, i.ad, i.ikn, i.teslimatKosul, i.odemeKosul, i.tarih_ihale, i.firmaID, i.cariID, i.durum, i.sipDurum, i.grupIhale, i.ihaleTipi,"
 		sorgu = sorgu & " i.dosyaNo, i.dosyaSorumlu, i.odemeVade, i.teklifGecerlik, i.teslimatSure, i.yeniCariVergiNo, i.satirKDV, i.catKodGoster, i.mustKodGoster,"
-		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster,"
+		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster, i.epostaGovde,"
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
-		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar,"
+		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar, i.teklifEposta, i.epostaGovde,"
 		sorgu = sorgu & " CASE WHEN i.ihaleTipi = 'bayi' THEN f.teklifDosya WHEN i.ihaleTipi = 'proforma' THEN f.proformaDosya END as teklifSablon"
 		sorgu = sorgu & " FROM dosya.ihale i"
 		sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
@@ -103,7 +103,9 @@ if yetkiKontrol  >= 3 then
 			teklifKDV			=	rs("teklifKDV")
 			satirKDV			=	rs("satirKDV")
 			altTopGoster		=	rs("altTopGoster")
+			epostaGovde			=	rs("epostaGovde")
 			bankalar			=	rs("bankalar")
+			teklifEposta		=	rs("teklifEposta")
 			catKodGoster		=	rs("catKodGoster")
 			mustKodGoster		=	rs("mustKodGoster")
 			yeniCariVergiNo		=	rs("yeniCariVergiNo")
@@ -147,12 +149,13 @@ if yetkiKontrol  >= 3 then
 			if isnull(cariSec) then
 				DosyaCariAd	= "<code>Kayıtlı olmayan bir cariye teklif verilmiş.</code> "
 			else
-				sorgu = "Select c.cariID, cariAd, c.firmaID from cari.cari c WHERE c.firmaID = " & firmaID & " AND c.cariID = " & carisec
+				sorgu = "Select c.cariID, cariAd, c.firmaID, c.email FROM cari.cari c WHERE c.firmaID = " & firmaID & " AND c.cariID = " & carisec
 				rs.open sorgu,sbsv5,1,3
 				if rs("firmaID") <> firmasec then
 					DosyaCariAd = "<code>seçili cari bu firmaya ait değil!!Mutlaka tekrar seçilmeli.</code> "&rs("cariAd")
 				else
 					DosyaCariAd = rs("cariAd")
+					cariEmail	= rs("email")
 				end if
 				rs.close
 			end if
@@ -610,13 +613,17 @@ Response.Write "<div class=""card-body row"">"
 				uhde			=	rs("uhde")
 				sipTempID		=	rs("sipTempID")
 				sipKalemID		=	rs("sipKalemID")
+
 				if not isnull(sipTempID) then
-					sipClass = " bg-info "
+					sipClass 		=	" bg-info "
+					sipYaziliMsg	=	"Ürün, sipariş TEMP listesinde kayıtlı."
 				elseif not isnull(sipKalemID) then
 					sipClass = " bg-success "
+					sipYaziliMsg	=	"Ürün, sipariş olarak kayıt edilmiş."
 				else
-					sipClass = ""
+					sipClass 		=	""
 				end if
+
 	Response.Write "<tr>"
 		Response.Write "<td width=""5%"" class=""align-middle text-center "&sipClass&""">"
 		Response.Write "<div class=""row"">"
@@ -628,7 +635,17 @@ Response.Write "<div class=""card-body row"">"
 				end if
 			Response.Write "</div>"
 			Response.Write "<div class=""col"">"
-				Response.Write "<span class=""icon cart-put pointer"" onclick=""modalajax('/teklif2/sipYaz_modal.asp?iuID="&ihaleUrunID&"')""></span>"
+				Response.Write "<span class=""icon cart-put pointer"""
+				if yetkiKontrol > 8 then
+					if not isnull(sipTempID) OR not isnull(sipKalemID) then
+						Response.Write " onclick=""swal('" & sipYaziliMsg & "','','info')"""
+					else
+						Response.Write " onclick=""modalajax('/teklif2/sipYaz_modal.asp?iuID="&ihaleUrunID&"')"""
+					end if
+				else
+					Response.Write " onclick=""swal('sipariş yazmak için yetkiniz yok.','','error')"""
+				end if
+				Response.Write "></span>"
 			Response.Write "</div>"
 		Response.Write "</div>"
 		Response.Write "</td>"
@@ -664,7 +681,7 @@ Response.Write "<div class=""card-body row"">"
 			if stoklarID = 0 OR isnull(stoklarID) then
 				Response.Write "<i class=""fa fa-exclamation text-danger""> stok karşılığı seçilmemiş</i> <i class=""fa fa-exclamation text-danger""></i>"
 			else
-					Response.Write "<div class=""m-0 fontkucuk2 text-info"" onclick=""$('#kalemAd"&ihaleUrunID&"').val('" & rs("stoklarAD") & "');return false;"">"
+					Response.Write "<div class=""m-0 fontkucuk2 text-info"" onclick=""$('#kalemAd"&ihaleUrunID&"').val('" & rs("stoklarAD") & "');$('#kalemAd"&ihaleUrunID&"').trigger('change')"">"
 						Response.Write "<i class=""icon arrow-up pointer""></i>" & rs("stoklarAD")
 					Response.Write "</div>"
 				'Response.Write rs("stoklarAD")
@@ -672,7 +689,7 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "</em></span>"
 			'##### müşteriye ait stok kodu ve stok adı
 				if not isnull(cariUrunRef) then
-					Response.Write "<div class=""m-0 fontkucuk2 text-danger"" onclick=""$('#kalemAd"&ihaleUrunID&"').val('" & cariUrunRef & " - " & cariUrunAd & "')"">"
+					Response.Write "<div class=""m-0 fontkucuk2 text-danger"" onclick=""$('#kalemAd"&ihaleUrunID&"').val('" & cariUrunRef & " - " & cariUrunAd & "');$('#kalemAd"&ihaleUrunID&"').trigger('change')"">"
 						Response.Write "<i class=""icon arrow-up pointer""></i><span class=""bold"">Cari Ref: </span>" & cariUrunRef & " <-> " & cariUrunAd
 					Response.Write "</div>"
 				end if
@@ -868,6 +885,14 @@ Response.Write "<div class=""card text-center"">"
 			Response.Write "<li class=""nav-item"">"
 			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#kolonlar"" role=""tab"" aria-controls=""kolonlar"">Kolonlar</a>"
 			Response.Write "</li>"
+
+			Response.Write "<li class=""nav-item"">"
+			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#eposta"" role=""tab"" aria-controls=""eposta"">E-posta</a>"
+			Response.Write "</li>"
+
+			Response.Write "<li class=""nav-item"">"
+			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#sablon"" role=""tab"" aria-controls=""sablon"">PDF Şablon</a>"
+			Response.Write "</li>"
 			
 		Response.Write "</ul>"
 	Response.Write "</div>"
@@ -913,14 +938,6 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "</div>"						
 				Response.Write "</div>"
 
-				Response.Write "<div class=""row mt-2"">"
-					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('satirKdv','dosya.ihale',"&id&"," & satirKdvDurum & ")"" class=""chck30 form-control"" " & chckDurum6 & ">"
-					Response.Write "</div>"
-					Response.Write "<div class=""col-2 text-left"">"
-						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ürün satırında KDV oranı göster.</div>"
-					Response.Write "</div>"						
-				Response.Write "</div>"
 			Response.Write "</div>"
 		'######### ANTET - KAŞE
 		'######### ANTET - KAŞE
@@ -1100,27 +1117,90 @@ Response.Write "<div class=""card text-center"">"
 			Response.Write "<div class=""tab-pane"" id=""kolonlar"" role=""tabpanel"">"
 				'###### İHRACAT PROFORMA için SÜTUN AYARLARI
 				if ihaleTipi = "proforma" then
-				Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('catKodGoster','dosya.ihale',"&id&"," & catKodDurum & ");"" class="" chck30 form-control"" " & chckDurum7 & ">"
+					Response.Write "<div class=""row"">"
+						Response.Write "<div class=""col-1 text-left"">"
+							Response.Write "<input type=""checkbox"" oninput=""ajSave('catKodGoster','dosya.ihale',"&id&"," & catKodDurum & ");"" class="" chck30 form-control"" " & chckDurum7 & ">"
+						Response.Write "</div>"
+						Response.Write "<div class=""col-2 text-left"">"
+							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte katalog kodu sütunu göster.</div>"
+						Response.Write "</div>"	
 					Response.Write "</div>"
-					Response.Write "<div class=""col-2 text-left"">"
-						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte katalog kodu sütunu göster.</div>"
-					Response.Write "</div>"	
-				Response.Write "</div>"
-				Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('mustKodGoster','dosya.ihale',"&id&"," & mustKodDurum & ");"" class="" chck30 form-control"" " & chckDurum8 & ">"
+					Response.Write "<div class=""row"">"
+						Response.Write "<div class=""col-1 text-left"">"
+							Response.Write "<input type=""checkbox"" oninput=""ajSave('mustKodGoster','dosya.ihale',"&id&"," & mustKodDurum & ");"" class="" chck30 form-control"" " & chckDurum8 & ">"
+						Response.Write "</div>"
+						Response.Write "<div class=""col-2 text-left"">"
+							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte ""CUST. Code"" sütunu göster.</div>"
+						Response.Write "</div>"	
 					Response.Write "</div>"
-					Response.Write "<div class=""col-2 text-left"">"
-						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte ""CUST. Code"" sütunu göster.</div>"
-					Response.Write "</div>"	
-				Response.Write "</div>"
+				else
+					Response.Write "<div class=""row mt-2"">"
+						Response.Write "<div class=""col-1 text-left"">"
+							Response.Write "<input type=""checkbox"" oninput=""ajSave('satirKdv','dosya.ihale',"&id&"," & satirKdvDurum & ")"" class=""chck30 form-control"" " & chckDurum6 & ">"
+						Response.Write "</div>"
+						Response.Write "<div class=""col-2 text-left"">"
+							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ürün satırında KDV oranı kolonunu göster.</div>"
+						Response.Write "</div>"						
+					Response.Write "</div>"
 				end if
 				'###### İHRACAT PROFORMA için SÜTUN AYARLARI
 			Response.Write "</div>"
 		'######### KOLONLAR
 		'######### KOLONLAR
+		
+		'######### e-posta
+		'######### e-posta
+			Response.Write "<div class=""tab-pane"" id=""eposta"" role=""tabpanel"">"
+				Response.Write "<div class=""row mt-2"">"
+					Response.Write "<div class=""input-group mb-3"">"
+						Response.Write "<div class=""input-group-prepend"">"
+							Response.Write "<span class=""input-group-text pointer p-0""><i class=""icon email-go""></i></span>"
+						Response.Write "</div>"
+						if isnull(teklifEposta) OR teklifEposta = "" then teklifEposta = cariEmail
+							Response.Write "<input id=""epostaAdres"" onchange=""ajSave('teklifEposta','dosya.ihale',"&id&",$(this).val())"" class=""form-control col-12"" value="""&teklifEposta&""" autocomplete=""off""  placeholder=""e-posta adresi"" data-toggle=""tooltip"" title=""Teklif için kayıt edilmiş e-posta adresi yok ise cari kartta kayıtlı olan e-posta adresi otomatik olarak getirilir."">"
+					Response.Write "</div>"
+				Response.Write "</div>"
+
+				Response.Write "<div class=""row mt-2"">"
+					Response.Write "<div class=""badge badge-secondary rounded-left"">e-posta içeriği</div>"
+				Response.Write "</div>"
+				Response.Write "<div class=""row"">"
+					Response.Write "<div id=""cariBilgi"" style=""height:120px; padding:10px;"" class=""col-8 border border-dark text-left"" contenteditable=""true"" onblur=""ajSaveBlur('epostaGovde', "&id&", 'dosya.ihale', 'epostaGovde', '', $(this).html(),'','','')"" >" & epostaGovde & "</div>"
+				Response.Write "</div>"
+
+			Response.Write "</div>"
+		'######### /e-posta
+		'######### /e-posta
+
+		'######### ŞABLON
+		'######### ŞABLON
+			Response.Write "<div class=""tab-pane"" id=""sablon"" role=""tabpanel"">"
+				Set fso = CreateObject("Scripting.FileSystemObject")
+				Set objFolder = FSO.GetFolder(Server.Mappath("/teklifSablon"))
+				Set objFiles = objFolder.Files
+
+				Response.Write "<select class=""form-control border border-danger"" onChange=""ajSave('pdfSablon','dosya.ihale',"&id&",$(this).val())"">"
+
+					For each z in objFiles
+						dosyaAd = z.name
+						dosyaAd = LEFT(dosyaAd, (LEN(dosyaAd)-4))
+						Response.Write "<option value=""" & dosyaAd & """>" & dosyaAd & "</option>"
+					next
+				Response.Write "</select>"
+				Set objFiles = Nothing
+				Set objFolder = Nothing
+				Set fso = Nothing
+				Response.Write "<select class=""form-control border border-warning mt-4"" onChange=""ajSave('landscapeDeger','dosya.ihale',"&id&",$(this).val())"">"
+
+						Response.Write "<option value=""0"">Dikey</option>"
+						Response.Write "<option value=""1"">Yatay</option>"
+
+				Response.Write "</select>"
+				
+			Response.Write "</div>"
+		'######### /ŞABLON
+		'######### /ŞABLON
+
 		Response.Write "</div>"
 	Response.Write "</div>"
 Response.Write "</div>"
@@ -1205,6 +1285,7 @@ function ajSave(alan, tablo, tabloID, deger){
 			}
     });
     };
+
 
 function cokluIDkaydet(alan, tablo, tabloID, deger){
 

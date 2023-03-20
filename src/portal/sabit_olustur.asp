@@ -155,11 +155,49 @@
 
 
         objStream.WriteText vbtab & "'#### MODULLER" & vbcrlf
-        objStream.WriteText vbtab & vbtab & "sb_modul_gorevTakip = true" & vbcrlf
-        objStream.WriteText vbtab & vbtab & "sb_modul_webmail = true" & vbcrlf
-        objStream.WriteText vbtab & vbtab & "sb_modul_teklif = true" & vbcrlf
+        objStream.WriteText vbtab & vbtab & "sb_modul_gorevTakip = true" & vbcrlf       'bu iptal olmuş olabilir. kontrol et
+        objStream.WriteText vbtab & vbtab & "sb_modul_webmail = true" & vbcrlf          'bu iptal olmuş olabilir. kontrol et
+        objStream.WriteText vbtab & vbtab & "sb_modul_teklif = true" & vbcrlf           'bu iptal olmuş olabilir. kontrol et
         objStream.WriteText vbtab & "'#### MODULLER" & vbcrlf
         ' objStream.WriteText vbcrlf & vbcrlf
+
+
+
+        objStream.WriteText vbtab & "'#### PERSONEL YETKİLER" & vbcrlf
+            ' sorgu = "SELECT distinct modulAd + ',' FROM portal.moduller FOR XML PATH('')"
+            sorgu = "select replace(replace( STUFF((SELECT distinct modulAd + ',' FROM portal.moduller FOR XML PATH('')), 1, 0, '') ,'<yetkiParametre>',''),'</yetkiParametre>','') [yetkiler]"
+            rs1.open sorgu, sbsv5, 1, 3
+                moduladlari = rs1(0)
+                moduladlari2 = len(moduladlari)
+                moduladlari3 = left(moduladlari,moduladlari2-1)
+                objStream.WriteText vbtab & vbtab & "sb_modul=""" & moduladlari3 & """" & vbcrlf
+            rs1.close
+            sorgu = "Select * from portal.moduller order by modulAd ASC,yetki ASC"
+            rs1.open sorgu, sbsv5, 1, 3
+            if rs1.recordcount > 0 then
+                sonmodulad = ""
+                modulSatir = ""
+                    for dii = 1 to rs1.recordcount
+                        if sonmodulad <> rs1("modulAd") then
+                            if sonmodulad = "" then
+                                modulSatir = modulSatir & rs1("modulAd") & "##"
+                            else
+                                modulSatir = modulSatir & "|" & rs1("modulAd") & "##"
+                            end if
+                        else
+                            modulSatir = modulSatir & ","
+                        end if
+                        modulSatir = modulSatir & rs1("yetkiAd") & "=" & rs1("yetki")
+                        sonmodulad = rs1("modulAd")
+                    rs1.movenext
+                    next
+                    objStream.WriteText vbtab & vbtab & "sb_moduller=""" & modulSatir & """" & vbcrlf
+            end if
+            rs1.close
+        objStream.WriteText vbtab & "'#### PERSONEL YETKİLER" & vbcrlf
+
+
+
 
 
         objStream.WriteText "end if" & vbcrlf
@@ -179,6 +217,7 @@
 	objStream.Close
 	set objStream = Nothing
 '#### olayı kapat ve dosyaya kaydet
+
 
 
 Response.Write now()

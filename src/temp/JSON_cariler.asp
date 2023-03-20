@@ -12,7 +12,8 @@
 '##### ajax ile gelen sorgu 
 '##### ajax ile gelen sorgu 
 	arananKelime		=	request.QueryString ("q")
-	arananKelime		=	trim(trim(arananKelime))
+	arananKelime		=	TRIM(arananKelime)
+	arananKelime		=	replace(arananKelime,Chr(9),"")
 '##### /ajax ile gelen sorgu 
 '##### /ajax ile gelen sorgu 
 

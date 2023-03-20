@@ -122,11 +122,8 @@ Response.Write "</table>"
 Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">"
 	Response.Write "<tr>"
 		Response.Write "<td style=""width:50%;"" class=""b-all"">"
-			Response.Write "<div style=""height:120px; padding:10px;"""
-				Response.Write " data-tabloid=""" & id & """"
-				Response.Write " data-tablo=""ihale"""
-				Response.Write " data-alan=""yeniCariAd"""
-			Response.Write " contenteditable=""true"" class=""ajSaveBlur"">" & teklifCariAD & "</div>"
+			Response.Write "<div id=""cariBilgi"" style=""height:120px; padding:10px;"""
+			Response.Write " contenteditable=""true"" onblur=""ajSaveBlur('cariBilgi', "&id&", 'dosya.ihale', 'yeniCariAd', '', $(this).html(),'','','')"" >" & teklifCariAD & "</div>"
 		Response.Write "</td>"
 		Response.Write "<td style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;"">"
 		Response.Write "<b>Tarih: </b>"&formatdatetime(tarih_ihale,2) & "<br>"
@@ -138,13 +135,25 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 		'Response.Write ikn&" "&ihaleAD
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:right;"">"
-		if fiyatOnay = "OK" then
-			Response.Write "<a class=""text-left"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
-			Response.Write "&nbsp;&nbsp;&nbsp;&nbsp;"
-			Response.Write "<a class=""text-left"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailVar""><i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i></a>"
-			Response.Write "&nbsp;&nbsp;"
-		end if
-		Response.Write "Rev."&teklifRevNo
+
+		Response.Write "<div class=""row text-right"">"
+			if fiyatOnay = "OK" then
+				Response.Write "<div class=""col-10"">"
+					Response.Write "<a class=""text-left pointer"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
+				Response.Write "</div>"
+				Response.Write "<div class=""col-1"">"
+				'Response.Write "&nbsp;&nbsp;&nbsp;&nbsp;"
+				'Response.Write "<a class=""text-left"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailVar""><i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i></a>"
+					Response.Write "<div id=""teklifMailGonder"" class=""text-left pointer"" onclick=""teklifPDFmail('"&id64&"','mailVar',$(this).attr('id'))"">"
+						Response.Write "<i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i>"
+					Response.Write "</div>"
+				Response.Write "</div>"
+				'Response.Write "&nbsp;&nbsp;"
+			end if
+				Response.Write "<div class=""col-1"">"
+					Response.Write "Rev."&teklifRevNo
+				Response.Write "</div>"
+		Response.Write "</div>"
 		Response.Write "</td>"
 	Response.Write "</tr>"
 Response.Write "</table>"
@@ -517,59 +526,6 @@ Response.Write "</page>"
 
 
 %>
-<script>
-	$(document).ready(function() {
-		// "ajSaveBlur" contenteditable div leri değiştirmek için "blur" ile tetiklenen ajSave
-			
-			$('.ajSaveBlur').off().on('blur',function() {
-						event.preventDefault();
-				var inputID		=	$(this).attr('id');
-				var tabloID		=	$(this).attr('data-tabloid');
-				var tablo		=	$(this).attr('data-tablo');
-				var alan		=	$(this).attr('data-alan');
-				var updateDosya	=	$('#divSabitBilgilerForm').attr('data-updatedosya');
-				var deger		=	$(this).val();
-				
-				if (deger == ''){
-					var deger = $(this).html();
-
-				}
-				
-			$.ajax({
-				type:'POST',
-				url :'/teklif2/hucre_kaydet.asp',
-				data :{'alan':alan,'id':tabloID,'tablo':tablo,'deger':deger,
-							},
-				beforeSend: function() {
-
-					//$(this).parent().html("<img src='image/working2.gif' width='20' height='20'/>");
-				  },
-						success: function(sonuc) {
-								//alert(sonuc);
-								sonucc = sonuc.split('|');
-								p_sonuc = sonucc[0];
-								
-								if(p_sonuc == "ok"){
-									toastr.options.positionClass = 'toast-bottom-right';
-									toastr.success('Değişiklik kayıt edildi.','İşlem Yapıldı!');
-									
-									$.post('/teklif2/'+updateDosya+'.asp',{ukfdID:tabloID}, function(data){
-										var $data = $(data);
-										$('#'+inputID).parent().html($data.find('#'+inputID).parent().html());
-									});
-									
-								}
-								else{
-									toastr.options.positionClass = 'toast-bottom-right';
-									toastr.error('Kayıt yapılmadı.','İşlem Başarısız!');
-								};
-					}
-			});
-			});
-		// contenteditable div leri değiştirmek için "blur" ile tetiklenen ajSave
-
-	});
-</script>
 
 
 

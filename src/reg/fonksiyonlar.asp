@@ -4753,8 +4753,190 @@ function dovizBulTarih(byVal birim, byVal tarih)
 		dovizBulTarih	=	birimKur
 end function
 
+'################## mail gonder CDO kullan
+	function mailGonderCDO(byVal mailBaslik, byVal mailicerik, byVal dosyaAdres, byVal CDOalicilar)
+		kid		=	kidbul()
+		sorgu = "SELECT t1.gonderenAd, t1.gonderenAdres, t1.gonderenAdresSifre, t1.smtpAdres, t1.smtpPort, t1.smtpSSL FROM toplumail.mailAccount t1 WHERE kid = " & kid 
+		fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount = 0 then
+				Response.Write "<script>$(document).ready(alert('Kullanıcıya ait e-posta tanımlamaları mevcut değil, e-posta gönderilemedi.'));</script>"
+				Response.End()
+			else
+				mg_gonderenAd 			= fn1("gonderenAd")
+				mg_gonderenAdres		= fn1("gonderenAdres")
+				mg_gonderenAdresSifre	= fn1("gonderenAdresSifre")
+				mg_smtpAdres 			= fn1("smtpAdres")
+				mg_smtpPort 			= fn1("smtpPort")
+				mg_smtpSSL 				= fn1("smtpSSL")
+			end if
+		fn1.close
 
 
+		Set objMail = Server.CreateObject("CDO.Message")
+		Set objConfig = CreateObject("CDO.Configuration")
+
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserver") 			=	mg_smtpAdres
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpserverport") 		=	mg_smtpPort
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusing")    		=	2
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") 	=	1
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      		=	mg_smtpSSL 
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    		=	mg_gonderenAdres
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")			=	"sgxuewlv12!!@3"
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout")=	60
+
+		objConfig.Fields.Update
+
+		Set objMail.Configuration = objConfig
+
+		objMail.From     = mg_gonderenAdres
+		'objMail.To       = "info@bulutihale.com"
+		objMail.To       = CDOalicilar
+
+		objMail.Subject  = mailBaslik
+		objMail.AddAttachment dosyaAdres
+		objMail.TextBody = "Test EMAIL"
+		objMail.HTMLBody = mailicerik
+
+		objMail.Send
+		Set objMail = Nothing
+
+	end function
+
+
+'################## //mail gonder CDO kullan
+
+
+function mailGonder2(byVal mailTipNo, byVal mailBaslik, byval mailicerik, byval dosyaAdres, byval mailCariGonder, byval cariID, byval ihaleID, byVal aliciAdres)
+
+	'mailTipNo 		= 	mail_gonderimTip tablosundaki fonksiyonu çağıran sayfaya göre değişen değer. Kullanıcı tablosunda bu değer olan kullanıcılara mail gönder
+	'mailBaslik		=	fonksiyonu çağıran sayfada tanımlanan mail başlığı.
+	'mailicerik		=	fonksiyonu çağıran sayfada oluşturulan mail içeriği.
+	'dosyaAdres		=	maile dosya eklenecek ise dosyanın adresi, çağıran sayfada tanımlanır.
+	'mailCariGonder	=	oluşturulan mail, adına oluşturulan cari hesaba da gönderilsin mi? Gönderilecek ise "evet" değeri gönderilmeyecekse "" değeri gelir.
+	'cariID			=	mail gönderilecek cariID gelsin, diğer carilere mail gitmesin sadece ilgili cariye mail gönderilsin.
+	'ihaleID		=	ihale tablosu id değeri
+	'aliciAdres		=	alıcı adresinin veritabanından okunmayıp direk olarak fonksiyona gönderilebilmesi için. tekil adres veya dizi olabilir.
+	
+	CDOalicilar = ""
+	
+	sorgu = "SELECT mailsender as raporGonderenMail, mailserver as SMTPserver, mailsenderPass as SMTPsifre FROM portal.firma WHERE id = " & firmaID
+	fn2.open sorgu,sbsv5,1,3
+		raporGonderenMail	=	fn2("raporGonderenMail")
+		SMTPserver			=	fn2("SMTPserver")
+		SMTPsifre			=	fn2("SMTPsifre")
+	fn2.close
+	
+	
+		Set JMail = Server.CreateObject("Jmail.Message")
+'JMail.ContentType			=	"text/html"
+		JMail.Encoding 				=	"base64"
+		JMail.Charset				=	"ISO-8859-9"
+		JMail.MimeVersion 			= 	"1.0"
+		JMail.From					=	raporGonderenMail
+		JMail.FromName				=	"Bulut İhale Bilgi"
+	
+	'############## ALICILARI BELİRLE.
+	'############## ALICILARI BELİRLE.
+	
+	
+		'#### dosya sorumlusu gönderilen e-postaya dahil ediliyor.
+			if id > 0 then
+				sorgu = "SELECT k.email FROM dosya.ihale i INNER JOIN personel.personel k ON i.dosyaSorumlu = k.id WHERE i.id = " & id
+				fn2.open sorgu,sbsv5,1,3
+					if fn2.recordcount > 0 then
+						email = fn2("email")
+						JMail.AddRecipientCC "" & email & ""
+						CDOalicilar	=	";" & CDOalicilar & ";" & email
+					end if
+				fn2.close
+				email = ""
+			end if
+		'#### /dosya sorumlusu gönderilen e-postaya dahil ediliyor.
+		
+		'###### kullanicilar tablosunda mailTip alanına göre maili alması gerekenler dahil ediliyor.
+			if mailTipNo = "" then
+				sorgu = "SELECT email FROM personel.personel WHERE id = " & kid
+				fn2.open sorgu,sbsv5,1,3
+					if fn2.recordcount > 0 then
+						email = fn2("email")
+						JMail.AddRecipientCC "" & email & ""
+						CDOalicilar	=	";" & CDOalicilar & ";" & email
+					end if
+				fn2.close
+				email = ""
+			else
+				sorgu = "SELECT mail_gonderimTip, email FROM kullanicilar WHERE CHARINDEX('" & mailTipNo & "',mail_gonderimTip) > 0 AND musteriID = " & musteriID
+				fn2.open sorgu,sbsv5,1,3
+					if fn2.recordcount > 0 then
+						for i = 1 to fn2.recordcount
+							email = fn2("email")
+							JMail.AddRecipientCC "" & email & ""
+							CDOalicilar	=	";" & CDOalicilar & ";" & email
+						fn2.movenext
+						next
+					else
+						response.Write "<script>$(document).ready(function() {toastr.options.positionClass = 'toast-bottom-right';toastr.danger('Mail adresi tanımlı değil!','Mail Gönderilemedi!');});</script>"
+					end if
+				fn2.close
+				email = ""
+			end if
+		'###### /kullanicilar tablosunda mailTip alanına göre maili alması gerekenler dahil ediliyor.
+		
+		'###### fonksiyonun çağırıldığı sayfadan girişi yapılmış olan mail adres(ler)i alma listesine dahil ediliyor.
+			if len(aliciAdres) > 0 then
+				CDOalicilar	=	";" & CDOalicilar & ";" & aliciAdres
+				mailListeB	=	split(aliciAdres,";")
+					
+				for x = 0 to ubound(mailListeB)
+					JMail.AddRecipient "" & mailListeB(x) & ""
+				next
+			end if
+		'###### /fonksiyonun çağırıldığı sayfadan girişi yapılmış olan mail adresi/leri alma listesine dahil ediliyor.
+		
+			' if mailCariGonder = "evet" then
+				' sorgu = "SELECT email FROM cariler WHERE musteriID = " & musteriID & " AND id = " & cariID
+				' fn2.open sorgu,sbsv5,1,3
+
+					' mailListe = fn2("email")
+					
+					' CDOalicilar	=	";" & CDOalicilar & ";" & mailListe
+					
+					' mailListeA	=	split(mailListe,";")
+					
+					' for x = 0 to ubound(mailListeA)
+						' JMail.AddRecipient "" & mailListeA(x) & ""
+					' next
+				' fn2.close
+			' end if
+	'############## /ALICILARI BELİRLE.
+	'############## /ALICILARI BELİRLE.
+
+		if len(trim(dosyaAdres)) > 0 then
+			JMail.AddAttachment				(dosyaAdres)
+		end if
+		
+	'JMail.AddRecipientCC			"info@bulutihale.com"
+		JMail.Subject				=	mailBaslik
+	'JMail.Body						=	"deneme içerik"
+		JMail.HTMLBody				=	mailicerik
+		JMail.Priority				=	3
+		JMail.MailServerUserName 	= 	raporGonderenMail
+		JMail.MailServerPassword 	= 	SMTPsifre
+		
+		
+		if mailCariGonder = "evet" then
+			call mailGonderCDO(mailBaslik, mailicerik, dosyaAdres, CDOalicilar)
+		else
+			JMail.Send						(SMTPserver)
+		end if
+
+		
+		
+		set JMail = Nothing
+	
+	response.write "ok|"
+	
+end function
 
 
 

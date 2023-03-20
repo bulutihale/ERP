@@ -12,6 +12,8 @@
 '##### ajax ile gelen sorgu 
 '##### ajax ile gelen sorgu 
 	arananKelime		=	request.QueryString ("q")
+	arananKelime		=	TRIM(arananKelime)
+	arananKelime		=	replace(arananKelime,Chr(9),"")
 	sart				=	request.QueryString ("sart")
 
 '	arananKelime 		=	Replace(arananKelime,"Ş","þ")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için

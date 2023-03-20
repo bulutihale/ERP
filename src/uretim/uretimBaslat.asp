@@ -11,7 +11,7 @@
 	uretilenMiktar			=	Request.Form("uretilenMiktar")
 	teminDepoID				=	Request.Form("teminDepoID")
 	uretilenUrunGirisDepoID	=	Request.Form("uretilenUrunGirisDepoID")
-
+	techizatID				=	Request.Form("techizatID")
 	modulAd =   "Üretim"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -23,6 +23,11 @@ Response.Flush()
 if ajandaID = "" then
 	hata = 1
 end if
+
+if techizatID = "" then
+	techizatID = 0
+end if
+
 yetkiKontrol = yetkibul(modulAd)
 
 '###### ARAMA FORMU
@@ -33,6 +38,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 	if islemDurum = "islemBasla" then
 
+
 		sorgu = "SELECT icerik, isTur FROM portal.ajanda WHERE id = " & ajandaID
 		rs.open sorgu,sbsv5,1,3
 			call logla("Üretim başlat: " & rs("icerik"))
@@ -40,7 +46,7 @@ yetkiKontrol = yetkibul(modulAd)
 		rs.close
 
 
-			sorgu = "UPDATE stok.stokHareket SET stokHareketTipi = 'U' WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & " AND stokHareketTuru = 'G' AND silindi = 0"
+			sorgu = "UPDATE stok.stokHareket SET stokHareketTipi = 'U', techizatID = " & techizatID & " WHERE siparisKalemID = " & siparisKalemID & " AND ajandaID = " & ajandaID & " AND stokHareketTuru = 'G' AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
 
 			sorgu = "UPDATE portal.ajanda SET baslangicZaman = getdate() WHERE id = " & ajandaID & " AND silindi = 0"

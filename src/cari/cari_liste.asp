@@ -183,7 +183,6 @@ call logla("Cari Listesi Ekranı")
 
 
 $( document ).ready(function() {
-alert();
 $(".demo").qrcode({
 
    text:'https://www.jqueryscript.net',

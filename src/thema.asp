@@ -61,7 +61,6 @@
 
 
 '###### ADC ÜZERİNDEN OTOMATİK LOGON
-'###### ADC ÜZERİNDEN OTOMATİK LOGON
 	if firmaSSO = "ADC" then
 		if kid = "" then
 			sorgu = "Select top 1 username from personel.clientData where (ip like '192.168.%' or ip like '10.%') and (username not like 'C:\%') and ip = '" & Request.ServerVariables("Remote_Addr") & "' and tarih > '" & tarihsql(date()) & "' order by clientDataLogID DESC"
@@ -131,7 +130,6 @@
 
 
 '###### ADC ÜZERİNDEN OTOMATİK LOGON
-'###### ADC ÜZERİNDEN OTOMATİK LOGON
 
 
 
@@ -142,31 +140,32 @@
 
 '#### YETKİ İŞLERİ
 '#### YETKİ İŞLERİ
-if kid <> "" then
-	sorgu = "SELECT" & vbcrlf
-	sorgu = sorgu & "replace(" & vbcrlf
-	sorgu = sorgu & "replace(" & vbcrlf
-	sorgu = sorgu & "STUFF((SELECT '|' + yetkiAd FROM personel.personel_yetki where personel.personel_yetki.yetkiParametre > 0 and personel.personel_yetki.kid = " & kid & " and yetkiParametre > 0 FOR XML PATH('')), 1, 1, '')" & vbcrlf
-	sorgu = sorgu & ",'<yetkiParametre>','')" & vbcrlf
-	sorgu = sorgu & ",'</yetkiParametre>','')" & vbcrlf
-	sorgu = sorgu & "[yetkiler]" & vbcrlf
-	rs.open sorgu, sbsv5, 1, 3
-	if not rs.eof then
-		yetkiler = rs(0)
-	end if
-	rs.close
-	kyearr = yetkiler
-	kyearr = Split(kyearr,"|")
-	yetkisorgu = " ("
-	for ki = 0 to ubound(kyearr)
-		yetkisorgu = yetkisorgu & " yetkigrup = '" & kyearr(ki) & "'" & vbcrlf
-		if ubound(kyearr) > ki then
-			yetkisorgu = yetkisorgu &  " or " & vbcrlf
-		end if
-	next
-	set kyearr = Nothing
-	yetkisorgu = yetkisorgu & " or yetkigrup is null )"
-end if
+' if kid <> "" then
+' 	sorgu = "SELECT" & vbcrlf
+' 	sorgu = sorgu & "replace(" & vbcrlf
+' 	sorgu = sorgu & "replace(" & vbcrlf
+' 	sorgu = sorgu & "STUFF((SELECT '|' + yetkiAd FROM personel.personel_yetki where personel.personel_yetki.yetkiParametre > 0 and personel.personel_yetki.kid = " & kid & " and yetkiParametre > 0 FOR XML PATH('')), 1, 1, '')" & vbcrlf
+' 	sorgu = sorgu & ",'<yetkiParametre>','')" & vbcrlf
+' 	sorgu = sorgu & ",'</yetkiParametre>','')" & vbcrlf
+' 	sorgu = sorgu & "[yetkiler]" & vbcrlf
+' Response.Write sorgu
+' 	rs.open sorgu, sbsv5, 1, 3
+' 	if not rs.eof then
+' 		yetkiler = rs(0)
+' 	end if
+' 	rs.close
+' 	kyearr = yetkiler
+' 	kyearr = Split(kyearr,"|")
+' 	yetkisorgu = " ("
+' 	for ki = 0 to ubound(kyearr)
+' 		yetkisorgu = yetkisorgu & " yetkigrup = '" & kyearr(ki) & "'" & vbcrlf
+' 		if ubound(kyearr) > ki then
+' 			yetkisorgu = yetkisorgu &  " or " & vbcrlf
+' 		end if
+' 	next
+' 	set kyearr = Nothing
+' 	yetkisorgu = yetkisorgu & " or yetkigrup is null )"
+' end if
 '#### YETKİ İŞLERİ
 '#### YETKİ İŞLERİ
 
@@ -369,7 +368,15 @@ if kid <> "" then
 				else
 					sorgu = sorgu & "ad_en as ad"
 				end if
-				sorgu = sorgu & ",link,icon,target from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') and menuYeri = 'TopRight' order by sira asc"
+				sorgu = sorgu & ",link,icon,target" & vbcrlf
+				sorgu = sorgu & "from portal.menuler" & vbcrlf
+				sorgu = sorgu & "left join personel.personel_yetki on personel.personel_yetki.yetkiAd = portal.menuler.yetkigrup and kid = " & kid & vbcrlf
+				sorgu = sorgu & "where " & vbcrlf
+				sorgu = sorgu & "(firmaID = 0 or firmaID = " & firmaID & ")" & vbcrlf
+				sorgu = sorgu & "and ustID = '0'" & vbcrlf
+				sorgu = sorgu & "and (yetkigrup is null or personel.personel_yetki.yetkiParametre > 0)" & vbcrlf
+				sorgu = sorgu & "and menuYeri = 'TopRight'" & vbcrlf
+				sorgu = sorgu & "order by sira asc" & vbcrlf
 				rs.open sorgu, sbsv5, 1, 3
 					for ri = 1 to rs.recordcount
 						ad		=	rs("ad")
@@ -402,6 +409,18 @@ if kid <> "" then
 								Response.Write """></i>"
 								Response.Write "</a>"
 								Response.Write "</li>"
+							elseif target = "modalajaxfit" then
+								Response.Write "<li class=""nav-item dropdown mr-1"">"
+								Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajaxfit('/" & link & "')"">"
+								Response.Write "<i class=""" & icon & """ title="""
+								if klang = "tr" then
+									Response.Write ad
+								else
+									Response.Write ad_en
+								end if
+								Response.Write """></i>"
+								Response.Write "</a>"
+								Response.Write "</li>"
 							end if
 						end if
 					rs.movenext
@@ -412,34 +431,34 @@ if kid <> "" then
 
 			'## GÖREV
 			'## GÖREV
-				if sb_modul_gorevTakip = true then
-					Response.Write "<li class=""nav-item dropdown mr-1"">"
-					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajaxfit('/it/arizaYeni_ajax.asp')"">"
-					Response.Write "<i class=""mdi mdi-calendar-plus mx-0"" title=""Hızlı Görev Ekle""></i>"
-					Response.Write "</a>"
-					Response.Write "</li>"
-				end if
+				' if sb_modul_gorevTakip = true then
+				' 	Response.Write "<li class=""nav-item dropdown mr-1"">"
+				' 	Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" onClick=""modalajaxfit('/it/arizaYeni_ajax.asp')"">"
+				' 	Response.Write "<i class=""mdi mdi-calendar-plus mx-0"" title=""Hızlı Görev Ekle""></i>"
+				' 	Response.Write "</a>"
+				' 	Response.Write "</li>"
+				' end if
 			'## GÖREV
 			'## GÖREV
 
 			'## TEKLİF
 			'## TEKLİF
-				if sb_modul_teklif = true then
-					yetkiTeklif = yetkibul("Teklif")
-					if yetkiTeklif >= 3 then
-						Response.Write "<li class=""nav-item dropdown mr-1"">"
-						Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"">"
-						' Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""modalajaxfit('/teklif/teklif_yeni_modal.asp')""></i>"
-						Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""document.location = '/teklif/teklif_yeni_modal'""></i>"
-						' Response.Write "<i class=""icon basket-add parmak"" title=""Yeni Teklif Oluştur"" onClick=""document.location = '/teklif/teklif_yeni_modal'""></i>"
-						' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
-						if yetkiTeklif >= 5 then
-							Response.Write "<div class=""badge badge-pill badge-warning"" onClick=""modalajaxfit('/teklif/teklif_onay_modal.asp')""><span class=""teklifOnaySayi"">0</span></div>"
-						end if
-						Response.Write "</a>"
-						Response.Write "</li>"
-					end if
-				end if
+				' if sb_modul_teklif = true then
+				' 	yetkiTeklif = yetkibul("Teklif")
+				' 	if yetkiTeklif >= 3 then
+				' 		Response.Write "<li class=""nav-item dropdown mr-1"">"
+				' 		Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"">"
+				' 		' Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""modalajaxfit('/teklif/teklif_yeni_modal.asp')""></i>"
+				' 		Response.Write "<i class=""mdi mdi-basket-unfill"" title=""Yeni Teklif Oluştur"" onClick=""document.location = '/teklif/teklif_yeni_modal'""></i>"
+				' 		' Response.Write "<i class=""icon basket-add parmak"" title=""Yeni Teklif Oluştur"" onClick=""document.location = '/teklif/teklif_yeni_modal'""></i>"
+				' 		' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
+				' 		if yetkiTeklif >= 5 then
+				' 			Response.Write "<div class=""badge badge-pill badge-warning"" onClick=""modalajaxfit('/teklif/teklif_onay_modal.asp')""><span class=""teklifOnaySayi"">0</span></div>"
+				' 		end if
+				' 		Response.Write "</a>"
+				' 		Response.Write "</li>"
+				' 	end if
+				' end if
 			'## TEKLİF
 			'## TEKLİF
 
@@ -542,7 +561,15 @@ if kid <> "" then
 				else
 					sorgu = sorgu & "ad_en as ad"
 				end if
-				sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = '0' and " & yetkisorgu & " and (panelKullanimTuru in ('" & sb_panelKullanimTuru & "','All') or panelKullanimTuru is null) and menuYeri is null order by sira asc"
+				sorgu = sorgu & ",link,icon,target,yetkigrup" & vbcrlf
+				sorgu = sorgu & "from portal.menuler" & vbcrlf
+				sorgu = sorgu & "left join personel.personel_yetki on personel.personel_yetki.yetkiAd = portal.menuler.yetkigrup and kid = " & kid & vbcrlf
+				sorgu = sorgu & "where " & vbcrlf
+				sorgu = sorgu & "(firmaID = 0 or firmaID = " & firmaID & ")" & vbcrlf
+				sorgu = sorgu & "and ustID = '0'" & vbcrlf
+				sorgu = sorgu & "and (yetkigrup is null or personel.personel_yetki.yetkiParametre > 0)" & vbcrlf
+				sorgu = sorgu & "and menuYeri is null" & vbcrlf
+				sorgu = sorgu & "order by sira asc" & vbcrlf
 				rs.open sorgu, sbsv5, 1, 3
 					for ri = 1 to rs.recordcount
 						ad		=	rs("ad")
@@ -600,7 +627,15 @@ if kid <> "" then
 							else
 								sorgu = sorgu & "ad_en as ad"
 							end if
-							sorgu = sorgu & ",link,icon,target,yetkigrup from portal.menuler where (firmaID = 0 or firmaID = " & firmaID & ") and ustID = " & rs("ID") & " and " & yetkisorgu & " order by sira asc"
+							sorgu = sorgu & ",link,icon,target,yetkigrup" & vbcrlf
+							sorgu = sorgu & "from portal.menuler" & vbcrlf
+							sorgu = sorgu & "left join personel.personel_yetki on personel.personel_yetki.yetkiAd = portal.menuler.yetkigrup and kid = " & kid & vbcrlf
+							sorgu = sorgu & "where " & vbcrlf
+							sorgu = sorgu & "(firmaID = 0 or firmaID = " & firmaID & ")" & vbcrlf
+							sorgu = sorgu & "and ustID = " & rs("ID") & vbcrlf
+							sorgu = sorgu & "and (yetkigrup is null or personel.personel_yetki.yetkiParametre > 0)" & vbcrlf
+							sorgu = sorgu & "and menuYeri is null" & vbcrlf
+							sorgu = sorgu & "order by sira asc" & vbcrlf
 							rs2.open sorgu, sbsv5, 1, 3
 								for rii = 1 to rs2.recordcount
 									if gelenadres4 = link then

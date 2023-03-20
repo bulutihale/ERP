@@ -65,6 +65,27 @@ end if
 				rs("fiyatPB") = "TL"
 			end if
 		end if
+
+		if tablo = "dosya.ihale" then
+		'##### teklife eklenen e-posta adresi cariye yazılsın
+			if alan = "teklifEposta" then
+				degerArr = split(deger,";")
+				for gi = 0 to ubound(degerArr)
+				kontrolDeger = degerArr(gi)
+					sorgu = "SELECT CHARINDEX('"&kontrolDeger&"',email) as kontrol, email FROM cari.cari WHERE cariID = (SELECT cariID FROM " & tablo & " WHERE id = " & tabloID & ")"
+					rs1.open sorgu, sbsv5,1,3
+						if isnull(rs1("kontrol")) OR rs1("kontrol") = 0 then
+							eskiDeger = rs1("email")
+							rs1("email") = eskiDeger & ";" & kontrolDeger
+							rs1.update
+						end if
+					rs1.close
+				next
+
+			end if
+		'##### /teklife eklenen e-posta adresi cariye yazılsın
+
+		end if
 		
 
 		

@@ -50,16 +50,17 @@ response.codepage=65001
 		end if
 	rs.close
 
-	sorgu = "SELECT teklifRevNo FROM dosya.ihale WHERE firmaID = " & firmaID & " AND id = " & id
+	sorgu = "SELECT teklifRevNo, landscapeDeger, pdfSablon FROM dosya.ihale WHERE firmaID = " & firmaID & " AND id = " & id
 	rs.open sorgu,sbsv5,1,3
 		rs("teklifRevNo")	=	sonRevizyonNo
 		rs.update
+		landscapeDeger		=	rs("landscapeDeger")
+		teklifDosya			=	rs("pdfSablon")
 	rs.close
 '###### PDF oluşmadan önce revizon numaraları ayarla
 
-	sorgu = "SELECT f.teklifDosya, f.adres FROM dosya.ihale i LEFT JOIN portal.firma f ON f.id = i.firmaID WHERE i.id = " & id
+	sorgu = "SELECT f.adres FROM dosya.ihale i LEFT JOIN portal.firma f ON f.id = i.firmaID WHERE i.id = " & id
 	rs.open sorgu,sbsv5,1,3
-		teklifDosya	=	rs("teklifDosya")
 		adres		=	rs("adres")	
 	rs.close
 
@@ -77,7 +78,6 @@ Set Page = Doc.Pages.Add
 
 
 
-
 asp_dosya	=	"http://"
 asp_dosya	=	asp_dosya & Request.ServerVariables("SERVER_NAME")
 asp_dosya	=	asp_dosya & "/teklifSablon/" & teklifDosya & ".asp?ihaleid="
@@ -85,7 +85,7 @@ asp_dosya	=	asp_dosya & id &"&pdf=yes"
 
 
 
-Doc.ImportFromUrl asp_dosya,"LeftMargin=30,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1,landscape=false"
+Doc.ImportFromUrl asp_dosya,"LeftMargin=30,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1,landscape="&landscapeDeger&""
 
 if klasorkontrol("/temp/dosya/" & firmaID) = True then
 else
@@ -115,11 +115,19 @@ end if
 dosyaAd		=	id64 & "_" & dosyaAdEki & ".pdf"
 
 '########## footer bilgisi
+if landscapeDeger = False then
 	Page.Canvas.DrawText footerBilgiA, "x=290, y=50; size=10", Doc.Fonts("Arial")
 	Page.Canvas.DrawText footerBilgiB, "x=180, y=37; size=5", Doc.Fonts("Arial")
 	Page.Canvas.DrawText footerBilgiC, "x=270, y=31; size=5", Doc.Fonts("Arial")
 	'Page.Canvas.DrawText footerBilgiD, "x=280, y=25; size=5", Doc.Fonts("Arial")
 	Page.Canvas.DrawText "FR-21 / Rev.No:01 / 05.12.17", "x=40, y=20; size=8", Doc.Fonts("Arial")
+else
+	Page.Canvas.DrawText footerBilgiA, "x=560, y=400; size=10; angle=90", Doc.Fonts("Arial") 
+	Page.Canvas.DrawText footerBilgiB, "x=570, y=270; size=5; angle=90", Doc.Fonts("Arial")
+	Page.Canvas.DrawText footerBilgiC, "x=580, y=370; size=5; angle=90", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText footerBilgiD, "x=280, y=25; size=5", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText "FR-21 / Rev.No:01 / 05.12.17", "x=40, y=20; size=8; angle=90", Doc.Fonts("Arial")
+end if
 '########## footer bilgisi
 
 Doc.Save Server.MapPath("/temp/dosya/" & firmaID & "/teklifler/" & id64 & "/" & dosyaAd), true
@@ -169,7 +177,7 @@ dosyaAdres		=	Server.MapPath("/temp/dosya/" & firmaID & "/teklifler/" & id64 & "
 	end if
 '###### /cari müşteriye mail gönderilecek mi? "evet" ise gönder "" ise sadece kendime mail gönder
 
-'call mailGonder(mailTipNo, mailBaslik, mailicerik, dosyaAdres, mailCariGonder, cariID, id,"")
+call mailGonder2(mailTipNo, mailBaslik, mailicerik, dosyaAdres, mailCariGonder, cariID, id,"")
 
 
 		

@@ -151,13 +151,24 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 		'Response.Write ikn&" "&ihaleAD
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:right;"">"
-		if fiyatOnay = "OK" then
-			Response.Write "<a class=""text-left"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
-			Response.Write "&nbsp;&nbsp;&nbsp;&nbsp;"
-			Response.Write "<a class=""text-left"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailVar""><i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i></a>"
-			Response.Write "&nbsp;&nbsp;"
-		end if
-		Response.Write "Rev."&teklifRevNo
+		Response.Write "<div class=""row text-right"">"
+			if fiyatOnay = "OK" then
+				Response.Write "<div class=""col-10"">"
+					Response.Write "<a class=""text-left pointer"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
+				Response.Write "</div>"
+				Response.Write "<div class=""col-1"">"
+				'Response.Write "&nbsp;&nbsp;&nbsp;&nbsp;"
+				'Response.Write "<a class=""text-left"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailVar""><i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i></a>"
+					Response.Write "<div id=""teklifMailGonder"" class=""text-left pointer"" onclick=""teklifPDFmail('"&id64&"','mailVar',$(this).attr('id'))"">"
+						Response.Write "<i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i>"
+					Response.Write "</div>"
+				Response.Write "</div>"
+				'Response.Write "&nbsp;&nbsp;"
+			end if
+				Response.Write "<div class=""col-1"">"
+					Response.Write "Rev."&teklifRevNo
+				Response.Write "</div>"
+		Response.Write "</div>"
 		Response.Write "</td>"
 	Response.Write "</tr>"
 Response.Write "</table>"

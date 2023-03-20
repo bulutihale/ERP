@@ -38,7 +38,6 @@ end if
 
 Response.Flush()
 
-call logla("Depo transferi oluştur")
 
 yetkiKontrol = yetkibul(modulAd)
 
@@ -65,6 +64,9 @@ yetkiKontrol = yetkibul(modulAd)
 				rs1.update
 				stokHareketID	=	rs1("stokHareketID")
 			rs1.close
+
+	call logla("Depo transferi oluşturuldu <b>stokHareketID:</b> " &stokHareketID)
+	
 		'#### /yarı mamullerin hareketini stokHareket tablosuna C (çıkış) olarak kaydet
 
 		'#### yarı mamullerin hareketini stokHareket tablosuna üretim depoya G (giriş) olarak kaydet

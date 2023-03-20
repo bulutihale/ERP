@@ -34,11 +34,12 @@
 
 '##### YETKİ BUL
 '##### YETKİ BUL
-	yetkiKontrol	 = yetkibul(modulAd)
+	yetkiKontrol	 	=	yetkibul(modulAd)
+	uretimYetkiKontrol	=	yetkibul("Üretim")
 '##### YETKİ BUL
 '##### YETKİ BUL
-
-call logla("Depo Günlük İş Listesi")
+if yetkiKontrol > 2 then
+	call logla("Depo Günlük İş Listesi")
 
 	
 			Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein"">"
@@ -191,7 +192,7 @@ call logla("Depo Günlük İş Listesi")
 												end if
 											elseif isTur = "transfer" then
 												if tamamlandi = 0 then
-													Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+													Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?sorgulananTarih="&sorgulananTarih&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
 												else
 													Response.Write " onclick=""swal('','Transfer işlemi yapılmış.')"""
 												end if
@@ -199,11 +200,13 @@ call logla("Depo Günlük İş Listesi")
 										Response.Write ">"
 											Response.Write icerik
 										Response.Write "</div>"
-										if yetkiKontrol > 5 then
-										'if isTur = "transfer" then
-											Response.Write "<div class=""col-lg-2 col-md-2 col-sm-2 text-center pointer hoverGel "&divBG&""" onclick=""hucreKaydet('id',"&ajandaID&",'tamamlandi','portal.ajanda',"&deger&")""><div class=""mt-3 align-middle""><i class="""&ikon&"""></i></div></div>"
-										'end if
+											Response.Write "<div class=""col-lg-2 col-md-2 col-sm-2 text-center pointer hoverGel "&divBG&""""
+										if uretimYetkiKontrol > 5 then
+											Response.Write " onclick=""hucreKaydet('id',"&ajandaID&",'tamamlandi','portal.ajanda',"&deger&")"">"
+										else
+											Response.Write " onclick=""swal('','işlem durumunu tamamlandı olarak işaretlemek için yetkiniz yok.','error')"">"
 										end if
+											Response.Write "<div class=""mt-3 align-middle""><i class="""&ikon&"""></i></div></div>"
 									Response.Write "</div>"'kutu içi satırlar
 										rs.movenext
 										next
@@ -223,7 +226,9 @@ call logla("Depo Günlük İş Listesi")
 			Response.Write "</div>"
 								
 									
-	
+	else
+		call yetkisizGiris("","","")
+	end if
 	
 	
 %>

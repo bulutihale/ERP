@@ -534,3 +534,72 @@ function numara(nesne,para,uyari)
 	}
 //alan hesapla
 
+// tooltip çalışsabilsin
+	//elementte, "data-toggle="tooltip" ve "title="açıklama içerik" olmalı."
+$(function () {
+	$('[data-toggle="tooltip"]').tooltip()
+  })
+// tooltip çalışsabilsin
+
+
+// contenteditable div leri değiştirmek için "blur" ile tetiklenen ajSave
+	function ajSaveBlur(inputID, tabloID, tablo, alan, updateDosya, deger, ek1, ek2, ek3){
+
+		$.ajax({
+			type:'POST',
+			url :'/teklif2/hucre_kaydet.asp',
+			data :{'alan':alan,'id':tabloID,'tablo':tablo,'deger':deger,
+						},
+			beforeSend: function() {
+
+				//$(this).parent().html("<img src='image/working2.gif' width='20' height='20'/>");
+			},
+					success: function(sonuc) {
+							//alert(sonuc);
+							sonucc = sonuc.split('|');
+							p_sonuc = sonucc[0];
+							
+							if(p_sonuc == "ok"){
+								toastr.options.positionClass = 'toast-bottom-right';
+								toastr.success('Değişiklik kayıt edildi.','İşlem Yapıldı!');
+								
+								// $.post('/teklif2/'+updateDosya+'.asp',{}, function(data){
+								// 	var $data = $(data);
+								// 	$('#'+inputID).parent().html($data.find('#'+inputID).parent().html());
+								// });
+								
+							}
+							else{
+								toastr.options.positionClass = 'toast-bottom-right';
+								toastr.error('Kayıt yapılmadı.','İşlem Başarısız!');
+							};
+				}
+		});
+		};
+// contenteditable div leri değiştirmek için "blur" ile tetiklenen ajSave
+
+
+function teklifPDFmail(id64,mailDurum,divID){
+	//	alert(secilenReceteID)
+		swal({
+			title:'ONAY',
+			text: 'Teklifin PDF formatına dönüştürülmesini ve e-posta olarak gönderilmesini onaylıyor musunuz?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(
+			function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			working(divID,30,30);
+			$('#ajax').load('/teklif2/teklif_firma_pdf/'+id64+'|'+mailDurum)
+
+		}, //confirm buton yapılanlar
+			function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			} //cancel buton yapılanlar		
+		);//swal sonu
+		}
+

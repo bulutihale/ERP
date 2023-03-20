@@ -25,7 +25,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 if gorevID <> "" then
             sorgu = "SELECT t1.receteAd, t1.ozelRecete, t1.receteTipi, t1.silindi, t2.cariID, t2. cariAd, t3.stokID, t3.stokAd,"
-			sorgu = sorgu & " ISNULL(t1.istasyonID,0) as istasyonID, t4.istasyonAd, t1.ciktiUrunMiktar, t5.uzunBirim"
+			sorgu = sorgu & " ISNULL(t1.istasyonID,0) as istasyonID, t4.istasyonAd, t5.uzunBirim"
 			sorgu = sorgu & " FROM recete.recete t1"
 			sorgu = sorgu & " LEFT JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 			sorgu = sorgu & " LEFT JOIN stok.stok t3 ON t1.stokID = t3.stokID"
@@ -43,7 +43,6 @@ if gorevID <> "" then
 				istasyonID		=	rs("istasyonID")
 				istasyonAd		=	rs("istasyonAd")
 				silindi			=	rs("silindi")
-				ciktiUrunMiktar	=	rs("ciktiUrunMiktar")
 				uzunBirim		=	rs("uzunBirim")
 				defDeger		=	cariID&"###"&cariAd
 				defDeger1		=	stokID&"###"&stokAd

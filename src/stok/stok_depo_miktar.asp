@@ -26,14 +26,17 @@ yetkiKontrol = yetkibul(modulAd)
 
             sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayGB(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktarGB,"
 			sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar,"
-			sorgu = sorgu & " t3.depoAd, t2.lot, t2.miktarBirim"
+			sorgu = sorgu & " t3.depoAd, t2.lot, t2.miktarBirim, t6.cariAd"
 			sorgu = sorgu & " FROM stok.stok t1"
 			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
+			sorgu = sorgu & " INNER JOIN teklif.siparisKalem t4 ON  t2.siparisKalemID = t4.id"
+			sorgu = sorgu & " INNER JOIN teklif.siparis t5 ON t4.siparisID = t5.sipID"
+  			sorgu = sorgu & " INNER JOIN cari.cari t6 ON t5.cariID = t6.cariID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t2.silindi = 0"
 			sorgu = sorgu & " AND stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) > 0"
 			sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) > 0"
-			sorgu = sorgu & " GROUP BY t2.depoID, t1.stokKodu, t1.stokID, t3.depoAd, t1.stokAd, t2.lot, t2.miktarBirim"
+			sorgu = sorgu & " GROUP BY t2.depoID, t1.stokKodu, t1.stokID, t3.depoAd, t1.stokAd, t2.lot, t2.miktarBirim, t4.siparisID, t6.cariAd"
 			rs.open sorgu, sbsv5, 1, 3
 
 
@@ -61,6 +64,8 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<th scope=""col"" class=""text-center"">Lot Miktar</th>"
 		' Response.Write "<th scope=""col"">Depo Miktar</th>"
 		Response.Write "<th scope=""col"">Depo Ad</th>"
+		Response.Write "<th scope=""col"">Müşteri Ad</th>"
+		
 		Response.Write "</tr></thead><tbody>"
 					
 				do until rs.EOF
@@ -68,10 +73,12 @@ yetkiKontrol = yetkibul(modulAd)
 					lot				=	rs("lot")
 					lotMiktar		=	rs("lotMiktar")
 					miktarBirim		=	rs("miktarBirim")
+					cariAd			=	rs("cariAd")
 					Response.Write "<tr>"
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td class=""text-right"">" & lotMiktar & " " & miktarBirim & " </td>"
 						Response.Write "<td>" & depoAd & "</td>"
+						Response.Write "<td>" & cariAd & "</td>"
 					Response.Write "</tr>"
 					Response.Flush()
 				rs.movenext

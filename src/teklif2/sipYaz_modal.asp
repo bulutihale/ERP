@@ -26,7 +26,7 @@ rs.close
 	if isnull(birimID) then
 		Response.Write "<div class=""bold"">Ürüne ait ANA BİRİM seçili olmadığı için sipariş yazılamaz</div>"
 	else
-
+call logla("Teklif kaleminden sipariş Temp kaydı açılacak.iuID:"&iuID&"")
 		Response.Write "<span class=""pointer"" data-dismiss=""modal"">&times;</span>"
 
 		Response.Write "<form action=""/teklif2/sipYazKaydet.asp"" method=""post"" class=""ajaxform"">"
@@ -43,15 +43,15 @@ rs.close
 
 
 				Response.Write "<div class=""col-lg-12"">"
-				Response.Write "<button type=""submit"" class=""btn form-control btn-success"">Kaydet</button>"
+				Response.Write "<button type=""submit"" class=""btn form-control btn-success"" >Kaydet</button>"
 					call clearfix()
 				Response.Write "</div>"
 			Response.Write "</div>"
 		Response.Write "</form>"
 	end if
 
-	else
-		call yetkisizGiris("","","")
-	end if
+else
+	call yetkisizGiris("","","")
+end if
 %>
 
