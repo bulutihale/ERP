@@ -46,7 +46,7 @@ if yetkiKontrol  >= 3 then
 		response.Flush()
 	'##### ANA VERİ ÇEK
 	'##### ANA VERİ ÇEK
-		sorgu = "Select i.id, i.ad, i.ikn, i.teslimatKosul, i.odemeKosul, i.tarih_ihale, i.firmaID, i.cariID, i.durum, i.sipDurum, i.grupIhale, i.ihaleTipi,"
+		sorgu = "Select i.id, i.ad, i.ikn, i.teslimatKosul, i.odemeKosul, i.tarih_ihale, i.firmaID, ISNULL(i.cariID,0) as cariID, i.durum, i.sipDurum, i.grupIhale, i.ihaleTipi,"
 		sorgu = sorgu & " i.dosyaNo, i.dosyaSorumlu, i.odemeVade, i.teklifGecerlik, i.teslimatSure, i.yeniCariVergiNo, i.satirKDV, i.catKodGoster, i.mustKodGoster,"
 		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster, i.epostaGovde,"
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
@@ -146,7 +146,7 @@ if yetkiKontrol  >= 3 then
 	
 	'##### CARİLERİ ÇEK
 	'##### CARİLERİ ÇEK
-			if isnull(cariSec) then
+			if isnull(cariSec) OR cariSec = 0 then
 				DosyaCariAd	= "<code>Kayıtlı olmayan bir cariye teklif verilmiş.</code> "
 			else
 				sorgu = "Select c.cariID, cariAd, c.firmaID, c.email FROM cari.cari c WHERE c.firmaID = " & firmaID & " AND c.cariID = " & carisec
@@ -295,7 +295,7 @@ if yetkiKontrol  >= 3 then
 
 '##### TABLO
 '##### TABLO
-			if isnull(cariSec) then
+			if isnull(cariSec) OR cariSec = 0 then
 				alimYapan	= "<code>" & yeniCariAd & "</code> "
 			else
 				sorgu = "SELECT cariID, cariAD FROM cari.cari WHERE cariID = " & cariID

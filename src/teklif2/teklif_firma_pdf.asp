@@ -172,12 +172,12 @@ dosyaAdres		=	Server.MapPath("/temp/dosya/" & firmaID & "/teklifler/" & id64 & "
 '###### cari müşteriye mail gönderilecek mi? "evet" ise gönder "" ise sadece kendime mail gönder
 	if mailDeger = "mailVar" then
 		mailCariGonder	=	"evet"
+		call mailGonder2(mailTipNo, mailBaslik, mailicerik, dosyaAdres, mailCariGonder, cariID, id,"")
 	else
 		mailCariGonder	=	""
 	end if
 '###### /cari müşteriye mail gönderilecek mi? "evet" ise gönder "" ise sadece kendime mail gönder
 
-call mailGonder2(mailTipNo, mailBaslik, mailicerik, dosyaAdres, mailCariGonder, cariID, id,"")
 
 
 		
