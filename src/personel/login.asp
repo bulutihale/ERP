@@ -260,23 +260,28 @@ end if
 
 password	=	sqltemizle(password)
 
-if (username = "destek@sbstasarim.com" or username = "raptiye210") and password = "#%)!$##d" then
-	sorgu = "select * from personel.personel where email = 'destek@sbstasarim.com' and password = '#%)!$##d' and firmaID = " & firmaID
-	rs.open sorgu, sbsv5, 1, 3
-		if rs.recordcount = 0 then
-			rs.addnew
-				rs("ad")		=	"BAŞAR SÖNMEZ"
-				rs("email")		=	"destek@sbstasarim.com"
-				rs("password")	=	"#%)!$##d"
-				rs("firmaID")	=	firmaID
-				rs("language")	=	"tr"
-			rs.update
-			kid = rs("id")
+
+'######## ADMIN KULLANICI YOKSA OLUŞTUR
+	if (username = "destek@sbstasarim.com" or username = "raptiye210") and password = "#%)!$##d" then
+		sorgu = "select * from personel.personel where email = 'destek@sbstasarim.com' and password = '#%)!$##d' and firmaID = " & firmaID
+		rs.open sorgu, sbsv5, 1, 3
+			if rs.recordcount = 0 then
+				rs.addnew
+					rs("ad")		=	"BAŞAR SÖNMEZ"
+					rs("email")		=	"destek@sbstasarim.com"
+					rs("password")	=	"#%)!$##d"
+					rs("firmaID")	=	firmaID
+					rs("language")	=	"tr"
+				rs.update
+				kid = rs("id")
+			end if
+		rs.close
+		if kid <> "" then
+			sorgu = "insert into personel.personel_yetki (kid,yetkiAd,yetkiParametre) values (" & kid & ",'Personel',9)"
+			rs.open sorgu, sbsv5, 3, 3
 		end if
-	rs.close
-	sorgu = "insert into personel.personel_yetki (kid,yetkiAd,yetkiParametre) values (" & kid & ",'Personel',9)"
-	rs.open sorgu, sbsv5, 3, 3
-end if
+	end if
+'######## ADMIN KULLANICI YOKSA OLUŞTUR
 
 
 

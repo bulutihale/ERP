@@ -16,13 +16,13 @@ yetkiTM = yetkibul(modulAd)
 call logla("Genel teklif ayarları güncelleme ekranı")
 
 '####### ADRES LİSTESİ
-	if yetkiTM > 0 then
+	if yetkiTM > 2 then
         if hata = "" then
             Response.Write "<div class=""container-fluid scroll-ekle3"">"
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Koşullar</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Koşullar","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                     Response.Write "<div class=""row"">"
                         sorgu = "Select * from teklif.teklifKosul where firmaID = " & firmaID & " and silindi = 0 order by teklifKosulID desc"
@@ -30,8 +30,8 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                             if rs.recordcount > 0 then
                                 Response.Write "<div class=""table-responsive"">"
                                 Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-                                Response.Write "<th scope=""col"" width=""100"">Koşul</th>"
-                                Response.Write "<th scope=""col"">İçerik</th>"
+                                Response.Write "<th scope=""col"" width=""100"">" & translate("Koşul","","") & "</th>"
+                                Response.Write "<th scope=""col"">" & translate("İçerik","","") & "</th>"
                                 if yetkiTM >= 3 then
                                     Response.Write "<th scope=""col"" class=""d-sm-table-cell"" width=""50"">&nbsp;</th>"
                                 end if
@@ -56,7 +56,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                                     adresGrupID64 =	adresGrupID
                                                     adresGrupID64 =	base64_encode_tr(adresGrupID64)
                                                     Response.Write "<a onClick="""
-                                                    Response.Write "bootmodal('Koşulu silmek mi istiyorsunuz?','custom','/teklif/teklif_ayarlar_islem.asp?formtur=teklifKosul&islem=sil&gorevID=" & adresGrupID64 & "','','Sil','Silme','btn-danger','btn-success','','ajax','3000','','');"
+                                                    Response.Write "bootmodal('" & translate("Koşulu silmek mi istiyorsunuz?","","") & "','custom','/teklif/teklif_ayarlar_islem.asp?formtur=teklifKosul&islem=sil&gorevID=" & adresGrupID64 & "','','" & translate("Sil","","") & "','" & translate("Silme","","") & "','btn-danger','btn-success','','ajax','3000','','');"
                                                     Response.Write """ title=""" & translate("Koşulu Sil","","") & """ class=""ml-1"" >"
                                                     Response.Write "<i class=""icon delete"
                                                     Response.Write """></i>"
@@ -78,7 +78,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                                 call forminput("icerik","","","","icerik","","icerik","")
                                             Response.Write "</td>"
                                             Response.Write "<td>"
-                                                Response.Write "<button class=""form-control"" type=""submit"">Ekle</button>"
+                                                Response.Write "<button class=""form-control"" type=""submit"">" & translate("Ekle","","") & "</button>"
                                             Response.Write "</td>"
                                         Response.Write "</tr>"
                                         call forminput("gorevID","","","","gorevID","hidden","gorevID","")
@@ -88,7 +88,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                 Response.Write "</table>"
                                 Response.Write "</div>"
                             else
-                                call yetkisizGiris("Şablon Bulunamadı","","")
+                                call yetkisizGiris(translate("Şablon Bulunamadı","",""),"","")
                             end if
                         rs.close
                     Response.Write "</div>"
@@ -119,7 +119,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Üst Yazılar</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Üst Yazılar","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                     Response.Write "<div class=""row"">"
                         sorgu = "Select * from teklif.teklifOnYazi where firmaID = " & firmaID & " and silindi = 0 order by yaziYeri, onYaziID desc"
@@ -127,8 +127,8 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                             if rs.recordcount > 0 then
                                 Response.Write "<div class=""table-responsive"">"
                                 Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-                                Response.Write "<th scope=""col"" width=""130"">Yazi Yeri</th>"
-                                Response.Write "<th scope=""col"">İçerik</th>"
+                                Response.Write "<th scope=""col"" width=""130"">" & translate("Yazı Yeri","","") & "</th>"
+                                Response.Write "<th scope=""col"">" & translate("İçerik","","") & "</th>"
                                 ' if yetkiTM >= 3 then
                                 '     Response.Write "<th scope=""col"" class=""d-sm-table-cell"" width=""50"">&nbsp;</th>"
                                 ' end if
@@ -189,7 +189,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                 Response.Write "</table>"
                                 Response.Write "</div>"
                             else
-                                call yetkisizGiris("Ön yazı bulunamadı","","")
+                                call yetkisizGiris(translate("Ön yazı bulunamadı","",""),"","")
                             end if
                         rs.close
                     Response.Write "</div>"
@@ -270,7 +270,8 @@ call logla("Genel teklif ayarları güncelleme ekranı")
 
 
     else
-        call yetkisizGiris("Teklif ayarlarını görmek için yeterli yetkiniz bulunmamaktadır","","")
+        hata = translate("Teklif ayarlarını görmek için yeterli yetkiniz bulunmamaktadır","","")
+        call yetkisizGiris(hata,"","")
 	end if
 '####### ADRES LİSTESİ
 

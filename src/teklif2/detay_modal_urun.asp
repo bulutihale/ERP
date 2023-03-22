@@ -8,7 +8,7 @@
 	ihaleID64				=	base64_encode_tr(ihaleID64)
 	stoklarID				=	Request.QueryString("stoklarID")
 	urunsec					=	stoklarID
-
+	stokSart				=	Request.QueryString("stokSart")
 
 
 
@@ -36,7 +36,7 @@ Response.Write "<input type=""hidden"" name=""tablo"" value=""ihale_urun"" />"
 	Response.Write "<div class=""container-fluid row"">"
 		Response.Write "<div class=""col-lg-12"">"
 		Response.Write "<label class=""badge"">Ürün Seçimi</label>"
-			call formselectv2("deger","","","","formSelect2 deger","","deger","","data-holderyazi=""Stok adı, stok kodu"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+			call formselectv2("deger","","","","formSelect2 deger","","deger","","data-holderyazi=""Stok adı, stok kodu"" data-sart="""&stokSart&""" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
 		Response.Write "</div>"
 
 		Response.Write "<div class=""col-lg-12"">"

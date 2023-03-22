@@ -51,7 +51,7 @@ if yetkiKontrol  >= 3 then
 		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster, i.epostaGovde,"
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
 		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar, i.teklifEposta, i.epostaGovde,"
-		sorgu = sorgu & " CASE WHEN i.ihaleTipi = 'bayi' THEN f.teklifDosya WHEN i.ihaleTipi = 'proforma' THEN f.proformaDosya END as teklifSablon"
+		sorgu = sorgu & " CASE WHEN i.ihaleTipi = 'bayi' THEN f.teklifDosya WHEN i.ihaleTipi = 'proforma' THEN f.proformaDosya END as teklifSablon, landscapeDeger"
 		sorgu = sorgu & " FROM dosya.ihale i"
 		sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
 		sorgu = sorgu & " WHERE i.firmaID = " & firmaID & " AND i.id = " & ihaleID
@@ -108,6 +108,7 @@ if yetkiKontrol  >= 3 then
 			teklifEposta		=	rs("teklifEposta")
 			catKodGoster		=	rs("catKodGoster")
 			mustKodGoster		=	rs("mustKodGoster")
+			landscapeDeger		=	rs("landscapeDeger")
 			yeniCariVergiNo		=	rs("yeniCariVergiNo")
 			yeniCariAd			=	rs("yeniCariAd")
 			a = instr(yeniCariAd,"<div>")
@@ -234,13 +235,13 @@ if yetkiKontrol  >= 3 then
 	'##### /TEMİNAT TÜRLERİ SELECT İÇİN HAZIRLA
 	'##### /TEMİNAT TÜRLERİ SELECT İÇİN HAZIRLA
 	
-	'##### TEMİNAT NAKİT/BANKA SELECT İÇİN HAZIRLA
-	'##### TEMİNAT NAKİT/BANKA SELECT İÇİN HAZIRLA
+	'##### SAYFA YÖNÜ SELECT İÇİN HAZIRLA
+	'##### SAYFA YÖNÜ SELECT İÇİN HAZIRLA
 
-				bankaNakitDegerler = "=|BANKA=0|NAKİT=1"
+				sayfaYonDegerler = "=|Dikey=0|Yatay=1"
 				
-	'##### /TEMİNAT NAKİT/BANKA SELECT İÇİN HAZIRLA
-	'##### /TEMİNAT NAKİT/BANKA SELECT İÇİN HAZIRLA
+	'##### SAYFA YÖNÜ SELECT İÇİN HAZIRLA
+	'##### SAYFA YÖNÜ SELECT İÇİN HAZIRLA
 
 	'##### YERLİ MALI DEĞERLER SELECT İÇİN HAZIRLA
 	'##### YERLİ MALI DEĞERLER SELECT İÇİN HAZIRLA
@@ -629,7 +630,7 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col"">"
 				if fiyatOnay = True then
-				Response.Write "<div class=""pointer"" onclick=""swal('fiyat onaylanmış kalem silinemez.','')""><i class=""fa fa-trash-o""></i></div>"
+				Response.Write "<div class=""pointer"" onclick=""swal('fiyat onaylanmış kalem silinemez.','','error')""><i class=""fa fa-trash-o""></i></div>"
 				else
 				Response.Write "<a id="""&rs("ihaleUrunID")&"|ihale_urun"&""" class=""btn ajSil pt-0 pb-0 pl-0"" role=""button""><i class=""fa fa-trash-o""></i></a>"
 				end if
@@ -659,7 +660,11 @@ Response.Write "<div class=""card-body row"">"
 			else
 				Response.Write " class=""fa fa-exclamation-triangle text-red btn"""
 			end if
-		Response.Write " onClick=""modalajax('/teklif2/detay_modal_kalemNot.asp?ihaleID=" & rs("ihaleID") & "&id=" & rs("ihaleUrunID") &  "');""></i>"
+		if fiyatOnay = False then
+			Response.Write " onClick=""modalajax('/teklif2/detay_modal_kalemNot.asp?ihaleID=" & rs("ihaleID") & "&id=" & rs("ihaleUrunID") &  "');""></i>"
+		else
+			Response.Write " onClick=""swal('fiyat onaylanmış kalemde değişiklik yapılamaz','','error')""></i>"
+		end if
 		Response.Write "</td>"
 
 '## siraNO
@@ -677,7 +682,7 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "<a id="""&rs("ihaleUrunID")&"|ihale_urun"&"|stokKarsilik"" class=""btn ajSil text-muted "" role=""button""><i class=""fa fa-trash-o p-0 m-0""></i></a>"
 			end if
 				
-				Response.Write "<span class=""stokKarsilik fontkucuk2 text-info btn"" onClick=""modalajaxfit('/teklif2/detay_modal_urun.asp?firmalarID=" & firmasec & "&ihaleID=" & rs("ihaleID") & "&id=" & rs("ihaleUrunID") & "&stoklarID=" & stoklarID & "');""><em id=""stoklarad"" class=""stoklarad" & rs("ihaleUrunID") & """>"
+				Response.Write "<span class=""stokKarsilik fontkucuk2 text-info btn"" onClick=""modalajaxfit('/teklif2/detay_modal_urun.asp?firmalarID=" & firmasec & "&ihaleID=" & rs("ihaleID") & "&id=" & rs("ihaleUrunID") & "&stoklarID=" & stoklarID & "&stokSart=" & stokSart & "');""><em id=""stoklarad"" class=""stoklarad" & rs("ihaleUrunID") & """>"
 			if stoklarID = 0 OR isnull(stoklarID) then
 				Response.Write "<i class=""fa fa-exclamation text-danger""> stok karşılığı seçilmemiş</i> <i class=""fa fa-exclamation text-danger""></i>"
 			else
@@ -1175,28 +1180,33 @@ Response.Write "<div class=""card text-center"">"
 		'######### ŞABLON
 		'######### ŞABLON
 			Response.Write "<div class=""tab-pane"" id=""sablon"" role=""tabpanel"">"
-				Set fso = CreateObject("Scripting.FileSystemObject")
-				Set objFolder = FSO.GetFolder(Server.Mappath("/teklifSablon"))
-				Set objFiles = objFolder.Files
 
-				Response.Write "<select class=""form-control border border-danger"" onChange=""ajSave('pdfSablon','dosya.ihale',"&id&",$(this).val())"">"
+				Response.Write "<div class=""row"">"
+					Set fso = CreateObject("Scripting.FileSystemObject")
+					Set objFolder = FSO.GetFolder(Server.Mappath("/teklifSablon"))
+					Set objFiles = objFolder.Files
+					Response.Write "<div class=""col text-left"">"
+						Response.Write "<div class=""badge badge-secondary rounded-left mt-4"">Teklif Şablonu</div>"
+						Response.Write "<select class=""form-control border border-danger"" onChange=""ajSave('pdfSablon','dosya.ihale',"&id&",$(this).val())"">"
 
-					For each z in objFiles
-						dosyaAd = z.name
-						dosyaAd = LEFT(dosyaAd, (LEN(dosyaAd)-4))
-						Response.Write "<option value=""" & dosyaAd & """>" & dosyaAd & "</option>"
-					next
-				Response.Write "</select>"
-				Set objFiles = Nothing
-				Set objFolder = Nothing
-				Set fso = Nothing
-				Response.Write "<select class=""form-control border border-warning mt-4"" onChange=""ajSave('landscapeDeger','dosya.ihale',"&id&",$(this).val())"">"
+							For each z in objFiles
+								dosyaAd = z.name
+								dosyaAd = LEFT(dosyaAd, (LEN(dosyaAd)-4))
+								Response.Write "<option value=""" & dosyaAd & """>" & dosyaAd & "</option>"
+							next
+						Response.Write "</select>"
+						Set objFiles = Nothing
+						Set objFolder = Nothing
+						Set fso = Nothing
+					Response.Write "</div>"
+				Response.Write "</div>"
 
-						Response.Write "<option value=""0"">Dikey</option>"
-						Response.Write "<option value=""1"">Yatay</option>"
-
-				Response.Write "</select>"
-				
+				Response.Write "<div class=""row"">"
+					Response.Write "<div class=""col text-left"">"
+						Response.Write "<div class=""badge badge-secondary rounded-left mt-4"">Sayfa Yönü</div>"
+						call formselectv2("landscapeDeger",landscapeDeger,"ajSave('landscapeDeger','dosya.ihale',"&id&",$(this).val())","","landscapeDeger","","",sayfaYonDegerler,"")		
+					Response.Write "</div>"	
+				Response.Write "</div>"	
 			Response.Write "</div>"
 		'######### /ŞABLON
 		'######### /ŞABLON

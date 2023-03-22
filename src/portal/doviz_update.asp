@@ -18,9 +18,9 @@ if yetkiTeklif >= 3 and yetkiSatis > 2 then
     gbp     =   Request.Form("gbp")
 
     if isnumeric(usd) = False or isnumeric(eur) = False or isnumeric(gbp) = False then
-        hatamesaj = "Kur bölümüne lütfen rakam yazın"
+        hatamesaj = translate("Kur bölümüne lütfen rakam yazın","","" )
         call logla(hatamesaj)
-        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+        call bootmodal(hatamesaj,"custom","","","",translate("Tamam","","" ),"","btn-danger","","","","","")
         Response.End()
     end if
 
@@ -29,21 +29,21 @@ if yetkiTeklif >= 3 and yetkiSatis > 2 then
     sorgu = sorgu & " and tarih >= '" & tarihsql(date()) & "'"
     rs.Open sorgu, sbsv5, 1, 3
     if rs.recordcount = 0 then
-        hatamesaj = "Kritik hata!! Güncelleme yapılamadı."
+        hatamesaj = translate("Kritik hata!! Güncelleme yapılamadı.","","" )
         call logla(hatamesaj)
-        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+        call bootmodal(hatamesaj,"custom","","","",translate("Tamam","","" ),"","btn-danger","","","","","")
         Response.End()
     else
         if islem = "custom" then
             usd = Replace(usd,".",",")
             eur = Replace(eur,".",",")
             gbp = Replace(gbp,".",",")
-            hatamesaj = "Döviz kurları yazdığınız şekilde güncellendi"
+            hatamesaj = translate("Döviz kurları yazdığınız şekilde güncellendi","","" )
         else
             usd = kurcek("USD")
             eur = kurcek("EUR")
             gbp = kurcek("GBP")
-            hatamesaj = "Döviz kurları merkez bankasından çekildi ve güncellendi"
+            hatamesaj = translate("Döviz kurları merkez bankasından çekildi ve güncellendi","","" )
             call jsrun("$('.dashDovizDiv').load('/portal/doviz_dashboard.asp');")
         end if
         rs("usdtryCustom")  =   usd
@@ -51,8 +51,8 @@ if yetkiTeklif >= 3 and yetkiSatis > 2 then
         rs("gbptryCustom")  =   gbp
         rs.update
         call logla(hatamesaj)
-        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-success","","","","","")
-        hatamesaj = "Yeni döviz kurları: usd = " & usd & " eur = " & eur & " gbp = " & gbp
+        call bootmodal(hatamesaj,"custom","","","",translate("Tamam","","" ),"","btn-success","","","","","")
+        hatamesaj = translate("Yeni döviz kurları:","","" ) & " usd = " & usd & " eur = " & eur & " gbp = " & gbp
         call logla(hatamesaj)
     end if
     rs.close
@@ -60,9 +60,9 @@ if yetkiTeklif >= 3 and yetkiSatis > 2 then
 
 
 else
-	hatamesaj = "Döviz kurlarını güncelleme yetkiniz bulunmamaktadır"
+	hatamesaj = translate("Döviz kurlarını güncelleme yetkiniz bulunmamaktadır","","" )
 	call logla(hatamesaj)
-	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+	call bootmodal(hatamesaj,"custom","","","",translate("Tamam","","" ),"","btn-danger","","","","","")
 	Response.End()
 end if
 %>

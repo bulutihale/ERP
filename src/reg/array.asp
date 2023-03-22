@@ -4,10 +4,7 @@ aylaruzun		=	Array("","Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz"
 aylarkisa		=	Array("","Oc","Şb","Mr","Ns","My","Hz","Tm","Ağ","Ey","Ek","Ks","Ar")
 oncelikArr		=	Array("Düşük","","Düşük+","","","Normal","","Yüksek","","Acil")
 paraArr			=	Array("","TL","USD","EUR")
-
-hastaneArr      =   Array("","Özel Sağlık","Gözde Tepecik","Gözde Kuşadası")
-
-muhasebedbArr   =   Array("best2022","best2021")
+' muhasebedbArr   =   Array("best2022","best2021")
 
 	'##### Depo Tipleri
 				depoTipDegerler = "=|SANAL=0|FİZİKSEL=1|SÜREÇ=2"
@@ -18,7 +15,7 @@ muhasebedbArr   =   Array("best2022","best2021")
 	'##### Depo Kategorileri
 	
 	'##### EVET - HAYIR
-				HEdegerler = "=|HAYIR=0|EVET=1"
+				HEdegerler = "=|" & translate("HAYIR","","") & "=0|" & translate("EVET","","") & "=1"
 	'##### EVET - HAYIR
 	
 	
@@ -41,6 +38,6 @@ muhasebedbArr   =   Array("best2022","best2021")
 	'##### 0'dan 24'e sayilar
 
 	'##### TEKLİF MODULÜ
-		teklifSonucArr	=	Array("Hazırlanıyor","Amir Onayında","Amir Onaylı","Amir Red","Müşteriye Gönderildi","Müşteri Red","Satış Gerçekleşti","Ödeme Bekleniyor","Sevkiyatta")
+		teklifSonucArr	=	Array(translate("Hazırlanıyor","",""),translate("Amir Onayında","",""),translate("Amir Onaylı","",""),translate("Amir Red","",""),translate("Müşteriye Gönderildi","",""),translate("Müşteri Red","",""),translate("Satış Gerçekleşti","",""),translate("Ödeme Bekleniyor","",""),translate("Sevkiyatta","",""))
 	'##### TEKLİF MODULÜ
 %>

@@ -8,7 +8,7 @@
     modulAd =   "Teklif"
     modulID =   "109"
     Response.Flush()
-    teklifTurleriArr = Array("--Teklif Türü--","Kdv Dahil Toplamlı Teklif","Kdv Hariç Toplamlı Teklif","","Genel Teklif","Mail Order","Taksitli Mail Order","İhracat Teklif","Proforma Fatura")
+    teklifTurleriArr = Array("--" & translate("Teklif Türü","","") & "--",translate("Kdv Dahil Toplamlı Teklif","",""),translate("Kdv Hariç Toplamlı Teklif","",""),"",translate("Genel Teklif","",""),translate("Mail Order","",""),translate("Taksitli Mail Order","",""),translate("İhracat Teklif","",""),translate("Proforma Fatura","",""))
 '###### ANA TANIMLAMALAR
 
 '#### yetkiler
@@ -16,7 +16,7 @@
 '#### yetkiler
 
 if yetkiTeklif < 3 then
-    hata = "Teklif verebilmek için yeterli yetkiniz bulunmamaktadır"
+    hata = translate("Teklif verebilmek için yeterli yetkiniz bulunmamaktadır","","")
 end if
 
 '### SAYFA ID TESPİT ET
@@ -91,7 +91,7 @@ end if
                 urunKatalogKodu       =   rs("urunKatalogKodu")
                 urunStokRefKodu       =   rs("urunStokRefKodu")
             else
-                hata = "Kritik Hata Oluştu. Hatalı teklif"
+                hata = translate("Kritik Hata Oluştu. Hatalı teklif","","")
             end if
             rs.close
         end if
@@ -140,7 +140,7 @@ end if
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
 				Response.Write "<div class=""card"">"
-				Response.Write "<div class=""card-header text-white bg-primary"">Cari Seçimi</div>"
+				Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Cari Seçimi","","") & "</div>"
 				Response.Write "<div class=""card-body"">"
                     '# form
                         Response.Write "<form action=""/cari/cari_liste_ajax.asp"" method=""post"" class=""cariform"">"
@@ -178,27 +178,27 @@ if hata = "" then
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Müşteri Bilgileri</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Müşteri Bilgileri","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                         '# form
                             Response.Write "<div class=""row"">"
                                 Response.Write "<div class=""col-lg-4"">"
-                                    Response.Write "<div class=""badge badge-danger"">Sayın : </div>"
+                                    Response.Write "<div class=""badge badge-danger"">" & translate("Sayın","","") & " : </div>"
                                     call forminput("cariAd",cariAd,"","","cariAd","autocompleteOFF","cariAd","")
                                     call forminput("cariKodu",cariKodu,"","","cariKodu","hidden","cariKodu","")
                                     call forminput("cariID",cariID,"","","cariID","hidden","cariID","")
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-4"">"
                                 if teklifsayi = "" then
-                                    Response.Write "<div class=""badge badge-success"">Sayı : (Boş bırakırsanız otomatik oluşur)</div>"
+                                    Response.Write "<div class=""badge badge-success"">" & translate("Sayı : (Boş bırakırsanız otomatik oluşur)","","") & "</div>"
                                     call forminput("teklifsayi",teklifsayi,"","","","autocompleteOFF","teklifsayi","")
                                 else
-                                    Response.Write "<div class=""badge badge-success"">Sayı :</div>"
+                                    Response.Write "<div class=""badge badge-success"">" & translate("Sayı","","") & " :</div>"
                                     call forminput("teklifsayi",teklifsayi,"","","","readonly","teklifsayi","")
                                 end if
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-4"">"
-                                    Response.Write "<div class=""badge badge-danger"">Teklif Tarihi : </div>"
+                                    Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Tarihi","","") & " : </div>"
                                     call forminput("tekliftarih",tekliftarih,"","","tarih","autocompleteOFF","tekliftarih","")
                                 Response.Write "</div>"
                             Response.Write "</div>"
@@ -216,12 +216,12 @@ if hata = "" then
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Teklif Ayarları</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Teklif Ayarları","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                         '# form
                             Response.Write "<div class=""row"">"
                                 Response.Write "<div class=""col-lg-3"">"
-                                    Response.Write "<div class=""badge badge-danger"">Teklif Veren Firma : </div>"
+                                    Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Veren Firma","","") & " : </div>"
                                         sorgu = "Select Ad,Id,logo from portal.firma where silindi = 0 and (Id = " & firmaID & " or anaFirmaID = " & firmaID & ") order by Ad ASC"
                                         rs.open sorgu,sbsv5,1,3
                                             Response.Write "<select name=""teklifFirmaId"" id=""teklifFirmaId"" class=""form-control"">"
@@ -241,7 +241,7 @@ if hata = "" then
                                         rs.close
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-3"">"
-                                    Response.Write "<div class=""badge badge-danger"">Teklif Türü : </div>"
+                                    Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Türü","","") & " : </div>"
                                         degerler = ""
                                         for ti = 0 to ubound(teklifTurleriArr)
                                             if teklifTurleriArr(ti) <> "" then
@@ -255,13 +255,13 @@ if hata = "" then
                                     call formselectv2("teklifTuru",teklifTuru,"$('#teklifUrunListe').load('/teklif/teklif_urun_liste.asp?teklifTuru=' + this.value + '&teklifID=" & teklifID & "');","","","","teklifTuru",degerler,"")
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-3"">"
-                                    Response.Write "<div class=""badge badge-danger"">Teklif Dili : </div>"
-                                    degerler = "--Teklif Dili--=|Türkçe=tr|İngilizce=en"
+                                    Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Dili","","") & " : </div>"
+                                    degerler = "--" & translate("Teklif Dili","","") & "--=|" & translate("Türkçe","","") & "=tr|" & translate("İngilizce","","") & "=en"
                                     call formselectv2("teklifDili",teklifDili,"","","","","teklifDili",degerler,"")
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-3"">"
-                                    Response.Write "<div class=""badge badge-danger"">Teklif Para Birimi : </div>"
-                                    degerler = "--Para Birimi--=|TRY=TRY|USD=USD|EUR=EUR|GBP=GBP"
+                                    Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Para Birimi","","") & " : </div>"
+                                    degerler = "--" & translate("Teklif Para Birimi","","") & "--=|TRY=TRY|USD=USD|EUR=EUR|GBP=GBP"
                                     ' if teklifParaBirimi = "-" then
                                         call formselectv2("teklifParaBirimi",teklifParaBirimi,"","","","","teklifParaBirimi",degerler,"")
                                     ' else
@@ -270,7 +270,7 @@ if hata = "" then
                                     ' end if
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-3"">"
-                                    Response.Write "<div class=""badge badge-danger"">Teklif Tasarımı : </div>"
+                                    Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Tasarımı","","") & " : </div>"
                                     ' degerler = "--Para Birimi--=|TL=TL|USD=USD|EUR=EUR"
                                     ' call formselectv2("teklifParaBirimi",teklifParaBirimi,"","","","","teklifParaBirimi",degerler,"")
                                 Response.Write "</div>"
@@ -289,7 +289,7 @@ if hata = "" then
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Teklif Ön Yazısı</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Teklif Ön Yazısı","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                         '# form
                             Response.Write "<div class=""row"">"
@@ -298,7 +298,7 @@ if hata = "" then
                                         sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Üstü' order by onYaziID desc"
                                         rs.open sorgu,sbsv5,1,3
                                             Response.Write "<select name=""onUstYazi"" id=""onUstYazi"" class=""form-control"" onChange=""$('.ustyazi').val($('#onUstYazi').children('option:selected').attr('data-onUstYazi'))"">"
-                                            Response.Write "<option value=""0"">--Hazır Yazı--</option>"
+                                            Response.Write "<option value=""0"">--" & translate("Hazır Yazı","","") & "--</option>"
                                             for oi = 1 to rs.recordcount
                                                 onYazi      =	rs("onYazi")
                                                 onYaziID	=	rs("onYaziID")
@@ -313,7 +313,7 @@ if hata = "" then
                                         rs.close
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-12"">"
-                                    call formtextarea("ustyazi",ustyazi,"","Üst Yazı","ustyazi","","","")
+                                    call formtextarea("ustyazi",ustyazi,"",translate("Üst Yazı","",""),"ustyazi","","","")
                                 Response.Write "</div>"
                             Response.Write "</div>"
                         '# form
@@ -332,13 +332,13 @@ if hata = "" then
                     Response.Write "<div class=""card"">"
                     Response.Write "<div class=""card-header text-white bg-primary"">"
                         Response.Write "<div class=""row"">"
-                            Response.Write "<div class=""col-lg-8"">Ürünler</div>"
+                            Response.Write "<div class=""col-lg-8"">" & translate("Ürünler","","") & "</div>"
                             Response.Write "<div class=""col-lg-2"">"
-                                Response.Write "<div class=""badge badge-info"">Katalog Kodu: </div>"
+                                Response.Write "<div class=""badge badge-info"">" & translate("Katalog Kodu","","") & ": </div>"
                                 call formselectv2("urunKatalogKodu",urunKatalogKodu,"","","","","urunKatalogKodu",HEdegerler,"")
                             Response.Write "</div>"
                             Response.Write "<div class=""col-lg-2"">"
-                                Response.Write "<div class=""badge badge-info"">Müşteri Referans Kodu: </div>"
+                                Response.Write "<div class=""badge badge-info"">" & translate("Müşteri Referans Kodu","","") & ": </div>"
                                 call formselectv2("urunStokRefKodu",urunStokRefKodu,"","","","","urunStokRefKodu",HEdegerler,"")
                             Response.Write "</div>"
                         Response.Write "</div>"
@@ -347,7 +347,7 @@ if hata = "" then
                         '# form
                         Response.Write "<div class=""row"">"
                             Response.Write "<div class=""col-lg-4"">"
-                                Response.Write "<div class=""badge badge-danger"">Teklif Verilecek Ürün : </div>"
+                                Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Verilecek Ürün","","") & ": </div>"
                                 ' sorgu = "Select stokID,stokKodu,stokAd from stok.stok where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 order by stokAd ASC"
                                 ' rs.open sorgu,sbsv5,1,3
                                         ' Response.Write "<select name=""teklifStokID"" id=""teklifStokID"" class=""form-control"">"
@@ -364,11 +364,11 @@ if hata = "" then
                                         ' next
                                         ' Response.Write "</select>"
                                 ' rs.close
-                                call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+                                call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""" & translate("Ürün adı, stok kodu, barkod","","") & """ data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
                             Response.Write "</div>"
                             Response.Write "<div class=""col-lg-1"">"
                                 Response.Write "<div class=""badge"">&nbsp;</div>"
-                                Response.Write "<button type=""button"" class=""btn btn-warning form-control"" onClick=""teklifUrunEkle();"">Ekle</button>"
+                                Response.Write "<button type=""button"" class=""btn btn-warning form-control"" onClick=""teklifUrunEkle();"">" & translate("Ekle","","") & "</button>"
                             Response.Write "</div>"
                         Response.Write "</div>"
 
@@ -393,10 +393,10 @@ if hata = "" then
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Teklife Özel Not</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Teklife Özel Not","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                         '# form
-                            call formtextarea("ozelNot",ozelNot,"","Teklife Özel Not","ozelNot","","","")
+                            call formtextarea("ozelNot",ozelNot,"",translate("Teklife Özel Not","",""),"ozelNot","","","")
                         '# form
                     Response.Write "</div>"
                     Response.Write "</div>"
@@ -411,7 +411,7 @@ if hata = "" then
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Ticari Koşullar</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Ticari Koşullar","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                         '# form
                             '## mevcut koşullar
@@ -430,7 +430,7 @@ if hata = "" then
                                 Response.Write "<thead>"
                                 Response.Write "<tr>"
                                 Response.Write "<th width=""100"">Koşul</th>"
-                                Response.Write "<th>İçerik</th>"
+                                Response.Write "<th>" & translate("İçerik","","") & "</th>"
                                 Response.Write "</tr>"
                                 Response.Write "</thead>"
                                 Response.Write "<tbody>"
@@ -460,7 +460,7 @@ if hata = "" then
                                     Response.Write "</tr>"
                                 rs.movenext
                                 next
-                                    kosuldegerler = "--Koşul Seçin--=|Ödeme=Ödeme|Teslimat=Teslimat|Garanti=Garanti|Destek=Destek|Opsiyon=Opsiyon"
+                                    kosuldegerler = "--" & translate("Koşul Seçin","","") & "--=|Ödeme=Ödeme|Teslimat=Teslimat|Garanti=Garanti|Destek=Destek|Opsiyon=Opsiyon"
                                     Response.Write "<tr>"
                                     Response.Write "<td>"
                                     call formselectv2("ozelkosultur1",ozelkosultur1,"","","","","ozelkosultur1",kosuldegerler,"")
@@ -487,7 +487,7 @@ if hata = "" then
             Response.Write "<div class=""row"">"
                 Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
                     Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-primary"">Teklif Alt Yazısı</div>"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Teklif Alt Yazısı","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
                         '# form
                             Response.Write "<div class=""row"">"
@@ -496,7 +496,7 @@ if hata = "" then
                                         sorgu = "Select onYaziID,onYazi from teklif.teklifOnYazi where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 and yaziYeri = N'Teklif Altı' order by onYaziID desc"
                                         rs.open sorgu,sbsv5,1,3
                                             Response.Write "<select name=""onAltYazi"" id=""onAltYazi"" class=""form-control"" onChange=""$('.altYazi').val($('#onAltYazi').children('option:selected').attr('data-onAltYazi'))"">"
-                                            Response.Write "<option value=""0"">--Hazır Yazı--</option>"
+                                            Response.Write "<option value=""0"">--" & translate("Hazır Yazı","","") & "--</option>"
                                             for oi = 1 to rs.recordcount
                                                 onYazi      =	rs("onYazi")
                                                 onYaziID	=	rs("onYaziID")
@@ -511,7 +511,7 @@ if hata = "" then
                                         rs.close
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-12"">"
-                                    call formtextarea("altYazi",altYazi,"","Alt Yazı","altYazi","","","")
+                                    call formtextarea("altYazi",altYazi,"",translate("Alt Yazı","",""),"altYazi","","","")
                                 Response.Write "</div>"
                             Response.Write "</div>"
                         '# form
@@ -525,7 +525,7 @@ if hata = "" then
 		Response.Write "<div class=""container-fluid"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
-                Response.Write "<button class=""form-control btn btn-success"" type=""submit"">KAYDET</button>"
+                Response.Write "<button class=""form-control btn btn-success"" type=""submit"">" & translate("Kaydet","","") & "</button>"
 			Response.Write "</div>"
 		Response.Write "</div>"
 		Response.Write "</div>"
@@ -564,9 +564,9 @@ if hata = "" then
                 Response.Write "teklifStokID = $('#stokSec').val();"
             Response.Write "}"
             Response.Write "if(cariAd==''){"
-                Response.Write "bootmodal('Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.','custom','','','','','','','','','','','');"
+                Response.Write "bootmodal('" & translate("Ürün eklemeden önce teklif verilecek olan firmaya ait cari bilgilerini girmelisiniz.","","") & "','custom','','','','','','','','','','','');"
             Response.Write "} else if(teklifStokID=='') {"
-                Response.Write "bootmodal('Lütfen bir ürün seçin.','custom','','','','','','','','','','','');"
+                Response.Write "bootmodal('" & translate("Lütfen bir ürün seçin.","","") & "','custom','','','','','','','','','','','');"
             Response.Write "} else {"
                 Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val() + '&teklifTuru=' + $('#teklifTuru').val());"
             Response.Write "}"

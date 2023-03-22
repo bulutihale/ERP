@@ -48,7 +48,7 @@ Response.Write "</style>"
 
 sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun, f.adres as firmamAdres, f.telefon as firmamTel, f.ilce, f.sehir, c1.il as ilAd,"_
 &" c2.cariAd as kurumCariAD, c1.adres as teklifCariAdres, i.tarih_ihale, i.dosyaNo, i.ikn, i.bayiDosyaTipi, i.teklifRevNo, i.teklifKase, i.teklifAntet, f.iletisimEposta, f.webSite,"_
-&" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, i.cariID,"_
+&" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, ISNULL(i.cariID,0) as cariID,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
 &" (SELECT COUNT(id) FROM dosya.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun,"_
 &" i.catKodGoster, i.mustKodGoster"_
@@ -139,9 +139,9 @@ Response.Write "</table>"
 Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">"
 	Response.Write "<tr>"
 		Response.Write "<td style=""width:50%;"" class=""b-all"">"
-			Response.Write "<div style=""height:120px; padding:10px;"""
+			Response.Write "<div style=""height:120px; padding:10px;""" 
 				Response.Write " data-tabloid=""" & id & """"
-				Response.Write " data-tablo=""ihale"""
+				Response.Write " data-tablo=""dosya.ihale"""
 				Response.Write " data-alan=""yeniCariAd"""
 			Response.Write " contenteditable=""true"" class=""ajSaveBlur"">" & teklifCariAD & "</div>"
 		Response.Write "</td>"

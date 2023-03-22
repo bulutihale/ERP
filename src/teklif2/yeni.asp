@@ -163,7 +163,7 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "</div>"
 				Response.Write "<div class=""col-lg-3"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left"">Alım Tarihi</div>"
-					call forminput("tarih_ihale_dog_temin",tarih_ihale,"","Alım Tarihi","tarih","","tarih_ihale_dogTemin","AutCompOff")
+					call forminput("tarih_ihale_dog_temin",date(),"","Alım Tarihi","tarih","","tarih_ihale_dogTemin","AutCompOff")
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""row mt-2"">"
@@ -202,7 +202,7 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""container row mt-2"">"
 				Response.Write "<div id=""tarih2_bayi"" class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left"">Teklif Tarihi</div>"
-				call forminput("tarih_ihale_bayi",tarih_ihale,"","Alım Tarihi","tarih","","tarih_ihale_bayi","AutCompOff")
+				call forminput("tarih_ihale_bayi",date(),"","Alım Tarihi","tarih","","tarih_ihale_bayi","AutCompOff")
 				Response.Write "</div>"
 				Response.Write "<div class=""col-lg-2"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left"">Ödeme Vadesi</div>"
@@ -237,7 +237,7 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "</div>"
 				Response.Write "<div class=""col-lg-3"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left"">Alım Tarihi</div>"
-					call forminput("tarih_ihale_ozel_hast",tarih_ihale,"","Alım Tarihi","tarih","","tarih_ihale_ozel_hast","AutCompOff")
+					call forminput("tarih_ihale_ozel_hast",date(),"","Alım Tarihi","tarih","","tarih_ihale_ozel_hast","AutCompOff")
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""container row mt-2"">"			
@@ -278,7 +278,7 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""container row mt-2"">"
 				Response.Write "<div id=""tarih2_proforma"" class=""col-lg-2"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left"">Teklif Tarihi</div>"
-					call forminput("tarih_ihale_bayi",tarih_ihale,"","Alım Tarihi","tarih","","tarih_ihale_bayi","AutCompOff")
+					call forminput("tarih_ihale_bayi",date(),"","Alım Tarihi","tarih","","tarih_ihale_bayi","AutCompOff")
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""container row"">"

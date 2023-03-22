@@ -41,7 +41,7 @@ if yetkiTeklif > 0 then
                         Response.Write "<form action=""/teklif/teklif_liste.asp"" method=""post"" class=""ortaform"">"
                         Response.Write "<div class=""form-row align-items-center"">"
                         Response.Write "<div class=""col-6 my-1"">"
-                        Response.Write "<input type=""text"" class=""form-control"" placeholder=""Cari Adı, Cari Kodu"" name=""aramaad"" value=""" & aramaad & """>"
+                        Response.Write "<input type=""text"" class=""form-control"" placeholder=""" & translate("Cari Adı, Cari Kodu","","") & """ name=""aramaad"" value=""" & aramaad & """>"
                         Response.Write "</div>"
                         Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
                         ' if isnull(firmaSSO) = True then
@@ -73,13 +73,13 @@ if yetkiTeklif > 0 then
 
             Response.Write "<div class=""table-responsive"">"
             Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-            Response.Write "<th scope=""col"">Tarih</th>"
-            Response.Write "<th scope=""col"">Sayı</th>"
-            Response.Write "<th scope=""col"">Dil</th>"
-            Response.Write "<th scope=""col"">Cari Ad</th>"
-            Response.Write "<th scope=""col"">Teklif Türü</th>"
-            Response.Write "<th scope=""col"">Para Birimi</th>"
-            Response.Write "<th scope=""col"">Sonuç</th>"
+            Response.Write "<th scope=""col"">" & translate("Tarih","","") & "</th>"
+            Response.Write "<th scope=""col"">" & translate("Sayı","","") & "</th>"
+            Response.Write "<th scope=""col"">" & translate("Dil","","") & "</th>"
+            Response.Write "<th scope=""col"">" & translate("Cari Ad","","") & "</th>"
+            Response.Write "<th scope=""col"">" & translate("Teklif Türü","","") & "</th>"
+            Response.Write "<th scope=""col"">" & translate("Para Birimi","","") & "</th>"
+            Response.Write "<th scope=""col"">" & translate("Sonuç","","") & "</th>"
             if yetkiTeklif >= 3 then
                 Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
             end if
@@ -146,7 +146,7 @@ if yetkiTeklif > 0 then
                                         teklif64 = teklifID
                                         teklif64 =	base64_encode_tr(teklif64)
                                         Response.Write "<a onClick="""
-                                        Response.Write "bootmodal('Teklifi Amir Onayına Gönder?','custom','/teklif/teklif_onay.asp?islem=1&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=0&teklifID=" & teklif64 & "','Amir Onayına Gönder','Gönderme','btn-danger','btn-success','','ajax','','','');"
+                                        Response.Write "bootmodal('" & translate("Teklifi Amir Onayına Gönder?","","") & "','custom','/teklif/teklif_onay.asp?islem=1&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=0&teklifID=" & teklif64 & "','" & translate("Amir Onayına Gönder","","") & "','" & translate("Gönderme","","") & "','btn-danger','btn-success','','ajax','','','');"
                                         Response.Write """ title=""" & translate("Teklifi Amir Onaylına Gönder","","") & """ class=""ml-1"" >"
                                         Response.Write "<i class=""icon group-key"
                                         Response.Write """></i>"
@@ -197,7 +197,7 @@ if yetkiTeklif > 0 then
                                         teklif64 =	base64_encode_tr(teklif64)
                                         Response.Write "<a onClick="""
                                         ' Response.Write "bootmodal('Teklifi Onaylıyor Musunuz?','custom','/teklif/teklif_onay.asp?islem=2&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=3&teklifID=" & teklif64 & "','Teklifi Onayla','Teklifi Reddet','btn-success','btn-danger','','ajax','','bootboxinput35','');"
-                                        Response.Write "bootmodal('Teklifi Onaylıyor Musunuz?<br /><input type=\'text\' id=\'bootboxinput35\' />','custom','/teklif/teklif_onay.asp?islem=2&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=3&teklifID=" & teklif64 & "','Teklifi Onayla','Teklifi Reddet','btn-success','btn-danger','','ajax','','bootboxinput35','');"
+                                        Response.Write "bootmodal('" & translate("Teklifi Onaylıyor Musunuz?","","") & "<br /><input type=\'text\' id=\'bootboxinput35\' />','custom','/teklif/teklif_onay.asp?islem=2&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=3&teklifID=" & teklif64 & "','" & translate("Teklifi Onayla","","") & "','" & translate("Teklifi Reddet","","") & "','btn-success','btn-danger','','ajax','','bootboxinput35','');"
                                         Response.Write """ title=""" & translate("Teklifi Onayla","","") & """ class=""ml-1"" >"
                                         Response.Write "<i class=""icon tick"
                                         Response.Write """></i>"
@@ -212,7 +212,7 @@ if yetkiTeklif > 0 then
                                         teklif64 =	base64_encode_tr(teklif64)
                                         Response.Write "<a onClick="""
                                         ' Response.Write "bootmodal('Teklifi Onaylıyor Musunuz?','custom','/teklif/teklif_onay.asp?islem=2&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=3&teklifID=" & teklif64 & "','Teklifi Onayla','Teklifi Reddet','btn-success','btn-danger','','ajax','','bootboxinput35','');"
-                                        Response.Write "bootmodal('Teklif sonucunu seçiniz?<br /><input type=\'text\' id=\'bootboxinput35\' />','custom','/teklif/teklif_onay.asp?islem=6&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=5&teklifID=" & teklif64 & "','Satış Gerçekleşti','Müşteri Red','btn-success','btn-danger','','ajax','','bootboxinput35','');"
+                                        Response.Write "bootmodal('" & translate("Teklif sonucunu seçiniz?","","") & "<br /><input type=\'text\' id=\'bootboxinput35\' />','custom','/teklif/teklif_onay.asp?islem=6&teklifID=" & teklif64 & "','/teklif/teklif_onay.asp?islem=5&teklifID=" & teklif64 & "','" & translate("Satış Gerçekleşti","","") & "','" & translate("Müşteri Red","","") & "','btn-success','btn-danger','','ajax','','bootboxinput35','');"
                                         Response.Write """ title=""" & translate("Teklif sonucunu seçiniz","","") & """ class=""ml-1"" >"
                                         Response.Write "<i class=""icon star"
                                         Response.Write """></i>"
@@ -257,7 +257,7 @@ if yetkiTeklif > 0 then
     '####### SONUÇ TABLOSU
     ' call dataTableYap("deneme","Durum,Firma Adı,Teklif Sayı,Teklif Türü,Tarih,Personel,İşlemler","/teklif/json_teklif.asp","","","","","","","","","")
 else
-    call yetkisizGiris("Teklifleri görmek için yeterli yetkiniz bulunmamaktadır","","")
+    call yetkisizGiris(translate("Teklifleri görmek için yeterli yetkiniz bulunmamaktadır","",""),"","")
 end if
 
 
