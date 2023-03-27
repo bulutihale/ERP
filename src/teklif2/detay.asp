@@ -51,20 +51,13 @@ if yetkiKontrol  >= 3 then
 		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster, i.epostaGovde,"
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
 		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar, i.teklifEposta, i.epostaGovde,"
-		sorgu = sorgu & " CASE WHEN i.ihaleTipi = 'bayi' THEN f.teklifDosya WHEN i.ihaleTipi = 'proforma' THEN f.proformaDosya END as teklifSablon, landscapeDeger"
+		sorgu = sorgu & " k.pdfKaynakDosya as teklifSablon, k.landscapeDeger, i.teklifMusteriOnay"
 		sorgu = sorgu & " FROM dosya.ihale i"
 		sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
+		sorgu = sorgu & " LEFT JOIN kalite.form k ON i.pdfSablon = k.pdfKaynakDosya"
 		sorgu = sorgu & " WHERE i.firmaID = " & firmaID & " AND i.id = " & ihaleID
 		rs.open sorgu,sbsv5,1,3
 		
-		' sorgu = "SELECT tarih_karar FROM sozlesmeler WHERE ihaleID = " & rs("id")
-		' rs2.open sorgu,sbsv5,1,3
-		' 	if rs2.recordcount > 0 then
-		' 		kararTarih	=	rs2("tarih_karar")
-		' 	else
-		' 		kararTarih	= 	null	
-		' 	end if
-		' rs2.close
 			
 			ad 					=	rs("ad")
 			cariID				=	rs("cariID")
@@ -102,6 +95,7 @@ if yetkiKontrol  >= 3 then
 			teklifSablon		=	rs("teklifSablon")
 			teklifKDV			=	rs("teklifKDV")
 			satirKDV			=	rs("satirKDV")
+			teklifMusteriOnay	=	rs("teklifMusteriOnay")
 			altTopGoster		=	rs("altTopGoster")
 			epostaGovde			=	rs("epostaGovde")
 			bankalar			=	rs("bankalar")
@@ -183,7 +177,31 @@ if yetkiKontrol  >= 3 then
 				firmalardegerler = degerler
 	'##### /FİRMALARIMI ÇEK
 	'##### /FİRMALARIMI ÇEK
+
+	'##### TEKLİF ŞABLONLARINI ÇEK
+	'##### TEKLİF ŞABLONLARINI ÇEK
+		sorgu = "SELECT formID, pdfKaynakDosya FROM kalite.form WHERE firmaID = " & firmaID & " AND formAd = 'Teklif'"
+		rs.open sorgu,sbsv5,1,3
+			degerler = "=|"
+			do while not rs.eof
+				degerler = degerler & rs("pdfKaynakDosya")
+				degerler = degerler & "="
+				degerler = degerler & rs("formID")
+				degerler = degerler & "|"
+			rs.movenext
+			loop
+			if degerler = "" then
+			else
+				degerler = left(degerler,len(degerler)-1)
+			end if
+		rs.close
+		teklifSablonDegerler = degerler
 	
+	'##### /TEKLİF ŞABLONLARINI ÇEK
+	'##### /TEKLİF ŞABLONLARINI ÇEK
+
+
+
 	'##### KULLANICILARI ÇEK
 	'##### KULLANICILARI ÇEK
 			sorgu = "select k.ad, k.id from personel.personel k where k.firmaID = " & firmaID & " order by k.ad asc"
@@ -835,7 +853,13 @@ Response.Write "<div class=""card-body row"">"
 		chckDurum8		=	""
 	end if
 
-
+	if teklifMusteriOnay = True then
+		teklifMusteriDurum = 	0
+		chckDurum9		=	" checked"
+	else
+		teklifMusteriDurum = 1
+		chckDurum9		=	""
+	end if
 
 	
 		Response.Write "<div class=""tab-pane"" id=""teklif"" role=""tabpanel"">"
@@ -943,6 +967,15 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "</div>"						
 				Response.Write "</div>"
 
+				Response.Write "<div class=""row mt-2"">"
+					Response.Write "<div class=""col-1 text-left"">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifMusteriOnay','dosya.ihale',"&id&"," & teklifMusteriDurum & ")"" class=""chck30 form-control"" " & chckDurum9 & ">"
+					Response.Write "</div>"
+					Response.Write "<div class=""col-2 text-left"">"
+						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte müşteri onayı talep tablosu olsun</div>"
+					Response.Write "</div>"						
+				Response.Write "</div>"
+
 			Response.Write "</div>"
 		'######### ANTET - KAŞE
 		'######### ANTET - KAŞE
@@ -1009,42 +1042,42 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi2').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi2"" class=""form-control col-12"" value=""- Satış fiyatlarımız hammadde alımı ve döviz kuruna göre değişiklik gösterebilir, bu durumda tarafınıza yeni bir proforma düzenlenir."">"
+						Response.Write "<input id=""yazi2"" class=""form-control col-12"" value=""- Satış fiyatlarımız hammadde alımı ve döviz kuruna göre değişiklik gösterebilir, bu durumda tarafınıza yeni bir teklif düzenlenir."">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi3').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi3"" class=""form-control col-12"" value=""- DENİZBANK IBAN No: TR76 0013 4000 0053 9430 7000 01"">"
+						Response.Write "<input id=""yazi3"" class=""form-control col-12"" value="""">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi4').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi4"" class=""form-control col-12"" value=""- Teslim sipariş tarihinden itibaren 2 işgünü."">"
+						Response.Write "<input id=""yazi4"" class=""form-control col-12"" value="""">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi5').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi5"" class=""form-control col-12"" value=""- Cihazımız 2 yıl garantilidir."">"
+						Response.Write "<input id=""yazi5"" class=""form-control col-12"" value="""">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi6').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi6"" class=""form-control col-12"" value=""- Cihaz ile birlikte Sağlık Bakanlığı ÜTS onayı, CE, HYB Belgesi, Personel Eğitim Sertifikası verilmektedir."">"
+						Response.Write "<input id=""yazi6"" class=""form-control col-12"" value="""">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi7').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi7"" class=""form-control col-12"" value=""- Cihaz kurulumu firmamıza aittir."">"
+						Response.Write "<input id=""yazi7"" class=""form-control col-12"" value="""">"
 				Response.Write "</div>"
 			elseif ihaleTipi = "proforma" then
 				Response.Write "<div class=""input-group mb-3"">"
@@ -1113,6 +1146,7 @@ Response.Write "<div class=""card text-center"">"
 						rs.movenext
 						next
 					end if
+				rs.close
 			Response.Write "</div>"
 		'######### BANKALAR
 		'######### BANKALAR
@@ -1180,33 +1214,12 @@ Response.Write "<div class=""card text-center"">"
 		'######### ŞABLON
 		'######### ŞABLON
 			Response.Write "<div class=""tab-pane"" id=""sablon"" role=""tabpanel"">"
-
 				Response.Write "<div class=""row"">"
-					Set fso = CreateObject("Scripting.FileSystemObject")
-					Set objFolder = FSO.GetFolder(Server.Mappath("/teklifSablon"))
-					Set objFiles = objFolder.Files
 					Response.Write "<div class=""col text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-4"">Teklif Şablonu</div>"
-						Response.Write "<select class=""form-control border border-danger"" onChange=""ajSave('pdfSablon','dosya.ihale',"&id&",$(this).val())"">"
-
-							For each z in objFiles
-								dosyaAd = z.name
-								dosyaAd = LEFT(dosyaAd, (LEN(dosyaAd)-4))
-								Response.Write "<option value=""" & dosyaAd & """>" & dosyaAd & "</option>"
-							next
-						Response.Write "</select>"
-						Set objFiles = Nothing
-						Set objFolder = Nothing
-						Set fso = Nothing
-					Response.Write "</div>"
+						call formselectv2("teklifSablon",teklifSablon,"ajSave('pdfSablon','dosya.ihale',"&id&",$(this).find('option:selected').text())","","teklifSablon","","",teklifSablonDegerler,"")		
+						Response.Write "<div class=""bold"">Seçili Şablon: <span class=""bold text-danger"">" & teklifSablon & "</span></div>"
 				Response.Write "</div>"
-
-				Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col text-left"">"
-						Response.Write "<div class=""badge badge-secondary rounded-left mt-4"">Sayfa Yönü</div>"
-						call formselectv2("landscapeDeger",landscapeDeger,"ajSave('landscapeDeger','dosya.ihale',"&id&",$(this).val())","","landscapeDeger","","",sayfaYonDegerler,"")		
-					Response.Write "</div>"	
-				Response.Write "</div>"	
 			Response.Write "</div>"
 		'######### /ŞABLON
 		'######### /ŞABLON

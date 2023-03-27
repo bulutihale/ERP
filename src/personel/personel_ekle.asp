@@ -30,6 +30,8 @@ yetkiBilgiIslem = yetkibul("Bilgi İşlem")
     email           =   Request.Form("email")
     gorev           =   Request.Form("gorev")
     expiration      =   Request.Form("expiration")
+    language        =   Request.Form("language")
+    firmaIDpersonel        =   Request.Form("firmaIDpersonel")
     bildirimYontemi1     =   Request.Form("bildirimYontemi1")
 '###### FORM BİLGİLERİNİ AL
 '###### FORM BİLGİLERİNİ AL
@@ -104,7 +106,11 @@ end if
         else
             rs("expiration") = expiration
         end if
+        if firmaIDpersonel <> "" then
+            rs("firmaID") = firmaIDpersonel
+        end if
         rs("bildirimYontemi1")  =   bildirimYontemi1
+        rs("language")  =   language
     rs.update
     gorevID = rs("id")
     rs.close

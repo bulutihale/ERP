@@ -3277,6 +3277,9 @@ function logla(byVal islem)
 		FNpersonelID = 0
 	end if
 	if modulID = "" then
+		modulID = Session("menuID")
+	end if
+	if modulID = "" then
 		modulID = 0
 	end if
 	if modulAd = "" then
@@ -3701,21 +3704,43 @@ end function
 
 
 
-function arrPersonelBul(byVal dbpersonelID,arrayDegeri)
-	if dbpersonelID = 0 or isnull(dbpersonelID) = True then
-		arrPersonelBul = "-"
-	else
-	personelDegerlerArr = arrayDegeri
-	dbpersonelID		=	int(dbpersonelID)
-		for pi = 0 to ubound(personelDegerlerArr)
-			personelDegerlerColumnArr = Split(personelDegerlerArr(pi),"=")
-			if int(personelDegerlerColumnArr(1)) = dbpersonelID then
-				arrPersonelBul = personelDegerlerColumnArr(0)
-				exit for
-			end if
-		next
-	end if
+
+function arrayDegerBulfn(byVal arraydeger,byVal arraysecenekler)
+    fnsonuc = ""
+    if isnull(arraydeger) = true then
+        arraydeger = ""
+    end if
+    if arraysecenekler <> "" then
+        arrayseceneklerArr = Split(arraysecenekler,"|")
+        for pi = 0 to ubound(arrayseceneklerArr)
+            arraysecenekler2Arr = Split(arrayseceneklerArr(pi),"=")
+                if arraysecenekler2Arr(1) = arraydeger then
+                    fnsonuc = arraysecenekler2Arr(0)
+                    exit for
+                end if
+            set arraysecenekler2Arr = Nothing
+        next
+        set arrayseceneklerArr = Nothing
+    end if
+    arrayDegerBulfn = fnsonuc
 end function
+' function arrPersonelBul(byVal dbpersonelID,arrayDegeri)
+' 	if dbpersonelID = 0 or isnull(dbpersonelID) = True then
+' 		arrPersonelBul = "-"
+' 	else
+' 		personelDegerlerArr = arrayDegeri
+' 		if isnumeric(dbpersonelID) = true then
+' 			dbpersonelID		=	int(dbpersonelID)
+' 		end if
+' 		for pi = 0 to ubound(personelDegerlerArr)
+' 			personelDegerlerColumnArr = Split(personelDegerlerArr(pi),"=")
+' 			if int(personelDegerlerColumnArr(1)) = dbpersonelID then
+' 				arrPersonelBul = personelDegerlerColumnArr(0)
+' 				exit for
+' 			end if
+' 		next
+' 	end if
+' end function
 
 
 function netsishareketturu(byVal kod)

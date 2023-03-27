@@ -42,7 +42,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<div class=""col-lg-1 col-sm-1 my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 							if yetkiKontrol >= 5 then
 								Response.Write "<div class=""col-lg-9 col-sm-6 my-1 text-right"">"
-									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/personel/personel_yeni.asp')"">" & translate("YENİ PERSONEL","","") & "</button>"
+									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/personel/personel_yeni.asp')"">" & translate("Yeni Personel Ekle","","") & "</button>"
 								Response.Write "</div>"
 							end if
 						Response.Write "</div>"
@@ -72,8 +72,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
+		Response.Write "<th scope=""col"">" & translate("Firma Adı","","") & "</th>"
 		Response.Write "<th scope=""col"">" & translate("Ad Soyad","","") & "</th>"
-		Response.Write "<th scope=""col"">" & translate("Görev","","") & "</th>"
+		Response.Write "<th scope=""col"">" & translate("Pozisyon","","") & "</th>"
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">GSM</th>"
 		Response.Write "<th scope=""col"">" & translate("Son Giriş","","") & "</th>"
 		if yetkiKontrol >= 5 then
@@ -85,11 +86,14 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & "personel.personel.ad," & vbcrlf
 			sorgu = sorgu & "personel.personel.gorev," & vbcrlf
 			sorgu = sorgu & "personel.personel.ceptelefon," & vbcrlf
-			sorgu = sorgu & "personel.personel.songiris" & vbcrlf
+			sorgu = sorgu & "personel.personel.songiris," & vbcrlf
+			sorgu = sorgu & "portal.firma.Ad as firmaAd" & vbcrlf
 			sorgu = sorgu & "from personel.personel" & vbcrlf
+			sorgu = sorgu & "INNER JOIN portal.firma on (portal.firma.Id = " & firmaID & " or portal.firma.anaFirmaID = " & firmaID & ") and portal.firma.Id = personel.personel.firmaID" & vbcrlf
 			sorgu = sorgu & "where" & vbcrlf
-			sorgu = sorgu & "personel.personel.firmaID = " & firmaID & vbcrlf
-			sorgu = sorgu & " and (personel.personel.expiration >= '" & tarihsql(date()) & "' or personel.personel.expiration is null )" & vbcrlf
+			' sorgu = sorgu & "personel.personel.firmaID = " & firmaID & vbcrlf
+			' sorgu = sorgu & "personel.personel.firmaID in (select Id from portal.firma where Id = " & firmaID & " or anaFirmaID = " & firmaID & ")" & vbcrlf
+			sorgu = sorgu & " (personel.personel.expiration >= '" & tarihsql(date()) & "' or personel.personel.expiration is null )" & vbcrlf
 			sorgu = sorgu & " and (personel.personel.songiris > '" & tarihsql(date()-30) & "' or personel.personel.songiris is null )" & vbcrlf
 			if aramaad = "" then
 			else
@@ -101,6 +105,9 @@ yetkiKontrol = yetkibul(modulAd)
 				for i = 1 to rs.recordcount
 					personelID	=	rs("id")
 					Response.Write "<tr>"
+					Response.Write "<td>"
+                    Response.Write rs("firmaAd")
+					Response.Write "</td>"
 					Response.Write "<td>"
                     Response.Write rs("ad")
 					Response.Write "</td>"
@@ -134,7 +141,7 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write """></i>"
 						Response.Write "</a>"
 
-						Response.Write "<a title=""" & translate("Personel Düzenle","","") & """"
+						Response.Write "<a title=""" & translate("Personel Bilgilerini Düzenle","","") & """"
 						Response.Write " onClick=""modalajax('/personel/personel_yeni.asp?gorevID=" & personelID64 & "');"">"
 						Response.Write "<i class=""icon user-edit parmak"
 						Response.Write """></i>"

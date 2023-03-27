@@ -53,6 +53,7 @@ yetkiPersonel = yetkibul("personel")
                     language	    =   rs("language")
                     SSOID           =   rs("SSOID") & ""
                     bildirimYontemi1 =  rs("bildirimYontemi1")
+                    firmaIDpersonel =  rs("firmaID")
                     call logla("Personel Bilgileri : " & ad)
                 end if
                 rs.close
@@ -62,22 +63,42 @@ yetkiPersonel = yetkibul("personel")
 
 
 
-'############# GÖREVLER
-							sorgu = "Select distinct(gorev) from personel.personel where firmaID = " & firmaID & " order by gorev ASC"
-							rs.open sorgu,sbsv5,1,3
-							' if rs.recordcount > 0 then
-									degerler = ""
-									do while not rs.eof
-										degerler = degerler & rs("gorev")
-    									degerler = degerler & "="
-										degerler = degerler & rs("gorev")
-										degerler = degerler & "|"
-									rs.movenext
-									loop
-									gorevDegerler = left(degerler,len(degerler)-1)
-							' end if
-							rs.close
-'############# GÖREVLER
+        '############# GÖREVLER
+            sorgu = "Select distinct(gorev) from personel.personel" & vbcrlf
+            sorgu = sorgu & "INNER JOIN portal.firma on (portal.firma.Id = " & firmaID & " or portal.firma.anaFirmaID = " & firmaID & ") and portal.firma.Id = personel.personel.firmaID" & vbcrlf
+            sorgu = sorgu & "order by gorev ASC" & vbcrlf
+            rs.open sorgu,sbsv5,1,3
+            ' if rs.recordcount > 0 then
+                    degerler = ""
+                    do while not rs.eof
+                        degerler = degerler & rs("gorev")
+                        degerler = degerler & "="
+                        degerler = degerler & rs("gorev")
+                        degerler = degerler & "|"
+                    rs.movenext
+                    loop
+                    gorevDegerler = left(degerler,len(degerler)-1)
+            ' end if
+            rs.close
+        '############# GÖREVLER
+
+        '############# firmalar
+            sorgu = "Select Ad,Id from portal.firma where portal.firma.Id = " & firmaID & " or portal.firma.anaFirmaID = " & firmaID & vbcrlf
+            sorgu = sorgu & "order by Ad ASC" & vbcrlf
+            rs.open sorgu,sbsv5,1,3
+            ' if rs.recordcount > 0 then
+                    degerler = ""
+                    do while not rs.eof
+                        degerler = degerler & rs("Ad")
+                        degerler = degerler & "="
+                        degerler = degerler & rs("Id")
+                        degerler = degerler & "|"
+                    rs.movenext
+                    loop
+                    firmaDegerler = left(degerler,len(degerler)-1)
+            ' end if
+            rs.close
+        '############# firmalar
 
 
 
@@ -85,6 +106,17 @@ yetkiPersonel = yetkibul("personel")
 		Response.Write "<form action=""/personel/personel_ekle.asp"" method=""post"" class=""ajaxform"">"
 		call forminput("gorevID",gorevID,"","","gorevID","hidden","gorevID","")
 		Response.Write "<div class=""form-row align-items-center"">"
+
+
+        '### firma
+            if yetkiPersonel >= 5 then
+                Response.Write "<div class=""col-sm-12 my-1"">"
+                Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Firma Adı","","") & "</span>"
+                    call formselectv2("firmaIDpersonel",firmaIDpersonel,"","","","","firmaIDpersonel",firmaDegerler,"")
+                Response.Write "</div>"
+            end if
+        '### firma
+
 		Response.Write "<div class=""col-sm-12 my-1"">"
         Response.Write "<span class=""badge badge-danger rounded-left"">" & translate("Personel Adı Soyadı","","") & "</span>"
         if yetkiPersonel >= 5 then
@@ -111,15 +143,23 @@ yetkiPersonel = yetkibul("personel")
             call forminput("email",email,"","","email","readonly","email","")
         end if
 		Response.Write "</div>"
-		Response.Write "<div class=""col-sm-12 my-1"">"
-        Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Görev","","") & "</span>"
-        if yetkiPersonel >= 5 then
-            call formselectv2("gorev",gorev,"","","","","gorev",gorevDegerler,"")
-            'drop
-        else
-            call forminput("gorev",gorev,"","","gorev","readonly","gorev","")
-        end if
-		Response.Write "</div>"
+        '### dil
+            Response.Write "<div class=""col-sm-12 my-1"">"
+            Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Dil","","") & "</span>"
+            call formselectv2("language",language,"","","","","language",dilDegerler,"")
+            Response.Write "</div>"
+        '### dil
+        '### görev
+            Response.Write "<div class=""col-sm-12 my-1"">"
+            Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Pozisyon","","") & "</span>"
+            if yetkiPersonel >= 5 then
+                call formselectv2("gorev",gorev,"","","","","gorev",gorevDegerler,"")
+                'drop
+            else
+                call forminput("gorev",gorev,"","","gorev","readonly","gorev","")
+            end if
+            Response.Write "</div>"
+        '### görev
         if yetkiPersonel >= 5 then
             Response.Write "<div class=""col-sm-12 my-1"">"
             Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Son Kullanma Tarihi","","") & "</span>"
@@ -139,52 +179,55 @@ yetkiPersonel = yetkibul("personel")
 '###### ARAMA FORMU
 
 
-'### İŞLEM GEÇMİŞİ TABLOSU
-'### İŞLEM GEÇMİŞİ TABLOSU
-    if hata = "" and yetkiPersonel = 9 and gorevID > 0 then
-		Response.Write "<div class=""container-fluid mt-3"">"
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
-				Response.Write "<div class=""card"">"
-                    Response.Write "<div class=""card-header text-white bg-success"">Hareket Ayrıntıları : </div>"
-                    Response.Write "<div class=""card-body"">"
-                        Response.Write "<div class=""row"">"
-                            Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs mt-1"">"
-                            '#### TABLO
-                                Response.Write "<table class=""table table-striped table-bordered table-hover mt10""><thead><tr>"
-                                Response.Write "<th>" & translate("Tarih","","") & "</th>"
-                                Response.Write "<th>" & translate("Personel","","") & "</th>"
-                                Response.Write "<th>" & translate("İşlem","","") & "</th>"
-                                Response.Write "<th>" & translate("IP","","") & "</th>"
-                                Response.Write "</tr></thead><tbody>"
-                                sorgu = "Select top(10) *,(Select personel.personel.ad from personel.personel where personel.personel.id = personel.personel_log.personelID) as kidAd from personel.personel_log where firmaID = " & firmaID & " and modulAd = '" & modulAd & "' and gorevID = " & gorevID
-                                sorgu = sorgu & "order by id desc"
-                                rs.open sorgu,sbsv5,1,3
-                                if rs.recordcount > 0 then
-                                for ri = 1 to rs.recordcount
-                                    Response.Write "<tr>"
-                                    Response.Write "<td>" & rs("tarih") & "</td>"
-                                    Response.Write "<td>" & rs("kidAd") & "</td>"
-                                    Response.Write "<td>" & rs("islem") & "</td>"
-                                    Response.Write "<td>" & rs("ip") & "</td>"
-                                    Response.Write "</td>"
-                                    Response.Write "</tr>"
-                                rs.movenext
-                                next
-                                end if
-                                rs.close
-                                Response.Write "</table>"
-                            '#### TABLO
-                            Response.Write "</div>"
-                        Response.Write "</div>"
-                    Response.Write "</div>"
-                Response.Write "</div>"
-            Response.Write "</div>"
-        Response.Write "</div>"
-        Response.Write "</div>"
-    end if
-'### İŞLEM GEÇMİŞİ TABLOSU
-'### İŞLEM GEÇMİŞİ TABLOSU
+
+
+
+' '### İŞLEM GEÇMİŞİ TABLOSU
+' '### İŞLEM GEÇMİŞİ TABLOSU
+'     if hata = "" and yetkiPersonel = 9 and gorevID > 0 then
+' 		Response.Write "<div class=""container-fluid mt-3"">"
+' 		Response.Write "<div class=""row"">"
+' 			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+' 				Response.Write "<div class=""card"">"
+'                     Response.Write "<div class=""card-header text-white bg-success"">Hareket Ayrıntıları : </div>"
+'                     Response.Write "<div class=""card-body"">"
+'                         Response.Write "<div class=""row"">"
+'                             Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs mt-1"">"
+'                             '#### TABLO
+'                                 Response.Write "<table class=""table table-striped table-bordered table-hover mt10""><thead><tr>"
+'                                 Response.Write "<th>" & translate("Tarih","","") & "</th>"
+'                                 Response.Write "<th>" & translate("Personel","","") & "</th>"
+'                                 Response.Write "<th>" & translate("İşlem","","") & "</th>"
+'                                 Response.Write "<th>" & translate("IP","","") & "</th>"
+'                                 Response.Write "</tr></thead><tbody>"
+'                                 sorgu = "Select top(10) *,(Select personel.personel.ad from personel.personel where personel.personel.id = personel.personel_log.personelID) as kidAd from personel.personel_log where firmaID = " & firmaID & " and modulAd = '" & modulAd & "' and gorevID = " & gorevID
+'                                 sorgu = sorgu & "order by id desc"
+'                                 rs.open sorgu,sbsv5,1,3
+'                                 if rs.recordcount > 0 then
+'                                 for ri = 1 to rs.recordcount
+'                                     Response.Write "<tr>"
+'                                     Response.Write "<td>" & rs("tarih") & "</td>"
+'                                     Response.Write "<td>" & rs("kidAd") & "</td>"
+'                                     Response.Write "<td>" & rs("islem") & "</td>"
+'                                     Response.Write "<td>" & rs("ip") & "</td>"
+'                                     Response.Write "</td>"
+'                                     Response.Write "</tr>"
+'                                 rs.movenext
+'                                 next
+'                                 end if
+'                                 rs.close
+'                                 Response.Write "</table>"
+'                             '#### TABLO
+'                             Response.Write "</div>"
+'                         Response.Write "</div>"
+'                     Response.Write "</div>"
+'                 Response.Write "</div>"
+'             Response.Write "</div>"
+'         Response.Write "</div>"
+'         Response.Write "</div>"
+'     end if
+' '### İŞLEM GEÇMİŞİ TABLOSU
+' '### İŞLEM GEÇMİŞİ TABLOSU
 
 
 %><!--#include virtual="/reg/rs.asp" -->

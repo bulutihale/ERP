@@ -194,15 +194,18 @@ end if
 '### 404 - 403
 	if left(adres,3) = "403" or left(adres,3) = "404" then
 		gelenadresarr	=	split(adres,"/")
+		toplamsayfa		=	""
 		if ubound(gelenadresarr) >= 3 then
 			sayfa3				=	gelenadresarr(3)
 			sayfa3				=	Replace(sayfa3,".html","")
 			Session("sayfa3")	=	sayfa3
+			toplamsayfa			=	sayfa3
 		end if
 		if ubound(gelenadresarr) >= 4 then
 			sayfa4				=	gelenadresarr(4)
 			sayfa4				=	Replace(sayfa4,".html","")
 			Session("sayfa4")	=	sayfa4
+			toplamsayfa			=	sayfa3 & "/" & sayfa4
 		end if
 		if ubound(gelenadresarr) >= 5 then
 			sayfa5				=	gelenadresarr(5)
@@ -248,6 +251,43 @@ end if
 		end if
 '##### ADRESTEN OTOMATİK FORM OLUŞTUR
 '##### ADRESTEN OTOMATİK FORM OLUŞTUR
+
+
+
+
+
+'##### MENÜYÜ BUL - NEREDEYİM
+	if toplamsayfa <> "" then
+		sorgu = "Select id from portal.menuler where link = '" & toplamsayfa & "' and (firmaID = 0 or firmaID = " & firmaID & ") order by firmaID ASC"
+		rs.Open sorgu, sbsv5, 1, 3
+		if rs.recordcount > 0 then
+			menuID = rs("id")
+			Session("menuID") = menuID
+		end if
+		rs.close
+	end if
+'##### MENÜYÜ BUL - NEREDEYİM
+
+
+
+
+
+
+
+'##### YARDIM
+	if menuID <> "" then
+		sorgu = "Select top 1 yardimID from portal.yardim where menuID = " & menuID & " and silindi = 0 order by yardimID DESC"
+		rs.Open sorgu, sbsv5, 1, 3
+		if rs.recordcount > 0 then
+			yardimID = rs("yardimID")
+		end if
+		rs.close
+	end if
+'##### YARDIM
+
+
+
+
 
 
 
@@ -350,10 +390,6 @@ if kid <> "" then
 	' 	Response.Write "					</li>"
 	' 	Response.Write "				</ul>"
 	' end if
-
-
-
-
 
 
 	'########### ÜST BAR
@@ -520,7 +556,6 @@ if kid <> "" then
 			'## BİLDİRİM ALANI
 
 			'## KULLANICI MENÜSÜ
-			'## KULLANICI MENÜSÜ
 				personel64 = kid
 				personel64 = base64_encode_tr(personel64)
 				Response.Write "<li class=""nav-item nav-profile dropdown"">"
@@ -531,7 +566,18 @@ if kid <> "" then
 				Response.Write "</div>"
 				Response.Write "</li>"
 			'## KULLANICI MENÜSÜ
-			'## KULLANICI MENÜSÜ
+
+			if yardimID <> "" then
+				Response.Write "<li class=""nav-item dropdown"">"
+				Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/yardim/yardim/" & base64_encode_tr(yardimID) & """>"
+				Response.Write "<i class=""mdi mdi-help parmak"" title=""Yardım""></i>"
+				Response.Write "</a>"
+				Response.Write "</li>"
+			end if
+
+
+
+
 
 		Response.Write "</ul>"
 	'########### ÜST BAR

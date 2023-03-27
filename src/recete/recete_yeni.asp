@@ -25,7 +25,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 if gorevID <> "" then
             sorgu = "SELECT t1.receteAd, t1.ozelRecete, t1.receteTipi, t1.silindi, t2.cariID, t2. cariAd, t3.stokID, t3.stokAd,"
-			sorgu = sorgu & " ISNULL(t1.istasyonID,0) as istasyonID, t4.istasyonAd, t5.uzunBirim"
+			sorgu = sorgu & " ISNULL(t1.istasyonID,0) as istasyonID, t4.istasyonAd, stok.FN_anaBirimADBul(t1.stokID,'uAd') as anaBirimAD"
 			sorgu = sorgu & " FROM recete.recete t1"
 			sorgu = sorgu & " LEFT JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 			sorgu = sorgu & " LEFT JOIN stok.stok t3 ON t1.stokID = t3.stokID"
@@ -42,8 +42,8 @@ if gorevID <> "" then
 				stokAd			=	rs("stokAd")
 				istasyonID		=	rs("istasyonID")
 				istasyonAd		=	rs("istasyonAd")
+				anaBirimAD		=	rs("anaBirimAD")
 				silindi			=	rs("silindi")
-				uzunBirim		=	rs("uzunBirim")
 				defDeger		=	cariID&"###"&cariAd
 				defDeger1		=	stokID&"###"&stokAd
 				defDeger2		=	istasyonID&"###"&istasyonAd
@@ -83,7 +83,7 @@ call logla(divAd & " Ekranı Girişi")
 			Response.Write "<div class=""col-lg-12"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
 				if gorevID = "" then
-					call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
+					call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id')); $('#receteAd').val($(this).text())","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
 				else
 					call formhidden("stokSec",stokID,"","","","","stokSec","")
 					call forminput("stokAd",stokAd,"","","","autocompleteOFF","stokAd","disabled")
@@ -105,10 +105,10 @@ call logla(divAd & " Ekranı Girişi")
 			Response.Write "</div>"
 		Response.Write "</div>"
 
-		Response.Write "<div class=""row"">"
+		Response.Write "<div id=""anaBirimDIV"" class=""row"">"
 			Response.Write "<div class=""col-lg-3 col-sm-4 text-center my-1"">"
 				Response.Write "<div class=""badge badge-secondary rounded"">Ana Birim</div><span class=""pointer text-info"" onclick=""swal('','Ürünün stok kartında tanımlanır ve ürün hareket gördükten sonra değiştirilemez!')""><i class=""mdi mdi-information""></i></span>"
-				Response.Write "<div class=""mt-2 bold text-danger"">" & uzunBirim & "</div>"
+				Response.Write "<div class=""mt-2 bold text-danger"">" & anaBirimAD & "</div>"
 			Response.Write "</div>"
 		Response.Write "</div>"
 				
@@ -154,6 +154,9 @@ call logla(divAd & " Ekranı Girişi")
 <script>
 	$(document).ready(function() {
 		$('#cariID, #stokSec, #istasyonSec').trigger('mouseenter');
+
+		
 	});
-	 
+
+ 
 </script>

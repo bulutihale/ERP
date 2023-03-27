@@ -67,8 +67,9 @@ call logla("Telefon Rehberi Ekranı")
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">" & translate("Departman","","") & "</th>"
 		Response.Write "<th scope=""col"" class=""d-none d-sm-table-cell"">" & translate("Ünvan","","") & "</th>"
 		Response.Write "</tr></thead><tbody>"
-            sorgu = "Select * from personel.telefonRehberi"
-			sorgu = sorgu & " where personel.telefonRehberi.firmaID = " & firmaID
+            sorgu = "Select *,personel.departman.departmanAd from personel.telefonRehberi" & vbcrlf
+			sorgu = sorgu & " LEFT JOIN personel.departman on personel.departman.departmanID = personel.telefonRehberi.departmanID" & vbcrlf
+			sorgu = sorgu & " where personel.telefonRehberi.firmaID = " & firmaID & vbcrlf
 			if aramaad = "" then
 			else
 				sorgu = sorgu & " and (personel.telefonRehberi.ad like N'%" & aramaad & "%')"
@@ -94,7 +95,7 @@ call logla("Telefon Rehberi Ekranı")
                     Response.Write rs("email")
 					Response.Write "</td>"
                     Response.Write "<td>"
-                    ' Response.Write rs("departmanAd")
+                    Response.Write rs("departmanAd")
 					Response.Write "</td>"
                     Response.Write "<td>"
                     Response.Write rs("unvan")

@@ -44,7 +44,8 @@ Response.Write "</style>"
 sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun, f.adres as firmamAdres, f.telefon as firmamTel, f.ilce, f.sehir, c1.il as ilAd,"_
 &" c2.cariAd as kurumCariAD, c1.adres as teklifCariAdres, i.tarih_ihale, i.dosyaNo, i.ikn, i.bayiDosyaTipi, i.teklifRevNo, i.teklifKase, i.teklifAntet, f.iletisimEposta, f.webSite,"_
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV,"_
-&" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD"_
+&" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
+&" i.teklifMusteriOnay"_
 &" FROM dosya.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
@@ -78,6 +79,7 @@ rs.open sorgu,sbsv5,1,3
 	kaseWidth			=	rs("kaseWidth")
 	kaseHeight			=	rs("kaseHeight")
 	satirKDV			=	rs("satirKDV")
+	teklifMusteriOnay	=	rs("teklifMusteriOnay")
 	firmaTanimlayiciNo	=	rs("firmaTanimlayiciNo")
 	vergiDairesi		=	rs("vergiDairesi")
 	vergiNo				=	rs("vergiNo")
@@ -162,16 +164,16 @@ Response.Write "<br>"
 '###################### ÜST YAZI
 '###################### ÜST YAZI
 	Response.Write "<div style=""text-align:center; font-size:20px;font-family:calibri""><b>TEKLİF</b></div>"
-	Response.Write "<div style=""text-align:justify; font-size:12px;font-family:calibri"">"
+	Response.Write "<div style=""text-align:justify; font-size:12px; font-family:calibri"">"
 		onYazi = "<p>Ürünlerimiz ile ilgili fiyat teklifimizi değerlendirdiğiniz için teşekkür ederiz. Teklifimizin en iyi fiyat ve kalite dengesini yansıttığına inanıyoruz."
-		onYazi = onYazi & " Herhangi bir sorunuz varsa lütfen bize ulaşmaktan çekinmeyin, sorularınızı cevaplamaktan mutluluk duyacağız."
-		onYazi = onYazi & " <br>Teklifimizin olumlu karşılanacağını temmeni eder çalışmalarınızda kolaylıklar dileriz.</p>"
+		onYazi = onYazi & " Herhangi bir sorunuz varsa lütfen bize ulaşmaktan çekinmeyin."
+		onYazi = onYazi & " Teklifimizin olumlu karşılanacağını temmeni eder çalışmalarınızda kolaylıklar dileriz.</p>"
 		Response.Write onYazi
 	Response.Write "</div>"
 '###################### /ÜST YAZI
 '###################### /ÜST YAZI
 
-Response.Write "<table class=""table-responsive-sm"" border=""1"" style=""width:100%;border-collapse:collapse;font-family:calibri;"" class=""container-fluid table-bordered"">"
+Response.Write "<table class=""table-responsive-sm container-fluid table-bordered"" border=""1"" style=""width:100%;border-collapse:collapse;font-family:calibri;margin-top:10px"">"
 Response.Write "<thead><tr style=""font-size:x-small;"" class=""text-center fontkucuk2 style1"">"
 	if grupIhale = "True" then
 		Response.Write "<th class=""bg-secondary"">"
@@ -494,6 +496,10 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 '################## /banka bilgileri tablosu
 '################## /banka bilgileri tablosu
 	Response.Write "<br>"
+
+'######### müşteri onay tablosu
+'######### müşteri onay tablosu
+	if teklifMusteriOnay = True then
 	Response.Write "<div style=""font-size: 11px;"">"
 		Response.Write "<table width=""100%"" border=""0"" cellspacing=""1"" cellpadding=""1"">"
 			Response.Write "<tbody>"
@@ -511,6 +517,9 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 			Response.Write "</tbody>"
 		Response.Write "</table>"
 	Response.Write "</div>"
+	end if
+'######### müşteri onay tablosu
+'######### müşteri onay tablosu
 
 			if teklifKase = True then
 						Response.Write "<img src=""" & kasePath & """ width=""" & kaseWidth & """ height=""" & kaseHeight & """>"

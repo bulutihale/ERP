@@ -6,7 +6,6 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
-    modulID =   "109"
     Response.Flush()
     teklifID            =   Request.Form("teklifID")
     cariAd              =   Request.Form("cariAd")
@@ -34,27 +33,27 @@
 
 '##### HATA ÖNLEME
     if teklifID = "" then
-        hatamesaj = "Hatalı Teklif! Devam Edilemez"
+        hatamesaj = translate("Hatalı Teklif! Devam Edilemez","","")
         call logla(hatamesaj)
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
     if teklifParaBirimi = "" then
-        hatamesaj = "Lütfen para birimini seçin."
+        hatamesaj = translate("Lütfen para birimini seçin.","","")
         call logla(hatamesaj)
         call focusinput("teklifParaBirimi")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
     if teklifTuru = "" then
-        hatamesaj = "Lütfen teklif türünü seçin"
+        hatamesaj = translate("Lütfen teklif türünü seçin","","")
         call logla(hatamesaj)
         call focusinput("teklifTuru")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
     if cariAd = "" then
-        hatamesaj = "Lütfen teklif verdiğiniz firma adını yazın veya cari seçin"
+        hatamesaj = translate("Lütfen teklif verdiğiniz firma adını yazın veya cari seçin","","")
         call logla(hatamesaj)
         call focusinput("cariAd")
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
@@ -97,7 +96,7 @@
             teklifParaBirimi1 = rs("teklifParaBirimi")
             if teklifParaBirimi1 = teklifParaBirimi then
             else
-              hatamesaj = "Teklife ait para birimini sonradan değiştiremezsiniz."
+              hatamesaj = translate("Teklife ait para birimini sonradan değiştiremezsiniz.","","")
               call logla(hatamesaj)
               call focusinput("cariAd")
               call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
@@ -131,7 +130,7 @@
       rs.close
 '### KAYDET
 
-        hatamesaj = "Teklif Kaydedildi"
+        hatamesaj = translate("Teklif Kaydedildi","","")
         call logla(hatamesaj)
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-success","","","","","")
 

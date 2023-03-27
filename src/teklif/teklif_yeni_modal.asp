@@ -8,7 +8,6 @@
     modulAd =   "Teklif"
     modulID =   "109"
     Response.Flush()
-    teklifTurleriArr = Array("--" & translate("Teklif Türü","","") & "--",translate("Kdv Dahil Toplamlı Teklif","",""),translate("Kdv Hariç Toplamlı Teklif","",""),"",translate("Genel Teklif","",""),translate("Mail Order","",""),translate("Taksitli Mail Order","",""),translate("İhracat Teklif","",""),translate("Proforma Fatura","",""))
 '###### ANA TANIMLAMALAR
 
 '#### yetkiler
@@ -18,6 +17,7 @@
 if yetkiTeklif < 3 then
     hata = translate("Teklif verebilmek için yeterli yetkiniz bulunmamaktadır","","")
 end if
+
 
 '### SAYFA ID TESPİT ET
 	if hata = "" then
@@ -46,7 +46,7 @@ end if
 
 '#### BİTMEMİŞ TEKLİFLERİ SİL
     if hata = "" then
-        sorgu = "delete teklif.teklif where (teklifsayi = '' or teklifsayi is null) and tarih < getdate()"
+        sorgu = "delete teklif.teklif where (teklifsayi = '' or teklifsayi is null) and tarih < getdate()-2"
         rs.open sorgu,sbsv5,3,3
     end if
 '#### BİTMEMİŞ TEKLİFLERİ SİL
@@ -364,7 +364,7 @@ if hata = "" then
                                         ' next
                                         ' Response.Write "</select>"
                                 ' rs.close
-                                call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""" & translate("Ürün adı, stok kodu, barkod","","") & """ data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+                                call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""" & translate("Ürün adı, stok kodu, barkod","","") & """ data-sart=""document.getElementById('teklifDili').value"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
                             Response.Write "</div>"
                             Response.Write "<div class=""col-lg-1"">"
                                 Response.Write "<div class=""badge"">&nbsp;</div>"
@@ -558,6 +558,7 @@ if hata = "" then
         ' Response.Write "}"
         Response.Write "function teklifUrunEkle() {"
             Response.Write "cariAd = $('#cariAd').val();"
+            Response.Write "teklifDili = $('#teklifDili').val();"
             Response.Write "if($('#stokSec').val()==null){"
                 Response.Write "teklifStokID = '';"
             Response.Write "}else{"
@@ -568,7 +569,7 @@ if hata = "" then
             Response.Write "} else if(teklifStokID=='') {"
                 Response.Write "bootmodal('" & translate("Lütfen bir ürün seçin.","","") & "','custom','','','','','','','','','','','');"
             Response.Write "} else {"
-                Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifParaBirimi=' + $('#teklifParaBirimi').val() + '&teklifTuru=' + $('#teklifTuru').val());"
+                Response.Write "modalajax('/teklif/teklif_urun_modal.asp?teklifID=" & teklifID & "&teklifStokID=' + teklifStokID + '&teklifDili=' + teklifDili + '&teklifParaBirimi=' + $('#teklifParaBirimi').val() + '&teklifTuru=' + $('#teklifTuru').val());"
             Response.Write "}"
         Response.Write "}"
     Response.Write "</script>"

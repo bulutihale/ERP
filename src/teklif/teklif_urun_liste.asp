@@ -6,7 +6,6 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
-    modulID =   "109"
     Response.Flush()
     teklifID    =   Request.QueryString("teklifID")
     teklifTuru  =   Request.QueryString("teklifTuru")
@@ -32,10 +31,10 @@
     if teklifID <> "" then
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-		Response.Write "<th scope=""col"">Stok Adı</th>"
-		Response.Write "<th scope=""col"" class=""text-right"">Birim Fiyat</th>"
-		Response.Write "<th scope=""col"" class=""text-right"">Adet</th>"
-		Response.Write "<th scope=""col"" class=""text-right"">Satır Toplamı</th>"
+		Response.Write "<th scope=""col"">" & translate("Stok Adı","","") & "</th>"
+		Response.Write "<th scope=""col"" class=""text-right"">" & translate("Birim Fiyat","","") & "</th>"
+		Response.Write "<th scope=""col"" class=""text-right"">" & translate("Adet","","") & "</th>"
+		Response.Write "<th scope=""col"" class=""text-right"">" & translate("Satır Toplamı","","") & "</th>"
 		Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 		Response.Write "</tr></thead><tbody>" 
             sorgu = "Select *,(Select kisaBirim from portal.birimler where birimID = teklif.teklif_urun.stokBirim) as birimAd,(Select kdv from stok.stok where stokID = teklif.teklif_urun.teklifStokID) as stokKdv from teklif.teklif_urun where silindi = 0 and teklifID = " & teklifID & " order by teklifKalemID ASC"
@@ -137,14 +136,14 @@
                         Response.Write "<tbody>"
                             if teklifTuru = 1 then
                                 Response.Write "<tr>"
-                                    Response.Write "<td class="""">Toplam</td>"
+                                    Response.Write "<td class="""">" & translate("Toplam","","") & "</td>"
                                     Response.Write "<td class=""text-right"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                 Response.Write "</tr>"
                             end if
                             if teklifTuru = 2 then
                                 if teklifIskontoToplam <> 0 then
                                     Response.Write "<tr>"
-                                        Response.Write "<td class="""">Toplam</td>"
+                                        Response.Write "<td class="""">" & translate("Toplam","","") & "</td>"
                                         Response.Write "<td class=""text-right"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                     Response.Write "</tr>"
                                 end if
@@ -152,32 +151,32 @@
                             if teklifTuru = 1 or teklifTuru = 2 then
                                 if teklifIskontoToplam <> 0 then
                                     Response.Write "<tr>"
-                                        Response.Write "<td class="""">Toplam İskonto</td>"
+                                        Response.Write "<td class="""">" & translate("Toplam İskonto","","") & "</td>"
                                         Response.Write "<td class=""text-right"">" & formatnumber(teklifIskontoToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                     Response.Write "</tr>"
                                 end if
                             end if
                             if teklifTuru = 1 then
                                 Response.Write "<tr>"
-                                    Response.Write "<td class="""">Ara Toplam</td>"
+                                    Response.Write "<td class="""">" & translate("Ara Toplam","","") & "</td>"
                                     Response.Write "<td class=""text-right"">" & formatnumber((teklifToplam - teklifIskontoToplam),sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                 Response.Write "</tr>"
                             end if
                             if teklifTuru = 1 then
                                 Response.Write "<tr>"
-                                    Response.Write "<td class="""">Toplam KDV</td>"
+                                    Response.Write "<td class="""">" & translate("Toplam KDV","","") & "</td>"
                                     Response.Write "<td class=""text-right"">" & formatnumber(teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                 Response.Write "</tr>"
                             end if
                             if teklifTuru = 1 then
                                 Response.Write "<tr>"
-                                    Response.Write "<td class="""">Toplam</td>"
+                                    Response.Write "<td class="""">" & translate("Toplam","","") & "</td>"
                                     Response.Write "<td class=""text-right"">" & formatnumber(teklifGenelToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                 Response.Write "</tr>"
                             end if
                             if teklifTuru = 1 or teklifTuru = 2 then
                                 Response.Write "<tr>"
-                                    Response.Write "<td class="""">Genel Toplam</td>"
+                                    Response.Write "<td class="""">" & translate("Genel Toplam","","") & "</td>"
                                     Response.Write "<td class=""text-right"">" & formatnumber((teklifGenelToplam+teklifKdv),sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
                                 Response.Write "</tr>"
                             end if

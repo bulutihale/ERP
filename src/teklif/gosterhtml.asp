@@ -64,7 +64,7 @@
 
 '### TEKLİF DATASINI ÇEK
     if teklifID = "" then
-        hata = "Teklif PDF oluşturulamıyor. ID boş geldi"
+        hata = translate("Teklif PDF oluşturulamıyor. ID boş geldi","","")
         call logla(hata)
     else
         call logla("Teklif PDF oluşturmaya başlanıyor ID : " & teklifID)
@@ -98,7 +98,7 @@
 
 
         else
-            hata = "Kritik Hata Oluştu. Bahsi geçen ID ye ait teklif bulunamadı"
+            hata = translate("Kritik Hata Oluştu. Bahsi geçen ID ye ait teklif bulunamadı","","")
             call logla(hata)
         end if
         rs.close
@@ -114,7 +114,7 @@
             raporIcerik =   rs("raporIcerik")
             sayfaYonu   =   rs("sayfaYonu")
         else
-            hata = "Kritik Hata Oluştu. Teklif PDF için uygun rapor formatı bulunamadı"
+            hata = translate("Kritik Hata Oluştu. Teklif PDF için uygun rapor formatı bulunamadı","","")
             call logla(hata)
         end if
         rs.close
@@ -169,7 +169,7 @@ end function
 
 function raporBody(sb_kosulFontSize)
     if raporIcerik = "" then
-        hata = "Teklif raporu formatı bulunamadı"
+        hata = translate("Teklif raporu formatı bulunamadı","","")
         call logla(hata)
     else
         kosulIcerik = ""

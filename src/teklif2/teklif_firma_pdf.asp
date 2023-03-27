@@ -50,18 +50,27 @@ response.codepage=65001
 		end if
 	rs.close
 
-	sorgu = "SELECT teklifRevNo, landscapeDeger, pdfSablon FROM dosya.ihale WHERE firmaID = " & firmaID & " AND id = " & id
+	sorgu = "SELECT teklifRevNo FROM dosya.ihale WHERE firmaID = " & firmaID & " AND id = " & id
 	rs.open sorgu,sbsv5,1,3
 		rs("teklifRevNo")	=	sonRevizyonNo
 		rs.update
-		landscapeDeger		=	rs("landscapeDeger")
-		teklifDosya			=	rs("pdfSablon")
 	rs.close
 '###### PDF oluşmadan önce revizon numaraları ayarla
 
-	sorgu = "SELECT f.adres FROM dosya.ihale i LEFT JOIN portal.firma f ON f.id = i.firmaID WHERE i.id = " & id
+	sorgu = "SELECT f.adres, i.pdfSablon, k.landscapeDeger"
+	sorgu = sorgu & " FROM dosya.ihale i"
+	sorgu = sorgu & " LEFT JOIN portal.firma f ON f.id = i.firmaID"
+	sorgu = sorgu & " LEFT JOIN kalite.form k ON i.pdfSablon = k.pdfKaynakDosya"
+	sorgu = sorgu & " WHERE i.id = " & id
 	rs.open sorgu,sbsv5,1,3
-		adres		=	rs("adres")	
+		adres			=	rs("adres")	
+		teklifDosya		=	rs("pdfSablon")
+		landscapeDeger	=	rs("landscapeDeger")
+		if landscapeDeger = "evet" then
+			landscapeDeger = True
+		else
+			landscapeDeger = False
+		end if
 	rs.close
 
 Set Pdf = Server.CreateObject("Persits.Pdf")
@@ -76,13 +85,15 @@ Set Page = Doc.Pages.Add
 
 
 
-
+serverName = Request.ServerVariables("SERVER_NAME")
+serverPort = Request.ServerVariables("SERVER_PORT")
 
 asp_dosya	=	"http://"
-asp_dosya	=	asp_dosya & Request.ServerVariables("SERVER_NAME")
+asp_dosya	=	asp_dosya & serverName
+asp_dosya	=	asp_dosya & ":"
+asp_dosya	=	asp_dosya & serverPort
 asp_dosya	=	asp_dosya & "/teklifSablon/" & teklifDosya & ".asp?ihaleid="
 asp_dosya	=	asp_dosya & id &"&pdf=yes"
-
 
 
 Doc.ImportFromUrl asp_dosya,"LeftMargin=30,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1,landscape="&landscapeDeger&""

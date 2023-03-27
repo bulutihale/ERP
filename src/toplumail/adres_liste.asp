@@ -9,7 +9,6 @@
 	aramaad	=	Request.Form("aramaad")
     Response.Flush()
 '###### ANA TANIMLAMALAR
-' |Toplu Mail#Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Gönderebilir=5,Silebilir=6
 
 yetkiTM = yetkibul(modulAd)
 

@@ -78,7 +78,7 @@ Response.Write "<div class=""card-body"">"
 			end if
 			sorgu = sorgu & " AND t2.siparisTarih >= '" & tarihsql2(t1) &"' AND t2.siparisTarih <= '" & tarihsql2(t2) &"'"
 			sorgu = sorgu & " AND t2.siparisTur = 'S'"
-			sorgu = sorgu & " ORDER BY t2.siparisTarih DESC"
+			sorgu = sorgu & " ORDER BY t2.siparisNo DESC"
 			rs.open sorgu, sbsv5, 1, 3
 
 

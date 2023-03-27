@@ -15,12 +15,8 @@
     modulID =   "109"
     personelID =   gorevID
     Response.Flush()
-    teklifTurleriArr = Array("--Teklif Türü--","Kdv Dahil Toplamlı Teklif","Kdv Hariç Toplamlı Teklif","","Genel Teklif","Mail Order","Taksitli Mail Order","İhracat Teklif","Proforma Fatura")
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
-
-' Teklif##Giriş Yapamaz=0,Kısıtlı Görebilir=1,Görebilir=2,Düzenleyebilir=3,Onay Verebilir=5,Teklifi Silebilir=6,Satış Yöneticisi=7,Yönetici=9
-
 
 call logla("Teklif Listesi Ekranı")
 
@@ -112,15 +108,16 @@ if yetkiTeklif > 0 then
                         sonucAciklama       =	rs("sonucAciklama") & ""
                         teklifID64          =   teklifID
                         teklifID64          =   base64_encode_tr(teklifID64)
-
                         Response.Write "<tr>"
                             Response.Write "<td>" & tekliftarih & "</td>"
                             Response.Write "<td>" & teklifsayi & "</td>"
-                            Response.Write "<td>" & teklifDili & "</td>"
+                            Response.Write "<td>"
+                                Response.Write arrayDegerBulfn(teklifDili,dilDegerler)
+                            Response.Write "</td>"
                             Response.Write "<td>" & cariAd & "</td>"
                             Response.Write "<td>" & teklifTurleriArr(teklifTuru) &  "</td>"
                             Response.Write "<td>" & teklifParaBirimi &  "</td>"
-                            Response.Write "<td>" & teklifSonuc & teklifSonucArr(teklifSonuc)
+                            Response.Write "<td>" & teklifSonucArr(teklifSonuc)
                             if teklifSonuc = 3 and sonucAciklama <> "" then
                                 Response.Write "<i class=""icon information"""
                                 Response.Write " onClick=""swal('','" & sonucAciklama & "')"""
@@ -133,7 +130,6 @@ if yetkiTeklif > 0 then
                                 '# ÖN İZLEME
                                     teklif64 = teklifID
                                     teklif64 =	base64_encode_tr(teklif64)
-                                    '//FIXME - bunu modal da yapabiliriz
                                     Response.Write "<a href=""/teklif/gosterhtml/" & teklif64 & """ title=""" & translate("Önizleme","","") & """ class=""ml-2"" >"
                                     Response.Write "<i title=""" & translate("Önizleme","","") & """ class=""icon page-white-find"
                                     Response.Write """></i>"

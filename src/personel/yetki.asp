@@ -58,11 +58,15 @@ yetkiPersonel = yetkibul("personel")
 	' rs.close
 '###### FİRMAYI BUL
 '###### FİRMAYI BUL
-
+    sorgu = "SELECT ad FROM personel.personel WHERE id = " & gorevID
+	rs.Open sorgu, sbsv5, 1, 3
+        ad  =   rs("ad")
+    rs.close
 
 '###### ARAMA FORMU
 '###### ARAMA FORMU
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+        Response.Write "<div class=""mb-3 bold"">" & ad & " için yetkiler.</div>"
 		Response.Write "<div class=""form-row align-items-center"">"
             for i = 0 to ubound(firmamodulListesiArr)
                 firmamodulListesiSeceneklerArr = firmamodulListesiSecenekler(i)

@@ -27,7 +27,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                     Response.Write "<div class=""row"">"
                         sorgu = "Select * from teklif.teklifKosul where firmaID = " & firmaID & " and silindi = 0 order by teklifKosulID desc"
                         rs.Open sorgu, sbsv5, 1, 3
-                            if rs.recordcount > 0 then
+                            ' if rs.recordcount > 0 then
                                 Response.Write "<div class=""table-responsive"">"
                                 Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
                                 Response.Write "<th scope=""col"" width=""100"">" & translate("Koşul","","") & "</th>"
@@ -87,9 +87,9 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                 Response.Write "</tbody>"
                                 Response.Write "</table>"
                                 Response.Write "</div>"
-                            else
-                                call yetkisizGiris(translate("Şablon Bulunamadı","",""),"","")
-                            end if
+                            ' else
+                            '     call yetkisizGiris(translate("Şablon Bulunamadı","",""),"","")
+                            ' end if
                         rs.close
                     Response.Write "</div>"
                     Response.Write "</div>"
@@ -124,10 +124,10 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                     Response.Write "<div class=""row"">"
                         sorgu = "Select * from teklif.teklifOnYazi where firmaID = " & firmaID & " and silindi = 0 order by yaziYeri, onYaziID desc"
                         rs.Open sorgu, sbsv5, 1, 3
-                            if rs.recordcount > 0 then
+                            ' if rs.recordcount > 0 then
                                 Response.Write "<div class=""table-responsive"">"
                                 Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
-                                Response.Write "<th scope=""col"" width=""130"">" & translate("Yazı Yeri","","") & "</th>"
+                                Response.Write "<th scope=""col"" width=""130"">" & translate("Neresi","","") & "</th>"
                                 Response.Write "<th scope=""col"">" & translate("İçerik","","") & "</th>"
                                 ' if yetkiTM >= 3 then
                                 '     Response.Write "<th scope=""col"" class=""d-sm-table-cell"" width=""50"">&nbsp;</th>"
@@ -139,8 +139,7 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                         onYazi		        =	rs("onYazi")
                                         Response.Write "<tr>"
                                             Response.Write "<td>"
-                                                degerler = "--Yazı Yeri--=|Teklif Üstü=Teklif Üstü|Teklif Altı=Teklif Altı|Ürün Altı=Ürün Altı"
-                                                call formselectv2("yaziYeri",yaziYeri,"$('.formname').val('yaziYeri');$('.formtur').val('teklifOnYazi');$('#formicerik').val(this.value);$('.gorevID').val(" & onYaziID & ");$('#formdata').submit();","","","","yaziYeri",degerler,"")
+                                                call formselectv2("yaziYeri",yaziYeri,"$('.formname').val('yaziYeri');$('.formtur').val('teklifOnYazi');$('#formicerik').val(this.value);$('.gorevID').val(" & onYaziID & ");$('#formdata').submit();","","","","yaziYeri",teklifYaziYeriArr,"")
                                             Response.Write "</td>"
                                             Response.Write "<td>"
                                                 call formtextarea("onYazi",onYazi,"$('.formname').val('onYazi');$('.formtur').val('teklifOnYazi');$('#formicerik').val(this.value);$('.gorevID').val(" & onYaziID & ");$('#formdata').submit();","","onYazi","","onYazi","")
@@ -169,12 +168,11 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                         Response.Write "<form action=""/teklif/teklif_ayarlar_islem.asp"" method=""post"" class=""ajaxform"">"
                                         Response.Write "<tr>"
                                             Response.Write "<td>"
-                                                degerler = "--Yazı Yeri--=|Teklif Üstü=Teklif Üstü|Teklif Altı=Teklif Altı|Ürün Altı=Ürün Altı"
-                                                call formselectv2("yaziYeri","","","","","","yaziYeri",degerler,"")
+                                                call formselectv2("yaziYeri","","","","","","yaziYeri",teklifYaziYeriArr,"")
                                             Response.Write "</td>"
                                             Response.Write "<td>"
                                                 call formtextarea("onYazi","","","","onYazi","","onYazi","")
-                                                Response.Write "<button class=""form-control btn btn-info"" type=""submit"">Ekle</button>"
+                                                Response.Write "<button class=""form-control btn btn-info"" type=""submit"">" & translate("Ekle","","") & "</button>"
                                             Response.Write "</td>"
                                             ' Response.Write "<td>"
                                             ' Response.Write "</td>"
@@ -188,9 +186,9 @@ call logla("Genel teklif ayarları güncelleme ekranı")
                                 Response.Write "</tbody>"
                                 Response.Write "</table>"
                                 Response.Write "</div>"
-                            else
-                                call yetkisizGiris(translate("Ön yazı bulunamadı","",""),"","")
-                            end if
+                            ' else
+                            '     call yetkisizGiris(translate("Ön yazı bulunamadı","",""),"","")
+                            ' end if
                         rs.close
                     Response.Write "</div>"
                     Response.Write "</div>"

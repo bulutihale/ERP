@@ -5,9 +5,9 @@
     call sessiontest()
     kid		=	kidbul()
     hata    =   ""
-    modulAd =   "Zimmet"
+    modulAd =   "Yardım"
     Response.Flush()
-    ' yardimYetki = yetkibul("Yardım")
+    yardimYetki = yetkibul("Yardım")
 '###### ANA TANIMLAMALAR
 
 
