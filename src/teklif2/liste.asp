@@ -128,7 +128,7 @@ Response.Write "</div>"
 Response.Write "</form>"
 
 Response.Write "<div class=""col-lg-4 col-md-4 col-sm-3 col-xs-6 text-right"">"
-Response.Write "<a href=""/teklif2/yeni"" class=""btn btn-success rounded"">Yeni Kayıt</a>"
+Response.Write "<a href=""/teklif2/yeni"" class=""btn btn-success rounded"">Yeni Teklif</a>"
 Response.Write "</div>"
 Response.Write "</div>"'row
 

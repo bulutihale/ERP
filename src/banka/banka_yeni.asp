@@ -2,7 +2,6 @@
 
 
 '###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
     call sessiontest()
     kid			=	kidbul()
     ID			=	Request.QueryString("ID")
@@ -12,17 +11,10 @@
 	gorevID64	=	gorevID
 	gorevID		=	base64_decode_tr(gorevID64)
 	modulAd 	=   "Teklif"
+	Response.Flush()
+	call logla("Yeni Banka Bilgisi Ekleme Ekranı Girişi")
+	yetkiKontrol = yetkibul("Teklif")
 '###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
-
-
-Response.Flush()
-
-
-call logla("Yeni Banka Bilgisi Ekleme Ekranı Girişi")
-
-yetkiKontrol = yetkibul(modulAd)
-
 
 	if gorevID <> "" then
 		sorgu = "SELECT t1.bankalarID, t1.hesapAd, t1.bankaAd, t2.birimID as paraBirimID, t1.subeAd, t1.subeNo, t1.hesapNo, t1.iban, t1.silindi, t2.kisaBirim as paraBirim, t1.swiftKod"
@@ -41,11 +33,9 @@ yetkiKontrol = yetkibul(modulAd)
 			iban				=	rs("iban")
 			swiftKod			=	rs("swiftKod")
 			silindi				=	rs("silindi")
-			defDeger			=	paraBirimID&"###"&paraBirim
-			
+			defDeger			=	paraBirimID & "###" & paraBirim
 		rs.close		
 	end if
-
 
 
 	if hata = "" and yetkiKontrol > 2 then
@@ -54,63 +44,58 @@ yetkiKontrol = yetkibul(modulAd)
 			call formhidden("bankaID",gorevID,"","","","autocompleteOFF","bankaID","")
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Hesap Adı</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Hesap Adı","","") & "</span>"
 				call forminput("hesapAd",hesapAd,"","","","autocompleteOFF","hesapAd","")
 			Response.Write "</div>"
 		Response.Write "</div>"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Banka Adı</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Banka Adı","","") & "</span>"
 				call forminput("bankaAd",bankaAd,"","","","autocompleteOFF","bankaAd","")
 			Response.Write "</div>"
 		Response.Write "</div>"
-
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-sm-6 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Hesap Döviz Türü</span>"
-				call formselectv2("paraBirim",paraBirim,"","","formSelect2 border","","paraBirim","","data-holderyazi=""Hesap Döviz Türü"" data-jsondosya=""JSON_paraBirimler"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Hesap Döviz Türü","","") & "</span>"
+				call formselectv2("paraBirim",paraBirim,"","","formSelect2 border","","paraBirim","","data-holderyazi=""" & translate("Hesap Döviz Türü","","") & """ data-jsondosya=""JSON_paraBirimler"" data-miniput=""0"" data-defdeger=""" & defDeger & """")
 			Response.Write "</div>"
 		Response.Write "</div>"
-		
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-sm-6 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Şube Adı</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Şube Adı","","") & "</span>"
 				call forminput("subeAd",subeAd,"","","","autocompleteOFF","subeAd","")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-2 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Şube No</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Şube No","","") & "</span>"
 				call forminput("subeNo",subeNo,"","","","autocompleteOFF","subeNo","")
 			Response.Write "</div>"
 		Response.Write "</div>"
-		
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-sm-6 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Hesap No</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Hesap No","","") & "</span>"
 				call forminput("hesapNo",hesapNo,"","","","autocompleteOFF","hesapNo","")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-6 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">SWIFT Kodu</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("SWIFT Kodu","","") & "</span>"
 				call forminput("swiftKod",swiftKod,"","","","autocompleteOFF","swiftKod","")
 			Response.Write "</div>"
 		Response.Write "</div>"
 
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">IBAN</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("IBAN","","") & "</span>"
 				call forminput("iban",iban,"","","","autocompleteOFF","iban","")
 			Response.Write "</div>"
 		Response.Write "</div>"
 
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-sm-3 my-1"">"
-				Response.Write "<span class=""badge badge-secondary rounded-left"">Kullanım Dışı</span>"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Kullanım Dışı","","") & "</span>"
 				call formselectv2("silindi",int(silindi),"","","silindi","","silindi",HEDegerler,"")
 			Response.Write "</div>"
 		Response.Write "</div>"
-
-
 		Response.Write "<div class=""form-row align-items-center"">"
-			Response.Write "<div class=""col-auto mt-4""><button type=""submit"" class=""btn btn-primary"">KAYDET</button></div>"
+			Response.Write "<div class=""col-auto mt-4""><button type=""submit"" class=""btn btn-primary"">" & translate("Kaydet","","") & "</button></div>"
 		Response.Write "</div>"
 		Response.Write "</form>"
 	end if

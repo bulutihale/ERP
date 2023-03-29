@@ -33,8 +33,9 @@
 				birim1Ad		=	rs("birim1Ad")
 				birim2Ad		=	rs("birim2Ad")
 				birim1Katsayi	=	rs("birim1Katsayi")
+				birim1Katsayi	=	replace(birim1Katsayi,",",".")
 				birim2Katsayi	=	rs("birim2Katsayi")
-		
+				birim2Katsayi	=	replace(birim2Katsayi,",",".")
 
 
 				Response.Write "<div class=""row text-center"">"
@@ -64,6 +65,8 @@
 <script>
 	function miktarHesapla(miktar1, updateInputID, birim1Katsayi, birim2Katsayi){
 		var hesaplananMiktar	=	miktar1 * (birim2Katsayi/birim1Katsayi);
-		$('#anaBirimMiktar').val(hesaplananMiktar);
+		var hesaplananMiktar = hesaplananMiktar.toString(); 
+		var sonuc = hesaplananMiktar.replace(".",",");
+		$('#anaBirimMiktar').val(sonuc);
 	}
 </script>

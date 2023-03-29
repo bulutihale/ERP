@@ -51,7 +51,7 @@ sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun,
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, ISNULL(i.cariID,0) as cariID,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
 &" (SELECT COUNT(id) FROM dosya.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun,"_
-&" i.catKodGoster, i.mustKodGoster"_
+&" i.catKodGoster, i.mustKodGoster, f.antetPath"_
 &" FROM dosya.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
@@ -85,6 +85,7 @@ rs.open sorgu,sbsv5,1,3
 	kasePath			=	rs("kasePath")
 	kaseWidth			=	rs("kaseWidth")
 	kaseHeight			=	rs("kaseHeight")
+	antetPath			=	rs("antetPath")
 	satirKDV			=	rs("satirKDV")
 	firmaTanimlayiciNo	=	rs("firmaTanimlayiciNo")
 	vergiDairesi		=	rs("vergiDairesi")
@@ -123,7 +124,7 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 	Response.Write "<tr>"
 		Response.Write "<td style=""width:10%"">"
 		if teklifAntet = True then
-			Response.Write "<img id=""imageLogo"" src=""/template/images/tio.jpg"" width=""90"" height=""auto"">"
+			Response.Write "<img id=""imageLogo"" src=""" & antetPath & """ width=""90"" height=""auto"">"
 		end if
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:center; font-size:30px"" class=""b-all"">"

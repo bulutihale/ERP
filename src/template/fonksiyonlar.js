@@ -383,7 +383,7 @@ function otomatikbuyut(id){$('#'+id).keyup(function(){this.value = this.value.to
 
 
 
-function numara(nesne,para,uyari)
+function numara(nesne,para,uyari) 
 //Kullanımı : numara(this,true,true)
 //Kullanımı : numara(this,false,'Bu alana sadece rakam yazılabilir')
 {

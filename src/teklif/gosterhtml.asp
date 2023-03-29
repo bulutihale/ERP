@@ -96,6 +96,10 @@
         altYazi               =   Replace(altYazi,chr(13),"<br />")
 
 
+        if isnull(cariID) = true then
+            cariID = 0
+        end if
+
 
         else
             hata = translate("Kritik Hata Oluştu. Bahsi geçen ID ye ait teklif bulunamadı","","")
@@ -104,6 +108,25 @@
         rs.close
     end if
 '### TEKLİF DATASINI ÇEK
+
+
+'### TEKLİF AYARLARINI ÇEK
+    if hata = "" then
+        sorgu = "Select teklifFontSize,teklifFontUrunListe,teklifFont from teklif.teklifAyar where firmaID = " & firmaID & " and silindi = 0"
+        rs.open sorgu,sbsv5,1,3
+        if rs.recordcount = 1 then
+            teklifFontSize          =   rs("teklifFontSize")
+            teklifFont              =   rs("teklifFont")
+            teklifFontUrunListe     =   rs("teklifFontUrunListe")
+        else
+            hata = translate("Kritik Hata Oluştu. Genel teklif ayarlarında eksik var","","")
+            call logla(hata)
+        end if
+        rs.close
+    end if
+
+'### TEKLİF AYARLARINI ÇEK
+
 
 
 '### RAPOR FORMATINI ÇEK
@@ -134,7 +157,6 @@
 
 
 function raporHead()
-    font = "'Open Sans', sans-serif"
     Response.Write "<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">"
     Response.Write "<html xmlns=""http://www.w3.org/1999/xhtml"">"
     Response.Write "<head>"
@@ -143,9 +165,9 @@ function raporHead()
     Response.Write "<meta name=""Language"" CONTENT=""tr"" />"
     Response.Write "<link href=""http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext"" rel=""stylesheet"" type=""text/css"">"
     Response.Write "<style type=""text/css"">"
-    Response.Write "*{font-family:" & font & ";}"
-    Response.Write "body {font-family: " & font & ";margin-top: 0px;}"
-    Response.Write "table {font-family: " & font & ";}"
+    Response.Write "*{font-family:" & teklifFont & ";font-size:" & teklifFontSize & "}"
+    Response.Write "body {font-family:" & teklifFont & ";font-size:" & teklifFontSize & ";margin-top: 0px;}"
+    Response.Write "table {font-family:" & teklifFont & ";font-size:" & teklifFontSize & "}"
     if sayfaYonu = "portrait" then 
         a="297mm"
         b="210mm"
@@ -154,6 +176,7 @@ function raporHead()
         b="297mm"
     end if
     Response.Write "#ortaalan {height:" & a & ";width:" & b & ";margin-left:auto;margin-right:auto;}"
+    Response.Write teklifFontUrunListe & vbcrlf
     Response.Write "</style>"
     Response.Write "</head>"
     Response.Write "<body>"
@@ -236,158 +259,152 @@ function raporBody(sb_kosulFontSize)
                     rowspansayi             =   0
                 '## hesaplamaları yap
 
-
-                urunListesi = urunListesi & "<div style=""clear:both;"">"
-                urunListesi = urunListesi & "<table width=""100%"" cellspacing=""0"" cellpadding=""2"" border=""0"" style=""margin-top:4px;font-size:"&sb_kosulFontSize&""">"
-                urunListesi = urunListesi & "<tbody><tr bgcolor=""#CCCCCC"">"
-                urunListesi = urunListesi & "<th width="""" height=""22"" valign=""middle"" style=""border: 1px solid #000;border-right:0px;color:White;text-align:center;""><strong>Ürün Adı</strong></th>"
-if urunKatalogKodu = 1 then
-    urunListesi = urunListesi & "<th width="""" height=""22"" valign=""middle"" style=""border: 1px solid #000;border-right:0px;color:White;text-align:center;""><strong>Katalog Kodu</strong></th>"
-    rowspansayi = rowspansayi + 1
-end if
-if urunStokRefKodu = 1 then
-    urunListesi = urunListesi & "<th width="""" height=""22"" valign=""middle"" style=""border: 1px solid #000;border-right:0px;color:White;text-align:center;""><strong>Müşteri Kodu</strong></th>"
-    rowspansayi = rowspansayi + 1
-end if
-if urunStokDetails > 0 then
-    urunListesi = urunListesi & "<th width=""20%"" height=""22"" valign=""middle"" style=""border: 1px solid #000;border-right:0px;color:White;text-align:center;""><strong>Detay</strong></th>"
-    rowspansayi = rowspansayi + 1
-end if
-                urunListesi = urunListesi & "<th width=""10%"" height=""22"" valign=""middle"" style=""border: 1px solid #000;border-right:0px;color:White;text-align:center;""><strong>Adet</strong></th>"
-                urunListesi = urunListesi & "<th width=""10%"" height=""22"" valign=""middle"" style=""border: 1px solid #000;border-right:0px;color:White;text-align:center;""><strong>Birim Fiyatı</strong></th>"
-                urunListesi = urunListesi & "<th width=""10%"" height=""22"" valign=""middle"" style=""border: 1px solid #000;color:White;text-align:center;""><strong>Toplam</strong></th>"
-                urunListesi = urunListesi & "</tr>"
-
-				for i = 1 to rs.recordcount
-                    '## verileri al
-                        teklifStokID        =   rs("teklifStokID")
-                        teklifParaBirimi    =   rs("teklifParaBirimi")
-                        stokParaBirim       =   rs("stokParaBirim")
-                        stokAd              =   rs("stokAd")
-                        stokAciklama        =   rs("stokAciklama") & ""
-                        stokAciklama        =   Replace(stokAciklama,chr(10),"<br />")
-                        stokAciklama        =   Replace(stokAciklama,chr(13),"<br />")
-                        stokAdet            =   rs("stokAdet")
-                        stokBirim           =   rs("stokBirim")
-                        stokFiyat           =   rs("stokFiyat")
-                        iskonto1            =   rs("iskonto1")
-                        iskonto2            =   rs("iskonto2")
-                        iskonto3            =   rs("iskonto3")
-                        iskonto4            =   rs("iskonto4")
-                        stokToplamFiyat     =   rs("stokToplamFiyat")
-                        birimAd             =   rs("birimAd")
-                        teklifKalemID       =   rs("teklifKalemID")
-                        stokKdv             =   rs("stokKdv")
-                        dovizKuru           =   rs("dovizKuru")
-                        katalogKodu         =   rs("katalogKodu") & ""
-                        cariUrunRef         =   rs("cariUrunRef") & ""
-
-                    '## verileri al
-
-
-
-                    '## hesaplamaları yap
-                        teklifSatirToplami      =   stokFiyat * stokAdet * dovizKuru
-                        teklifToplam            =   teklifToplam + teklifSatirToplami
-                        teklifSatirIskonto      =   teklifSatirToplami - stokToplamFiyat
-                        teklifIskontoToplam     =   teklifIskontoToplam + teklifSatirIskonto
-                        teklifSatirKdv          =   (teklifSatirToplami - teklifSatirIskonto) - (teklifSatirToplami - teklifSatirIskonto) / (1 + (stokKdv / 100))
-                        teklifSatirKdvDahil     =   (teklifSatirToplami - teklifSatirIskonto) / (1 + (stokKdv / 100))
-                        teklifKdv               =   teklifKdv + teklifSatirKdv
-                        teklifGenelToplam       =   teklifToplam - teklifKdv - teklifIskontoToplam
-                    '## hesaplamaları yap
-
-                    '## Ürün listesi
-                        urunListesi = urunListesi & "<tr>"
-                            urunListesi = urunListesi & "<td width="""" style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">"
-                            ' urunListesi = urunListesi & "<img src=""http://teklif.sbstasarim.com/resim.asp?id=1140"" align=""left"" style=""max-width:50px;max-height:50px;"" width=""50"">"
-                            urunListesi = urunListesi & "<strong>" & stokAd & "</strong></td>"
-if urunKatalogKodu = 1 then
-    urunListesi = urunListesi & "<td style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">" & katalogKodu & "</td>"
-end if
-if urunStokRefKodu = 1 then
-    urunListesi = urunListesi & "<td style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">" & cariUrunRef & "</td>"
-end if
-if urunStokDetails > 0 then
-    urunListesi = urunListesi & "<td style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">" & stokAciklama & "&nbsp;</td>"
-end if
-                            urunListesi = urunListesi & "<td width="""" align=""center"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;border-right:0px;"">" & stokAdet & " " & birimAd & "</td>"
-                            urunListesi = urunListesi & "<td width="""" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;border-right:0px;"">" & stokFiyat & " " & stokParaBirim & "</td>"
-                            urunListesi = urunListesi & "<td width="""" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;"">" & formatnumber(stokToplamFiyat,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                        urunListesi = urunListesi & "</tr>"
-                    '## Ürün listesi
-
-				rs.movenext
-				next
-
-
-
-
-                if teklifTuru = 1 then
-                    urunListesi = urunListesi & "<tr>"
-                    urunListesi = urunListesi & "<td width="""" rowspan=""6"" style="""">&nbsp;</td>"
-                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-left: 1px solid;height:20px;""><b>&nbsp;&nbsp;Toplam</b></td>"
-                    urunListesi = urunListesi & "<td width="""" align=""right"" valign=""middle"" style=""border-left: 1px solid;border-right: 1px solid;"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                    urunListesi = urunListesi & "</tr>"
-                end if
-                if teklifTuru = 2 then
-                    if teklifIskontoToplam <> 0 then
-                        trowspansayi = rowspansayi + 1
-                        urunListesi = urunListesi & "<tr>"
-                        urunListesi = urunListesi & "<td width="""" colspan=""" & trowspansayi & """ rowspan=""2"" style="""">&nbsp;</td>"
-                        urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-left: 1px solid;height:20px;""><b>&nbsp;&nbsp;Toplam</b></td>"
-                        urunListesi = urunListesi & "<td width="""" align=""right"" valign=""middle"" style=""border-left: 1px solid;border-right: 1px solid;"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                        urunListesi = urunListesi & "</tr>"
-                    end if
-                end if
-                if teklifTuru = 1 or teklifTuru = 2 then
-                    if teklifIskontoToplam <> 0 then
-                        urunListesi = urunListesi & "<tr>"
-                        urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-bottom:0px;border-right:0px;""><b>&nbsp;&nbsp;</b>Toplam İskonto</td>"
-                        urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;border-bottom:0px;"">" & formatnumber(teklifIskontoToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                        urunListesi = urunListesi & "</tr>"
-                    end if
-                end if
-                if teklifTuru = 1 then
-                    urunListesi = urunListesi & "<tr>"
-                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-bottom:0px;border-right:0px;""><b>&nbsp;&nbsp;</b>Ara Toplam</td>"
-                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;border-bottom:0px;"">" & formatnumber((teklifToplam - teklifIskontoToplam),sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                    urunListesi = urunListesi & "</tr>"
-                end if
-                if teklifTuru = 1 then
-                    urunListesi = urunListesi & "<tr>"
-                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-bottom:0px;border-right:0px;""><b>&nbsp;&nbsp;</b>Toplam Kdv</td>"
-                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;border-bottom:0px;"">" & formatnumber(teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
-                    urunListesi = urunListesi & "</tr>"
-                end if
-                if teklifTuru = 1 then
-                    urunListesi = urunListesi & "<tr>"
-                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-right:0px;""><b>&nbsp;&nbsp;</b><strong>Toplam</strong></td>"
-                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;""><strong>" & formatnumber(teklifGenelToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
-                    urunListesi = urunListesi & "</tr>"
-                end if
-                if teklifTuru = 1 then
-                    gtrowspansayi = rowspansayi + 1
-                    urunListesi = urunListesi & "<tr>"
-                    urunListesi = urunListesi & "<td width="""" rowspan=""6"" style="""">&nbsp;</td>"
-                    urunListesi = urunListesi & "<td colspan=""" & gtrowspansayi & """ align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-right:0px;""><b>&nbsp;&nbsp;</b><strong>Genel Toplam</strong></td>"
-                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;""><strong>" & formatnumber(teklifGenelToplam+teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
-                    urunListesi = urunListesi & "</tr>"
-                end if
-                if teklifTuru = 2 then
-                    gtrowspansayi = rowspansayi + 1
-                    urunListesi = urunListesi & "<tr>"
-                    if teklifIskontoToplam <> 0 then
-                        urunListesi = urunListesi & "<td width="""" colspan=""" & gtrowspansayi & """ rowspan=""2"" style="""">&nbsp;</td>"
-                    else
-                        urunListesi = urunListesi & "<td colspan=""" & gtrowspansayi & """ style="""">&nbsp;</td>"
-                    end if
-                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-right:0px;""><b>&nbsp;&nbsp;</b><strong>Genel Toplam</strong></td>"
-                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;""><strong>" & formatnumber(teklifGenelToplam+teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
-                    urunListesi = urunListesi & "</tr>"
-                end if
-                urunListesi = urunListesi & "</tbody></table>"
-                urunListesi = urunListesi & "</div>"
+                ' urunListesi = urunListesi & "<div style=""clear:both;"">"
+                    urunListesi = urunListesi & "<table width=""100%"" cellspacing=""0"" cellpadding=""2"" border=""0"" class=""urunListe"">"
+                        urunListesi = urunListesi & "<tbody>"
+                            urunListesi = urunListesi & "<tr>"
+                                urunListesi = urunListesi & "<th height=""22"" valign=""middle"" style=""border-right:0px;"">" & translate("Ürün Adı","","") & "</th>"
+                                if urunKatalogKodu = 1 then
+                                    urunListesi = urunListesi & "<th height=""22"" valign=""middle"" style=""border-right:0px;"">" & translate("Katalog Kodu","","") & "</th>"
+                                    rowspansayi = rowspansayi + 1
+                                end if
+                                if urunStokRefKodu = 1 then
+                                    urunListesi = urunListesi & "<th height=""22"" valign=""middle"" style=""border-right:0px;"">" & translate("Müşteri Kodu","","") & "</th>"
+                                    rowspansayi = rowspansayi + 1
+                                end if
+                                if urunStokDetails > 0 then
+                                    urunListesi = urunListesi & "<th width=""20%"" height=""22"" valign=""middle"" style=""border-right:0px;"">" & translate("Detay","","") & "</th>"
+                                    rowspansayi = rowspansayi + 1
+                                end if
+                                urunListesi = urunListesi & "<th width=""10%"" height=""22"" valign=""middle"" style=""border-right:0px;"">" & translate("Adet","","") & "</th>"
+                                urunListesi = urunListesi & "<th width=""10%"" height=""22"" valign=""middle"" style=""border-right:0px;"">" & translate("Birim Fiyatı","","") & "</th>"
+                                urunListesi = urunListesi & "<th width=""10%"" height=""22"" valign=""middle"">" & translate("Toplam","","") & "</th>"
+                            urunListesi = urunListesi & "</tr>"
+                            for i = 1 to rs.recordcount
+                                '## verileri al
+                                    teklifStokID        =   rs("teklifStokID")
+                                    teklifParaBirimi    =   rs("teklifParaBirimi")
+                                    stokParaBirim       =   rs("stokParaBirim")
+                                    stokAd              =   rs("stokAd")
+                                    stokAciklama        =   rs("stokAciklama") & ""
+                                    stokAciklama        =   Replace(stokAciklama,chr(10),"<br />")
+                                    stokAciklama        =   Replace(stokAciklama,chr(13),"<br />")
+                                    stokAdet            =   rs("stokAdet")
+                                    stokBirim           =   rs("stokBirim")
+                                    stokFiyat           =   rs("stokFiyat")
+                                    iskonto1            =   rs("iskonto1")
+                                    iskonto2            =   rs("iskonto2")
+                                    iskonto3            =   rs("iskonto3")
+                                    iskonto4            =   rs("iskonto4")
+                                    stokToplamFiyat     =   rs("stokToplamFiyat")
+                                    birimAd             =   rs("birimAd")
+                                    teklifKalemID       =   rs("teklifKalemID")
+                                    stokKdv             =   rs("stokKdv")
+                                    dovizKuru           =   rs("dovizKuru")
+                                    katalogKodu         =   rs("katalogKodu") & ""
+                                    cariUrunRef         =   rs("cariUrunRef") & ""
+                                '## verileri al
+                                '## hesaplamaları yap
+                                    teklifSatirToplami      =   stokFiyat * stokAdet * dovizKuru
+                                    teklifToplam            =   teklifToplam + teklifSatirToplami
+                                    teklifSatirIskonto      =   teklifSatirToplami - stokToplamFiyat
+                                    teklifIskontoToplam     =   teklifIskontoToplam + teklifSatirIskonto
+                                    teklifSatirKdv          =   (teklifSatirToplami - teklifSatirIskonto) - (teklifSatirToplami - teklifSatirIskonto) / (1 + (stokKdv / 100))
+                                    teklifSatirKdvDahil     =   (teklifSatirToplami - teklifSatirIskonto) / (1 + (stokKdv / 100))
+                                    teklifKdv               =   teklifKdv + teklifSatirKdv
+                                    teklifGenelToplam       =   teklifToplam - teklifKdv - teklifIskontoToplam
+                                '## hesaplamaları yap
+                                '## Ürün listesi
+                                    urunListesi = urunListesi & "<tr>"
+                                        urunListesi = urunListesi & "<td width="""" style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">"
+                                        ' urunListesi = urunListesi & "<img src=""http://teklif.sbstasarim.com/resim.asp?id=1140"" align=""left"" style=""max-width:50px;max-height:50px;"" width=""50"">"
+                                        urunListesi = urunListesi & "<strong>" & stokAd & "</strong></td>"
+                                        if urunKatalogKodu = 1 then
+                                            urunListesi = urunListesi & "<td style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">" & katalogKodu & "</td>"
+                                        end if
+                                        if urunStokRefKodu = 1 then
+                                            urunListesi = urunListesi & "<td style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">" & cariUrunRef & "</td>"
+                                        end if
+                                        if urunStokDetails > 0 then
+                                            urunListesi = urunListesi & "<td style=""border-left: 1px solid #000;border-bottom: 1px solid #000;"">" & stokAciklama & "&nbsp;</td>"
+                                        end if
+                                        urunListesi = urunListesi & "<td width="""" align=""center"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;border-right:0px;"">" & stokAdet & " " & birimAd & "</td>"
+                                        urunListesi = urunListesi & "<td width="""" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;border-right:0px;"">" & stokFiyat & " " & stokParaBirim & "</td>"
+                                        urunListesi = urunListesi & "<td width="""" align=""right"" valign=""middle"" style=""border: 1px solid #000;border-top:0px;border-bottom:1px solid #000;"">" & formatnumber(stokToplamFiyat,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                    urunListesi = urunListesi & "</tr>"
+                                '## Ürün listesi
+                            rs.movenext
+                            next
+                            '##### FİYAT ALANI
+                                if teklifTuru = 1 then
+                                    urunListesi = urunListesi & "<tr>"
+                                    urunListesi = urunListesi & "<td colspan=""2"" rowspan=""6"" width="""" style="""">&nbsp;</td>"
+                                    ' urunListesi = urunListesi & "<td width="""" rowspan=""6"" style="""">&nbsp;</td>"'6
+                                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-color:#000000;border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;height:20px;""><b>&nbsp;&nbsp;" & translate("Toplam","","") & "</b></td>"
+                                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border-color:#000000;border-bottom: 1px solid;border-right: 1px solid;"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                    urunListesi = urunListesi & "</tr>"
+                                end if
+                                if teklifTuru = 2 then
+                                    if teklifIskontoToplam <> 0 then
+                                        urunListesi = urunListesi & "<tr>"
+                                        urunListesi = urunListesi & "<td colspan=""2"" rowspan=""2"" style="""">&nbsp;</td>"
+                                        urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-color:#000000;border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;height:20px;""><b>&nbsp;&nbsp;" & translate("Toplam","","") & "</b></td>"
+                                        urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border-color:#000000;border-bottom: 1px solid;border-right: 1px solid;"">" & formatnumber(teklifToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                        urunListesi = urunListesi & "</tr>"
+                                    end if
+                                end if
+                                if teklifTuru = 1 or teklifTuru = 2 then
+                                    if teklifIskontoToplam <> 0 then
+                                        urunListesi = urunListesi & "<tr>"
+                                        urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-color:#000000;border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;height:20px;""><b>&nbsp;&nbsp;</b>" & translate("Toplam İskonto","","") & "</td>"
+                                        urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border-color:#000000;border-bottom: 1px solid;border-right: 1px solid;"">" & formatnumber(teklifIskontoToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                        urunListesi = urunListesi & "</tr>"
+                                    end if
+                                end if
+                                if teklifTuru = 1 then
+                                    urunListesi = urunListesi & "<tr>"
+                                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-color:#000000;border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;height:20px;""><b>&nbsp;&nbsp;</b>" & translate("Ara Toplam","","") & "</td>"
+                                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border-color:#000000;border-bottom: 1px solid;border-right: 1px solid;"">" & formatnumber((teklifToplam - teklifIskontoToplam),sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                    urunListesi = urunListesi & "</tr>"
+                                end if
+                                if teklifTuru = 1 then
+                                    urunListesi = urunListesi & "<tr>"
+                                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-color:#000000;border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;height:20px;""><b>&nbsp;&nbsp;</b>" & translate("Toplam KDV","","") & "</td>"
+                                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border-color:#000000;border-bottom: 1px solid;border-right: 1px solid;"">" & formatnumber(teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</td>"
+                                    urunListesi = urunListesi & "</tr>"
+                                end if
+                                if teklifTuru = 1 then
+                                    urunListesi = urunListesi & "<tr>"
+                                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-color:#000000;border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;height:20px;""><b>&nbsp;&nbsp;</b><strong>" & translate("Toplam","","") & "</strong></td>"
+                                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border-color:#000000;border-bottom: 1px solid;border-right: 1px solid;""><strong>" & formatnumber(teklifGenelToplam,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
+                                    urunListesi = urunListesi & "</tr>"
+                                end if
+                                if teklifTuru = 1 then
+                                    ' gtrowspansayi = rowspansayi + 1
+                                    urunListesi = urunListesi & "<tr>"
+                                    ' urunListesi = urunListesi & "<td width="""" style="""">&nbsp;</td>"
+                                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border-color:#000000;border-left: 1px solid;border-right: 1px solid;border-bottom: 1px solid;height:20px;""><b>&nbsp;&nbsp;</b><strong>" & translate("Genel Toplam","","") & "</strong></td>"
+                                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border-color:#000000;border-bottom: 1px solid;border-right: 1px solid;""><strong>" & formatnumber(teklifGenelToplam+teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
+                                    urunListesi = urunListesi & "</tr>"
+                                end if
+                                if teklifTuru = 2 then
+                                    ' gtrowspansayi = rowspansayi + 1
+                                    urunListesi = urunListesi & "<tr>"
+                                    if teklifIskontoToplam <> 0 then
+                                        urunListesi = urunListesi & "<td width="""" colspan=""2"" rowspan=""2"" style="""">&nbsp;</td>"
+                                        ' urunListesi = urunListesi & "<td width="""" colspan=""" & gtrowspansayi & """ rowspan=""2"" style="""">&nbsp;</td>"
+                                    else
+                                        urunListesi = urunListesi & "<td colspan=""2"" style="""">&nbsp;</td>"
+                                        ' urunListesi = urunListesi & "<td colspan=""" & gtrowspansayi & """ style="""">&nbsp;</td>"
+                                    end if
+                                    urunListesi = urunListesi & "<td colspan=""2"" align=""left"" valign=""middle"" style=""border: 1px solid #000;height:20px;border-right:0px;""><b>&nbsp;&nbsp;</b><strong>" & translate("Genel Toplam","","") & "</strong></td>"
+                                    urunListesi = urunListesi & "<td align=""right"" valign=""middle"" style=""border: 1px solid #000;""><strong>" & formatnumber(teklifGenelToplam+teklifKdv,sb_TeklifOndalikSayi) & " " & teklifParaBirimi & "</strong></td>"
+                                    urunListesi = urunListesi & "</tr>"
+                                end if
+                            '##### FİYAT ALANI
+                        urunListesi = urunListesi & "</tbody>"
+                    urunListesi = urunListesi & "</table>"
+                ' urunListesi = urunListesi & "</div>"
 			end if
 			rs.close
 
@@ -401,29 +418,32 @@ end if
 
 
         '## BANKA HESAP BİLGİLERİ
-' <table width="100%" border="0" cellspacing="1" cellpadding="1" style="border: 1px solid #000;margin-top:4px">
-' 	<tbody><tr>
-' 		<th bgcolor="#CCCCCC" style="color:White;">Banka</th>
-' 		<th bgcolor="#CCCCCC" style="color:White;">Iban</th>
-' 	</tr>
-	
-' 	<tr>
-' 		<td align="center">TÜRKİYE İŞ BANKASI</td>
-' 		<td align="center">TR89 0006 4000 0013 4940 2025 86
-' </td>
-' 	</tr>
-	
-' 	<tr>
-' 		<td align="center" style="border-top:1px solid #E8E8E8;">GARANTİ BANKASI</td>
-' 		<td align="center" style="border-top:1px solid #E8E8E8;">TR16 0006 2000 3550 0006 2985 17</td>
-' 	</tr>
-	
-' 	<tr>
-' 		<td align="center" style="border-top:1px solid #E8E8E8;">AKBANK</td>
-' 		<td align="center" style="border-top:1px solid #E8E8E8;">TR45 0004 6006 3488 8000 0210 77
-' </td>
-' 	</tr>
-' </tbody></table>
+            sorgu = "Select bankaAd,iban,paraBirim from portal.bankalar where silindi = 0 and firmaID = " & teklifFirmaId & " order by sira ASC"
+            rs.open sorgu,sbsv5,1,3
+            if rs.recordcount > 0 then
+                bankaHesapBilgileri = ""
+                bankaHesapBilgileri = bankaHesapBilgileri & "<table width=""100%"" border=""0"" cellspacing=""1"" cellpadding=""1"" style=""border: 1px solid #000;margin-top:4px"">"
+                bankaHesapBilgileri = bankaHesapBilgileri & "<tbody>"
+                bankaHesapBilgileri = bankaHesapBilgileri & "<tr>"
+                bankaHesapBilgileri = bankaHesapBilgileri & "<th bgcolor=""#CCCCCC"" style=""color:White;"">" & translate("Banka Adı","","") & "</th>"
+                bankaHesapBilgileri = bankaHesapBilgileri & "<th bgcolor=""#CCCCCC"" style=""color:White;"">" & translate("IBAN","","") & "</th>"
+                bankaHesapBilgileri = bankaHesapBilgileri & "<th bgcolor=""#CCCCCC"" style=""color:White;"">" & translate("Hesap Döviz Türü","","") & "</th>"
+                bankaHesapBilgileri = bankaHesapBilgileri & "</tr>"
+                for bi = 1 to rs.recordcount
+                    bankaAd         =   rs("bankaAd")
+                    bankaiban       =   rs("iban")
+                    bankaparaBirim  =   rs("paraBirim")
+                    bankaHesapBilgileri = bankaHesapBilgileri & "<tr>"
+                    bankaHesapBilgileri = bankaHesapBilgileri & "<td align=""center"">" & bankaAd & "</td>"
+                    bankaHesapBilgileri = bankaHesapBilgileri & "<td align=""center"">" & bankaiban & "</td>"
+                    bankaHesapBilgileri = bankaHesapBilgileri & "<td align=""center"">" & bankaparaBirim & "</td>"
+                    bankaHesapBilgileri = bankaHesapBilgileri & "</tr>"
+                rs.movenext
+                next
+                bankaHesapBilgileri = bankaHesapBilgileri & "</tbody>"
+                bankaHesapBilgileri = bankaHesapBilgileri & "</table>"
+            end if
+            rs.close
         '## BANKA HESAP BİLGİLERİ
 
 

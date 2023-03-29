@@ -6,7 +6,6 @@
     kid		=	kidbul()
     hata    =   ""
     modulAd =   "Teklif"
-    modulID =   "109"
     Response.Flush()
     teklifTuru        =   Request.QueryString("teklifTuru")
     teklifStokID      =   Request.QueryString("teklifStokID")
@@ -24,13 +23,13 @@
 '##### HATA ÖNLEME
   if teklifKalemID = "" then
     if teklifStokID = "" then
-        hatamesaj = "Hatalı Stok!"
+        hatamesaj = translate("Hatalı Stok!","","")
         call logla(hatamesaj)
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
     end if
     if teklifParaBirimi = "" then
-        hatamesaj = "Lütfen önce teklifin verileceği para birimini seçin!"
+        hatamesaj = translate("Lütfen önce teklifin verileceği para birimini seçin!","","")
         call logla(hatamesaj)
         Response.Write hatamesaj
         Response.End()
@@ -39,15 +38,14 @@
 '##### HATA ÖNLEME
 
 
-
-
-
 '###### TEKLİF BİLGİLERİNİ AL
         sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
           teklifDili          =   rs("teklifDili")
-          teklifParaBirimi    =   rs("teklifParaBirimi")
+          if teklifParaBirimi = "" then
+            teklifParaBirimi    =   rs("teklifParaBirimi")
+          end if
           teklifTuru          =   rs("teklifTuru")
         end if
         rs.close
@@ -87,7 +85,7 @@ end if
           stokAciklama  = rs("stokAciklama") & ""
           stokToplamFiyat = stokFiyat
       else
-          hatamesaj = "Hatalı Stok"
+          hatamesaj = translate("Hatalı Stok","","")
           call logla(hatamesaj)
           call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
           Response.End()
@@ -97,9 +95,9 @@ end if
 
 
 if teklifKalemID = "" then
-  call logla("Teklife ürün ekleniyor : " & stokAd)
+  call logla(translate("Teklife ürün ekleniyor","","") & " : " & stokAd)
 else
-  call logla("Teklifdeki ürün güncelleniyor : " & stokAd)
+  call logla(translate("Teklifdeki ürün güncelleniyor","","") & " : " & stokAd)
 end if
 
   '### ECNEBİCE
@@ -135,13 +133,14 @@ end if
 
 '### BİRİMLERİ BUL
     if birimTur <> "" then
-      sorgu = "Select birimID,uzunBirim from portal.birimler where silindi = 0 and birimTur = '" & birimTur & "' order by sira asc"
+      sorgu = "Select birimID,uzunBirim from portal.birimler where firmaID = " & firmaID & " and silindi = 0 and birimTur = '" & birimTur & "' order by sira asc"
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
         birimDegerler = ""
         for i = 1 to rs.recordcount
           birimID   =   rs("birimID")
           uzunBirim =   rs("uzunBirim")
+          uzunBirim =   translate(rs("uzunBirim"),"","")
           birimDegerler = birimDegerler & uzunBirim & "=" & birimID & "|"
           rs.movenext
         next
@@ -164,7 +163,7 @@ end if
 
 '###### PARA BİRİMİNİ TESBİT ET
   if teklifParaBirimi <> stokParaBirim then
-    Response.Write "<div class=""text-center h3 mt-2 mb-3"">Teklif para birimi (" & teklifParaBirimi & ") ile stok para birimi (" & stokParaBirim & ") farklılar</div>"
+    Response.Write "<div class=""text-center h3 mt-2 mb-3"">" & translate("Teklif para birimi {%1} ile stok para birimi {%2} farklılar",teklifParaBirimi,stokParaBirim) & "</div>"
     '### STOK PARA BİRİMİNİ DÖNÜŞTÜR
       if teklifParaBirimi = "TRY" then
         hesaplanacakParaBirimi = stokParaBirim & teklifParaBirimi
@@ -184,6 +183,7 @@ end if
     if instr(hesaplanacakParaBirimi,"TRY") > 0 then
       '## içinde TL geçen çevrimler
         sorgu = "Select " & hesaplanacakParaBirimi & "," & hesaplanacakParaBirimi & "Custom from portal.doviz where firmaID = " & firmaID & " order by dovizID desc"
+Response.Write sorgu
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount > 0 then
             ParaBirim1 =   rs(0)
@@ -288,18 +288,18 @@ end if
     Response.Write "<input type=""hidden"" value=""" & stokkdv & """ name=""stokkdv"" />"
     Response.Write "<table width=""100%"" border=""0"" cellspacing=""1"" cellpadding=""1"">"
     'Stok Ad
-      Response.Write "<tr><td width=""100"">Ürün Adı</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
+      Response.Write "<tr><td width=""100"">" & translate("Ürün Adı","","") & "</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
       call forminput("stokAd",stokAd,"","","stokAd mb-2","autocompleteOFF","stokAd","")
       Response.Write "</td></tr>"
     'Stok Ad
     'Stok Açıklama
-      Response.Write "<tr><td width=""100"">Ürün Notu</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
+      Response.Write "<tr><td width=""100"">" & translate("Ürün Notu","","") & "</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
       call formtextarea("stokAciklama",stokAciklama,"","","stokAciklama mb-2 height-100","autocompleteOFF","stokAciklama","")
       Response.Write "</td></tr>"
     'Stok Açıklama
     'Adet
       Response.Write "<tr>"
-        Response.Write "<td>Adet</td>"
+        Response.Write "<td>" & translate("Adet","","") & "</td>"
         Response.Write "<td>"
           call forminput("stokAdet",stokAdet,"numara(this,true,false);fiyathesapla();","","stokAdet mb-2 pr-2","autocompleteOFF","stokAdet","")
         Response.Write "</td>"
@@ -307,7 +307,7 @@ end if
     'Adet
     'Birim
       Response.Write "<tr>"
-        Response.Write "<td>Birim</td>"
+        Response.Write "<td>" & translate("Birim","","") & "</td>"
         Response.Write "<td>"
           call formselectv2("stokBirim",stokBirim,"fiyathesapla();","","mb-2","","stokBirim",birimDegerler,"")
         Response.Write "</td>"
@@ -315,12 +315,12 @@ end if
     'Birim
     'Fiyatlar
       Response.Write "<tr>"
-          Response.Write "<td>Birim Fiyat</td>"
+          Response.Write "<td>" & translate("Birim Fiyat","","") & "</td>"
         '### fiyat
           Response.Write "<td class=""pr-2"">"
-          Response.Write "<div class=""badge badge-danger"">" & sb_TeklifFiyatAd0
+          Response.Write "<div class=""badge badge-danger"">" & translate(sb_TeklifFiyatAd0,"","")
           if teklifTuru = 2 then
-            Response.Write " KDV Hariç"
+            Response.Write " " & translate("KDV Hariç","","")
           end if
           Response.Write "</div>"
           stokFiyat = replace(stokFiyat,",",".")
@@ -329,7 +329,7 @@ end if
         '### fiyat
           if sb_TeklifFiyatSayi > 0 then
             Response.Write "<td class=""pr-2"">"
-            Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd1 & "</div>"
+            Response.Write "<div class=""badge badge-warning"">" & translate(sb_TeklifFiyatAd1,"","") & "</div>"
             fiyat1 = replace(fiyat1,",",".")
             call forminput("fiyat1",fiyat1,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat1 parmak","readonly","fiyat1","")
             Response.Write "</td>"
@@ -337,7 +337,7 @@ end if
         '### fiyat
           if sb_TeklifFiyatSayi > 1 then
             Response.Write "<td class=""pr-2"">"
-              Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd2 & "</div>"
+              Response.Write "<div class=""badge badge-warning"">" & translate(sb_TeklifFiyatAd2,"","") & "</div>"
               fiyat2 = replace(fiyat2,",",".")
               call forminput("fiyat2",fiyat2,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat2 parmak","readonly","fiyat2","")
             Response.Write "</td>"
@@ -345,7 +345,7 @@ end if
         '### fiyat
           if sb_TeklifFiyatSayi > 2 then
             Response.Write "<td class=""pr-2"">"
-              Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd3 & "</div>"
+              Response.Write "<div class=""badge badge-warning"">" & translate(sb_TeklifFiyatAd3,"","") & "</div>"
               fiyat3 = replace(fiyat3,",",".")
               call forminput("fiyat3",fiyat3,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat3 parmak","readonly","fiyat3","")
             Response.Write "</td>"
@@ -353,7 +353,7 @@ end if
         '### fiyat
           if sb_TeklifFiyatSayi > 3 then
             Response.Write "<td>"
-              Response.Write "<div class=""badge badge-warning"">" & sb_TeklifFiyatAd4 & "</div>"
+              Response.Write "<div class=""badge badge-warning"">" & translate(sb_TeklifFiyatAd4,"","") & "</div>"
               fiyat4 = replace(fiyat4,",",".")
               call forminput("fiyat4",fiyat4,"$('#stokFiyat').val(this.value);fiyathesapla();","","fiyat4 parmak","readonly","fiyat4","")
             Response.Write "</td>"
@@ -362,29 +362,29 @@ end if
     'Fiyatlar
     'iskonto
       Response.Write "<tr>"
-            Response.Write "<td>İskonto</td>"
+            Response.Write "<td>" & translate("İskonto","","") & "</td>"
             'iskonto
               if sb_TeklifIskontoSayisi > 0 then
                   Response.Write "<td class=""pr-2"">"
-                  Response.Write "<div class=""badge badge-secondary"">İskonto 1 % [<span class=""iskontospan1"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
+                  Response.Write "<div class=""badge badge-secondary"">" & translate("İskonto","","") & " 1 % [<span class=""iskontospan1"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
                   call forminput("iskonto1",iskonto1,"numara(this,false,'yok');fiyathesapla();","iskonto1","","","iskonto1","")
                   Response.Write "</td>"
               end if
               if sb_TeklifIskontoSayisi > 1 then
                   Response.Write "<td class=""pr-2"">"
-                  Response.Write "<div class=""badge badge-secondary"">İskonto 2 % [<span class=""iskontospan2"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
+                  Response.Write "<div class=""badge badge-secondary"">" & translate("İskonto","","") & " 2 % [<span class=""iskontospan2"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
                   call forminput("iskonto2",iskonto2,"numara(this,false,'yok');fiyathesapla();","iskonto2","","","iskonto2","")
                   Response.Write "</td>"
               end if
               if sb_TeklifIskontoSayisi > 2 then
                   Response.Write "<td class=""pr-2"">"
-                  Response.Write "<div class=""badge badge-secondary"">İskonto 3 % [<span class=""iskontospan3"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
+                  Response.Write "<div class=""badge badge-secondary"">" & translate("İskonto","","") & " 3 % [<span class=""iskontospan3"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
                   call forminput("iskonto3",iskonto3,"numara(this,false,'yok');fiyathesapla();","iskonto3","","","iskonto3","")
                   Response.Write "</td>"
               end if
               if sb_TeklifIskontoSayisi > 3 then
                   Response.Write "<td class=""pr-2"">"
-                  Response.Write "<div class=""badge badge-secondary"">İskonto 4 % [<span class=""iskontospan4"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
+                  Response.Write "<div class=""badge badge-secondary"">" & translate("İskonto","","") & " 4 % [<span class=""iskontospan4"">" & formatnumber(stokFiyat,2) & "</span>]</div>"
                   call forminput("iskonto4",iskonto4,"numara(this,false,'yok');fiyathesapla();","iskonto4","","","iskonto4","")
                   Response.Write "</td>"
               end if
@@ -393,7 +393,7 @@ end if
     'iskonto
     'Toplam Fiyat stokParaBirim
       Response.Write "<tr>"
-        Response.Write "<td>Toplam Fiyat</td>"
+        Response.Write "<td>" & translate("Toplam Fiyat","","") & "</td>"
         Response.Write "<td>"
           Response.Write "<div class=""input-group mt-2"">"
             call forminput("stokToplamFiyat",stokToplamFiyat,"","","","","stokToplamFiyat","")
@@ -407,7 +407,7 @@ end if
     if hesaplanacakParaBirimi <> "" then
     'Toplam Fiyat teklifParaBirimi
       Response.Write "<tr>"
-        Response.Write "<td>Toplam Fiyat</td>"
+        Response.Write "<td>" & translate("Toplam Fiyat","","") & "</td>"
         Response.Write "<td>"
           Response.Write "<div class=""input-group mt-2"">"
             call forminput("stokToplamFiyatTPB",stokToplamFiyatTPB,"","","border-danger","","stokToplamFiyatTPB","")
@@ -423,7 +423,7 @@ end if
     'kaydet butonu
         Response.Write "<div class=""col-lg-12 col-xs-12 mt-3"">"
         Response.Write "<div class=""badge"">&nbsp;</div>"
-        Response.Write "<button type=""submit"" class=""btn btn-success form-control"">EKLE</button>"
+        Response.Write "<button type=""submit"" class=""btn btn-success form-control"">" & translate("Ekle","","") & "</button>"
         Response.Write "</div>"
     'kaydet butonu
   Response.Write "</form>"

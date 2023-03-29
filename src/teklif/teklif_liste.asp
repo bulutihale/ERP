@@ -151,7 +151,7 @@ if yetkiTeklif > 0 then
                                 end if
                             end if
                             if yetkiTeklif >= 2 then
-                                if teklifSonuc >= 2 then
+                                if teklifSonuc >= 2 or (yetkiTeklif = 9 and teklifSonuc = 0) then
                                     '# PDF
                                         teklif64 = teklifID
                                         teklif64 =	base64_encode_tr(teklif64)

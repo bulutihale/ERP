@@ -333,14 +333,14 @@ if hata = "" then
                     Response.Write "<div class=""card-header text-white bg-primary"">"
                         Response.Write "<div class=""row"">"
                             Response.Write "<div class=""col-lg-8"">" & translate("Ürünler","","") & "</div>"
-                            Response.Write "<div class=""col-lg-2"">"
-                                Response.Write "<div class=""badge badge-info"">" & translate("Katalog Kodu","","") & ": </div>"
-                                call formselectv2("urunKatalogKodu",urunKatalogKodu,"","","","","urunKatalogKodu",HEdegerler,"")
-                            Response.Write "</div>"
-                            Response.Write "<div class=""col-lg-2"">"
-                                Response.Write "<div class=""badge badge-info"">" & translate("Müşteri Referans Kodu","","") & ": </div>"
-                                call formselectv2("urunStokRefKodu",urunStokRefKodu,"","","","","urunStokRefKodu",HEdegerler,"")
-                            Response.Write "</div>"
+                            ' Response.Write "<div class=""col-lg-2"">"
+                            '     Response.Write "<div class=""badge badge-info"">" & translate("Katalog Kodu","","") & ": </div>"
+                            '     call formselectv2("urunKatalogKodu",urunKatalogKodu,"","","","","urunKatalogKodu",HEdegerler,"")
+                            ' Response.Write "</div>"
+                            ' Response.Write "<div class=""col-lg-2"">"
+                            '     Response.Write "<div class=""badge badge-info"">" & translate("Müşteri Referans Kodu","","") & ": </div>"
+                            '     call formselectv2("urunStokRefKodu",urunStokRefKodu,"","","","","urunStokRefKodu",HEdegerler,"")
+                            ' Response.Write "</div>"
                         Response.Write "</div>"
                     Response.Write "</div>"
                     Response.Write "<div class=""card-body"">"

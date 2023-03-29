@@ -288,7 +288,7 @@ if yetkiKontrol  >= 3 then
 	'##### DOSYA DURUM SELECT İÇİN HAZIRLA
 	'##### DOSYA DURUM SELECT İÇİN HAZIRLA
 
-				dosyaDurumDegerler = "=|Normal=normal|Kurum İptal Etti=kurumIptal|Zarfımız İptal=zarfIptal|Uhdemizde Ürün Kalmadı=urunKalmadi"
+				dosyaDurumDegerler = "=|Normal=normal|Uhdemizde Ürün Kalmadı=urunKalmadi"
 				
 	'##### /DOSYA DURUM SELECT İÇİN HAZIRLA
 	'##### /DOSYA DURUM SELECT İÇİN HAZIRLA
@@ -462,18 +462,18 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "</div>"
 			Response.Write "</div>"
 			
-			Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col-12"">"
-						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ödeme Koşulları</div>"
-						Response.Write "<textarea id="""" onchange=""ajSave('odemeKosul','dosya.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""odemeKosul"" cols=""50"" rows=""5"">" & odemeKosul & "</textarea>"
-					Response.Write "</div>"
-			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col-12"">"
-						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teslimat Koşulları</div>"
-						Response.Write "<textarea onchange=""ajSave('teslimatKosul','dosya.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""teslimatKosul"" cols=""50"" rows=""5"">" & teslimatKosul & "</textarea>"
-					Response.Write "</div>"
-			Response.Write "</div>"
+			' Response.Write "<div class=""row"">"
+			' 		Response.Write "<div class=""col-12"">"
+			' 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ödeme Koşulları</div>"
+			' 			Response.Write "<textarea id="""" onchange=""ajSave('odemeKosul','dosya.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""odemeKosul"" cols=""50"" rows=""5"">" & odemeKosul & "</textarea>"
+			' 		Response.Write "</div>"
+			' Response.Write "</div>"
+			' Response.Write "<div class=""row"">"
+			' 		Response.Write "<div class=""col-12"">"
+			' 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teslimat Koşulları</div>"
+			' 			Response.Write "<textarea onchange=""ajSave('teslimatKosul','dosya.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""teslimatKosul"" cols=""50"" rows=""5"">" & teslimatKosul & "</textarea>"
+			' 		Response.Write "</div>"
+			' Response.Write "</div>"
 
 			Response.Write "</div>"'card-body
 		Response.Write "</div>"'card
@@ -488,8 +488,8 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Sipariş Durum</div>"
 				call formselectv2("sipDurum",sipDurum,"ajSave('sipDurum','dosya.ihale',"&id&",$(this).val())","","","","",sipDurumDegerler,"")
 			
-			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Mukayese Durum</div>"
-				call formselectv2("mukayeseDurum",mukayeseDurum,"ajSave('sipDurum','dosya.ihale',"&id&",$(this).val())","","","","",mukayeseDurumDegerler,"")
+			' Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Mukayese Durum</div>"
+			' 	call formselectv2("mukayeseDurum",mukayeseDurum,"ajSave('sipDurum','dosya.ihale',"&id&",$(this).val())","","","","",mukayeseDurumDegerler,"")
 			
 				
 			Response.Write "</div>"'card-body
@@ -535,7 +535,7 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Sıra Numarası</div>" 
-					call forminput("siraNo",siraNo,"","Sıra No","","autocompleteOFF","siraNo","")
+					call forminput("siraNo",siraNo,"numara(this,false,false)","Sıra No","","autocompleteOFF","siraNo","")
 				Response.Write "</div>"
 			Response.Write "<div class=""col-lg-5"">"
 			if ihaleTipi = "proforma" then
@@ -556,7 +556,7 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<div class=""row mt-2"">"
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Miktar</div>" 
-				call forminput("miktar",miktar,"","Miktar","","autocompleteOFF","miktar","")
+				call forminput("miktar",miktar,"numara(this,false,false)","Miktar","","autocompleteOFF","miktar","")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Birim</div>" 
@@ -688,7 +688,7 @@ Response.Write "<div class=""card-body row"">"
 '## siraNO
 		classYaz = classbelirle("align-middle text-center",kisimIhale,ihaleTipi,"","",rs("iptal"),rs("uhde"),"","","","","","")
 		Response.Write "<td width=""5%"" class="""&classYaz&""">"
-			call forminput("siraNo",siraNo,"",""," borderless text-center","","","onChange=""ajSave('siraNo','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("siraNo",siraNo,"numara(this,false,false);",""," borderless text-center","","","onChange=""ajSave('siraNo','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /siraNO
 
@@ -726,19 +726,19 @@ Response.Write "<div class=""card-body row"">"
 
 '## miktar
 		Response.Write "<td width=""7%"" class=""align-middle border-right-0 p-0"">"
-			call forminput("miktar",formatnumber(rs("miktar"),0),"","","borderless text-right input50","","","onChange=""ajSave('miktar','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("miktar",formatnumber(rs("miktar"),0),"numara(this,false,false);this.select();","","borderless text-right input50","","","onChange=""ajSave('miktar','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /miktar
 
 '## birim
 		Response.Write "<td width=""7%"" class=""align-middle border-left-0 pl-1"">"
-			call forminput("birim",rs("birim"),"","","borderless text-left input30","","","onChange=""ajSave('birim','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("birim",rs("birim"),"this.select();","","borderless text-left input30","","","onChange=""ajSave('birim','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /birim
 
 '## iskonto
 		Response.Write "<td width=""3%"" class=""align-middle border-right-0 p-0"">"
-			call forminput("iskontoOran",iskontoOran,"","%","borderless text-right p-0 bold text-center","","","onChange=""ajSave('iskontoOran','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("iskontoOran",iskontoOran,"numara(this,false,false);this.select();","%","borderless text-right p-0 bold text-center","","","onChange=""ajSave('iskontoOran','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /iskonto
 
@@ -746,7 +746,7 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<td width=""10%"" class=""align-middle border-right-0 p-0"">"
 			para_deger = para_basamak(rs("firmamFiyat"))
 			
-			call forminput("firmamFiyat",para_deger,"","","borderless para text-right p-0 ","","","onChange=""ajSave('firmamFiyat','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("firmamFiyat",para_deger,"numara(this,true,false);this.select();","","borderless para text-right p-0 ","","","onChange=""ajSave('firmamFiyat','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 		
 		Response.Write "<td width=""10%"" class=""align-middle border-left-0 p-0 pl-1"">"
@@ -766,7 +766,7 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "<td class="""&y&""">"
 					Response.Write "<div>"
 					if yetkiKontrol >= 5 then
-						Response.Write "<input type=""checkbox"" class=""chck30"" " & chckValue & " onInput=""ajSave('fiyatOnay','dosya.ihale_urun',"&ihaleUrunID&","&fiyatOnayDeger&")"">"
+						Response.Write "<input type=""checkbox"" class=""chck30"" " & chckValue & " onInput=""ajSave('fiyatOnay','dosya.ihale_urun',"&ihaleUrunID&","&fiyatOnayDeger&")"" onClick=""this.select();"">"
 					else
 						Response.Write "<span class=""icon world-delete pointer"" onclick=""swal('fiyat onay yetkisi yok.','')""></span>"
 					end if
@@ -1035,28 +1035,28 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi1').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi1"" class=""form-control col-12"" value=""- Kargo alıcı firmaya aittir."">"
+						Response.Write "<input id=""yazi1"" class=""form-control col-12"" value=""- Kargo alıcı firmaya aittir.&#10; &#13;"">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi2').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi2"" class=""form-control col-12"" value=""- Satış fiyatlarımız hammadde alımı ve döviz kuruna göre değişiklik gösterebilir, bu durumda tarafınıza yeni bir teklif düzenlenir."">"
+						Response.Write "<input id=""yazi2"" class=""form-control col-12"" value=""- Satış fiyatlarımız hammadde alımı ve döviz kuruna göre değişiklik gösterebilir, bu durumda tarafınıza yeni bir teklif düzenlenir.&#10; &#13;"">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi3').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi3"" class=""form-control col-12"" value="""">"
+						Response.Write "<input id=""yazi3"" class=""form-control col-12"" value=""- Ödeme peşindir.&#10; &#13;"">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi4').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi4"" class=""form-control col-12"" value="""">"
+						Response.Write "<input id=""yazi4"" class=""form-control col-12"" value=""- Teslim tarihiniz ödemeye müteakip belirlenir.&#10; &#13;"">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
