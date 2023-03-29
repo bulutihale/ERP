@@ -78,6 +78,7 @@ rs.open sorgu,sbsv5,1,3
 	kasePath			=	rs("kasePath")
 	kaseWidth			=	rs("kaseWidth")
 	kaseHeight			=	rs("kaseHeight")
+	if isnull(kaseHeight) then kaseHeight = "auto"
 	antetPath			=	rs("antetPath")
 	satirKDV			=	rs("satirKDV")
 	teklifMusteriOnay	=	rs("teklifMusteriOnay")
@@ -172,7 +173,7 @@ Response.Write "</table>"
 	Response.Write "</div>"
 	Response.Write "<div style=""text-align:right; margin-top:0px;margin-right:60px"">"
 		if teklifKase = True then
-			Response.Write "<img id=""imageLogo"" src=""" & kasePath & """ width=""90"" height=""auto"">"
+			Response.Write "<img id=""imageLogo"" src=""" & kasePath & """ width=""" & kaseWidth & """ height=""" & kaseHeight & """>"
 		end if
 	Response.Write "</div>"
 '###################### /ÜST YAZI

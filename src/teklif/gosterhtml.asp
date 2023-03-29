@@ -71,36 +71,32 @@
         sorgu = "Select top 1 * from teklif.teklif where teklifID = " & teklifID
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
-        cariAd              =   rs("cariAd")
-        cariID              =   rs("cariID")
-        cariKodu            =   rs("cariKodu")
-        cariYetkiliID       =   rs("cariYetkiliID")
-        teklifsayi          =   rs("teklifsayi")
-        tekliftarih         =   rs("tekliftarih")
-        teklifFirmaId         =   rs("teklifFirmaId")
-        teklifTuru            =   rs("teklifTuru")
-        teklifDili            =   rs("teklifDili")
-        teklifParaBirimi      =   rs("teklifParaBirimi")
-        onUstYazi             =   rs("onUstYazi")
-        ustyazi               =   rs("ustyazi")
-        ozelNot               =   rs("ozelNot")
-        ozelkosultur1         =   rs("ozelkosultur1")
-        ozelkosulicerik1      =   rs("ozelkosulicerik1")
-        onAltYazi             =   rs("onAltYazi")
-        teklifKosul           =   rs("teklifKosul")
-        urunKatalogKodu       =   rs("urunKatalogKodu")
-        urunStokRefKodu       =   rs("urunStokRefKodu")
-        personelID            =   rs("kid")
-        altYazi               =   rs("altYazi") & ""
-        altYazi               =   Replace(altYazi,chr(10),"<br />")
-        altYazi               =   Replace(altYazi,chr(13),"<br />")
-
-
-        if isnull(cariID) = true then
-            cariID = 0
-        end if
-
-
+            cariAd              =   rs("cariAd")
+            cariID              =   rs("cariID")
+            cariKodu            =   rs("cariKodu")
+            cariYetkiliID       =   rs("cariYetkiliID")
+            teklifsayi          =   rs("teklifsayi")
+            tekliftarih         =   rs("tekliftarih")
+            teklifFirmaId         =   rs("teklifFirmaId")
+            teklifTuru            =   rs("teklifTuru")
+            teklifDili            =   rs("teklifDili")
+            teklifParaBirimi      =   rs("teklifParaBirimi")
+            onUstYazi             =   rs("onUstYazi")
+            ustyazi               =   rs("ustyazi")
+            ozelNot               =   rs("ozelNot")
+            ozelkosultur1         =   rs("ozelkosultur1")
+            ozelkosulicerik1      =   rs("ozelkosulicerik1")
+            onAltYazi             =   rs("onAltYazi")
+            teklifKosul           =   rs("teklifKosul")
+            urunKatalogKodu       =   rs("urunKatalogKodu")
+            urunStokRefKodu       =   rs("urunStokRefKodu")
+            personelID            =   rs("kid")
+            altYazi               =   rs("altYazi") & ""
+            altYazi               =   Replace(altYazi,chr(10),"<br />")
+            altYazi               =   Replace(altYazi,chr(13),"<br />")
+            if isnull(cariID) = true then
+                cariID = 0
+            end if
         else
             hata = translate("Kritik Hata Oluştu. Bahsi geçen ID ye ait teklif bulunamadı","","")
             call logla(hata)
@@ -112,7 +108,7 @@
 
 '### TEKLİF AYARLARINI ÇEK
     if hata = "" then
-        sorgu = "Select teklifFontSize,teklifFontUrunListe,teklifFont from teklif.teklifAyar where firmaID = " & firmaID & " and silindi = 0"
+        sorgu = "Select teklifFontSize,teklifFontUrunListe,teklifFont from teklif.teklifAyar where firmaID = " & teklifFirmaId & " and silindi = 0"
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
             teklifFontSize          =   rs("teklifFontSize")
@@ -131,7 +127,7 @@
 
 '### RAPOR FORMATINI ÇEK
     if hata = "" then
-        sorgu = "Select raporIcerik, sayfaYonu from rapor.raporFormat where modul = 'Teklif' and modul2 = " & teklifTuru & " and firmaID = " & firmaID & " and silindi = 0 order by raporFormatID DESC"
+        sorgu = "Select raporIcerik, sayfaYonu from rapor.raporFormat where modul = 'Teklif' and modul2 = " & teklifTuru & " and firmaID = " & teklifFirmaId & " and silindi = 0 order by raporFormatID DESC"
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount = 1 then
             raporIcerik =   rs("raporIcerik")
@@ -204,7 +200,7 @@ function raporBody(sb_kosulFontSize)
                         sorgu = "Select * from teklif.teklifKosul where silindi = 0 and firmaID = " & firmaID & " and silindi = 0 and teklifKosulID in (" & teklifKosul & ") order by kosul ASC"
                         rs.open sorgu,sbsv5,1,3
                         if rs.recordcount > 0 then
-                            kosulIcerik = kosulIcerik & "<table width=""100%"" cellspacing=""0"" cellpadding=""2"" border=""0"" style=""border-bottom: 1px solid #000;margin-top:4px;font-size:"&sb_kosulFontSize&""">"
+                            kosulIcerik = kosulIcerik & "<table width=""100%"" cellspacing=""0"" cellpadding=""2"" border=""0"" style=""border-bottom: 1px solid #000;margin-top:4px;font-size:" & sb_kosulFontSize & """>"
                             kosulIcerik = kosulIcerik & "<tbody>"
                             for i = 1 to rs.recordcount
                                 kosul           =   rs("kosul")

@@ -227,13 +227,16 @@ if hata = "" then
                                             Response.Write "<select name=""teklifFirmaId"" id=""teklifFirmaId"" class=""form-control"">"
                                             ' Response.Write "<option value="""">--Firma Seç--</option>"
                                             for oi = 1 to rs.recordcount
-                                                teklifFirmaAd       =	rs("Ad")
-                                                teklifFirmaId       =	rs("Id")
-                                                teklifFirmaLogo	    =	rs("logo")
-                                                Response.Write "<option value=""" & teklifFirmaId & """ "
-                                                Response.Write " data-teklifFirmaLogo=""" & teklifFirmaLogo & """ "
+                                                teklifFirmalarAd       =	rs("Ad")
+                                                teklifFirmalarId       =	rs("Id")
+                                                ' teklifFirmaLogo	    =	rs("logo")
+                                                Response.Write "<option value=""" & teklifFirmalarId & """ "
+                                                ' Response.Write " data-teklifFirmaLogo=""" & teklifFirmaLogo & """ "
+                                                if teklifFirmaId = teklifFirmalarId then
+                                                    Response.Write "selected"
+                                                end if
                                                 Response.Write ">"
-                                                Response.Write teklifFirmaAd
+                                                Response.Write teklifFirmalarAd
                                                 Response.Write "</option>"
                                             rs.movenext
                                             next
@@ -257,7 +260,7 @@ if hata = "" then
                                 Response.Write "<div class=""col-lg-3"">"
                                     Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Dili","","") & " : </div>"
                                     degerler = "--" & translate("Teklif Dili","","") & "--=|" & translate("Türkçe","","") & "=tr|" & translate("İngilizce","","") & "=en"
-                                    call formselectv2("teklifDili",teklifDili,"","","","","teklifDili",degerler,"")
+                                    call formselectv2("teklifDili",teklifDili,"$('.teklifKosulDilInput').removeAttr('checked');$('.teklifKosulDil').addClass('d-none');$('.teklifKosulDil'+this.value).removeClass('d-none');","","","","teklifDili",degerler,"")
                                 Response.Write "</div>"
                                 Response.Write "<div class=""col-lg-3"">"
                                     Response.Write "<div class=""badge badge-danger"">" & translate("Teklif Para Birimi","","") & " : </div>"
@@ -449,8 +452,9 @@ if hata = "" then
                                     teklifKosulID   =   rs("teklifKosulID")
                                     kosul           =   rs("kosul")
                                     icerik          =   rs("icerik")
-                                    Response.Write "<tr>"
-                                    Response.Write "<td nowrap><input style=""opacity:1;position:relative;"" type=""checkbox"" name=""kosul"" id=""kosul" & teklifKosulID & """ value=""" & teklifKosulID & """"
+                                    teklifKosulDil  =   rs("dil")
+                                    Response.Write "<tr class=""teklifKosulDil teklifKosulDil" & teklifKosulDil & """>"
+                                    Response.Write "<td nowrap><input class=""teklifKosulDilInput"" style=""opacity:1;position:relative;"" type=""checkbox"" name=""kosul"" id=""kosul" & teklifKosulID & """ value=""" & teklifKosulID & """"
                                     if teklifKosulSonuc = true then
                                         Response.Write " checked=""checked"" "
                                     end if

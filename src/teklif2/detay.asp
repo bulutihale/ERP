@@ -19,7 +19,6 @@
 	'entProgDB	=	entProgDBbul(id)
 
 
-
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
     kid		=	kidbul()
@@ -245,14 +244,6 @@ if yetkiKontrol  >= 3 then
 	'##### /PARA BİRİMLERİ SELECT İÇİN HAZIRLA
 	
 	
-	'##### TEMİNAT TÜRLERİ SELECT İÇİN HAZIRLA
-	'##### TEMİNAT TÜRLERİ SELECT İÇİN HAZIRLA
-
-				teminatTurDegerler = "=|Geçici Teminat=gecici|Kesin Teminat=kesin|Ek Geçici Teminat=ekGecici|Ek Kesin Teminat=ekKesin"
-				
-	'##### /TEMİNAT TÜRLERİ SELECT İÇİN HAZIRLA
-	'##### /TEMİNAT TÜRLERİ SELECT İÇİN HAZIRLA
-	
 	'##### SAYFA YÖNÜ SELECT İÇİN HAZIRLA
 	'##### SAYFA YÖNÜ SELECT İÇİN HAZIRLA
 
@@ -328,7 +319,7 @@ Response.Write "<div class=""row"">"
 Response.Write "<div class=""col-lg-12"">"
 Response.Write "<div class=""card"">"
 Response.Write "<div class=""card-header"" id=""sayfaAdi"">"
-	Response.Write "<a class=""btn btn-info rounded px-1 py-0"" target="""" href=""/teklifSablon/" & teklifSablon & "/" & id64 & """><i class=""fa fa-envelope""></i></a>"
+	'Response.Write "<a class=""btn btn-info rounded px-1 py-0"" target="""" href=""/teklifSablon/" & teklifSablon & "/" & id64 & """><i class=""fa fa-envelope""></i></a>"
 	Response.Write sayfaadi &" <i class=""fa fa-hand-o-right"" aria-hidden=""true""></i> "
 	Response.Write dosyaNo &" ("& ihaleNo & ") <i class=""fa fa-window-minimize"" aria-hidden=""true""></i> "
 	Response.Write alimYapan & " <i class=""fa fa-window-minimize"" aria-hidden=""true""></i> "
@@ -344,22 +335,26 @@ Response.Write "<div class=""card-body row"">"
 	Response.Write "<ul class=""nav nav-tabs"" role=""tablist"" id=""sekmeler"">"
 	
 		Response.Write "<li class=""nav-item"">"
-		Response.Write "<a class=""active nav-link fontkucuk"" data-toggle=""tab"" href=""#anaVeri"" role=""tab"" aria-controls=""anaVeri"">Ana Veri</a>"
+		Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#anaVeri"" role=""tab"" aria-controls=""anaVeri"">Ana Veri</a>"
 		Response.Write "</li>"
 	
 		Response.Write "<li class=""nav-item"">"
-		Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#urunler"" role=""tab"" aria-controls=""urunler"">Ürünler</a>"
+		Response.Write "<a class=""active nav-link fontkucuk"" data-toggle=""tab"" href=""#urunler"" role=""tab"" aria-controls=""urunler"">Ürünler</a>"
 		Response.Write "</li>"
-	
-		' Response.Write "<li class=""nav-item"">"
-		' Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#rakipler"" role=""tab"" aria-controls=""rakipler"">Rakip/Uhde</a>"
-		' Response.Write "</li>"
+			
+		Response.Write "<li class=""nav-item"">"
+		Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#teklif"" role=""tab"" aria-controls=""teklif"">Teklif Ayarları</a>"
+		Response.Write "</li>"
+		
+		Response.Write "<li class=""nav-item"" id=""onizlemeTAB"">"
+		if teklifSablon <> "" then
+			Response.Write "<a class=""nav-link fontkucuk"" href=""/teklifSablon/" & teklifSablon & "/" & id64 & """>"
+		else
+			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#onizlemeDIV"" role=""tab"" aria-controls=""onizlemeDIV"">"
+		end if
+			Response.Write "Teklif Önizleme</a>"
+		Response.Write "</li>"
 
-		
-		Response.Write "<li class=""nav-item"">"
-		Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#teklif"" role=""tab"" aria-controls=""teklif"">Teklif</a>"
-		Response.Write "</li>"
-		
 	Response.Write "</ul>"
 '##### /SEKMELER
 '##### /SEKMELER
@@ -368,9 +363,8 @@ Response.Write "<div class=""card-body row"">"
 '##### ANA VERİ
 '##### ANA VERİ
 		
-		Response.Write "<div class=""active tab-pane"" id=""anaVeri"" role=""tabpanel"">"
-	Response.Write "<input type=""hidden"" name=""ihaleID"" value=" & id & " />"
-	
+	Response.Write "<div class=""tab-pane"" id=""anaVeri"" role=""tabpanel"">"
+		Response.Write "<input type=""hidden"" name=""ihaleID"" value=" & id & " />"	
 		Response.Write "<div id=""anaVeriInput"" class="""">"
 	
 	Response.Write "<div class=""card-deck"">"
@@ -514,7 +508,7 @@ Response.Write "<div class=""card-body row"">"
 
 '##### ÜRÜNLER
 '##### ÜRÜNLER
-		Response.Write "<div class=""tab-pane"" id=""urunler"" role=""tabpanel"">"
+		Response.Write "<div class=""active tab-pane"" id=""urunler"" role=""tabpanel"">"
 		
 		Response.Write "<div class=""urunlistediv d-none"" tabindex=""-1"">"
 			Response.Write "<div id=""exceLoading""><img src='/image/working2.gif' width='40' height='40'/></div>"
@@ -688,7 +682,7 @@ Response.Write "<div class=""card-body row"">"
 '## siraNO
 		classYaz = classbelirle("align-middle text-center",kisimIhale,ihaleTipi,"","",rs("iptal"),rs("uhde"),"","","","","","")
 		Response.Write "<td width=""5%"" class="""&classYaz&""">"
-			call forminput("siraNo",siraNo,"numara(this,false,false);",""," borderless text-center","","","onChange=""ajSave('siraNo','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("siraNo",siraNo,"",""," borderless text-center","","","onChange=""ajSave('siraNo','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /siraNO
 
@@ -726,7 +720,7 @@ Response.Write "<div class=""card-body row"">"
 
 '## miktar
 		Response.Write "<td width=""7%"" class=""align-middle border-right-0 p-0"">"
-			call forminput("miktar",formatnumber(rs("miktar"),0),"numara(this,false,false);this.select();","","borderless text-right input50","","","onChange=""ajSave('miktar','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("miktar",formatnumber(rs("miktar"),0),"","","borderless text-right input50","","","onChange=""ajSave('miktar','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /miktar
 
@@ -738,7 +732,7 @@ Response.Write "<div class=""card-body row"">"
 
 '## iskonto
 		Response.Write "<td width=""3%"" class=""align-middle border-right-0 p-0"">"
-			call forminput("iskontoOran",iskontoOran,"numara(this,false,false);this.select();","%","borderless text-right p-0 bold text-center","","","onChange=""ajSave('iskontoOran','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("iskontoOran",iskontoOran,"","%","borderless text-right p-0 bold text-center","","","onChange=""ajSave('iskontoOran','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /iskonto
 
@@ -746,7 +740,7 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<td width=""10%"" class=""align-middle border-right-0 p-0"">"
 			para_deger = para_basamak(rs("firmamFiyat"))
 			
-			call forminput("firmamFiyat",para_deger,"numara(this,true,false);this.select();","","borderless para text-right p-0 ","","","onChange=""ajSave('firmamFiyat','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("firmamFiyat",para_deger,"","","borderless para text-right p-0 ","","","onChange=""ajSave('firmamFiyat','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 		
 		Response.Write "<td width=""10%"" class=""align-middle border-left-0 p-0 pl-1"">"
@@ -785,8 +779,8 @@ Response.Write "<div class=""card-body row"">"
 
 
 
-'##### TEKLİF
-'##### TEKLİF
+'##### TEKLİF AYARLARI
+'##### TEKLİF AYARLARI
 	
 	if teklifKase = True then
 		teklifKaseDurum = 	0
@@ -1217,8 +1211,8 @@ Response.Write "<div class=""card text-center"">"
 				Response.Write "<div class=""row"">"
 					Response.Write "<div class=""col text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-4"">Teklif Şablonu</div>"
-						call formselectv2("teklifSablon",teklifSablon,"ajSave('pdfSablon','dosya.ihale',"&id&",$(this).find('option:selected').text())","","teklifSablon","","",teklifSablonDegerler,"")		
-						Response.Write "<div class=""bold"">Seçili Şablon: <span class=""bold text-danger"">" & teklifSablon & "</span></div>"
+						call formselectv2("teklifSablon",teklifSablon,"ajSave('pdfSablon','dosya.ihale',"&id&",$(this).find('option:selected').text())","","teklifSablon border border-info","","",teklifSablonDegerler,"")		
+						Response.Write "<div id=""seciliSablonDIV"" class=""bold mt-2"">Seçili Şablon: <span class=""bold text-danger"">" & teklifSablon & "</span></div>"
 				Response.Write "</div>"
 			Response.Write "</div>"
 		'######### /ŞABLON
@@ -1241,11 +1235,19 @@ Response.Write "</div>"
 			
 			
 		Response.Write "</div>"'tab-pane
-'##### /TEKLİF
-'##### /TEKLİF
+'##### /TEKLİF AYARLARI
+'##### /TEKLİF AYARLARI
+	Response.Write "</div>"
 
+'##### TEKLİF ÖNİZLEME
+'##### TEKLİF ÖNİZLEME
+		Response.Write "<div class=""tab-pane"" id=""onizlemeDIV"" role=""tabpanel"">"
+			Response.Write "<div class=""mt-3 bg-warning bold h3 col-5 rounded"">Şablon seçilmemiş.</div>"
+			Response.Write "<div class=""mt-3 ml-3 col-5 rounded bold"">* Teklif Ayarları sekmesinden ""PDF Şablon"" seçimi yapınız.</div>"
+		Response.Write "</div>"'tab-pane
+'##### /TEKLİF ÖNİZLEME
+'##### /TEKLİF ÖNİZLEME
 
-Response.Write "</div>"
 
 Response.Write "</div>"
 Response.Write "</div>"
@@ -1300,9 +1302,10 @@ function ajSave(alan, tablo, tabloID, deger){
 															var $data = $(data);
 															
 															$('#anaVeriInput').html($data.find('#anaVeriInput').html());
-															$('#rakiplerTablo').html($data.find('#rakiplerTablo').html());
 															$('#urunlerTablo').html($data.find('#urunlerTablo').html());
-															$('.def-kapali').hide('slow');
+															$('#seciliSablonDIV').html($data.find('#seciliSablonDIV').html());
+															//$('#sayfaAdi').html($data.find('#sayfaAdi').html());
+															$('#onizlemeTAB').html($data.find('#onizlemeTAB').html());
 												});//tablolar güncellendi
 							
 			}
@@ -1344,7 +1347,6 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 															var $data = $(data);
 															
 															$('#anaVeriInput').html($data.find('#anaVeriInput').html());
-															$('#rakiplerTablo').html($data.find('#rakiplerTablo').html());
 															$('#urunlerTablo').html($data.find('#urunlerTablo').html());
 															$('.def-kapali').hide('slow');
 												});//tablolar güncellendi
@@ -1421,7 +1423,6 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 										};
 												$.get('/teklif2/detay/<%=id64%>', function(data){
 															var $data = $(data);
-															$('#rakiplerTablo').html($data.find('#rakiplerTablo').html());
 															$('#urunlerTablo').html($data.find('#urunlerTablo').html());
 															$('.def-kapali').hide('slow');
 												});//tablolar güncellendi

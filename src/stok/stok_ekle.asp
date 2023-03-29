@@ -21,6 +21,7 @@
     lotTakip        =   Request.Form("lotTakip")
     stokAdEn        =   Request.Form("stokAdEn")
     katalogKodu     =   Request.Form("katalogKodu")
+    kdv             =   Request.Form("kdv")
     if rafOmru = "" then
         rafOmru = 0
     end if
@@ -41,6 +42,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 	call rqKontrol(stokKodu,"Lütfen Stok Seçin","")
 	call rqKontrol(anaBirimID,"Lütfen ürüne ait ana birimi seçin","")
+    call rqKontrol(kdv, "Ürüne ait KDV ORANI girişi yapınız","")
 
 if yetkiKontrol > 2 then
 
@@ -68,6 +70,7 @@ end if
                 rs("lotTakip")          =   lotTakip
                 rs("stokAdEn")          =   stokAdEn
                 rs("katalogKodu")       =   katalogKodu
+                rs("kdv")               =   kdv
             rs.update
             rs.close
 

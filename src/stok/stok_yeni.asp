@@ -30,7 +30,7 @@ inpKontrol		=	""
 if gorevID <> "" then
 
             sorgu = "SELECT t1.stokKodu, t1.stokAd, t1.stokTuru, t1.minStok, t1.stokBarcode, t1.kkDepoGiris, ISNULL(t1.silindi,0) as silindi,"
-			sorgu = sorgu & " t1.anaBirimID, t2.uzunBirim, t1.rafOmru, t1.stokAdEn,"
+			sorgu = sorgu & " t1.anaBirimID, t2.uzunBirim, t1.rafOmru, t1.stokAdEn, t1.kdv,"
 			sorgu = sorgu & " stok.FN_stokHareketKontrol("&firmaID&", "&gorevID&") as hareketKontrol, t1.lotTakip"
 			sorgu = sorgu & " FROM stok.stok t1"
 			sorgu = sorgu & " LEFT JOIN portal.birimler t2 ON t1.anaBirimID = t2.birimID"
@@ -49,6 +49,7 @@ if gorevID <> "" then
 				rafOmru			=	rs("rafOmru")
 				lotTakip		=	rs("lotTakip")
 				stokAdEn		=	rs("stokAdEn")
+				kdv				=	rs("kdv")
 				defDeger		=	anaBirimID & "###" & uzunBirim
             rs.close
 			
@@ -107,17 +108,21 @@ Response.Write "<div class=""tab-content"">"
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-sm-4 my-1"">"
+				Response.Write "<div class=""col-sm-3 my-1"">"
 					Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Türü</span>"
 					call formselectv2("stokTuru",stokTuru,"","","stokTuru","","stokTuru",stokTipDegerler,"")
 				Response.Write "</div>"
-				Response.Write "<div class=""col-sm-4 my-1"">"
+				Response.Write "<div class=""col-sm-3 my-1"">"
 					Response.Write "<span class=""badge badge-secondary rounded-left"">Minumum Stok Miktarı</span>"
 					call forminput("minStok",minStok,"","","","","minStok","")
 				Response.Write "</div>"
-				Response.Write "<div class=""col-sm-4 my-1"">"
+				Response.Write "<div class=""col-sm-3 my-1"">"
 					Response.Write "<span class=""badge badge-secondary rounded-left"">Raf Ömrü (Ay)</span>"
 					call forminput("rafOmru",rafOmru,"","ay cinsinden","","","rafOmru","")
+				Response.Write "</div>"
+				Response.Write "<div class=""col-sm-3 my-1"">"
+					Response.Write "<span class=""badge badge-secondary rounded-left"">KDV Oranı</span>"
+					call forminput("kdv",kdv,"numara(this,false,false)","KDV","","","kdv","")
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""row"">"

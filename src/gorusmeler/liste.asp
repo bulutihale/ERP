@@ -147,4 +147,4 @@ Response.Write "</div>"
 			
 			
 
-    </script><!--ajSave kayıt işlemleri-->
+    </script><!--kayıt işlemleri-->

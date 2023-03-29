@@ -85,6 +85,7 @@ rs.open sorgu,sbsv5,1,3
 	kasePath			=	rs("kasePath")
 	kaseWidth			=	rs("kaseWidth")
 	kaseHeight			=	rs("kaseHeight")
+	if isnull(kaseHeight) then kaseHeight = "auto"
 	antetPath			=	rs("antetPath")
 	satirKDV			=	rs("satirKDV")
 	firmaTanimlayiciNo	=	rs("firmaTanimlayiciNo")
@@ -120,7 +121,7 @@ rs.open sorgu,sbsv5,1,3
 '####### /VERİLERİ ÇEK
 
 Response.Write "<page size=""A4"" class=""section-to-print"">"
-Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">"
+Response.Write "<table border=""1"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">" 
 	Response.Write "<tr>"
 		Response.Write "<td style=""width:10%"">"
 		if teklifAntet = True then
@@ -128,28 +129,32 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 		end if
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:center; font-size:30px"" class=""b-all"">"
-			Response.Write "<span style=""font-weight:bold;"">PROFORMA INVOICE</span>"
+			Response.Write "<span style=""font-weight:bold;"">PRICE OFFER</span>"
 		Response.Write "</td>"
 		Response.Write "<td class=""b-all"" style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;width:15%"">"
-		Response.Write "<b>Tarih: </b>"&formatdatetime(tarih_ihale,2) & "<br>"
-		Response.Write "<b>Teklif No: </b>" & dosyaNo
+			Response.Write "<b>Date: </b>"&formatdatetime(tarih_ihale,2) & "<br>"
+			Response.Write "<b>Number: </b>" & dosyaNo
 		Response.Write "</td>"
 	Response.Write "</tr>"
 Response.Write "</table>"
 	Response.Write "<br>"
 Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">"
 	Response.Write "<tr>"
-		Response.Write "<td style=""width:50%;"" class=""b-all"">"
+		Response.Write "<td style=""width:25%;"" class=""b-all"">"
 			Response.Write "<div style=""height:120px; padding:10px;""" 
 				Response.Write " data-tabloid=""" & id & """"
 				Response.Write " data-tablo=""dosya.ihale"""
 				Response.Write " data-alan=""yeniCariAd"""
 			Response.Write " contenteditable=""true"" class=""ajSaveBlur"">" & teklifCariAD & "</div>"
 		Response.Write "</td>"
+		Response.Write "<td align=""center"">"
+			if teklifKase = True then
+				Response.Write "<img id=""imageLogo"" src=""" & kasePath & """ width=""" & kaseWidth & """ height=""" & kaseHeight & """>"
+			end if
+		Response.Write "</td>"
 	Response.Write "</tr>"
 	Response.Write "<tr>"
 		Response.Write "<td>"
-		'Response.Write ikn&" "&ihaleAD
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:right;"">"
 		Response.Write "<div class=""row text-right"">"
@@ -158,15 +163,12 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 					Response.Write "<a class=""text-left pointer"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
 				Response.Write "</div>"
 				Response.Write "<div class=""col-1"">"
-				'Response.Write "&nbsp;&nbsp;&nbsp;&nbsp;"
-				'Response.Write "<a class=""text-left"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailVar""><i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i></a>"
 					Response.Write "<div id=""teklifMailGonder"" class=""text-left pointer"" onclick=""teklifPDFmail('"&id64&"','mailVar',$(this).attr('id'))"">"
 						Response.Write "<i class=""fa fa-at"" title=""PDF oluştur. Bayi kayıtlı E-posta adreslerine otomatik olarak yolla.""></i>"
 					Response.Write "</div>"
 				Response.Write "</div>"
-				'Response.Write "&nbsp;&nbsp;"
 			end if
-				Response.Write "<div class=""col-1"">"
+				Response.Write "<div class=""col-12 text-right"">"
 					Response.Write "Rev."&teklifRevNo
 				Response.Write "</div>"
 		Response.Write "</div>"
@@ -183,7 +185,7 @@ Response.Write "<thead><tr style=""font-size:x-small;"" class=""text-center font
 		Response.Write "</th>"
 	end if
 Response.Write "<th class=""bg-secondary"">Item</th>"	
-Response.Write "<th class=""bg-secondary"">Ürün Kodu</th>"
+Response.Write "<th class=""bg-secondary"">Code</th>"
 if mustKodGoster = True then
 	Response.Write "<th class=""bg-secondary"">Cust Code</th>"
 end if
@@ -518,9 +520,6 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 '################## /banka bilgileri tablosu
 
 
-			if teklifKase = True then
-						Response.Write "<img src=""" & kasePath & """ width=""" & kaseWidth & """ height=""" & kaseHeight & """>"
-			end if
 
 
 
