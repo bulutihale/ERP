@@ -101,6 +101,21 @@
         objStream.WriteText vbcrlf & vbcrlf
 
 
+        sorgu = "Select * from stok.stokAyar where silindi = 0 and firmaID = " & rs("Id")
+        rs1.open sorgu, sbsv5, 1, 3
+        if rs1.recordcount > 0 then
+        for dii = 1 to rs1.recordcount
+                objStream.WriteText vbtab & "'#### STOK" & vbcrlf
+                objStream.WriteText vbtab & vbtab & "sb_stokKoduZorunlu = " & rs1("stokKoduZorunlu") & "" & vbcrlf
+                objStream.WriteText vbtab & "'#### STOK" & vbcrlf
+                objStream.WriteText vbcrlf & vbcrlf
+        rs1.movenext
+        next
+        end if
+        rs1.close
+
+
+
         objStream.WriteText vbtab & "'#### CARİ bilgieri dış db den çekilecekse" & vbcrlf
         objStream.WriteText vbtab & vbtab & "firmaCariDBvar = " & rs("CariDBvar") & "" & vbcrlf
         objStream.WriteText vbtab & vbtab & "firmaCariSunucu = """ & rs("CariSunucu") & """" & vbcrlf

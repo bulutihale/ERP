@@ -4,6 +4,7 @@ aylaruzun		=	Array("","Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz"
 aylarkisa		=	Array("","Oc","Şb","Mr","Ns","My","Hz","Tm","Ağ","Ey","Ek","Ks","Ar")
 oncelikArr		=	Array("Düşük","","Düşük+","","","Normal","","Yüksek","","Acil")
 paraArr			=	Array("","TL","USD","EUR")
+silindiArr		=	Array("",translate("Silindi","",""))
 ' muhasebedbArr   =   Array("best2022","best2021")
 
 	'##### Depo Tipleri
@@ -23,7 +24,7 @@ paraArr			=	Array("","TL","USD","EUR")
 	'##### Diller
 	
 	'##### Stok Tipleri
-		stokTipDegerler = "=|Mamül=1|Yarı Mamül=2|Bileşen=3|Hammadde=4"
+		stokTurDegerler = "=|" & translate("Mamul","","") & "=1|" & translate("Yarı Mamul","","") & "=2|" & translate("Bileşen","","") & "=3|" & translate("Hammadde","","") & "=4"
 	'##### Stok Tipleri
 	
 	'##### Reçete Ön Hazırlık Tipleri

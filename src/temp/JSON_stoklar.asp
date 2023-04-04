@@ -75,8 +75,16 @@
 				
 				
 					Response.Write "{"
-					Response.Write """id"":"&rs("stokID")&","
-					Response.Write """text"":"""& stokKodu & " -- "& stokAd & " -- " & stokBarcode &""""
+					Response.Write """id"":" & rs("stokID") & ","
+					Response.Write """text"":"""
+					if stokKodu <> "" then
+						Response.Write stokKodu & " -- "
+					end if
+					Response.Write stokAd
+					if stokBarcode <> "" then
+						Response.Write " -- " & stokBarcode
+					end if
+					Response.Write """"
 					if i < rs.recordcount then
 						Response.Write "},"
 					else

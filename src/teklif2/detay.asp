@@ -689,7 +689,8 @@ Response.Write "<div class=""card-body row"">"
 '## urunAD
 		classYaz = classbelirle("align-middle",kisimIhale,ihaleTipi,"","",rs("iptal"),"","","","","","","")
 		Response.Write "<td width=""40%"" class="""&classYaz&""">"
-			call forminput("urunAd",urunAd,"","","borderless mt-4","","kalemAd"&ihaleUrunID&"","onChange=""ajSave('urunAd','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			'call forminput("urunAd",urunAd,"","","borderless mt-4","","kalemAd"&ihaleUrunID&"","onChange=""ajSave('urunAd','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("urunAd",urunAd,"","","borderless mt-4","","kalemAd"&ihaleUrunID&"","onChange=""ajSave('deneme','dosya.deneme',5,$(this).val())""")
 			if stoklarID > 0 then
 				Response.Write "<a id="""&rs("ihaleUrunID")&"|ihale_urun"&"|stokKarsilik"" class=""btn ajSil text-muted "" role=""button""><i class=""fa fa-trash-o p-0 m-0""></i></a>"
 			end if

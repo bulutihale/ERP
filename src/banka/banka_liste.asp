@@ -49,11 +49,12 @@
 	if hata = "" then
 		if yetkiKontrol > 0 then
 			Response.Write "<div class=""table-responsive"">"
-				sorgu = "Select * "
-				sorgu = sorgu & " FROM portal.bankalar t1"
-				' sorgu = sorgu & " LEFT JOIN portal.birimler ON t1.paraBirim = portal.birimler.kisaBirim AND portal.birimler.birimTur = 'para' and portal.birimler.firmaID = " & firmaID
-				sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
-				sorgu = sorgu & " order by t1.bankaAd ASC"
+				sorgu = "Select" & vbcrlf
+				sorgu = sorgu & "portal.bankalar.*," & vbcrlf
+				sorgu = sorgu & "(select Ad from portal.firma where Id = portal.bankalar.firmaID) as firmaAd" & vbcrlf
+				sorgu = sorgu & "FROM portal.bankalar" & vbcrlf
+				sorgu = sorgu & "WHERE silindi = 0" & vbcrlf
+				sorgu = sorgu & "and firmaID in (select Id from portal.firma where portal.firma.anaFirmaID = " & firmaID & " OR portal.firma.Id = " & firmaID & ")" & vbcrlf
 				rs.Open sorgu, sbsv5, 1, 3
 					if rs.recordcount > 0 then
 						Response.Write "<div class=""container-fluid"">"
@@ -64,6 +65,7 @@
 								Response.Write "<div class=""row"">"
 									Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark"">"
 										Response.Write "<tr>"
+											Response.Write "<th scope=""col"">" & translate("Firma Adı","","") & "</th>"
 											Response.Write "<th scope=""col"">" & translate("Hesap Adı","","") & "</th>"
 											Response.Write "<th scope=""col"">" & translate("Banka Adı","","") & "</th>"
 											Response.Write "<th scope=""col"">" & translate("Hesap Döviz Türü","","") & "</th>"
@@ -75,6 +77,7 @@
 											Response.Write "<th scope=""col"">&nbsp;</th>"
 										Response.Write "</tr></thead>"
 										for i = 1 to rs.recordcount
+											firmaAd			=	rs("firmaAd")
 											hesapAd			=	rs("hesapAd")
 											bankaID			=	rs("bankalarID")
 											bankaAd			=	rs("bankaAd")
@@ -87,6 +90,7 @@
 											paraBirim		=	rs("paraBirim")
 											swiftKod		=	rs("swiftKod")
 											Response.Write "<tr>"
+												Response.Write "<td class="""">" & firmaAd & "</td>"
 												Response.Write "<td class="""">" & hesapAd & "</td>"
 												Response.Write "<td class="""">" & bankaAd & "</td>"
 												Response.Write "<td class="""">" & paraBirim & "</td>"

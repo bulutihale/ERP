@@ -25,6 +25,8 @@ Response.Flush()
 
 
     dosyaAd = "yedek" & unique() & ".bak"
+	' sorgu = "DBCC SHRINKFILE(sbs_tio_log)" & vbcrlf
+	' sorgu = "dbcc shrinkdatabase ('" & sb_dbad & "')" & vbcrlf
 	sorgu = "BACKUP DATABASE " & sb_dbad & " TO DISK = '" & sb_fizikselPath & dosyaAd & "'"
     if sb_sqlYedekCompress = true then
         sorgu = sorgu & " WITH COMPRESSION"

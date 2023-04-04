@@ -1,6 +1,7 @@
 ﻿<!--#include virtual="/reg/rs.asp" --><%
 
 	call sessiontest()
+	
 	Response.Flush()
 
 
@@ -11,10 +12,6 @@
 		stokID					=	Request.Form("stokID")
 	'##### request
 	'##### request
-
-
-
-
 
 	
 
@@ -52,7 +49,4 @@
 
 			response.Write sonuc
 
-%>
-
-
-
+%><!--#include virtual="/reg/rs.asp" -->

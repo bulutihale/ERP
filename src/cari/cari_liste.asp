@@ -46,7 +46,7 @@ call logla("Cari Listesi Ekranı")
 					Response.Write "</div>"
 					Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 					' if isnull(firmaSSO) = True then
-					if yetkiTeklif >= 3 or yetkiSatis > 1 then
+					if yetkiKontrol > 0 OR (yetkiTeklif >= 3 or yetkiSatis > 1) then
 						Response.Write "<div class=""col-auto my-1""><button type=""button"" class=""btn btn-danger"" onClick=""modalajaxfit('/cari/cari_yeni.asp')"">" & translate("YENİ CARİ","","") & "</a></div>"
 					end if
 					' end if

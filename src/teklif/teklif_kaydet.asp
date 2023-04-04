@@ -139,4 +139,9 @@
 
 
 
+  if teklifOlusuncaListeyeDon = "on" then
+    call jsgit("/teklif/teklif_liste")
+  end if
+
+
 %><!--#include virtual="/reg/rs.asp" -->

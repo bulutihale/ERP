@@ -69,9 +69,7 @@ else
 	'### YAPICAK BİŞİ YOK :(
 	'### YAPICAK BİŞİ YOK :(
 	'### Site sabitlerini çek
-	'### Site sabitlerini çek
 		%><!--#include virtual="/temp/sabitler_ek.asp" --><%
-	'### Site sabitlerini çek
 	'### Site sabitlerini çek
 	'### SSO Başka DB ise
 	'### SSO Başka DB ise
@@ -121,10 +119,11 @@ else
 	'### STOK'ları dış DB'den alıyorsa
 	
 	'### DİL
-	'### DİL
 	%><!--#include virtual="/temp/language.asp" --><%
 	'### DİL
-	'### DİL
 	%><!--#include virtual="/reg/array.asp" --><!--#include virtual="/reg/fonksiyonlar.asp" --><%
+	'### Kişisel verileri çek
+	%><!--#include virtual="/temp/sabitler_personelayar.asp" --><%
+	'### Kişisel verileri çek
 end if
 %>

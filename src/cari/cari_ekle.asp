@@ -25,12 +25,12 @@
 
 Response.Flush()
 
-
+yetkiKontrol	= yetkibul(modulAd)
 yetkiTeklif	    = yetkibul("Teklif")
 yetkiSatis  	= yetkibul("Satış")
 
 
-if yetkiTeklif >= 3 or yetkiSatis > 1 then
+if yetkiKontrol > 0 OR (yetkiTeklif >= 3 or yetkiSatis > 1) then
     if gorevID = "" then
         call logla("Cari Ekleme : " & cariAd)
     else

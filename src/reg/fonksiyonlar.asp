@@ -1431,6 +1431,7 @@ function jsontable(byVal isimler, byVal alanlar, byVal sortsira, byVal sortdurum
 
 end function
 
+
 function aktifpasif(deger)
 	if deger = True then
 		aktifpasif = aktifarr(1)
@@ -3588,9 +3589,15 @@ Function truefalse(deger,cevap)
 		if cevap = "varyok" then
 			truefalse = translate("Var","","")
 		end if
+		if cevap = "yokvar" then
+			truefalse = translate("Yok","","")
+		end if
 	else
 		if cevap = "varyok" then
 			truefalse = translate("Yok","","")
+		end if
+		if cevap = "yokvar" then
+			truefalse = translate("Var","","")
 		end if
 	end if
 end function
@@ -3646,7 +3653,7 @@ function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 			call logla(gelenmetin)
 		end if
 		if gelenbaslik = "" then
-			gelenbaslik = "Hata Oluştu"
+			gelenbaslik = translate("Hata Oluştu","","")
 		end if
 		Response.Write "<div class=""container-fluid mt-5"">"
 		Response.Write "<div class=""row"">"
@@ -3656,7 +3663,7 @@ function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 				Response.Write "<div class=""card-header text-white bg-primary"">" & gelenbaslik & "</div>"
 				Response.Write "<div class=""card-body text-center"">"
 				if gelenmetin = "" then
-					Response.Write "Bu alana girmek için yetkiniz yeterli değil."
+					Response.Write translate("Bu alana girmek için yetkiniz yeterli değil.","","")
 				else
 					Response.Write gelenmetin
 				end if
@@ -3666,6 +3673,41 @@ function yetkisizGiris(byVal gelenmetin, byVal gelenbaslik,byVal ek3)
 			Response.Write "<div class=""col-lg-3 col-md-3 col-sm-1 col-xs-1""></div>"
 		Response.Write "</div>"
 		Response.Write "</div>"
+end function
+
+
+function personelAyarGuncelle(byVal ayarAd, byVal ayarDeger, byVal kullaniciID)
+	'## 3 nisan 2023 - başar
+	'## call personelAyarGuncelle("stokSifirGoster","off",kid)
+	if kullaniciID = "" then
+		kullaniciID = kid
+	end if
+	personelAyarUpdate = false
+	if ayarAd <> "" and ayarDeger <> "" then
+		sorgu = "Select top 1 * from personel.personelAyar where ayarAd = '" & ayarAd & "' and kid = " & kullaniciID
+		rs.open sorgu, sbsv5, 1, 3
+		if rs.recordcount = 0 then
+			rs.addnew
+			rs("kid")		= kullaniciID
+			rs("ayarAd")	= ayarAd
+			rs("ayarDeger") = ayarDeger
+			rs.update
+			personelAyarUpdate = true
+		else
+			if ayarDeger = rs("ayarDeger") then
+				'performans
+			else
+				rs("ayarDeger") = ayarDeger
+				rs.update
+				personelAyarUpdate = true
+			end if
+		end if
+		rs.close
+	end if
+	if personelAyarUpdate = true then
+		'sabit dosyasını yeniden oluştur
+		Server.execute "/portal/sabit_olustur_personelayar.asp"
+	end if
 end function
 
 
@@ -3718,6 +3760,14 @@ function arrayDegerBulfn(byVal arraydeger,byVal arraysecenekler)
                     fnsonuc = arraysecenekler2Arr(0)
                     exit for
                 end if
+				'olmuyorsa bir de numeric deneyelim
+					if isnumeric(arraydeger) = true and isnumeric(arraysecenekler2Arr(1)) = true then
+						if int(arraysecenekler2Arr(1)) = int(arraydeger) then
+							fnsonuc = arraysecenekler2Arr(0)
+							exit for
+						end if
+					end if
+				'olmuyorsa bir de numeric deneyelim
             set arraysecenekler2Arr = Nothing
         next
         set arrayseceneklerArr = Nothing
@@ -4610,15 +4660,15 @@ function geoIP(byVal alan,byVal gelenIP)
     IParr = Split(gelenIP,".")
     IPSub = IParr(0) & "." & IParr(1) & "." & IParr(2) & "."
 	set IParr = Nothing
-    sorgu = "Select top 1 v3,v4,v5,v6 from portal.geoIP where IP1 like '" & IPSub & "%'"
+    sorgu = "Select top 1 v3 from sbs_geoIP.portal.geoIP where IP1 like '" & IPSub & "%'"
     fn1.open sorgu, sbsv5,1,3
         if fn1.recordcount > 0 then
             if alan = "şehir" or alan = "sehir" then
                 geoIP = fn1("v3")
-            elseif alan = "ilçe" or alan = "ilce" then
-                geoIP = fn1("v4")
-            elseif alan = "konum" then
-                geoIP = fn1("v5") & "," & fn1("v6")
+            ' elseif alan = "ilçe" or alan = "ilce" then
+            '     geoIP = fn1("v4")
+            ' elseif alan = "konum" then
+            '     geoIP = fn1("v5") & "," & fn1("v6")
             else
                 geoIP = ""
             end if
@@ -4962,6 +5012,30 @@ function mailGonder2(byVal mailTipNo, byVal mailBaslik, byval mailicerik, byval 
 	response.write "ok|"
 	
 end function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

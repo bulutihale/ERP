@@ -2,255 +2,421 @@
 
 
 '###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
     call sessiontest()
     kid			=	kidbul()
     ID			=	Request.QueryString("ID")
     kid64		=	ID
     opener  	=   Request.Form("opener")
     gorevID 	=   Request.QueryString("gorevID")
-	a			=   Request.QueryString("a")
 	stokID64	=	gorevID
 	gorevID64	=	gorevID
 	gorevID		=	base64_decode_tr(gorevID64)
-	modulAd 	=   "stok"
+	modulAd 	=   "Stok"
+	Response.Flush()
+	call logla("Stok Düzenleme Ekranı Girişi")
+	yetkiKontrol 	=	yetkibul("Stok")
+	inpKontrol		=	""
 '###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
 
 
-Response.Flush()
+	if gorevID <> "" then
+		sorgu = "SELECT" & vbcrlf
+		sorgu = sorgu & "stok.stok.*" & vbcrlf
+		sorgu = sorgu & ",portal.birimler.uzunBirim" & vbcrlf
+		sorgu = sorgu & ",stok.FN_stokHareketKontrol(" & firmaID & ", " & gorevID & ") as hareketKontrol" & vbcrlf
+		sorgu = sorgu & " FROM stok.stok"
+		sorgu = sorgu & " LEFT JOIN portal.birimler ON stok.stok.anaBirimID = portal.birimler.birimID"
+		sorgu = sorgu & " WHERE stok.stok.firmaID = " & firmaID & " AND stok.stok.stokID = " & gorevID
+		rs.open sorgu, sbsv5, 1, 3
+			stokKodu		=	rs("stokKodu")
+			stokAd			=	rs("stokAd")
+			stokTuru		=	rs("stokTuru")
+			minStok			=	rs("minStok")
+			stokBarcode		=	rs("stokBarcode")
+			kkDepoGiris		=	rs("kkDepoGiris")
+			silindi			=	rs("silindi")
+			anaBirimID		=	rs("anaBirimID")
+			uzunBirim		=	rs("uzunBirim")
+			hareketKontrol	=	rs("hareketKontrol")
+			rafOmru			=	rs("rafOmru")
+			lotTakip		=	rs("lotTakip")
+			stokAdEn		=	rs("stokAdEn")
+			kdv				=	rs("kdv")
+			manuelKayit		=	rs("manuelKayit")
+			paraBirimID		=	rs("paraBirimID")
+			stokfirmaID		=	rs("firmaID")
+			fiyat1			=	rs("fiyat1")
+			fiyat2			=	rs("fiyat2")
+			fiyat3			=	rs("fiyat3")
+			fiyat4			=	rs("fiyat4")
+			defDeger		=	anaBirimID & "###" & uzunBirim
+		rs.close
+		inpKontrol	=	""
+	else
+		lotTakip = 1 ' yeni ürün kayıt ediliyorsa LOT Takip default olarak yapılır işaretlesin diye.
+	end if
 
 
-call logla("Stok Düzenleme Ekranı Girişi")
-
-yetkiKontrol 	=	yetkibul(modulAd)
-inpKontrol		=	""
 
 
-if gorevID <> "" then
+      sorgu = "Select birimID,uzunBirim from portal.birimler where firmaID = " & firmaID & " and silindi = 0 and birimTur = 'miktar' order by sira asc"
+      rs.open sorgu,sbsv5,1,3
+      if rs.recordcount > 0 then
+        birimDegerler = ""
+        for i = 1 to rs.recordcount
+          birimID   =   rs("birimID")
+          uzunBirim =   rs("uzunBirim")
+          uzunBirim =   translate(rs("uzunBirim"),"","")
+          birimDegerler = birimDegerler & uzunBirim & "=" & birimID & "|"
+          rs.movenext
+        next
+        birimDegerler = left(birimDegerler,len(birimDegerler)-1)
+      end if
+      rs.close
 
-            sorgu = "SELECT t1.stokKodu, t1.stokAd, t1.stokTuru, t1.minStok, t1.stokBarcode, t1.kkDepoGiris, ISNULL(t1.silindi,0) as silindi,"
-			sorgu = sorgu & " t1.anaBirimID, t2.uzunBirim, t1.rafOmru, t1.stokAdEn, t1.kdv,"
-			sorgu = sorgu & " stok.FN_stokHareketKontrol("&firmaID&", "&gorevID&") as hareketKontrol, t1.lotTakip"
-			sorgu = sorgu & " FROM stok.stok t1"
-			sorgu = sorgu & " LEFT JOIN portal.birimler t2 ON t1.anaBirimID = t2.birimID"
-			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID
-			rs.open sorgu, sbsv5, 1, 3
-				stokKodu		=	rs("stokKodu")
-				stokAd			=	rs("stokAd")
-				stokTuru		=	rs("stokTuru")
-				minStok			=	rs("minStok")
-				stokBarcode		=	rs("stokBarcode")
-				kkDepoGiris		=	rs("kkDepoGiris")
-				silindi			=	rs("silindi")
-				anaBirimID		=	rs("anaBirimID")
-				uzunBirim		=	rs("uzunBirim")
-				hareketKontrol	=	rs("hareketKontrol")
-				rafOmru			=	rs("rafOmru")
-				lotTakip		=	rs("lotTakip")
-				stokAdEn		=	rs("stokAdEn")
-				kdv				=	rs("kdv")
-				defDeger		=	anaBirimID & "###" & uzunBirim
+
+
+        '############# firmalar
+            sorgu = "Select Ad,Id from portal.firma where portal.firma.Id = " & firmaID & " or portal.firma.anaFirmaID = " & firmaID & vbcrlf
+            sorgu = sorgu & "order by Ad ASC" & vbcrlf
+            rs.open sorgu,sbsv5,1,3
+            ' if rs.recordcount > 0 then
+                    degerler = ""
+                    do while not rs.eof
+                        degerler = degerler & rs("Ad")
+                        degerler = degerler & "="
+                        degerler = degerler & rs("Id")
+                        degerler = degerler & "|"
+                    rs.movenext
+                    loop
+                    firmaDegerler = left(degerler,len(degerler)-1)
+            ' end if
             rs.close
-			
-			inpKontrol	=	""
-else
-	lotTakip = 1 ' yeni ürün kayıt ediliyorsa LOT Takip default olarak yapılır işaretlesin diye.
-end if
+        '############# firmalar
 
 
-'###### ARAMA FORMU
+    sorgu = "Select birimID,kisaBirim from portal.birimler where birimGrup = 'para' and firmaID = " & firmaID
+    rs.open sorgu, sbsv5, 1, 3
+        if rs.recordcount > 0 then
+			degerler = ""
+			do while not rs.eof
+				degerler = degerler & rs("kisaBirim")
+				degerler = degerler & "="
+				degerler = degerler & rs("birimID")
+				degerler = degerler & "|"
+			rs.movenext
+			loop
+			paraDegerler = left(degerler,len(degerler)-1)
+        end if
+    rs.close
+
+
+
+
+
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 2 then
 		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-10 bold h3 text-info "">Ürün Ana Kartı</div>"
+			Response.Write "<div class=""col-10 bold h3 text-info "">" & translate("Ürün Bilgileri","","") & "</div>"
 			Response.Write "<div class=""text-right col-2""><span onclick=""modalkapat()"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "</div>"
 
-		Response.Write "<ul class=""nav nav-tabs"" role=""tablist"">"
-			Response.Write "<li class=""nav-item"">"
-				Response.Write "<a class=""nav-link active"" data-toggle=""tab"" href=""#home"">Ana Kart</a>"
-			Response.Write "</li>"
-			Response.Write "<li class=""nav-item"">"
-				Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#ekTanimlar"">Ek Tanımlar</a>"
-			Response.Write "</li>"
-			Response.Write "<li class=""nav-item"">"
-				Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#koliTanimlari"">Koli Tanımları</a>"
-			Response.Write "</li>"
-		Response.Write "</ul>"
+
+		'### SEKMELER
+			Response.Write "<ul class=""nav nav-tabs"" role=""tablist"">"
+				Response.Write "<li class=""nav-item"">"
+					Response.Write "<a class=""nav-link active"" data-toggle=""tab"" href=""#home"">" & translate("Temel Bilgiler","","") & "</a>"
+				Response.Write "</li>"
+				if gorevID <> "" then
+					Response.Write "<li class=""nav-item"">"
+						Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#ekTanimlar"">" & translate("Ek Bilgiler","","") & "</a>"
+					Response.Write "</li>"
+				end if
+				Response.Write "<li class=""nav-item"">"
+					Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#koliTanimlari"">" & translate("Koli Tanımları","","") & "</a>"
+				Response.Write "</li>"
+			Response.Write "</ul>"
+		'### SEKMELER
+
+
+
+
 
 Response.Write "<div class=""tab-content"">"
 	Response.Write "<div id=""home"" class=""container tab-pane active"">"
-  		Response.Write "<form action=""/stok/stok_ekle.asp?a="&a&""" method=""post"" class=""ajaxform"">"
+  		Response.Write "<form action=""/stok/stok_ekle.asp"" method=""post"" class=""ajaxform"">"
 		Response.Write "<div class=""align-items-left"">"
 			call formhidden("stokID64",stokID64,"","","","","stokID64","")
 			call formhidden("stokID",gorevID,"","","","","stokID","")
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-lg-6 col-sm-12 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Kodu</span>"
-					call forminput("stokKodu",stokKodu,"","","",inpKontrol,"stokKodu","")
-				Response.Write "</div>"
-				Response.Write "<div class=""col-lg-6 col-sm-12 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Katalog Kodu</span>"
-					call forminput("katalogKodu",katalogKodu,"","","",inpKontrol,"katalogKodu","")
-				Response.Write "</div>"
+
+
+
+
+
+
+				Response.Write "<div class=""row mt-2"">"
+                Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+                    Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Stok Temel Bilgileri","","") & "</div>"
+                    Response.Write "<div class=""card-body"">"
+						Response.Write "<div class=""row"">"
+							'######## CODE
+			Response.Write "<div class=""col-sm-12 my-1"">"
 			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-sm-12 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Ad</span>"
-					call forminput("stokAd",stokAd,"","","",inpKontrol,"stokAd","")
-				Response.Write "</div>"
-			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-sm-12 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün İngilizce Ad</span>"
-					call forminput("stokAdEn",stokAdEn,"","","",inpKontrol,"stokAdEn","")
-				Response.Write "</div>"
-			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-sm-3 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Stok Türü</span>"
-					call formselectv2("stokTuru",stokTuru,"","","stokTuru","","stokTuru",stokTipDegerler,"")
-				Response.Write "</div>"
-				Response.Write "<div class=""col-sm-3 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Minumum Stok Miktarı</span>"
-					call forminput("minStok",minStok,"","","","","minStok","")
-				Response.Write "</div>"
-				Response.Write "<div class=""col-sm-3 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Raf Ömrü (Ay)</span>"
-					call forminput("rafOmru",rafOmru,"","ay cinsinden","","","rafOmru","")
-				Response.Write "</div>"
-				Response.Write "<div class=""col-sm-3 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">KDV Oranı</span>"
-					call forminput("kdv",kdv,"numara(this,false,false)","KDV","","","kdv","")
-				Response.Write "</div>"
-			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-sm-3 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Mal Kabulde Giriş KK Depo</span>"
-					call formselectv2("kkDepoGiris",kkDepoGiris,"","","kkDepoGiris","","kkDepoGiris",HEDegerler,"")
-				Response.Write "</div>"
-				Response.Write "<div class=""col-sm-3 my-1"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün ana birim</span>"
-					if hareketKontrol > 0 then
-						Response.Write "<div class=""mt-2"">" & uzunBirim & "<span class=""text-danger pointer ml-2"" onclick=""swal('Ürün hareket görmüş, birim değiştirilemez.','')""><i class=""mdi mdi-information-outline""></i></span></div>"
-						call formhidden("anaBirimID",anaBirimID,"","","","","anaBirimID","")
-					else
-						call formselectv2("anaBirimID","","","","formSelect2 anaBirimID border inpReset","","anaBirimID","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-idKullan=""evet"" data-defdeger="""&defDeger&"""")
-					end if
-				Response.Write "</div>"
-			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-				if yetkiKontrol >= 8 then
-					Response.Write "<div class=""col-sm-6 my-1"">"
-						Response.Write "<span class=""badge badge-secondary rounded-left"">Kullanım Dışı</span>"
-						call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
+
+
+								Response.Write "<div class=""col-lg-4 col-sm-12"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Firma Adı","","") & "</span>"
+									call formselectv2("stokfirmaID",stokfirmaID,"","","","","stokfirmaID",firmaDegerler,"")
+								Response.Write "</div>"
+								Response.Write "<div class=""col-lg-4 col-sm-12"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Stok Kodu","","") & "</span>"
+									call forminput("stokKodu",stokKodu,"","","",inpKontrol,"stokKodu","")
+								Response.Write "</div>"
+								Response.Write "<div class=""col-lg-4 col-sm-12"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Katalog Kodu","","") & "</span>"
+									call forminput("katalogKodu",katalogKodu,"","","",inpKontrol,"katalogKodu","")
+								Response.Write "</div>"
+							'######## CODE
+							'######## NAME
+								Response.Write "<div class=""col-sm-12 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürün Adı","","") & "</span>"
+									call forminput("stokAd",stokAd,"","","",inpKontrol,"stokAd","")
+								Response.Write "</div>"
+								Response.Write "<div class=""col-sm-12 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürünün İngilizce Adı","","") & "</span>"
+									call forminput("stokAdEn",stokAdEn,"","","",inpKontrol,"stokAdEn","")
+								Response.Write "</div>"
+							'######## NAME
+						Response.Write "</div>"
 					Response.Write "</div>"
-					Response.Write "<div class=""col-sm-6 my-1"">"
-						Response.Write "<span class=""badge badge-secondary rounded-left"">LOT Takibi Yapılsın</span><span class=""text-danger pointer ml-2"" onclick=""swal('','Koli, koli bandı gibi sarf malzemelerde LOT takibi yapılmayacağı için bu tip ürünlerde HAYIR seçilir.')""><i class=""mdi mdi-information-outline""></i></span>"
-						call formselectv2("lotTakip",lotTakip,"","","lotTakip","","lotTakip",HEDegerler,"")
 					Response.Write "</div>"
+				Response.Write "</div>"
+				Response.Write "</div>"
+
+
+
+
+
+
+				Response.Write "<div class=""row mt-2"">"
+                Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+                    Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Fiyat Bilgileri","","") & "</div>"
+                    Response.Write "<div class=""card-body"">"
+						Response.Write "<div class=""row"">"
+							'######## PRICE
+								if sb_TeklifFiyatSayi > 0 then
+									Response.Write "<div class=""col-sm-3 my-1"">"
+										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd0,"","") & "</span>"
+										call forminput("fiyat1",fiyat1,"numara(this,false,false)",translate(sb_TeklifFiyatAd0,"",""),"","","fiyat1","")
+									Response.Write "</div>"
+								end if
+								if sb_TeklifFiyatSayi > 1 then
+									Response.Write "<div class=""col-sm-3 my-1"">"
+										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd1,"","") & "</span>"
+										call forminput("fiyat2",fiyat2,"numara(this,false,false)",translate(sb_TeklifFiyatAd1,"",""),"","","fiyat2","")
+									Response.Write "</div>"
+								end if
+								if sb_TeklifFiyatSayi > 2 then
+									Response.Write "<div class=""col-sm-3 my-1"">"
+										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd2,"","") & "</span>"
+										call forminput("fiyat3",fiyat3,"numara(this,false,false)",translate(sb_TeklifFiyatAd2,"",""),"","","fiyat3","")
+									Response.Write "</div>"
+								end if
+								if sb_TeklifFiyatSayi > 3 then
+									Response.Write "<div class=""col-sm-3 my-1"">"
+										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd3,"","") & "</span>"
+										call forminput("fiyat4",fiyat4,"numara(this,false,false)",translate(sb_TeklifFiyatAd3,"",""),"","","fiyat4","")
+									Response.Write "</div>"
+								end if
+								' if sb_TeklifFiyatSayi > 4 then
+								' 	Response.Write "<div class=""col-sm-3 my-1"">"
+								' 		Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd4,"","") & "</span>"
+								' 		call forminput("fiyat5",fiyat5,"numara(this,false,false)",translate(sb_TeklifFiyatAd4,"",""),"","","fiyat5","")
+								' 	Response.Write "</div>"
+								' end if
+								Response.Write "<div class=""col-sm-3 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("KDV Oranı","","") & "</span>"
+									call forminput("kdv",kdv,"numara(this,false,false)",translate("KDV","",""),"","","kdv","")
+								Response.Write "</div>"
+								Response.Write "<div class=""col-sm-3 my-1"">"
+                                    Response.Write "<div class=""badge badge-secondary"">" & translate("Para Birimi","","") & " : </div>"
+                                    ' paraBirimIDdegerler = "--" & translate("Para Birimi","","") & "--=|TRY=TRY|USD=USD|EUR=EUR|GBP=GBP"
+									call formselectv2("paraBirimID",paraBirimID,"","","","","paraBirimID",paraDegerler,"")
+								Response.Write "</div>"
+
+
+
+
+							'######## PRICE
+						Response.Write "</div>"
+					Response.Write "</div>"
+					Response.Write "</div>"
+				Response.Write "</div>"
+				Response.Write "</div>"
+
+
+
+
+
+
+				Response.Write "<div class=""row mt-2"">"
+                Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
+                    Response.Write "<div class=""card"">"
+                    Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Depolama Bilgileri","","") & "</div>"
+                    Response.Write "<div class=""card-body"">"
+						Response.Write "<div class=""row"">"
+							'######## WAREHOUSE
+								Response.Write "<div class=""col-sm-3 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Stok Türü","","") & "</span>"
+									call formselectv2("stokTuru",stokTuru,"","","stokTuru","","stokTuru",stokTurDegerler,"")
+								Response.Write "</div>"
+								Response.Write "<div class=""col-sm-3 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Minumum Stok Miktarı","","") & "</span>"
+									call forminput("minStok",minStok,"","","","","minStok","")
+								Response.Write "</div>"
+								Response.Write "<div class=""col-sm-3 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Raf Ömrü (Ay)","","") & "</span>"
+									call forminput("rafOmru",rafOmru,"",translate("Ay","",""),"","","rafOmru","")
+								Response.Write "</div>"
+								Response.Write "<div class=""col-sm-3 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürün Ana Birimi","","") & "</span>"
+									if hareketKontrol > 0 then
+										Response.Write "<div class=""mt-2"">" & uzunBirim & "<span class=""text-danger pointer ml-2"" onclick=""swal('" & translate("Ürün hareket görmüş, Ana birim değiştirilemez.","","") & "','')""><i class=""mdi mdi-information-outline""></i></span></div>"
+										call formhidden("anaBirimID",anaBirimID,"","","","","anaBirimID","")
+									else
+										call formselectv2("anaBirimID",anaBirimID,"","","","","anaBirimID",birimDegerler,"")
+										' call formselectv2("anaBirimID","","","","formSelect2 anaBirimID border inpReset","","anaBirimID","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-idKullan=""evet"" data-defdeger=""" & defDeger & """")
+									end if
+								Response.Write "</div>"
+								if yetkiKontrol >= 8 then
+									' Response.Write "<div class=""col-sm-6 my-1"">"
+									' 	Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Kullanım Dışı Ürün","","") & "</span>"
+									' 	call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
+									' Response.Write "</div>"
+									Response.Write "<div class=""col-sm-6 my-1"">"
+										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("LOT Takibi Yapılsın","","") & "</span><span class=""text-danger pointer ml-2"" onclick=""swal('','" & translate("Koli, koli bandı gibi sarf malzemelerde LOT takibi yapılmayacağı için bu tip ürünlerde HAYIR seçilir.","","") & "')""><i class=""mdi mdi-information-outline""></i></span>"
+										call formselectv2("lotTakip",lotTakip,"","","lotTakip","","lotTakip",HEDegerler,"")
+									Response.Write "</div>"
+								end if
+								Response.Write "<div class=""col-sm-6 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Mal Kabul Kalite Kontrol Deposundan Mı Yapılsın?","","") & "</span>"
+									call formselectv2("kkDepoGiris",kkDepoGiris,"","","kkDepoGiris","","kkDepoGiris",HEDegerler,"")
+								Response.Write "</div>"
+							'######## WAREHOUSE
+						Response.Write "</div>"
+					Response.Write "</div>"
+					Response.Write "</div>"
+				Response.Write "</div>"
+				Response.Write "</div>"
+
+
+
+			Response.Write "<div class=""row mt-2"">"
+				if manuelKayit = "" or manuelKayit = true then
+					Response.Write "<div class=""col my-1""><button type=""submit"" class=""btn btn-primary form-control"">" & translate("Kaydet","","") & "</button></div>"
+				else
+					Response.Write "<div class=""col my-1""><div class=""btn btn-warning form-control"" onclick=""netsisKayit()"">" & translate("Senkronize Muhasebe Yazılımına Kaydet","","") & "</div></div>"
 				end if
 			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">KAYDET</button></div>"
-				if gorevID <> "" then
-					Response.Write "<div class=""col-auto my-1""><div class=""btn btn-warning"" onclick=""netsisKayit()"">NETSİS KAYIT</div></div>"
-				end if
-				Response.Write "</div>"
+
 		Response.Write "</div>"
 		Response.Write "</form>"
 	Response.Write "</div>"
 
-	Response.Write "<div id=""ekTanimlar"" class=""container tab-pane fade mt-4"">"
+
+'########### DETAILED INFORMATION
 	if gorevID <> "" then
-
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-2 text-center"">"
-				call forminput("katsayi1Deger","1","","","text-center bold h3","","katsayi1Deger","readonly")
-				'Response.Write "<span class=""bold h2"">1</span>"
-			Response.Write "</div>"	
-			Response.Write "<div class=""col-3"">"
-				call formselectv2("birimListe","","","","formSelect2 birimListe border inpReset","","birimListe","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-idKullan=""evet""")
-			Response.Write "</div>"	
-			Response.Write "<div class=""col-1"">"
-				Response.Write "<span class=""bold h2"">=</span>"
-			Response.Write "</div>"
-			Response.Write "<div class=""col-2"">"
-				call forminput("katsayi2Deger",katsayi2Deger,"","","","","katsayi2Deger","")
-			Response.Write "</div>"
-			Response.Write "<div class=""col-3 bold h3 mt-1"">"
-				Response.Write uzunBirim
-			Response.Write "</div>"
-			if yetkiKontrol >= 8 then
-				Response.Write "<div id=""birimKatsayiKayit"" onclick=""birimKatsayiKayit('yeniKayit',0)"" class=""col-1 btn btn-info text-center rounded"">EKLE</div>"
-			end if
-		Response.Write "</div>"
-		Response.Write "<div class=""row mt-5 text-left h3 text-warning border"">"
-			Response.Write "<div class=""col-12 "">"
-				Response.Write "Birim Karşılıkları"
-			Response.Write "</div>"
-		Response.Write "</div>"
-
-			sorgu = "SELECT t1.stokBirimID, t2.uzunBirim as birim1Ad, t3.uzunBirim as birim2Ad, t1.birim1Katsayi, t1.birim2Katsayi FROM stok.stokBirim t1"
-			sorgu = sorgu & " INNER JOIN portal.birimler t2 ON t1.BirimID1 = t2.birimID"
-			sorgu = sorgu & " INNER JOIN portal.birimler t3 ON t1.BirimID2 = t3.birimID"
-			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t1.silindi = 0"
-			rs.open sorgu, sbsv5, 1, 3
-			for zi = 1 to rs.recordcount
-				if rs.recordcount > 0 then
-					stokBirimID		=	rs("stokBirimID")
-					birim1Ad		=	rs("birim1Ad")
-					birim2Ad		=	rs("birim2Ad")
-					birim1Katsayi	=	rs("birim1Katsayi")
-					birim2Katsayi	=	rs("birim2Katsayi")
-				end if
-				Response.Write "<div class=""row text-center h4"">"
-
-				
-					Response.Write "<div class=""col-1 pointer text-danger"">"
-					if yetkiKontrol >= 8 then
-						Response.Write "<i onclick=""birimKatsayiKayit('silinecek',"&stokBirimID&")"" class=""mdi mdi-delete-forever""></i>"
-					end if
-					Response.Write "</div>"
-					Response.Write "<div class=""col-1"">"
-						Response.Write birim1Katsayi
-					Response.Write "</div>"
-					Response.Write "<div class=""col-3"">"
-						Response.Write birim1Ad
-					Response.Write "</div>"
-					Response.Write "<div class=""col-1"">"
-						Response.Write "<span class=""bold h2"">=</span>"
-					Response.Write "</div>"
-					Response.Write "<div class=""col-3"">"
-						Response.Write birim2Katsayi
-					Response.Write "</div>"
-					Response.Write "<div class=""col-3"">"
-						Response.Write birim2Ad
-					Response.Write "</div>"
+		Response.Write "<div id=""ekTanimlar"" class=""container tab-pane fade mt-4"">"
+			Response.Write "<div class=""row"">"
+				Response.Write "<div class=""col-2 text-center"">"
+					call forminput("katsayi1Deger","1","","","text-center bold h3","","katsayi1Deger","readonly")
+				Response.Write "</div>"	
+				Response.Write "<div class=""col-3"">"
+					call formselectv2("birimListe","","","","formSelect2 birimListe border inpReset","","birimListe","","data-holderyazi=""Birim"" data-jsondosya=""JSON_mikBirimler"" data-miniput=""0"" data-idKullan=""evet""")
+				Response.Write "</div>"	
+				Response.Write "<div class=""col-1"">"
+					Response.Write "<span class=""bold h2"">=</span>"
 				Response.Write "</div>"
-			rs.movenext
-			next
-			rs.close
-	end if
-	Response.Write "</div>"
+				Response.Write "<div class=""col-2"">"
+					call forminput("katsayi2Deger",katsayi2Deger,"","","","","katsayi2Deger","")
+				Response.Write "</div>"
+				Response.Write "<div class=""col-3 bold h3 mt-1"">"
+					Response.Write uzunBirim
+				Response.Write "</div>"
+				if yetkiKontrol >= 8 then
+					Response.Write "<div id=""birimKatsayiKayit"" onclick=""birimKatsayiKayit('yeniKayit',0)"" class=""col-1 btn btn-info text-center rounded"">" & translate("Ekle","","") & "</div>"
+				end if
+			Response.Write "</div>"
+			Response.Write "<div class=""row mt-5 text-left h3 text-warning border"">"
+				Response.Write "<div class=""col-12 "">"
+					Response.Write "Birim Karşılıkları"
+				Response.Write "</div>"
+			Response.Write "</div>"
 
+				sorgu = "SELECT t1.stokBirimID, t2.uzunBirim as birim1Ad, t3.uzunBirim as birim2Ad, t1.birim1Katsayi, t1.birim2Katsayi FROM stok.stokBirim t1"
+				sorgu = sorgu & " INNER JOIN portal.birimler t2 ON t1.BirimID1 = t2.birimID"
+				sorgu = sorgu & " INNER JOIN portal.birimler t3 ON t1.BirimID2 = t3.birimID"
+				sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t1.silindi = 0"
+				rs.open sorgu, sbsv5, 1, 3
+				for zi = 1 to rs.recordcount
+					if rs.recordcount > 0 then
+						stokBirimID		=	rs("stokBirimID")
+						birim1Ad		=	rs("birim1Ad")
+						birim2Ad		=	rs("birim2Ad")
+						birim1Katsayi	=	rs("birim1Katsayi")
+						birim2Katsayi	=	rs("birim2Katsayi")
+					end if
+					Response.Write "<div class=""row text-center h4"">"
+
+					
+						Response.Write "<div class=""col-1 pointer text-danger"">"
+						if yetkiKontrol >= 8 then
+							Response.Write "<i onclick=""birimKatsayiKayit('silinecek',"&stokBirimID&")"" class=""mdi mdi-delete-forever""></i>"
+						end if
+						Response.Write "</div>"
+						Response.Write "<div class=""col-1"">"
+							Response.Write birim1Katsayi
+						Response.Write "</div>"
+						Response.Write "<div class=""col-3"">"
+							Response.Write birim1Ad
+						Response.Write "</div>"
+						Response.Write "<div class=""col-1"">"
+							Response.Write "<span class=""bold h2"">=</span>"
+						Response.Write "</div>"
+						Response.Write "<div class=""col-3"">"
+							Response.Write birim2Katsayi
+						Response.Write "</div>"
+						Response.Write "<div class=""col-3"">"
+							Response.Write birim2Ad
+						Response.Write "</div>"
+					Response.Write "</div>"
+				rs.movenext
+				next
+				rs.close
+		Response.Write "</div>"
+	end if
+'########### DETAILED INFORMATION
+
+
+'########### POCKET INFORMATION
 	Response.Write "<div id=""koliTanimlari"" class=""container tab-pane fade mt-4"">"
 		Response.Write "<div class=""col-sm-12 my-1"">"
-			Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Ad</span>"
+			Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürün Adı","","") & "</span>"
 			call forminput("stokAd",stokAd,"","","",inpKontrol,"","")
 		Response.Write "</div>"
 		Response.Write "<div class=""col-sm-12 my-1"">"
-			Response.Write "<span class=""badge badge-secondary rounded-left"">Seçilen Koli</span>"
-			call formselectv2("koliSec","","","","formSelect2 koliSec border inpReset","","koliSec","","data-holderyazi=""kullanılacak ham koli seçimi"" data-jsondosya=""JSON_koliler"" data-miniput=""3"" data-defdeger=""""")
+			Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Seçilen Koli","","") & "</span>"
+			call formselectv2("koliSec","","","","formSelect2 koliSec border inpReset","","koliSec","","data-holderyazi=""" & translate("Kullanılacak ham koli seçimi","","") & """ data-jsondosya=""JSON_koliler"" data-miniput=""3"" data-defdeger=""""")
 		Response.Write "</div>"
 		Response.Write "<div class=""col-sm-4 my-1"">"
-			Response.Write "<span class=""badge badge-secondary rounded-left"">Koli İçi Ürün Miktarı</span>"
-			call forminput("koliUrunMiktar",koliUrunMiktar,"","Koli içi ürün miktarı","","","koliUrunMiktar","")
+			Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Koli İçi Ürün Miktarı","","") & "</span>"
+			call forminput("koliUrunMiktar",koliUrunMiktar,"",translate("Koli İçi Ürün Miktarı","",""),"","","koliUrunMiktar","")
 		Response.Write "</div>"
 		if yetkiKontrol >= 8 then
 			Response.Write "<div class=""col-sm-4 my-1"">"
-				Response.Write "<div id=""koliTanimKayit"" onclick=""koliTanimKayit('yeniKayit',0)"" class=""col-12 btn btn-info text-center rounded"">EKLE</div>"
+				Response.Write "<div id=""koliTanimKayit"" onclick=""koliTanimKayit('yeniKayit',0)"" class=""col-12 btn btn-info text-center rounded"">" & translate("Ekle","","") & "</div>"
 			Response.Write "</div>"
 		end if
 
@@ -264,9 +430,9 @@ Response.Write "<div class=""tab-content"">"
 			Response.Write "<table class=""table table-sm table-striped"">"
 				Response.Write "<thead class=""thead-dark"">"
 					Response.Write "<th scope=""col""></th>"
-					Response.Write "<th scope=""col"">Koli Adı</th>"
-					Response.Write "<th scope=""col"">Kullanılan Koli Adı</th>"
-					Response.Write "<th scope=""col"">Koli içi miktar</th>"
+					Response.Write "<th scope=""col"">" & translate("Koli Adı","","") & "</th>"
+					Response.Write "<th scope=""col"">" & translate("Kullanılan Koli Adı","","") & "</th>"
+					Response.Write "<th scope=""col"">" & translate("Koli İçi Ürün Miktarı","","") & "</th>"
 				Response.Write "</thead><tbody>"
 		
 		for zi = 1 to rs.recordcount
@@ -293,6 +459,11 @@ Response.Write "<div class=""tab-content"">"
 		rs.close
 
 	Response.Write "</div>"
+'########### POCKET INFORMATION
+
+
+
+
 
 Response.Write "</div>"
 
@@ -301,11 +472,11 @@ Response.Write "</div>"
 '###### ARAMA FORMU
 
 
+%>
 
 
 
 
-%><!--#include virtual="/reg/rs.asp" -->
 
 
 <script>
@@ -409,4 +580,5 @@ if(islem == 'silinecek'){var baslik = 'Kayıt silinsin mi?'}else{var baslik = 'K
 		}
 </script>
 
-
+<%
+%><!--#include virtual="/reg/rs.asp" -->

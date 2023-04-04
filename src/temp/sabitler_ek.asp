@@ -363,6 +363,11 @@ if firmaID = 5 then
 	'#### STOK bilgieri dış db den çekilecekse
 
 
+	'#### STOK
+		sb_stokKoduZorunlu = True
+	'#### STOK
+
+
 	'#### CARİ bilgieri dış db den çekilecekse
 		firmaCariDBvar = 1
 		firmaCariSunucu = "."
@@ -536,6 +541,11 @@ if firmaID = 7 then
 	'#### STOK bilgieri dış db den çekilecekse
 
 
+	'#### STOK
+		sb_stokKoduZorunlu = False
+	'#### STOK
+
+
 	'#### CARİ bilgieri dış db den çekilecekse
 		firmaCariDBvar = 0
 		firmaCariSunucu = ""
@@ -548,15 +558,15 @@ if firmaID = 7 then
 	'#### TEKLİF
 		sb_TeklifCariAramaLimit = 5
 		sb_TeklifFiyatSayi = 2
-		sb_TeklifFiyatAd0 = "Teklif Fiyatı"
-		sb_TeklifFiyatAd1 = "TL Fiyatı"
+		sb_TeklifFiyatAd0 = "Perakende Satış Fiyatı"
+		sb_TeklifFiyatAd1 = "Toptan Satış Fiyatı"
 		sb_TeklifFiyatAd2 = "USD Fiyatı"
 		sb_TeklifFiyatAd3 = "Fiyat 3"
 		sb_TeklifFiyatAd4 = "Fiyat 4"
 		sb_TeklifFiyatiSirifOlanStoklariGizle = False
 		sb_TeklifIskontoSayisi = 2
 		sb_TeklifOndalikSayi = 2
-		sb_TeklifSayiFormatOn = "politeklif"
+		sb_TeklifSayiFormatOn = "polimek"
 		sb_TeklifSayiFormatRakam = 2
 		sb_TeklifSayiFormat = "on|4yil|2ay|2gun|rakam"
 		sb_kosulFontSize = "11px"
@@ -801,9 +811,9 @@ if firmaID = 12 then
 	'## TEMEL TANIMLAR
 		sb_firmaAd =	"Polikod Teklif"
 		sb_url =	mainUrl
-		sb_logo = sb_mainUrlOnEk & mainUrl & "/template/images/polimek_logo.jpg"
-		sb_logoMini = sb_mainUrlOnEk & mainUrl & "/template/images/polimek_logo.jpg"
-		sb_logo128 = sb_mainUrlOnEk & mainUrl & "/template/images/polimek_logo.jpg"
+		sb_logo = sb_mainUrlOnEk & mainUrl & "/template/images/polikod_logo.jpg"
+		sb_logoMini = sb_mainUrlOnEk & mainUrl & "/template/images/polikod_logo.jpg"
+		sb_logo128 = sb_mainUrlOnEk & mainUrl & "/template/images/polikod_logo.jpg"
 		sb_cdnUrl = sb_mainUrlOnEk & mainUrl & "/cdn"
 		sb_konum =	"Izmir"
 		sb_yetkiliPersonel = ""
@@ -857,6 +867,24 @@ if firmaID = 12 then
 		firmaCaridbUSR = ""
 		firmaCaridbPass = ""
 	'#### CARİ bilgieri dış db den çekilecekse
+
+
+	'#### TEKLİF
+		sb_TeklifCariAramaLimit = 5
+		sb_TeklifFiyatSayi = 2
+		sb_TeklifFiyatAd0 = "Perakende Satış Fiyatı"
+		sb_TeklifFiyatAd1 = "Toptan Satış Fiyatı"
+		sb_TeklifFiyatAd2 = "USD Fiyatı"
+		sb_TeklifFiyatAd3 = "Fiyat 3"
+		sb_TeklifFiyatAd4 = "Fiyat 4"
+		sb_TeklifFiyatiSirifOlanStoklariGizle = False
+		sb_TeklifIskontoSayisi = 2
+		sb_TeklifOndalikSayi = 2
+		sb_TeklifSayiFormatOn = "polikod"
+		sb_TeklifSayiFormatRakam = 2
+		sb_TeklifSayiFormat = "on|4yil|2ay|2gun|rakam"
+		sb_kosulFontSize = "11px"
+	'#### TEKLİF
 
 
 	'#### MODULLER

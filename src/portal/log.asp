@@ -25,6 +25,7 @@ yetki = yetkibul("manager")
 		Response.Write "<th>İşlem</th>"
 		Response.Write "<th>ip</th>"
 		Response.Write "<th>Konum</th>"
+		Response.Write "<th>İşlem</th>"
 		Response.Write "</tr></thead><tbody>"
 			sorgu = "Select" & vbcrlf
 			sorgu = sorgu & "top(400)" & vbcrlf
@@ -78,9 +79,10 @@ yetki = yetkibul("manager")
 				Response.Write "<td>&nbsp;</td>"
 			end if
 			Response.Write "<td>" & rs("islem") & "</td>"
-			Response.Write "<td>" & rs("ip") & "</td>"
+			Response.Write "<td>" & rs("ip")
+			Response.Write "</td>"
 			if rs("geoIPdistrict") = "" or isnull(rs("geoIPdistrict")) = true then
-				geoIPdistrict = geoIP("ilçe",rs("ip"))
+				geoIPdistrict = geoIP("sehir",rs("ip"))
 				sorgu = "update personel.personel_log set geoIPdistrict = '" & geoIPdistrict & "' where ip = '" & rs("ip") & "'"
 				rs2.open sorgu,sbsv5,3,3
 				Response.Write "<td>" & geoIPdistrict & "</td>"
@@ -91,6 +93,13 @@ yetki = yetkibul("manager")
 			else
 				Response.Write "<td>" & rs("geoIPdistrict") & "</td>"
 			end if
+			Response.Write "</td>"
+			Response.Write "<td>"
+			Response.Write "<i class=""icon exclamation"""
+			if yetki = 9 then
+				Response.Write " onClick="""""
+			end if
+			Response.Write "></i>"
 			Response.Write "</td>"
 			Response.Write "</tr>"
 			Response.Flush()

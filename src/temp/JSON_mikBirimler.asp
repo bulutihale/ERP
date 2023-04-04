@@ -29,6 +29,7 @@
 			sorgu = sorgu & " t1.birimID, t1.kisaBirim, t1.uzunBirim"
 			sorgu = sorgu & " FROM portal.birimler t1" 
 			sorgu = sorgu & " WHERE t1.birimGrup = 'miktar'"
+			sorgu = sorgu & " and firmaID = " & firmaID & vbcrlf
 			sorgu = sorgu & " AND (t1.kisaBirim like N'%" & arananKelime & "%' OR t1.uzunBirim like N'%" & arananKelime & "%')"
 			if sart <> "" then
 				sorgu = sorgu & " AND t1.birimTur = '" & sart & "'"
@@ -53,7 +54,7 @@
 						idDeger =  rs("kisaBirim")
 					end if
 					Response.Write """id"":""" & idDeger & ""","
-					Response.Write """text"":""" & rs("kisaBirim") & " - " & rs("uzunBirim") & """"
+					Response.Write """text"":""" & rs("kisaBirim") & " - " & translate(rs("uzunBirim"),"","") & """"
 
 					if i < rs.recordcount then
 						Response.Write "},"

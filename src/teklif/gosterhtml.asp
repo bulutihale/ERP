@@ -120,9 +120,7 @@
         end if
         rs.close
     end if
-
 '### TEKLİF AYARLARINI ÇEK
-
 
 
 '### RAPOR FORMATINI ÇEK

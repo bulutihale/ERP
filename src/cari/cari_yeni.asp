@@ -22,7 +22,7 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
-
+ 	yetkiKontrol	= yetkibul(modulAd)
 	yetkiTeklif	    = yetkibul("Teklif")
 	yetkiSatis  	= yetkibul("Satış")
 

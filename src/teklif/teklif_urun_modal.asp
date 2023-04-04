@@ -183,7 +183,6 @@ end if
     if instr(hesaplanacakParaBirimi,"TRY") > 0 then
       '## içinde TL geçen çevrimler
         sorgu = "Select " & hesaplanacakParaBirimi & "," & hesaplanacakParaBirimi & "Custom from portal.doviz where firmaID = " & firmaID & " order by dovizID desc"
-Response.Write sorgu
         rs.open sorgu,sbsv5,1,3
         if rs.recordcount > 0 then
             ParaBirim1 =   rs(0)

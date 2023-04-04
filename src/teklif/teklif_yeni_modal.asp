@@ -367,7 +367,7 @@ if hata = "" then
                                         ' next
                                         ' Response.Write "</select>"
                                 ' rs.close
-                                call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""" & translate("Ürün adı, stok kodu, barkod","","") & """ data-sart=""document.getElementById('teklifDili').value"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+                                call formselectv2("stokSec","","","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""" & translate("Ürün adı, stok kodu, barkod","","") & """ data-sart=""document.getElementById('teklifDili').value"" data-jsondosya=""JSON_stoklar"" data-miniput=""0""")
                             Response.Write "</div>"
                             Response.Write "<div class=""col-lg-1"">"
                                 Response.Write "<div class=""badge"">&nbsp;</div>"
