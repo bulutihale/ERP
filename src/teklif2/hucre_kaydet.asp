@@ -45,7 +45,7 @@ end if
 		rs.open sorgu, sbsv5,1,3
 		
 		
-		if tablo = "dosya.ihale_urun" then
+		if tablo = "teklifv2.ihale_urun" then
 		'####### fiyat onaylanmış ise teklif kalemi ile ilgili bir şey değiştirilemesin
 		'####### fiyat onaylanmış ise teklif kalemi ile ilgili bir şey değiştirilemesin
 			if alan <> "fiyatOnay" AND rs("fiyatOnay") = True then

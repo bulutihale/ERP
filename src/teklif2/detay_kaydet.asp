@@ -121,7 +121,7 @@
 '##### DOSYA KAYDET
 
 	'## veritabanı
-		sorgu = "SELECT * FROM dosya.ihale_urun"
+		sorgu = "SELECT * FROM teklifv2.ihale_urun"
 		rs.open sorgu, sbsv5,1,3
 			rs.addnew
 				rs("ihaleID")				=	ihaleID

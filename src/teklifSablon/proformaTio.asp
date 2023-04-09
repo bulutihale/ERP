@@ -50,7 +50,7 @@ sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun,
 &" c2.cariAd as kurumCariAD, c1.adres as teklifCariAdres, i.tarih_ihale, i.dosyaNo, i.ikn, i.bayiDosyaTipi, i.teklifRevNo, i.teklifKase, i.teklifAntet, f.iletisimEposta, f.webSite,"_
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, ISNULL(i.cariID,0) as cariID,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
-&" (SELECT COUNT(id) FROM dosya.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun,"_
+&" (SELECT COUNT(id) FROM teklifv2.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun,"_
 &" i.catKodGoster, i.mustKodGoster, f.antetPath"_
 &" FROM teklifv2.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
@@ -102,7 +102,7 @@ rs.open sorgu,sbsv5,1,3
 	
 	sorgu = "SELECT COUNT(CASE iu.fiyatOnay WHEN 'True' THEN 1 ELSE NULL END) as fiyatOnaySayi,"_
 	&" COUNT(iu.id) as iuToplamKayit, SUM(ISNULL(iu.iskontoOran,0)) as iskontoKontrol"_
-	&" FROM dosya.ihale_urun iu WHERE iu.ihaleID = " & id
+	&" FROM teklifv2.ihale_urun iu WHERE iu.ihaleID = " & id
 	rs.open sorgu,sbsv5,1,3
 	
 	
@@ -220,7 +220,7 @@ sorgu = "SELECT COUNT(CASE iu.firmamParaBirim WHEN 'TL' THEN 1 ELSE NULL END) as
 &" COUNT(CASE iu.tavsiyeBirim WHEN 'EUR' THEN 1 ELSE NULL END) as EURsayiTavs,"_
 &" COUNT(CASE iu.tavsiyeBirim WHEN 'USD' THEN 1 ELSE NULL END) as USDsayiTavs,"_
 &" COUNT(iu.id) as toplamKayit"_
-&" FROM dosya.ihale_urun iu WHERE iu.ihaleID = " & id
+&" FROM teklifv2.ihale_urun iu WHERE iu.ihaleID = " & id
 rs.open sorgu,sbsv5,1,3
 
 birimYok	=	rs("brYok")
@@ -268,7 +268,7 @@ sorgu = sorgu &" tavsiyeFiyat * iu.miktar as tavsiyeTutar, iu.firmamFiyat, iu.fi
 sorgu = sorgu &" iu.firmamFiyat * iu.miktar as firmamTutar, iu.stoklarListeFiyat * iu.miktar as listeTutar,"
 sorgu = sorgu &" ISNULL(bayiAlis,0) * iu.miktar as bayiTutar, s.katalogKodu, ISNULL(s.stokBarcode,'') as ubbKod, s.stokKodu, s.kdv,"
 sorgu = sorgu &" REPLACE(REPLACE(iu.kalemNot,CHAR(13),'<br>'),CHAR(10),'<br>') as kalemNot"
-sorgu = sorgu &" FROM dosya.ihale_urun iu"
+sorgu = sorgu &" FROM teklifv2.ihale_urun iu"
 sorgu = sorgu &" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"
 sorgu = sorgu &" LEFT JOIN stok.stokRef r ON iu.stoklarID = r.stokID AND r.cariID = " & cariID & ""
 sorgu = sorgu &" WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
@@ -374,7 +374,7 @@ Response.Write "</tbody></table>"
 Response.Write "<br>"
 
 	sorgu = "SELECT s.kdv, SUM(iu.miktar*(iu.firmamFiyat-((ISNULL(iu.iskontoOran,0)/100)*iu.firmamFiyat))) as kdvToplam "_
-		&" FROM dosya.ihale_urun iu"_
+		&" FROM teklifv2.ihale_urun iu"_
 		&" INNER JOIN stok.stok s ON iu.stoklarID = s.stokID"_
 		&" WHERE ihaleID = "& id &""_
 		&" GROUP BY kdv"_

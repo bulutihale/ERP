@@ -93,7 +93,7 @@ rs.open sorgu,sbsv5,1,3
 	
 	sorgu = "SELECT COUNT(CASE iu.fiyatOnay WHEN 'True' THEN 1 ELSE NULL END) as fiyatOnaySayi,"_
 	&" COUNT(iu.id) as iuToplamKayit, SUM(ISNULL(iu.iskontoOran,0)) as iskontoKontrol"_
-	&" FROM dosya.ihale_urun iu WHERE iu.ihaleID = " & id
+	&" FROM teklifv2.ihale_urun iu WHERE iu.ihaleID = " & id
 	rs.open sorgu,sbsv5,1,3
 	
 	
@@ -214,7 +214,7 @@ sorgu = "SELECT COUNT(CASE iu.firmamParaBirim WHEN 'TL' THEN 1 ELSE NULL END) as
 &" COUNT(CASE iu.tavsiyeBirim WHEN 'EUR' THEN 1 ELSE NULL END) as EURsayiTavs,"_
 &" COUNT(CASE iu.tavsiyeBirim WHEN 'USD' THEN 1 ELSE NULL END) as USDsayiTavs,"_
 &" COUNT(iu.id) as toplamKayit"_
-&" FROM dosya.ihale_urun iu WHERE iu.ihaleID = " & id
+&" FROM teklifv2.ihale_urun iu WHERE iu.ihaleID = " & id
 rs.open sorgu,sbsv5,1,3
 
 birimYok	=	rs("brYok")
@@ -261,7 +261,7 @@ sorgu = sorgu &" ((iu.firmamFiyat * iu.miktar)*ISNULL(iu.iskontoOran,0))/100 as 
 sorgu = sorgu &" tavsiyeFiyat * iu.miktar as tavsiyeTutar, iu.firmamFiyat, iu.firmamParaBirim,"
 sorgu = sorgu &" iu.firmamFiyat * iu.miktar as firmamTutar, iu.stoklarListeFiyat * iu.miktar as listeTutar,"
 sorgu = sorgu &" ISNULL(bayiAlis,0) * iu.miktar as bayiTutar, s.katalogKodu, ISNULL(s.stokBarcode,'') as ubbKod, s.stokKodu, s.kdv"
-sorgu = sorgu &" FROM dosya.ihale_urun iu"
+sorgu = sorgu &" FROM teklifv2.ihale_urun iu"
 sorgu = sorgu &" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"
 sorgu = sorgu &" WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
 rs.open sorgu,sbsv5,1,3
@@ -342,7 +342,7 @@ Response.Write "</tbody></table>"
 Response.Write "<br>"
 
 	sorgu = "SELECT s.kdv, SUM(iu.miktar*(iu.firmamFiyat-((ISNULL(iu.iskontoOran,0)/100)*iu.firmamFiyat))) as kdvToplam "_
-		&" FROM dosya.ihale_urun iu"_
+		&" FROM teklifv2.ihale_urun iu"_
 		&" INNER JOIN stok.stok s ON iu.stoklarID = s.stokID"_
 		&" WHERE ihaleID = "& id &""_
 		&" GROUP BY kdv"_
@@ -438,7 +438,7 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 
 		USDkur		=	dovizBulTarih("usdtry", tarih_ihale)
 
-	sorgu = "SELECT iu.grupNo, iu.siraNo, iu.kalemNot, iu.kalemNotTeklifEkle FROM dosya.ihale_urun iu WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
+	sorgu = "SELECT iu.grupNo, iu.siraNo, iu.kalemNot, iu.kalemNotTeklifEkle FROM teklifv2.ihale_urun iu WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
 	rs.open sorgu,sbsv5,1,3
 
 			Response.Write "<table style=""font-family:calibri; font-size:12px;"">"

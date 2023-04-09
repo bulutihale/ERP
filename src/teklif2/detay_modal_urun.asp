@@ -40,7 +40,7 @@ Response.Write "<input type=""hidden"" name=""tablo"" value=""ihale_urun"" />"
 		Response.Write "</div>"
 
 		Response.Write "<div class=""col-lg-12"">"
-		Response.Write "<button type="""" class=""btn form-control btn-success"" onClick=""ajSave('stoklarID','dosya.ihale_urun',"&id&",$('#deger').val())"">Değiştir</button>"
+		Response.Write "<button type="""" class=""btn form-control btn-success"" onClick=""ajSave('stoklarID','teklifv2.ihale_urun',"&id&",$('#deger').val())"">Değiştir</button>"
 			call clearfix()
 		Response.Write "</div>"
 	Response.Write "</div>"

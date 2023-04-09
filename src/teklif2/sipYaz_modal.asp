@@ -13,7 +13,7 @@
 if yetkiKontrol > 0 then
 
 
-sorgu = "SELECT t3.birimID, t3.uzunBirim, t1.miktar FROM dosya.ihale_urun t1"
+sorgu = "SELECT t3.birimID, t3.uzunBirim, t1.miktar FROM teklifv2.ihale_urun t1"
 sorgu = sorgu & " LEFT JOIN stok.stok t2 ON t1.stoklarID = t2.stokID"
 sorgu = sorgu & " LEFT JOIN portal.birimler t3 ON t2.anaBirimID = t3.birimID"
 sorgu = sorgu & " WHERE t1.id = " & iuID

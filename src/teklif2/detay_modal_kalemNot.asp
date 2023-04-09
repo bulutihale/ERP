@@ -21,7 +21,7 @@
 '##### YETKİ BUL
 
 
-sorgu = "SELECT kalemNot, kalemNotTeklifEkle FROM dosya.ihale_urun WHERE id =" & id
+sorgu = "SELECT kalemNot, kalemNotTeklifEkle FROM teklifv2.ihale_urun WHERE id =" & id
 rs.open sorgu,sbsv5,1,3
 
 kalemNot			=	rs("kalemNot")
@@ -40,7 +40,7 @@ Response.Write "<form action=""/teklif2/hucre_kaydet.asp"" method=""post"" class
 Response.Write "<input type=""hidden"" name=""alan"" value=""kalemNot"" />"
 Response.Write "<input type=""hidden"" name=""tabloID"" value=""" & id & """ />"
 Response.Write "<input type=""hidden"" name=""ihaleID"" value=""" & ihaleID & """ />"
-Response.Write "<input type=""hidden"" name=""tablo"" value=""dosya.ihale_urun"" />"
+Response.Write "<input type=""hidden"" name=""tablo"" value=""teklifv2.ihale_urun"" />"
 
 	Response.Write "<div class=""container-fluid row"">"
 		Response.Write "<div class=""col-lg-12"">"

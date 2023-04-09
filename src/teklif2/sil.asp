@@ -24,7 +24,7 @@
 	
 	'#### ihale_urun tablosundan stok karşılığı siliniyorsa
 		if tablo = "ihale_urun" AND deger1 = "stokKarsilik" then
-			sorgu = "SELECT stoklarID FROM dosya.ihale_urun WHERE id = " & id
+			sorgu = "SELECT stoklarID FROM teklifv2.ihale_urun WHERE id = " & id
 			rs.open sorgu, sbsv5,1,3
 			rs("stoklarID") = 0
 			rs.update

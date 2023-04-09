@@ -603,7 +603,7 @@ Response.Write "<div class=""card-body row"">"
 			&" iu.bayiMarj, ISNULL(iu.bayiAlisPB,'TL') as bayiAlisPB, iu.stoklarListeFiyat, iu.stoklarListeFiyatPB, iu.listeFiyatTarih, iu.iskontoOran,"_
 			&" iu.id as ihaleUrunID, iu.ad as urunAd, iu.kalemNot, iu.kalemNotTeklifEkle, s.stokAd as stoklarAD, i.id as ihaleID, i.ihaleTipi, i.firmaID,"_
 			&" r.cariUrunRef, r.cariUrunAd, t5.id as sipTempID, t6.id as sipKalemID"_
-			&" FROM dosya.ihale_urun iu"_
+			&" FROM teklifv2.ihale_urun iu"_
 			&" INNER JOIN teklifv2.ihale i ON iu.ihaleID = i.id"_
 			&" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"_
 			&" LEFT JOIN stok.stokRef r ON iu.stoklarID = r.stokID AND r.cariID = " & cariID & ""_
@@ -682,14 +682,14 @@ Response.Write "<div class=""card-body row"">"
 '## siraNO
 		classYaz = classbelirle("align-middle text-center",kisimIhale,ihaleTipi,"","",rs("iptal"),rs("uhde"),"","","","","","")
 		Response.Write "<td width=""5%"" class="""&classYaz&""">"
-			call forminput("siraNo",siraNo,"",""," borderless text-center","","","onChange=""ajSave('siraNo','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("siraNo",siraNo,"",""," borderless text-center","","","onChange=""ajSave('siraNo','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /siraNO
 
 '## urunAD
 		classYaz = classbelirle("align-middle",kisimIhale,ihaleTipi,"","",rs("iptal"),"","","","","","","")
 		Response.Write "<td width=""40%"" class="""&classYaz&""">"
-			'call forminput("urunAd",urunAd,"","","borderless mt-4","","kalemAd"&ihaleUrunID&"","onChange=""ajSave('urunAd','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			'call forminput("urunAd",urunAd,"","","borderless mt-4","","kalemAd"&ihaleUrunID&"","onChange=""ajSave('urunAd','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 			call forminput("urunAd",urunAd,"","","borderless mt-4","","kalemAd"&ihaleUrunID&"","onChange=""ajSave('deneme','dosya.deneme',5,$(this).val())""")
 			if stoklarID > 0 then
 				Response.Write "<a id="""&rs("ihaleUrunID")&"|ihale_urun"&"|stokKarsilik"" class=""btn ajSil text-muted "" role=""button""><i class=""fa fa-trash-o p-0 m-0""></i></a>"
@@ -721,19 +721,19 @@ Response.Write "<div class=""card-body row"">"
 
 '## miktar
 		Response.Write "<td width=""7%"" class=""align-middle border-right-0 p-0"">"
-			call forminput("miktar",formatnumber(rs("miktar"),0),"","","borderless text-right input50","","","onChange=""ajSave('miktar','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("miktar",formatnumber(rs("miktar"),0),"","","borderless text-right input50","","","onChange=""ajSave('miktar','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /miktar
 
 '## birim
 		Response.Write "<td width=""7%"" class=""align-middle border-left-0 pl-1"">"
-			call forminput("birim",rs("birim"),"this.select();","","borderless text-left input30","","","onChange=""ajSave('birim','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("birim",rs("birim"),"this.select();","","borderless text-left input30","","","onChange=""ajSave('birim','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /birim
 
 '## iskonto
 		Response.Write "<td width=""3%"" class=""align-middle border-right-0 p-0"">"
-			call forminput("iskontoOran",iskontoOran,"","%","borderless text-right p-0 bold text-center","","","onChange=""ajSave('iskontoOran','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("iskontoOran",iskontoOran,"","%","borderless text-right p-0 bold text-center","","","onChange=""ajSave('iskontoOran','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /iskonto
 
@@ -741,11 +741,11 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<td width=""10%"" class=""align-middle border-right-0 p-0"">"
 			para_deger = para_basamak(rs("firmamFiyat"))
 			
-			call forminput("firmamFiyat",para_deger,"","","borderless para text-right p-0 ","","","onChange=""ajSave('firmamFiyat','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("firmamFiyat",para_deger,"","","borderless para text-right p-0 ","","","onChange=""ajSave('firmamFiyat','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 		
 		Response.Write "<td width=""10%"" class=""align-middle border-left-0 p-0 pl-1"">"
-			call formselectv2("firmamParaBirim",rs("firmamParaBirim"),"","","btn p-0 okKaldir","","",paraBirimDegerler,"onChange=""ajSave('firmamParaBirim','dosya.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call formselectv2("firmamParaBirim",rs("firmamParaBirim"),"","","btn p-0 okKaldir","","",paraBirimDegerler,"onChange=""ajSave('firmamParaBirim','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /Fiyatım
 
@@ -761,7 +761,7 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "<td class="""&y&""">"
 					Response.Write "<div>"
 					if yetkiKontrol >= 5 then
-						Response.Write "<input type=""checkbox"" class=""chck30"" " & chckValue & " onInput=""ajSave('fiyatOnay','dosya.ihale_urun',"&ihaleUrunID&","&fiyatOnayDeger&")"" onClick=""this.select();"">"
+						Response.Write "<input type=""checkbox"" class=""chck30"" " & chckValue & " onInput=""ajSave('fiyatOnay','teklifv2.ihale_urun',"&ihaleUrunID&","&fiyatOnayDeger&")"" onClick=""this.select();"">"
 					else
 						Response.Write "<span class=""icon world-delete pointer"" onclick=""swal('fiyat onay yetkisi yok.','')""></span>"
 					end if
