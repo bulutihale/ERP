@@ -23,7 +23,7 @@
 '##### DOSYA SİL
 '##### DOSYA SİL
 
-	sorgu = "UPDATE dosya.ihale SET silindi = 1 WHERE id = " & ihaleID
+	sorgu = "UPDATE teklifv2.ihale SET silindi = 1 WHERE id = " & ihaleID
 	rs.open sorgu,sbsv5,3,3
 '##### /DOSYA SİL
 '##### /DOSYA SİL

@@ -154,21 +154,19 @@ Response.Write "<div class=""tab-content"">"
 
 
 
+
+
 				Response.Write "<div class=""row mt-2"">"
                 Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs-12"">"
                     Response.Write "<div class=""card"">"
                     Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Stok Temel Bilgileri","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
 						Response.Write "<div class=""row"">"
-							'######## CODE
-			Response.Write "<div class=""col-sm-12 my-1"">"
-			Response.Write "</div>"
-
-
 								Response.Write "<div class=""col-lg-4 col-sm-12"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Firma Adı","","") & "</span>"
 									call formselectv2("stokfirmaID",stokfirmaID,"","","","","stokfirmaID",firmaDegerler,"")
 								Response.Write "</div>"
+							'######## CODE
 								Response.Write "<div class=""col-lg-4 col-sm-12"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Stok Kodu","","") & "</span>"
 									call forminput("stokKodu",stokKodu,"","","",inpKontrol,"stokKodu","")
@@ -177,13 +175,17 @@ Response.Write "<div class=""tab-content"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Katalog Kodu","","") & "</span>"
 									call forminput("katalogKodu",katalogKodu,"","","",inpKontrol,"katalogKodu","")
 								Response.Write "</div>"
+								Response.Write "<div class=""col-sm-6 my-1"">"
+									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürünün Barkodu","","") & "</span>"
+									call forminput("stokBarcode",stokBarcode,"","","",inpKontrol,"stokBarcode","")
+								Response.Write "</div>"
 							'######## CODE
 							'######## NAME
-								Response.Write "<div class=""col-sm-12 my-1"">"
+								Response.Write "<div class=""col-sm-6 my-1"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürün Adı","","") & "</span>"
 									call forminput("stokAd",stokAd,"","","",inpKontrol,"stokAd","")
 								Response.Write "</div>"
-								Response.Write "<div class=""col-sm-12 my-1"">"
+								Response.Write "<div class=""col-sm-6 my-1"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürünün İngilizce Adı","","") & "</span>"
 									call forminput("stokAdEn",stokAdEn,"","","",inpKontrol,"stokAdEn","")
 								Response.Write "</div>"
@@ -209,25 +211,25 @@ Response.Write "<div class=""tab-content"">"
 								if sb_TeklifFiyatSayi > 0 then
 									Response.Write "<div class=""col-sm-3 my-1"">"
 										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd0,"","") & "</span>"
-										call forminput("fiyat1",fiyat1,"numara(this,false,false)",translate(sb_TeklifFiyatAd0,"",""),"","","fiyat1","")
+										call forminput("fiyat1",fiyat1,"numara(this,true,false)",translate(sb_TeklifFiyatAd0,"",""),"","","fiyat1","")
 									Response.Write "</div>"
 								end if
 								if sb_TeklifFiyatSayi > 1 then
 									Response.Write "<div class=""col-sm-3 my-1"">"
 										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd1,"","") & "</span>"
-										call forminput("fiyat2",fiyat2,"numara(this,false,false)",translate(sb_TeklifFiyatAd1,"",""),"","","fiyat2","")
+										call forminput("fiyat2",fiyat2,"numara(this,true,false)",translate(sb_TeklifFiyatAd1,"",""),"","","fiyat2","")
 									Response.Write "</div>"
 								end if
 								if sb_TeklifFiyatSayi > 2 then
 									Response.Write "<div class=""col-sm-3 my-1"">"
 										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd2,"","") & "</span>"
-										call forminput("fiyat3",fiyat3,"numara(this,false,false)",translate(sb_TeklifFiyatAd2,"",""),"","","fiyat3","")
+										call forminput("fiyat3",fiyat3,"numara(this,true,false)",translate(sb_TeklifFiyatAd2,"",""),"","","fiyat3","")
 									Response.Write "</div>"
 								end if
 								if sb_TeklifFiyatSayi > 3 then
 									Response.Write "<div class=""col-sm-3 my-1"">"
 										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate(sb_TeklifFiyatAd3,"","") & "</span>"
-										call forminput("fiyat4",fiyat4,"numara(this,false,false)",translate(sb_TeklifFiyatAd3,"",""),"","","fiyat4","")
+										call forminput("fiyat4",fiyat4,"numara(this,true,false)",translate(sb_TeklifFiyatAd3,"",""),"","","fiyat4","")
 									Response.Write "</div>"
 								end if
 								' if sb_TeklifFiyatSayi > 4 then
@@ -245,10 +247,6 @@ Response.Write "<div class=""tab-content"">"
                                     ' paraBirimIDdegerler = "--" & translate("Para Birimi","","") & "--=|TRY=TRY|USD=USD|EUR=EUR|GBP=GBP"
 									call formselectv2("paraBirimID",paraBirimID,"","","","","paraBirimID",paraDegerler,"")
 								Response.Write "</div>"
-
-
-
-
 							'######## PRICE
 						Response.Write "</div>"
 					Response.Write "</div>"

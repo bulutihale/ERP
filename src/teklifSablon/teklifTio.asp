@@ -46,7 +46,7 @@ sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun,
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
 &" i.teklifMusteriOnay, f.antetPath"_
-&" FROM dosya.ihale i"_
+&" FROM teklifv2.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
 &" LEFT JOIN portal.firma f ON i.firmaID = f.Id"_
@@ -127,7 +127,7 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 	Response.Write "<tr>"
 		Response.Write "<td style=""width:50%;"" class=""b-all"">"
 			Response.Write "<div id=""cariBilgi"" style=""height:120px; padding:10px;"""
-			Response.Write " contenteditable=""true"" onblur=""ajSaveBlur('cariBilgi', "&id&", 'dosya.ihale', 'yeniCariAd', '', $(this).html(),'','','')"" >" & teklifCariAD & "</div>"
+			Response.Write " contenteditable=""true"" onblur=""ajSaveBlur('cariBilgi', "&id&", 'teklifv2.ihale', 'yeniCariAd', '', $(this).html(),'','','')"" >" & teklifCariAD & "</div>"
 		Response.Write "</td>"
 		Response.Write "<td style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;"">"
 		Response.Write "<b>Tarih: </b>"&formatdatetime(tarih_ihale,2) & "<br>"
@@ -418,7 +418,7 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 '################# TEKLİF ALT BİLGİLERİ
 	sorgu = "SELECT REPLACE(REPLACE(teklifNot,CHAR(13),'<br>'),CHAR(10),'<br>') as teklifNot,"
 	sorgu = sorgu & " odemeVade, teklifGecerlik, teslimatSure, bankalar"
-	sorgu = sorgu & " FROM dosya.ihale WHERE id = " & id
+	sorgu = sorgu & " FROM teklifv2.ihale WHERE id = " & id
 	rs.open sorgu,sbsv5,1,3
 
 				

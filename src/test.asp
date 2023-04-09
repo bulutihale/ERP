@@ -2,6 +2,7 @@
 
 
 Response.Write geoIP("ilçe","31.223.84.240")
+Response.Write geoIP("ilçe","212.156.34.226")
 
 
 

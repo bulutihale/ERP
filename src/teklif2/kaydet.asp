@@ -137,7 +137,7 @@
 		tarih 			=	date()
 	end if
 	'## veritabanı
-		sorgu = "SELECT * FROM dosya.ihale ORDER BY id DESC"
+		sorgu = "SELECT * FROM teklifv2.ihale ORDER BY id DESC"
 		rs.open sorgu, sbsv5,1,3
 			'##### DOSYA NO OLUŞTUR
 			'##### DOSYA NO OLUŞTUR

@@ -4654,28 +4654,8 @@ function geoIP(byVal alan,byVal gelenIP)
 		' Response.Write geoIP("konum","")
 		' Response.Write geoIP("şehir","212.68.61.88")
 	'##### KULLANIMI
-    if gelenIP = "" then
-        gelenIP = Request.ServerVariables("REMOTE_ADDR")
-    end if
-    IParr = Split(gelenIP,".")
-    IPSub = IParr(0) & "." & IParr(1) & "." & IParr(2) & "."
-	set IParr = Nothing
-    sorgu = "Select top 1 v3 from sbs_geoIP.portal.geoIP where IP1 like '" & IPSub & "%'"
-    fn1.open sorgu, sbsv5,1,3
-        if fn1.recordcount > 0 then
-            if alan = "şehir" or alan = "sehir" then
-                geoIP = fn1("v3")
-            ' elseif alan = "ilçe" or alan = "ilce" then
-            '     geoIP = fn1("v4")
-            ' elseif alan = "konum" then
-            '     geoIP = fn1("v5") & "," & fn1("v6")
-            else
-                geoIP = ""
-            end if
-        else
-            geoIP = ""
-        end if
-    fn1.close
+	' geoIP = xmlverigonder("https://erp.sbstasarim.com/portal/geoIP.asp","","POST",gelenIP,"","","","","")
+	geoIP = xmlverigonder("https://erp.sbstasarim.com/portal/geoIP.asp","ip=" & gelenIP,"POST","text","","","","","")
 end function
 
 
@@ -4916,7 +4896,7 @@ function mailGonder2(byVal mailTipNo, byVal mailBaslik, byval mailicerik, byval 
 	
 		'#### dosya sorumlusu gönderilen e-postaya dahil ediliyor.
 			if id > 0 then
-				sorgu = "SELECT k.email FROM dosya.ihale i INNER JOIN personel.personel k ON i.dosyaSorumlu = k.id WHERE i.id = " & id
+				sorgu = "SELECT k.email FROM teklifv2.ihale i INNER JOIN personel.personel k ON i.dosyaSorumlu = k.id WHERE i.id = " & id
 				fn2.open sorgu,sbsv5,1,3
 					if fn2.recordcount > 0 then
 						email = fn2("email")

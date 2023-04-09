@@ -86,6 +86,13 @@
     end if
 
 
+    '#### DOSYA KONTROL
+        if klasorkontrol("/temp/dosya/" & firmaID) = false then
+            call klasorolustur("/temp/dosya/" & firmaID)
+        end if
+    '#### DOSYA KONTROL
+
+
 	Set objStream = server.CreateObject("ADODB.Stream")
 	objStream.Open
 	objStream.CharSet = "UTF-8"
@@ -95,6 +102,6 @@
 	set objStream = Nothing
 
     call jquerykontrol()
-    call jsgit("/temp/stokexport.xls")
+    call jsgit("/temp/dosya/" & firmaID & "/stokexport.xls")
 
 %><!--#include virtual="/reg/rs.asp" -->

@@ -1,14 +1,6 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
 
-' firmatipi = cariTur
-' iskonto = sil
-' ilce = sil
-' il = sehir
-'//FIXME - Şehir - şehir2 inputunu onar
-
-
-'###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid			=	kidbul()
@@ -16,15 +8,16 @@
     gorevID 	=   Request.QueryString("gorevID")
 	gorevID64	=	gorevID
 	gorevID		=	base64_decode_tr(gorevID64)
-	modulAd 	=   "cari"
-	cariTurArr	=	"Son Kullanıcı=3|Bayi=2|Tedarikçi=8"
-	Response.Flush()
-'###### ANA TANIMLAMALAR
+    hata    	=   ""
+    modulAd 	=   "Cari"
+    Response.Flush()
+	yetkiKontrol = yetkibul("Cari")
 '###### ANA TANIMLAMALAR
 
- 	yetkiKontrol	= yetkibul(modulAd)
-	yetkiTeklif	    = yetkibul("Teklif")
-	yetkiSatis  	= yetkibul("Satış")
+
+'#### yetkiler
+	yetkiKontrol	= yetkibul("Cari")
+'#### yetkiler
 
 
 if gorevID <> "" then
@@ -50,17 +43,14 @@ if gorevID <> "" then
 end if
 
 
-manuelKayit = True
-
-
-if cariKodu = "" then
-	call logla("Cari Düzenleme Ekranı Girişi")
+if gorevID = "" then
+	call logla(translate("Cari Ayrıntıları Ekranı","",""))
+	manuelKayit = true
 else
-	call logla("Cari Düzenleme Ekranı : " & cariAd)
+	call logla(translate("Cari Ayrıntıları Ekranı","","") & cariAd)
 end if
 
 
-'### sehirArr
 '### sehirArr
 	if hata = "" then
 		sorgu = "Select ilID,sehiradi from portal.iller order by sehiradi ASC"
@@ -69,26 +59,25 @@ end if
 			do while not rs.eof
 				sehirArr = sehirArr & rs("sehiradi")
 				sehirArr = sehirArr & "="
-				sehirArr = sehirArr & rs("ilID")
+				sehirArr = sehirArr & rs("sehiradi")
+				' sehirArr = sehirArr & rs("ilID")
 				sehirArr = sehirArr & "|"
-				if rs("sehiradi") = il then
-					sehir = rs("ilID")
-				end if
+				' if rs("sehiradi") = il then
+				' 	sehir = rs("ilID")
+				' end if
 			rs.movenext
 			loop
 			sehirArr = left(sehirArr,len(sehirArr)-1)
 		rs.close
 	end if
 '### sehirArr
-'### sehirArr
 
 
 
 
 
 '###### ARAMA FORMU
-'###### ARAMA FORMU
-	if yetkiTeklif >= 3 or yetkiSatis > 1 then
+	if yetkiKontrol >= 3 then
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "<form action=""/cari/cari_ekle.asp"" method=""post"" class=""ajaxform"">"
 		Response.Write "<input type=""hidden"" name=""gorevID"" value=""" & gorevID & """ />"
@@ -126,14 +115,14 @@ end if
 				'## unvan
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-danger"">" & translate("Cari Türü","","") & "</div>"
-					call formselectv2("cariTur",cariTur,"","","","","cariTur",cariTurArr,"")
+					call formselectv2("cariTur",cariTur,"","","","","cariTur",sb_cariTurArr,"")
 				Response.Write "</div>"
 				'## unvan
 				'## unvan
-				Response.Write "<div class=""col-lg-8 col-md-8 col-sm-8 col-xs mb-4"">"
-					Response.Write "<div class=""badge badge-secondary"">" & translate("Ünvan","","") & "</div>"
-					call forminput("unvan",unvan,"","","","autocompleteOFF","unvan","")
-				Response.Write "</div>"
+				' Response.Write "<div class=""col-lg-8 col-md-8 col-sm-8 col-xs mb-4"">"
+				' 	Response.Write "<div class=""badge badge-secondary"">" & translate("Ünvan","","") & "</div>"
+				' 	call forminput("unvan",unvan,"","","","autocompleteOFF","unvan","")
+				' Response.Write "</div>"
 				'## unvan
 				'## unvan
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
@@ -150,17 +139,17 @@ end if
 				'## unvan
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4 sehirdiv"">"
 					Response.Write "<div class=""badge badge-secondary float-start"">" & translate("Şehir","","") & "</div>"
-					Response.Write "<div class=""float-right"">"
-						Response.Write "<button class=""btn btn-success btn-sm"" type=""submit"">" & translate("Şehir Ekle","","") & "</button>"
-					Response.Write "</div>"
-					call formselectv2("sehir",sehir,"","","","","sehir",sehirArr,"")
+					' Response.Write "<div class=""float-right"">"
+						' Response.Write "<button class=""btn btn-success btn-sm"" type=""submit"">" & translate("Şehir Ekle","","") & "</button>"
+					' Response.Write "</div>"
+					call formselectv2("il",il,"","","","","il",sehirArr,"")
 				Response.Write "</div>"
 				'## unvan
 				'## unvan
-				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4 sehir2div d-none"">"
-					Response.Write "<div class=""badge badge-secondary"">" & translate("Şehir Adını Yazın","","") & "</div>"
-					call forminput("sehir2","","","","","autocompleteOFF","sehir2","")
-				Response.Write "</div>"
+				' Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4 sehir2div d-none"">"
+				' 	Response.Write "<div class=""badge badge-secondary"">" & translate("Şehir Adını Yazın","","") & "</div>"
+				' 	call forminput("sehir2","","","","","autocompleteOFF","sehir2","")
+				' Response.Write "</div>"
 				'## unvan
 				'## unvan
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
@@ -181,9 +170,9 @@ end if
 				Response.Write "</div>"
 				'## unvan
 				'## unvan
-				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
+				Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-secondary"">" & translate("Posta Adresi","","") & "</div>"
-					call formtextarea("adres",adres,"","","","","adres","")
+					call formtextarea("adres",adres,"","","form-control","","adres","")
 				Response.Write "</div>"
 				'## unvan
 			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs"">"
@@ -198,9 +187,9 @@ end if
 
 		Response.Write "</form>"
 	else
-		call yetkisizGiris("Bu Alanı Görme Yetkiniz Yok","","")
+		hata = translate("Bu işlemi yapmak için yeterli yetkiniz bulunmamaktadır","","")
+		call yetkisizGiris(hata,"","")
 	end if
-'###### ARAMA FORMU
 '###### ARAMA FORMU
 
 

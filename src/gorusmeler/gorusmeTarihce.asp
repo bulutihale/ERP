@@ -16,7 +16,7 @@
 
 
 	sorgu = "SELECT g.id as gorusmelerID, g.gorusmeTarihi, g.gorusmeIcerik, g.gorusulenKisi, g.sonrakiAramaTarihi, ISNULL(g.sonrakiAramaID,0) as sonrakiAramaID, k.ad as kullanici"_
-	&" FROM dosya.gorusmeler g"_
+	&" FROM teklifv2.gorusmeler g"_
 	&" INNER JOIN personel.personel k ON g.kid = k.id"_
 	&" WHERE g.ihaleID = " & ihaleID &""_
 	&" ORDER BY g.id DESC"

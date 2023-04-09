@@ -13,26 +13,25 @@
     hata    =   ""
     modulAd =   "Personel"
     personelID =   gorevID
-    Response.Flush()
+    ' Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
 call logla("Personel Bilgileri Güncelleniyor")
 
-yetkiKontrol = yetkibul(modulAd)
-yetkiBilgiIslem = yetkibul("Bilgi İşlem")
+yetkiKontrol = yetkibul("Personel")
 
 '###### FORM BİLGİLERİNİ AL
 '###### FORM BİLGİLERİNİ AL
-    ad              =   Request.Form("ad")
-    ceptelefon      =   Request.Form("ceptelefon")
-    password        =   Request.Form("password")
-    email           =   Request.Form("email")
-    gorev           =   Request.Form("gorev")
-    expiration      =   Request.Form("expiration")
-    language        =   Request.Form("language")
-    firmaIDpersonel        =   Request.Form("firmaIDpersonel")
-    bildirimYontemi1     =   Request.Form("bildirimYontemi1")
+    ad                  =   Request.Form("ad")
+    ceptelefon          =   Request.Form("ceptelefon")
+    password            =   Request.Form("password")
+    email               =   Request.Form("email")
+    gorev               =   Request.Form("gorev")
+    expiration          =   Request.Form("expiration")
+    language            =   Request.Form("language")
+    firmaIDpersonel     =   Request.Form("firmaIDpersonel")
+    bildirimYontemi1    =   Request.Form("bildirimYontemi1")
 '###### FORM BİLGİLERİNİ AL
 '###### FORM BİLGİLERİNİ AL
 
@@ -40,7 +39,7 @@ yetkiBilgiIslem = yetkibul("Bilgi İşlem")
 '#### VERİ KONTROL
 '#### VERİ KONTROL
 if email = "" then
-	hatamesaj = "Lütfen email adresini yazın"
+	hatamesaj = translate("Lütfen email adresini yazın","","")
 	call logla(hatamesaj)
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
 	Response.End()
@@ -48,7 +47,7 @@ end if
 
 if gorevID = "" then
     if yetkiKontrol < 5 then
-        hatamesaj = "Bu işlemi yapmak için yeterli yetkiniz bulunmamaktadır."
+        hatamesaj = translate("Bu işlemi yapmak için yeterli yetkiniz bulunmamaktadır","","")
         call logla(hatamesaj)
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
@@ -56,7 +55,7 @@ if gorevID = "" then
 end if
 
 if emailkontrol(email) = "hata" then
-        hatamesaj = "Hatalı email adresi yazdınız"
+        hatamesaj = translate("Hatalı email adresi yazdınız","","")
         call logla(hatamesaj)
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
@@ -122,6 +121,12 @@ end if
 call logla("Personel Bilgileri Güncellendi")
 
 
+
+
+
+
+
+
 if yetkiKontrol > 5 then
     call jsac("/personel/personel_liste.asp")
     call modalkapat()
@@ -129,6 +134,17 @@ else
 	hatamesaj = translate("Bilgiler Güncellendi","","")
 	call logla(hatamesaj)
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+end if
+
+
+
+if kid = gorevID then
+    klang = Request.Cookies("klang")
+    if klang = language then
+    else
+        Response.Cookies("klang") = language
+        call jsgit("/")
+    end if
 end if
 
 %><!--#include virtual="/reg/rs.asp" -->

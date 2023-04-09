@@ -17,7 +17,7 @@ response.codepage=65001
 	'########## PDF için footer bilgilerini oluştur
 		sorgu = "SELECT f.Ad as adUzun, f.adres, f.telefon, f.faksNo as faks, f.iletisimEposta, f.ilce, f.sehir, f.vergiDairesi, f.vergiNo, f.webSite"_
 			&" FROM portal.firma f"_
-			&" WHERE f.id = (SELECT firmaID FROM dosya.ihale WHERE id = " & id & ")"
+			&" WHERE f.id = (SELECT firmaID FROM teklifv2.ihale WHERE id = " & id & ")"
 		rs.open sorgu,sbsv5,1,3
 			firmaAd			=	rs("adUzun")
 			vergiDairesi	=	rs("vergiDairesi")& " V.D."
@@ -50,7 +50,7 @@ response.codepage=65001
 		end if
 	rs.close
 
-	sorgu = "SELECT teklifRevNo FROM dosya.ihale WHERE firmaID = " & firmaID & " AND id = " & id
+	sorgu = "SELECT teklifRevNo FROM teklifv2.ihale WHERE firmaID = " & firmaID & " AND id = " & id
 	rs.open sorgu,sbsv5,1,3
 		rs("teklifRevNo")	=	sonRevizyonNo
 		rs.update
@@ -58,7 +58,7 @@ response.codepage=65001
 '###### PDF oluşmadan önce revizon numaraları ayarla
 
 	sorgu = "SELECT f.adres, i.pdfSablon, k.landscapeDeger"
-	sorgu = sorgu & " FROM dosya.ihale i"
+	sorgu = sorgu & " FROM teklifv2.ihale i"
 	sorgu = sorgu & " LEFT JOIN portal.firma f ON f.id = i.firmaID"
 	sorgu = sorgu & " LEFT JOIN kalite.form k ON i.pdfSablon = k.pdfKaynakDosya"
 	sorgu = sorgu & " WHERE i.id = " & id
@@ -160,7 +160,7 @@ rs.addnew
 rs.update
 rs.close
 
-sorgu = "SELECT i.dosyaNo, i.cariID, c.cariAd, i.yeniCariAd FROM dosya.ihale i LEFT JOIN cari.cari c ON i.cariID = c.cariID WHERE i.id = " & id
+sorgu = "SELECT i.dosyaNo, i.cariID, c.cariAd, i.yeniCariAd FROM teklifv2.ihale i LEFT JOIN cari.cari c ON i.cariID = c.cariID WHERE i.id = " & id
 rs.open sorgu,sbsv5,1,3
 
 	cariAD		=	rs("cariAd")

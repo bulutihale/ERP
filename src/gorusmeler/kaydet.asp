@@ -40,7 +40,7 @@
 '##### DOSYA KAYDET
 
 	'## veritabanı
-		sorgu = "SELECT * FROM dosya.gorusmeler WHERE firmaID = " & firmaID & " order by id DESC"
+		sorgu = "SELECT * FROM teklifv2.gorusmeler WHERE firmaID = " & firmaID & " order by id DESC"
 		rs.open sorgu, sbsv5,1,3
 
 			rs.addnew
@@ -58,7 +58,7 @@
 		
 	'##### yapılan yeni görüşme ile bağlantılı olan önceki görüşmeye takip görüşmesinin yapıldığı ID yazılsın.
 	if oncekiGorusmeID > 0 then
-		sorgu = "UPDATE dosya.gorusmeler SET sonrakiAramaID = " & gorusmelerIDsonKayit & " WHERE id = " & oncekiGorusmeID
+		sorgu = "UPDATE teklifv2.gorusmeler SET sonrakiAramaID = " & gorusmelerIDsonKayit & " WHERE id = " & oncekiGorusmeID
 		rs.open sorgu, sbsv5,1,3
 	end if
 	'##### yapılan yeni görüşme ile bağlantılı olan önceki görüşmeye takip görüşmesinin yapıldığı ID yazılsın.

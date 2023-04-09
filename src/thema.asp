@@ -500,7 +500,7 @@ if kid <> "" then
 
 			'## MAİL
 			'## MAİL
-				if sb_modul_webmail = true then
+				' if sb_modul_webmail = true then
 					if webmailUser <> "" then
 						Response.Write "<li class=""nav-item dropdown mr-1"">"
 						Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/webmail/mail"">"
@@ -510,7 +510,7 @@ if kid <> "" then
 						Response.Write "</a>"
 						Response.Write "</li>"
 					end if
-				end if
+				' end if
 			'## MAİL
 			'## MAİL
 

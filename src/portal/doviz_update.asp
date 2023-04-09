@@ -11,7 +11,7 @@
 	yetkiTeklif	    = yetkibul("Teklif")
 	yetkiSatis  	= yetkibul("Satış")
 
-if yetkiTeklif >= 3 and yetkiSatis > 2 then
+if yetkiTeklif >= 3 or yetkiSatis > 2 then
     islem   =   Request.Form("islem")
     usd     =   Request.Form("usd")
     eur     =   Request.Form("eur")
@@ -23,7 +23,6 @@ if yetkiTeklif >= 3 and yetkiSatis > 2 then
         call bootmodal(hatamesaj,"custom","","","",translate("Tamam","","" ),"","btn-danger","","","","","")
         Response.End()
     end if
-
     sorgu = "Select top 1 * from portal.doviz"
     sorgu = sorgu & " where firmaID = " & firmaID
     sorgu = sorgu & " and tarih >= '" & tarihsql(date()) & "'"
@@ -44,7 +43,7 @@ if yetkiTeklif >= 3 and yetkiSatis > 2 then
             eur = kurcek("EUR")
             gbp = kurcek("GBP")
             hatamesaj = translate("Döviz kurları merkez bankasından çekildi ve güncellendi","","" )
-            call jsrun("$('.dashDovizDiv').load('/portal/doviz_dashboard.asp');")
+            call jsrundelay("$('.dashdovizDiv').load('/portal/doviz_dashboard.asp');",5)
         end if
         rs("usdtryCustom")  =   usd
         rs("eurtryCustom")  =   eur
@@ -52,13 +51,10 @@ if yetkiTeklif >= 3 and yetkiSatis > 2 then
         rs.update
         call logla(hatamesaj)
         call bootmodal(hatamesaj,"custom","","","",translate("Tamam","","" ),"","btn-success","","","","","")
-        hatamesaj = translate("Yeni döviz kurları:","","" ) & " usd = " & usd & " eur = " & eur & " gbp = " & gbp
+        hatamesaj = translate("Yeni döviz kurları","","" ) & " : usd = " & usd & " eur = " & eur & " gbp = " & gbp
         call logla(hatamesaj)
     end if
     rs.close
-
-
-
 else
 	hatamesaj = translate("Döviz kurlarını güncelleme yetkiniz bulunmamaktadır","","" )
 	call logla(hatamesaj)

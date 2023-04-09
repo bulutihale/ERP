@@ -66,7 +66,7 @@ end if
 			end if
 		end if
 
-		if tablo = "dosya.ihale" then
+		if tablo = "teklifv2.ihale" then
 		'##### teklife eklenen e-posta adresi cariye yazılsın
 			if alan = "teklifEposta" then
 				degerArr = split(deger,";")

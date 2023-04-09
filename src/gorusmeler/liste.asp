@@ -18,7 +18,7 @@
 	ihaleID			=	base64_decode_tr(ihaleID)
 '### değerleri al
 
-sorgu = "SELECT c.cariAd as cariAD FROM dosya.ihale i"_
+sorgu = "SELECT c.cariAd as cariAD FROM teklifv2.ihale i"_
 	&" INNER JOIN cari.cari c ON i.cariID = c.cariID"_
 	&" WHERE i.id = " & ihaleID
 	rs.open sorgu,sbsv5,1,3

@@ -20,7 +20,7 @@
 	sorgu = "SELECT t2.cariID, t1.stoklarID, t1.kalemNot, t1.firmamFiyat, t1.firmamParaBirim, t2.ad as siparisAd, t1.ihaleID,"
 	sorgu = sorgu & " (SELECT kisaBirim FROM portal.birimler WHERE birimID = "& birimID & ") as mikBirim"
 	sorgu = sorgu & " FROM dosya.ihale_urun t1"
-	sorgu = sorgu & " INNER JOIN dosya.ihale t2 ON t1.ihaleID = t2.id"
+	sorgu = sorgu & " INNER JOIN teklifv2.ihale t2 ON t1.ihaleID = t2.id"
 	sorgu = sorgu & " WHERE t1.id = " & iuID
 	rs.open sorgu, sbsv5,1,3
 		cariID			=	rs("cariID")

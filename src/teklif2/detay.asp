@@ -51,7 +51,7 @@ if yetkiKontrol  >= 3 then
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
 		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar, i.teklifEposta, i.epostaGovde,"
 		sorgu = sorgu & " k.pdfKaynakDosya as teklifSablon, k.landscapeDeger, i.teklifMusteriOnay"
-		sorgu = sorgu & " FROM dosya.ihale i"
+		sorgu = sorgu & " FROM teklifv2.ihale i"
 		sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
 		sorgu = sorgu & " LEFT JOIN kalite.form k ON i.pdfSablon = k.pdfKaynakDosya"
 		sorgu = sorgu & " WHERE i.firmaID = " & firmaID & " AND i.id = " & ihaleID
@@ -374,7 +374,7 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""row"">"
 				Response.Write "<div class=""col-12"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Firmam Seçimi</div>"
-						call formselectv2("firmasec",firmasec,"ajSave('firmaID','dosya.ihale',"&id&",$(this).val())","","firmasec",iptalKontrol,"",firmalardegerler,"")		
+						call formselectv2("firmasec",firmasec,"ajSave('firmaID','teklifv2.ihale',"&id&",$(this).val())","","firmasec",iptalKontrol,"",firmalardegerler,"")		
 				Response.Write "</div>"
 			Response.Write "</div>"
 
@@ -383,40 +383,40 @@ Response.Write "<div class=""card-body row"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Cari Seçimi</div>"
 					Response.Write "<div class=""fontkucuk2""><strong>Mevcut Cari :</strong>" & DosyaCariAd & "</div>"
 					Response.Write "<div id=""cariDIV"">"
-						call formselectv2("cariID","","ajSave('cariID','dosya.ihale',"&id&",$(this).val())","","formSelect2 cariID pb-2","","","","data-holderyazi=""Cari adı, cari kodu, vergi no"" data-jsondosya=""JSON_cariler"" data-miniput=""3"" ")			
+						call formselectv2("cariID","","ajSave('cariID','teklifv2.ihale',"&id&",$(this).val())","","formSelect2 cariID pb-2","","","","data-holderyazi=""Cari adı, cari kodu, vergi no"" data-jsondosya=""JSON_cariler"" data-miniput=""3"" ")			
 					Response.Write "</div>"
 				Response.Write "</div>"
 			Response.Write "</div>"
 			Response.Write "<div class=""row"">"
 				Response.Write "<div class=""col"">"
-					Response.Write "<div class=""btn btn-sm btn-info rounded mt-2"" onclick=""ajSave('cariID','dosya.ihale',"&id&",null)"">yeni cari</div>"
+					Response.Write "<div class=""btn btn-sm btn-info rounded mt-2"" onclick=""ajSave('cariID','teklifv2.ihale',"&id&",null)"">yeni cari</div>"
 				Response.Write "</div>"
 			Response.Write "</div>"
 			if isnull(cariID) OR cariID = 0 OR cariID = "" then
 				Response.Write "<div class=""row"">"
 					Response.Write "<div class=""col-12"">"
 						Response.Write "<div class=""badge badge-info rounded-left mt-2"">Yeni Cari Vergi No</div>"
-						Response.Write "<input onchange=""ajSave('yeniCariVergiNo','dosya.ihale',"&id&",$(this).val())"" class=""col-12 form-control"" type=""text"" value=""" & yeniCariVergiNo & """>"
+						Response.Write "<input onchange=""ajSave('yeniCariVergiNo','teklifv2.ihale',"&id&",$(this).val())"" class=""col-12 form-control"" type=""text"" value=""" & yeniCariVergiNo & """>"
 					Response.Write "</div>"
 				Response.Write "</div>"
 
 				Response.Write "<div class=""row"">"
 					Response.Write "<div class=""col"">"
 						Response.Write "<div class=""badge badge-info rounded-left mt-2"">Yeni Cari Ad</div><br>"
-						Response.Write "<input onchange=""ajSave('yeniCariAd','dosya.ihale',"&id&",$(this).val())"" class=""col-12 form-control"" type=""text"" value=""" & yeniCariAd & """>"
+						Response.Write "<input onchange=""ajSave('yeniCariAd','teklifv2.ihale',"&id&",$(this).val())"" class=""col-12 form-control"" type=""text"" value=""" & yeniCariAd & """>"
 					Response.Write "</div>"
 				Response.Write "</div>"
 			end if
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Tipi</div>"
-					call formselectv2("tip",tip,"ajSave('tip','dosya.ihale',"&id&",$(this).val())","","",iptalKontrol,"",dosyaTipDegerler,"")
+					call formselectv2("tip",tip,"ajSave('tip','teklifv2.ihale',"&id&",$(this).val())","","",iptalKontrol,"",dosyaTipDegerler,"")
 				
 				Response.Write "<div class="""&classYaz&""">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Tipi</div>"
-					call formselectv2("bayiDosyaTipi",bayiDosyaTipi,"ajSave('bayiDosyaTipi','dosya.ihale',"&id&",$(this).val())","","",iptalKontrol,"",bayiDosyaTipiDegerler,"")
+					call formselectv2("bayiDosyaTipi",bayiDosyaTipi,"ajSave('bayiDosyaTipi','teklifv2.ihale',"&id&",$(this).val())","","",iptalKontrol,"",bayiDosyaTipiDegerler,"")
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Sorumlusu</div>"
-					call formselectv2("dosyaSorumlu",dosyaSorumlu,"ajSave('dosyaSorumlu','dosya.ihale',"&id&",$(this).val())","","","","",kullanicilarDegerler,"")
+					call formselectv2("dosyaSorumlu",dosyaSorumlu,"ajSave('dosyaSorumlu','teklifv2.ihale',"&id&",$(this).val())","","","","",kullanicilarDegerler,"")
 				
 				' if dosyaKayitTip = "M" then
 				' 	Response.Write "<div id=""ihaleNoVer"" class=""mt-1"">"
@@ -436,36 +436,36 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""card-body"">"
 			
 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Adı</div>"
-				call forminput("ad",ad,"","Dosya Adı","","","","onChange=""ajSave('ad','dosya.ihale',"&id&",$(this).val())""")
+				call forminput("ad",ad,"","Dosya Adı","","","","onChange=""ajSave('ad','teklifv2.ihale',"&id&",$(this).val())""")
 	
 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Alım Tarihi ve Saati</div>"
-				call forminput("tarih_ihale",tarih_ihale,"ajSave('tarih_ihale','dosya.ihale',"&id&",$(this).val())","İhale Tarih"," tarih cell",iptalKontrol,"","")
+				call forminput("tarih_ihale",tarih_ihale,"ajSave('tarih_ihale','teklifv2.ihale',"&id&",$(this).val())","İhale Tarih"," tarih cell",iptalKontrol,"","")
 				
 			Response.Write "<div class=""row"">"
 				Response.Write "<div class=""col-lg-4"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ödeme Vadesi</div>"
-					call forminput("odemeVade",odemeVade,"","(gün)","ajSave","","","onChange=""ajSave('odemeVade','dosya.ihale',"&id&",$(this).val())""")
+					call forminput("odemeVade",odemeVade,"","(gün)","ajSave","","","onChange=""ajSave('odemeVade','teklifv2.ihale',"&id&",$(this).val())""")
 				Response.Write "</div>"
 				Response.Write "<div class=""col-lg-4"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklif Geçerlilik</div>"
-					call forminput("teklifGecerlik",teklifGecerlik,"","Geçerlilik","","","","onChange=""ajSave('teklifGecerlik','dosya.ihale',"&id&",$(this).val())""")
+					call forminput("teklifGecerlik",teklifGecerlik,"","Geçerlilik","","","","onChange=""ajSave('teklifGecerlik','teklifv2.ihale',"&id&",$(this).val())""")
 				Response.Write "</div>"
 				Response.Write "<div class=""col-lg-4"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teslimat Süresi</div>"
-					call forminput("teslimatSure",teslimatSure,"","Teslimat Süresi","","","","onChange=""ajSave('teslimatSure','dosya.ihale',"&id&",$(this).val())""")
+					call forminput("teslimatSure",teslimatSure,"","Teslimat Süresi","","","","onChange=""ajSave('teslimatSure','teklifv2.ihale',"&id&",$(this).val())""")
 				Response.Write "</div>"
 			Response.Write "</div>"
 			
 			' Response.Write "<div class=""row"">"
 			' 		Response.Write "<div class=""col-12"">"
 			' 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ödeme Koşulları</div>"
-			' 			Response.Write "<textarea id="""" onchange=""ajSave('odemeKosul','dosya.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""odemeKosul"" cols=""50"" rows=""5"">" & odemeKosul & "</textarea>"
+			' 			Response.Write "<textarea id="""" onchange=""ajSave('odemeKosul','teklifv2.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""odemeKosul"" cols=""50"" rows=""5"">" & odemeKosul & "</textarea>"
 			' 		Response.Write "</div>"
 			' Response.Write "</div>"
 			' Response.Write "<div class=""row"">"
 			' 		Response.Write "<div class=""col-12"">"
 			' 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teslimat Koşulları</div>"
-			' 			Response.Write "<textarea onchange=""ajSave('teslimatKosul','dosya.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""teslimatKosul"" cols=""50"" rows=""5"">" & teslimatKosul & "</textarea>"
+			' 			Response.Write "<textarea onchange=""ajSave('teslimatKosul','teklifv2.ihale',"&id&",$(this).val())"" class=""form-control fontkucuk2"" name=""teslimatKosul"" cols=""50"" rows=""5"">" & teslimatKosul & "</textarea>"
 			' 		Response.Write "</div>"
 			' Response.Write "</div>"
 
@@ -477,13 +477,13 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""card-body col-lg-6"">"
 			
 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Durum</div>"
-				call formselectv2("durum",dosyaDurum,"ajSave('durum','dosya.ihale',"&id&",$(this).val())","","","","",dosyaDurumDegerler,"")
+				call formselectv2("durum",dosyaDurum,"ajSave('durum','teklifv2.ihale',"&id&",$(this).val())","","","","",dosyaDurumDegerler,"")
 				
 			Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Sipariş Durum</div>"
-				call formselectv2("sipDurum",sipDurum,"ajSave('sipDurum','dosya.ihale',"&id&",$(this).val())","","","","",sipDurumDegerler,"")
+				call formselectv2("sipDurum",sipDurum,"ajSave('sipDurum','teklifv2.ihale',"&id&",$(this).val())","","","","",sipDurumDegerler,"")
 			
 			' Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Mukayese Durum</div>"
-			' 	call formselectv2("mukayeseDurum",mukayeseDurum,"ajSave('sipDurum','dosya.ihale',"&id&",$(this).val())","","","","",mukayeseDurumDegerler,"")
+			' 	call formselectv2("mukayeseDurum",mukayeseDurum,"ajSave('sipDurum','teklifv2.ihale',"&id&",$(this).val())","","","","",mukayeseDurumDegerler,"")
 			
 				
 			Response.Write "</div>"'card-body
@@ -604,7 +604,7 @@ Response.Write "<div class=""card-body row"">"
 			&" iu.id as ihaleUrunID, iu.ad as urunAd, iu.kalemNot, iu.kalemNotTeklifEkle, s.stokAd as stoklarAD, i.id as ihaleID, i.ihaleTipi, i.firmaID,"_
 			&" r.cariUrunRef, r.cariUrunAd, t5.id as sipTempID, t6.id as sipKalemID"_
 			&" FROM dosya.ihale_urun iu"_
-			&" INNER JOIN dosya.ihale i ON iu.ihaleID = i.id"_
+			&" INNER JOIN teklifv2.ihale i ON iu.ihaleID = i.id"_
 			&" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"_
 			&" LEFT JOIN stok.stokRef r ON iu.stoklarID = r.stokID AND r.cariID = " & cariID & ""_
 			&" LEFT JOIN teklif.siparisKalemTemp t5 ON t5.iuID = iu.ID"_
@@ -867,7 +867,7 @@ Response.Write "<div class=""card-body row"">"
 						Response.Write "<input type=""hidden"" name=""alan"" value=""teklifNot"" />"
 						Response.Write "<input type=""hidden"" name=""ihaleID"" value=""" & id & """ />"
 						Response.Write "<input type=""hidden"" name=""ihaleID64"" value=""" & id64 & """ />"
-						Response.Write "<input type=""hidden"" name=""tablo"" value=""dosya.ihale"" />"
+						Response.Write "<input type=""hidden"" name=""tablo"" value=""teklifv2.ihale"" />"
 						
 						Response.Write "<div class=""container-fluid row text-left"">"
 							Response.Write "<div class=""col-lg-12"">"
@@ -928,7 +928,7 @@ Response.Write "<div class=""card text-center"">"
 			Response.Write "<div class=""active tab-pane"" id=""antet"" role=""tabpanel"">"
 				Response.Write "<div class=""row"">"
 					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifAntet','dosya.ihale',"&id&"," & teklifAntetDurum & ");"" class="" chck30 form-control"" " & chckDurum2 & ">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifAntet','teklifv2.ihale',"&id&"," & teklifAntetDurum & ");"" class="" chck30 form-control"" " & chckDurum2 & ">"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-2 text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte Antet olsun</div>"
@@ -937,7 +937,7 @@ Response.Write "<div class=""card text-center"">"
 
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifKase','dosya.ihale',"&id&"," & teklifKaseDurum & ")"" class=""chck30 form-control"" " & chckDurum & ">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifKase','teklifv2.ihale',"&id&"," & teklifKaseDurum & ")"" class=""chck30 form-control"" " & chckDurum & ">"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-2 text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte Kaşe olsun</div>"
@@ -946,7 +946,7 @@ Response.Write "<div class=""card text-center"">"
 
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('altTopGoster','dosya.ihale',"&id&"," & altTopGosterDurum & ")"" class=""chck30 form-control"" " & chckDurum5 & ">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('altTopGoster','teklifv2.ihale',"&id&"," & altTopGosterDurum & ")"" class=""chck30 form-control"" " & chckDurum5 & ">"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-2 text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte Alt Toplam olsun</div>"
@@ -955,7 +955,7 @@ Response.Write "<div class=""card text-center"">"
 
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifKdv','dosya.ihale',"&id&"," & teklifKdvDurum & ")"" class=""chck30 form-control"" " & chckDurum4 & ">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifKdv','teklifv2.ihale',"&id&"," & teklifKdvDurum & ")"" class=""chck30 form-control"" " & chckDurum4 & ">"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-2 text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte KDV olsun</div>"
@@ -964,7 +964,7 @@ Response.Write "<div class=""card text-center"">"
 
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-1 text-left"">"
-						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifMusteriOnay','dosya.ihale',"&id&"," & teklifMusteriDurum & ")"" class=""chck30 form-control"" " & chckDurum9 & ">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('teklifMusteriOnay','teklifv2.ihale',"&id&"," & teklifMusteriDurum & ")"" class=""chck30 form-control"" " & chckDurum9 & ">"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-2 text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte müşteri onayı talep tablosu olsun</div>"
@@ -1132,7 +1132,7 @@ Response.Write "<div class=""card text-center"">"
 
 							Response.Write "<div class=""row mt-2"">"
 								Response.Write "<div class=""col-1 text-left"">"
-									Response.Write "<input type=""checkbox"" " & bankaChck & " oninput=""cokluIDkaydet('bankalar','dosya.ihale',"&id&"," & rs("bankalarID") & ")"" class=""chck30 form-control"">"
+									Response.Write "<input type=""checkbox"" " & bankaChck & " oninput=""cokluIDkaydet('bankalar','teklifv2.ihale',"&id&"," & rs("bankalarID") & ")"" class=""chck30 form-control"">"
 								Response.Write "</div>"
 								Response.Write "<div class=""col-2 text-left"">"
 									Response.Write "<div class=""badge badge-warning rounded-left mt-2"">" & rs("hesapAd") & "</div>"
@@ -1153,7 +1153,7 @@ Response.Write "<div class=""card text-center"">"
 				if ihaleTipi = "proforma" then
 					Response.Write "<div class=""row"">"
 						Response.Write "<div class=""col-1 text-left"">"
-							Response.Write "<input type=""checkbox"" oninput=""ajSave('catKodGoster','dosya.ihale',"&id&"," & catKodDurum & ");"" class="" chck30 form-control"" " & chckDurum7 & ">"
+							Response.Write "<input type=""checkbox"" oninput=""ajSave('catKodGoster','teklifv2.ihale',"&id&"," & catKodDurum & ");"" class="" chck30 form-control"" " & chckDurum7 & ">"
 						Response.Write "</div>"
 						Response.Write "<div class=""col-2 text-left"">"
 							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte katalog kodu sütunu göster.</div>"
@@ -1161,7 +1161,7 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "</div>"
 					Response.Write "<div class=""row"">"
 						Response.Write "<div class=""col-1 text-left"">"
-							Response.Write "<input type=""checkbox"" oninput=""ajSave('mustKodGoster','dosya.ihale',"&id&"," & mustKodDurum & ");"" class="" chck30 form-control"" " & chckDurum8 & ">"
+							Response.Write "<input type=""checkbox"" oninput=""ajSave('mustKodGoster','teklifv2.ihale',"&id&"," & mustKodDurum & ");"" class="" chck30 form-control"" " & chckDurum8 & ">"
 						Response.Write "</div>"
 						Response.Write "<div class=""col-2 text-left"">"
 							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte ""CUST. Code"" sütunu göster.</div>"
@@ -1170,7 +1170,7 @@ Response.Write "<div class=""card text-center"">"
 				else
 					Response.Write "<div class=""row mt-2"">"
 						Response.Write "<div class=""col-1 text-left"">"
-							Response.Write "<input type=""checkbox"" oninput=""ajSave('satirKdv','dosya.ihale',"&id&"," & satirKdvDurum & ")"" class=""chck30 form-control"" " & chckDurum6 & ">"
+							Response.Write "<input type=""checkbox"" oninput=""ajSave('satirKdv','teklifv2.ihale',"&id&"," & satirKdvDurum & ")"" class=""chck30 form-control"" " & chckDurum6 & ">"
 						Response.Write "</div>"
 						Response.Write "<div class=""col-2 text-left"">"
 							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ürün satırında KDV oranı kolonunu göster.</div>"
@@ -1191,7 +1191,7 @@ Response.Write "<div class=""card text-center"">"
 							Response.Write "<span class=""input-group-text pointer p-0""><i class=""icon email-go""></i></span>"
 						Response.Write "</div>"
 						if isnull(teklifEposta) OR teklifEposta = "" then teklifEposta = cariEmail
-							Response.Write "<input id=""epostaAdres"" onchange=""ajSave('teklifEposta','dosya.ihale',"&id&",$(this).val())"" class=""form-control col-12"" value="""&teklifEposta&""" autocomplete=""off""  placeholder=""e-posta adresi"" data-toggle=""tooltip"" title=""Teklif için kayıt edilmiş e-posta adresi yok ise cari kartta kayıtlı olan e-posta adresi otomatik olarak getirilir."">"
+							Response.Write "<input id=""epostaAdres"" onchange=""ajSave('teklifEposta','teklifv2.ihale',"&id&",$(this).val())"" class=""form-control col-12"" value="""&teklifEposta&""" autocomplete=""off""  placeholder=""e-posta adresi"" data-toggle=""tooltip"" title=""Teklif için kayıt edilmiş e-posta adresi yok ise cari kartta kayıtlı olan e-posta adresi otomatik olarak getirilir."">"
 					Response.Write "</div>"
 				Response.Write "</div>"
 
@@ -1199,7 +1199,7 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left"">e-posta içeriği</div>"
 				Response.Write "</div>"
 				Response.Write "<div class=""row"">"
-					Response.Write "<div id=""cariBilgi"" style=""height:120px; padding:10px;"" class=""col-8 border border-dark text-left"" contenteditable=""true"" onblur=""ajSaveBlur('epostaGovde', "&id&", 'dosya.ihale', 'epostaGovde', '', $(this).html(),'','','')"" >" & epostaGovde & "</div>"
+					Response.Write "<div id=""cariBilgi"" style=""height:120px; padding:10px;"" class=""col-8 border border-dark text-left"" contenteditable=""true"" onblur=""ajSaveBlur('epostaGovde', "&id&", 'teklifv2.ihale', 'epostaGovde', '', $(this).html(),'','','')"" >" & epostaGovde & "</div>"
 				Response.Write "</div>"
 
 			Response.Write "</div>"
@@ -1212,7 +1212,7 @@ Response.Write "<div class=""card text-center"">"
 				Response.Write "<div class=""row"">"
 					Response.Write "<div class=""col text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-4"">Teklif Şablonu</div>"
-						call formselectv2("teklifSablon",teklifSablon,"ajSave('pdfSablon','dosya.ihale',"&id&",$(this).find('option:selected').text())","","teklifSablon border border-info","","",teklifSablonDegerler,"")		
+						call formselectv2("teklifSablon",teklifSablon,"ajSave('pdfSablon','teklifv2.ihale',"&id&",$(this).find('option:selected').text())","","teklifSablon border border-info","","",teklifSablonDegerler,"")		
 						Response.Write "<div id=""seciliSablonDIV"" class=""bold mt-2"">Seçili Şablon: <span class=""bold text-danger"">" & teklifSablon & "</span></div>"
 				Response.Write "</div>"
 			Response.Write "</div>"

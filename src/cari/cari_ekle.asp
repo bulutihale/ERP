@@ -2,72 +2,54 @@
 
 
 '###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
     call sessiontest()
-    kid		=	kidbul()
+    kid			=	kidbul()
+    kid64		=	ID
+    hata    	=   ""
+    modulAd 	=   "Cari"
+    Response.Flush()
+	yetkiKontrol = yetkibul("Cari")
+'###### ANA TANIMLAMALAR
+
+
+
+'###### ANA TANIMLAMALAR
     cariKodu 		=   Request.Form("cariKodu")
     cariAd	 		=   Request.Form("cariAd")
     unvan	 		=   Request.Form("unvan")
     vergiDairesi	=   Request.Form("vergiDairesi")
     vergiNo	 		=   Request.Form("vergiNo")
-    sehir	 		=   Request.Form("sehir")
-    sehir2	 		=   Request.Form("sehir2")
+    il	 		    =   Request.Form("il")
+    ' sehir2	 		=   Request.Form("sehir2")
     telefon	 		=   Request.Form("telefon")
     postakodu	 	=   Request.Form("postakodu")
     email	 		=   Request.Form("email")
     adres	 		=   Request.Form("adres")
     gorevID			=   Request.Form("gorevID")
     cariTur         =   Request.Form("cariTur")
-	modulAd 		=   "cari"
-'###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
 
-Response.Flush()
 
-yetkiKontrol	= yetkibul(modulAd)
-yetkiTeklif	    = yetkibul("Teklif")
-yetkiSatis  	= yetkibul("Satış")
-
-
-if yetkiKontrol > 0 OR (yetkiTeklif >= 3 or yetkiSatis > 1) then
+if yetkiKontrol > 3 then
     if gorevID = "" then
-        call logla("Cari Ekleme : " & cariAd)
+        call logla(translate("Cari Ekleme","","") & cariAd)
     else
-        call logla("Cari Güncelleme : " & cariAd)
+        call logla(translate("Cari Güncelleme","","") & cariAd)
     end if
 else
-    call yetkisizGiris("Bu Alanı Görme Yetkiniz Yok","","")
+    hata = translate("Bu işlemi yapmak için yeterli yetkiniz bulunmamaktadır","","")
+    call yetkisizGiris(hata,"","")
 end if
 
 
-if cariAd = "" then
-	hatamesaj = "Cari Adını Yazın"
-	call logla(hatamesaj)
-	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
-	Response.End()
-end if
 
-
-if vergiDairesi = "" then
-	hatamesaj = "Vergi Dairesini Yazın"
-	call logla(hatamesaj)
-	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
-	Response.End()
-end if
-
-
-if vergiNo = "" then
-	hatamesaj = "Vergi Numarasını Yazın"
-	call logla(hatamesaj)
-	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
-	Response.End()
-end if
+call rqKontrol(cariAd,translate("Lütfen cari adını yazın","",""),"")
 
 
 if gorevID <> "" then
     if isnumeric(gorevID) = False then
-        hatamesaj = "Hatalı Kayıt. Lütfen yeniden deneyin."
+        hatamesaj = translate("Hatalı Kayıt. Lütfen yeniden deneyin.","","")
         call logla(hatamesaj)
         call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
         Response.End()
@@ -75,16 +57,17 @@ if gorevID <> "" then
 end if
 
 
+
 if gorevID <> "" then
-    hatamesaj = "Kayıt Güncellendi : " & cariAd
+    hatamesaj = translate("Kayıt Güncellendi","","") & " : " & cariAd
     sorgu = "Select top 1 * from cari.cari where cariID = " & gorevID
     rs.open sorgu, sbsv5, 1, 3
-elseif cariKodu <> "" then
-    hatamesaj = "Kayıt Güncellendi : " & cariAd
-    sorgu = "Select top 1 * from cari.cari where cariKodu = '" & cariKodu & "' and firmaID = " & firmaID
-    rs.open sorgu, sbsv5, 1, 3
+' elseif cariKodu <> "" then
+'     hatamesaj = translate("Kayıt Güncellendi","","") & " : " & cariAd
+'     sorgu = "Select top 1 * from cari.cari where cariKodu = '" & cariKodu & "' and firmaID = " & firmaID
+'     rs.open sorgu, sbsv5, 1, 3
 else
-    hatamesaj = "Kayıt Yapıldı : " & cariAd
+    hatamesaj = translate("Kayıt Yapıldı","","") & " : " & cariAd
     sorgu = "Select top 1 * from cari.cari"
     rs.open sorgu, sbsv5, 1, 3
     rs.addnew
@@ -98,11 +81,11 @@ end if
 	rs("vergiDairesi")      =   vergiDairesi
 	rs("vergiNo")           =   vergiNo
 	rs("il")                =   il
-    if sehir <> "" then
-	    rs("sehir")         =   sehir
-    end if
+    ' if sehir <> "" then
+	'     rs("sehir")         =   sehir
+    ' end if
 	rs("cariTur")           =   cariTur
-	rs("manuelKayit")       =   manuelKayit
+	' rs("manuelKayit")       =   manuelKayit
 	rs("telefon")           =   telefon
 	rs("fax")               =   fax
     rs("iskonto")           =   iskonto
@@ -117,17 +100,16 @@ rs.close
 
 
     call logla(hatamesaj)
-    call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
+    ' call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
 
 
 
 
+call toastrCagir(hatamesaj, "OK", "right", "success", "otomatik", "")
 
 
-' call toastrCagir("Kayıt Tamamlandı", "OK", "right", "success", "otomatik", "")
-
-' call jsac("/cari/cari_liste.asp")
-' modalkapat()
+call jsac("/cari/cari_liste.asp")
+modalkapat()
 
 
 

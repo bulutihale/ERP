@@ -36,6 +36,7 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/satis/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
 		Response.Write "<div class=""table-responsive mt-3"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
+		Response.Write "<th class=""col-4"" scope=""col"">Müşteri</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Tarih</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Teslim Tarih</th>"
 		Response.Write "<th class=""col-1"" scope=""col"">Kod</th>"
@@ -44,7 +45,6 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "<th class=""col-1"" scope=""col"">Miktar</th>"
 		Response.Write "<th class=""col-1"" scope=""col""><span>Giden</span> / <span class=""text-danger"">İptal</span></th>"
 		Response.Write "<th class=""col-1"" scope=""col""></th>"
-		Response.Write "<th class=""col-4"" scope=""col"">Müşteri</th>"
 		Response.Write "</tr></thead><tbody>"
 		
 		
@@ -117,6 +117,7 @@ Response.Write "<div class=""card-body"">"
 					end if
 					
 					Response.Write "<tr class=""" & satirClass & """>"
+						Response.Write "<td>" & cariAd & "</td>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write siparisTarih
 							Response.Write "<hr class=""p-0 m-0"">"
@@ -150,7 +151,6 @@ Response.Write "<div class=""card-body"">"
 								Response.Write "<div class=""btn btn-sm btn-success border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&sorgulananTarih=" & planTarih & "')"">" & planTarih & "</div>"
 							End if
 						Response.Write "</td>"
-						Response.Write "<td>" & cariAd & "</td>"
 					Response.Write "</tr>"
 					Response.Flush()
 				rs.movenext

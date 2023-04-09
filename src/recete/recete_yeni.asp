@@ -131,7 +131,7 @@ call logla(divAd & " Ekranı Girişi")
 		Response.Write "<div class=""form-row align-items-center"">"
 			Response.Write "<div class=""col-sm-3 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Ürün Tipi</span>"
-				call formselectv2("receteTipi",int(receteTipi),"","","receteTipi","","receteTipi",stokTipDegerler,"")
+				call formselectv2("receteTipi",int(receteTipi),"","","receteTipi","","receteTipi",stokTurDegerler,"")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-sm-3 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left"">Kullanım Dışı</span>"

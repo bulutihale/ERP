@@ -82,13 +82,17 @@ yetki = yetkibul("manager")
 			Response.Write "<td>" & rs("ip")
 			Response.Write "</td>"
 			if rs("geoIPdistrict") = "" or isnull(rs("geoIPdistrict")) = true then
-				geoIPdistrict = geoIP("sehir",rs("ip"))
-				sorgu = "update personel.personel_log set geoIPdistrict = '" & geoIPdistrict & "' where ip = '" & rs("ip") & "'"
-				rs2.open sorgu,sbsv5,3,3
-				Response.Write "<td>" & geoIPdistrict & "</td>"
-				gi = gi + 1
-				if gi = 20 then
-					exit for
+				if geoIPCozumle = "on" then
+					geoIPdistrict = geoIP("sehir",rs("ip"))
+					sorgu = "update personel.personel_log set geoIPdistrict = '" & geoIPdistrict & "' where ip = '" & rs("ip") & "'"
+					rs2.open sorgu,sbsv5,3,3
+					gi = gi + 1
+					if gi = 20 then
+						exit for
+					end if
+					Response.Write "<td>" & geoIPdistrict & "</td>"
+				else
+					Response.Write "<td>" & rs("geoIPdistrict") & "</td>"
 				end if
 			else
 				Response.Write "<td>" & rs("geoIPdistrict") & "</td>"

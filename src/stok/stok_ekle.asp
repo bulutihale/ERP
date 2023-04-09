@@ -9,7 +9,7 @@
     stokAd	 		=   Request.Form("stokAd")
 	stokTuru		=   Request.Form("stokTuru")
     minStok         =   Request.Form("minStok")
-    gorevID			=   Request.Form("gorevID")
+    gorevID			=   Request.Form("stokID")
 	silindi			=   Request.Form("silindi")
 	kkDepoGiris		=	Request.Form("kkDepoGiris")
     rafOmru         =	Request.Form("rafOmru")
@@ -24,13 +24,12 @@
     fiyat3          =   Request.Form("fiyat3")
     fiyat4          =   Request.Form("fiyat4")
     paraBirimID     =   Request.Form("paraBirimID")
+    stokBarcode     =   Request.Form("stokBarcode")
 	modulAd 		=   "Stok"
-    kayitDurum      =   false
     call logla("Stok Güncelleme: " & stokKodu & "")
     Response.Flush()
     yetkiKontrol = yetkibul("Stok")
 '###### ANA TANIMLAMALAR
-
 
 
 '###### veri kontrol
@@ -49,6 +48,9 @@
     if fiyat4 = "" then
         fiyat4 = 0
     end if
+    if gorevID = "" then
+        manuelKayit = 1
+    end if
 '###### veri kontrol
 
 
@@ -63,18 +65,37 @@
 '##### VERİ KONTROL
 
 
-
-
 '##### STOK MUHASEBE PROGRAMI İLE SENKRON MU?
-    sorgu = "Select top 1 manuelKayit from stok.stok where stokKodu = '" & stokKodu & "' and firmaID = " & stokfirmaID
-    rs.open sorgu, sbsv5, 1, 3
-        if rs.recordcount > 0 then
-            manuelKayit = rs("manuelKayit")
-            kayitDurum = true
-        else
-            manuelKayit = 1
-        end if
-    rs.close
+    if sb_stokKoduZorunlu = true then
+        sorgu = "Select top 1 manuelKayit from stok.stok where stokKodu = '" & stokKodu & "' and firmaID = " & stokfirmaID
+        rs.open sorgu, sbsv5, 1, 3
+            if rs.recordcount > 0 then
+                manuelKayit = rs("manuelKayit")
+            else
+                manuelKayit = 1
+            end if
+        rs.close
+    end if
+    if gorevID <> "" then
+        sorgu = "Select top 1 manuelKayit from stok.stok where stokID = " & gorevID
+        rs.open sorgu, sbsv5, 1, 3
+            if rs.recordcount > 0 then
+                manuelKayit = rs("manuelKayit")
+            end if
+        rs.close
+    end if
+    if stokKodu <> "" then
+        sorgu = "Select top 1 manuelKayit from stok.stok where stokKodu = '" & stokKodu & "'" & vbcrlf
+        sorgu = sorgu & "and stok.stok.firmaID in (select Id from portal.firma where portal.firma.anaFirmaID = " & firmaID & " OR portal.firma.Id = " & firmaID & ")" & vbcrlf
+        rs.open sorgu, sbsv5, 1, 3
+            if rs.recordcount > 0 then
+                hata = translate("Yazmış olduğunuz stok koduna ait başka bir ürün bulunuyor. Lütfen girdiğiniz bilgileri kontrol edin.","","")
+                call logla(hata)
+                call bootmodal(hata,"custom","","","","Tamam","","btn-danger","","","","","")
+                Response.End()
+            end if
+        rs.close
+    end if
 '##### STOK MUHASEBE PROGRAMI İLE SENKRON MU?
 
 
@@ -95,13 +116,6 @@ if manuelKayit = 0 then
     Response.End()
 end if
 
-
-if gorevID <> "" and kayitDurum = true then
-    hata = translate("Yazmış olduğunuz stok koduna ait başka bir ürün bulunuyor. Lütfen girdiğiniz bilgileri kontrol edin.","","")
-    call logla(hata)
-    call bootmodal(hata,"custom","","","","Tamam","","btn-danger","","","","","")
-    Response.End()
-end if
 
 
 if yetkiKontrol <= 2 then
@@ -143,6 +157,7 @@ end if
     rs("stokAd")			=	stokAd
     rs("stokAdEn")          =   stokAdEn
     rs("stokTuru")			=	stokTuru
+    rs("stokBarcode")       =   stokBarcode
     rs("silindi")			=	silindi
     rs("kdv")               =   kdv
     rs("fiyat1")            =   fiyat1

@@ -46,4 +46,12 @@ silindiArr		=	Array("",translate("Silindi","",""))
 		teklifTurleriArr = Array("--" & translate("Teklif Türü","","") & "--",translate("Kdv Dahil Toplamlı Teklif","",""),translate("Kdv Hariç Toplamlı Teklif","",""),"",translate("Genel Teklif","",""),translate("Mail Order","",""),translate("Taksitli Mail Order","",""),translate("İhracat Teklif","",""),translate("Proforma Fatura","",""))
 		teklifYaziYeriArr = "--" & translate("Neresi","","") & "--=|" & translate("Teklif Üstü","","") & "=Teklif Üstü|" & translate("Teklif Altı","","") & "=Teklif Altı|" & translate("Ürün Altı","","") & "=Ürün Altı"
 	'##### TEKLİF MODULÜ
+
+
+	'##### CARİ MODULÜ
+		sb_cariTurArr	=	translate("Son Kullanıcı","","") & "=3|" & translate("Bayi","","") & "=2|" & translate("Tedarikçi","","") & "=8"
+	'##### CARİ MODULÜ
+
+
+
 %>

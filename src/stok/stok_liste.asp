@@ -8,7 +8,7 @@
     kid64		=	ID
     opener  	=   Request.Form("opener")
     rqstokSifirGoster			=   Request.Form("stokSifirGoster")
-    rqstokSilinmislerGoster	=   Request.Form("stokSilinmislerGoster")
+    rqstokSilinmislerGoster		=   Request.Form("stokSilinmislerGoster")
 	aramaad		=	Request.Form("aramaad")
     hata    	=   ""
     modulAd 	=   "Stok"
@@ -25,7 +25,7 @@
 	end if
 	if rqstokSilinmislerGoster <> "" then
 		stokSilinmislerGoster = rqstokSilinmislerGoster
-		call personelAyarGuncelle("stokSifirGoster",rqstokSilinmislerGoster,kid)
+		call personelAyarGuncelle("stokSilinmislerGoster",rqstokSilinmislerGoster,kid)
 	end if
 	if stokSifirGoster = "" then
 		stokSifirGoster = "on"
@@ -56,9 +56,9 @@
 							if yetkiKontrol >= 5 then
 								Response.Write "<div class=""col-lg-9 col-sm-3 my-1 text-right"">"
 									if stokSifirGoster = "on" then
-										Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSifirGoster').val('off');$('#listebuttonform').submit();"">" & translate("Stok Sıfır Olanları Göster","","") & "</button>"
+										Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSifirGoster').val('off');$('#listebuttonform').submit();"">" & translate("Stok Sıfır Olanları Gizle","","") & "</button>"
 									else
-										Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSifirGoster').val('on');$('#listebuttonform').submit();"">" & translate("Stok Sıfır Olanları Gizle","","") & "</button>"
+										Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSifirGoster').val('on');$('#listebuttonform').submit();"">" & translate("Stok Sıfır Olanları Göster","","") & "</button>"
 									end if
 									if stokSilinmislerGoster = "on" then
 										Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSilinmislerGoster').val('off');$('#listebuttonform').submit();"">" & translate("Silinmişleri Gizle","","") & "</button>"
@@ -66,7 +66,7 @@
 										Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSilinmislerGoster').val('on');$('#listebuttonform').submit();"">" & translate("Silinmişleri Göster","","") & "</button>"
 									end if
 									Response.Write "<button type=""button"" class=""btn btn-warning mr-2"" onClick=""modalajax('/stok/import.asp')"">" & translate("Veri Aktarımı","","") & "</button>"
-									Response.Write "<button type=""button"" class=""btn btn-warning mr-2"" onClick=""netsisSenk('" & firmaStokDB & "')"">" & translate("Muhasebe Yazılımı ile Senkronize Et","","") & "</button>"
+									' Response.Write "<button type=""button"" class=""btn btn-warning mr-2"" onClick=""netsisSenk('" & firmaStokDB & "')"">" & translate("Muhasebe Yazılımı ile Senkronize Et","","") & "</button>"
 									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/stok/stok_yeni.asp')"">" & translate("Yeni Ürün Ekle","","") & "</button>"
 								Response.Write "</div>"
 							end if
@@ -103,11 +103,10 @@
 					sorgu = sorgu & "LEFT JOIN portal.birimler ON stok.stok.anaBirimID = portal.birimler.birimID" & vbcrlf
 					sorgu = sorgu & "WHERE" & vbcrlf
 					sorgu = sorgu & "stok.stok.firmaID in (select Id from portal.firma where portal.firma.anaFirmaID = " & firmaID & " OR portal.firma.Id = " & firmaID & ")" & vbcrlf
-					' sorgu = sorgu & "AND stok.stok.silindi = 0" & vbcrlf
 					if aramaad <> "" then
 						sorgu = sorgu & " and (stok.stok.stokAd like N'%" & aramaad & "%' OR stok.stok.stokBarcode like N'%" & aramaad & "%' OR stok.stok.stokKodu like N'%" & aramaad & "%')"
 					end if
-					if stokSifirGoster = "on" then
+					if stokSifirGoster = "off" then
 						sorgu = sorgu & " AND stok.FN_stokSay(" & firmaID & ", stok.stok.stokID) > 0" & vbcrlf
 					end if
 					if stokSilinmislerGoster = "on" then
@@ -127,14 +126,6 @@
 							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Stok Türü","","") & "</th>"
 							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Durum","","")
 							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Entegrasyon","","")
-								' Response.Write "<div class=""row"">"
-								' 	Response.Write "<div class=""col"">"  & "</div>"
-									' Response.Write "<div id=""divDurum"" class=""col p-0 m-0"">"
-									' 	Response.Write "<i class=""mdi mdi-arrow-expand text-danger pointer"" title=""" & translate("Pasif ürünleri göster / gizle","","") & """"
-									' 		Response.Write " onclick=""working('divDurum',20,20);$('#ortaalan').load('/stok/stok_liste.asp?durum=" & q & "');"">"
-									' 	Response.Write "</i>"
-									' Response.Write "</div>"
-								' Response.Write "</div>"
 							Response.Write "</th>"
 							if yetkiKontrol >= 5 then
 								Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
@@ -209,6 +200,10 @@
 		call yetkisizGiris(hata,"","")
 	end if
 '####### SONUÇ TABLOSU
+
+
+
+
 
             ' sorgu = "SELECT"
 			' sorgu = sorgu & " t1.stokID, stok.FN_stokSay(" & firmaID & ", t1.stokID) as stokMiktar, t1.stokKodu, t1.stokAd, t1.stokBarcode," 

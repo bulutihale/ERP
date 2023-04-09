@@ -188,7 +188,7 @@ if t2 <> "" then
 	sorgufiltre = sorgufiltre & " AND CONVERT(varchar,i.tarih_ihale,104) <= '" & t2 & "'"
 end if
 
-sorgu = "Select count(i.id) from dosya.ihale i LEFT JOIN cari.cari c ON i.cariID = c.cariID"_
+sorgu = "Select count(i.id) from teklifv2.ihale i LEFT JOIN cari.cari c ON i.cariID = c.cariID"_
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
 &" LEFT JOIN portal.iller ON c.il = iller.ilID"_
 &" LEFT JOIN portal.firma f ON i.firmaID = f.Id"_
@@ -207,14 +207,14 @@ else
 end if
 
 sorgu = "SELECT i.dosyaNo, i.ihaleNo, i.dosyaKayitTip, i.yeniCariVergiNo,"
-sorgu = sorgu & " (select count(id) from dosya.gorusmeler g WHERE i.id = g.ihaleID) as gorusmeSayi,"
-sorgu = sorgu & " (select count(id) from dosya.gorusmeler g WHERE i.id = g.ihaleID AND g.sonrakiAramaTarihi is not null AND g.sonrakiAramaID is null) as gorusulecekSayi,"
+sorgu = sorgu & " (select count(id) from teklifv2.gorusmeler g WHERE i.id = g.ihaleID) as gorusmeSayi,"
+sorgu = sorgu & " (select count(id) from teklifv2.gorusmeler g WHERE i.id = g.ihaleID AND g.sonrakiAramaTarihi is not null AND g.sonrakiAramaID is null) as gorusulecekSayi,"
 sorgu = sorgu & " f.teklifDosya, i.tarih_ihale, i.ilanTarih, i.bayiKurumID, i.durum, i.girilecek, i.ikn, i.id as ihaleID, i.teslimatBitti, k.ad as sorumlu,"
 sorgu = sorgu & " CASE WHEN i.ihaleTipi = 'bayi' THEN 'firma' ELSE i.ihaleTipi END as ihaleTipi, c.cariAd AS cariAD, i.yeniCariAd,"
 sorgu = sorgu & " IIF(i.girilecek='False','',IIF(i.mukayeseDurum='0','Bekleniyor',i.mukayeseDurum)) as MukD, i.dosyaIcerik,"
 sorgu = sorgu & " c.il AS sehir, i.ad AS dosyaAD, f.Ad AS firmaAD, isnull(i.netsisDOVIZTIP,'TL') AS dosyaPB,"
 sorgu = sorgu & " CASE WHEN i.ihaleTipi = 'bayi' THEN f.teklifDosya WHEN i.ihaleTipi = 'proforma' THEN f.proformaDosya END as teklifSablon"
-sorgu = sorgu & " FROM dosya.ihale i"
+sorgu = sorgu & " FROM teklifv2.ihale i"
 sorgu = sorgu & " LEFT JOIN cari.cari c ON i.cariID = c.cariID"
 sorgu = sorgu & " LEFT JOIN personel.personel k ON i.dosyaSorumlu = k.id"
 sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
@@ -272,7 +272,7 @@ if rs.recordcount > 0 then
 				'Response.Write "<td class=""align-middle text-left fontkucuk2"" style=""width:8%"">"
 				'Response.Write "<b>Mukayese:</b> " & rs("MukD")
 			'Response.Write "</td>"
-			'classYaz = classbelirle2("align-middle text-center fontkucuk2 m-0 p-0", ihaleID, "dosya.ihale", "durumSorgu", "","")
+			'classYaz = classbelirle2("align-middle text-center fontkucuk2 m-0 p-0", ihaleID, "teklifv2.ihale", "durumSorgu", "","")
 			' Response.Write "<td class="""&classYaz&""" style=""width:6%"">"
 			
 			' 		Response.Write "<div id=""divGorusme_"&ihaleID64&""" class=""bg-secondary text-left fontkucuk2 col m-0 p-0 align-self-end bd-highlight"">"
