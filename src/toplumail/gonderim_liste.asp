@@ -56,7 +56,7 @@ call logla("Toplu mail gönderim listesi ekranı")
 				Response.Write "<div class=""card"">"
 				Response.Write "<div class=""card-body"">"
 				Response.Write "<div class=""row"">"
-		sorgu = "Select top 10" & vbcrlf
+		sorgu = "Select top 100" & vbcrlf
 		sorgu = sorgu & "durum" & vbcrlf
 		sorgu = sorgu & ",gonderimID" & vbcrlf
 		sorgu = sorgu & ",toplumail.gonderim.tarih" & vbcrlf
@@ -79,6 +79,7 @@ call logla("Toplu mail gönderim listesi ekranı")
         else
             sorgu = sorgu & " and (toplumail.sablon.sablonBaslik like N'%" & aramaad & "%' or toplumail.adres.adres like N'%" & aramaad & "%')" & vbcrlf
         end if
+        ' sorgu = sorgu & "order by newid()"
         sorgu = sorgu & "order by toplumail.gonderim.tarih desc"
 					rs.Open sorgu, sbsv5, 1, 3
 						if rs.recordcount > 0 then

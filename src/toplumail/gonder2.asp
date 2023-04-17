@@ -53,6 +53,35 @@ call logla("Gönderim yapılacak mailler hazırlanıyor")
 '###### İŞLEM
 
 
+'### PERSONEL MAİL BİLGİSİNİ AL
+    if hata = "" then
+        sorgu = "Select top 1 email from personel.personel where id = " & kid
+        rs.open sorgu, sbsv5, 1, 3
+        if rs.recordcount > 0 then
+            personelMail    =  rs("email")
+        else
+            hata = 1
+        end if
+        rs.close
+    end if
+    if personelMail <> "" then
+        sorgu = "Select top 1 adresID from toplumail.adres where adres = '" & personelMail & "'"
+        rs.open sorgu, sbsv5, 1, 3
+        if rs.recordcount > 0 then
+            adresID    =  rs("adresID")
+        else
+            hata = 1
+        end if
+        rs.close
+    end if
+    if adresID <> "" then
+        sorgu = "INSERT into toplumail.gonderim" & vbcrlf
+        sorgu = sorgu & "select top 1 getdate() as tarih," & kid & " as kid," & firmaID & " as firmaID,'Beklemede' as durum," & sablonID & " as sablonID,adresID," & mailAccountID & " as mailAccountID from toplumail.adres" & vbcrlf
+        sorgu = sorgu & "where adresID = " & adresID & vbcrlf
+        rs.open sorgu,sbsv5,3,3
+    end if
+'### PERSONEL MAİL BİLGİSİNİ AL
+
 
 
 

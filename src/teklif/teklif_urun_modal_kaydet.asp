@@ -10,6 +10,7 @@
     modulID =   "109"
     teklifStokID        =   Request.Form("teklifStokID")
     teklifID            =   Request.Form("teklifID")
+    teklifKalemID       =   Request.Form("teklifKalemID")
     teklifParaBirimi    =   Request.Form("teklifParaBirimi")
     stokParaBirim       =   Request.Form("stokParaBirim")
     stokAd              =   Request.Form("stokAd")
@@ -66,9 +67,14 @@
 
 
 '### KAYDET
+    if teklifKalemID = "" then
       sorgu = "Select top 1 * from teklif.teklif_urun"
       rs.open sorgu,sbsv5,1,3
         rs.addnew
+    else
+      sorgu = "Select top 1 * from teklif.teklif_urun where teklifKalemID = " & teklifKalemID
+      rs.open sorgu,sbsv5,1,3
+    end if
             rs("kid")                 =   kid
             rs("firmaID")             =   firmaID
             rs("teklifID")            =   teklifID

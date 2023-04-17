@@ -3519,6 +3519,63 @@ function formselectv2(byVal formad,byVal formdeger, byVal formonclick, byVal for
 	Response.Write "</div>"
 end function
 
+
+function formcheckbox(byVal formad,byVal formdeger, byVal formonclick, byVal formtitle, byVal formcss, byVal ozel, byVal nesneID, byVal degerler, byVal ek3)
+    'gelen data türünü anla
+        datatype = ""
+        if datatype = "" and typename(formdeger) = "Boolean" then
+            datatype = "boolean"
+        elseif datatype = "" and isnumeric(formdeger) = True then
+            formdeger = int(formdeger)
+            datatype = "int"
+        end if
+    'gelen data türünü anla
+    ' call clearfix()
+	Response.Write "<div>"
+    Response.Write "<input type=""checkbox"" class="""
+	Response.Write formcss
+	Response.Write """ name="""
+	Response.Write formad
+	Response.Write """"
+	if nesneID = "" then
+		Response.Write " id="""
+		Response.Write formad
+		Response.Write """"
+    else
+		Response.Write " id="""
+		Response.Write nesneID
+		Response.Write """"
+	end if
+	if formonclick = "online" then
+	elseif formonclick <> "" then
+		Response.Write " onChange="""
+		Response.Write formonclick
+		Response.Write """"
+	end if
+	if ozel = "readonly" then
+		Response.Write " readonly"
+	end if
+    if datatype = "boolean" then
+        if formdeger = true then
+            Response.Write " checked=""checked"" "
+        end if
+    elseif datatype = "int" then
+        'örnek olunca yazılacak
+    end if
+	Response.Write ">"
+    Response.Write "<label class=""ml-1"" for="""
+    if nesneID = "" then
+        Response.Write formad
+    else
+        Response.Write nesneID
+    end if
+    Response.Write """>"
+    Response.Write formtitle
+    Response.Write "</label>"
+    Response.Write "</div>"
+end function
+
+
 function clearfix()
 	Response.Write "<div class=""clearfix d-none""></div>"
 end function
@@ -4274,6 +4331,8 @@ function mailGonderToplu(byVal gonderimID)
 		sorgu = sorgu & ",toplumail.sablon.sablonBaslik" & vbcrlf
 		sorgu = sorgu & ",toplumail.sablon.sablonIcerik" & vbcrlf
 		sorgu = sorgu & ",toplumail.adres.adres" & vbcrlf
+		sorgu = sorgu & ",toplumail.adres.ekData1" & vbcrlf
+		sorgu = sorgu & ",toplumail.adres.ekData2" & vbcrlf
 		sorgu = sorgu & ",toplumail.mailAccount.gonderenAd" & vbcrlf
 		sorgu = sorgu & ",toplumail.mailAccount.gonderenAdres" & vbcrlf
 		sorgu = sorgu & ",toplumail.mailAccount.gonderenAdresSifre" & vbcrlf
@@ -4290,11 +4349,14 @@ function mailGonderToplu(byVal gonderimID)
 		if gonderimID <> "" then
 			sorgu = sorgu & "and toplumail.gonderim.gonderimID = " & gonderimID & vbcrlf
 		end if
+		sorgu = sorgu & "order by newid()" & vbcrlf
 		fn1.open sorgu, sbsv5, 1, 3
 		if fn1.recordcount > 0 then
 			mg_sablonBaslik = fn1("sablonBaslik")
 			mg_sablonIcerik = fn1("sablonIcerik")
-			mg_adres = fn1("adres")
+			mg_adres = fn1("adres") & ""
+			mg_ekData1 = fn1("ekData1") & ""
+			mg_ekData2 = fn1("ekData2") & ""
 			mg_gonderenAd = fn1("gonderenAd")
 			mg_gonderenAdres = fn1("gonderenAdres")
 			mg_gonderenAdresSifre = fn1("gonderenAdresSifre")
@@ -4304,11 +4366,19 @@ function mailGonderToplu(byVal gonderimID)
 			mg_blacklist = fn1("blacklist")
 			'## içerik düzenleme
 				sablonIcerik	=	mg_sablonIcerik
-				mailadresi		=	mg_adres
-				mailadresi64	=	mailadresi
-				mailadresi64	=	base64_encode_tr(mailadresi64)
-				sablonIcerik    =   Replace(sablonIcerik,"[mailAdresi]",mailadresi)
-				sablonIcerik    =   Replace(sablonIcerik,"[buraya]","<a href=""" & sb_mainUrlOnEk & mainUrl & "/unsubscribe.asp?a=" & mailadresi64 & """>buraya</a>")
+				sablonIcerik    =   Replace(sablonIcerik,"[ekData1]",mg_ekData1)
+				sablonIcerik    =   Replace(sablonIcerik,"{ekData1}",mg_ekData1)
+				sablonIcerik    =   Replace(sablonIcerik,"[ekData2]",mg_ekData2)
+				sablonIcerik    =   Replace(sablonIcerik,"{ekData2}",mg_ekData2)
+				sablonIcerik    =   Replace(sablonIcerik,"[user]",mg_adres)
+				sablonIcerik    =   Replace(sablonIcerik,"{user}",mg_adres)
+				'## mail listesinden çık
+					mailadresi		=	mg_adres
+					mailadresi64	=	mailadresi
+					mailadresi64	=	base64_encode_tr(mailadresi64)
+					sablonIcerik    =   Replace(sablonIcerik,"[mailAdresi]",mailadresi)
+					sablonIcerik    =   Replace(sablonIcerik,"[buraya]","<a href=""" & sb_mainUrlOnEk & mainUrl & "/unsubscribe.asp?a=" & mailadresi64 & """>buraya</a>")
+				'## mail listesinden çık
 				mg_sablonIcerik	=	sablonIcerik
 				sablonIcerik = "<!doctype html>"
 				sablonIcerik = sablonIcerik & "<html xmlns=""http://www.w3.org/1999/xhtml"" xmlns:v=""urn:schemas-microsoft-com:vml"" xmlns:o=""urn:schemas-microsoft-com:office:office"">"
@@ -4323,6 +4393,9 @@ function mailGonderToplu(byVal gonderimID)
 					sablonIcerik = sablonIcerik & "</body>"
 				sablonIcerik = sablonIcerik & "</html>"
 				mg_sablonIcerik	=	sablonIcerik
+			' Response.Write sablonIcerik
+			' Response.End()
+
 			'## içerik düzenleme
 			if mg_blacklist = 0 then
 				if mg_smtpSSL = true then
@@ -4361,11 +4434,13 @@ function mailGonderToplu(byVal gonderimID)
 					fn1("durum") = "Gönderildi"
 					fn1.update
 					call jsconsole("Gönderildi : " & kvkkMaske(mg_adres,"",""))
+					mailGonderimDurum = "1"
 				end if
 			else
 				fn1("durum") = "Blacklist"
 				fn1.update
 				call jsconsole("Blacklist : " & kvkkMaske(mg_adres,"",""))
+				mailGonderimDurum = "1"
 			end if
 		end if
 		fn1.close

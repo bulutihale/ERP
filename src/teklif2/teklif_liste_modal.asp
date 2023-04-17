@@ -20,7 +20,7 @@ if yetkiKontrol  >= 3 then
 Response.Write "<div class=""container-fluid"">"
 Response.Write "<div class=""text-center col-lg-12 mb10"">"
 
-Sorgu = "SELECT tl.tarih, tl.kid, tl.dosyaAd, tl.revNo, tl.cariMailKomut, k.ad FROM dosya.teklif_liste tl INNER JOIN personel.personel k ON tl.kid = k.id WHERE tl.firmaID = " & firmaID & " AND tl.ihaleID = " & id & " ORDER BY tl.id DESC"
+Sorgu = "SELECT tl.tarih, tl.kid, tl.dosyaAd, tl.revNo, tl.cariMailKomut, k.ad FROM teklifv2.teklif_liste tl INNER JOIN personel.personel k ON tl.kid = k.id WHERE tl.firmaID = " & firmaID & " AND tl.ihaleID = " & id & " ORDER BY tl.id DESC"
 rs.open sorgu,sbsv5,1,3
 
 if rs.recordcount = 0 then

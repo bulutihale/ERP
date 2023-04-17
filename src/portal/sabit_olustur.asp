@@ -186,6 +186,23 @@
         '########## GÖREV
 
 
+        '########## GÖREV
+            sorgu = "Select * from toplumail.topluMailAyar where silindi = 0 and firmaID = " & rs("Id")
+            rs1.open sorgu, sbsv5, 1, 3
+            if rs1.recordcount > 0 then
+            for dii = 1 to rs1.recordcount
+                objStream.WriteText vbtab & "'#### TOPLU MAİL" & vbcrlf
+                objStream.WriteText vbtab & vbtab & "sb_gonderimT1 = """ & rs1("gonderimT1") & """" & vbcrlf
+                objStream.WriteText vbtab & vbtab & "sb_gonderimT2 = """ & rs1("gonderimT2") & """" & vbcrlf
+                objStream.WriteText vbtab & vbtab & "sb_gonderimMiktari = " & rs1("gonderimMiktari") & "" & vbcrlf
+                objStream.WriteText vbtab & "'#### TOPLU MAİL" & vbcrlf
+                objStream.WriteText vbcrlf & vbcrlf
+            rs1.movenext
+            next
+            end if
+            rs1.close
+        '########## GÖREV
+
 
         ' objStream.WriteText vbtab & "'#### MODULLER" & vbcrlf
         ' objStream.WriteText vbtab & vbtab & "sb_modul_gorevTakip = true" & vbcrlf       'bu iptal olmuş olabilir. kontrol et

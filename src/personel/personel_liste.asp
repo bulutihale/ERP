@@ -7,33 +7,24 @@
     kid		=	kidbul()
     ID		=	Request.QueryString("ID")
     kid64	=	ID
-    opener  =   Request.Form("opener")
-    gorevID =   Request.QueryString("gorevID")
 	aramaad	=	Request.Form("aramaad")
     hata    =   ""
     modulAd =   "Personel"
     personelID =   gorevID
+	yetkiKontrol = yetkibul("Personel")
     Response.Flush()
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
-
 call logla("Personel Listesi Ekranı")
 
-yetkiKontrol = yetkibul(modulAd)
-
-
-
 '###### ARAMA FORMU
-'###### ARAMA FORMU
-	if hata = "" and opener = "" and yetkiKontrol > 0 then
-
+	if hata = "" and yetkiKontrol > 0 then
 		Response.Write "<div class=""container-fluid"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
                 Response.Write "<div class=""card"">"
                 Response.Write "<div class=""card-body"">"
-				'Response.Write "<div class=""row"">"
 					Response.Write "<form action=""/personel/personel_liste.asp"" method=""post"" class=""ortaform"">"
 						Response.Write "<div class=""form-row align-items-center"">"
 							Response.Write "<div class=""col-lg-2 col-sm-2 my-1"">"
@@ -47,20 +38,16 @@ yetkiKontrol = yetkibul(modulAd)
 							end if
 						Response.Write "</div>"
 					Response.Write "</form>"
-				'Response.Write "</div>"
 				Response.Write "</div>"
 				Response.Write "</div>"
 			Response.Write "</div>"
 		Response.Write "</div>"
 		Response.Write "</div>"
-
 	end if
 '###### ARAMA FORMU
-'###### ARAMA FORMU
 
 
 
-'####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
 	if hata = "" and yetkiKontrol > 0 then
 		Response.Write "<div class=""container-fluid"">"
@@ -90,13 +77,13 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & "portal.firma.Ad as firmaAd" & vbcrlf
 			sorgu = sorgu & "from personel.personel" & vbcrlf
 			sorgu = sorgu & "INNER JOIN portal.firma on (portal.firma.Id = " & firmaID & " or portal.firma.anaFirmaID = " & firmaID & ") and portal.firma.Id = personel.personel.firmaID" & vbcrlf
-			sorgu = sorgu & "where" & vbcrlf
 			' sorgu = sorgu & "personel.personel.firmaID = " & firmaID & vbcrlf
 			' sorgu = sorgu & "personel.personel.firmaID in (select Id from portal.firma where Id = " & firmaID & " or anaFirmaID = " & firmaID & ")" & vbcrlf
-			sorgu = sorgu & " (personel.personel.expiration >= '" & tarihsql(date()) & "' or personel.personel.expiration is null )" & vbcrlf
-			sorgu = sorgu & " and (personel.personel.songiris > '" & tarihsql(date()-30) & "' or personel.personel.songiris is null )" & vbcrlf
+			' sorgu = sorgu & " (personel.personel.expiration >= '" & tarihsql(date()) & "' or personel.personel.expiration is null )" & vbcrlf
+			' sorgu = sorgu & " and (personel.personel.songiris > '" & tarihsql(date()-30) & "' or personel.personel.songiris is null )" & vbcrlf
 			if aramaad = "" then
 			else
+				sorgu = sorgu & "where" & vbcrlf
 				sorgu = sorgu & " and (personel.personel.ad like N'%" & aramaad & "%')" & vbcrlf
 			end if
 			sorgu = sorgu & " order by personel.personel.ad ASC" & vbcrlf
@@ -169,7 +156,6 @@ yetkiKontrol = yetkibul(modulAd)
 		call yetkisizGiris("","","")
 	end if
 '####### SONUÇ TABLOSU
-'####### SONUÇ TABLOSU
 
 
 
@@ -182,4 +168,4 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 
-%>
+%><!--#include virtual="/reg/rs.asp" -->

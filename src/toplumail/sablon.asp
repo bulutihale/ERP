@@ -59,7 +59,7 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 				Response.Write "<div class=""card"">"
 				Response.Write "<div class=""card-body"">"
 				Response.Write "<div class=""row"">"
-					sorgu = "Select top 30 sablonID,tarih,sablonBaslik" & vbcrlf
+					sorgu = "Select top 30 sablonID,tarih,sablonBaslik,beklemedeSayisi,gonderildiSayisi" & vbcrlf
 					sorgu = sorgu & ",(select count(gonderimID) from toplumail.gonderim where sablonID = toplumail.sablon.sablonID and durum = 'Beklemede') as Beklemede" & vbcrlf
 					sorgu = sorgu & ",(select count(gonderimID) from toplumail.gonderim where sablonID = toplumail.sablon.sablonID and durum = 'Gönderildi') as Gonderildi" & vbcrlf
 					sorgu = sorgu & "from toplumail.sablon where firmaID = " & firmaID & " and silindi = 0" & vbcrlf
@@ -86,6 +86,11 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 									sablonBaslik		=	rs("sablonBaslik")
 									Beklemede			=	rs("Beklemede")
 									Gonderildi			=	rs("Gonderildi")
+									if Beklemede > 0 or Gonderildi > 0 then
+										rs("beklemedeSayisi")	=	Beklemede
+										rs("gonderildiSayisi")	=	Gonderildi
+										rs.update
+									end if
 									sablonID64          =   sablonID
 									sablonID64          =   base64_encode_tr(sablonID64)
 									gonderimSayi		=	0

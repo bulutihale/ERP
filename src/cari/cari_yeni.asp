@@ -77,7 +77,7 @@ end if
 
 
 '###### ARAMA FORMU
-	if yetkiKontrol >= 3 then
+	if yetkiKontrol >= 5 then
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "<form action=""/cari/cari_ekle.asp"" method=""post"" class=""ajaxform"">"
 		Response.Write "<input type=""hidden"" name=""gorevID"" value=""" & gorevID & """ />"

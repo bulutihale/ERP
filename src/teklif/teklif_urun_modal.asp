@@ -261,6 +261,7 @@ if teklifKalemID <> "" then
         stokAd            =   rs("stokAd")
         stokFiyat         =   rs("stokFiyat")
         stokToplamFiyat   =   rs("stokToplamFiyatOrj")
+        stokToplamFiyatTPB=   rs("stokToplamFiyatTPB")
       end if
       rs.close
   '###### TEKLİF BİLGİLERİNİ AL
@@ -278,6 +279,7 @@ end if
 
 '### ANA FORM
   Response.Write "<form id=""teklifUrunModal"" class=""ajaxform"" method=""post"" action=""/teklif/teklif_urun_modal_kaydet.asp"">"
+    Response.Write "<input type=""hidden"" value=""" & teklifKalemID & """ name=""teklifKalemID"" />"
     Response.Write "<input type=""hidden"" value=""" & teklifID & """ name=""teklifID"" />"
     Response.Write "<input type=""hidden"" value=""" & teklifStokID & """ name=""teklifStokID"" />"
     Response.Write "<input type=""hidden"" value=""" & teklifParaBirimi & """ name=""teklifParaBirimi"" />"

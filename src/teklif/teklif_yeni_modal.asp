@@ -125,7 +125,7 @@ end if
             tekliftarih  = date()
         end if
         if teklifDili = "" then
-            teklifDili  = "tr"
+            ' teklifDili  = "tr" 'opsiyonlar yüzünden kapattım
         end if
         if teklifParaBirimi = "" then
             teklifParaBirimi  = "TRY"
@@ -453,7 +453,7 @@ if hata = "" then
                                     kosul           =   rs("kosul")
                                     icerik          =   rs("icerik")
                                     teklifKosulDil  =   rs("dil")
-                                    Response.Write "<tr class=""teklifKosulDil teklifKosulDil" & teklifKosulDil & """>"
+                                    Response.Write "<tr class=""teklifKosulDil d-none teklifKosulDil" & teklifKosulDil & """>"
                                     Response.Write "<td nowrap><input class=""teklifKosulDilInput"" style=""opacity:1;position:relative;"" type=""checkbox"" name=""kosul"" id=""kosul" & teklifKosulID & """ value=""" & teklifKosulID & """"
                                     if teklifKosulSonuc = true then
                                         Response.Write " checked=""checked"" "

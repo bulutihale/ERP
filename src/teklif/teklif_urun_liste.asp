@@ -37,7 +37,7 @@
 		Response.Write "<th scope=""col"" class=""text-right"">" & translate("Satır Toplamı","","") & "</th>"
 		Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 		Response.Write "</tr></thead><tbody>" 
-            sorgu = "Select *,(Select kisaBirim from portal.birimler where birimID = teklif.teklif_urun.stokBirim) as birimAd,(Select kdv from stok.stok where stokID = teklif.teklif_urun.teklifStokID) as stokKdv from teklif.teklif_urun where silindi = 0 and teklifID = " & teklifID & " order by teklifKalemID ASC"
+            sorgu = "Select *,(Select kisaBirim from portal.birimler where birimID = teklif.teklif_urun.stokBirim) as birimAd,(Select kdv from stok.stok where stokID = teklif.teklif_urun.teklifStokID) as stokKdv from teklif.teklif_urun where silindi = 0 and teklifID = " & teklifID & " order by sira ASC, teklifKalemID ASC"
 			rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount > 0 then
                 '## hesaplamaları yap
@@ -114,6 +114,29 @@
                             Response.Write """></i>"
                             Response.Write "</a>"
 						'# KALEM SİL
+
+                        '## UP
+                            Response.Write "<i title=""" & translate("Yukarı Taşı","","") & """"
+                            if rs("sira") < 2 then
+                                Response.Write "class=""icon arrow-up ml-2"""
+                            else
+                                Response.Write "class=""parmak icon arrow-up ml-2"""
+                                Response.Write " onClick=""$('#ajax').load('/teklif/teklif_urun_adim_sira.asp?receteAdimID=" & teklifKalemID & "&adimDirection=up')"""
+                            end if
+                            Response.Write """></i>"
+                        '## UP
+										
+                        '## DOWN
+                            Response.Write "<i title=""" & translate("Yukarı Taşı","","") & """"
+                            if rs.recordcount <= i then
+                                Response.Write "class=""icon arrow-down ml-2"""
+                            else
+                                Response.Write "class=""parmak icon arrow-down ml-2"""
+                                Response.Write " onClick=""$('#ajax').load('/teklif/teklif_urun_adim_sira.asp?receteAdimID=" & teklifKalemID & "&adimDirection=down')"""
+                            end if
+                            Response.Write """></i>"
+                        '## DOWN
+
 						Response.Write "</td>"
 					Response.Write "</tr>"
 					Response.Flush()

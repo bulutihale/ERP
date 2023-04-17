@@ -39,7 +39,7 @@ response.codepage=65001
 		
 
 '###### PDF oluşmadan önce revizon numaraları ayarla
-	sorgu = "SELECT top(1) revNo FROM dosya.teklif_liste WHERE firmaID = " & firmaID & " AND ihaleID = " & id & " ORDER BY id DESC"
+	sorgu = "SELECT top(1) revNo FROM teklifv2.teklif_liste WHERE firmaID = " & firmaID & " AND ihaleID = " & id & " ORDER BY id DESC"
 	rs.open sorgu,sbsv5,1,3
 	
 		if rs.recordcount = 0 then
@@ -145,7 +145,7 @@ Doc.Save Server.MapPath("/temp/dosya/" & firmaID & "/teklifler/" & id64 & "/" & 
 		
 
 
-sorgu = "SELECT firmaID, ihaleID, dosyaAd, kid, revNo, cariMailKomut FROM dosya.teklif_liste"
+sorgu = "SELECT firmaID, ihaleID, dosyaAd, kid, revNo, cariMailKomut FROM teklifv2.teklif_liste"
 rs.open sorgu,sbsv5,1,3
 
 rs.addnew

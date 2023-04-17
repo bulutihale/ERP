@@ -20,7 +20,6 @@
     vergiDairesi	=   Request.Form("vergiDairesi")
     vergiNo	 		=   Request.Form("vergiNo")
     il	 		    =   Request.Form("il")
-    ' sehir2	 		=   Request.Form("sehir2")
     telefon	 		=   Request.Form("telefon")
     postakodu	 	=   Request.Form("postakodu")
     email	 		=   Request.Form("email")
@@ -31,7 +30,7 @@
 
 
 
-if yetkiKontrol > 3 then
+if yetkiKontrol > 5 then
     if gorevID = "" then
         call logla(translate("Cari Ekleme","","") & cariAd)
     else
@@ -73,7 +72,6 @@ else
     rs.addnew
     rs("manuelKayit")       =   True
 end if
-
     rs("firmaID")           =   firmaID
 	rs("cariKodu")          =   cariKodu
 	rs("cariAd")            =   cariAd
@@ -81,11 +79,7 @@ end if
 	rs("vergiDairesi")      =   vergiDairesi
 	rs("vergiNo")           =   vergiNo
 	rs("il")                =   il
-    ' if sehir <> "" then
-	'     rs("sehir")         =   sehir
-    ' end if
 	rs("cariTur")           =   cariTur
-	' rs("manuelKayit")       =   manuelKayit
 	rs("telefon")           =   telefon
 	rs("fax")               =   fax
     rs("iskonto")           =   iskonto
@@ -93,26 +87,16 @@ end if
 	rs("postakodu")         =   postakodu
 	rs("email")             =   email
 	rs("ilce")              =   ilce
-
 rs.update
 rs.close
 
 
 
-    call logla(hatamesaj)
-    ' call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
-
-
-
+call logla(hatamesaj)
 
 call toastrCagir(hatamesaj, "OK", "right", "success", "otomatik", "")
 
-
 call jsac("/cari/cari_liste.asp")
 modalkapat()
-
-
-
-
 
 %><!--#include virtual="/reg/rs.asp" -->

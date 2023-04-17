@@ -2,8 +2,6 @@
 
 
 '#### SSL
-'#### SSL
-'#### SSL
 	if sb_ssl = 1 then
 		if Request.ServerVariables("SERVER_PORT") = 443 then
 		else
@@ -11,12 +9,9 @@
 		end if
 	end if
 '#### SSL
-'#### SSL
-'#### SSL
 
 
 
-'###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 	Session("lngTimer")	=	Timer
 	site				=	Request.ServerVariables("HTTP_HOST")
@@ -27,36 +22,7 @@
 	sayfa5				=	""
 	Session("sayfa5")	=	""
 	kid					=	kidbul()
-	' Response.Flush()
-'	call sessiontest()
 '###### ANA TANIMLAMALAR
-'###### ANA TANIMLAMALAR
-
-
-' if firmaID = "" then
-' 	Response.Write "Tanımsız Firma"
-' 	Response.End()
-' end if
-
-
-' '###### FİRMAYI BUL
-' '###### FİRMAYI BUL
-' 	sorgu = "Select id,logo,logoMini,ad,url,SSO from portal.Firma where Id = " & firmaID
-' 	rs.Open sorgu, sbsv5, 1, 3
-' 	if rs.recordcount = 0 then
-' 		Response.Write "Tanımsız Firma"
-' 		Response.End()
-' 	elseif rs.recordcount = 1 then
-' 		firmaID		=	rs("id")
-' 		firmaLogo	=	rs("logo")
-' 		firmaLogo2	=	rs("logoMini")
-' 		firmaAd		=	rs("ad")
-' 		firmaURL	=	rs("url")
-' 		firmaSSO	=	rs("SSO")
-' 	end if
-' 	rs.close
-' '###### FİRMAYI BUL
-' '###### FİRMAYI BUL
 
 
 
@@ -135,62 +101,24 @@
 
 
 
-
-
-
-'#### YETKİ İŞLERİ
-'#### YETKİ İŞLERİ
-' if kid <> "" then
-' 	sorgu = "SELECT" & vbcrlf
-' 	sorgu = sorgu & "replace(" & vbcrlf
-' 	sorgu = sorgu & "replace(" & vbcrlf
-' 	sorgu = sorgu & "STUFF((SELECT '|' + yetkiAd FROM personel.personel_yetki where personel.personel_yetki.yetkiParametre > 0 and personel.personel_yetki.kid = " & kid & " and yetkiParametre > 0 FOR XML PATH('')), 1, 1, '')" & vbcrlf
-' 	sorgu = sorgu & ",'<yetkiParametre>','')" & vbcrlf
-' 	sorgu = sorgu & ",'</yetkiParametre>','')" & vbcrlf
-' 	sorgu = sorgu & "[yetkiler]" & vbcrlf
-' Response.Write sorgu
-' 	rs.open sorgu, sbsv5, 1, 3
-' 	if not rs.eof then
-' 		yetkiler = rs(0)
-' 	end if
-' 	rs.close
-' 	kyearr = yetkiler
-' 	kyearr = Split(kyearr,"|")
-' 	yetkisorgu = " ("
-' 	for ki = 0 to ubound(kyearr)
-' 		yetkisorgu = yetkisorgu & " yetkigrup = '" & kyearr(ki) & "'" & vbcrlf
-' 		if ubound(kyearr) > ki then
-' 			yetkisorgu = yetkisorgu &  " or " & vbcrlf
-' 		end if
-' 	next
-' 	set kyearr = Nothing
-' 	yetkisorgu = yetkisorgu & " or yetkigrup is null )"
-' end if
-'#### YETKİ İŞLERİ
-'#### YETKİ İŞLERİ
-
-
 '###### PERSONEL BUL
-'###### PERSONEL BUL
-if kid <> "" then
-	sorgu = "Select ad,passwordExpiration,passwordChangeFirstLogin,webmailUser from Personel.Personel where (expiration is null or expiration >= '" & tarihsql(date()) & "') and Id = " & kid
-	rs.Open sorgu, sbsv5, 1, 3
-	if rs.recordcount = 0 then
-		Response.Write "TANIMSIZ PERSONEL : " & kid
-		Response.End()
-	elseif rs.recordcount = 1 then
-		personelAd					=	rs("ad")
-		passwordExpiration			=	rs("passwordExpiration")
-		passwordChangeFirstLogin	=	rs("passwordChangeFirstLogin")
-		webmailUser					=	rs("webmailUser")
+	if kid <> "" then
+		sorgu = "Select ad,passwordExpiration,passwordChangeFirstLogin,webmailUser from Personel.Personel where (expiration is null or expiration >= '" & tarihsql(date()) & "') and Id = " & kid
+		rs.Open sorgu, sbsv5, 1, 3
+		if rs.recordcount = 0 then
+			Response.Write "TANIMSIZ PERSONEL : " & kid
+			Response.End()
+		elseif rs.recordcount = 1 then
+			personelAd					=	rs("ad")
+			passwordExpiration			=	rs("passwordExpiration")
+			passwordChangeFirstLogin	=	rs("passwordChangeFirstLogin")
+			webmailUser					=	rs("webmailUser")
+		end if
+		rs.close
 	end if
-	rs.close
-end if
-'###### PERSONEL BUL
 '###### PERSONEL BUL
 
 
-'### 404 - 403
 '### 404 - 403
 	if left(adres,3) = "403" or left(adres,3) = "404" then
 		gelenadresarr	=	split(adres,"/")
@@ -215,41 +143,38 @@ end if
 		set gelenadresarr = Nothing
 	end if
 '### 404 - 403
-'### 404 - 403
 
 
 '##### ADRESTEN OTOMATİK FORM OLUŞTUR
-'##### ADRESTEN OTOMATİK FORM OLUŞTUR
-		if inStr(adres,"?") > 0 then
-			sayfacoz		=	Split(adres,"?")
-			sayfaturu		=	sayfacoz(0)
-			sayfaturu		=	Replace(sayfaturu,"404;","")
-			sayfaturu		=	Replace(sayfaturu,":80","")
-			formverileri	=	sayfacoz(1)
-			if instr(formverileri,"=") > 0 then
-				formverileri = Split(formverileri,"|")
-				formverisayisi = ubound(formverileri)+1
-				redim fvname(formverisayisi)
-				redim fvdata(formverisayisi)
-				for fi = 1 to formverisayisi
-					fv = Split(formverileri(fi-1),"=")
-						fvname(fi-1) = fv(0)
-						fvdata(fi-1) = fv(1)
-					set fv = Nothing
-				next
-				set formverileri = Nothing
-				Response.Write "<!DOCTYPE HTML><html><head><meta charset=""utf-8""></head><body><form id=""q2post"" action=""" & sayfaturu & """ method=""post"">"
-				for fi = 1 to formverisayisi
-					Response.Write "<input type=""hidden"" name=""" & fvname(fi-1) & """ value=""" & fvdata(fi-1) & """ />"
-				next
-				Response.Write "</form>"
-				Response.Write "<scr" & "ipt type=""text/javascript"">document.getElementById('q2post').submit();</scr" & "ipt>"
-				Response.Write "</body></html>"
-				Response.End()
-			end if
-			set sayfacoz = Nothing
+	if inStr(adres,"?") > 0 then
+		sayfacoz		=	Split(adres,"?")
+		sayfaturu		=	sayfacoz(0)
+		sayfaturu		=	Replace(sayfaturu,"404;","")
+		sayfaturu		=	Replace(sayfaturu,":80","")
+		formverileri	=	sayfacoz(1)
+		if instr(formverileri,"=") > 0 then
+			formverileri = Split(formverileri,"|")
+			formverisayisi = ubound(formverileri)+1
+			redim fvname(formverisayisi)
+			redim fvdata(formverisayisi)
+			for fi = 1 to formverisayisi
+				fv = Split(formverileri(fi-1),"=")
+					fvname(fi-1) = fv(0)
+					fvdata(fi-1) = fv(1)
+				set fv = Nothing
+			next
+			set formverileri = Nothing
+			Response.Write "<!DOCTYPE HTML><html><head><meta charset=""utf-8""></head><body><form id=""q2post"" action=""" & sayfaturu & """ method=""post"">"
+			for fi = 1 to formverisayisi
+				Response.Write "<input type=""hidden"" name=""" & fvname(fi-1) & """ value=""" & fvdata(fi-1) & """ />"
+			next
+			Response.Write "</form>"
+			Response.Write "<scr" & "ipt type=""text/javascript"">document.getElementById('q2post').submit();</scr" & "ipt>"
+			Response.Write "</body></html>"
+			Response.End()
 		end if
-'##### ADRESTEN OTOMATİK FORM OLUŞTUR
+		set sayfacoz = Nothing
+	end if
 '##### ADRESTEN OTOMATİK FORM OLUŞTUR
 
 
@@ -267,10 +192,6 @@ end if
 		rs.close
 	end if
 '##### MENÜYÜ BUL - NEREDEYİM
-
-
-
-
 
 
 
@@ -293,74 +214,77 @@ end if
 
 
 
+'###### fantazi başlangıç
+	for i = 1 to 200
+		Response.Write vbcrlf
+	next
+'###### fantazi başlangıç
 
-for i = 1 to 200
-	Response.Write vbcrlf
-next
-Response.Write "<!DOCTYPE html>"
-Response.Write "<html lang=""en"">"
-Response.Write "<head>"
-Response.Write "<meta charset=""utf-8"">"
-Response.Write "<meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=no"">"
-Response.Write "<title>" & firmaAd & "</title>"
-Response.Write "<link href=""/template/fonksiyonlar.css"" rel=""stylesheet"">"
-Response.Write "<link rel=""stylesheet"" href=""/template/css/style.css"">"
-Response.Write "<link rel=""stylesheet"" href=""/template/vendors/mdi/css/materialdesignicons.min.css"">"
-Response.Write "<link rel=""stylesheet"" href=""/template/vendors/base/vendor.bundle.base.css"">"
-Response.Write "<link rel=""stylesheet"" href=""/template/vendors/datatables.net-bs4/dataTables.bootstrap4.css"">"
-Response.Write "<link rel=""stylesheet"" href=""/template/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.css"">"
-Response.Write "<link rel=""stylesheet"" href=""/template/fonts/font-awesome-4.4.0/css/font-awesome.min.css"">"
-Response.Write "<link rel=""stylesheet"" href=""/template/famfamfam/famfamfam.css"">"
-Response.Write "<scr" & "ipt src=""/template/vendors/base/vendor.bundle.base.js""></scr" & "ipt>"
-Response.Write "<scr" & "ipt src=""/template/jquery.form-3.4.min.js""></scr" & "ipt>"
-Response.Write "<scr" & "ipt src=""/template/cycle.all.latest.js""></scr" & "ipt>"
-Response.Write "<link rel=""shortcut icon"" href=""/arayuz/favicon-32x32.png"" />"
-Response.Write "<link rel=""icon"" type=""image/png"" sizes=""32x32"" href=""/arayuz/favicon-32x32.png"">"
 
-	'bu kısmı sonra seo.js ye al
-	'bu kısmı sonra seo.js ye al
-	Response.Write "<scr" & "ipt type=""text/javascript"">"
-			Response.Write "function toastAc(mesaj,toastClass){"
-			Response.Write "$.toast({"
-'				Response.Write "heading: 'Headings',"			'başlık
-				Response.Write "text: mesaj,"
-				Response.Write "hideAfter: 5000,"				'otomatik kapan  false veya milisaniye
-				Response.Write "icon: 'error',"					'info - error
-'				Response.Write "loader: true,"
-'				Response.Write "loaderBg: '#9EC600'"
-'				Response.Write "showHideTransition: 'fade',"	'açılma kapanma şekli  slide - plain - fade
-'				Response.Write "allowToastClose: false,"		'kapanma iptal
-				Response.Write "stack: 15,"						'max toast sayısı  false , 1,2,3,4
-				Response.Write "position: 'bottom-right',"
-'				Response.Write "bgColor: '#FF1356',"
-'				Response.Write "textColor: 'white'"
-'				Response.Write "textAlign: 'center"
-				Response.Write "class: 'class' + toastClass,"
-				Response.Write "afterHidden: function () {"
-					Response.Write "$.toast('class' + toastClass).reset();"
-'					Response.Write "alert('Toast has been hidden.');"
+'###### header
+	Response.Write "<!DOCTYPE html>"
+	Response.Write "<html lang=""en"">"
+	Response.Write "<head>"
+	Response.Write "<meta charset=""utf-8"">"
+	Response.Write "<meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=no"">"
+	Response.Write "<title>" & firmaAd & "</title>"
+	Response.Write "<link href=""/template/fonksiyonlar.css"" rel=""stylesheet"">"
+	Response.Write "<link rel=""stylesheet"" href=""/template/css/style.css"">"
+	Response.Write "<link rel=""stylesheet"" href=""/template/vendors/mdi/css/materialdesignicons.min.css"">"
+	Response.Write "<link rel=""stylesheet"" href=""/template/vendors/base/vendor.bundle.base.css"">"
+	Response.Write "<link rel=""stylesheet"" href=""/template/vendors/datatables.net-bs4/dataTables.bootstrap4.css"">"
+	Response.Write "<link rel=""stylesheet"" href=""/template/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.css"">"
+	Response.Write "<link rel=""stylesheet"" href=""/template/fonts/font-awesome-4.4.0/css/font-awesome.min.css"">"
+	Response.Write "<link rel=""stylesheet"" href=""/template/famfamfam/famfamfam.css"">"
+	Response.Write "<scr" & "ipt src=""/template/vendors/base/vendor.bundle.base.js""></scr" & "ipt>"
+	Response.Write "<scr" & "ipt src=""/template/jquery.form-3.4.min.js""></scr" & "ipt>"
+	Response.Write "<scr" & "ipt src=""/template/cycle.all.latest.js""></scr" & "ipt>"
+	Response.Write "<link rel=""shortcut icon"" href=""/arayuz/favicon-32x32.png"" />"
+	Response.Write "<link rel=""icon"" type=""image/png"" sizes=""32x32"" href=""/arayuz/favicon-32x32.png"">"
+		'bu kısmı sonra seo.js ye al
+		Response.Write "<scr" & "ipt type=""text/javascript"">"
+				Response.Write "function toastAc(mesaj,toastClass){"
+				Response.Write "$.toast({"
+	'				Response.Write "heading: 'Headings',"			'başlık
+					Response.Write "text: mesaj,"
+					Response.Write "hideAfter: 5000,"				'otomatik kapan  false veya milisaniye
+					Response.Write "icon: 'error',"					'info - error
+	'				Response.Write "loader: true,"
+	'				Response.Write "loaderBg: '#9EC600'"
+	'				Response.Write "showHideTransition: 'fade',"	'açılma kapanma şekli  slide - plain - fade
+	'				Response.Write "allowToastClose: false,"		'kapanma iptal
+					Response.Write "stack: 15,"						'max toast sayısı  false , 1,2,3,4
+					Response.Write "position: 'bottom-right',"
+	'				Response.Write "bgColor: '#FF1356',"
+	'				Response.Write "textColor: 'white'"
+	'				Response.Write "textAlign: 'center"
+					Response.Write "class: 'class' + toastClass,"
+					Response.Write "afterHidden: function () {"
+						Response.Write "$.toast('class' + toastClass).reset();"
+	'					Response.Write "alert('Toast has been hidden.');"
+					Response.Write "}"
+				Response.Write "})"
+			Response.Write "};"
+		Response.Write "</scr" & "ipt>"
+		'bu kısmı sonra seo.js ye al
+		if kid = "" then
+			bgsayi = rastgele(6,1)
+			Response.Write "<style>"
+				Response.Write "body {"
+					Response.Write "background-image: url('/temp/background/" & firmaID & "/background" & bgsayi & ".jpg');"
+					Response.Write "background-size: cover;"
 				Response.Write "}"
-			Response.Write "})"
-		Response.Write "};"
-	Response.Write "</scr" & "ipt>"
-	'bu kısmı sonra seo.js ye al
-	'bu kısmı sonra seo.js ye al
-
-if kid = "" then
-	bgsayi = rastgele(6,1)
-	Response.Write "<style>"
-		Response.Write "body {"
-			Response.Write "background-image: url('/temp/background/" & firmaID & "/background" & bgsayi & ".jpg');"
-			Response.Write "background-size: cover;"
-		Response.Write "}"
-	Response.Write "</style>"
-end if
+			Response.Write "</style>"
+		end if
+	Response.Write "</head>"
+	Response.Write "<body>"
+'###### header
 
 
 
 
-Response.Write "</head>"
-Response.Write "<body>"
+
+
 
 
 if kid <> "" then
@@ -374,29 +298,16 @@ if kid <> "" then
 	Response.Write "				</div>"
 	Response.Write "			</div>"
 	Response.Write "			<div class=""navbar-menu-wrapper d-flex align-items-center justify-content-end"">"
-
-	' if GorevListele = True and 1 = 2 then
-	' 	Response.Write "			<form action=""/gorev/liste"" method=""post"" id=""themaAramaForm"">"
-	' 	Response.Write "				<input type=""hidden"" class=""form-control"" placeholder=""Arama"" name=""aramagorev"" value=""" & aramagorev & """ id=""themaAramaGorev"" />"
-	' 	Response.Write "			</form>"
-	' 	Response.Write "				<ul class=""navbar-nav mr-lg-4 w-100"">"
-	' 	Response.Write "					<li class=""nav-item nav-search d-none d-lg-block w-100"">"
-	' 	Response.Write "						<div class=""input-group"">"
-	' 	Response.Write "							<div class=""input-group-prepend"">"
-	' 	Response.Write "								<span class=""input-group-text"" id=""search""><i class=""mdi mdi-magnify""></i></span>"
-	' 	Response.Write "							</div>"
-	' 	Response.Write "							<input type=""text"" class=""form-control"" placeholder=""Arama"" aria-label=""arama"" aria-describedby=""arama"" />"
-	' 	Response.Write "						</div>"
-	' 	Response.Write "					</li>"
-	' 	Response.Write "				</ul>"
-	' end if
-
-
-	'########### ÜST BAR
 	'########### ÜST BAR
 		Response.Write "<ul class=""navbar-nav navbar-nav-right"">"
-
-			'##### MENÜLER
+			'## HAVA DURUMU
+				Response.Write "<li class=""nav-item dropdown mr-1"">"
+				havadurumuicon		=	""
+				havadurumuguncel		=	""
+				call havadurumucek(sb_konum,"anlık")
+				Response.Write "<img src=""" & havadurumuicon & """ title=""" & havadurumuguncel & """ />"
+				Response.Write "</li>"
+			'## HAVA DURUMU
 			'##### MENÜLER
 				sorgu = "select id,"
 				if klang = "tr" then
@@ -463,9 +374,6 @@ if kid <> "" then
 					next
 				rs.close
 			'##### MENÜLER
-			'##### MENÜLER
-
-			'## GÖREV
 			'## GÖREV
 				' if sb_modul_gorevTakip = true then
 				' 	Response.Write "<li class=""nav-item dropdown mr-1"">"
@@ -475,9 +383,6 @@ if kid <> "" then
 				' 	Response.Write "</li>"
 				' end if
 			'## GÖREV
-			'## GÖREV
-
-			'## TEKLİF
 			'## TEKLİF
 				' if sb_modul_teklif = true then
 				' 	yetkiTeklif = yetkibul("Teklif")
@@ -496,25 +401,17 @@ if kid <> "" then
 				' 	end if
 				' end if
 			'## TEKLİF
-			'## TEKLİF
-
 			'## MAİL
+				if webmailUser <> "" then
+					Response.Write "<li class=""nav-item dropdown mr-1"">"
+					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/webmail/mail"">"
+					Response.Write "<i class=""mdi mdi-email-variant"" title=""E-Mail Listesi""></i>"
+					' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
+						Response.Write "<div class=""badge badge-pill badge-warning""><span class=""mailSayi"">0</span></div>"
+					Response.Write "</a>"
+					Response.Write "</li>"
+				end if
 			'## MAİL
-				' if sb_modul_webmail = true then
-					if webmailUser <> "" then
-						Response.Write "<li class=""nav-item dropdown mr-1"">"
-						Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/webmail/mail"">"
-						Response.Write "<i class=""mdi mdi-email-variant"" title=""E-Mail Listesi""></i>"
-						' Response.Write "<i class=""icon email"" title=""E-Mail Listesi""></i>"
-							Response.Write "<div class=""badge badge-pill badge-warning""><span class=""mailSayi"">0</span></div>"
-						Response.Write "</a>"
-						Response.Write "</li>"
-					end if
-				' end if
-			'## MAİL
-			'## MAİL
-
-			'## BİLDİRİM ALANI
 			'## BİLDİRİM ALANI
 				sorgu = "Select top 50 notificationID,icerik,onem from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid =  " & kid & " and tarih >= '" & tarihsql(date()-3) & "' order by notificationID desc"
 				rs.Open sorgu, sbsv5, 1, 3
@@ -553,8 +450,6 @@ if kid <> "" then
 				' end if
 				rs.close
 			'## BİLDİRİM ALANI
-			'## BİLDİRİM ALANI
-
 			'## KULLANICI MENÜSÜ
 				personel64 = kid
 				personel64 = base64_encode_tr(personel64)
@@ -566,21 +461,16 @@ if kid <> "" then
 				Response.Write "</div>"
 				Response.Write "</li>"
 			'## KULLANICI MENÜSÜ
-
-			if yardimID <> "" then
-				Response.Write "<li class=""nav-item dropdown"">"
-				Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/yardim/yardim/" & base64_encode_tr(yardimID) & """>"
-				Response.Write "<i class=""mdi mdi-help parmak"" title=""Yardım""></i>"
-				Response.Write "</a>"
-				Response.Write "</li>"
-			end if
-
-
-
-
-
+			'## YARDIM
+				if yardimID <> "" then
+					Response.Write "<li class=""nav-item dropdown"">"
+					Response.Write "<a class=""nav-link count-indicator d-flex justify-content-center align-items-center"" href=""/yardim/yardim/" & base64_encode_tr(yardimID) & """>"
+					Response.Write "<i class=""mdi mdi-help parmak"" title=""Yardım""></i>"
+					Response.Write "</a>"
+					Response.Write "</li>"
+				end if
+			'## YARDIM
 		Response.Write "</ul>"
-	'########### ÜST BAR
 	'########### ÜST BAR
 					Response.Write "<button class=""navbar-toggler navbar-toggler-right d-lg-none align-self-center"" type=""button"" data-toggle=""offcanvas""><span class=""mdi mdi-menu""></span></button>"
 				Response.Write "</div>"
@@ -644,7 +534,7 @@ if kid <> "" then
 												raporIcon	=	rs3("raporIcon")
 												raporTuru	=	rs3("raporTuru")
 												raporID		=	rs3("raporID")
-												if raporTuru = "datatable" or raporTuru = "htmltable" then
+												if raporTuru = "datatable" or raporTuru = "htmltable" or raporTuru = "excel" then
 													raporID64	=	raporID
 													raporID64	=	base64_encode_tr(raporID64)
 													raporDosya	=	"rapor/genel/" & raporID64
@@ -835,7 +725,8 @@ if kid <> "" then
 			'########### ALT BAR
 			'########### ALT BAR
 				Response.Write "<footer class=""footer"">"
-				Response.Write "<div class=""d-sm-flex justify-content-center justify-content-sm-between"">"
+				' Response.Write "<div class=""d-sm-flex justify-content-center justify-content-sm-between"">"
+				Response.Write "<div class=""justify-content-center justify-content-sm-between text-right"">"
 				Response.Write "<span class=""text-muted text-center text-sm-left d-block d-sm-inline-block"">Copyright © " & year(date()) & " <a href=""http://" & firmaURL & """ target=""_blank"">" & firmaAd & "</a>. " & translate("Her Hakkı Saklıdır","","") & ".</span>"
 				'Response.Write "<span class=""float-none float-sm-right d-block mt-1 mt-sm-0 text-center"">Hand-crafted & made with <i class=""mdi mdi-heart text-danger""></i></span>"
 				Response.Write "</div>"
@@ -846,73 +737,102 @@ if kid <> "" then
 	Response.Write "</div>"
 	Response.Write "</div>"
 else
-
-
-	call logla("Şifre Giriş Ekranı")
-	Response.Write "<div class=""container-fluid mt-5"">"
-	Response.Write "<div class=""row"">"
-		Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
-		Response.Write "<div class=""col-lg-4 col-md-4 col-sm-10 col-xs-10"">"
-			Response.Write "<div class=""card"">"
-			Response.Write "<div class=""card-header text-white bg-primary"">" & firmaAd &" Giriş İşlemi</div>"
-			Response.Write "<div class=""card-body"">"
-				Response.Write "<form action=""/personel/login.asp"" method=""post"" class=""ajaxform"">"
-					if firmaSSO = "" then
-						Response.Write "<div>"
-						Response.Write "<div class=""badge badge-secondary"">Kullanıcı Adınız</div>"
-						call forminput("email",email,"","","","","email","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<div class=""badge badge-secondary"">Şifreniz</div>"
-						call forminput("password",password,"","","","password","password","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
-						Response.Write "</div>"
-					elseif firmaSSO = "ADC" then
-						Response.Write "<div>"
-						Response.Write "<div class=""badge badge-secondary"">Bilgisayarı açtığınız kullanıcı adı</div>"
-						call forminput("email",email,"","","","","email","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<div class=""badge badge-secondary"">Şifre</div>"
-						call forminput("password",password,"","","","password","password","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
-						Response.Write "</div>"
-					elseif firmaSSO = "NETSIS" then
-						Response.Write "<div>"
-						Response.Write "<div class=""badge badge-secondary"">Kullanıcı Adınız</div>"
-						call forminput("email",email,"","","","","email","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<div class=""badge badge-secondary"">Şifreniz</div>"
-						call forminput("password",password,"","","","password","password","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
-						Response.Write "</div>"
-					else
-						Response.Write "<div>"
-						Response.Write "<div class=""badge badge-secondary"">Kullanıcı Adınız</div>"
-						call forminput("email",email,"","","","","email","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<div class=""badge badge-secondary"">Şifreniz</div>"
-						call forminput("password",password,"","","","password","password","")
-						Response.Write "</div>"
-						Response.Write "<div class=""mt-4"">"
-						Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
-						Response.Write "</div>"
+	'##### LOGIN OLMAMIŞ KULLANICI
+		if sayfa3 = "report" then
+			'### raporlama
+				if sayfa4 = "" then
+				else
+					sayfa64 = sayfa4
+					sayfa64 = base64_decode_tr(sayfa64)
+					if isnumeric(sayfa64) = true then
+						sorgu = "Select raporTuru,misafirErisimi from rapor.raporIndex where raporID = " & sayfa64 & " and firmaID = " & firmaID
+						rs.open sorgu, sbsv5, 1, 3
+							if rs.recordcount > 0 then
+								'herşey yolunda. raporu ver
+									raporTuru		=	rs("raporTuru")
+									misafirErisimi	=	rs("misafirErisimi")
+									Session("raporID") = sayfa64
+									if raporTuru = "htmltable" then
+										Server.Execute "/rapor/genel_html.asp"
+									elseif raporTuru = "excel" then
+										Server.Execute "/rapor/genel_excel.asp"
+									end if
+								'herşey yolunda. raporu ver
+							else
+								'patlak
+							end if
+						rs.close
 					end if
-				Response.Write "</form>"
+				end if
+			'### raporlama
+		else
+			call logla("Şifre Giriş Ekranı")
+			Response.Write "<div class=""container-fluid mt-5"">"
+			Response.Write "<div class=""row"">"
+				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
+				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-10 col-xs-10"">"
+					Response.Write "<div class=""card"">"
+					Response.Write "<div class=""card-header text-white bg-primary"">" & firmaAd &" Giriş İşlemi</div>"
+					Response.Write "<div class=""card-body"">"
+						Response.Write "<form action=""/personel/login.asp"" method=""post"" class=""ajaxform"">"
+							if firmaSSO = "" then
+								Response.Write "<div>"
+								Response.Write "<div class=""badge badge-secondary"">Kullanıcı Adınız</div>"
+								call forminput("email",email,"","","","","email","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<div class=""badge badge-secondary"">Şifreniz</div>"
+								call forminput("password",password,"","","","password","password","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
+								Response.Write "</div>"
+							elseif firmaSSO = "ADC" then
+								Response.Write "<div>"
+								Response.Write "<div class=""badge badge-secondary"">Bilgisayarı açtığınız kullanıcı adı</div>"
+								call forminput("email",email,"","","","","email","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<div class=""badge badge-secondary"">Şifre</div>"
+								call forminput("password",password,"","","","password","password","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
+								Response.Write "</div>"
+							elseif firmaSSO = "NETSIS" then
+								Response.Write "<div>"
+								Response.Write "<div class=""badge badge-secondary"">Kullanıcı Adınız</div>"
+								call forminput("email",email,"","","","","email","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<div class=""badge badge-secondary"">Şifreniz</div>"
+								call forminput("password",password,"","","","password","password","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
+								Response.Write "</div>"
+							else
+								Response.Write "<div>"
+								Response.Write "<div class=""badge badge-secondary"">Kullanıcı Adınız</div>"
+								call forminput("email",email,"","","","","email","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<div class=""badge badge-secondary"">Şifreniz</div>"
+								call forminput("password",password,"","","","password","password","")
+								Response.Write "</div>"
+								Response.Write "<div class=""mt-4"">"
+								Response.Write "<button class=""form-control btn btn-success"" type=""submit"">Giriş Yap</button>"
+								Response.Write "</div>"
+							end if
+						Response.Write "</form>"
+					Response.Write "</div>"
+					Response.Write "</div>"
+				Response.Write "</div>"
+				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
 			Response.Write "</div>"
 			Response.Write "</div>"
-		Response.Write "</div>"
-		Response.Write "<div class=""col-lg-4 col-md-4 col-sm-1 col-xs-1""></div>"
-	Response.Write "</div>"
-	Response.Write "</div>"
+		end if
+	'##### LOGIN OLMAMIŞ KULLANICI
 end if
 
 Response.Write "<div id=""ajax"" class=""d-none""></div>"

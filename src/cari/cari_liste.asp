@@ -46,7 +46,9 @@
 									' else
 									' 	Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSilinmislerGoster').val('on');$('#listebuttonform').submit();"">" & translate("Silinmişleri Göster","","") & "</button>"
 									' end if
-									Response.Write "<button type=""button"" class=""btn btn-warning mr-2"" onClick=""modalajax('/cari/import.asp')"">" & translate("Veri Aktarımı","","") & "</button>"
+									if yetkiKontrol >= 7 then
+										Response.Write "<button type=""button"" class=""btn btn-warning mr-2"" onClick=""modalajax('/cari/import.asp')"">" & translate("Veri Aktarımı","","") & "</button>"
+									end if
 									' Response.Write "<button type=""button"" class=""btn btn-warning mr-2"" onClick=""netsisSenk('" & firmaStokDB & "')"">" & translate("Muhasebe Yazılımı ile Senkronize Et","","") & "</button>"
 									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/cari/cari_yeni.asp')"">" & translate("Yeni Cari Ekle","","") & "</button>"
 								Response.Write "</div>"
@@ -111,9 +113,7 @@
 							Response.Write "<th scope=""col"">" & translate("Firma Türü","","") & "</th>"
 							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Entegrasyon","","")
 							Response.Write "</th>"
-							if yetkiKontrol >= 5 then
 								Response.Write "<th scope=""col"" class=""text-right"">" & translate("İşlem","","") & "</th>"
-							end if
 							Response.Write "</tr>"
 						Response.Write "</thead><tbody>"
 							for i = 1 to rs.recordcount
@@ -131,10 +131,10 @@
 								Response.Write "<tr>"
 									Response.Write "<td>" & cariKodu & "</td>"
 									Response.Write "<td>" & cariAd & "</td>"
-									Response.Write "<td>" & telefon & "</td>"
-									Response.Write "<td>" & email & "</td>"
+									Response.Write "<td>" & kvkkMaske(telefon,6,yetkiKontrol) & "</td>"
+									Response.Write "<td>" & kvkkMaske(email,6,yetkiKontrol) & "</td>"
 									Response.Write "<td>" & il & "</td>"
-									Response.Write "<td>" & cariTur & "</td>"
+									Response.Write "<td>" & arrayDegerBulfn(cariTur,sb_cariTurArr) & "</td>"
 									Response.Write "<td class=""text-right"">"
 									Response.Write truefalse(manuelKayit,"yokvar")
 									Response.Write "</td>"
