@@ -1,5 +1,8 @@
 ﻿<!--#include virtual="/reg/rs.asp" --><%
 
+Response.End()
+
+
 
 '###### ANA TANIMLAMALAR
     call sessiontest()

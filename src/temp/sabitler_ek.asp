@@ -376,6 +376,7 @@ if firmaID = 11 then
 
 	'#### PORTAL AYARLARI
 		geoIPCozumle="off"
+		sb_depoEntegrasyon="Netsis"
 	'#### PORTAL AYARLARI
 
 

@@ -28,7 +28,4 @@
 	end if
 '##### HÜCRE EDIT 
 
-Response.End()
-
-
 %><!--#include virtual="/reg/rs.asp" -->

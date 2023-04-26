@@ -845,6 +845,8 @@ language_tr = language_tr & "||Teklif raporu formatı bulunamadı=Teklif raporu 
 language_tr = language_tr & "||Müşteri Kodu=Müşteri Kodu"
 language_tr = language_tr & "||KDV Hariç=KDV Hariç"
 language_tr = language_tr & "||Ön izleme için lütfen bir şablon seçin=Ön izleme için lütfen bir şablon seçin"
+language_tr = language_tr & "||Arşiv=Arşiv"
+language_tr = language_tr & "||Şablonu Çoğalt=Şablonu Çoğalt"
 if klang = "" then
 klang = "tr"
 end if

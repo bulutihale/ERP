@@ -102,7 +102,7 @@
 										Response.Write "<div class=""col-lg-6 col-sm-12"">"
 											Response.Write "<div class=""input-group input-group-sm p-0 m-0"">"
 												'call forminput("gelenMiktar","","numara(this,true,false)","Miktar","inpReset","autocompleteOFF","gelenMiktar","")
-												Response.Write "<input type=""text"" class=""form-control input input-sm"" aria-describedby=""basic-addon1"" id=""gelenMiktar"" placeholder=""Miktar"" autocomplete=""off"">"
+												Response.Write "<input type=""text"" class=""form-control input input-sm"" aria-describedby=""basic-addon1"" id=""gelenMiktar"" name=""gelenMiktar"" placeholder=""Miktar"" autocomplete=""off"">"
 												Response.Write "<div class=""input-group-append m-0 p-0 rounded"">"
 													Response.Write "<span class=""input-group-text pointer m-0"" id=""basic-addon1"" onclick=""anaBirimMiktarHesap('gelenMiktar'," & stokID & ")""><i class=""icon calculator p-0""></i></span>"
 												Response.Write "</div>"

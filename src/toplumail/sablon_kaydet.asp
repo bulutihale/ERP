@@ -19,6 +19,7 @@
 	sablonBaslik    =	Upload.Form("sablonBaslik")
 	sablonIcerik    =	Upload.Form("sablonIcerik")
 	smsBaslikID     =	Upload.Form("smsBaslikID")
+	islem           =	Upload.Form("islem")
 
     Response.Flush()
 
@@ -71,6 +72,9 @@ if yetkiTM >= 3 then
     sorgu = "Select top 1 * from toplumail.sablon where sablonID = " & gorevID
     rs.open sorgu, sbsv5, 1, 3
         if rs.recordcount = 0 then
+            rs.addnew
+        end if
+        if islem = "clone" then
             rs.addnew
         end if
         rs("sablonIcerik")  =   sablonIcerik

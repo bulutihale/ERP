@@ -95,18 +95,32 @@ else
 				sbsrapor.Open baglantibilgileri
 	            rs.open raporSQL, sbsrapor, 1, 3
 			end if
-                    sonuc = ""
-                    sonuc = sonuc & "<!DOCTYPE html><html lang=""en""><head><meta charset=""utf-8"">" & vbcrlf
-                    sonuc = sonuc & "</head>" & vbcrlf
-                    sonuc = sonuc & "<body>" & vbcrlf
-                    sonuc = sonuc & "<table border=""1"" align=""center"" style=""font-size:10px;"" cellpadding=""0"" cellspacing=""0"">" & vbcrlf
-                        sonuc = sonuc & "<tr>" & vbcrlf
+                ' ############# EXCEL İŞLERİ
+                    ExcelFile = Server.Mappath("/temp/dosya/" & firmaID & "/" & dosyaAdi)
+                    call dosyakopyala("/temp/sablon.xlsx","/temp/dosya/" & firmaID & "/" & dosyaAdi)
+                    ilktabload  =   "Sayfa1"
+                    Set ExcelConnection = Server.CreateObject("ADODB.Connection")
+                    ' ExcelConnection.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ExcelFile & ";Extended Properties=""Excel 12.0; HDR=Yes; IMEX=3; MODE=Share; READONLY=False"";"
+                    ExcelConnection.Open "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ExcelFile & ";Extended Properties=""Excel 8.0;HDR=No;"";"
+                    Set rsx = Server.CreateObject("ADODB.Recordset")
+                    Set rsx2 = Server.CreateObject("ADOX.Catalog")
+                    rsx2.ActiveConnection = ExcelConnection
+                    ' ######### İLK SAYFA ADINI ÖĞREN
+                        For tnum = 0 To rsx2.Tables.count - 1
+                            Set tbl = rsx2.Tables(tnum)
+                            ilktabload = tbl.Name
+                            exit for
+                        Next
+                    ' ######### İLK SAYFA ADINI ÖĞREN
+                    '######## BAŞLIKLARI OLUŞTUR
+                        rsx.open "SELECT * FROM [" & ilktabload & "]",ExcelConnection, 3,3
                             raporBasliklar = raporSQL
                             raporBasliklar1 = instr(raporBasliklar,"--:")
                             raporBasliklar = right(raporBasliklar,((len(raporBasliklar)-2)-raporBasliklar1))
                             raporBasliklar1 = instr(raporBasliklar,":--")
                             raporBasliklar = left(raporBasliklar,raporBasliklar1-1)
                             raporBasliklarArr = Split(raporBasliklar,",")
+                            rsx.movefirst
                             for ri = 0 to ubound(raporBasliklarArr)
                                 if instr(raporBasliklarArr(ri)," as ") > 0 then
                                     baslikArr = Split(raporBasliklarArr(ri)," as ")
@@ -115,37 +129,31 @@ else
                                 else
                                     baslik = raporBasliklarArr(ri)
                                 end if
-                                sonuc = sonuc & "<th scope=""col"">" & baslik & "</th>" & vbcrlf
+                                rsx.Fields(ri).value =   baslik
                             next
-                        sonuc = sonuc & "</tr>" & vbcrlf
-						if rs.recordcount > 0 then
-							for i = 1 to rs.recordcount
-                                sonuc = sonuc & "<tr>" & vbcrlf
-								for ti = 0 to ubound(raporBasliklarArr)
-                                    sonuc = sonuc & "<td>"
-                                    sonuc = sonuc & rs(ti)
-                                    sonuc = sonuc & "</td>" & vbcrlf
-								next
-                                sonuc = sonuc & "</tr>" & vbcrlf
-							rs.movenext
-							next
-						end if
-                    sonuc = sonuc & "</table>" & vbcrlf
-                    sonuc = sonuc & "</body>" & vbcrlf
-                    sonuc = sonuc & "</html>"
-            rs.close
-            '#### DOSYA KONTROL
-                if klasorkontrol("/temp/dosya/" & firmaID) = false then
-                    call klasorolustur("/temp/dosya/" & firmaID)
-                end if
-            '#### DOSYA KONTROL
-            Set objStream = server.CreateObject("ADODB.Stream")
-            objStream.Open
-            objStream.CharSet = "UTF-8"
-                objStream.WriteText sonuc
-            objStream.SaveToFile Server.Mappath("/temp/dosya/" & firmaID & "/" & dosyaAdi),2
-            objStream.Close
-            set objStream = Nothing
+                        rsx.update
+                    '######## BAŞLIKLARI OLUŞTUR
+                    '######## BAŞLIKLARI TEMİZLE
+                        rsx.movefirst
+                        for i = ubound(raporBasliklarArr)+1 to 9
+                            rsx.Fields(i).value = ""
+                        next
+                        rsx.update
+                    '######## BAŞLIKLARI TEMİZLE
+                    '######## DATA INSERT
+                        if rs.recordcount > 0 then
+                            for i = 1 to rs.recordcount
+                                rsx.addnew
+                                for ti = 0 to ubound(raporBasliklarArr)
+                                    rsx.Fields(ti).value = rs(ti)
+                                next
+                                rsx.update
+                            rs.movenext
+                            next
+                        end if
+                    '######## DATA INSERT
+                    rsx.close
+                ' ############# EXCEL İŞLERİ
             '####
                 if misafirErisimi = true then
                     Response.Write "<div class=""container mt-5"">"

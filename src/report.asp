@@ -1,3 +1,0 @@
-﻿rapor
-
-iptal bu sayfa

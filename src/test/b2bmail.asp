@@ -1,5 +1,6 @@
 ﻿<!--#include virtual="/reg/rs.asp" --><%
 
+bu dosya silinsin
 
 call mailGonderToplu("")
 

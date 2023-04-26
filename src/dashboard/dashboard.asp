@@ -90,7 +90,7 @@ Response.Write "<i onClick=""modalajax('/dashboard/dashboard_duzenle.asp');"" st
 function modulBilgiBul(byVal modul,byVal bilgi)
 	if modul = "doviz" then
 		if bilgi = "dosya" then
-			modulBilgiBul = "/portal/doviz_dashboard.asp"
+			modulBilgiBul = "/dashboard/doviz_dashboard.asp"
 		elseif bilgi = "boyut" then
 			modulBilgiBul = "col-lg-4 col-md-4 col-sm-4 col-xs-12"
 		end if

@@ -1,6 +1,7 @@
 ﻿<!--#include virtual="/reg/rs.asp" --><%
 
 '###### ANA TANIMLAMALAR
+    Server.ScriptTimeout = 900
     call sessiontest()
     kid		=	kidbul()
     hata    =   ""
@@ -21,12 +22,19 @@ fiyatlarArr     =	Split(fiyatlar,chr(10))
 
 for i = 0 to ubound(fiyatlarArr)
     if len(fiyatlarArr(i)) > 10 then
+        for ii = 1 to 10
+            fiyatlarArr(i)      =   replace(fiyatlarArr(i),"  "," ")
+        next
+        fiyatlarArr(i)      =   replace(fiyatlarArr(i)," ",vbtab)
         fiyatlarAyrintiArr  =   Split(fiyatlarArr(i),vbtab)
             sorgu = "Select top 10 FIYAT1,KAYITTAR from TBLSTOKFIAT where STOKKODU = '" & fiyatlarAyrintiArr(0) & "' AND FIYATGRUBU = '" & fiyatgrubu & "'"
             rs.open sorgu, sbsstok, 1, 3
             if rs.recordcount = 1 then
                 Response.Write "OK : " & fiyatlarAyrintiArr(0) & "=" & rs("FIYAT1") & ">" & fiyatlarAyrintiArr(1) & vbcrlf
-                rs("FIYAT1") = fiyatlarAyrintiArr(1)
+                fiyat = fiyatlarAyrintiArr(1)
+                fiyat = replace(fiyat,",","")
+                fiyat = replace(fiyat,".",",")
+                rs("FIYAT1") = fiyat
                 rs("KAYITTAR")  =   now()
                 rs.update
             elseif rs.recordcount > 1 then
@@ -40,6 +48,11 @@ for i = 0 to ubound(fiyatlarArr)
 next
 
 set fiyatlarArr = Nothing
+
+
+	hatamesaj = "Netsis fiyatlar güncellendi"
+	call logla(hatamesaj)
+	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
 
 
 %><!--#include virtual="/reg/rs.asp" -->

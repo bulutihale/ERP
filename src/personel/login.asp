@@ -267,17 +267,17 @@ password	=	sqltemizle(password)
 		rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount = 0 then
 				rs.addnew
-					rs("ad")		=	"BAŞAR SÖNMEZ"
+					rs("ad")		=	"BAŞAR SÖNMEZ Admin"
 					rs("email")		=	"destek@sbstasarim.com"
 					rs("password")	=	"#%)!$##d"
 					rs("firmaID")	=	firmaID
 					rs("language")	=	"tr"
 				rs.update
-				kid = rs("id")
+				pkid = rs("id")
 			end if
 		rs.close
-		if kid <> "" then
-			sorgu = "insert into personel.personel_yetki (kid,yetkiAd,yetkiParametre) values (" & kid & ",'Personel',9)"
+		if pkid <> "" then
+			sorgu = "insert into personel.personel_yetki (kid,yetkiAd,yetkiParametre) values (" & pkid & ",'Personel',9)"
 			rs.open sorgu, sbsv5, 3, 3
 		end if
 	end if

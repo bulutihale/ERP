@@ -57,18 +57,7 @@ Function asagiyuvarla(sayi)
 	end if
 End function
 
-Function dosyakontrol(adres)
-	if adres = "" then
-	else
-		set fs=Server.CreateObject("Scripting.FileSystemObject")
-		if fs.FileExists(Server.Mappath(adres)) = True then
-			dosyakontrol = True
-		else
-			dosyakontrol = False
-		end if
-		set fs = Nothing
-	end if
-end function
+
 
 '############################################################################################################################ TEST
 '############################################################################################################################ TEST
@@ -3641,6 +3630,31 @@ Function klasorkontrol(adres)
 end function
 
 
+Function dosyakontrol(adres)
+	if adres = "" then
+	else
+		set fs=Server.CreateObject("Scripting.FileSystemObject")
+		if fs.FileExists(Server.Mappath(adres)) = True then
+			dosyakontrol = True
+		else
+			dosyakontrol = False
+		end if
+		set fs = Nothing
+	end if
+end function
+
+Function dosyakopyala(byVal dosya1,byVal dosya2)
+	if dosya1 = "" or dosya2 = "" then
+	else
+		set fs=Server.CreateObject("Scripting.FileSystemObject")
+		if fs.FileExists(Server.Mappath(dosya1)) = True then
+			fs.copyfile Server.Mappath(dosya1),Server.Mappath(dosya2)
+		end if
+		set fs = Nothing
+	end if
+end function
+
+
 Function truefalse(deger,cevap)
 	if deger = True then
 		if cevap = "varyok" then
@@ -4435,12 +4449,14 @@ function mailGonderToplu(byVal gonderimID)
 					fn1.update
 					call jsconsole("Gönderildi : " & kvkkMaske(mg_adres,"",""))
 					mailGonderimDurum = "1"
+					call logla("Mail gönderildi. Modul:mailGonderToplu. Adres:" & kvkkMaske(mg_adres,"",""))
 				end if
 			else
 				fn1("durum") = "Blacklist"
 				fn1.update
 				call jsconsole("Blacklist : " & kvkkMaske(mg_adres,"",""))
 				mailGonderimDurum = "1"
+				call logla("Mail gönderilmedi. Modul:mailGonderToplu. Adres:" & kvkkMaske(mg_adres,"","") & ". Sebep:Blacklist")
 			end if
 		end if
 		fn1.close
@@ -4884,7 +4900,27 @@ function dovizBulTarih(byVal birim, byVal tarih)
 end function
 
 '################## mail gonder CDO kullan
-	function mailGonderCDO(byVal mailBaslik, byVal mailicerik, byVal dosyaAdres, byVal CDOalicilar)
+	function mailGonderCDO(byVal mailBaslik, byVal mailicerik, byVal dosyaAdres, byVal CDOalicilar, byVal personelGrupID)
+		'## kullanıcı grubuna mail gönderimi yapılacaksa
+		if personelGrupID > 0 then
+			sorgu = "SELECT t2.email FROM personel.personelGrupIndex t1"
+			sorgu = sorgu & " INNER JOIN personel.personel t2 ON t1.personelID = t2.id"
+			sorgu = sorgu & " WHERE t1.personelGrupID = " & personelGrupID
+			fn1.open sorgu, sbsv5, 1, 3
+			if fn1.recordcount > 0 then
+			grupEmail = ""
+				for fi = 1 to fn1.recordcount
+					grupEmail = grupEmail & ";" & fn1("email")
+				fn1.movenext
+				next
+			end if
+			fn1.close
+			CDOalicilar	=	CDOalicilar & ";" & grupEmail
+		end if
+
+		'## /kullanıcı grubuna mail gönderimi yapılacaksa
+
+		'### mail gönderenin mail account bilgilerini al
 		kid		=	kidbul()
 		sorgu = "SELECT t1.gonderenAd, t1.gonderenAdres, t1.gonderenAdresSifre, t1.smtpAdres, t1.smtpPort, t1.smtpSSL FROM toplumail.mailAccount t1 WHERE kid = " & kid 
 		fn1.open sorgu, sbsv5, 1, 3
@@ -5055,7 +5091,7 @@ function mailGonder2(byVal mailTipNo, byVal mailBaslik, byval mailicerik, byval 
 		
 		
 		if mailCariGonder = "evet" then
-			call mailGonderCDO(mailBaslik, mailicerik, dosyaAdres, CDOalicilar)
+			call mailGonderCDO(mailBaslik, mailicerik, dosyaAdres, CDOalicilar,"")
 		else
 			JMail.Send						(SMTPserver)
 		end if

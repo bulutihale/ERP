@@ -32,7 +32,7 @@
 							call formselectv2("fiyatGrubu",fiyatGrubu,"","","","","fiyatGrubu",fiyatGrubudegerler,"")
 						Response.Write "</div>"
                         Response.Write "<div class=""col-sm-12 my-1"">"
-                        Response.Write "<span class=""badge badge-secondary"">Her satıra bir stok gelecek şekilde excelden direk kopyala yapıştır ile buraya yapıştırın</span>"
+                        Response.Write "<span class=""badge badge-secondary text-left"">Her satıra bir stok gelecek şekilde excelden direk kopyala yapıştır ile buraya yapıştırın<br >Örnek:<br />45041330 38,34<br />45041331 47,34</span>"
                             call formtextarea("fiyatlar",fiyatlar,"","","","","fiyatlar","")
                         Response.Write "</div>"
                         Response.Write "<div class=""col-auto my-1"">"

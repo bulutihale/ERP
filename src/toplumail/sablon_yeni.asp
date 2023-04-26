@@ -82,6 +82,7 @@ if yetkiTM >= 3 then
 		Response.Write "<form action=""/toplumail/sablon_kaydet.asp"" method=""post"" class=""ajaxform"" enctype=""multipart/form-data"">"
         call forminput("gorevID",gorevID,"","","gorevID","hidden","gorevID","")
         call forminput("tur",tur,"","","tur","hidden","tur","")
+        call forminput("islem",islem,"","","islem","hidden","islem","")
 		Response.Write "<div class=""form-row align-items-center"">"
 		Response.Write "<div class=""col-sm-12 my-1"">"
         Response.Write "<span class=""badge badge-secondary"">" & translate("Başlık","","") & "</span>"

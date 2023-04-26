@@ -127,6 +127,16 @@ call logla("Toplu Mail Şablon Listesi Ekranı")
 												Response.Write "</a>"
 											'# Şablon düzenle
 										end if
+										if yetkiTM >= 3 then
+											'# Şablon clone
+												sablonID64 =	sablonID
+												sablonID64 =	base64_encode_tr(sablonID64)
+												Response.Write "<a onClick=""modalajaxfit('/toplumail/sablon_yeni.asp?sablonID=" & sablonID64 & "&islem=clone')"" title=""" & translate("Şablonu Çoğalt","","") & """ class=""ml-2"" >"
+												Response.Write "<i class=""icon page-copy"
+												Response.Write """></i>"
+												Response.Write "</a>"
+											'# Şablon clone
+										end if
 										if yetkiTM >= 6 then
 											'# Şablon sil
 												sablonID64 =	sablonID

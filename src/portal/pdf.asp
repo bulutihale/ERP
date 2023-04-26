@@ -105,7 +105,7 @@ if id <> "" and modul <> "" then
         '######### DOWNLOAD
             Response.Write "<div class=""col-lg-12 text-center"">"
                 Response.Write "<h4>Dosya Oluşturuldu!</h4>"
-                Response.Write "<div><a href=""/temp/" & modul & "/" & dosyaadi & ".pdf"" target=""_blank"">Dosyayı PDF Olarak İndir</a></div>"
+                Response.Write "<div><a href=""/temp/" & modul & "/" & firmaID & "/" & dosyaadi & ".pdf"" target=""_blank"">Dosyayı PDF Olarak İndir</a></div>"
             Response.Write "</div>"
         '######### DOWNLOAD
 else
