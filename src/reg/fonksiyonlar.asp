@@ -3277,7 +3277,7 @@ function logla(byVal islem)
 	end if
 	veri			=	"'" & FNtarih & "','" & FNpersonelID & "','" & FNip & "','" & FNgorevID & "','" & FNislem & "','" & firmaID & "','','" & modulAd & "','" & modulID & "',''"
 	sorgu		=	"INSERT INTO personel.personel_log VALUES (" & veri & ")"
-	fn1.open sorgu, sbsv5, 3, 3
+	fn2.open sorgu, sbsv5, 3, 3
 end function
 
 Function tarihsaatsql(tarih)'2011-11-21 00:00:00

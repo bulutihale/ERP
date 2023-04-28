@@ -199,36 +199,4 @@ yetkiTM = yetkibul(modulAd)
 	end if
 '####### ADRES LİSTESİ
 
-
-
-
-
-
-
-
-
-'##### yetkisi olmayan için kelimeyi maskeler
-'##### yetkisi olmayan için kelimeyi maskeler
-'## call kvkkMaske("deneme",2,4)
-	' function kvkkMaske(byVal kelime,byVal minYetki,byVal mevcutYetki)
-	' 	if kelime <> "" then
-	' 		if mevcutYetki >= minYetki then
-	' 			'göster
-	' 			kvkkMaske = kelime
-	' 		else
-	' 			'gizle
-	' 			kvkkMaske = left(kelime,2)
-	' 			for fnki = 1 to len(kelime)
-	' 				kvkkMaske = kvkkMaske & "*"
-	' 			next
-	' 			kvkkMaske = kvkkMaske & right(kelime,2)
-	' 		end if
-	' 	else
-	' 		kvkkMaske = ""
-	' 	end if
-	' end function
-'##### yetkisi olmayan için kelimeyi maskeler
-'##### yetkisi olmayan için kelimeyi maskeler
-
-
 %><!--#include virtual="/reg/rs.asp" -->

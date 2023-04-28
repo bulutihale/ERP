@@ -50,7 +50,7 @@ sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun,
 &" c2.cariAd as kurumCariAD, c1.adres as teklifCariAdres, i.tarih_ihale, i.dosyaNo, i.ikn, i.bayiDosyaTipi, i.teklifRevNo, i.teklifKase, i.teklifAntet, f.iletisimEposta, f.webSite,"_
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, ISNULL(i.cariID,0) as cariID,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
-&" (SELECT COUNT(id) FROM teklifv2.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun,"_
+&" (SELECT COUNT(id) FROM teklifv2.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun, i.ekMaliyet1, i.ekMaliyet1Deger, i.ekMaliyet1Birim,"_
 &" i.catKodGoster, i.mustKodGoster, f.antetPath"_
 &" FROM teklifv2.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
@@ -97,6 +97,9 @@ rs.open sorgu,sbsv5,1,3
 	catKodGoster		=	rs("catKodGoster")
 	mustKodGoster		=	rs("mustKodGoster")
 	kalemNotSutun		=	rs("kalemNotSutun")
+	ekMaliyet1			=	rs("ekMaliyet1")
+	ekMaliyet1Deger		=	rs("ekMaliyet1Deger")
+	ekMaliyet1Birim		=	rs("ekMaliyet1Birim")
 	rs.close
 	
 	
@@ -123,15 +126,15 @@ rs.open sorgu,sbsv5,1,3
 Response.Write "<page size=""A4"" class=""section-to-print"">"
 Response.Write "<table border=""1"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">" 
 	Response.Write "<tr>"
-		Response.Write "<td style=""width:10%"">"
+		Response.Write "<td style=""width:20%"">"
 		if teklifAntet = True then
 			Response.Write "<img id=""imageLogo"" src=""" & antetPath & """ width=""90"" height=""auto"">"
 		end if
 		Response.Write "</td>"
-		Response.Write "<td style=""text-align:center; font-size:30px"" class=""b-all"">"
-			Response.Write "<span style=""font-weight:bold;"">PRICE OFFER</span>"
+		Response.Write "<td style=""text-align:center; font-size:30px; width:60%"" class=""b-all"">"
+			Response.Write "<span style=""font-weight:bold;"">PROFORMA INVOICE</span>"
 		Response.Write "</td>"
-		Response.Write "<td class=""b-all"" style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;width:15%"">"
+		Response.Write "<td class=""b-all"" style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;width:20%"">"
 			Response.Write "<b>Date: </b>"&formatdatetime(tarih_ihale,2) & "<br>"
 			Response.Write "<b>Number: </b>" & dosyaNo
 		Response.Write "</td>"
@@ -140,7 +143,7 @@ Response.Write "</table>"
 	Response.Write "<br>"
 Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">"
 	Response.Write "<tr>"
-		Response.Write "<td style=""width:25%;"" class=""b-all"">"
+		Response.Write "<td style=""width:35%;"" class=""b-all"">"
 			Response.Write "<div style=""height:120px; padding:10px;""" 
 				Response.Write " data-tabloid=""" & id & """"
 				Response.Write " data-tablo=""teklifv2.ihale"""
@@ -405,7 +408,7 @@ if paraBirim <> "mix" AND altTopGoster = "True" then'tüm kalemlerin para birimi
 	Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;font-size:11px"">"
 		Response.Write "<tr style=""text-align:right;"" class=""text-right d-flex"">"
 			Response.Write "<td style=""width:60%"">&nbsp;</td>"
-			Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">Brüt Tutar</td>"
+			Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">Total</td>"
 			Response.Write "<td style=""width:20%"" class=""b-top b-right b-bottom"">"
 				para_deger = para_basamak(toplam_firmam_tutar)
 				Response.Write para_deger & " " & paraBirim
@@ -421,6 +424,23 @@ if paraBirim <> "mix" AND altTopGoster = "True" then'tüm kalemlerin para birimi
 			Response.Write "</td>"
 		Response.Write "</tr>"
 	end if
+	if ekMaliyet1 = True then
+		Response.Write "<tr style=""text-align:right;"" class=""text-right d-flex"">"
+			Response.Write "<td style=""width:60%"">&nbsp;</td>"
+			Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">" & sb_ekMaliyet1 & "</td>"
+			Response.Write "<td style=""width:20%"" class=""b-top b-right b-bottom"">"
+				ekMal = para_basamak(ekMaliyet1Deger)
+				if ekMaliyet1Birim <> paraBirim then
+					Response.Write "<span class=""text-danger bold"">!!birim farklı!!</span>"
+					ekMal = 0
+				else
+					Response.Write ekMal & " " & paraBirim
+				end if
+			Response.Write "</td>"
+		Response.Write "</tr>"
+	else
+		ekMal = 0
+	end if
 	if teklifKDV = true then
 		Response.Write kdvSatir
 	else
@@ -429,10 +449,10 @@ if paraBirim <> "mix" AND altTopGoster = "True" then'tüm kalemlerin para birimi
 		Response.Write "<tr style=""text-align:right;"" class=""text-right d-flex"">"
 		Response.Write "<td style=""width:60%"">&nbsp;</td>"
 		Response.Write "<td style=""text-align:right;width:20%"" class=""b-all"">"
-		Response.Write "Genel Toplam"
+		Response.Write "Grand Total"
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:right;width:20%"" class=""b-top b-right b-bottom"">"
-		firmam_genel_toplam = toplam_firmam_tutar - toplam_iskonto_tutar + toplamKdvHesap
+		firmam_genel_toplam = toplam_firmam_tutar - toplam_iskonto_tutar + toplamKdvHesap + ekMal
 		para_deger = para_basamak(firmam_genel_toplam)
 		Response.Write para_deger&" "&paraBirim
 		Response.Write "</td>"
@@ -448,6 +468,7 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 
 '################# TEKLİF ALT BİLGİLERİ
 '################# TEKLİF ALT BİLGİLERİ
+
 	sorgu = "SELECT REPLACE(REPLACE(teklifNot,CHAR(13),'<br>'),CHAR(10),'<br>') as teklifNot,"
 	sorgu = sorgu & " odemeVade, teklifGecerlik, teslimatSure, bankalar"
 	sorgu = sorgu & " FROM teklifv2.ihale WHERE id = " & id
@@ -473,6 +494,11 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 
 
 			Response.Write "<table style=""font-family:calibri; font-size:12px;"">"
+				Response.Write "<tr>"
+					Response.Write "<td style=""width:70%"">"
+						Response.Write "<b><u>TERMS</u></b>"
+					Response.Write "</td>"
+				Response.Write "</tr>"
 				Response.Write "<tr>"
 					Response.Write "<td style=""width:70%"">"
 						Response.Write teklifNot

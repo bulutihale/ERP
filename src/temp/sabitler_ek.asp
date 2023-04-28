@@ -115,6 +115,7 @@ if firmaID = 5 then
 	'#### PORTAL AYARLARI
 		geoIPCozumle="off"
 		geoIPBlok="off"
+		sb_ekMaliyet1="Shipment Cost"
 	'#### PORTAL AYARLARI
 
 
@@ -364,7 +365,7 @@ if firmaID = 11 then
 	'#### TOPLU MAİL
 		sb_gonderimT1 = "10:00"
 		sb_gonderimT2 = "17:00"
-		sb_gonderimMiktari = 10
+		sb_gonderimMiktari = 1
 	'#### TOPLU MAİL
 
 

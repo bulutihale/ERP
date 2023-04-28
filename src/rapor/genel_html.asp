@@ -81,6 +81,8 @@ else
 				sbsrapor.Open baglantibilgileri
 	            rs.open raporSQL, sbsrapor, 1, 3
 			end if
+' Response.End()
+
 			Response.Write "<div class=""container-fluid"">"
 			Response.Write "<div class=""row"">"
 				Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"

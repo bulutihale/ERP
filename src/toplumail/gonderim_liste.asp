@@ -7,6 +7,10 @@
     hata    =   ""
     modulAd =   "Toplu Mail"
     aramaad	=	Request.Form("aramaad")
+    aramaadq	=	Request.QueryString("aramaad")
+	if aramaadq <> "" then
+		aramaad = aramaadq
+	end if
     Response.Flush()
 '###### ANA TANIMLAMALAR
 
@@ -80,7 +84,7 @@ call logla("Toplu mail gönderim listesi ekranı")
             sorgu = sorgu & " and (toplumail.sablon.sablonBaslik like N'%" & aramaad & "%' or toplumail.adres.adres like N'%" & aramaad & "%')" & vbcrlf
         end if
         ' sorgu = sorgu & "order by newid()"
-        sorgu = sorgu & "order by toplumail.gonderim.tarih desc"
+        sorgu = sorgu & "order by toplumail.gonderim.durum ASC, toplumail.gonderim.tarih desc"
 					rs.Open sorgu, sbsv5, 1, 3
 						if rs.recordcount > 0 then
 							bekleyen = 0
@@ -114,7 +118,7 @@ call logla("Toplu mail gönderim listesi ekranı")
 										if durum = "Beklemede" then
                                             Response.Write "<td class=""text-right"">"
 											'# Mail Gönder
-												Response.Write "<a onClick=""$('#ajax').load('/toplumail/gonder3.asp?gonderimID=" & gonderimID & "');"" title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
+												Response.Write "<a onClick=""$('#ajax').load('/toplumail/gonder3.asp?gonderimID=" & gonderimID & "&aramaad=" & aramaad & "');"" title=""" & translate("Mail Gönder","","") & """ class=""ml-2"" >"
 												Response.Write "<i class=""icon email-go"
 												Response.Write """></i>"
 												Response.Write "</a>"
@@ -123,7 +127,16 @@ call logla("Toplu mail gönderim listesi ekranı")
 											bekleyen = 1
                                         else
                                             Response.Write "<td>"
-                                            Response.Write "&nbsp;"
+											if durum = "Blacklist" then
+												Response.Write "&nbsp;"
+											else
+												'# Mail Gönder
+													Response.Write "<a onClick=""$('#ajax').load('/toplumail/gonder3.asp?gonderimID=" & gonderimID & "&aramaad=" & aramaad & "');"" title=""" & translate("Yeniden Mail Gönder","","") & """ class=""ml-2"" >"
+													Response.Write "<i class=""icon email-go parmak"
+													Response.Write """></i>"
+													Response.Write "</a>"
+												'# Mail Gönder
+											end if
                                             Response.Write "</td>"
 										end if
 
@@ -146,11 +159,15 @@ call logla("Toplu mail gönderim listesi ekranı")
 		Response.Write "</div>"
 
 
-if bekleyen > 0 then
-	call jsacdelay("/toplumail/gonderim_liste.asp",10000)
-else
-	call jsacdelay("/toplumail/gonderim_liste.asp",60000)
-end if
+		'### arama yapıldıysa ekranı tazeleme
+			if aramaad = "" then
+				if bekleyen > 0 then
+					' call jsacdelay("/toplumail/gonderim_liste.asp?aramaad=" & aramaad,10000)
+				else
+					' call jsacdelay("/toplumail/gonderim_liste.asp?aramaad=" & aramaad,60000)
+				end if
+			end if
+		'### arama yapıldıysa ekranı tazeleme
 
 
 

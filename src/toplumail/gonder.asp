@@ -33,7 +33,7 @@
 	if hata = "" then
         '### ŞABLONLAR
             sorgu = "Select * from toplumail.sablon where firmaID = " & firmaID & " and silindi = 0"
-            sorgu = sorgu & " order by sablonBaslik ASC"
+            sorgu = sorgu & " order by sablonID DESC"
             rs.open sorgu,sbsv5,1,3
             if rs.recordcount > 0 then
                 degerler = "=|"

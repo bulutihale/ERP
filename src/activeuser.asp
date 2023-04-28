@@ -107,7 +107,7 @@ end if
 
 
 '#### TOPLU MAİL
-    ' if uniq mod 2 = 0 then
+    if uniq mod 2 = 0 then
         mailGonderimDurum = ""
         call mailGonderToplu("")
         call jsconsole("Toplu Mail")
@@ -117,7 +117,7 @@ end if
                 call jsconsole("Toplu Mail")
             next
         end if
-    ' end if
+    end if
 '#### TOPLU MAİL
 
 

@@ -50,7 +50,7 @@ if yetkiKontrol  >= 3 then
 		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster, i.epostaGovde,"
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
 		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar, i.teklifEposta, i.epostaGovde,"
-		sorgu = sorgu & " k.pdfKaynakDosya as teklifSablon, k.landscapeDeger, i.teklifMusteriOnay"
+		sorgu = sorgu & " k.pdfKaynakDosya as teklifSablon, k.landscapeDeger, i.teklifMusteriOnay, i.ekMaliyet1, i.ekMaliyet1Deger, i.ekMaliyet1Birim"
 		sorgu = sorgu & " FROM teklifv2.ihale i"
 		sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
 		sorgu = sorgu & " LEFT JOIN kalite.form k ON i.pdfSablon = k.pdfKaynakDosya"
@@ -95,6 +95,9 @@ if yetkiKontrol  >= 3 then
 			teklifKDV			=	rs("teklifKDV")
 			satirKDV			=	rs("satirKDV")
 			teklifMusteriOnay	=	rs("teklifMusteriOnay")
+			ekMaliyet1			=	rs("ekMaliyet1")
+			ekMaliyet1Deger		=	rs("ekMaliyet1Deger")
+			ekMaliyet1Birim		=	rs("ekMaliyet1Birim")
 			altTopGoster		=	rs("altTopGoster")
 			epostaGovde			=	rs("epostaGovde")
 			bankalar			=	rs("bankalar")
@@ -856,6 +859,16 @@ Response.Write "<div class=""card-body row"">"
 		chckDurum9		=	""
 	end if
 
+	if ekMaliyet1 = True then
+		ekMaliyet1Durum = 	0
+		chckDurum10		=	" checked"
+	else
+		ekMaliyet1Durum = 1
+		chckDurum10		=	""
+	end if
+
+	
+
 	
 		Response.Write "<div class=""tab-pane"" id=""teklif"" role=""tabpanel"">"
 	
@@ -891,7 +904,7 @@ Response.Write "<div class=""card text-center"">"
 		Response.Write "<ul class=""nav nav-tabs card-header-tabs"" role=""tablist"" id=""sekmeler"">"
 		
 			Response.Write "<li class=""nav-item"">"
-			Response.Write "<a class=""active nav-link fontkucuk"" data-toggle=""tab"" href=""#antet"" role=""tab"" aria-controls=""antet"">Antet-Kaşe</a>"
+			Response.Write "<a class=""active nav-link fontkucuk"" data-toggle=""tab"" href=""#antet"" role=""tab"" aria-controls=""antet"">Genel</a>"
 			Response.Write "</li>"
 
 			Response.Write "<li class=""nav-item"">"
@@ -907,7 +920,7 @@ Response.Write "<div class=""card text-center"">"
 			Response.Write "</li>"
 
 			Response.Write "<li class=""nav-item"">"
-			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#kolonlar"" role=""tab"" aria-controls=""kolonlar"">Kolonlar</a>"
+			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#ekBilgi"" role=""tab"" aria-controls=""ekBilgi"">Ek Bilgi</a>"
 			Response.Write "</li>"
 
 			Response.Write "<li class=""nav-item"">"
@@ -1146,9 +1159,9 @@ Response.Write "<div class=""card text-center"">"
 		'######### BANKALAR
 		'######### BANKALAR
 
-		'######### KOLONLAR
-		'######### KOLONLAR
-			Response.Write "<div class=""tab-pane"" id=""kolonlar"" role=""tabpanel"">"
+		'######### EK BİLGİ
+		'######### EK BİLGİ
+			Response.Write "<div class=""tab-pane"" id=""ekBilgi"" role=""tabpanel"">"
 				'###### İHRACAT PROFORMA için SÜTUN AYARLARI
 				if ihaleTipi = "proforma" then
 					Response.Write "<div class=""row"">"
@@ -1159,7 +1172,7 @@ Response.Write "<div class=""card text-center"">"
 							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Teklifte katalog kodu sütunu göster.</div>"
 						Response.Write "</div>"	
 					Response.Write "</div>"
-					Response.Write "<div class=""row"">"
+					Response.Write "<div class=""row mt-2"">"
 						Response.Write "<div class=""col-1 text-left"">"
 							Response.Write "<input type=""checkbox"" oninput=""ajSave('mustKodGoster','teklifv2.ihale',"&id&"," & mustKodDurum & ");"" class="" chck30 form-control"" " & chckDurum8 & ">"
 						Response.Write "</div>"
@@ -1178,9 +1191,19 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "</div>"
 				end if
 				'###### İHRACAT PROFORMA için SÜTUN AYARLARI
+				Response.Write "<div class=""row mt-2"">"
+					Response.Write "<div class=""col-1 text-left"">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('ekMaliyet1','teklifv2.ihale',"&id&"," & ekMaliyet1Durum & ")"" class=""chck30 form-control"" " & chckDurum10 & ">"
+					Response.Write "</div>"
+					Response.Write "<div class=""col-2 text-left"">"
+						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">" & sb_ekMaliyet1 & "</div>"
+					Response.Write "</div>"
+					call forminput("ekMaliyet1Deger",ekMaliyet1Deger,"ajSave('ekMaliyet1Deger','teklifv2.ihale',"&id&",$(this).val())","Tutar","bold text-right","","","")
+					call formselectv2("ekMaliyet1Birim",ekMaliyet1Birim,"","","btn p-0 okKaldir","","",paraBirimDegerler,"onChange=""ajSave('ekMaliyet1Birim','teklifv2.ihale',"&id&",$(this).val())""")
+				Response.Write "</div>"
 			Response.Write "</div>"
-		'######### KOLONLAR
-		'######### KOLONLAR
+		'######### /EK BİLGİ
+		'######### /EK BİLGİ
 		
 		'######### e-posta
 		'######### e-posta
@@ -1307,6 +1330,7 @@ function ajSave(alan, tablo, tabloID, deger){
 															$('#seciliSablonDIV').html($data.find('#seciliSablonDIV').html());
 															//$('#sayfaAdi').html($data.find('#sayfaAdi').html());
 															$('#onizlemeTAB').html($data.find('#onizlemeTAB').html());
+															$('#ekBilgi').html($data.find('#ekBilgi').html());
 												});//tablolar güncellendi
 							
 			}

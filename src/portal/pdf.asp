@@ -16,8 +16,14 @@
 '###### ANA TANIMLAMALAR
 
 '##### DATALARI AL
-    id = Request.QueryString("id")
-    modul = Request.QueryString("modul")
+    id          =   Request.QueryString("id")
+    modul       =   Request.QueryString("modul")
+    teklifID    =   Request.Form("teklifID")
+
+    if teklifID <> "" then
+        id = teklifID
+        modul = "teklif"
+    end if
 '##### DATALARI AL
 
 
@@ -99,7 +105,12 @@ if id <> "" and modul <> "" then
 		        Doc.ImportFromUrl acilanLink,"PageHeight=820;BottomMargin=5;"
 		        Page.Canvas.DrawText "Sayfa : 1/1", "x=0; y=30; width=600; alignment=center; size=10", Font
             end if
-		    Filename = Doc.Save( Server.MapPath("/temp/" & modul & "/" & dosyaadi & ".pdf"), True )
+            '#### DOSYA KONTROL
+                if klasorkontrol("/temp/" & modul & "/" & firmaID) = false then
+                    call klasorolustur("/temp/" & modul & "/" & firmaID)
+                end if
+            '#### DOSYA KONTROL
+		    Filename = Doc.Save( Server.MapPath("/temp/" & modul & "/" & firmaID & "/" & dosyaadi & ".pdf"), True )
 		    Set Doc = Nothing
 		'######### PDF OLUŞTUR ###########
         '######### DOWNLOAD

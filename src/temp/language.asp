@@ -847,6 +847,9 @@ language_tr = language_tr & "||KDV Hariç=KDV Hariç"
 language_tr = language_tr & "||Ön izleme için lütfen bir şablon seçin=Ön izleme için lütfen bir şablon seçin"
 language_tr = language_tr & "||Arşiv=Arşiv"
 language_tr = language_tr & "||Şablonu Çoğalt=Şablonu Çoğalt"
+language_tr = language_tr & "||Cari Ekleme=Cari Ekleme"
+language_tr = language_tr & "||Teklifi İndir=Teklifi İndir"
+language_tr = language_tr & "||Yeniden Mail Gönder=Yeniden Mail Gönder"
 if klang = "" then
 klang = "tr"
 end if

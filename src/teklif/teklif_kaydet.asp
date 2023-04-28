@@ -130,18 +130,18 @@
       rs.close
 '### KAYDET
 
-        hatamesaj = translate("Teklif Kaydedildi","","")
-        call logla(hatamesaj)
-        call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-success","","","","","")
-
-
-      jsrun("$('#teklifsayi').val('" & teklifsayi & "');")
-
-
 
   if teklifOlusuncaListeyeDon = "on" then
     call jsgit("/teklif/teklif_liste")
+  else
+    call jsrun("$('#teklifsayi').val('" & teklifsayi & "');")
   end if
 
+  dosyaadi = "teklif" & "_" & tarihjp(date()) & "-" & teklifID
+  hatamesaj = "<div class=""text-center"">" & translate("Teklif Kaydedildi","","") & "<br /><a href=""" & "/temp/" & "teklif" & "/" & firmaID & "/" & dosyaadi & ".pdf" & """ target=""_blank"">" & translate("Teklifi İndir","","") & "</a></div>"
+  call logla(hatamesaj)
+  call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-success","","","","","")
 
+  Server.execute "/portal/pdf.asp"
+  
 %><!--#include virtual="/reg/rs.asp" -->

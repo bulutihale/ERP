@@ -31,7 +31,7 @@
 			rs.close
 	'#### /ihale_urun tablosundan stok karşılığı siliniyorsa
 		else
-			sorgu = "SELECT * FROM dosya." & tablo & " WHERE id = " & id & ""
+			sorgu = "SELECT * FROM teklifv2." & tablo & " WHERE id = " & id & ""
 			rs.open sorgu, sbsv5,1,3
 				
 				rs.delete
@@ -50,7 +50,7 @@
 		if tablo = "ihale_urun" AND deger1 <> "stokKarsilik" then
 	
 	'#### rakip fiyatları siliniyor
-			sorgu = "SELECT * FROM dosya.fiyatlar WHERE ihaleUrunID = " & id & ""
+			sorgu = "SELECT * FROM teklifv2.fiyatlar WHERE ihaleUrunID = " & id & ""
 			rs.open sorgu, sbsv5,1,3
 			if rs.recordcount > 0  then
 				for i = 1 to rs.recordcount
