@@ -40,10 +40,13 @@ Set Font = Doc.Fonts("Times-Roman")
 
 
 
+serverName = Request.ServerVariables("SERVER_NAME") 
+serverPort = Request.ServerVariables("SERVER_PORT")
 
-
-asp_dosya	=	"https://"
-asp_dosya	=	asp_dosya & Request.ServerVariables("SERVER_NAME")
+asp_dosya	=	"http://"
+asp_dosya	=	asp_dosya & serverName
+asp_dosya	=	asp_dosya & ":"
+asp_dosya	=	asp_dosya & serverPort
 asp_dosya	=	asp_dosya & "/" & pdfKaynakYol & "/" & pdfKaynakDosya & ".asp"
 
 if pdfKaynakDosya = "kalite_form_yap" then
@@ -84,7 +87,7 @@ end if
 
 
 	if dosyakontrolSonuc = True then
-		fsoDosyasil("/temp/dosya/" & firmaID & "/" & pdfKayitYol & "/" & formKod & "/" & dosyaAd)
+		dosyasil("/temp/dosya/" & firmaID & "/" & pdfKayitYol & "/" & formKod & "/" & dosyaAd)
 	end if
 
 

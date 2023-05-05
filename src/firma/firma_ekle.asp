@@ -1,6 +1,6 @@
 <!--#include virtual="/reg/rs.asp" --><%
 
-bu dosya teklif2 klasörünün altına gitsin
+'bu dosya teklif2 klasörünün altına gitsin
 
 
 '###### ANA TANIMLAMALAR

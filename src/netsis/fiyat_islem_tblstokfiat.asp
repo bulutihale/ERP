@@ -27,20 +27,32 @@ for i = 0 to ubound(fiyatlarArr)
         next
         fiyatlarArr(i)      =   replace(fiyatlarArr(i)," ",vbtab)
         fiyatlarAyrintiArr  =   Split(fiyatlarArr(i),vbtab)
+        sonucmesaj          =   ""
             sorgu = "Select top 10 FIYAT1,KAYITTAR from TBLSTOKFIAT where STOKKODU = '" & fiyatlarAyrintiArr(0) & "' AND FIYATGRUBU = '" & fiyatgrubu & "'"
             rs.open sorgu, sbsstok, 1, 3
             if rs.recordcount = 1 then
-                Response.Write "OK : " & fiyatlarAyrintiArr(0) & "=" & rs("FIYAT1") & ">" & fiyatlarAyrintiArr(1) & vbcrlf
+                ' Response.Write "OK : " & fiyatlarAyrintiArr(0) & "=" & rs("FIYAT1") & ">" & fiyatlarAyrintiArr(1) & vbcrlf
                 fiyat = fiyatlarAyrintiArr(1)
-                fiyat = replace(fiyat,",","")
-                fiyat = replace(fiyat,".",",")
+                if instr(fiyat,".") > 0 and instr(fiyat,",") > 0 then
+                    'hem virgül hem nokta var
+                        fiyat = replace(fiyat,".","")
+                        ' fiyat = replace(fiyat,".",",")
+                elseif instr(fiyat,".") > 0 then
+                    'noktayı virgül yap
+                        fiyat = replace(fiyat,".",",")
+                        ' Response.Write fiyat
+                end if
+                eskifiyat = rs("FIYAT1")
                 rs("FIYAT1") = fiyat
                 rs("KAYITTAR")  =   now()
                 rs.update
+                sonucmesaj = sonucmesaj & "OK : " & fiyatlarAyrintiArr(0) & "= Eski fiyat " & eskifiyat & "> Yeni fiyat " & rs("FIYAT1") & "<br />"
             elseif rs.recordcount > 1 then
-                Response.Write "hata multi : " & fiyatlarAyrintiArr(0) & vbcrlf
+                sonucmesaj = sonucmesaj & "Hata!! Bu ürün birden fazla bulundu : " & fiyatlarAyrintiArr(0) & "<br />"
+                ' Response.Write "Hata multi : " & fiyatlarAyrintiArr(0) & vbcrlf
             elseif rs.recordcount = 0 then
-                Response.Write "hata sıfır : " & fiyatlarAyrintiArr(0) & vbcrlf
+                sonucmesaj = sonucmesaj & "Hata!! Ürün bulunamadı : " & fiyatlarAyrintiArr(0) & "<br />"
+                ' Response.Write "hata sıfır : " & fiyatlarAyrintiArr(0) & vbcrlf
             end if
             rs.close
         set fiyatlarAyrintiArr = Nothing
@@ -52,6 +64,7 @@ set fiyatlarArr = Nothing
 
 	hatamesaj = "Netsis fiyatlar güncellendi"
 	call logla(hatamesaj)
+    hatamesaj = hatamesaj & "<br />" & sonucmesaj
 	call bootmodal(hatamesaj,"custom","","","","Tamam","","btn-danger","","","","","")
 
 

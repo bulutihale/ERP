@@ -55,7 +55,7 @@
 					
 					Response.Write "<tr>"
 						Response.Write "<td class=""text-center"">"
-							if yetkiKontrol >= 8 then
+							if yetkiKontrol >= 8 OR satinalmaYetki > 5 then
 							Response.Write "<span"
 						Response.Write " onClick=""bootmodal('Silinsin mi?','custom','/malKabul/stok_hareket_sil.asp?stokHareketID="&stokHareketID&"','','SİL','İPTAL','','','','ajax','','','')"""
 							Response.Write " class=""btn btn-sm border rounded fontkucuk2 bg-danger"">"

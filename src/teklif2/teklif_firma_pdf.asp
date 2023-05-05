@@ -85,7 +85,7 @@ Set Page = Doc.Pages.Add
 
 
 
-serverName = Request.ServerVariables("SERVER_NAME")
+serverName = Request.ServerVariables("SERVER_NAME") 
 serverPort = Request.ServerVariables("SERVER_PORT")
 
 asp_dosya	=	"http://"
