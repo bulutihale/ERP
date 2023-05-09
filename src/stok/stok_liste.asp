@@ -91,7 +91,7 @@
 				Response.Write "<div class=""row"">"
 					sorgu = "SELECT" & vbcrlf
 					sorgu = sorgu & "stok.stok.stokID," & vbcrlf
-					sorgu = sorgu & "stok.FN_stokSay(7, stok.stok.stokID) as stokMiktar," & vbcrlf
+					sorgu = sorgu & "stok.FN_stokSay(" & firmaID & ", stok.stok.stokID) as stokMiktar," & vbcrlf
 					sorgu = sorgu & "stok.stok.stokKodu," & vbcrlf
 					sorgu = sorgu & "stok.stok.stokAd," & vbcrlf
 					sorgu = sorgu & "stok.stok.stokBarcode," & vbcrlf

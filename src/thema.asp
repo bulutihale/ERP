@@ -304,7 +304,7 @@ if kid <> "" then
 				Response.Write "<li class=""nav-item dropdown mr-1"">"
 				havadurumuicon		=	""
 				havadurumuguncel		=	""
-				call havadurumucek(sb_konum,"anlık")
+				'call havadurumucek(sb_konum,"anlık")
 				Response.Write "<img src=""" & havadurumuicon & """ title=""" & havadurumuguncel & """ />"
 				Response.Write "</li>"
 			'## HAVA DURUMU

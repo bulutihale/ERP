@@ -131,10 +131,13 @@
 					Response.Write "<li class=""nav-item"">"
 						Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#ekTanimlar"">" & translate("Ek Bilgiler","","") & "</a>"
 					Response.Write "</li>"
+					Response.Write "<li class=""nav-item"">"
+						Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#koliTanimlari"">" & translate("Koli Tanımları","","") & "</a>"
+					Response.Write "</li>"
+					Response.Write "<li class=""nav-item"">"
+						Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#ozelIslem"">" & translate("Özel İşlem","","") & "</a>"
+					Response.Write "</li>"
 				end if
-				Response.Write "<li class=""nav-item"">"
-					Response.Write "<a class=""nav-link"" data-toggle=""tab"" href=""#koliTanimlari"">" & translate("Koli Tanımları","","") & "</a>"
-				Response.Write "</li>"
 			Response.Write "</ul>"
 		'### SEKMELER
 
@@ -439,6 +442,8 @@ Response.Write "<div class=""tab-content"">"
 				kullanilanKoliAd	=	rs("kullanilanKoliAd")
 				koliAd				=	rs("koliAd")
 				koliUrunMiktar		=	rs("koliUrunMiktar")
+			else
+				koliIndexID			=	0
 			end if
 				
 			Response.Write "<tr>"
@@ -459,6 +464,56 @@ Response.Write "<div class=""tab-content"">"
 	Response.Write "</div>"
 '########### POCKET INFORMATION
 
+
+'########### ÖZEL İŞLEM
+	Response.Write "<div id=""ozelIslem"" class=""container tab-pane fade mt-4"">"
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-sm-12 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürün Adı","","") & "</span>"
+				call forminput("stokAd",stokAd,"","","",inpKontrol,"","")
+			Response.Write "</div>"
+		Response.Write "</div>"
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-6 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("LOT","","") & "</span>"
+				call forminput("lot",lot,"lotSKTgetir();","","",inpKontrol,"lot","")
+			Response.Write "</div>"
+			Response.Write "<div class=""col-3 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("LOT SKT","","") & "</span>"
+				call forminput("lotSKT",lotSKT,"","","",inpKontrol,"lotSKT","")
+			Response.Write "</div>"
+		Response.Write "</div>"
+		Response.Write "<div id=""giresiDepoRow"" class=""form-row align-items-center"">"
+			Response.Write "<div class=""col-sm-6 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left"">Hareket Kayıt Depo Seçimi</span>"
+				call formselectv2("girisDepoSec",girisDepoSec,"","","formSelect2 girisDepoSec border","","girisDepoSec","","data-holderyazi=""depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0""")
+			Response.Write "</div>"
+		Response.Write "</div>"
+		Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-sm-3 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left bg-success"">" & translate("Giriş Yapılacak Miktar","","") & "</span>"
+				call forminput("girisMiktar",girisMiktar,"$('#cikisMiktar').val('');",translate("Giriş Yapılacak Miktar","",""),"border border-success text-success bold","","girisMiktar","")
+			if yetkiKontrol >= 8 then
+				Response.Write "<div class=""my-1"">"
+					Response.Write "<div id=""ozelIslemKayit"" onclick=""ozelIslem('miktarGir', $('#girisMiktar').val())"" class=""col-12 btn btn-success text-center rounded"">" & translate("MİKTAR GİRİŞİ YAP","","") & "</div>"
+				Response.Write "</div>"
+			end if
+			Response.Write "</div>"
+
+			Response.Write "<div class=""col-sm-3 my-1"">"
+				Response.Write "<span class=""badge badge-secondary rounded-left bg-danger"">" & translate("Çıkış Yapılacak Miktar","","") & "</span>"
+				call forminput("cikisMiktar",cikisMiktar,"$('#girisMiktar').val('');",translate("Çıkış Yapılacak Miktar","",""),"border border-danger text-danger bold","","cikisMiktar","")
+
+			if yetkiKontrol >= 8 then
+				Response.Write "<div class=""my-1"">"
+					Response.Write "<div id=""ozelIslemKayit"" onclick=""ozelIslem('miktarCik',$('#cikisMiktar').val())"" class=""col-12 btn btn-danger text-center rounded"">" & translate("MİKTAR ÇIKIŞI YAP","","") & "</div>"
+				Response.Write "</div>"
+			end if
+			Response.Write "</div>"
+		Response.Write "</div>"
+
+	Response.Write "</div>"
+'########### /ÖZEL İŞLEM
 
 
 
@@ -532,37 +587,79 @@ Response.Write "</div>"
 		koliID			=	$('#koliSec').val();
 		koliUrunMiktar	=	$('#koliUrunMiktar').val();
 
-if(islem == 'silinecek'){var baslik = 'Kayıt silinsin mi?'}else{var baslik = 'Koli bilgileri kayıt edilsin mi?'};
-	//	alert(secilenReceteID)
-		swal({
-			title: baslik,
-			type: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#DD6B55',
-			confirmButtonText: 'evet',
-			cancelButtonText: 'hayır'
-		}).then(
-			function(result) {
-			// handle Confirm button click
-			// result is an optional parameter, needed for modals with input
-			
-				$.post("/stok/koliIndexEkle.asp", {
-					islem:islem,
-					koliIndexID:koliIndexID,
-					stokID:stokID,
-					koliID:koliID,
-					koliUrunMiktar:koliUrunMiktar}, function(data){
-						$('#koliTanimlari').load('/stok/stok_yeni.asp?gorevID='+stokID64+' #koliTanimlari > *');
-						toastr.success(data);
-					});
-				
-				
-}, //confirm buton yapılanlar
-			function(dismiss) {
-			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-			} //cancel buton yapılanlar		
+		if(islem == 'silinecek'){var baslik = 'Kayıt silinsin mi?'}else{var baslik = 'Koli bilgileri kayıt edilsin mi?'};
+			//	alert(secilenReceteID)
+				swal({
+					title: baslik,
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#DD6B55',
+					confirmButtonText: 'evet',
+					cancelButtonText: 'hayır'
+				}).then(
+					function(result) {
+					// handle Confirm button click
+					// result is an optional parameter, needed for modals with input
+					
+						$.post("/stok/koliIndexEkle.asp", {
+							islem:islem,
+							koliIndexID:koliIndexID,
+							stokID:stokID,
+							koliID:koliID,
+							koliUrunMiktar:koliUrunMiktar}, function(data){
+								$('#koliTanimlari').load('/stok/stok_yeni.asp?gorevID='+stokID64+' #koliTanimlari > *');
+								toastr.success(data);
+							});
+						
+						
+		}, //confirm buton yapılanlar
+				function(dismiss) {
+				// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+				} //cancel buton yapılanlar		
 		);//swal sonu
 		}
+
+	function ozelIslem(islem, hareketmiktar){
+
+		stokID64		=	$('#stokID64').val();
+		stokID			=	$('#stokID').val();
+		girisDepoSec	=	$('#girisDepoSec').val();
+		lot				=	$('#lot').val();
+		lotSKT			=	$('#lotSKT').val();
+
+		if(islem == 'miktarCik'){var baslik = hareketmiktar + ' ürün stoğundan düşülecek?'}else{var baslik = hareketmiktar + ' miktar ürün stoğuna eklenecek.'};
+			//	alert(secilenReceteID)
+				swal({
+					title: baslik,
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#DD6B55',
+					confirmButtonText: 'evet',
+					cancelButtonText: 'hayır'
+				}).then(
+					function(result) {
+					// handle Confirm button click
+					// result is an optional parameter, needed for modals with input
+					
+						$.post("/stok/stokHareket_ekle.asp", {
+							islem:islem,
+							stokID:stokID,
+							lot:lot,
+							lotSKT:lotSKT,
+							girisDepoSec:girisDepoSec,
+							hareketmiktar:hareketmiktar}, function(data){
+								$('#ozelIslem').load('/stok/stok_yeni.asp?gorevID='+stokID64+' #ozelIslem > *');
+								toastr.success(data);
+							});
+						
+						
+		}, //confirm buton yapılanlar
+				function(dismiss) {
+				// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+				} //cancel buton yapılanlar		
+		);//swal sonu
+		}
+		
 
 
 
@@ -574,8 +671,21 @@ if(islem == 'silinecek'){var baslik = 'Kayıt silinsin mi?'}else{var baslik = 'K
 			stokKodu:stokKodu,
 			stokAd:stokAd
 		});
+	}
 
-		}
+	function lotSKTgetir(){
+		var stokID		=	$('#stokID').val();
+		var lot			=	$('#lot').val();
+
+		$.post("/stok/lot_skt_bul.asp", {
+			stokID:stokID,
+			lot:lot
+		}, function(data){
+			$('#lotSKT').val(data);
+			if(data != ''){$('#lotSKT').attr('readonly', true)}else{$('#lotSKT').attr('readonly', false)};
+			});
+	}
+		
 </script>
 
 <%

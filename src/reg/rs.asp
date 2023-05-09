@@ -7,7 +7,6 @@ if sbsv5 <> "" then
 end if
 
 
-
 if sayfasonu = True then
 else
 	%><!--#include virtual="/temp/sabitler.asp" --><%

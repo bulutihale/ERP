@@ -101,8 +101,8 @@ end if
 				call formselectv2("girisDepoID","","","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('malKabul','iade')""")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-3 col-sm-12 my-1"">"
-				Response.Write "<span class=""badge badge-success rounded-left"">Atanan LOT</span>"
-				call forminput("atananLot",atananLot,"","Atanan LOT","","autocompleteOFF","atananLot","readonly")
+				Response.Write "<span class=""badge badge-success rounded-left"">Atanan LOT</span> <span class=""icon brick-edit ml-3 pointer"" id=""lotGetir"" title=""LOT hesapla""></span> "
+				call forminput("atananLot",atananLot,"","Atanan LOT","","autocompleteOFF","atananLot","")
 			Response.Write "</div>"
 			Response.Write "<div class=""w-100""></div>"
 			Response.Write "<div class=""col-lg-3 col-sm-12 my-1"">"
@@ -132,7 +132,7 @@ end if
 
 <script>
 	$(document).ready(function() {
-		$('#girisDepoID').on('change', function(){
+		$('#lotGetir').on('click', function(){
 			var depoID		=	$('#girisDepoID').val();
 			var lotTakip	=	$('#lotTakip').val();
 			if(lotTakip == 1){

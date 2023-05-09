@@ -59,7 +59,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("stokID")			=	stokID
 					rs1("stokHareketTipi")	=	"T"
 					rs1("lot")				=	lot
-					rs1("lotSKT")			=	lotSKT
+					rs1("lotSKT")			=	tarihsql(lotSKT)
 					rs1("ajandaID")			=	ajandaID
 				rs1.update
 				stokHareketID	=	rs1("stokHareketID")
@@ -87,7 +87,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("stokHareketTipi")	=	"T"
 					rs1("refHareketID")		=	stokHareketID
 					rs1("lot")				=	lot
-					rs1("lotSKT")			=	lotSKT
+					rs1("lotSKT")			=	tarihsql(lotSKT)
 					rs1("ajandaID")			=	ajandaID
 				rs1.update
 			rs1.close

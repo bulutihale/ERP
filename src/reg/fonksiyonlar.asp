@@ -4317,8 +4317,10 @@ function lotOlusturFunc(depoID)
 	if depoLotTemplate <> "" then
 		sonlot1 = instr(depoLotTemplate,"[") +1
 		sonlot2 = right(sonlot,(len(depoLotTemplate)-sonlot1))
-		sonlot2 = int(sonlot2)
-		yenilot = sonlot2+1
+		' 	sonlot2 = int(sonlot2)
+		if isnumeric(sonlot2) then
+			yenilot = sonlot2+1
+		end if
 		yenilotformat = depoLotTemplate
 		yenilotformat = replace(yenilotformat,"YYYY",yil)
 		yenilotformat = replace(yenilotformat,"YY",right(yil,2))
@@ -4947,7 +4949,7 @@ end function
 		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate") 	=	1
 		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpusessl")      		=	mg_smtpSSL 
 		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendusername")    		=	mg_gonderenAdres
-		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")			=	"sgxuewlv12!!@3"
+		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/sendpassword")			=	mg_gonderenAdresSifre
 		objConfig.Fields("http://schemas.microsoft.com/cdo/configuration/smtpconnectiontimeout")=	60
 
 		objConfig.Fields.Update

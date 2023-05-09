@@ -19,12 +19,15 @@
 	aciklama		=   Request.Form("aciklama")
     belgeNo			=   Request.Form("belgeNo")
 	belgeTarih		=   Request.Form("belgeTarih")
+	belgeTarih		=	tarihsql(belgeTarih)
 	stokID			=   Request.Form("stokID")
     cariID	 		=   Request.Form("cariSec")
     girisTarih		=   Request.Form("girisTarih")
+	girisTarih		=	tarihsql(girisTarih)
 	siparisKalemID	=	Request.Form("siparisKalemID")
 	lot				=	Request.Form("lot")
 	lotSKT			=	Request.Form("lotSKT")
+	lotSKT			=	tarihsql(lotSKT)
 	
     modulAd =   "Mal Kabul"
     modulID =   "89"
@@ -38,8 +41,9 @@
 	rs.close
 
 
-
 Response.Flush()
+
+
 
 call logla("Mal Kabul Belge Kayıt:" & belgeNo & "")
 
@@ -67,6 +71,7 @@ end if
 
 '################### stok hareket tablosuna mal kabul kaydı yaz
 	
+
 	sorgu = "SELECT top(1) * FROM stok.stokHareket"
 	rs.open sorgu, sbsv5, 1, 3
 		rs.addnew
@@ -90,7 +95,7 @@ end if
 			rs("lot")				=	lot
 			rs("lotSKT")			=	lotSKT
 		rs.update
-		rs.close
+		rs.close 
 
 '################### stok hareket tablosuna mal kabul kaydı yaz
 

@@ -113,7 +113,7 @@ else
 		rs("kid")			=	kid
 		rs("siparisAd")		=	siparisAd
 		rs("kalemNot")		=	kalemNot
-		rs("siparisTarih")	=	siparisTarih
+		rs("siparisTarih")	=	tarihsql(siparisTarih)
 		rs("cariID")		=	cariID
 		rs("stokID")		=	stokID
 		rs("miktar")		=	miktar

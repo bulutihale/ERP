@@ -4,14 +4,24 @@ if kid = 2 then
 	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
 end if
-if kid = 31 then
+if kid = 5 then
 	stokSifirGoster="on"
 	stokSilinmislerGoster="on"
-	teklifOlusuncaListeyeDon="on"
+end if
+if kid = 27 then
+	stokSilinmislerGoster="off"
+	stokSifirGoster="off"
+end if
+if kid = 28 then
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+end if
+if kid = 29 then
+	stokSifirGoster="off"
+	stokSilinmislerGoster="off"
 end if
 if kid = 32 then
-	stokSifirGoster="on"
-	stokSilinmislerGoster="on"
-	teklifOlusuncaListeyeDon="on"
+	stokSifirGoster="off"
+	stokSilinmislerGoster="off"
 end if
 %>

@@ -24,7 +24,7 @@ if firmaID = 5 then
 		sb_cdnUrl = sb_mainUrlOnEk & mainUrl & "/cdn"
 		sb_konum =	"Izmir"
 		sb_yetkiliPersonel = ""
-		sb_ssl = True
+		sb_ssl = False
 		'## SERVİSLER
 			sb_activeuserUrl =	"/activeuser.asp"
 			sb_activeuserTime = 30
@@ -59,7 +59,7 @@ if firmaID = 5 then
 
 
 	'#### STOK bilgieri dış db den çekilecekse
-		firmaStokDBvar = 1
+		firmaStokDBvar = 0
 		firmaStokSunucu = "."
 		firmaStokDB = "TIO2022"
 		firmaStokdbUSR = "sbs_bulutihale"
@@ -73,7 +73,7 @@ if firmaID = 5 then
 
 
 	'#### CARİ bilgieri dış db den çekilecekse
-		firmaCariDBvar = 1
+		firmaCariDBvar = 0
 		firmaCariSunucu = "."
 		firmaCariDB = "TIO2022"
 		firmaCaridbUSR = "sbs_bulutihale"
