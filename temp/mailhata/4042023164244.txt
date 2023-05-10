@@ -1,5 +1,0 @@
-﻿Number of attachments: 1
-  attachments: 
-  {
-    Encoding "C:\web\erp.sbstasarim.com\backup\yedek4042023164145.bak"
-  }

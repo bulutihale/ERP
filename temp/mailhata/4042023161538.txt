@@ -1,3 +1,0 @@
-﻿Number of attachments: 1
-  attachments: 
-  {
