@@ -1,0 +1,73 @@
+﻿
+
+.fontkucuk {font-size:small !important;}
+.fontkucuk2 {font-size:x-small !important;}
+.bold {font-weight:bold !important;}
+
+/*div'e scroll ekle*/
+.scroll-ekle {max-height: calc(80vh - 210px);overflow-y: hidden;}
+.scroll-ekle:hover {overflow-y: auto;}
+/*div'e scroll ekle*/
+
+/*div'e scroll ekle 2 */
+.scroll-ekle2 {max-height: calc(57vh - 206px);overflow-y: auto;}
+/*div'e scroll ekle*/
+
+/*div'e scroll ekle 3 */
+.scroll-ekle3 {max-height: calc(70vh);overflow-y: auto;}
+/*div'e scroll ekle*/
+
+/* div hover renk değiştirme */
+.hoverGel:hover {color:#FFFFFF;background-color:#863F40;}
+.hoverGel:hover .text-danger {color:#FFFFFF !important;}
+.hoverGel a:link, a:visited, a:hover, a:active{color:inherit;text-decoration: none;}
+/* div hover renk değiştirme */
+
+/*checkbox boyutu için ayarlama*/
+	.chck30{width: 30px;    height: 30px;}
+	.chck20{width: 20px;    height: 20px;}
+/*checkbox boyutu için ayarlama*/
+
+
+/*cursor listesi*/
+	.alias {cursor: alias;}
+	.all-scroll {cursor: all-scroll;}
+	.auto {cursor: auto;}
+	.cell {cursor: cell;}
+	.context-menu {cursor: context-menu;}
+	.col-resize {cursor: col-resize;}
+	.copy {cursor: copy;}
+	.crosshair {cursor: crosshair;}
+	.default {cursor: default;}
+	.e-resize {cursor: e-resize;}
+	.ew-resize {cursor: ew-resize;}
+	.grab {cursor: -webkit-grab; cursor: grab;}
+	.grabbing {cursor: -webkit-grabbing; cursor: grabbing;}
+	.help {cursor: help;}
+	.move {cursor: move;}
+	.n-resize {cursor: n-resize;}
+	.ne-resize {cursor: ne-resize;}
+	.nesw-resize {cursor: nesw-resize;}
+	.ns-resize {cursor: ns-resize;}
+	.nw-resize {cursor: nw-resize;}
+	.nwse-resize {cursor: nwse-resize;}
+	.no-drop {cursor: no-drop;}
+	.none {cursor: none;}
+	.not-allowed {cursor: not-allowed;}
+	.pointer {cursor: pointer;}
+	.parmak {cursor: pointer;}
+	.progress {cursor: progress;}
+	.row-resize {cursor: row-resize;}
+	.s-resize {cursor: s-resize;}
+	.se-resize {cursor: se-resize;}
+	.sw-resize {cursor: sw-resize;}
+	.text {cursor: text;}
+	.url {cursor: url(myBall.cur),auto;}
+	.w-resize {cursor: w-resize;}
+	.wait {cursor: wait;}
+	.zoom-in {cursor: zoom-in;}
+	.zoom-out {cursor: zoom-out;}
+/*cursor listesi*/
+
+
+.height-100 {height: 100px !important;}
