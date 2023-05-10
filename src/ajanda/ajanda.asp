@@ -444,7 +444,7 @@ end if
 			else if($(this).hasClass('geri')){
 				ayHareket = -1
 				}
-			else{ayHareket = 0};
+			else{ayHareket = 0}; 
 			
 			$('#ajandaAnaDIV').fadeOut('slow', function () {
 				$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?isTur='+isTur+'&yer='+yer+'&silAjandaID='+silAjandaID+'&siparisKalemID='+siparisKalemID+'&ayHareket='+ayHareket+'&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *').fadeIn('slow');
