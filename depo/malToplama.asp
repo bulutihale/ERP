@@ -1,0 +1,62 @@
+﻿<!--#include virtual="/reg/rs.asp" --><%
+
+
+'###### ANA TANIMLAMALAR
+    call sessiontest()
+    kid		=	kidbul()
+	modulAd =   "Depo"
+    Response.Flush()
+'###### ANA TANIMLAMALAR
+
+
+'##### SEVK EMRİ LİSTESİ
+    if sb_depoEntegrasyon = "Netsis" then
+        sorgu = "SELECT" & vbcrlf
+        sorgu = sorgu & "CARI_KOD, CARI_ISIM, SEVKNO, MAX(SEVKTARIHI) SEVKTARIHI, SEHIRADI, ILCEADI, dbo.NTS_WM_PAKETLEME_GRUBU(SIPINCKEY,SEVKNO) AS PAKETLEME_GRUBU, USERID, SUM(HACIM) HACIM, SUM(AGIRLIK) AGIRLIK, case when SUM(PLANMIK) = 0 then 0 ELSE SUM(TOPLANANMIK)/SUM(PLANMIK)*100 END as PROGRESS, TOPLAMA_ID, TOPLAMA_YAPAN_KULLANICI,KONTROL_YAPAN_KULLANICI, MAX(PROJE_KODU) AS PROJE_KODU, SUM(PLANMIK) AS KALEM_ADEDI, COUNT(*) KALEM_SAYISI, RUT, MAX(YUKLEMETARIHI) YUKLEMETARIHI, MAX(TOPLAMATARIHI) TOPLAMATARIHI, dbo.NTS_WM_SEVKIYAT_GRUBU(SIPINCKEY,SEVKNO) AS SEVKIYATGRUBU, dbo.NTS_WM_SEVKIYAT_NOTE (MAX(SIPINCKEY),MAX(SEVKNO)) AS SEVKIYATNOTU,  max(SEVKEMRIACIKLAMA) as SEVKEMRIACIKLAMA, SUM(PLANMIK2) AS KALEM_ADEDI2, SUM(PLANMIK3) AS KALEM_ADEDI3, CASE WHEN MAX(CAST(BLOKE AS INT)) = 1 THEN 'Bloke' ELSE 'Serbest' END AS BLOKE,  DATEDIFF(MINUTE, MAX(TOPLAMA_ATAMA), GETDATE()) SURE, MAX(KOLI_ADEDI) AS KOLI_ADEDI, PAKETLEME_ID, KILIT_DURUMU, dbo.NTS_WM_SEVKIYAT_NOTE2 (MAX(SIPINCKEY),MAX(SEVKNO)) AS SEVKIYATNOTU2, ISLEM_ID, SEPET_NUMARALARI, KONTROL_ACIKLAMA,MBT_NO" & vbcrlf
+        sorgu = sorgu & "FROM NTS_WM_SEVKPLAN_TERM WITH (NOLOCK)" & vbcrlf
+        sorgu = sorgu & "WHERE" & vbcrlf
+        sorgu = sorgu & "USERID IS NOT NULL AND DURUM = 'H' AND SUBE_KODU = 0 AND DEPO_KODU IN(60) AND ISNULL(MBT_NO,0) = 0" & vbcrlf
+        sorgu = sorgu & "GROUP BY CARI_KOD, CARI_ISIM, SEVKNO, SEHIRADI, ILCEADI, dbo.NTS_WM_PAKETLEME_GRUBU(SIPINCKEY,SEVKNO), USERID, TOPLAMA_ID, TOPLAMA_YAPAN_KULLANICI,KONTROL_YAPAN_KULLANICI, RUT, dbo.NTS_WM_SEVKIYAT_GRUBU(SIPINCKEY,SEVKNO),PAKETLEME_ID, KILIT_DURUMU, ISLEM_ID, SEPET_NUMARALARI, KONTROL_ACIKLAMA,MBT_NO" & vbcrlf
+    end if
+'##### SEVK EMRİ LİSTESİ
+
+
+%><!--#include virtual="/reg/rs.asp" -->
+
+
+ERP 
+
+
+MOBİL EKRAN
+
+
+mal deposu
+toplama deposu
+sevkiyat deposu
+
+
+mal toplama
+
+
+netsis ile konuşma
+
+
+TOPLANILACAK SİPARİŞLER [netsis senkron]
+
+    sipariş seç
+
+SİPARİŞ KALEMLERİ [netsis senkron]
+    -- stok bakiye bul [netsis senkron]
+
+    kalem > hücre - hangi hücrede ne kadar var
+
+    kalem kalem topla
+
+    fiş sonu
+
+    barkod basımı
+
+    irsaliye kesimi
+
+
+her işlem sonu netsis sthar depo transferi

@@ -1,0 +1,56 @@
+﻿The message was undeliverable. All servers failed to receive the message
+Number of attachments: 1
+  attachments: 
+  {
+    Encoding "C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\src\temp\yedek25092022170245.bak"
+  }
+.execute()
+{
+  Trying server mail:212.68.61.84
+  <- 220 sbstasarim.com ESMTP IceWarp 10.4.5; Sun, 25 Sep 2022 19:25:18 +0300
+  -> EHLO LH5139
+  <- 250-sbstasarim.com Hello LH5139 [212.68.61.84], pleased to meet you.
+250-ENHANCEDSTATUSCODES
+250-SIZE 104857600
+250-EXPN
+250-ETRN
+250-ATRN
+250-DSN
+250-CHECKPOINT
+250-8BITMIME
+250-AUTH PLAIN LOGIN DIGEST-MD5 CRAM-MD5 GSSAPI
+250 HELP
+  -> AUTH LOGIN
+Sending authentication data..
+  -> MAIL FROM:<teknik@sbstasarim.comm>
+ <- 501 5.7.1 <teknik@sbstasarim.comm>... Permission denied
+Error: 501 5.7.1 <teknik@sbstasarim.comm>... Permission denied
+Number of attachments: 1
+  attachments: 
+  {
+    Encoding "C:\HostingSpaces\sbstasarim3\tio.sbstasarim.com\src\temp\yedek25092022170245.bak"
+  }
+.execute()
+{
+  Trying server mail:212.68.61.84
+  <- 220 sbstasarim.com ESMTP IceWarp 10.4.5; Sun, 25 Sep 2022 19:25:18 +0300
+  -> EHLO LH5139
+  <- 250-sbstasarim.com Hello LH5139 [212.68.61.84], pleased to meet you.
+250-ENHANCEDSTATUSCODES
+250-SIZE 104857600
+250-EXPN
+250-ETRN
+250-ATRN
+250-DSN
+250-CHECKPOINT
+250-8BITMIME
+250-AUTH PLAIN LOGIN DIGEST-MD5 CRAM-MD5 GSSAPI
+250 HELP
+  -> AUTH LOGIN
+Sending authentication data..
+  -> MAIL FROM:<teknik@sbstasarim.comm>
+ <- 501 5.7.1 <teknik@sbstasarim.comm>... Permission denied
+Error: 501 5.7.1 <teknik@sbstasarim.comm>... Permission denied
+
+  1 of 1 servers failed
+}
