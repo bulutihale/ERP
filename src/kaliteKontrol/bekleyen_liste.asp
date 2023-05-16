@@ -10,6 +10,8 @@
     opener  =   Request.Form("opener")
     gorevID =   Request.QueryString("gorevID")
 	aramaad	=	Request.Form("aramaad")
+	t1		=	Request.Form("t1")
+	t2		=	Request.Form("t2")
     hata    =   ""
     modulAd =   "Kalite Kontrol"
     personelID =   gorevID
@@ -70,6 +72,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row"">"
 
 		Response.Write "<div class=""table-responsive"">"
+		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/satinAlma/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark text-center""><tr>"
 		Response.Write "<th scope=""col"">Giriş Tarih</th>"
 		Response.Write "<th scope=""col"">Belge No</th>"

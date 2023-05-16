@@ -22,7 +22,7 @@
 	if gorevID <> "" then
 		sorgu = "SELECT" & vbcrlf
 		sorgu = sorgu & "stok.stok.*" & vbcrlf
-		sorgu = sorgu & ",portal.birimler.uzunBirim" & vbcrlf
+		sorgu = sorgu & ",portal.birimler.uzunBirim as seciliBirim" & vbcrlf
 		sorgu = sorgu & ",stok.FN_stokHareketKontrol(" & firmaID & ", " & gorevID & ") as hareketKontrol" & vbcrlf
 		sorgu = sorgu & " FROM stok.stok"
 		sorgu = sorgu & " LEFT JOIN portal.birimler ON stok.stok.anaBirimID = portal.birimler.birimID"
@@ -36,7 +36,7 @@
 			kkDepoGiris		=	rs("kkDepoGiris")
 			silindi			=	rs("silindi")
 			anaBirimID		=	rs("anaBirimID")
-			uzunBirim		=	rs("uzunBirim")
+			seciliBirim		=	rs("seciliBirim")
 			hareketKontrol	=	rs("hareketKontrol")
 			rafOmru			=	rs("rafOmru")
 			lotTakip		=	rs("lotTakip")
@@ -284,7 +284,7 @@ Response.Write "<div class=""tab-content"">"
 								Response.Write "<div class=""col-sm-3 my-1"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürün Ana Birimi","","") & "</span>"
 									if hareketKontrol > 0 then
-										Response.Write "<div class=""mt-2"">" & uzunBirim & "<span class=""text-danger pointer ml-2"" onclick=""swal('" & translate("Ürün hareket görmüş, Ana birim değiştirilemez.","","") & "','')""><i class=""mdi mdi-information-outline""></i></span></div>"
+										Response.Write "<div class=""mt-2"">" & seciliBirim & "<span class=""text-danger pointer ml-2"" onclick=""swal('" & translate("Ürün hareket görmüş, Ana birim değiştirilemez.","","") & "','')""><i class=""mdi mdi-information-outline""></i></span></div>"
 										call formhidden("anaBirimID",anaBirimID,"","","","","anaBirimID","")
 									else
 										call formselectv2("anaBirimID",anaBirimID,"","","","","anaBirimID",birimDegerler,"")
@@ -344,7 +344,7 @@ Response.Write "<div class=""tab-content"">"
 					call forminput("katsayi2Deger",katsayi2Deger,"","","","","katsayi2Deger","")
 				Response.Write "</div>"
 				Response.Write "<div class=""col-3 bold h3 mt-1"">"
-					Response.Write uzunBirim
+					Response.Write seciliBirim
 				Response.Write "</div>"
 				if yetkiKontrol >= 8 then
 					Response.Write "<div id=""birimKatsayiKayit"" onclick=""birimKatsayiKayit('yeniKayit',0)"" class=""col-1 btn btn-info text-center rounded"">" & translate("Ekle","","") & "</div>"

@@ -20,7 +20,6 @@
 		rs.open sorgu, sbsv5,1,3
 					
 			lotSKT	=	rs("lotSKT")
-
 		Response.Write  lotSKT
 
 	'## veritabanı

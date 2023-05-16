@@ -101,7 +101,7 @@ end if
 
 call bildirim(2,"Ürün Bildirimi",stokKodu & " Ürün girişi yapıldı",1,kid,"2","","","","")
 
-call mailGonderCDO("deneme",stokKodu & " Ürün girişi yapıldı", "","","2")
+call mailGonderCDO("Mal Kabul Bildirim", miktar & " " & miktarBirim & " " & stokKodu & " Ürün girişi yapıldı", "","","2")
 
 call toastrCagir("Mal kabul ürün kaydı yapıldı.", "OK", "right", "success", "otomatik", "")
 

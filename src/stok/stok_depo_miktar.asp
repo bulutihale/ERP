@@ -38,7 +38,6 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) > 0"
 			sorgu = sorgu & " GROUP BY t2.depoID, t1.stokKodu, t1.stokID, t3.depoAd, t1.stokAd, t2.lot, t2.miktarBirim, t4.siparisID, t6.cariAd,t2.lotSKT "
 			rs.open sorgu, sbsv5, 1, 3
-
 '###### ARAMA FORMU
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 2 AND not rs.EOF then
