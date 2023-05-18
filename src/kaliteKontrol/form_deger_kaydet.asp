@@ -31,18 +31,9 @@ yetkiKontrol = yetkibul(modulAd)
 			formID		=	rs("formID")
 		rs.close
 
-		sorgu = "SELECT * FROM kalite.degerForm WHERE formID = " & formID & " AND ayiriciTabloAd = '" & ayiriciTabloAd & "' AND ayiriciTabloID = " & ayiriciTabloID
-		rs.open sorgu, sbsv5, 1, 3
-			if rs.recordcount = 0 then
-				rs.addnew
-					rs("kid")				=	kid
-					rs("formID")			=	formID
-					rs("ayiriciTabloAd")	=	ayiriciTabloAd
-					rs("ayiriciTabloID")	=	ayiriciTabloID
-				rs.update
-			end if
-			degerFormID	=	rs("degerFormID")
-		rs.close
+	'##### kalite.degerForm tablosunda form değerlerinin kayıt edildiği tabloya kayıt yaz	
+		degerFormID	=	degerFormIDbul(formID, ayiriciTabloAd, ayiriciTabloID)
+	'##### /kalite.degerForm tablosunda form değerlerinin kayıt edildiği tabloya kayıt yaz
 
 		sorgu = "SELECT * FROM kalite.degerSutun WHERE sutunID  = " & sutunID & " AND degerFormID = " & degerFormID
 		rs.open sorgu, sbsv5, 1, 3

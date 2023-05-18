@@ -81,9 +81,13 @@ yetkiKontrol = yetkibul(modulAd)
 	'##### /üretilen ürüne ait bilgileri al
 
 			sorgu = "SELECT ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) as uretilmisMiktar,"
-			sorgu = sorgu & " CASE WHEN ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & " = stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") THEN 'tamam'"
-			sorgu = sorgu & " WHEN ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & " > stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") THEN 'fazla'"
-			sorgu = sorgu & " ELSE 'eksik' END as miktarTamamKontrol"
+			sorgu = sorgu & " CASE"
+			 	sorgu = sorgu & " WHEN ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & ""
+				sorgu = sorgu & " = (stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") * stok.FN_receteMiktarBul ("&ajandaID&")) THEN 'tamam'"
+				sorgu = sorgu & " WHEN"
+				sorgu = sorgu & " ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & ""
+				sorgu = sorgu & " > (stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") * stok.FN_receteMiktarBul ("&ajandaID&"))"
+			sorgu = sorgu & " THEN 'fazla' ELSE 'eksik' END as miktarTamamKontrol"
 			rs.open sorgu,sbsv5,1,3
 				uretilmisMiktar		=	rs("uretilmisMiktar")
 				miktarTamamKontrol	=	rs("miktarTamamKontrol")
@@ -105,7 +109,7 @@ yetkiKontrol = yetkibul(modulAd)
 	sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
 	sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & " AND t1.ajandaID = " & ajandaID & ""
 	sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND t1.silindi = 0"
-	sorgu = sorgu & " ORDER BY t1.stokHareketID DESC"			
+	sorgu = sorgu & " ORDER BY t1.stokHareketID DESC"		
 	rs.open sorgu,sbsv5,1,3
 
 	a = 0
@@ -209,7 +213,6 @@ yetkiKontrol = yetkibul(modulAd)
 					rs.movenext
 				next
 			rs.close
-
 
 			if miktarTamamKontrol = "tamam" then
 				sorgu = "UPDATE portal.ajanda SET bitisZaman = getdate(), tamamlandi = 1  WHERE id = " & ajandaID & " AND silindi = 0"

@@ -133,6 +133,7 @@
 							Response.Write "</tr>"
 						Response.Write "</thead><tbody>"
 							for i = 1 to rs.recordcount
+							Response.Flush()
 								stokID			=	rs("stokID")
 								stokID64	 	=	stokID
 								stokID64		=	base64_encode_tr(stokID64)

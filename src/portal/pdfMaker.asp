@@ -13,8 +13,14 @@ response.codepage=65001
 			cariID64				=	Request.Form("cariID64")
 			formKod					=	Request.Form("formKod")
 			ayiriciTabloAd			=	Request.Form("ayiriciTabloAd")
-			ayiriciTabloID			=	Request.Form("ayiriciTabloID")
+			ayiriciTabloID64		=	Request.Form("ayiriciTabloID")
+			ayiriciTabloID			=	ayiriciTabloID64
+			ayiriciTabloID			=	base64_decode_tr(ayiriciTabloID)
 			kaliteFormID			=	Request.Form("kaliteFormID")
+
+	'##### kalite.degerForm tablosunda form değerlerinin kayıt edildiği tabloya kayıt yaz	
+		degerFormID	=	degerFormIDbul(kaliteFormID, ayiriciTabloAd, ayiriciTabloID)
+	'##### /kalite.degerForm tablosunda form değerlerinin kayıt edildiği tabloya kayıt yaz
 
 
 			if landscapeDeger = "evet" then
@@ -50,8 +56,8 @@ asp_dosya	=	asp_dosya & serverPort
 asp_dosya	=	asp_dosya & "/" & pdfKaynakYol & "/" & pdfKaynakDosya & ".asp"
 
 if pdfKaynakDosya = "kalite_form_yap" then
-	asp_dosya		=	asp_dosya & "?pdf=evet&stokID="&stokID64&"&cariID="&cariID64&"&formKod="&formKod&"&ayiriciTabloAd="&ayiriciTabloAd&"&ayiriciTabloID="&ayiriciTabloID&"&kaliteFormID="&kaliteFormID
-	dosyaAd			=	ayiriciTabloAd & "_" & ayiriciTabloID & ".pdf"
+	asp_dosya		=	asp_dosya & "?pdf=evet&stokID="&stokID64&"&cariID="&cariID64&"&formKod="&formKod&"&ayiriciTabloAd="&ayiriciTabloAd&"&ayiriciTabloID="&ayiriciTabloID64&"&kaliteFormID="&kaliteFormID
+	dosyaAd			=	ayiriciTabloAd & "_" & ayiriciTabloID64 & ".pdf"
 	klasorAd		=	pdfKayitYol & "/" & formKod
 	landscapeDeger	=	landscapeDeger
 end if
@@ -91,12 +97,12 @@ end if
 	end if
 
 
+doyaPath = "/temp/dosya/" & firmaID & "/" & pdfKayitYol & "/" & formKod & "/"
 
+Doc.Save Server.MapPath(doyaPath & dosyaAd), true
 
-Doc.Save Server.MapPath("/temp/dosya/" & firmaID & "/" & pdfKayitYol & "/" & formKod & "/" & dosyaAd), true
-
-
-
+sorgu = "UPDATE kalite.degerForm SET dosyaPath = '" & doyaPath & "', dosyaAd = '" & dosyaAd & "' WHERE ayiriciTabloAd = '" & ayiriciTabloAd & "' AND ayiriciTabloID = " & ayiriciTabloID
+rs.open sorgu, sbsv5, 3, 3
 
 %>
 

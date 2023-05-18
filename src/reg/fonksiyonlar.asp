@@ -5108,10 +5108,27 @@ end function
 
 
 
+function degerFormIDbul(byVal formID, byVal ayiriciTabloAd, byVal ayiriciTabloID)
 
+'		sorgu = "SELECT * FROM kalite.degerForm WHERE formID = " & formID & " AND ayiriciTabloAd = '" & ayiriciTabloAd & "' AND ayiriciTabloID = " & ayiriciTabloID
+		sorgu = "SELECT * FROM kalite.degerForm WHERE ayiriciTabloAd = '" & ayiriciTabloAd & "' AND ayiriciTabloID = " & ayiriciTabloID
+		rs.open sorgu, sbsv5, 1, 3
+			if rs.recordcount = 0 then
+				rs.addnew
+					rs("kid")				=	kid
+					rs("formID")			=	formID
+					rs("ayiriciTabloAd")	=	ayiriciTabloAd
+					rs("ayiriciTabloID")	=	ayiriciTabloID
+				rs.update
+			else
+				rs("formID")	=	formID
+				rs.update
+			end if
+	
+		degerFormIDbul	=	rs("degerFormID")
 
-
-
+		rs.close
+end function
 
 
 

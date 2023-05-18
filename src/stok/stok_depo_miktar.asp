@@ -24,20 +24,57 @@ call logla("Stok Depo Miktarları Detay")
 yetkiKontrol = yetkibul(modulAd)
 
 
-            sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayGB(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktarGB,"
-			sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar,"
-			sorgu = sorgu & " t3.depoAd, t2.lot, t2.miktarBirim, t6.cariAd, t2.lotSKT as lotSKT"
-			sorgu = sorgu & " FROM stok.stok t1"
-			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
-			sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
-			sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t4 ON  t2.siparisKalemID = t4.id"
-			sorgu = sorgu & " LEFT JOIN teklif.siparis t5 ON t4.siparisID = t5.sipID"
-  			sorgu = sorgu & " LEFT JOIN cari.cari t6 ON t5.cariID = t6.cariID"
-			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t2.silindi = 0"
-			sorgu = sorgu & " AND stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) > 0"
-			sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) > 0"
-			sorgu = sorgu & " GROUP BY t2.depoID, t1.stokKodu, t1.stokID, t3.depoAd, t1.stokAd, t2.lot, t2.miktarBirim, t4.siparisID, t6.cariAd,t2.lotSKT "
-			rs.open sorgu, sbsv5, 1, 3
+            ' sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayGB(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktarGB,"
+			' sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar,"
+			' sorgu = sorgu & " t3.depoAd, t2.lot, t2.miktarBirim, t6.cariAd, t2.lotSKT as lotSKT"
+			' sorgu = sorgu & " FROM stok.stok t1"
+			' sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
+			' sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
+			' sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t4 ON  t2.siparisKalemID = t4.id"
+			' sorgu = sorgu & " LEFT JOIN teklif.siparis t5 ON t4.siparisID = t5.sipID"
+  			' sorgu = sorgu & " LEFT JOIN cari.cari t6 ON t5.cariID = t6.cariID"
+			' sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t2.silindi = 0"
+			' sorgu = sorgu & " AND stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) > 0"
+			' sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) > 0"
+			' sorgu = sorgu & " GROUP BY t2.depoID, t1.stokKodu, t1.stokID, t3.depoAd, t1.stokAd, t2.lot, t2.miktarBirim, t4.siparisID, t6.cariAd,t2.lotSKT "
+
+
+
+sorgu = "SELECT"
+sorgu = sorgu & " t1.stokKodu,"
+sorgu = sorgu & " t1.stokAd,"
+sorgu = sorgu & " stok.FN_stokSayGB ( " & firmaID & ", t1.stokID, t2.depoID ) AS stokMiktarGB,"
+sorgu = sorgu & " stok.FN_stokSayDepoLot ( " & firmaID & ", t1.stokID, t2.depoID, t2.lot ) AS lotMiktar,"
+sorgu = sorgu & " t3.depoAd,"
+sorgu = sorgu & " t2.lot,"
+sorgu = sorgu & " t2.miktarBirim,"
+'sorgu = sorgu & " t6.cariAd,"
+sorgu = sorgu & " t2.lotSKT AS lotSKT"
+sorgu = sorgu & " FROM"
+sorgu = sorgu & " stok.stok t1"
+sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
+sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
+'sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t4 ON t2.siparisKalemID = t4.id"
+'sorgu = sorgu & " LEFT JOIN teklif.siparis t5 ON t4.siparisID = t5.sipID"
+'sorgu = sorgu & " LEFT JOIN cari.cari t6 ON t5.cariID = t6.cariID"
+sorgu = sorgu & " WHERE"
+sorgu = sorgu & " t1.firmaID = " & firmaID & ""
+sorgu = sorgu & " AND t1.stokID = " & gorevID & ""
+sorgu = sorgu & " AND t2.silindi = 0"
+sorgu = sorgu & " AND stok.FN_stokSayDepo ( " & firmaID & ", t1.stokID, t2.depoID ) > 0"
+sorgu = sorgu & " AND stok.FN_stokSayDepoLot ( " & firmaID & ", t1.stokID, t2.depoID, t2.lot ) > 0"
+sorgu = sorgu & " GROUP BY"
+sorgu = sorgu & " t2.depoID,"
+sorgu = sorgu & " t1.stokKodu,"
+sorgu = sorgu & " t1.stokID,"
+sorgu = sorgu & " t3.depoAd,"
+sorgu = sorgu & " t1.stokAd,"
+sorgu = sorgu & " t2.lot,"
+sorgu = sorgu & " t2.miktarBirim,"
+'sorgu = sorgu & " t4.siparisID,"
+'sorgu = sorgu & " t6.cariAd,"
+sorgu = sorgu & " t2.lotSKT"
+	rs.open sorgu, sbsv5, 1, 3
 '###### ARAMA FORMU
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 2 AND not rs.EOF then
@@ -73,7 +110,7 @@ yetkiKontrol = yetkibul(modulAd)
 					lotSKT			=	rs("lotSKT")
 					lotMiktar		=	rs("lotMiktar")
 					miktarBirim		=	rs("miktarBirim")
-					cariAd			=	rs("cariAd")
+					'cariAd			=	rs("cariAd")
 					Response.Write "<tr>"
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td>" & lotSKT & "</td>"
