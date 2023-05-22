@@ -84,7 +84,7 @@
             end if
         rs.close
     end if
-    if stokKodu <> "" then
+    if stokKodu <> "" AND gorevID = "" then
         sorgu = "Select top 1 manuelKayit from stok.stok where stokKodu = '" & stokKodu & "'" & vbcrlf
         sorgu = sorgu & "and stok.stok.firmaID in (select Id from portal.firma where portal.firma.anaFirmaID = " & firmaID & " OR portal.firma.Id = " & firmaID & ")" & vbcrlf
         rs.open sorgu, sbsv5, 1, 3

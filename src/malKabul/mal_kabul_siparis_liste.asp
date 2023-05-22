@@ -70,7 +70,7 @@
 					Response.Write "<tr class=""" & satirClass & """>"
 						Response.Write "<td class=""text-center"">" 
 							Response.Write "<div class=""satirSec btn btn-secondary border rounded p-0"""
-								Response.Write """ onclick=""$('.inputDIV').html('');$('#inputDIV"&siparisKalemID&"').load('/malKabul/mal_kabul_siparis_liste.asp #inputDIV"&siparisKalemID&" >*', {kalemSec:'ok',cariID:"&cariID&"});"" "
+								Response.Write """ onclick=""inputKontrol("&siparisKalemID&", "&cariID&");$('.inputDIV').html('');"" "
 								Response.Write """ data-sipkalemid=""" & siparisKalemID & """"
 								Response.Write """ data-stokid=""" & stokID & """"
 								Response.Write """ data-stokkodu=""" & stokKodu & """"
@@ -124,7 +124,7 @@
 								Response.Write "<div class=""col-lg-2"">"
 									Response.Write "<div class=""row h-100"">"
 										Response.Write "<div class=""col-lg-12 col-sm-12 h-100"">"
-											Response.Write "<button type=""submit"" class=""btn btn-warning rounded p-0 h-100"">KAYDET</button>"
+											Response.Write "<button id=""btn_"&siparisKalemID&""" type=""submit"" onclick=""working('btn_"&siparisKalemID&"','30','30')"" class=""btn btn-warning rounded p-0 h-100"">KAYDET</button>"
 										Response.Write "</div>"
 									Response.Write "</div>"
 								Response.Write "</div>"
@@ -158,28 +158,51 @@
 %>
 
 <script>
-	$(document).ready(function() {
-		
-		$('.satirSec').on('click', function() {
-			$('tr').removeClass('table-primary');
-			$(this).closest('tr').addClass('table-primary');
-			//mal_kabul.asp  de yer alan form'a gönder
-			$('#inpStokKodu').val($(this).attr('data-stokkodu'));
-			$('#inpMiktar').val($(this).attr('data-miktar'));
-			$('#inpSipKalemID').val($(this).attr('data-sipkalemid'));
-			$('#inpstokID').val($(this).attr('data-stokid'));
-			$('#inpTeslimEdilen').val($(this).attr('data-teslimedilen'));
-			$('#miktarbirim').attr('data-sart',$(this).attr('data-mikbirim'));
-			if($('#miktarbirim').hasClass('select2-hidden-accessible')){
-				$('#miktarbirim').val(null).trigger('change');
-				$('#miktarbirim').select2('destroy')
-			};//sadece siparişle aynı miktar birimini seçmek için
-		});
-		
-		
-		
-		
+
+
+$(document).ready(function() {
+	$('.satirSec').on('click', function() {
+		$('tr').removeClass('table-primary');
+		$(this).closest('tr').addClass('table-primary');
+		//mal_kabul.asp  de yer alan form'a gönder
+		$('#inpStokKodu').val($(this).attr('data-stokkodu'));
+		$('#inpMiktar').val($(this).attr('data-miktar'));
+		$('#inpSipKalemID').val($(this).attr('data-sipkalemid'));
+		$('#inpstokID').val($(this).attr('data-stokid'));
+		$('#inpTeslimEdilen').val($(this).attr('data-teslimedilen'));
+		$('#miktarbirim').attr('data-sart',$(this).attr('data-mikbirim'));
+		if($('#miktarbirim').hasClass('select2-hidden-accessible')){
+			$('#miktarbirim').val(null).trigger('change');
+			$('#miktarbirim').select2('destroy')
+		};//sadece siparişle aynı miktar birimini seçmek için
 	});
+
+});
+
+	function inputKontrol(siparisKalemID, cariID) {
+		
+	var belgeTarih		=	$('#belgeTarih').val();
+	var belgeNo			=	$('#belgeNo').val();
+	var girisTarih		=	$('#girisTarih').val();
+	var depoSec			=	$('#depoSec').val();
+	var hata 			= 	0
+
+	if(belgeTarih == ''){swal('','belge tarihi girilmedi');var hata = 1;return false}
+	if(belgeNo == ''){swal('','belge no girilmedi');var hata = 1;return false}
+	if(girisTarih == ''){swal('','giriş tarihi seçilmedi');var hata = 1;return false}
+	if(depoSec == null){swal('','giriş yapılacak depo seçilmedi');var hata = 1;return false}
+
+
+	if(hata == 0){
+		$('#inputDIV'+siparisKalemID).load('/malKabul/mal_kabul_siparis_liste.asp #inputDIV'+siparisKalemID+' >*', {kalemSec:'ok',cariID:cariID});
+		}else if(hata == 1){alert('hata')};
+
+
+				}
+		
+		
+		
+		
 	
 </script>
 

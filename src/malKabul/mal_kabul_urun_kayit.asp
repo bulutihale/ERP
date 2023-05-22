@@ -40,6 +40,10 @@
 		birimID	=	rs("bid")
 	rs.close
 
+	sorgu = "SELECT stokAd FROM stok.stok WHERE stokID = " & stokID
+	rs.open sorgu,sbsv5,1,3
+		stokAd	=	rs("stokAd")
+	rs.close
 
 Response.Flush()
 
@@ -101,7 +105,7 @@ end if
 
 call bildirim(2,"Ürün Bildirimi",stokKodu & " Ürün girişi yapıldı",1,kid,"2","","","","")
 
-call mailGonderCDO("Mal Kabul Bildirim", miktar & " " & miktarBirim & " " & stokKodu & " Ürün girişi yapıldı", "","","2")
+call mailGonderCDO("Mal Kabul Bildirim", miktar & " " & miktarBirim & " " & stokKodu & " " & stokAd & " Ürün girişi yapıldı", "","","2")
 
 call toastrCagir("Mal kabul ürün kaydı yapıldı.", "OK", "right", "success", "otomatik", "")
 
