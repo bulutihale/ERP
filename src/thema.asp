@@ -869,6 +869,12 @@ Response.Write "<scr" & "ipt src=""/template/bootbox.min.js""></scr" & "ipt>"
 Response.Write "<scr" & "ipt src=""/template/fonksiyonlar.js""></scr" & "ipt>"
 Response.Write "<scr" & "ipt type=""text/javascript"" src=""/template/toastr/toastr.min.js""></scr" & "ipt>"
 
+Response.Write "<link href=""/template/jqvmap/jqvmap.css"" media=""screen"" rel=""stylesheet"" type=""text/css"" />"
+Response.Write "<script src=""/template/jqvmap/jquery.vmap.js"" type=""text/javascript""></script>"
+Response.Write "<script src=""/template/jqvmap/maps/jquery.vmap.turkey.js"" type=""text/javascript""></script>"
+Response.Write "<script src=""/template/jqvmap/maps/jquery.vmap.turkeyRegion.js"" type=""text/javascript""></script>"
+
+
 Response.Write "<link href=""/template/toastr/toastr.min.css"" rel=""stylesheet"" />"
 Response.Write "<link href=""/template/select2.css"" rel=""stylesheet"">"
 Response.Write "<link href=""/template/select2-bootstrap4.css"" rel=""stylesheet"">"

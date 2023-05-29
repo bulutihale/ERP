@@ -91,10 +91,10 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & " t1.dosyaPath, t1.dosyaAd"
 			sorgu = sorgu & " FROM kalite.degerForm t1"
 			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.ayiriciTabloID = t2.stokHareketID"
-			sorgu = sorgu & " INNER JOIN cari.cari t3 ON t2.cariID = t3.cariID"
+			sorgu = sorgu & " LEFT JOIN cari.cari t3 ON t2.cariID = t3.cariID"
 			sorgu = sorgu & " INNER JOIN stok.stok t4 ON t2.stokID = t4.stokID"
-			sorgu = sorgu & " INNER JOIN kalite.form t5 ON t1.formID = t5.formID"
-			sorgu = sorgu & " WHERE t5.formKod = 1 AND t1.silindi = 0"
+			sorgu = sorgu & " LEFT JOIN kalite.form t5 ON t1.formID = t5.formID"
+			sorgu = sorgu & " WHERE t1.silindi = 0"
 			if lot <> "" then
 				sorgu = sorgu & " AND t2.lot = '" & lot & "'"
 			end if
@@ -147,18 +147,20 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td class=""text-center"">" & lotSKT & "</td>"
 					if yetkiKontrol >= 5 then
 						Response.Write "<td class=""text-right"">"
-
-
-						Response.Write "<div"
-						if not isnull(dosyaAd) then
-						 	Response.Write " class=""badge badge-pill badge-success pointer"""
-							Response.Write " onClick=""window.open('" & dosyaPath & dosyaAd & "');"">"
-						else
-							Response.Write " class=""badge badge-pill badge-danger pointer"""
-							Response.Write " onClick=""swal('','Form için PDF oluşturulmamış.');"">"
-						end if
-							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
-						Response.Write "</div>"
+							Response.Write "<div class=""badge badge-pill badge-info pointer mr-1 col-5"" title=""Gelen Malzeme Kalite Kontrol Formu"""
+								Response.Write " onClick=""modalajaxfitozelKapat('/kaliteKontrol/kalite_form_yap.asp?formKod=1&stokID=" & stokID64 & "&cariID=" & cariID64 & "&ayiriciTabloAd=stokHareket&ayiriciTabloID=" & stokHareketID64 & "');"">"
+								Response.Write "<i class=""mdi mdi-webhook""></i>"
+							Response.Write "</div>"
+							Response.Write "<div"
+							if not isnull(dosyaAd) then
+								Response.Write " class=""badge badge-pill badge-success pointer col-5"""
+								Response.Write " onClick=""window.open('" & dosyaPath & dosyaAd & "');"">"
+							else
+								Response.Write " class=""badge badge-pill badge-danger pointer col-5"""
+								Response.Write " onClick=""swal('','Form için PDF oluşturulmamış.');"">"
+							end if
+								Response.Write "<i class=""mdi mdi-chevron-right""></i>"
+							Response.Write "</div>"
 
 						Response.Write "</td>"
 					end if

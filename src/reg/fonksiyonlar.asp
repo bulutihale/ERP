@@ -4924,7 +4924,7 @@ end function
 
 		'### mail gönderenin mail account bilgilerini al
 		kid		=	kidbul()
-		sorgu = "SELECT t1.gonderenAd, t1.gonderenAdres, t1.gonderenAdresSifre, t1.smtpAdres, t1.smtpPort, t1.smtpSSL FROM toplumail.mailAccount t1 WHERE kid = " & kid 
+		sorgu = "SELECT t1.gonderenAd, t1.gonderenAdres, t1.gonderenAdresSifre, t1.smtpAdres, t1.smtpPort, t1.smtpSSL FROM toplumail.mailAccount t1 WHERE firmaID = " & firmaID 
 		fn1.open sorgu, sbsv5, 1, 3
 			if fn1.recordcount = 0 then
 				Response.Write "<script>$(document).ready(alert('Kullanıcıya ait e-posta tanımlamaları mevcut değil, e-posta gönderilemedi.'));</script>"

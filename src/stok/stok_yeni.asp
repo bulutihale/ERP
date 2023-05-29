@@ -59,7 +59,7 @@
 
 
 
-      sorgu = "Select birimID,uzunBirim from portal.birimler where firmaID = " & firmaID & " and silindi = 0 and birimTur = 'miktar' order by sira asc"
+      sorgu = "Select birimID,uzunBirim from portal.birimler where firmaID = " & firmaID & " and silindi = 0 and birimGrup = 'miktar' order by sira asc"
       rs.open sorgu,sbsv5,1,3
       if rs.recordcount > 0 then
         birimDegerler = ""

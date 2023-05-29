@@ -24,6 +24,7 @@
 '###### ANA TANIMLAMALAR
 
 
+
 Response.Flush()
 
 call logla("Kalite Kontrol ürün kabul: " & stokHareketID & "")
@@ -192,6 +193,19 @@ if yetkiKontrol > 2 then
 	'###### //RED edilen miktar işlemleri
 	'###### //RED edilen miktar işlemleri
 				rs.close
+
+
+	'######### kalite kontrol formu için kayıtlar
+		sorgu = "SELECT * FROM kalite.degerForm"
+		rs.open sorgu, sbsv5, 1, 3
+			rs.addnew
+				rs("kid")				=	kid
+				rs("ayiriciTabloAd")	=	"stokHareket"
+				rs("ayiriciTabloID")	=	stokHareketID
+			rs.update
+		rs.close
+
+	'######### kalite kontrol formu için kayıtlar
 end if
 
 call bildirim(2,"Ürün Bildirimi",stokKodu & " Ürün Kalite Kontrol girişi yapıldı",1,kid,"","","","","")

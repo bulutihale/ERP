@@ -138,10 +138,10 @@ yetkiKontrol = yetkibul(modulAd)
 					if yetkiKontrol >= 5 then
 						Response.Write "<td class=""text-right"">"
 						'# kalite formu çağır
-						Response.Write "<div class=""badge badge-pill badge-info pointer mr-1"" title=""Gelen Malzeme Kalite Kontrol Formu"""
-							Response.Write " onClick=""modalajaxfitozelKapat('/kaliteKontrol/kalite_form_yap.asp?formKod=1&stokID=" & stokID64 & "&cariID=" & cariID64 & "&ayiriciTabloAd=stokHareket&ayiriciTabloID=" & stokHareketID64 & "');"">"
-							Response.Write "<i class=""mdi mdi-webhook""></i>"
-						Response.Write "</div>"
+						'Response.Write "<div class=""badge badge-pill badge-info pointer mr-1"" title=""Gelen Malzeme Kalite Kontrol Formu"""
+							'Response.Write " onClick=""modalajaxfitozelKapat('/kaliteKontrol/kalite_form_yap.asp?formKod=1&stokID=" & stokID64 & "&cariID=" & cariID64 & "&ayiriciTabloAd=stokHareket&ayiriciTabloID=" & stokHareketID64 & "');"">"
+							'Response.Write "<i class=""mdi mdi-webhook""></i>"
+						'Response.Write "</div>"
 						'# /kalite formu çağır
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""

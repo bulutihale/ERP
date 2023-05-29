@@ -40,9 +40,9 @@
 
 
     if tgun = 0 then
-        call havadurumucek(konum,"anlık")
+        'call havadurumucek(konum,"anlık")
     else
-	    call havadurumucek(konum,tarihtr(date()+1))
+	    'call havadurumucek(konum,tarihtr(date()+1))
     end if
 
 
