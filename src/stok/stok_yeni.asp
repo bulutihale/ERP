@@ -29,6 +29,7 @@
 		sorgu = sorgu & " WHERE stok.stok.firmaID = " & firmaID & " AND stok.stok.stokID = " & gorevID
 		rs.open sorgu, sbsv5, 1, 3
 			stokKodu		=	rs("stokKodu")
+			katalogKodu		=	rs("katalogKodu")
 			stokAd			=	rs("stokAd")
 			stokTuru		=	rs("stokTuru")
 			minStok			=	rs("minStok")

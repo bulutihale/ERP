@@ -12,7 +12,7 @@ silindiArr		=	Array("",translate("Silindi","",""))
 	'##### Depo Tipleri
 	
 	'##### Depo Kategorileri
-		depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis|Üretim Süreç=surecUretim|Kesimhane Süreç=surecKesim|Sterilizasyon Sarf=sterilizasyonSarf"
+		depoKategoriDegerler = "=|Kalite Kontrol=kalite|Üretim=uretim|Mal Kabul=malKabul|Mamül=mamul|Satış=satis|Üretim Süreç=surecUretim|Kesimhane Süreç=surecKesim|Sterilizasyon Sarf=sterilizasyonSarf|Fason=fason"
 	'##### Depo Kategorileri
 	
 	'##### EVET - HAYIR

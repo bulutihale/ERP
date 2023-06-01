@@ -1198,7 +1198,7 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "<div class=""col-2 text-left"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">" & sb_ekMaliyet1 & "</div>"
 					Response.Write "</div>"
-					call forminput("ekMaliyet1Deger",ekMaliyet1Deger,"ajSave('ekMaliyet1Deger','teklifv2.ihale',"&id&",$(this).val())","Tutar","bold text-right","","","")
+					call forminput("ekMaliyet1Deger",ekMaliyet1Deger,"","Tutar","bold text-right","","","onChange=""ajSave('ekMaliyet1Deger','teklifv2.ihale',"&id&",$(this).val())""")
 					call formselectv2("ekMaliyet1Birim",ekMaliyet1Birim,"","","btn p-0 okKaldir","","",paraBirimDegerler,"onChange=""ajSave('ekMaliyet1Birim','teklifv2.ihale',"&id&",$(this).val())""")
 				Response.Write "</div>"
 			Response.Write "</div>"

@@ -53,12 +53,13 @@ end if
 		defDeger		=	kaliteFormID &"###"& kaliteFormText
 '###### select2 de inital value ve form içeriğini oluşturmak için
 
-	sorgu = "SELECT t1.landscapeDeger, t1.pdfKaynakYol, t1.pdfKaynakDosya, t1.formStyle, t1.formEngStyle, t1.sutunWidthArr"
+	sorgu = "SELECT t1.landscapeDeger, t1.pdfKaynakYol, t1.pdfKaynakDosya, t1.formStyle, t1.formEngStyle, t1.sutunWidthArr, t1.formVersiyon"
 	sorgu = sorgu & " FROM kalite.form t1 WHERE t1.formKod = " & formKod
 	if kaliteFormID > 0 then
 	 sorgu = sorgu & " AND t1.formID = " & kaliteFormID
 	end if
 	rs.open sorgu, sbsv5, 1, 3
+		formVersiyon	=	rs("formVersiyon")
 		landscapeDeger	=	rs("landscapeDeger")
 		pdfKaynakYol	=	rs("pdfKaynakYol")
 		pdfKaynakDosya	=	rs("pdfKaynakDosya")
@@ -95,6 +96,7 @@ end if
 		Response.Write " data-pdfkaynakyol=""" & pdfKaynakYol & """"
 		Response.Write " data-pdfkaynakdosya=""" & pdfKaynakDosya & """"
 		Response.Write " data-kaliteformid=""" & kaliteFormID & """"
+		Response.Write " data-formversiyon=""" & formVersiyon & """"
 		Response.Write " data-pdfkayityol=""kalite"""
 	Response.Write "</div>"
 	
@@ -253,6 +255,7 @@ end if
 			var pdfKaynakDosya	=	$('#sabitDegerler').attr('data-pdfkaynakdosya');
 			var pdfKayitYol		=	$('#sabitDegerler').attr('data-pdfkayityol'); 
 			var kaliteFormID	=	$('#sabitDegerler').attr('data-kaliteformid'); 
+			var formVersiyon	=	$('#sabitDegerler').attr('data-formversiyon'); 
 
 
 				$.ajax({
@@ -269,6 +272,7 @@ end if
 						'ayiriciTabloAd':ayiriciTabloAd,
 						'ayiriciTabloID':ayiriciTabloID,
 						'kaliteFormID':kaliteFormID,
+						'formVersiyon':formVersiyon,
 								},
 					beforeSend: function() {
 

@@ -17,6 +17,7 @@ response.codepage=65001
 			ayiriciTabloID			=	ayiriciTabloID64
 			ayiriciTabloID			=	base64_decode_tr(ayiriciTabloID)
 			kaliteFormID			=	Request.Form("kaliteFormID")
+			formVersiyon			=	Request.Form("formVersiyon")
 
 	'##### kalite.degerForm tablosunda form değerlerinin kayıt edildiği tabloya kayıt yaz	
 		degerFormID	=	degerFormIDbul(kaliteFormID, ayiriciTabloAd, ayiriciTabloID)
@@ -97,11 +98,15 @@ end if
 	end if
 
 
-doyaPath = "/temp/dosya/" & firmaID & "/" & pdfKayitYol & "/" & formKod & "/"
+dosyaPath = "/temp/dosya/" & firmaID & "/" & pdfKayitYol & "/" & formKod & "/"
 
-Doc.Save Server.MapPath(doyaPath & dosyaAd), true
+'########## footer bilgisi
+	Page.Canvas.DrawText formVersiyon, "x=20, y=20; size=8", Doc.Fonts("Arial")
+'########## footer bilgisi
 
-sorgu = "UPDATE kalite.degerForm SET dosyaPath = '" & doyaPath & "', dosyaAd = '" & dosyaAd & "' WHERE ayiriciTabloAd = '" & ayiriciTabloAd & "' AND ayiriciTabloID = " & ayiriciTabloID
+Doc.Save Server.MapPath(dosyaPath & dosyaAd), true
+
+sorgu = "UPDATE kalite.degerForm SET dosyaPath = '" & dosyaPath & "', dosyaAd = '" & dosyaAd & "' WHERE ayiriciTabloAd = '" & ayiriciTabloAd & "' AND ayiriciTabloID = " & ayiriciTabloID
 rs.open sorgu, sbsv5, 3, 3
 
 %>
