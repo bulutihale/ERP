@@ -1,0 +1,183 @@
+﻿id;Tarih;personelID;IP;gorevID;islem;firmaID;url;modulAd
+73030;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73031;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73032;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73033;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73034;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73035;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73036;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73037;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73038;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73039;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73040;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73041;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73042;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73043;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73044;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73045;2.05.2023 16:51:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73046;2.05.2023 16:51:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+73047;3.05.2023 08:18:00;29;192.168.1.85;0;Welcome Dashboard;5;;Dashboard
+73048;3.05.2023 08:18:00;29;192.168.1.85;0;Welcome Dashboard;5;;Dashboard
+73049;3.05.2023 08:18:00;29;192.168.1.85;0;Reçeteler Listelendi;5;;Reçete
+73050;3.05.2023 08:19:00;29;192.168.1.85;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+73051;3.05.2023 08:21:00;29;192.168.1.85;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: C-SECTION  SET   LITVANYA ;5;;Reçete
+73052;3.05.2023 08:21:00;29;192.168.1.85;0;Yeni Reçete Ekleniyor: C-SECTION  SET   LITVANYA ;5;;Reçete
+73053;3.05.2023 08:21:00;29;192.168.1.85;0;Reçeteler Listelendi;5;;Reçete
+73054;3.05.2023 08:22:00;29;192.168.1.85;2169;Reçete Adimlari Listelendi : C-SECTION  SET   LITVANYA ;5;;Reçete
+73055;3.05.2023 08:22:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73056;3.05.2023 08:22:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73057;3.05.2023 08:26:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73058;3.05.2023 08:29:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73059;3.05.2023 08:29:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73060;3.05.2023 08:29:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73061;3.05.2023 08:29:00;29;192.168.1.85;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+73062;3.05.2023 08:30:00;29;192.168.1.85;0;Stok Güncelleme: YM-00598;5;;Stok
+73063;3.05.2023 08:30:00;29;192.168.1.85;0;Yeni ürün eklendi:YM-00598;5;;Stok
+73064;3.05.2023 08:30:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73065;3.05.2023 08:30:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73066;3.05.2023 08:30:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73067;3.05.2023 08:31:00;29;192.168.1.85;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+73068;3.05.2023 08:34:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73069;3.05.2023 08:34:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73070;3.05.2023 08:34:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73071;3.05.2023 08:35:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73072;3.05.2023 08:35:00;29;192.168.1.85;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+73073;3.05.2023 08:35:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73074;3.05.2023 08:35:00;29;192.168.1.85;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+73075;3.05.2023 08:36:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73076;3.05.2023 08:36:00;29;192.168.1.85;0;Reçeteler Listelendi;5;;Reçete
+73077;3.05.2023 08:37:00;29;192.168.1.85;0;Reçeteler Listelendi;5;;Reçete
+73078;3.05.2023 08:37:00;29;192.168.1.85;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+73079;3.05.2023 08:37:00;29;192.168.1.85;0;Reçeteler Listelendi;5;;Reçete
+73080;3.05.2023 08:37:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73081;3.05.2023 08:38:00;29;192.168.1.85;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+73082;3.05.2023 08:39:00;29;192.168.1.85;0;Stok Güncelleme: YM-00598;5;;Stok
+73083;3.05.2023 08:39:00;29;192.168.1.85;0;Yazmis oldugunuz stok koduna ait baska bir ürün bulunuyor. Lütfen girdiginiz bilgileri kontrol edin.;5;;Stok
+73084;3.05.2023 08:39:00;29;192.168.1.85;0;Stok Güncelleme: YM-00599;5;;Stok
+73085;3.05.2023 08:39:00;29;192.168.1.85;0;Yeni ürün eklendi:YM-00599;5;;Stok
+73086;3.05.2023 08:39:00;29;192.168.1.85;0;Stok Listesi Ekrani;5;;Stok
+73087;3.05.2023 08:39:00;29;192.168.1.85;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+73088;3.05.2023 08:39:00;29;192.168.1.85;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  DÜZ ÖRTÜ 200X200CM DUBLEX;5;;Reçete
+73089;3.05.2023 08:39:00;29;192.168.1.85;0;Yeni Reçete Ekleniyor:  DÜZ ÖRTÜ 200X200CM DUBLEX;5;;Reçete
+73090;3.05.2023 08:39:00;29;192.168.1.85;0;Reçeteler Listelendi;5;;Reçete
+73091;3.05.2023 08:40:00;29;192.168.1.85;2170;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 200X200CM DUBLEX;5;;Reçete
+73092;3.05.2023 08:40:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73093;3.05.2023 08:40:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73094;3.05.2023 08:40:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73095;3.05.2023 08:40:00;29;192.168.1.85;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+73096;3.05.2023 08:40:00;29;192.168.1.85;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+73097;3.05.2023 08:40:00;29;192.168.1.85;0;Reçete adimi sirasi degistirildi;5;;Reçete
+73098;3.05.2023 08:40:00;29;192.168.1.85;2170;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 200X200CM DUBLEX;5;;Reçete
+73099;3.05.2023 08:40:00;29;192.168.1.85;2169;Reçete Adimlari Listelendi : C-SECTION  SET   LITVANYA ;5;;Reçete
+73100;3.05.2023 08:40:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73101;3.05.2023 08:40:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73102;3.05.2023 08:41:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73103;3.05.2023 08:42:00;29;192.168.1.85;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+73104;3.05.2023 08:42:00;29;192.168.1.85;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+73105;3.05.2023 08:42:00;29;192.168.1.85;0;Reçete adimi sirasi degistirildi;5;;Reçete
+73106;3.05.2023 08:42:00;29;192.168.1.85;2169;Reçete Adimlari Listelendi : C-SECTION  SET   LITVANYA ;5;;Reçete
+73107;3.05.2023 08:42:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73108;3.05.2023 08:43:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73109;3.05.2023 08:46:00;29;192.168.1.85;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+73110;3.05.2023 08:46:00;29;192.168.1.85;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+73111;3.05.2023 08:46:00;29;192.168.1.85;0;Reçete adimi sirasi degistirildi;5;;Reçete
+73112;3.05.2023 08:46:00;29;192.168.1.85;2169;Reçete Adimlari Listelendi : C-SECTION  SET   LITVANYA ;5;;Reçete
+73113;3.05.2023 08:46:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73114;3.05.2023 08:46:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73115;3.05.2023 08:49:00;29;192.168.1.85;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+73116;3.05.2023 08:49:00;29;192.168.1.85;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+73117;3.05.2023 08:49:00;29;192.168.1.85;0;Reçete adimi sirasi degistirildi;5;;Reçete
+73118;3.05.2023 08:49:00;29;192.168.1.85;2169;Reçete Adimlari Listelendi : C-SECTION  SET   LITVANYA ;5;;Reçete
+73119;3.05.2023 08:49:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73120;3.05.2023 08:49:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73121;3.05.2023 08:49:00;29;192.168.1.85;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+73122;3.05.2023 08:49:00;29;192.168.1.85;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+73123;3.05.2023 08:49:00;29;192.168.1.85;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+73124;3.05.2023 08:50:00;29;192.168.1.85;0;Reçete adimi sirasi degistirildi;5;;Reçete
+73125;3.05.2023 08:50:00;29;192.168.1.85;2169;Reçete Adimlari Listelendi : C-SECTION  SET   LITVANYA ;5;;Reçete
+73126;3.05.2023 09:08:00;27;192.168.1.82;0;Welcome Dashboard;5;;Dashboard
+73127;3.05.2023 09:08:00;27;192.168.1.82;0;Satinalma Temp Siparis Olusturma Ekrani;5;;Satin Alma
+73128;3.05.2023 09:09:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+73129;3.05.2023 09:10:00;27;192.168.1.82;0;1022 carisine satin alma siparisi için 48 kodlu ürün eklendi;5;;Satin Alma
+73130;3.05.2023 09:10:00;27;192.168.1.82;0;Satinalma siparis ana tablo aktarimi;5;;Satin Alma
+73131;3.05.2023 09:10:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+73132;3.05.2023 10:19:00;28;192.168.1.51;0;Mal Kabul Ekrani Giris;5;;Lojistik
+73133;3.05.2023 10:27:00;28;192.168.1.51;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+73134;3.05.2023 10:27:00;28;192.168.1.51;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+73135;3.05.2023 10:27:00;28;192.168.1.51;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+73136;3.05.2023 10:27:00;28;192.168.1.51;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+73137;3.05.2023 10:29:00;28;192.168.1.51;0;108 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+73138;3.05.2023 10:29:00;28;192.168.1.51;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+73139;3.05.2023 10:29:00;28;192.168.1.51;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+73140;3.05.2023 10:30:00;28;192.168.1.51;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+73141;3.05.2023 10:58:00;0;192.168.1.34;0;Sifre Giris Ekrani;5;;
+73142;3.05.2023 10:58:00;0;192.168.1.34;0;Sifre Denemesi;5;;Personel
+73143;3.05.2023 10:58:00;0;192.168.1.34;0;Sifre Dogrulaniyor;5;;Personel
+73144;3.05.2023 10:58:00;32;192.168.1.34;0;Basarili Giris;5;;Personel
+73145;3.05.2023 10:58:00;32;192.168.1.34;0;Welcome Dashboard;5;;Dashboard
+73146;3.05.2023 10:58:00;32;192.168.1.34;0;Teklif Listesi Ekrani;5;;Teklif
+73147;3.05.2023 10:58:00;32;192.168.1.34;0;Kayit Basarili.;5;;Teklif
+73148;3.05.2023 11:00:00;32;192.168.1.34;0;Teklif kalemi kayit ediliyor;5;;
+73149;3.05.2023 11:00:00;32;192.168.1.34;0;Teklif kalemi kayit ediliyor;5;;
+73150;3.05.2023 11:01:00;32;192.168.1.34;0;Stok Listesi Ekrani;5;;Stok
+73151;3.05.2023 11:01:00;32;192.168.1.34;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+73152;3.05.2023 11:01:00;32;192.168.1.34;0;Stok Güncelleme: M-00173;5;;Stok
+73153;3.05.2023 11:01:00;32;192.168.1.34;0;Ürüne ait fiyat bilgisini yaziniz;5;;Stok
+73154;3.05.2023 11:02:00;32;192.168.1.34;0;Stok Güncelleme: M-00173;5;;Stok
+73155;3.05.2023 11:02:00;32;192.168.1.34;0;Yeni ürün eklendi:M-00173;5;;Stok
+73156;3.05.2023 11:02:00;32;192.168.1.34;0;Stok Listesi Ekrani;5;;Stok
+73157;3.05.2023 11:02:00;32;192.168.1.34;0;Teklif kalemi kayit ediliyor;5;;
+74047;3.05.2023 16:34:00;28;192.168.1.51;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74048;3.05.2023 16:38:00;27;192.168.1.82;0;Welcome Dashboard;5;;Dashboard
+74049;3.05.2023 16:38:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74050;3.05.2023 16:38:00;27;192.168.1.82;0;Personel Çikis Yapti;5;;Personel
+74051;3.05.2023 16:38:00;0;192.168.1.82;0;Sifre Giris Ekrani;5;;
+74052;3.05.2023 16:39:00;0;192.168.1.82;0;Sifre Denemesi;5;;Personel
+74053;3.05.2023 16:39:00;0;192.168.1.82;0;Sifre Dogrulaniyor;5;;Personel
+74054;3.05.2023 16:39:00;28;192.168.1.82;0;Basarili Giris;5;;Personel
+74055;3.05.2023 16:39:00;28;192.168.1.82;0;Welcome Dashboard;5;;Dashboard
+74056;3.05.2023 16:39:00;28;192.168.1.82;0;Mal Kabul Ekrani Giris;5;;Lojistik
+74057;3.05.2023 16:40:00;28;192.168.1.82;0;Mal Kabul Belge Kayit:EAN2023000000323;5;;Mal Kabul
+74058;3.05.2023 16:40:00;28;192.168.1.82;0;Toplam teslim alinan miktar siparis miktarindan fazla olamaz.;5;;Mal Kabul
+74059;3.05.2023 16:40:00;28;192.168.1.82;0;Mal Kabul Belge Kayit:EAN2023000000323;5;;Mal Kabul
+74060;3.05.2023 16:41:00;28;192.168.1.82;0;Mal Kabul Belge Kayit:EAN2023000000323;5;;Mal Kabul
+74061;3.05.2023 16:41:00;28;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74062;3.05.2023 16:41:00;28;192.168.1.82;0;Personel Çikis Yapti;5;;Personel
+74063;3.05.2023 16:41:00;0;192.168.1.82;0;Sifre Giris Ekrani;5;;
+74064;3.05.2023 16:41:00;0;192.168.1.82;0;Sifre Denemesi;5;;Personel
+74065;3.05.2023 16:41:00;0;192.168.1.82;0;Sifre Dogrulaniyor;5;;Personel
+74066;3.05.2023 16:41:00;27;192.168.1.82;0;Basarili Giris;5;;Personel
+74067;3.05.2023 16:41:00;27;192.168.1.82;0;Welcome Dashboard;5;;Dashboard
+74068;3.05.2023 16:41:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74069;3.05.2023 16:41:00;27;192.168.1.82;0;SIP2023_00049 numarali sipariste 1425 id kalem bakiye kapatma iptal edildi.;5;;Satin Alma
+74070;3.05.2023 16:41:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74071;3.05.2023 16:42:00;27;192.168.1.82;0;SIP2023_00049 numarali sipariste 1425 id kalem bakiye kapatma iptal edildi.;5;;Satin Alma
+74072;3.05.2023 16:42:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74073;3.05.2023 16:42:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74074;3.05.2023 16:43:00;27;192.168.1.82;0;SIP2023_00029 numarali sipariste 1381 id kalem bakiye kapatma iptal edildi.;5;;Satin Alma
+74075;3.05.2023 16:43:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74076;3.05.2023 16:43:00;27;192.168.1.82;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74077;3.05.2023 16:44:00;27;192.168.1.82;0;Personel Çikis Yapti;5;;Personel
+74078;3.05.2023 16:44:00;0;192.168.1.82;0;Sifre Giris Ekrani;5;;
+74079;3.05.2023 16:44:00;0;192.168.1.82;0;Sifre Denemesi;5;;Personel
+74080;3.05.2023 16:44:00;0;192.168.1.82;0;Sifre Dogrulaniyor;5;;Personel
+74081;3.05.2023 16:44:00;28;192.168.1.82;0;Basarili Giris;5;;Personel
+74082;3.05.2023 16:44:00;28;192.168.1.82;0;Welcome Dashboard;5;;Dashboard
+74083;3.05.2023 16:44:00;28;192.168.1.82;0;Mal Kabul Ekrani Giris;5;;Lojistik
+74084;3.05.2023 16:45:00;28;192.168.1.82;0;Personel Bilgileri Giris Ekrani;5;;personel
+74085;3.05.2023 16:45:00;28;192.168.1.82;28;Personel Bilgileri : SONER ;5;;personel
+74086;3.05.2023 16:45:00;28;192.168.1.82;0;Personel Çikis Yapti;5;;Personel
+74087;3.05.2023 16:45:00;0;192.168.1.82;0;Sifre Giris Ekrani;5;;
+74088;3.05.2023 16:45:00;0;192.168.1.82;0;Sifre Denemesi;5;;Personel
+74089;3.05.2023 16:45:00;0;192.168.1.82;0;Sifre Dogrulaniyor;5;;Personel
+74090;3.05.2023 16:45:00;27;192.168.1.82;0;Basarili Giris;5;;Personel
+74091;3.05.2023 16:45:00;27;192.168.1.82;0;Welcome Dashboard;5;;Dashboard
+74092;3.05.2023 16:45:00;27;192.168.1.82;0;Stok Listesi Ekrani;5;;Stok
+74093;3.05.2023 16:46:00;27;192.168.1.82;2;Stok Düzenleme Ekrani Girisi;5;;Stok
+74094;3.05.2023 16:49:00;28;192.168.1.51;0;Stok Listesi Ekrani;5;;Stok
+74095;3.05.2023 16:50:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74096;3.05.2023 16:50:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74097;3.05.2023 16:50:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74098;3.05.2023 16:50:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74099;3.05.2023 16:50:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74100;3.05.2023 16:50:00;28;192.168.1.51;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;

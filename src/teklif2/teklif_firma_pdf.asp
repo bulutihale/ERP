@@ -57,7 +57,7 @@ response.codepage=65001
 	rs.close
 '###### PDF oluşmadan önce revizon numaraları ayarla
 
-	sorgu = "SELECT f.adres, i.pdfSablon, k.landscapeDeger"
+	sorgu = "SELECT f.adres, i.pdfSablon, k.landscapeDeger, k.formVersiyon"
 	sorgu = sorgu & " FROM teklifv2.ihale i"
 	sorgu = sorgu & " LEFT JOIN portal.firma f ON f.id = i.firmaID"
 	sorgu = sorgu & " LEFT JOIN kalite.form k ON i.pdfSablon = k.pdfKaynakDosya"
@@ -66,10 +66,16 @@ response.codepage=65001
 		adres			=	rs("adres")	
 		teklifDosya		=	rs("pdfSablon")
 		landscapeDeger	=	rs("landscapeDeger")
+		formVersiyon	=	rs("formVersiyon")
+
 		if landscapeDeger = "evet" then
-			landscapeDeger = True
+			landscapeDeger 	= 	True
+			bottomValue		=	10
+			rightValue		=	70
 		else
 			landscapeDeger = False
+			bottomValue		=	70
+			rightValue		=	10
 		end if
 	rs.close
 
@@ -84,7 +90,6 @@ Set Doc = Pdf.CreateDocument
 Set Page = Doc.Pages.Add
 
 
-
 serverName = Request.ServerVariables("SERVER_NAME") 
 serverPort = Request.ServerVariables("SERVER_PORT")
 
@@ -96,7 +101,7 @@ asp_dosya	=	asp_dosya & "/teklifSablon/" & teklifDosya & ".asp?ihaleid="
 asp_dosya	=	asp_dosya & id &"&pdf=yes"
 
 
-Doc.ImportFromUrl asp_dosya,"LeftMargin=30,RightMargin=10,TopMargin=10,BottomMargin=10,scale=1,landscape="&landscapeDeger&""
+Doc.ImportFromUrl asp_dosya,"LeftMargin=30, RightMargin=" & rightValue & ",TopMargin=10, BottomMargin=" & bottomValue & ",scale=1,landscape="&landscapeDeger&""
 
 if klasorkontrol("/temp/dosya/" & firmaID) = True then
 else
@@ -127,19 +132,33 @@ dosyaAd		=	id64 & "_" & dosyaAdEki & ".pdf"
 
 '########## footer bilgisi
 if landscapeDeger = False then
-	Page.Canvas.DrawText footerBilgiA, "x=290, y=50; size=10", Doc.Fonts("Arial")
-	Page.Canvas.DrawText footerBilgiB, "x=180, y=37; size=5", Doc.Fonts("Arial")
-	Page.Canvas.DrawText footerBilgiC, "x=270, y=31; size=5", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText footerBilgiA, "x=290, y=50; size=10", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText footerBilgiB, "x=180, y=37; size=5", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText footerBilgiC, "x=270, y=31; size=5", Doc.Fonts("Arial")
 	'Page.Canvas.DrawText footerBilgiD, "x=280, y=25; size=5", Doc.Fonts("Arial")
-	Page.Canvas.DrawText "FR-21 / Rev.No:01 / 05.12.17", "x=40, y=20; size=8", Doc.Fonts("Arial")
+'######### sayfa numaralarını koy
+   For Each Page in Doc.Pages
+        str = Page.Index & " / " & Doc.Pages.Count
+        Page.Canvas.DrawText str, "x=280, y=20", Doc.Fonts("Courier")
+		Page.Canvas.DrawText formVersiyon, "x=40, y=20; size=8", Doc.Fonts("Arial")
+    Next
+'######### sayfa numaralarını koy
+
 else
-	Page.Canvas.DrawText footerBilgiA, "x=560, y=400; size=10; angle=90", Doc.Fonts("Arial") 
-	Page.Canvas.DrawText footerBilgiB, "x=570, y=270; size=5; angle=90", Doc.Fonts("Arial")
-	Page.Canvas.DrawText footerBilgiC, "x=580, y=370; size=5; angle=90", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText footerBilgiA, "x=560, y=400; size=10; angle=90", Doc.Fonts("Arial") 
+	'Page.Canvas.DrawText footerBilgiB, "x=570, y=270; size=5; angle=90", Doc.Fonts("Arial")
+	'Page.Canvas.DrawText footerBilgiC, "x=580, y=370; size=5; angle=90", Doc.Fonts("Arial")
 	'Page.Canvas.DrawText footerBilgiD, "x=280, y=25; size=5", Doc.Fonts("Arial")
-	'Page.Canvas.DrawText "FR-21 / Rev.No:01 / 05.12.17", "x=40, y=20; size=8; angle=90", Doc.Fonts("Arial")
+'######### sayfa numaralarını koy
+   For Each Page in Doc.Pages
+        str = Page.Index & " / " & Doc.Pages.Count
+        Page.Canvas.DrawText str, "x=590, y=400; angle=90", Doc.Fonts("Courier")
+		Page.Canvas.DrawText formVersiyon, "x=590, y=20; size=8; angle=90", Doc.Fonts("Arial")
+    Next
+'######### sayfa numaralarını koy
 end if
 '########## footer bilgisi
+
 
 Doc.Save Server.MapPath("/temp/dosya/" & firmaID & "/teklifler/" & id64 & "/" & dosyaAd), true
 		

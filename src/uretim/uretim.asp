@@ -6,9 +6,14 @@
     call sessiontest()
     kid				=	kidbul()
 	gelenVeriHam	=	Session("sayfa5")
-	gelenVeri		=	split(gelenVeriHam,"++")
-	isTur			=	gelenVeri(0)
-	gorevID64		=	gelenVeri(1)
+	if gelenVeriHam = "" then
+		isTur			=	Request.QueryString("isTur")
+		gorevID64		=	Request.QueryString("ajandaID64")
+	else
+		gelenVeri		=	split(gelenVeriHam,"++")
+		isTur			=	gelenVeri(0)
+		gorevID64		=	gelenVeri(1)
+	end if
 	gorevID			=	gorevID64
 	gorevID			=	base64_decode_tr(gorevID)
 	ajandaID		=	gorevID
@@ -341,7 +346,7 @@ yetkiKontrol = yetkibul(modulAd)
 					sorgu = sorgu & " LEFT JOIN recete.recete t4 ON  t4.receteID =  t1.altReceteID"
 					sorgu = sorgu & " WHERE t1.receteID = " & secilenReceteID
 					sorgu = sorgu & " AND t1.silindi = 0"
-					sorgu = sorgu & " ORDER BY t1.sira ASC"					
+					sorgu = sorgu & " ORDER BY t1.sira ASC"	
 					rs.open sorgu, sbsv5, 1, 3
 
 
@@ -422,7 +427,7 @@ yetkiKontrol = yetkibul(modulAd)
 										sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & ""
 										sorgu = sorgu & " AND t1.ajandaID = " & ajandaID & ""
 										sorgu = sorgu & " AND t1.stokID = " & stokID & ""
-										sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID
+										sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID & " AND t1.receteAdimID = " & receteAdimID
 										rs1.open sorgu, sbsv5, 1, 3
 
 										toplamLotMiktar	=	0
@@ -467,7 +472,7 @@ yetkiKontrol = yetkibul(modulAd)
 											btnRenk	=	" btn-secondary "
 											miktarKontrol	=	0
 										else
-											Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?ihtiyacMiktar="&ihtiyacMiktar&"&isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"&surecDepoID="&surecDepoID&"');"""
+											Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?ihtiyacMiktar="&ihtiyacMiktar&"&isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"&surecDepoID="&surecDepoID&"&receteAdimID="&receteAdimID&"');"""
 											btnRenk	=	" btn-success "
 											miktarKontrol	=	0
 										end if

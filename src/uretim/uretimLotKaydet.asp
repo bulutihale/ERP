@@ -19,6 +19,7 @@
 	lotSKT				=	Request.Form("lotSKT")
 	ajandaID			=	Request.Form("ajandaID")
 	ihtiyacMiktar		=	Request.Form("ihtiyacMiktar")
+	receteAdimID		=	Request.Form("receteAdimID")
 
 
 	sorgu = "SELECT stok.FN_birimIDBul('" & miktarBirim & "','K') as bid"
@@ -75,6 +76,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("stokHareketTipi")		=	stokHareketTipi
 				rs("lotSKT")				=	tarihsql(lotSKT)
 				rs("ajandaID")				=	ajandaID
+				rs("receteAdimID")			=	receteAdimID
 			rs.update
 			cikisHareketID	=	rs("stokHareketID")
 
@@ -96,6 +98,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("refHareketID")			=	cikisHareketID
 				rs("lotSKT")				=	tarihsql(lotSKT)
 				rs("ajandaID")				=	ajandaID
+				rs("receteAdimID")			=	receteAdimID
 			rs.update
 		rs.close
 	else

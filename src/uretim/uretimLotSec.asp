@@ -9,6 +9,7 @@
 	ihtiyacMiktar	=	Request.QueryString("ihtiyacMiktar")
 	gorevID64		=	Request.QueryString("gorevID")
 	gorevID			=	gorevID64
+	ajandaID64		=	gorevID64
 	ajandaID		=	base64_decode_tr(gorevID)
 	stokID			=	Request.QueryString("stokID")
 	secilenDepoID	=	Request.QueryString("secilenDepoID")
@@ -23,6 +24,7 @@
 	if secilenReceteID = "" then
 		secilenReceteID = 0
 	end if
+	receteAdimID	=	Request.QueryString("receteAdimID")
 	modulAd =   "Üretim"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -43,7 +45,7 @@ yetkiKontrol = yetkibul(modulAd)
 	sorgu = "SELECT t1.stokID, t2.stokKodu, t2.stokAd, portal.siparisKalemIDbul(" & firmaID  & ", " & ajandaID & ") as siparisKalemID"
 	sorgu = sorgu & " FROM recete.receteAdim t1"
 	sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
-	sorgu = sorgu & " WHERE t1.silindi = 0 AND t1.receteID = " & secilenReceteID & " AND t1.stokID = " & stokID
+	sorgu = sorgu & " WHERE t1.silindi = 0 AND t1.receteID = " & secilenReceteID & " AND t1.stokID = " & stokID & " AND t1.receteAdimID = " & receteAdimID
 	rs.open sorgu, sbsv5, 1, 3
 
 		if rs.recordcount = 0 then
@@ -101,7 +103,7 @@ yetkiKontrol = yetkibul(modulAd)
 									call forminput("kullanimMiktar","","","","","autocompleteOFF","kullanimMiktar"&divSayi&"","")
 								Response.Write "</td>"
 								Response.Write "<td class=""text-center"">"
-									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','"&surecDepoID&"',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&surecDepoID&");"" class=""btn btn-info"">kullan</div>"
+									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','"&surecDepoID&"',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&surecDepoID&","&receteAdimID&");"" class=""btn btn-info"">kullan</div>"
 								Response.Write "</td>"
 							Response.Write "</tr>"
 						rs1.movenext
@@ -125,7 +127,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 %>
 <script>
-	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,surecDepoID,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID,surecDepoID){
+	function lotKullan(isTur,divSayi,stokKodu,stokHareketTuru,surecDepoID,stokID,siparisKalemID,lot,stokHareketTipi,miktarBirim,secilenDepoID,secilenReceteID,lotSKT,ajandaID,surecDepoID,receteAdimID){
 
 	var kullanimMiktar		=	$('#kullanimMiktar'+divSayi).val();
 		if(kullanimMiktar == undefined){swal('miktar girişi yapılmalı',''); return false};
@@ -157,9 +159,10 @@ yetkiKontrol = yetkibul(modulAd)
 					lot:lot, 
 					stokHareketTipi:stokHareketTipi, 
 					lotSKT:lotSKT,
-					ihtiyacMiktar:'<%=ihtiyacMiktar%>'
+					ihtiyacMiktar:'<%=ihtiyacMiktar%>',
+					receteAdimID:receteAdimID
 					}, function(){
-				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')
+				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+'&isTur='+isTur+'&ajandaID64=<%=ajandaID64%> #receteAdim > *')
 				});
 				modalkapat();
 			}, //confirm buton yapılanlar

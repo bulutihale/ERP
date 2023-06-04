@@ -12,10 +12,72 @@ $(document).ready(function() {
 		//"html: true" popover içindeki html kodlarının çalışması için 
 		//"trigger:'focus'" popover dışında bir yere tıklandığında kapanması için
 	$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',container: 'body'});
+	
+	
+//popover içine tıklanabilir link koyulduğunda aşağıdakinin kullanılması gerekli --data-toggle="popoverH"-- kullan
+	$('[data-toggle="popoverH"]').popover({
+		html: true,
+		trigger: 'manual'
+	  }).on('mouseenter', function () {
+		var _this = this;
+		$(this).popover('show');
+		 idAlan 	=	$(this).attr('data-idalan');
+		 idDeger 	=	$(this).attr('data-iddeger');
+		 alan	 	=	$(this).attr('data-alan');
+		 tablo	 	=	$(this).attr('data-tablo');
+		 deger	 	=	$(this).attr('data-deger');
+		$('.popover').on('mouseleave', function () {
+			$(_this).popover('hide');});
+	  		}).on('shown.bs.popover', function () {
+				$('.sayfaKes').off().on('click', function () {
+
+				  // jQuery ile tetiklenecek olayları burada gerçekleştirin
+				  $('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:idDeger,alan:alan,tablo:tablo,deger:deger}, function(){location.reload();})
+				});
+			  }).on('mouseleave', function () {
+		var _this = this;
+		setTimeout(function () {
+		  if (!$('.popover:hover').length) {
+			$(_this).popover('hide');
+		  }
+		}, 30);
+	  });
+//popover içine tıklanabilir link koyulduğunda yukarındakinin kullanılması gerekli --data-toggle="popoverH"-- kullan
 	})
 	$(document).ajaxComplete(function() {
 		$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',placement:'bottom',container: 'body'});
-	});
+
+//popover içine tıklanabilir link koyulduğunda aşağıdakinin kullanılması gerekli --data-toggle="popoverH"-- kullan
+		$('[data-toggle="popoverH"]').popover({
+			html: true,
+			trigger: 'manual'
+		}).on('mouseenter', function () {
+			var _this = this;
+			$(this).popover('show');
+			 idAlan 	=	$(this).attr('data-idalan');
+			 idDeger 	=	$(this).attr('data-iddeger');
+			 alan	 	=	$(this).attr('data-alan');
+			 tablo	 	=	$(this).attr('data-tablo');
+			 deger	 	=	$(this).attr('data-deger');
+			$('.popover').on('mouseleave', function () {
+				$(_this).popover('hide');});
+				}).on('shown.bs.popover', function () {
+					$('.sayfaKes').off().on('click', function () {
+
+						// jQuery ile tetiklenecek olayları burada gerçekleştirin
+						$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:idDeger,alan:alan,tablo:tablo,deger:deger}, function(){location.reload();})
+					});
+				}).on('mouseleave', function () {
+			var _this = this;
+			setTimeout(function () {
+			if (!$('.popover:hover').length) {
+				$(_this).popover('hide');
+			}
+			}, 30);
+		});
+//popover içine tıklanabilir link koyulduğunda yukarındakinin kullanılması gerekli --data-toggle="popoverH"-- kullan
+	
+});
 	//popover aktifleştimrk için 
 
 
@@ -602,4 +664,33 @@ function teklifPDFmail(id64,mailDurum,divID){
 			} //cancel buton yapılanlar		
 		);//swal sonu
 		}
+
+
+	// hucreKaydet işlemleri		
+	function hucreKaydetGenel(idAlan,id,alan,tablo,deger,baslik,updateDIV,updateURL,ek3,ek4){
+		/* idAlan : tablonun id değerinin olduğu alanın adı
+
+		*/
+	swal({
+	title: baslik,
+	type: 'warning',
+	showCancelButton: true,
+		confirmButtonColor: '#DD6B55',
+		confirmButtonText: 'evet',
+		cancelButtonText: 'hayır'
+	}).then(
+		function(result) {
+		// handle Confirm button click
+		// result is an optional parameter, needed for modals with input
+			$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:id,alan:alan,tablo:tablo,deger:deger})
+		
+			$('#'+updateDIV).load(updateURL+' #'+updateDIV+' > *')
+			
+		}, //confirm buton yapılanlar
+		function(dismiss) {
+		// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+		} //cancel buton yapılanlar		
+	);//swal sonu
+}
+// hucreKaydet işlemleri		
 

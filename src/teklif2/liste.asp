@@ -295,9 +295,12 @@ if rs.recordcount > 0 then
 					
 			' Response.Write "</td>"
 			Response.Write "<td class=""align-middle text-left"">"
+			Response.Write "<div class=""row"">"
+			Response.Write "<div class=""col-6"">"
 				Response.Write "<a class=""btn btn-success rounded px-1 py-0"" href=""/teklif2/detay/" & ihaleID64 & """><i class=""fa fa-edit""></i></a>"
-				
+			Response.Write "</div>"
 	'############## POPOVER ile işlemler listesi gösterimi
+			Response.Write "<div class=""col-6"">"
 			Response.write "<a tabindex=""0"" role=""button"""
 				Response.write " class=""btn btn-info rounded px-2 py-0 ml-1"""
 				Response.write " data-toggle=""popover"""
@@ -320,6 +323,8 @@ if rs.recordcount > 0 then
 						Response.Write "<a class=""btn btn-warning rounded px-2 ml-1 py-0"" onClick=""modalajax(&#39;/teklif2/teklif_liste_modal.asp?id="& ihaleID64 & "&#39;);""><i class=""fa fa-file-pdf-o""></i></a>"
 					end if
 	'############## /POPOVER ile işlemler listesi gösterimi
+				Response.Write "</div>"
+
 			Response.Write "</td>"
 		Response.Write "</tr>"
 	rs.movenext

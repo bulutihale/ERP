@@ -17,7 +17,7 @@ Response.Write ".b-right { border-right:1px black solid;}"
 Response.Write ".b-top { border-top:1px black solid;}"
 Response.Write ".b-bottom { border-bottom:1px black solid;}"
 Response.Write ".b-all { border-bottom:1px black solid;border-top:1px black solid;border-right:1px black solid;border-left:1px black solid;}"
-Response.Write "page {background: white;display: block;margin: auto auto;margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);padding:0 1cm 0 0.5cm;width: 29.7cm;height: auto; background-color:#FFFFFF;}"
+Response.Write "page {background: white;display: block;margin: auto auto;margin-bottom: 0.5cm;box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);padding:0 1cm 0 0.5cm;width: 21cm;height: auto; background-color:#FFFFFF;}"
 
 Response.Write "@media print {@page {size:A4 landscape;background: white;}body{visibility:hidden;}.section-to-print{visibility: visible;}}"
 Response.Write "</style>"
@@ -48,7 +48,7 @@ Response.Write "</style>"
 	end if
 
 
-sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.Ad as firmamAdUzun, f.adres as firmamAdres, f.telefon as firmamTel, f.ilce, f.sehir, c1.il as ilAd,"_
+sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.uzunAd as firmamAdUzun, f.adres as firmamAdres, f.telefon as firmamTel, f.ilce, f.sehir, c1.il as ilAd,"_
 &" c2.cariAd as kurumCariAD, c1.adres as teklifCariAdres, i.tarih_ihale, i.dosyaNo, i.ikn, i.bayiDosyaTipi, i.teklifRevNo, i.teklifKase, i.teklifAntet, f.iletisimEposta, f.webSite,"_
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, ISNULL(i.cariID,0) as cariID,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
@@ -126,17 +126,17 @@ rs.open sorgu,sbsv5,1,3
 '####### /VERİLERİ ÇEK
 
 Response.Write "<page size=""A4"" class=""section-to-print"">"
-Response.Write "<table border=""1"" style=""width:100%;font-family:calibri;border-collapse:collapse;"" class=""b-all"">" 
+Response.Write "<table border=""1"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">" 
 	Response.Write "<tr>"
-		Response.Write "<td style=""width:20%"" class=""b-all"">"
+		Response.Write "<td style=""width:150px"">"
 		if teklifAntet = True then
 			Response.Write "<img id=""imageLogo"" src=""" & antetPath & """ width=""90"" height=""auto"">"
 		end if
 		Response.Write "</td>"
-		Response.Write "<td style=""text-align:center; font-size:30px; width:60%"" class=""b-all"">"
+		Response.Write "<td style=""text-align:center; font-size:30px; width:350px"" class=""b-all"">"
 			Response.Write "<span style=""font-weight:bold;"">PROFORMA INVOICE</span>"
 		Response.Write "</td>"
-		Response.Write "<td class=""b-all"" style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;width:20%"">"
+		Response.Write "<td class=""b-all"" style=""padding-top:20px;padding-right:10px;text-align:right;vertical-align:top;width:150px"">"
 			Response.Write "<b>Date: </b>"&formatdatetime(tarih_ihale,2) & "<br>"
 			Response.Write "<b>Number: </b>" & dosyaNo
 		Response.Write "</td>"
@@ -146,12 +146,12 @@ Response.Write "</table>"
 Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">"
 	Response.Write "<tr>"
 		
-		Response.Write "<td style=""width:350px;font-size:9pt"" class=""b-all"">"
+		Response.Write "<td style=""width:250px;font-size:9pt"" class=""b-all"">"
 			Response.Write "<div style=""height:90px; padding:10px;""" 
 			Response.Write " class="""">" & firmamAdUzun & "<br>" & firmamAdres & " <br> VAT No: " & vergiDairesi & " " & vergiNo & " <br> Tel: " & telefon &" </div>"
 		Response.Write "</td>"
 
-		Response.Write "<td style=""width:400px;"" class=""b-all border border-success"">"
+		Response.Write "<td style=""width:300px;"" class=""b-all border border-success"">"
 			Response.Write "<div style=""height:90px; padding:10px;font-size:9pt""" 
 				Response.Write " data-tabloid=""" & id & """"
 				Response.Write " data-tablo=""teklifv2.ihale"""
@@ -202,8 +202,7 @@ w12			=	"50px"
 tbstyle		=	"font-size:7pt;"
 
 Response.Write "<div id=""teklifGovde"">"
-
-Response.Write "<table class=""table-responsive-sm b-all"" border=""1"" style=""width:100%;border-collapse:collapse;font-family:calibri;"" class=""container-fluid table-bordered"">"
+Response.Write "<table class=""table-responsive-sm"" border=""1"" style=""width:100%;border-collapse:collapse;font-family:calibri;"" class=""container-fluid table-bordered"">"
 Response.Write "<thead><tr style=""font-size:x-small;"" class=""text-center fontkucuk2 style1"">"
 	if grupIhale = "True" then
 		Response.Write "<th class="""">"
@@ -352,27 +351,27 @@ for i = 1 to rs.recordcount
 	Response.Write ">"
 '###### SIRA NO
 '###### SIRA NO
-	Response.Write "<td style=""text-align:center;width:" & w1 & """ class=""text-center b-all"">" & siraNo & "</td>"
+	Response.Write "<td style=""text-align:center;width:" & w1 & """ class=""text-center"">" & siraNo & "</td>"
 '###### /SIRA NO
 '###### /SIRA NO
 
 '###### STOK KODU
 '###### STOK KODU
-	Response.Write "<td style=""text-align:center;width:" & w2 & """ class=""text-center b-all"">" & stokKodu & "</td>"
+	Response.Write "<td style=""text-align:center;width:" & w2 & """ class=""text-center"">" & stokKodu & "</td>"
 '###### /STOK KODU
 '###### /STOK KODU
 
 '###### MÜŞTERİ STOK KODU
 '###### MÜŞTERİ STOK KODU
 	if mustKodGoster = True then
-		Response.Write "<td style=""text-align:center;width:" & w3 & """ class=""text-center b-all"">" & cariUrunRef & "</td>"
+		Response.Write "<td style=""text-align:center;width:" & w3 & """ class=""text-center"">" & cariUrunRef & "</td>"
 	end if
 '###### /MÜŞTERİ STOK KODU
 '###### /MÜŞTERİ STOK KODU
 
 '###### ÜRÜN ADI
 '###### ÜRÜN ADI
-	Response.Write "<td style=""width:" & w4 & """ class=""b-all"">"
+	Response.Write "<td style=""width:" & w4 & """>"
 		Response.Write rs("iuAD")
 	Response.Write "</td>"
 '###### /ÜRÜN ADI
@@ -381,42 +380,42 @@ for i = 1 to rs.recordcount
 '##### KALEM DETAYI
 '##### KALEM DETAYI
 	if kalemNotTeklifEkle > 0 then
-			Response.Write "<td style=""text-align:left;font-size:7pt;width:" & w5 & """ class=""b-all"">" & kalemNot & "</td>"
+		Response.Write "<td style=""text-align:left;font-size:7pt;width:" & w5 & """>" & kalemNot & "</td>"
 	end if
 '##### KALEM DETAYI
 '##### KALEM DETAYI
 
 
 	if satirKDV = True then
-		Response.Write "<td style=""text-align:center;width:" & w6 & """ class=""text-center b-all"">" & kdv & "</td>"
+		Response.Write "<td style=""text-align:center;width:" & w6 & """ class=""text-center"">" & kdv & "</td>"
 	end if
-	Response.Write "<td style=""text-align:right;width:" & w7 & """ class=""text-right b-all"">"
+	Response.Write "<td style=""text-align:right;width:" & w7 & """ class=""text-right"">"
 	Response.Write formatnumber(rs("miktar"),0)&" "&rs("birim")
 	Response.Write "</td>"
-	Response.Write "<td style=""text-align:right;width:" & w8 & """ class=""text-right b-all"">"
+	Response.Write "<td style=""text-align:right;width:" & w8 & """ class=""text-right"">"
 		Response.Write firmamFiyat & " " & firmamParaBirim
 	Response.Write "</td>"
 	
-	Response.Write "<td style=""text-align:right;width:" & w9 & """ class=""text-right b-all"">"
+	Response.Write "<td style=""text-align:right;width:" & w9 & """ class=""text-right"">"
 		Response.Write firmamTutar & " " & firmamParaBirim
 	toplam_firmam_tutar = toplam_firmam_tutar + firmamTutar
 	Response.Write "</td>"
 	if iskontoKontrol > 0 then
-		Response.Write "<td style=""text-align:center;width:" & w10 & """ class=""b-all"">"
+		Response.Write "<td style=""text-align:center;width:" & w10 & """ class="""">"
 		if iskontoOran > 0 then
 			Response.Write "%" & iskontoOran
 		else
 			Response.Write "&nbsp;"
 		end if
 		Response.Write "</td>"
-		Response.Write "<td style=""text-align:right;width:" & w11 & """ class=""b-all"">"
+		Response.Write "<td style=""text-align:right;width:" & w11 & """ class="""">"
 			if iskontoTutar > 0 then
 				Response.Write iskontoTutar & " " & firmamParaBirim
 			else
 				Response.Write "&nbsp;"
 			end if
 		Response.Write "</td>"
-		Response.Write "<td style=""text-align:right;width:" & w12 & """ class=""b-all"">"
+		Response.Write "<td style=""text-align:right;width:" & w12 & """ class="""">"
 			Response.Write iskontoSonraTutar & " " & firmamParaBirim
 		Response.Write "</td>"
 		toplam_iskonto_tutar = toplam_iskonto_tutar + iskontoTutar
@@ -554,7 +553,7 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 		USDkur		=	dovizBulTarih("usdtry", tarih_ihale)
 
 
-			Response.Write "<table style=""font-family:calibri; font-size:12px;"">"
+			Response.Write "<table style=""font-family:calibri; font-size:12px;border-collapse:collapse;"">"
 				Response.Write "<tr>"
 					Response.Write "<td style=""width:70%"">"
 						Response.Write "<b><u>TERMS</u></b>"
@@ -579,10 +578,10 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 		Response.Write "<table style=""font-family:calibri; font-size:12px;border-collapse:collapse;"" width=""100%"" border=""1"">"
 			Response.Write "<thead>"
 				Response.Write "<tr style=""text-align:center;"">"
-					Response.Write "<th class=""b-all"">Bank</th>"
-					Response.Write "<th class=""b-all"">IBAN</th>"
-					Response.Write "<th class=""b-all"">SWIFT</th>"
-					Response.Write "<th class=""b-all"" >Currency</th>"
+					Response.Write "<th>Bank</th>"
+					Response.Write "<th>IBAN</th>"
+					Response.Write "<th>SWIFT</th>"
+					Response.Write "<th>Currency</th>"
 				Response.Write "</tr>"
 			Response.Write "</thead>"
 			Response.Write "<tbody>"
@@ -592,10 +591,10 @@ end if'tüm kalemlerin para birimi aynı ise toplamlar gösterilsin.
 			swiftKod	=	rs("swiftKod")
 			dovizTur	=	rs("paraBirim")
 				Response.Write "<tr style=""text-align:center;"">"
-					Response.Write "<td style=""border: 1px solid #000;"">"&bankaAd&"</td>"
-					Response.Write "<td style=""border: 1px solid #000;"">"&iban&"</td>"
-					Response.Write "<td style=""border: 1px solid #000;"">"&swiftKod&"</td>"
-					Response.Write "<td style=""border: 1px solid #000;"">"&dovizTur&"</td>"
+					Response.Write "<td style="""">"&bankaAd&"</td>"
+					Response.Write "<td style="""">"&iban&"</td>"
+					Response.Write "<td style="""">"&swiftKod&"</td>"
+					Response.Write "<td style="""">"&dovizTur&"</td>"
 				Response.Write "</tr>"
 			rs.movenext
 			next
@@ -618,6 +617,12 @@ Response.Write "</page>"
 %>
 <script>
 	$(document).ready(function() {
+
+$('.sayfaKes').on('click', function(){
+	alert();
+})
+
+
 		// "ajSaveBlur" contenteditable div leri değiştirmek için "blur" ile tetiklenen ajSave
 			
 			$('.ajSaveBlur').off().on('blur',function() {

@@ -426,7 +426,7 @@ Response.Write "<div class=""tab-content"">"
 		sorgu = sorgu & " FROM stok.koliIndex t1"
 		sorgu = sorgu & " INNER JOIN stok.koli t2 ON t1.koliID = t2.koliID"
 		sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.hamKoliStokID = t3.stokID"
-		sorgu = sorgu & " WHERE t1.silindi = 0"
+		sorgu = sorgu & " WHERE t1.silindi = 0 AND t1.stokID = " & gorevID
 		rs.open sorgu, sbsv5, 1, 3
 
 			Response.Write "<table class=""table table-sm table-striped"">"

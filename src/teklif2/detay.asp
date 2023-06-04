@@ -555,11 +555,22 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Miktar</div>" 
 				call forminput("miktar",miktar,"numara(this,false,false)","Miktar","","autocompleteOFF","miktar","")
 			Response.Write "</div>"
+
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Birim</div>" 
 				call forminput("birim",birim,"","Birim","","","birim","")
 			Response.Write "</div>"
-			
+
+			Response.Write "<div class=""col-lg-2"">"
+				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Fiyat</div>" 
+				call forminput("firmamFiyat","","numara(this,true,false)","","para text-right p-0 ","","","")
+			Response.Write "</div>"
+
+			Response.Write "<div class=""col-lg-1"">"
+				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Para Birim</div>" 
+				call formselectv2("firmamParaBirim","","","","btn p-0","","",paraBirimDegerler,"")
+			Response.Write "</div>"
+
 			Response.Write "<div class=""col-lg-1"">"
 			Response.Write "<div class=""badge mt-2"">&nbsp;</div>"
 			Response.Write "<button name=""urunler"" class=""kaydet btn-block btn-primary rounded"" type=""submit"" onClick=""$('#tip').val('acik');"">kaydet</button>"

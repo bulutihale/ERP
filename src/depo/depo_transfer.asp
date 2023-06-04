@@ -49,7 +49,9 @@ yetkiKontrol = yetkibul(modulAd)
 		'### sipariş miktar ve birimini bul
 			sorgu = "SELECT t2.miktar, stok.FN_anaBirimADBul("&stokID&",'kad') as urunAnaBirim"
 			sorgu = sorgu & " FROM portal.ajanda t1"
-			sorgu = sorgu & " INNER JOIN teklif.siparisKalem t2 ON t2.id = (SELECT siparisKalemID FROM portal.ajanda t3 WHERE t3.id = t1.bagliAjandaID)"
+			sorgu = sorgu & " INNER JOIN teklif.siparisKalem t2 ON t2.id = "
+			sorgu = sorgu & " CASE WHEN t1.bagliAjandaID is not null THEN"
+			sorgu = sorgu & " (SELECT siparisKalemID FROM portal.ajanda t3 WHERE t3.id = t1.bagliAjandaID) ELSE (t1.siparisKalemID) END"
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
 			rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount > 0 then
