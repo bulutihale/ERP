@@ -45,7 +45,7 @@ if yetkiKontrol = 9 then
 if gorevID = "" then
     gorevID = 0
 end if
-        sorgu = "SELECT stokKodu, anaBirimID, stok.FN_anaBirimADBul(anaBirimID, 'kad') as anaBirimAd  FROM stok.stok WHERE stokID = " & stokID
+        sorgu = "SELECT stokKodu, anaBirimID, stok.FN_anaBirimADBul(stokID, 'kad') as anaBirimAd  FROM stok.stok WHERE stokID = " & stokID
         rs.open sorgu, sbsv5, 1, 3
             stokKodu    =   rs("stokKodu")
             anaBirimID  =   rs("anaBirimID")

@@ -102,6 +102,9 @@
 							rs.close
 							rs.open ikinciSorgu, sbsv5,1,3
 							call jsrun("swal('','Cari için özel reçete kayıt edilmemiş stok için oluşturulmuş genel reçeteye göre işlem kayıtları oluşturuldu.','warning')")
+							receteID		=	rs("receteID")
+							sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
+							rs1.open sorgu, sbsv5,3,3
 						end if
 						if rs.recordcount > 0 then
 							receteID		=	rs("receteID")

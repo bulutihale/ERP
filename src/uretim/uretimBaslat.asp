@@ -83,10 +83,10 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = "SELECT ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) as uretilmisMiktar,"
 			sorgu = sorgu & " CASE"
 			 	sorgu = sorgu & " WHEN ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & ""
-				sorgu = sorgu & " = (stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") * stok.FN_receteMiktarBul ("&ajandaID&")) THEN 'tamam'"
+				sorgu = sorgu & " = (stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") * ISNULL(stok.FN_receteMiktarBul ( 425 ),1)) THEN 'tamam'"
 				sorgu = sorgu & " WHEN"
 				sorgu = sorgu & " ISNULL(stok.FN_uretilmisMiktarBul("&ajandaID&", " & uretilenStokID & ", "&firmaID&"),0) + " & uretilenMiktar & ""
-				sorgu = sorgu & " > (stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") * stok.FN_receteMiktarBul ("&ajandaID&"))"
+				sorgu = sorgu & " > (stok.FN_siparisMiktarBul("&ajandaID&", "&firmaID&") * ISNULL(stok.FN_receteMiktarBul ( 425 ),1))"
 			sorgu = sorgu & " THEN 'fazla' ELSE 'eksik' END as miktarTamamKontrol"
 			rs.open sorgu,sbsv5,1,3
 				uretilmisMiktar		=	rs("uretilmisMiktar")

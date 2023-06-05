@@ -293,10 +293,10 @@ Response.Write "<div class=""tab-content"">"
 									end if
 								Response.Write "</div>"
 								if yetkiKontrol >= 8 then
-									' Response.Write "<div class=""col-sm-6 my-1"">"
-									' 	Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Kullanım Dışı Ürün","","") & "</span>"
-									' 	call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
-									' Response.Write "</div>"
+									 Response.Write "<div class=""col-sm-6 my-1"">"
+									 	Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Kullanım Dışı Ürün","","") & "</span>"
+									 	call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
+									 Response.Write "</div>"
 									Response.Write "<div class=""col-sm-6 my-1"">"
 										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("LOT Takibi Yapılsın","","") & "</span><span class=""text-danger pointer ml-2"" onclick=""swal('','" & translate("Koli, koli bandı gibi sarf malzemelerde LOT takibi yapılmayacağı için bu tip ürünlerde HAYIR seçilir.","","") & "')""><i class=""mdi mdi-information-outline""></i></span>"
 										call formselectv2("lotTakip",lotTakip,"","","lotTakip","","lotTakip",HEDegerler,"")

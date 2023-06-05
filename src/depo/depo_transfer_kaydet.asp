@@ -95,7 +95,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 		'### Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
-			if not isnull(ajandaID) then
+			if ajandaID > 0 then
 			sorgu = "SELECT (stok.FN_receteMiktarBul("&ajandaID&") * stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar, stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar"
 			rs.open sorgu, sbsv5,1,3
 				toplamMiktar	=	rs("toplamMiktar")
