@@ -44,6 +44,7 @@ $(document).ready(function() {
 	  });
 //popover içine tıklanabilir link koyulduğunda yukarındakinin kullanılması gerekli --data-toggle="popoverH"-- kullan
 	})
+	
 	$(document).ajaxComplete(function() {
 		$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',placement:'bottom',container: 'body'});
 
@@ -667,12 +668,19 @@ function teklifPDFmail(id64,mailDurum,divID){
 
 
 	// hucreKaydet işlemleri		
-	function hucreKaydetGenel(idAlan,id,alan,tablo,deger,baslik,updateDIV,updateURL,ek3,ek4){
-		/* idAlan : tablonun id değerinin olduğu alanın adı
-		/ parametre : "{parametre:parametre}" şeklinde gelecek
-
+	function hucreKaydetGenel(idAlan,id,alan,tablo,deger,baslik,updateDIV,updateURL,postDeger,ek4){
+		/* idAlan 		: tablonun id değerinin olduğu alanın adı
+			id			: id değeri
+			postDeger	: güncellenecek DIV için post edilmesi gereken parametreler (örnek kullanım: "cariID_8**stokID_954")
 		*/
-		
+		var postDegerBol	=	postDeger.split("**");
+		var postData = {};
+		for(var i = 0; i < postDegerBol.length; i++){
+ 			var postData1 = postDegerBol[i].split("_")[0]
+ 			var postData2 = postDegerBol[i].split("_")[1]
+		 postData[postData1] = postData2;
+		} ;
+
 
 	swal({
 	title: baslik,
@@ -685,9 +693,17 @@ function teklifPDFmail(id64,mailDurum,divID){
 		function(result) {
 		// handle Confirm button click
 		// result is an optional parameter, needed for modals with input
-			$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:id,alan:alan,tablo:tablo,deger:deger})
-		
-			$('#'+updateDIV).load(updateURL+' #'+updateDIV+' > *')
+		$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:id,alan:alan,tablo:tablo,deger:deger}, function(){
+			$('#'+updateDIV).load(updateURL+' #'+updateDIV+' > *', postData, function(response, status, xhr){
+				if(status == "error"){
+					toastr.options.positionClass = 'toast-bottom-right';
+					toastr.error('İşlem başarısız ('+xhr.statusText+xhr.status+')','HATA!');
+				}else if(status == "success"){
+					toastr.options.positionClass = 'toast-bottom-right';
+					toastr.success('İşlem tamamlandı','OK');
+				}
+			});
+		});
 			
 		}, //confirm buton yapılanlar
 		function(dismiss) {

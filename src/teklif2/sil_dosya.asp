@@ -16,7 +16,7 @@
 	'##### request
 	'##### request
 	hatamesaj = "Kayıt Başlıyor"
-	call logla("Dosya","insert",hatamesaj,modulID)
+	call logla("Dosya silindi KID:"&kid&"dosyaID:"&modulID)
 	
 
 

@@ -1,0 +1,84 @@
+﻿id;Tarih;personelID;IP;gorevID;islem;firmaID;url;modulAd
+74571;8.05.2023 11:39:00;0;192.168.1.127;0;Sifre Giris Ekrani;5;;
+74572;8.05.2023 11:39:00;0;192.168.1.127;0;Sifre Denemesi;5;;Personel
+74573;8.05.2023 11:39:00;0;192.168.1.127;0;Sifre Dogrulaniyor;5;;Personel
+74574;8.05.2023 11:39:00;28;192.168.1.127;0;Basarili Giris;5;;Personel
+74575;8.05.2023 11:39:00;28;192.168.1.127;0;Welcome Dashboard;5;;Dashboard
+74576;8.05.2023 11:41:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74577;8.05.2023 12:06:00;28;192.168.1.127;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+74578;8.05.2023 12:07:00;28;192.168.1.127;0;101 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+74579;8.05.2023 12:09:00;28;192.168.1.127;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+74580;8.05.2023 12:09:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74581;8.05.2023 12:13:00;28;192.168.1.127;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+74582;8.05.2023 12:15:00;28;192.168.1.127;0;283 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+74583;8.05.2023 12:15:00;28;192.168.1.127;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+74584;8.05.2023 13:00:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74585;8.05.2023 13:01:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74586;8.05.2023 13:28:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74587;8.05.2023 13:35:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74588;8.05.2023 13:35:00;28;192.168.1.127;0;Stok Listesi Ekrani;5;;Stok
+74589;8.05.2023 13:36:00;28;192.168.1.127;0;Stok Listesi Ekrani;5;;Stok
+74590;8.05.2023 13:36:00;28;192.168.1.127;0;Stok Listesi Ekrani;5;;Stok
+74591;8.05.2023 13:37:00;28;192.168.1.127;0;Stok Listesi Ekrani;5;;Stok
+74592;8.05.2023 13:37:00;28;192.168.1.127;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+74593;8.05.2023 13:37:00;28;192.168.1.127;0;Yetkisiz Giris;5;;Kalite Kontrol
+74594;8.05.2023 13:37:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74595;8.05.2023 13:47:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74596;8.05.2023 13:47:00;28;192.168.1.127;0;Satinalma Temp Siparis Olusturma Ekrani;5;;Satin Alma
+74597;8.05.2023 13:47:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74598;8.05.2023 13:47:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74599;8.05.2023 13:52:00;0;192.168.1.163;0;Sifre Giris Ekrani;5;;
+74600;8.05.2023 13:52:00;0;192.168.1.163;0;Sifre Denemesi;5;;Personel
+74601;8.05.2023 13:52:00;0;192.168.1.163;0;Sifre Dogrulaniyor;5;;Personel
+74602;8.05.2023 13:52:00;35;192.168.1.163;0;Basarili Giris;5;;Personel
+74603;8.05.2023 13:52:00;35;192.168.1.163;0;Welcome Dashboard;5;;Dashboard
+74604;8.05.2023 13:53:00;35;192.168.1.163;0;Welcome Dashboard;5;;Dashboard
+74605;8.05.2023 13:53:00;35;192.168.1.163;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+74606;8.05.2023 13:53:00;35;192.168.1.163;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+74607;8.05.2023 13:54:00;35;192.168.1.163;0;Kalite Kontrol Formu olusturma;5;;Kalite Kontrol
+74608;8.05.2023 13:54:00;35;192.168.1.163;0;Kalite Kontrol Formu olusturma;5;;Kalite Kontrol
+74609;8.05.2023 13:55:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+74610;8.05.2023 13:56:00;35;192.168.1.163;652;Stok girisi kalite kontrol onayi;5;;Kalite Kontrol
+74611;8.05.2023 13:58:00;35;192.168.1.163;0;Kalite Kontrol Formu olusturma;5;;Kalite Kontrol
+74612;8.05.2023 13:58:00;35;192.168.1.163;0;Kalite Kontrol Formu olusturma;5;;Kalite Kontrol
+74613;8.05.2023 13:59:00;35;192.168.1.163;0;Personel Çikis Yapti;5;;Personel
+74614;8.05.2023 13:59:00;0;192.168.1.163;0;Sifre Giris Ekrani;5;;
+74615;8.05.2023 13:59:00;0;192.168.1.163;0;Sifre Denemesi;5;;Personel
+74616;8.05.2023 13:59:00;0;192.168.1.163;0;Sifre Dogrulaniyor;5;;Personel
+74617;8.05.2023 13:59:00;0;192.168.1.163;0;Hatali Kullanici adi veya sifre yazdiniz;5;;Personel
+74618;8.05.2023 13:59:00;0;192.168.1.163;0;Sifre Denemesi;5;;Personel
+74619;8.05.2023 13:59:00;0;192.168.1.163;0;Sifre Dogrulaniyor;5;;Personel
+74620;8.05.2023 13:59:00;36;192.168.1.163;0;Basarili Giris;5;;Personel
+74621;8.05.2023 13:59:00;36;192.168.1.163;0;Welcome Dashboard;5;;Dashboard
+74622;8.05.2023 14:00:00;36;192.168.1.163;0;Welcome Dashboard;5;;Dashboard
+74623;8.05.2023 14:01:00;36;192.168.1.163;0;Yetkisiz Giris;5;;Depo
+74624;8.05.2023 14:01:00;36;192.168.1.163;0;Üretim Isleri Listelendi;5;;Üretim
+74625;8.05.2023 14:02:00;36;192.168.1.163;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+74626;8.05.2023 14:02:00;36;192.168.1.163;0;Onay Bekleyen Kayit Bulunamadi;5;;Üretim
+74627;8.05.2023 14:02:00;36;192.168.1.163;0;Reçeteler Listelendi;5;;Reçete
+74628;8.05.2023 14:02:00;36;192.168.1.163;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+74629;8.05.2023 14:02:00;36;192.168.1.163;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74630;8.05.2023 14:03:00;36;192.168.1.163;0;Personel Bilgileri Giris Ekrani;5;;personel
+74631;8.05.2023 14:03:00;36;192.168.1.163;36;Personel Bilgileri : YAREN ;5;;personel
+74632;8.05.2023 14:03:00;36;192.168.1.163;0;Dogrudan Müsteri Siparisi Olusturma Ekrani;5;;Satis
+74633;8.05.2023 14:03:00;36;192.168.1.163;0;Yetkisiz Giris;5;;Satis
+74634;8.05.2023 14:03:00;36;192.168.1.163;0;Müsteri Siparisleri Listelendi;5;;Satis
+74635;8.05.2023 14:04:00;36;192.168.1.163;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+74636;8.05.2023 14:41:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74637;8.05.2023 14:41:00;28;192.168.1.127;0;Mal Kabul Ekrani Giris;5;;Lojistik
+74638;8.05.2023 14:42:00;28;192.168.1.127;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+74639;8.05.2023 14:42:00;28;192.168.1.127;0;Yetkisiz Giris;5;;Kalite Kontrol
+74640;8.05.2023 14:43:00;28;192.168.1.127;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+74641;8.05.2023 14:43:00;28;192.168.1.127;0;Yetkisiz Giris;5;;Kalite Kontrol
+74642;8.05.2023 14:43:00;28;192.168.1.127;0;Mal Kabul Ekrani Giris;5;;Lojistik
+74643;8.05.2023 14:45:00;28;192.168.1.127;0;Mal Kabul Ekrani Giris;5;;Lojistik
+74644;8.05.2023 15:02:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74645;8.05.2023 16:32:00;28;192.168.1.127;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+74646;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74647;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74648;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74649;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74650;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74651;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74652;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+74653;8.05.2023 16:50:00;28;192.168.1.127;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;

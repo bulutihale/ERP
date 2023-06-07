@@ -192,7 +192,7 @@ sorgu = "Select count(i.id) from teklifv2.ihale i LEFT JOIN cari.cari c ON i.car
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
 &" LEFT JOIN portal.iller ON c.il = iller.ilID"_
 &" LEFT JOIN portal.firma f ON i.firmaID = f.Id"_
-&" WHERE i.firmaID = " & firmaID & sorgufiltre & sorguKayitTip & sorguihaleTipi
+&" WHERE i.silindi = 0 AND i.firmaID = " & firmaID & sorgufiltre & sorguKayitTip & sorguihaleTipi
 rs.open sorgu,sbsv5,1,3
 	toplamkayitsayisi = rs(0)
 rs.close
@@ -218,7 +218,7 @@ sorgu = sorgu & " FROM teklifv2.ihale i"
 sorgu = sorgu & " LEFT JOIN cari.cari c ON i.cariID = c.cariID"
 sorgu = sorgu & " LEFT JOIN personel.personel k ON i.dosyaSorumlu = k.id"
 sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
-sorgu = sorgu & " WHERE i.firmaID = " & firmaID & sorgufiltre & sorguKayitTip & sorguihaleTipi & " order by i.ihaleNo ASC, i.tarih_ihale DESC OFFSET " & ilkkayit & " ROWS FETCH NEXT " & sayfaKayitSayisi & " ROWS ONLY"
+sorgu = sorgu & " WHERE i.silindi = 0 AND i.firmaID = " & firmaID & sorgufiltre & sorguKayitTip & sorguihaleTipi & " order by i.ihaleNo ASC, i.tarih_ihale DESC OFFSET " & ilkkayit & " ROWS FETCH NEXT " & sayfaKayitSayisi & " ROWS ONLY"
 rs.open sorgu,sbsv5,1,3
 
 if rs.recordcount > 0 then
@@ -295,35 +295,40 @@ if rs.recordcount > 0 then
 					
 			' Response.Write "</td>"
 			Response.Write "<td class=""align-middle text-left"">"
-			Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-6"">"
-				Response.Write "<a class=""btn btn-success rounded px-1 py-0"" href=""/teklif2/detay/" & ihaleID64 & """><i class=""fa fa-edit""></i></a>"
-			Response.Write "</div>"
-	'############## POPOVER ile işlemler listesi gösterimi
-			Response.Write "<div class=""col-6"">"
-			Response.write "<a tabindex=""0"" role=""button"""
-				Response.write " class=""btn btn-info rounded px-2 py-0 ml-1"""
-				Response.write " data-toggle=""popover"""
-				Response.write " title='İşlemler Listesi'"
-				Response.write " data-content='"
-					Response.Write "<div class=""hoverGel rounded""><a target="""" href=""/teklifSablon/" & teklifSablon & "/" & ihaleID64 & """><i class=""btn btn-info rounded px-1 py-0 fa fa-envelope""></i>&nbsp;Teklif ekranı</a></div>"
-				Response.Write "<hr class=""m-1 p-0"">"
-					if instr(yetki,",5,") = 0 then
-						Response.Write "<div class=""hoverGel rounded""><a href=""/dosya/upload_liste/" & ihaleID64 & """><i class=""btn btn-success rounded px-1 py-0 fa fa-book""></i>&nbsp;İlişkili dosya yükle</a></div>"
-					end if
-				Response.Write "<hr class=""m-1 p-0"">"
-					if instr(yetki,",4,") = 0 then
-						Response.Write "<div class=""hoverGel rounded"" onclick=""silDosya("&ihaleID64&")""><i class=""btn btn-danger rounded px-1 py-0 fa fa-trash""></i>&nbsp;Dosya Sil</div>"
-					end if
-				Response.write "'>"
-				Response.write "<i class=""fa fa-angle-double-right"" aria-hidden=""true""></i>"
-				Response.write "</a>"
-					dosyaSayi = dosyaSay("/temp/dosya/" & firmaID & "/teklifler/" & ihaleID64)
-					if  int(dosyaSayi) > 0 then
-						Response.Write "<a class=""btn btn-warning rounded px-2 ml-1 py-0"" onClick=""modalajax(&#39;/teklif2/teklif_liste_modal.asp?id="& ihaleID64 & "&#39;);""><i class=""fa fa-file-pdf-o""></i></a>"
-					end if
-	'############## /POPOVER ile işlemler listesi gösterimi
+			Response.Write "<div class=""row "">"
+				Response.Write "<div class=""col-2"" title=""dosya işlemleri"">"
+					Response.Write "<a class=""pointer rounded"" href=""/teklif2/detay/" & ihaleID64 & """><i class=""fa fa-edit""></i></a>"
 				Response.Write "</div>"
+					'if instr(yetki,",5,") = 0 then
+						'Response.Write "<div class=""hoverGel rounded p-0 m-0""><a href=""/dosya/upload_liste/" & ihaleID64 & """><i class=""btn btn-success rounded px-1 py-0 fa fa-book""></i></a></div>"
+					'end if
+			dosyaSayi = dosyaSay("/temp/dosya/" & firmaID & "/teklifler/" & ihaleID64)
+			if  int(dosyaSayi) > 0 then
+			Response.Write "<div class=""col-1"" title=""PDF oluşturlmuş versiyon listesi"">"
+				Response.Write "<a class=""pointer rounded"" onClick=""modalajax(&#39;/teklif2/teklif_liste_modal.asp?id="& ihaleID64 & "&#39;);""><i class=""fa fa-file-pdf-o""></i></a>"
+			Response.Write "</div>"
+			end if
+					Response.Write "<div class=""col-2 rounded"" title=""teklif önizleme"">"
+						Response.Write "<a target="""" href=""/teklifSablon/" & teklifSablon & "/" & ihaleID64 & """><i class=""fa fa-envelope""></i></a>"
+					Response.Write "</div>"
+					if instr(yetki,",4,") = 0 then
+						Response.Write "<div class=""pointer rounded col-2"" onclick=""silDosya(&#39;"&ihaleID64&"&#39;)"" title=""dosyayı sil""><i class=""fa fa-trash text-danger""></i></div>"
+					end if
+	'############## POPOVER ile işlemler listesi gösterimi
+			' Response.Write "<div class=""col-6"">"
+			' Response.write "<a tabindex=""0"" role=""button"""
+			' 	Response.write " class=""btn btn-info rounded px-2 py-0 ml-1"""
+			' 	Response.write " data-toggle=""popover"""
+			' 	Response.write " title='İşlemler Listesi'"
+			' 	Response.write " data-content='"
+			' 	Response.Write "<hr class=""m-1 p-0"">"
+			' 	Response.Write "<hr class=""m-1 p-0"">"
+			' 	Response.write "'>"
+			' 	Response.write "<i class=""fa fa-angle-double-right"" aria-hidden=""true""></i>"
+			' 	Response.write "</a>"
+			' 	Response.Write "</div>"
+	'############## /POPOVER ile işlemler listesi gösterimi
+			
 
 			Response.Write "</td>"
 		Response.Write "</tr>"

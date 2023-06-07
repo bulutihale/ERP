@@ -53,11 +53,12 @@
 					cariAd			=	rs("cariAd")
 					Response.Write "<tr>"
 						Response.Write "<td>"
-							'Response.Write cariUrunRef
-			call forminput("cariUrunRef",cariUrunRef,"","","borderless text-left input30","","","onChange=""hucreKaydetGenel('id',"&stokRefID&",'cariUrunRef','stok.stokRef',$(this).val(),'Müşteriye ait ref değiştirilsin mi?','refTablo','"&sayfaURL&"','','')""")
+							sayfaParametre = "cariID_"&cariID&"**stokID_"&stokID
+			call forminput("cariUrunRef",cariUrunRef,"","","borderless text-left input30","","","onChange=""hucreKaydetGenel('id',"&stokRefID&",'cariUrunRef','stok.stokRef',$(this).val(),'Müşteriye ait ref değiştirilsin mi?','refTablo','"&sayfaURL&"','"&sayfaParametre&"','')""")
 						Response.Write "</td>"
 						Response.Write "<td>"
-							Response.Write cariUrunAd
+							'Response.Write cariUrunAd
+			call forminput("cariUrunAd",cariUrunAd,"","","borderless text-left input30","","","onChange=""hucreKaydetGenel('id',"&stokRefID&",'cariUrunAd','stok.stokRef',$(this).val(),'Müşteriye ait Ürün Adı değiştirilsin mi?','refTablo','"&sayfaURL&"','"&sayfaParametre&"','')""")
 						Response.Write "</td>"
 						Response.Write "<td>"
 							Response.Write cariAd
