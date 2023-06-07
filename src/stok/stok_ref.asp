@@ -67,15 +67,7 @@ yetkiKontrol = yetkibul(modulAd)
 			Response.Write "</div>"
 		Response.Write "</div>"
 		
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
-                Response.Write "<div class=""card"">"
-					Response.Write "<div class=""row"">"
 						Response.Write "<div id=""divStokRef""></div>"
-					Response.Write "</div>"
-				Response.Write "</div>"
-			Response.Write "</div>"
-		Response.Write "</div>"
 		
 		Response.Write "</div>"
 

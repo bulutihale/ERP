@@ -205,7 +205,14 @@
 			rs.update
 			modulID = rs("id")
 		rs.close
+
+		'######### teklifV2.teklifSabit tablosundan default içerikleri al
+		if tip = "proforma" then
+			sorgu = "UPDATE teklifv2.ihale SET teklifNot = (SELECT defaultAciklama FROM teklifv2.teklifSabit WHERE teklifTip = '"&tip&"') WHERE id = " & modulID
+			rs.open sorgu, sbsv5,3,3
+		end if
 		
+		'######### teklifV2.teklifSabit tablosundan default içerikleri al
 			hatamesaj = "Kayıt Başarılı."
 			call logla(hatamesaj)
 			

@@ -3,8 +3,11 @@
 
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
-    stokID	=   Request.Form("stokID")
-	cariID	=	Request.Form("cariID")
+	urlBolum1	=	Session("sayfa3")
+	urlBolum2	=	Session("sayfa4")
+    stokID		=   Request.Form("stokID")
+	cariID		=	Request.Form("cariID")
+	sayfaURL 	=	"/"&urlBolum1&"/stok_ref_liste.asp"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -20,16 +23,16 @@
 				Response.Write "<div class=""row"">"
 
 		Response.Write "<div class=""table-responsive"">"
-		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
+		Response.Write "<table style=""width:100%"" class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 		Response.Write "<th scope=""col"">Kod</th>"
 		Response.Write "<th scope=""col"">Ürün Adı</th>"
 		Response.Write "<th scope=""col"">Cari</th>"
 		if yetkiKontrol >= 5 then
 			Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 		end if
-		Response.Write "</tr></thead><tbody>"
+		Response.Write "</tr></thead><tbody id=""refTablo"">"
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.cariUrunRef, t1.cariUrunAd, t2.cariAd"
+			sorgu = sorgu & " t1.id as stokRefID, t1.cariUrunRef, t1.cariUrunAd, t2.cariAd"
 			sorgu = sorgu & " FROM stok.stokRef t1"
 			sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
@@ -44,13 +47,21 @@
 			
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
+					stokRefID		=	rs("stokRefID")
 					cariUrunRef		=	rs("cariUrunRef")
 					cariUrunAd		=	rs("cariUrunAd")
 					cariAd			=	rs("cariAd")
 					Response.Write "<tr>"
-						Response.Write "<td>" & cariUrunRef & "</td>"
-						Response.Write "<td>" & cariUrunAd & "</td>"
-						Response.Write "<td>" & cariAd & "</td>"
+						Response.Write "<td>"
+							'Response.Write cariUrunRef
+			call forminput("cariUrunRef",cariUrunRef,"","","borderless text-left input30","","","onChange=""hucreKaydetGenel('id',"&stokRefID&",'cariUrunRef','stok.stokRef',$(this).val(),'Müşteriye ait ref değiştirilsin mi?','refTablo','"&sayfaURL&"','','')""")
+						Response.Write "</td>"
+						Response.Write "<td>"
+							Response.Write cariUrunAd
+						Response.Write "</td>"
+						Response.Write "<td>"
+							Response.Write cariAd
+						Response.Write "</td>"
 					if yetkiKontrol >= 5 then
 						Response.Write "<td class=""text-right"">"
 						'# stok düzenle

@@ -187,7 +187,7 @@ Response.Write "<thead><tr style=""font-size:x-small;"" class=""text-center font
 		Response.Write "</th>"
 	end if
 Response.Write "<th class=""bg-secondary"">Sıra</th>"	
-Response.Write "<th class=""bg-secondary"">Ürün Kodu</th>"
+Response.Write "<th class=""bg-secondary"">Ref Kodu</th>"
 Response.Write "<th class=""bg-secondary"">Ürün & Hizmet Tanımı</th>"
 if satirKDV = True then
 Response.Write "<th class=""bg-secondary"">KDV</th>"
@@ -260,7 +260,7 @@ sorgu = sorgu &" (iu.firmamFiyat * iu.miktar) - (((iu.firmamFiyat * iu.miktar)*I
 sorgu = sorgu &" ((iu.firmamFiyat * iu.miktar)*ISNULL(iu.iskontoOran,0))/100 as iskontoTutar,"
 sorgu = sorgu &" tavsiyeFiyat * iu.miktar as tavsiyeTutar, iu.firmamFiyat, iu.firmamParaBirim,"
 sorgu = sorgu &" iu.firmamFiyat * iu.miktar as firmamTutar, iu.stoklarListeFiyat * iu.miktar as listeTutar,"
-sorgu = sorgu &" ISNULL(bayiAlis,0) * iu.miktar as bayiTutar, s.katalogKodu, ISNULL(s.stokBarcode,'') as ubbKod, s.stokKodu, s.kdv"
+sorgu = sorgu &" ISNULL(bayiAlis,0) * iu.miktar as bayiTutar, s.katalogKodu, ISNULL(s.stokBarcode,'') as ubbKod, s.stokKodu, s.kdv, s.katalogKodu"
 sorgu = sorgu &" FROM teklifv2.ihale_urun iu"
 sorgu = sorgu &" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"
 sorgu = sorgu &" WHERE iu.ihaleID = " & id & " ORDER BY iu.grupNo ASC, iu.siraNo ASC"
@@ -273,6 +273,7 @@ toplam_firmam_tutar		=	0
 
 for i = 1 to rs.recordcount
 	stokKodu			=	rs("stokKodu")
+	katalogKodu			=	rs("katalogKodu")
 	kdv					=	rs("kdv")
 	siraNo				=	rs("siraNo")
 	ubbKod				=	rs("ubbKod")
@@ -290,7 +291,7 @@ if grupIhale = "True" then
 	Response.Write "</td>"
 end if
 	Response.Write "<td style=""text-align:center;"" class=""text-center"">" & siraNo & "</td>"
-	Response.Write "<td style=""text-align:center;"" class=""text-center"">" & stokKodu & "</td>"
+	Response.Write "<td style=""text-align:center;"" class=""text-center"">" & katalogKodu & "</td>"
 	Response.Write "<td>"
 		Response.Write rs("iuAD") & "<br>"
 		if len(ubbKod) > 0 then

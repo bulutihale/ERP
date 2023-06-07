@@ -669,8 +669,11 @@ function teklifPDFmail(id64,mailDurum,divID){
 	// hucreKaydet işlemleri		
 	function hucreKaydetGenel(idAlan,id,alan,tablo,deger,baslik,updateDIV,updateURL,ek3,ek4){
 		/* idAlan : tablonun id değerinin olduğu alanın adı
+		/ parametre : "{parametre:parametre}" şeklinde gelecek
 
 		*/
+		
+
 	swal({
 	title: baslik,
 	type: 'warning',

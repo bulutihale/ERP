@@ -18,8 +18,8 @@
 
 
 call logla("" & modulAd & " Depo Girişi Bekleyen Ürünler Ekranı")
-
-yetkiKontrol = yetkibul(modulAd)
+lojAdmin		=	yetkibul("Lojistik")	
+yetkiKontrol 	= 	yetkibul(modulAd)
 
 
 
@@ -107,7 +107,7 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
 						Response.Write "<td class=""text-center"">" & lot & "</td>"
 						Response.Write "<td class=""text-center"">" & lotSKT & "</td>"
-					if yetkiKontrol >= 5 then
+					if yetkiKontrol >= 5 OR lojAdmin = 9 then
 						Response.Write "<td class=""text-right"">"
 						'# transfer red
 						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""

@@ -232,7 +232,7 @@ if yetkiKontrol  >= 3 then
 	'##### DOSYA TİPLERİNİ SELECT İÇİN HAZIRLA
 	'##### DOSYA TİPLERİNİ SELECT İÇİN HAZIRLA
 
-				dosyaTipDegerler = "=|Doğrudan Temin=dog_temin|Açık İhale=acik|Yaklaşık Maliyet=yaklasik_mal|Özel Hastane=ozel_hast|Pazarlık Usulü=pazarlik|FirmaBayi=bayi|E-İhale=eihale"
+				dosyaTipDegerler = "=|Doğrudan Temin=dog_temin|Özel Hastane=ozel_hast|FirmaBayi=bayi|İhracat Proforma=proforma"
 				
 	'##### /DOSYA TİPLERİNİ SELECT İÇİN HAZIRLA
 	'##### /DOSYA TİPLERİNİ SELECT İÇİN HAZIRLA
@@ -413,10 +413,10 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Tipi</div>"
 					call formselectv2("tip",tip,"ajSave('tip','teklifv2.ihale',"&id&",$(this).val())","","",iptalKontrol,"",dosyaTipDegerler,"")
 				
-				Response.Write "<div class="""&classYaz&""">"
-				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Tipi</div>"
-					call formselectv2("bayiDosyaTipi",bayiDosyaTipi,"ajSave('bayiDosyaTipi','teklifv2.ihale',"&id&",$(this).val())","","",iptalKontrol,"",bayiDosyaTipiDegerler,"")
-				Response.Write "</div>"
+				'Response.Write "<div class="""&classYaz&""">"
+				'Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Tipi</div>"
+					'call formselectv2("bayiDosyaTipi",bayiDosyaTipi,"ajSave('bayiDosyaTipi','teklifv2.ihale',"&id&",$(this).val())","","",iptalKontrol,"",bayiDosyaTipiDegerler,"")
+				'Response.Write "</div>"
 				
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Dosya Sorumlusu</div>"
 					call formselectv2("dosyaSorumlu",dosyaSorumlu,"ajSave('dosyaSorumlu','teklifv2.ihale',"&id&",$(this).val())","","","","",kullanicilarDegerler,"")
