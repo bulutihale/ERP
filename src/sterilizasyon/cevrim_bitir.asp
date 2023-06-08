@@ -35,10 +35,10 @@ call rqKontrol(EOgazMiktar, "Kullanılan Etilen Oksit gaz miktarı girişi yapı
 				for zi = 1 to rs.recordcount
 					stokHareketID	=	rs("stokHareketID")
 
-					sorgu = "EXEC stok.SP_stokHareketCopyRow " & stokHareketID & ", @kid =" &kid&", @cikisDepoBul = 0, @hareketTur='C'"
+					sorgu = "EXEC stok.SP_stokHareketCopyRow " & stokHareketID & ", @kid =" &kid&", @cikisDepoBul = 0, @hareketTur='C', @firmaID = "&firmaID&""
 					rs1.open sorgu, sbsv5, 3, 3
 
-					sorgu = "EXEC stok.SP_stokHareketCopyRow " & stokHareketID & ", @kid =" &kid&", @cikisDepoBul = 1, @hareketTur='G'"
+					sorgu = "EXEC stok.SP_stokHareketCopyRow " & stokHareketID & ", @kid =" &kid&", @cikisDepoBul = 1, @hareketTur='G', @firmaID = "&firmaID&""
 					rs1.open sorgu, sbsv5, 3, 3
 
 				rs.movenext

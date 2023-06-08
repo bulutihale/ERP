@@ -61,7 +61,7 @@ Response.Write "<div class=""card-body"">"
 			if cariID <> "" then
 				sorgu = sorgu & " AND t3.cariID = " & cariID & ""
 			end if
-			sorgu = sorgu & " ORDER BY t1.receteID"
+			sorgu = sorgu & " ORDER BY t1.receteID DESC"
 			rs.open sorgu, sbsv5, 1, 3
 			
 			if rs.recordcount = 0 then

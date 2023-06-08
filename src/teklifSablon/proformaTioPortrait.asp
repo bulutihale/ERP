@@ -136,7 +136,7 @@ Response.Write "<table border=""1"" style=""width:100%;font-family:calibri;borde
 				Response.Write  firmamAdUzun & "<br>"
 				Response.Write  firmamAdres & " <br>"
 				Response.Write "VAT No: " & vergiDairesi & " " & vergiNo & " <br>"
-				Response.Write "Tel: " & telefon
+				Response.Write "Tel: " & firmamTel
 			Response.Write " </div>"
 		end if
 		Response.Write "</td>"

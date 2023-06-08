@@ -7,6 +7,9 @@
 	t1						=	Request.Form("t1")
 	t2						=	Request.Form("t2")
 	call sessiontest()
+	modulAd	=	"Gelişmiş Teklif"
+		yetkiKontrol 	=	yetkibul(modulAd)
+
 
 sayfaKayitSayisi	=	100
 
@@ -218,7 +221,7 @@ sorgu = sorgu & " FROM teklifv2.ihale i"
 sorgu = sorgu & " LEFT JOIN cari.cari c ON i.cariID = c.cariID"
 sorgu = sorgu & " LEFT JOIN personel.personel k ON i.dosyaSorumlu = k.id"
 sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
-sorgu = sorgu & " WHERE i.silindi = 0 AND i.firmaID = " & firmaID & sorgufiltre & sorguKayitTip & sorguihaleTipi & " order by i.ihaleNo ASC, i.tarih_ihale DESC OFFSET " & ilkkayit & " ROWS FETCH NEXT " & sayfaKayitSayisi & " ROWS ONLY"
+sorgu = sorgu & " WHERE i.silindi = 0 AND i.firmaID = " & firmaID & sorgufiltre & sorguKayitTip & sorguihaleTipi & " order by i.tarih_ihale DESC, i.id DESC  OFFSET " & ilkkayit & " ROWS FETCH NEXT " & sayfaKayitSayisi & " ROWS ONLY"
 rs.open sorgu,sbsv5,1,3
 
 if rs.recordcount > 0 then
@@ -311,7 +314,7 @@ if rs.recordcount > 0 then
 					Response.Write "<div class=""col-2 rounded"" title=""teklif önizleme"">"
 						Response.Write "<a target="""" href=""/teklifSablon/" & teklifSablon & "/" & ihaleID64 & """><i class=""fa fa-envelope""></i></a>"
 					Response.Write "</div>"
-					if instr(yetki,",4,") = 0 then
+					if yetkiKontrol > 5 then
 						Response.Write "<div class=""pointer rounded col-2"" onclick=""silDosya(&#39;"&ihaleID64&"&#39;)"" title=""dosyayı sil""><i class=""fa fa-trash text-danger""></i></div>"
 					end if
 	'############## POPOVER ile işlemler listesi gösterimi
