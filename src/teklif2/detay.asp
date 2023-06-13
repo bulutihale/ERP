@@ -667,7 +667,7 @@ Response.Write "<div class=""card-body row"">"
 					if not isnull(sipTempID) OR not isnull(sipKalemID) then
 						Response.Write " onclick=""swal('" & sipYaziliMsg & "','','info')"""
 					else
-						Response.Write " onclick=""modalajax('/teklif2/sipYaz_modal.asp?iuID="&ihaleUrunID&"')"""
+						Response.Write " onclick=""modalajax('/teklif2/sipYaz_modal.asp?iuID="&ihaleUrunID&"&ihaleID="&ihaleID&"')"""
 					end if
 				else
 					Response.Write " onclick=""swal('sipariş yazmak için yetkiniz yok.','','error')"""

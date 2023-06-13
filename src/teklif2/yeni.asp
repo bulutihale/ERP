@@ -87,7 +87,7 @@ Response.Write "<div class=""card-body row"">"
 					Response.Write "<div id=""divYeniCari"" class=""mt-3 d-none"">"
 						Response.Write "<div class=""m-0 p-0"">Vergi No :</div>"
 						call clearfix()
-						Response.Write "<input id=""yeniCariVergiNo"" name=""yeniCariVergiNo"" type=""text"">"
+						Response.Write "<input id=""yeniCariVergiNo"" name=""yeniCariVergiNo"" type=""text"" onclick=""swal('<span class=\'text-danger\'>ÖNEMLİ!</span>','vergi numarasının doğru girilmesi önem taşımaktadır, firma ÜTS\'de kayıtlı ise ÜTS kayıtlarından firma bilgileri otomatik getirilir.<br><br>Kayıtlı değil ise sipariş alındığında cari kayıtları bu vergi numarası ile otomatik oluşturulacağından özellikle <span class=\'bold\'>vergi no</span> ve cari detayları doğru girilmelidir.')"">"
 						Response.Write "<div id=""utsNoListe""></div>"
 					Response.Write "<hr class=""bg-danger"">"
 						call clearfix()
