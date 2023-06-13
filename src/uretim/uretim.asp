@@ -222,9 +222,9 @@ yetkiKontrol = yetkibul(modulAd)
 								if yetkiKontrol > 6 then
 									uretilmisMiktar	=	""
 									btnYazi			=	""
-									if isTur = "kesimPlan" then
-										Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBitir'," & uretilenMiktar & ")"""
-									elseif isTur = "uretimPlan" then
+									'if isTur = "kesimPlan" then
+										'Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBitir'," & uretilenMiktar & ")"""
+									'elseif isTur = "uretimPlan" then
 										sorgu = "SELECT stok.FN_uretilmisMiktarBul(" & ajandaID & ", " & stokID & ", " & firmaID & ") as uretilmisMiktar"
 										rs.open sorgu,sbsv5,1,3
 											uretilmisMiktar		=	rs("uretilmisMiktar")
@@ -235,9 +235,9 @@ yetkiKontrol = yetkibul(modulAd)
 										uretimOran	=	formatpercent(uretilmisMiktar/sipMiktar,2)
 										btnYazi		=	"<span style=""font-size:30px"">" & uretimOran & "</span><br><span class=""fontkucuk"">(" & uretilmisMiktar & " / " & sipMiktar & " " & mikBirim & ")</span><br>"
 										Response.Write " onclick=""modalajax('/uretim/uretimBitirModal.asp?siparisKalemID="&siparisKalemID&"&ajandaID="&ajandaID&"&islemDurum=islemBitir&teminDepoID="&secilenDepoID&"&secilenReceteID="&secilenReceteID&"');"""
-									end if
+									'end if
 								else
-									Response.Write " onclick=""swal('YETKİ YOK','Üretim başlatmak için yetkiniz yeterli değil!')"""
+									Response.Write " onclick=""swal('YETKİ YOK','Üretim başlatmak için yetkiniz yok!')"""
 								end if
 									Response.Write ">" & btnYazi & " <span style=""font-size:30px"">BİTİR</span></button>"
 							end if

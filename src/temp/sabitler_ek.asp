@@ -27,7 +27,7 @@ if firmaID = 5 then
 		sb_ssl = False
 		'## SERVİSLER
 			sb_activeuserUrl =	"/activeuser.asp"
-			sb_activeuserTime = 3
+			sb_activeuserTime = 10
 		'## SERVİSLER
 	'## TEMEL TANIMLAR
 

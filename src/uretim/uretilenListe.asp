@@ -62,9 +62,9 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "<th class=""col-2"" scope=""col"">Üretim Başlangıcı</th>"
 		Response.Write "<th class=""col-2"" scope=""col"">Üretim Bitişi</th>"
 		Response.Write "<th class=""col-4"" scope=""col"">Ürün Adı</th>"
-		Response.Write "<th></th>"
+		Response.Write "<th>Üretilen / Talep</th>"
 		Response.Write "</tr></thead><tbody>"
-		
+
 		
             sorgu = "SELECT"
 			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "

@@ -131,7 +131,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-lg-2 col-sm-6 bold"">Giriş Depo</div>"
 					Response.Write "<div class=""col-lg-10 col-sm-6"">"
-						call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "','" & depoKategori & "')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('uretim','sterilizasyon','kesim','sterilizasyonSarf','fason','iade')""")
+						call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "','" & depoKategori & "')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0""")
 					Response.Write "</div>"
 				Response.Write "</div>"
 

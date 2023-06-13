@@ -39,8 +39,15 @@ if gorevID <> "" then
 		email				=	rs("email")
 		ilce				=	rs("ilce")
 		silindi				=	rs("silindi")
+		ulkeID				=	rs("ulkeID")
 	rs.close
 end if
+
+	if ulkeID <> "" then
+		defDeger = defDegerBul("portal.ulkeler", "id", ulkeID, "adTurkce")
+	end if
+
+
 
 
 if gorevID = "" then
@@ -92,7 +99,7 @@ end if
 
 
 			Response.Write "<div class=""row mt-2"">"
-				'## Cari Kodu
+
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-secondary"">" & translate("Cari Kod","","") & "</div>"
 					if manuelKayit = False then
@@ -101,8 +108,7 @@ end if
 						call forminput("cariKodu",cariKodu,"","","","autocompleteOFF","cariKodu","")
 					end if
 				Response.Write "</div>"
-				'## Cari Kodu
-				'## Cari Ad
+
 				Response.Write "<div class=""col-lg-8 col-md-8 col-sm-8 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-danger"">" & translate("Cari Ad","","") & "</div>"
 					if manuelKayit = False then
@@ -111,65 +117,49 @@ end if
 						call forminput("cariAd",cariAd,"","","","autocompleteOFF","cariAd","")
 					end if
 				Response.Write "</div>"
-				'## Cari Ad
-				'## unvan
+			Response.Write "</div>"
+			Response.Write "<div class=""row mt-2"">"
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-danger"">" & translate("Cari Türü","","") & "</div>"
 					call formselectv2("cariTur",cariTur,"","","","","cariTur",sb_cariTurArr,"")
 				Response.Write "</div>"
-				'## unvan
-				'## unvan
-				' Response.Write "<div class=""col-lg-8 col-md-8 col-sm-8 col-xs mb-4"">"
-				' 	Response.Write "<div class=""badge badge-secondary"">" & translate("Ünvan","","") & "</div>"
-				' 	call forminput("unvan",unvan,"","","","autocompleteOFF","unvan","")
-				' Response.Write "</div>"
-				'## unvan
-				'## unvan
+
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-danger"">" & translate("Vergi Dairesi","","") & "</div>"
 					call forminput("vergiDairesi",vergiDairesi,"","","","autocompleteOFF","vergiDairesi","")
 				Response.Write "</div>"
-				'## unvan
-				'## unvan
+
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-danger"">" & translate("Vergi Numarası","","") & "</div>"
 					call forminput("vergiNo",vergiNo,"","","","autocompleteOFF","vergiNo","")
 				Response.Write "</div>"
-				'## unvan
-				'## unvan
+			Response.Write "</div>"
+			Response.Write "<div class=""row mt-2"">"
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4 sehirdiv"">"
 					Response.Write "<div class=""badge badge-secondary float-start"">" & translate("Şehir","","") & "</div>"
-					' Response.Write "<div class=""float-right"">"
-						' Response.Write "<button class=""btn btn-success btn-sm"" type=""submit"">" & translate("Şehir Ekle","","") & "</button>"
-					' Response.Write "</div>"
 					call formselectv2("il",il,"","","","","il",sehirArr,"")
 				Response.Write "</div>"
-				'## unvan
-				'## unvan
-				' Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4 sehir2div d-none"">"
-				' 	Response.Write "<div class=""badge badge-secondary"">" & translate("Şehir Adını Yazın","","") & "</div>"
-				' 	call forminput("sehir2","","","","","autocompleteOFF","sehir2","")
-				' Response.Write "</div>"
-				'## unvan
-				'## unvan
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
-					Response.Write "<div class=""badge badge-secondary"">" & translate("Telefon","","") & "</div>"
-					call forminput("telefon",telefon,"","","","autocompleteOFF","telefon","")
+					Response.Write "<div class=""badge badge-secondary rounded-left"">Ülke</div>"
+					call formselectv2("ulkeID","","","","formSelect2 ulkeID border","","ulkeID","","data-holderyazi=""Ülke"" data-jsondosya=""JSON_ulkeler"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
 				Response.Write "</div>"
-				'## unvan
-				'## unvan
+			Response.Write "</div>"
+
+			Response.Write "<div class=""row mt-2"">"
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-secondary"">" & translate("Posta Kodu","","") & "</div>"
 					call forminput("postakodu",postakodu,"","","","autocompleteOFF","postakodu","")
 				Response.Write "</div>"
-				'## unvan
-				'## unvan
 				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-secondary"">" & translate("Email Adresi","","") & "</div>"
 					call forminput("email",email,"","","","autocompleteOFF","email","")
 				Response.Write "</div>"
-				'## unvan
-				'## unvan
+				Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4 col-xs mb-4"">"
+					Response.Write "<div class=""badge badge-secondary"">" & translate("Telefon","","") & "</div>"
+					call forminput("telefon",telefon,"","","","autocompleteOFF","telefon","")
+				Response.Write "</div>"
+			Response.Write "</div>"
+
 				Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs mb-4"">"
 					Response.Write "<div class=""badge badge-secondary"">" & translate("Posta Adresi","","") & "</div>"
 					call formtextarea("adres",adres,"","","form-control","","adres","")
@@ -194,3 +184,12 @@ end if
 
 
 %><!--#include virtual="/reg/rs.asp" -->
+
+
+
+<script>
+	$(document).ready(function() {
+		$('#ulkeID').trigger('mouseenter');
+	});
+	 
+</script>

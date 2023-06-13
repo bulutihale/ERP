@@ -5132,15 +5132,22 @@ end function
 
 
 
+function defDegerBul(byVal tablo, byVal idAlan, byVal tabloID, byVal degerAlan)
+	'tablo		:	sorgulanacak tablo "portal.ulkeler" gibi
+	'idAlan		:	sorgulanacak olan id değerinin alan adı "ulkelerID" gibi
+	'tabloID	:	sorgulanacak ID değeri
+	'degerAlan	:	cevap olarak dönecek alanın adı
+
+		sorgu = "EXEC [portal].[SP_defDegerBul] '" & tablo & "', '" & idAlan & "', " & tabloID & ", '" & degerAlan & "'"
+		fn1.open sorgu, sbsv5, 1, 3			
+			sonuc	=	fn1(0)
+		fn1.close
+
+		defDegerBul	=	sonuc
 
 
 
-
-
-
-
-
-
+end function
 
 
 

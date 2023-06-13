@@ -26,6 +26,7 @@
     adres	 		=   Request.Form("adres")
     gorevID			=   Request.Form("gorevID")
     cariTur         =   Request.Form("cariTur")
+    ulkeID          =   Request.Form("ulkeID")
 '###### ANA TANIMLAMALAR
 
 
@@ -87,6 +88,7 @@ end if
 	rs("postakodu")         =   postakodu
 	rs("email")             =   email
 	rs("ilce")              =   ilce
+    rs("ulkeID")            =   ulkeID
 rs.update
 rs.close
 
