@@ -24,26 +24,12 @@ call logla("Stok Depo Miktarları Detay")
 yetkiKontrol = yetkibul(modulAd)
 
 
-            ' sorgu = "SELECT t1.stokKodu, t1.stokAd, stok.FN_stokSayGB(" & firmaID & ", t1.stokID, t2.depoID) as stokMiktarGB,"
-			' sorgu = sorgu & " stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) as lotMiktar,"
-			' sorgu = sorgu & " t3.depoAd, t2.lot, t2.miktarBirim, t6.cariAd, t2.lotSKT as lotSKT"
-			' sorgu = sorgu & " FROM stok.stok t1"
-			' sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
-			' sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
-			' sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t4 ON  t2.siparisKalemID = t4.id"
-			' sorgu = sorgu & " LEFT JOIN teklif.siparis t5 ON t4.siparisID = t5.sipID"
-  			' sorgu = sorgu & " LEFT JOIN cari.cari t6 ON t5.cariID = t6.cariID"
-			' sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t2.silindi = 0"
-			' sorgu = sorgu & " AND stok.FN_stokSayDepo(" & firmaID & ", t1.stokID, t2.depoID) > 0"
-			' sorgu = sorgu & " AND stok.FN_stokSayDepoLot(" & firmaID & ", t1.stokID, t2.depoID, t2.lot) > 0"
-			' sorgu = sorgu & " GROUP BY t2.depoID, t1.stokKodu, t1.stokID, t3.depoAd, t1.stokAd, t2.lot, t2.miktarBirim, t4.siparisID, t6.cariAd,t2.lotSKT "
-
 
 
 sorgu = "SELECT"
 sorgu = sorgu & " t1.stokKodu,"
 sorgu = sorgu & " t1.stokAd,"
-sorgu = sorgu & " stok.FN_stokSayGB ( " & firmaID & ", t1.stokID, t2.depoID ) AS stokMiktarGB,"
+sorgu = sorgu & " stok.FN_stokSayGB2 ( " & firmaID & ", t1.stokID ) AS stokMiktarGB,"
 sorgu = sorgu & " stok.FN_stokSayDepoLot ( " & firmaID & ", t1.stokID, t2.depoID, t2.lot ) AS lotMiktar,"
 sorgu = sorgu & " t3.depoAd,"
 sorgu = sorgu & " t2.lot,"
@@ -89,9 +75,49 @@ sorgu = sorgu & " t2.lotSKT"
 			Response.Write "<div class=""col h3 text-info text-right bold"">" & stokAd & "</div>"
 		Response.Write "</div>"
 
-		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-12 text-danger fontkucuk2"">**Depo giriş onayı bekleyen ürünler GÖSTERİLMEZ.</div>"
-		Response.Write "</div>"
+'############## depo girişi bekleyenler
+	sorgu = "SELECT t1.stokKodu, t1.stokAd,"
+	sorgu = sorgu & " t2.miktar,"
+	sorgu = sorgu & " t3.depoAd, t2.lot, t2.miktarBirim, t2.lotSKT"
+	sorgu = sorgu & " FROM stok.stok t1"
+	sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
+	sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
+	sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID & " AND t2.silindi = 0"
+	sorgu = sorgu & " AND stokHareketTuru = 'GB'"
+	rs1.open sorgu, sbsv5, 1, 3
+	
+	if rs1.recordcount > 0 then
+
+		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm table-danger""><thead class=""thead-danger""><tr class=""text-center fontkucuk2"">"
+		Response.Write "<th scope=""col"">LOT</th>"
+		Response.Write "<th scope=""col"">LOT SKT</th>"
+		Response.Write "<th scope=""col"" class=""text-center"">Lot Miktar</th>"
+		Response.Write "<th scope=""col"">Depo Ad</th>"
+		Response.Write "</tr></thead><tbody>"
+	
+		for zi = 1 to rs1.recordcount
+			depoAd			=	rs1("depoAd")
+			lot				=	rs1("lot")
+			lotSKT			=	rs1("lotSKT")
+			miktar			=	rs1("miktar")
+			miktarBirim		=	rs1("miktarBirim")
+
+					Response.Write "<tr>"
+						Response.Write "<td>" & lot & "</td>"
+						Response.Write "<td>" & lotSKT & "</td>"
+						Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & " </td>"
+						Response.Write "<td>" & depoAd & "<span class=""fontkucuk2 text-success""> (giriş bekliyor)</span></td>"
+					Response.Write "</tr>"
+		rs1.movenext
+		next
+		Response.Write "</tbody>"
+		Response.Write "</table>"
+	end if
+	rs1.close
+'############## /depo girişi bekleyenler
+
+
+Response.Write "<hr>"
 
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"

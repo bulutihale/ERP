@@ -15,6 +15,7 @@
 	ajandaID		=	ajandaID64
 	ajandaID		=	base64_decode_tr(ajandaID)
 	secilenDepoID	=	Request.QueryString("secilenDepoID")
+	depoTalepID		=	Request.QueryString("depoTalepID")
     stokID64		=   Request.QueryString("stokID")
 	stokID			=	stokID64
 	if not isnumeric(stokID) then
@@ -34,11 +35,25 @@
 	if girisDepoID = "" then
 		girisDepoID = 0
 	end if
+	if depoTalepID = "" then
+		depoTalepID = 0
+	end if
+	
 	modulAd			=   "Depo"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
 Response.Flush()
+
+if depoTalepID > 0 then
+	sorgu = "SELECT t1.miktar, t1.mikBirim"
+	sorgu = sorgu & " FROM stok.depoTalep t1"
+	sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.silindi = 0 AND depoTalepID = " & depoTalepID
+	rs.open sorgu,sbsv5,1,3
+		ihtiyacMiktar	=	rs("miktar")
+		siparisBirim 	=	rs("mikBirim")
+	rs.close
+end if
 
 
 call rqKontrol(stokID,"Lütfen aktarım yapılacak ürün seçimi yapın.","")
@@ -109,7 +124,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-12"">"
 						Response.Write "<div class=""badge badge-secondary rounded-left"">Stok</div>"
-						call formselectv2("stokID","","girisDepoSec('" & girisDepoID & "','" & receteAdimID64 & "', '" & ajandaID64 & "',$(this).val()),'" & depoKategori & "'","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger&"""")
+						call formselectv2("stokID","","girisDepoSec('" & girisDepoID & "','" & receteAdimID64 & "', '" & ajandaID64 & "',$(this).val(),'','','"&depoTalepID&"'),'" & depoKategori & "'","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger&"""")
 					Response.Write "</div>"
 				Response.Write "</div>"
 
@@ -131,7 +146,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-lg-2 col-sm-6 bold"">Giriş Depo</div>"
 					Response.Write "<div class=""col-lg-10 col-sm-6"">"
-						call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "','" & depoKategori & "')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0""")
+						call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "','" & depoKategori & "','','"&depoTalepID&"')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0""")
 					Response.Write "</div>"
 				Response.Write "</div>"
 
@@ -250,7 +265,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "<div class=""col-lg-2 col-sm-6"">"
 								call forminput("aktarMiktar","","if(($('#girisDepoID').val())==null){swal('','Ürünün aktarılacağı Giriş depo seçimi yapılmamış.')}","","","autocompleteOFF","aktarMiktar_"&siraNo&"","")
 							Response.Write "</div>"
-							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "'," & lotMiktar & "," & ajandaID &",'"&depoKategori&"','"&surecDepoID&"');"">"
+							Response.Write "<div id=""btn_"&siraNo&""" class=""col-lg-1 rounded btn btn-sm btn-warning bold"" onclick=""depoTransfer(" & siraNo & ",'" & lot & "','" & lotSKT & "','" & miktarBirim & "'," & depoID & "," &  stokID & ",'" & stokKodu & "','" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "'," & lotMiktar & "," & ajandaID &",'"&depoKategori&"','"&surecDepoID&"','"&depoTalepID&"');"">"
 								Response.Write "<i class=""mdi mdi-jira pointer bold""></i>"
 							Response.Write "</div>"
 							end if
@@ -272,7 +287,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 	<script>
 	// transfer işlemleri		
-		function depoTransfer(siraNo,lot,lotSKT,miktarBirim,depoID,stokID,stokKodu,receteAdimID64,ajandaID64,stokID64,lotMiktar,ajandaID,depoKategori,surecDepoID){
+		function depoTransfer(siraNo,lot,lotSKT,miktarBirim,depoID,stokID,stokKodu,receteAdimID64,ajandaID64,stokID64,lotMiktar,ajandaID,depoKategori,surecDepoID,depoTalepID){
 			var listeTur	=	$('#listeTur').val();
 			var girisDepoID	=	$('#girisDepoID').val();
 			var aktarMiktar	=	$('#aktarMiktar_'+siraNo).val();
@@ -300,9 +315,10 @@ yetkiKontrol = yetkibul(modulAd)
 						girisDepoID:girisDepoID,
 						lotMiktar:lotMiktar,
 						ajandaID64:ajandaID64,
+						depoTalepID:depoTalepID,
 						surecDepoID:surecDepoID}, function(){
 							$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID=<%=receteID%>&secilenDepoID=<%=secilenDepoID%>&surecDepoID='+surecDepoID+' #receteAdim > *')
-							girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64,depoKategori,surecDepoID);
+							girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64,depoKategori,surecDepoID,depoTalepID);
 						});
 					
 
@@ -319,9 +335,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 	// Giriş depo seçildiğinde deponun kendi kendine aktarımını engellemek için sayfayı post et
-		function girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64,depoKategori,surecDepoID){
-			
-			$('#refreshDIV').load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+'&secilenDepoID=<%=secilenDepoID%>&surecDepoID=<%=surecDepoID%> #refreshDIV > *',{girisDepoID:girisDepoID})
+		function girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64,depoKategori,surecDepoID,depoTalepID){
+
+$('#refreshDIV').load('/depo/depo_transfer.asp?depoTalepID='+depoTalepID+'&listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+'&secilenDepoID=<%=secilenDepoID%>&surecDepoID=<%=surecDepoID%> #refreshDIV > *',{girisDepoID:girisDepoID})
 		}
 	// Giriş depo seçildiğinde deponun kendi kendine aktarımını engellemek için sayfayı post et
 

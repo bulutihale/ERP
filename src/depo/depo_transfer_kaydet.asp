@@ -15,6 +15,7 @@
 	miktarBirim		=   Request.Form("miktarBirim")
 	stokID			=   Request.Form("stokID")
 	stokKodu		=   Request.Form("stokKodu")
+	depoTalepID		=	Request.Form("depoTalepID")
 	ajandaID64		=   Request.Form("ajandaID64")
 	ajandaID		=	ajandaID64
 	ajandaID		=	base64_decode_tr(ajandaID)
@@ -110,5 +111,13 @@ yetkiKontrol = yetkibul(modulAd)
 			end if
 		'### /Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
 
+		'### Eğer "depo transfer talebi" üzerinden gelen bir hareket kaydı ise depoTalep tablosunda üzerinde tamamlandı işaretle.
+			if depoTalepID > 0 then
+				sorgu = "UPDATE stok.depoTalep SET tamamlandi = 1, transferTarih = getdate(), transferKid = " & kid & " WHERE depoTalepID = " & depoTalepID
+				rs.open sorgu, sbsv5,3,3
+				call jsrun("$('#siparislistesi').load('/depo/talep_kalem_ekle.asp?islem=kontrol');")
+
+			end if
+		'### /Eğer "depo transfer talebi" üzerinden gelen bir hareket kaydı ise depoTalep tablosunda üzerinde tamamlandı işaretle.
 
 %><!--#include virtual="/reg/rs.asp" -->
