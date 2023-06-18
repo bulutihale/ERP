@@ -119,7 +119,7 @@
 	if hata = "" and yetkiKontrol > 2 then
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-10 bold h3 text-info "">" & translate("Ürün Bilgileri","","") & "</div>"
-			Response.Write "<div class=""text-right col-2""><span onclick=""modalkapat()"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
+			Response.Write "<div class=""text-right col-2""><span data-dismiss=""modal"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "</div>"
 
 

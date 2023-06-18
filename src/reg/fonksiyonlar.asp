@@ -5138,20 +5138,29 @@ function defDegerBul(byVal tablo, byVal idAlan, byVal tabloID, byVal degerAlan)
 	'tabloID	:	sorgulanacak ID değeri
 	'degerAlan	:	cevap olarak dönecek alanın adı
 
+if tabloID <> "" then
 		sorgu = "EXEC [portal].[SP_defDegerBul] '" & tablo & "', '" & idAlan & "', " & tabloID & ", '" & degerAlan & "'"
 		fn1.open sorgu, sbsv5, 1, 3			
 			sonuc	=	fn1(0)
 		fn1.close
 
 		defDegerBul	=	sonuc
-
+end if
 
 
 end function
 
 
-
-
+Function OndalikKontrol(sayi)
+    Dim ondalikBolum
+    ondalikBolum = sayi - Int(sayi)
+    
+    If ondalikBolum <> 0 Then
+        OndalikKontrol = FormatNumber(sayi, 2)
+    Else
+        OndalikKontrol = FormatNumber(sayi,0)
+    End If
+End Function
 
 
 

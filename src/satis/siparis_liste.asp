@@ -12,6 +12,8 @@
 	t4				=	Request.Form("t4")
 	siparisNo		=	Request.Form("siparisNo")
     modulAd 		=   "Satış"
+
+
 	
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 60 end if
@@ -51,7 +53,7 @@ Response.Write "<div class=""card-body"">"
 		'//FIXME - miktar hesaplaması yanlış, düzeltilmeli!!!
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, t1.mikBirim, ISNULL(t1.birimFiyat,0) as birimFiyat, t1.paraBirim,"
-			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih, t2.teslimTarih,"
+			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih, t2.teslimTarih, t2.cariID,"
 			sorgu = sorgu & " ISNULL((SELECT SUM(t4.miktar) FROM stok.stokHareket t4 WHERE t4.siparisKalemID = t1.id AND t4.silindi = 0),0) as teslimEdilen,"
 			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id AND silindi = 0 AND stokID = t3.stokID) as teslimBirim, t4.cariAd, t2.siparisNo,"
 			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat, DATEFROMPARTS(t5.hangiYil, t5.hangiAy, t5.hangiGun) as planTarih"
@@ -92,6 +94,7 @@ Response.Write "<div class=""card-body"">"
 					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
 					cariAd				=	rs("cariAd")
+					cariID				=	rs("cariID")
 					kalemNot			=	rs("kalemNot")
 					miktar				=	rs("miktar")
 					mikBirim			=	rs("mikBirim")
@@ -132,6 +135,10 @@ Response.Write "<div class=""card-body"">"
 							Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
 								Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
 								Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+							Response.Write "</div>"
+							Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-success pointer mr-2"""
+								Response.Write " onClick=""modalajaxfit('/satis/recete_maliyet.asp?siparisKalemID="&siparisKalemID&"&cariID=" & cariID & "&stokID=" & stokID & "');"">"
+								Response.Write "<i class=""mdi mdi-calculator""></i>"
 							Response.Write "</div>"
 						Response.Write "</td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"

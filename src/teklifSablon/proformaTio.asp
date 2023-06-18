@@ -439,7 +439,7 @@ for i = 1 to rs.recordcount
 	if pdfPageBreak = True then
 		sayfaURL = "/"&urlBolum1&"/"&urlBolum2&"/"&id64
 		Response.Write "</tbody></table>" 'mevcut tabloyu kapat yeni tablo aç
-		Response.Write "<i class=""icon cut-red pointer"" title=""PDF dokümanında bu noktada yeni sayfaya geçilecek."" onclick=""hucreKaydetGenel('id'," & ihaleUrunID & ", 'pdfPageBreak', 'teklifv2.ihale_urun',0,'Sayfa kesmesi kaldırılsın mı?','teklifGovde','"&sayfaURL&"','','')""></i>"
+		Response.Write "<i class=""icon cut-red pointer"" title=""PDF dokümanında bu noktada yeni sayfaya geçilecek."" onclick=""hucreKaydetGenel('id'," & ihaleUrunID & ", 'pdfPageBreak', 'teklifv2.ihale_urun','0','Sayfa kesmesi kaldırılsın mı?','teklifGovde','"&sayfaURL&"','','')""></i>"
 		Response.Write "<table class=""table-responsive-sm"" border=""1"" style=""width:100%;border-collapse:collapse;font-family:calibri;page-break-before:always;"" class=""container-fluid table-bordered""><tbody style=""" & tbstyle & """ class=""fontkucuk2"">"
 	end if
 	'###### /page break tanımlanmış mı

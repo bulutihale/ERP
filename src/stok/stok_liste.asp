@@ -149,7 +149,9 @@
 									Response.Write "<td>" & stokKodu & "</td>"
 									Response.Write "<td>" & stokAd & "</td>"
 									Response.Write "<td>" & stokBarcode & "</td>"
-									Response.Write "<td class=""text-right"">" & formatnumber(stokMiktar,0) & " " & translate(urunAnaBirim,"","") &"</td>"
+									Response.Write "<td class=""text-right"">"
+										Response.Write "<div>" & formatnumber(stokMiktar,0) & " " & translate(urunAnaBirim,"","") & "</div>"
+									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">"
 									if stokTuru = "" then
 										Response.Write translate("Tanımlanmamış","","")

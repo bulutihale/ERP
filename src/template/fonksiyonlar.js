@@ -667,49 +667,77 @@ function teklifPDFmail(id64,mailDurum,divID){
 		}
 
 
-	// hucreKaydet işlemleri		
-	function hucreKaydetGenel(idAlan,id,alan,tablo,deger,baslik,updateDIV,updateURL,postDeger,ek4){
-		/* idAlan 		: tablonun id değerinin olduğu alanın adı
-			id			: id değeri
-			postDeger	: güncellenecek DIV için post edilmesi gereken parametreler (örnek kullanım: "cariID_8**stokID_954")
+
+// hucreKaydet işlemleri		
+function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, updateURL, postDeger, ek4) {
+		/* idAlan 		: 	tablonun id değerinin olduğu alanın adı
+			id			: 	id değeri
+			updateDIV	:	update edilecek div in ID değeri
+			updateURL	:	update edilecek DIV in bulunduğu URL
+			postDeger	:	güncellenecek DIV için post edilmesi gereken parametreler (örnek kullanım: "cariID_8**stokID_954")
+			
 		*/
-		var postDegerBol	=	postDeger.split("**");
+
+		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+			if (deger.toString().includes(',')){
+				deger = deger.toString().replace(',','.');
+			}
+		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+
+		var postDegerBol = postDeger.split("**");
 		var postData = {};
-		for(var i = 0; i < postDegerBol.length; i++){
- 			var postData1 = postDegerBol[i].split("_")[0]
- 			var postData2 = postDegerBol[i].split("_")[1]
-		 postData[postData1] = postData2;
-		} ;
+	for (var i = 0; i < postDegerBol.length; i++) {
+	  var postData1 = postDegerBol[i].split("_")[0];
+	  var postData2 = postDegerBol[i].split("_")[1];
 
+	  postData[postData1] = postData2;
+	}
+  
+	function executeCodeBlock() {
+	  $('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
+		if(updateDIV !== ''){
 
-	swal({
-	title: baslik,
-	type: 'warning',
-	showCancelButton: true,
+		$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
+		  if (status == "error") {
+			toastr.options.positionClass = 'toast-bottom-right';
+			toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
+		  } else if (status == "success") {
+			toastr.options.positionClass = 'toast-bottom-right';
+			toastr.success('İşlem tamamlandı', 'OK');
+		  }
+		});
+	}else{
+		if (status == "error") {
+			toastr.options.positionClass = 'toast-bottom-right';
+			toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
+		  } else if (status == "success") {
+			toastr.options.positionClass = 'toast-bottom-right';
+			toastr.success('İşlem tamamlandı', 'OK');
+		  }
+	}
+	  });
+	}
+  
+	if (baslik !== '') {
+	  swal({
+		title: baslik,
+		type: 'warning',
+		showCancelButton: true,
 		confirmButtonColor: '#DD6B55',
 		confirmButtonText: 'evet',
 		cancelButtonText: 'hayır'
-	}).then(
-		function(result) {
+	  }).then(function(result) {
 		// handle Confirm button click
 		// result is an optional parameter, needed for modals with input
-		$('#ajax').load('/portal/hucre_kaydet.asp',{idAlan:idAlan,id:id,alan:alan,tablo:tablo,deger:deger}, function(){
-			$('#'+updateDIV).load(updateURL+' #'+updateDIV+' > *', postData, function(response, status, xhr){
-				if(status == "error"){
-					toastr.options.positionClass = 'toast-bottom-right';
-					toastr.error('İşlem başarısız ('+xhr.statusText+xhr.status+')','HATA!');
-				}else if(status == "success"){
-					toastr.options.positionClass = 'toast-bottom-right';
-					toastr.success('İşlem tamamlandı','OK');
-				}
-			});
-		});
-			
-		}, //confirm buton yapılanlar
-		function(dismiss) {
+		executeCodeBlock();
+	  }).catch(function(dismiss) {
 		// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-		} //cancel buton yapılanlar		
-	);//swal sonu
-}
+	  });
+	} else {
+	  executeCodeBlock();
+	}
+  }
+
+
 // hucreKaydet işlemleri		
 

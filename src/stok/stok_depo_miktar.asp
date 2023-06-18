@@ -64,7 +64,7 @@ sorgu = sorgu & " t2.lotSKT"
 '###### ARAMA FORMU
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 2 AND not rs.EOF then
-		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "<div class=""text-right""><span  data-dismiss=""modal"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
 
 
 		stokKodu		=	rs("stokKodu")

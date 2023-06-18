@@ -27,6 +27,8 @@
 '##### HÜCRE EDIT
 '##### HÜCRE EDIT
 	'## veritabanı
+
+	if id <> "" then
 		sorgu = "SELECT * FROM " & tablo & " WHERE " & idAlan & " = " & id 
 		rs.open sorgu, sbsv5,1,3
 		
@@ -39,6 +41,10 @@
 								
 			rs.update
 		rs.close
+	elseif id = "" then
+		sorgu = "INSERT INTO " & tablo & " (firmaID, " & alan & ") VALUES ('"&firmaID&"','" & deger & "')"
+		rs.open sorgu, sbsv5,3,3
+	end if
 	'## veritabanı
 
 '##### HÜCRE EDIT

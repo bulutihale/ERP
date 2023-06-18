@@ -13,7 +13,8 @@
 	arananKelime		=	replace(arananKelime,Chr(9),"")
 '##### şart ile gelen sorgu 
 '##### şart ile gelen sorgu 
-	sart		=	request.QueryString ("sart")
+	sart				=	request.QueryString ("sart")
+	sartOzel			=	request.QueryString ("sartOzel")
 '##### /şart ile gelen sorgu 
 '##### /şart ile gelen sorgu 
 
@@ -25,11 +26,14 @@
             sorgu = "SELECT"
 			sorgu = sorgu & " receteID,"
 			sorgu = sorgu & " receteAd"
-			sorgu = sorgu & " FROM recete.recete"
+			sorgu = sorgu & " FROM recete.recete t1"
 			sorgu = sorgu & " WHERE silindi = 0"
 			sorgu = sorgu & " AND (receteAd like N'%" & arananKelime & "%')"
 			if sart <> "" then
 				sorgu = sorgu & " AND stokID = " & sart
+			end if
+			if sartOzel <> "" then
+				sorgu = sorgu & " AND " & sartOzel
 			end if
 			sorgu = sorgu & " ORDER BY receteAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
