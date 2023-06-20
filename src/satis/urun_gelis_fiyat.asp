@@ -74,7 +74,7 @@ rs.open sorgu, sbsv5, 1, 3
 					Response.Write "<td class=""text-left"">" & girisTarih & "</td>"
 					Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
 					Response.Write "<td class=""text-right"">"
-					Response.Write "<div class=""pointer"" onclick=""$('#subbirimMaliyet_"&receteAdimID&"').val($(this).attr('data-deger')).trigger('change')"" data-deger=""" & birimFiyat & """>" & birimFiyat & " " & paraBirim & "</div>" 
+					Response.Write "<div class=""pointer"" onclick=""$('#birimMaliyet_"&receteAdimID&"').val($(this).attr('data-deger')).trigger('change')"" data-deger=""" & birimFiyat & """>" & birimFiyat & " " & paraBirim & "</div>" 
 					Response.Write "</td>"
 				Response.Write "</tr>"
 			rs.movenext

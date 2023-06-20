@@ -340,7 +340,7 @@ sub altReceteGetir(subAltReceteID,conn,subihtiyacMiktar,arkaRenk)
 							if not isnull(conn("stokID")) AND conn("altReceteID") = 0 then
 								Response.Write "<div onclick=""modalajax('/satis/urun_gelis_fiyat.asp?stokID="&conn("stokID")&"&receteAdimID="&conn("receteAdimID")&"');""><i class=""icon page-go pointer""></i></div>"
 								postDeger1	=	"stokID_"&anastokID&"**cariID_"&cariID&"**siparisKalemID_"&siparisKalemID&"**receteID_"&receteID&""
-								call forminput("subbirimMaliyet",subbirimMaliyet,"","","text-center bold text-success subbirimMaliyet","autocompleteOFF","subbirimMaliyet_"&conn("receteAdimID"),"onchange=""hucreKaydetGenel('receteAdimID','"&conn("receteAdimID")&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','')""")
+								call forminput("subbirimMaliyet",subbirimMaliyet,"","","text-center bold text-success subbirimMaliyet","autocompleteOFF","birimMaliyet_"&conn("receteAdimID"),"onchange=""hucreKaydetGenel('receteAdimID','"&conn("receteAdimID")&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','')""")
 							elseif conn("altReceteID") > 0 then
 								Response.Write "<div class=""text-center""><span class=""help"" onclick=""swal('','Ürüne ait alt reçete mevcut<br><br> alt reçete maliyetleri zaten ürün maliyetine ekleneceği için fiyat girişi yapılamaz.','warning')""><i class=""icon error-delete ""></i></span></div>"
 							end if

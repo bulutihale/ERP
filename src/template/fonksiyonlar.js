@@ -670,6 +670,7 @@ function teklifPDFmail(id64,mailDurum,divID){
 
 // hucreKaydet işlemleri		
 function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, updateURL, postDeger, ek4) {
+	
 		/* idAlan 		: 	tablonun id değerinin olduğu alanın adı
 			id			: 	id değeri
 			updateDIV	:	update edilecek div in ID değeri
@@ -679,9 +680,19 @@ function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, upd
 		*/
 
 		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
-			if (deger.toString().includes(',')){
-				deger = deger.toString().replace(',','.');
+			
+			var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
+
+			if (decimalSeparator === '.' ) {
+				if (deger.toString().includes(',')){
+						deger = deger.toString().replace(',','.');
+					}
+			}else{
+				if (deger.toString().includes('.')){
+						deger = deger.toString().replace('.',',');
+					}
 			}
+				
 		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 
 		var postDegerBol = postDeger.split("**");

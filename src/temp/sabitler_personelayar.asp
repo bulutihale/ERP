@@ -3,6 +3,9 @@ kid = kidbul()
 if kid = 2 then
 	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
+	mamulGoster="on"
+	yariMamulGoster="off"
+	hammaddeGoster="off"
 end if
 if kid = 5 then
 	stokSifirGoster="on"
@@ -10,7 +13,7 @@ if kid = 5 then
 end if
 if kid = 27 then
 	stokSilinmislerGoster="off"
-	stokSifirGoster="off"
+	stokSifirGoster="on"
 end if
 if kid = 28 then
 	stokSifirGoster="on"

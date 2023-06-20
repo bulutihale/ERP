@@ -8,7 +8,10 @@
     kid64		=	ID
     opener  	=   Request.Form("opener")
     rqstokSifirGoster			=   Request.Form("stokSifirGoster")
-    rqstokSilinmislerGoster		=   Request.Form("stokSilinmislerGoster")
+	rqstokSilinmislerGoster		=   Request.Form("stokSilinmislerGoster")
+    rqmamulGoster				=   Request.Form("mamulGoster")
+    rqyariMamulGoster			=   Request.Form("yariMamulGoster")
+    rqhammaddeGoster			=   Request.Form("hammaddeGoster")
 	aramaad		=	Request.Form("aramaad")
     hata    	=   ""
     modulAd 	=   "Stok"
@@ -27,12 +30,40 @@
 		stokSilinmislerGoster = rqstokSilinmislerGoster
 		call personelAyarGuncelle("stokSilinmislerGoster",rqstokSilinmislerGoster,kid)
 	end if
+	if rqmamulGoster <> "" then
+		mamulGoster = rqmamulGoster
+		call personelAyarGuncelle("mamulGoster",rqmamulGoster,kid)
+	end if
+	if rqyariMamulGoster <> "" then
+		yariMamulGoster = rqyariMamulGoster
+		call personelAyarGuncelle("yariMamulGoster",rqyariMamulGoster,kid)
+	end if
+	if rqhammaddeGoster <> "" then
+		hammaddeGoster = rqhammaddeGoster
+		call personelAyarGuncelle("hammaddeGoster",rqhammaddeGoster,kid)
+	end if
 	if stokSifirGoster = "" then
 		stokSifirGoster = "on"
 	end if
 	if stokSilinmislerGoster = "" then
 		stokSilinmislerGoster = "off"
 	end if
+	if mamulGoster = "on" then
+		mDurum = "1"
+	else
+		mDurum = "0"
+	end if
+	if yariMamulGoster = "on" then
+		ymDurum = "2"
+	else
+		ymDurum = "0"
+	end if
+	if hammaddeGoster = "on" then
+		hmDurum = "4"
+	else
+		hmDurum = "0"
+	end if
+
 '###### KİŞİSELLEŞTİRİLMİŞ AYARLARI OKU
 
 
@@ -48,6 +79,9 @@
 					Response.Write "<form action=""/stok/stok_liste"" method=""post"" id=""listebuttonform"">"
 						call formhidden("stokSifirGoster",stokSifirGoster,"","","","","stokSifirGoster","")
 						call formhidden("stokSilinmislerGoster",stokSilinmislerGoster,"","","","","stokSilinmislerGoster","")
+						call formhidden("mamulGoster",mamulGoster,"","","","","mamulGoster","")
+						call formhidden("yariMamulGoster",yariMamulGoster,"","","","","yariMamulGoster","")
+						call formhidden("hammaddeGoster",hammaddeGoster,"","","","","hammaddeGoster","")
 						Response.Write "<div class=""form-row align-items-center"">"
 							Response.Write "<div class=""col-lg-2 col-sm-2 my-1"">"
 								Response.Write "<input type=""text"" class=""form-control"" placeholder=""" & translate("Ürün Adı","","") & """ name=""aramaad"" value=""" & aramaad & """>"
@@ -70,6 +104,25 @@
 									Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/stok/stok_yeni.asp')"">" & translate("Yeni Ürün Ekle","","") & "</button>"
 								Response.Write "</div>"
 							end if
+						Response.Write "</div>"
+						Response.Write "<div class=""form-row align-items-center"">"
+							Response.Write "<div class=""col-lg-12 text-right"">"
+								if mamulGoster = "on" then
+									Response.Write "<button type=""button"" class=""btn btn-danger mr-2"" onClick=""$('#mamulGoster').val('off');$('#listebuttonform').submit();"">Mamulleri gizle</button>"
+								else
+									Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#mamulGoster').val('on');$('#listebuttonform').submit();"">Mamulleri Göster</button>"
+								end if
+								if yariMamulGoster = "on" then
+									Response.Write "<button type=""button"" class=""btn btn-danger mr-2"" onClick=""$('#yariMamulGoster').val('off');$('#listebuttonform').submit();"">Yarı mamulleri gizle</button>"
+								else
+									Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#yariMamulGoster').val('on');$('#listebuttonform').submit();"">Yarı mamulleri göster</button>"
+								end if
+								if hammaddeGoster = "on" then
+									Response.Write "<button type=""button"" class=""btn btn-danger mr-2"" onClick=""$('#hammaddeGoster').val('off');$('#listebuttonform').submit();"">Hammaddeleri gizle</button>"
+								else
+									Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#hammaddeGoster').val('on');$('#listebuttonform').submit();"">Hammaddeleri göster</button>"
+								end if
+							Response.Write "</div>"
 						Response.Write "</div>"
 					Response.Write "</form>"
 				Response.Write "</div>"
@@ -103,6 +156,9 @@
 					sorgu = sorgu & "LEFT JOIN portal.birimler ON stok.stok.anaBirimID = portal.birimler.birimID" & vbcrlf
 					sorgu = sorgu & "WHERE" & vbcrlf
 					sorgu = sorgu & "stok.stok.firmaID in (select Id from portal.firma where portal.firma.anaFirmaID = " & firmaID & " OR portal.firma.Id = " & firmaID & ")" & vbcrlf
+					if mDurum <> "0" OR ymDurum <> "0" OR hmDurum <> "0" then
+						sorgu = sorgu & " AND stok.stok.stokTuru IN (" & mDurum & "," & ymDurum & "," & hmDurum & ")" & vbcrlf
+					end if
 					if aramaad <> "" then
 						sorgu = sorgu & " and (stok.stok.stokAd like N'%" & aramaad & "%' OR stok.stok.stokBarcode like N'%" & aramaad & "%' OR stok.stok.stokKodu like N'%" & aramaad & "%')"
 					end if
@@ -112,7 +168,7 @@
 					if stokSilinmislerGoster = "on" then
 						sorgu = sorgu & " AND stok.stok.silindi = 0" & vbcrlf
 					end if
-					sorgu = sorgu & "order by stok.stok.stokKodu ASC" & vbcrlf
+					sorgu = sorgu & "ORDER BY stok.stok.stokKodu ASC" & vbcrlf
 					rs.open sorgu, sbsv5, 1, 3
 					if rs.recordcount > 0 then
 						Response.Write "<div class=""table-responsive"">"

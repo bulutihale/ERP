@@ -15,6 +15,21 @@
 	arananKelime		=	TRIM(arananKelime)
 	arananKelime		=	replace(arananKelime,Chr(9),"")
 	sart				=	request.QueryString ("sart")
+	if mamulGoster = "on" then
+		mDurum = "1"
+	else
+		mDurum = "0"
+	end if
+	if yariMamulGoster = "on" then
+		ymDurum = "2"
+	else
+		ymDurum = "0"
+	end if
+	if hammaddeGoster = "on" then
+		hmDurum = "4"
+	else
+		hmDurum = "0"
+	end if
 
 '	arananKelime 		=	Replace(arananKelime,"Ş","þ")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
 '	arananKelime 		=	Replace(arananKelime,"İ","Ý")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
@@ -34,6 +49,9 @@
 			sorgu = sorgu & " FROM stok.stok t1" 
 			sorgu = sorgu & " WHERE t1.silindi = 0 AND (t1.stokAd like N'%" & arananKelime & "%' OR t1.stokBarcode like N'%" & arananKelime & "%' OR t1.stokKodu like N'%" & arananKelime & "%' OR t1.stokAdEN like N'%" & arananKelime & "%')"
 			sorgu = sorgu & " and firmaID = " & firmaID
+			if mDurum <> "0" OR ymDurum <> "0" OR hmDurum <> "0" then
+				sorgu = sorgu & " AND t1.stokTuru IN (" & mDurum & "," & ymDurum & "," & hmDurum & ")"
+			end if
 			sorgu = sorgu & " ORDER BY t1.stokAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
 			
