@@ -53,7 +53,7 @@ sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.uzunAd as firmamAdU
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, ISNULL(i.cariID,0) as cariID,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
 &" (SELECT COUNT(id) FROM teklifv2.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun, i.ekMaliyet1, i.ekMaliyet1Deger, i.ekMaliyet1Birim,"_
-&" i.catKodGoster, i.mustKodGoster, f.antetPath, i.teklifAciklamaDIV"_
+&" i.catKodGoster, i.mustKodGoster, f.antetPath, i.teklifAciklamaDIV, i.ekMaliyet2, i.ekMaliyet2Deger, i.ekMaliyet2Birim"_
 &" FROM teklifv2.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
@@ -103,6 +103,9 @@ rs.open sorgu,sbsv5,1,3
 	ekMaliyet1			=	rs("ekMaliyet1")
 	ekMaliyet1Deger		=	rs("ekMaliyet1Deger")
 	ekMaliyet1Birim		=	rs("ekMaliyet1Birim")
+	ekMaliyet2			=	rs("ekMaliyet2")
+	ekMaliyet2Deger		=	rs("ekMaliyet2Deger")
+	ekMaliyet2Birim		=	rs("ekMaliyet2Birim")
 	rs.close
 	
 	
@@ -514,6 +517,25 @@ if paraBirim <> "mix" AND altTopGoster = "True" then'tüm kalemlerin para birimi
 	else
 		ekMal = 0
 	end if
+
+	if ekMaliyet2 = True then
+		Response.Write "<tr style=""text-align:right;"" class=""text-right d-flex"">"
+			Response.Write "<td style=""width:60%"">&nbsp;</td>"
+			Response.Write "<td style=""text-align:right;width:20%;"" class=""b-all"">" & sb_ekMaliyet2 & "</td>"
+			Response.Write "<td style=""width:20%"" class=""b-top b-right b-bottom"">"
+				ekMal2 = para_basamak(ekMaliyet2Deger)
+				if ekMaliyet2Birim <> paraBirim then
+					Response.Write "<span class=""text-danger bold"">!!birim farklı!!</span>"
+					ekMal2 = 0
+				else
+					Response.Write ekMal2 & " " & paraBirim
+				end if
+			Response.Write "</td>"
+		Response.Write "</tr>"
+	else
+		ekMal2 = 0
+	end if
+	
 	if teklifKDV = true then
 		Response.Write kdvSatir
 	else
@@ -525,7 +547,7 @@ if paraBirim <> "mix" AND altTopGoster = "True" then'tüm kalemlerin para birimi
 		Response.Write "Grand Total"
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:right;width:20%"" class=""b-top b-right b-bottom"">"
-		firmam_genel_toplam = toplam_firmam_tutar - toplam_iskonto_tutar + toplamKdvHesap + ekMal
+		firmam_genel_toplam = toplam_firmam_tutar - toplam_iskonto_tutar + toplamKdvHesap + ekMal + ekMal2
 		para_deger = para_basamak(firmam_genel_toplam)
 		Response.Write para_deger&" "&paraBirim
 		Response.Write "</td>"

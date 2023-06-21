@@ -50,7 +50,8 @@ if yetkiKontrol  >= 3 then
 		sorgu = sorgu & " i.mukayeseDurum, i.girilecek, i.ilanTarih, ISNULL(i.bayiDosyaTipi,'yok') as bayiDosyaTipi, i.bayiKurumID, i.yaklasikMalGoster, i.epostaGovde,"
 		sorgu = sorgu & " ISNULL(i.ihaleNo,0) as ihaleNo, i.eEksiltme, i.yerliOranGoster, i.kodlamaBitti, i.teklifNot, ISNULL(i.miktarArttirimi,0) as miktarArttirimi,"
 		sorgu = sorgu & " i.dosyaKayitTip, i.teklifKase, i.teklifAntet, i.teklifKDV, i.altTopGoster, f.dogTeminDosya, i.yeniCariAd, i.bankalar, i.teklifEposta, i.epostaGovde,"
-		sorgu = sorgu & " k.pdfKaynakDosya as teklifSablon, k.landscapeDeger, i.teklifMusteriOnay, i.ekMaliyet1, i.ekMaliyet1Deger, i.ekMaliyet1Birim"
+		sorgu = sorgu & " k.pdfKaynakDosya as teklifSablon, k.landscapeDeger, i.teklifMusteriOnay, i.ekMaliyet1, i.ekMaliyet1Deger, i.ekMaliyet1Birim,"
+		sorgu = sorgu & " i.ekMaliyet2, i.ekMaliyet2Deger, i.ekMaliyet2Birim"
 		sorgu = sorgu & " FROM teklifv2.ihale i"
 		sorgu = sorgu & " LEFT JOIN portal.firma f ON i.firmaID = f.id"
 		sorgu = sorgu & " LEFT JOIN kalite.form k ON i.pdfSablon = k.pdfKaynakDosya"
@@ -98,6 +99,9 @@ if yetkiKontrol  >= 3 then
 			ekMaliyet1			=	rs("ekMaliyet1")
 			ekMaliyet1Deger		=	rs("ekMaliyet1Deger")
 			ekMaliyet1Birim		=	rs("ekMaliyet1Birim")
+			ekMaliyet2			=	rs("ekMaliyet2")
+			ekMaliyet2Deger		=	rs("ekMaliyet2Deger")
+			ekMaliyet2Birim		=	rs("ekMaliyet2Birim")
 			altTopGoster		=	rs("altTopGoster")
 			epostaGovde			=	rs("epostaGovde")
 			bankalar			=	rs("bankalar")
@@ -878,7 +882,13 @@ Response.Write "<div class=""card-body row"">"
 		chckDurum10		=	""
 	end if
 
-	
+	if ekMaliyet2 = True then
+		ekMaliyet2Durum = 	0
+		chckDurum11		=	" checked"
+	else
+		ekMaliyet2Durum = 1
+		chckDurum11		=	""
+	end if
 
 	
 		Response.Write "<div class=""tab-pane"" id=""teklif"" role=""tabpanel"">"
@@ -1211,6 +1221,16 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "</div>"
 					call forminput("ekMaliyet1Deger",ekMaliyet1Deger,"","Tutar","bold text-right","","","onChange=""ajSave('ekMaliyet1Deger','teklifv2.ihale',"&id&",$(this).val())""")
 					call formselectv2("ekMaliyet1Birim",ekMaliyet1Birim,"","","btn p-0 okKaldir","","",paraBirimDegerler,"onChange=""ajSave('ekMaliyet1Birim','teklifv2.ihale',"&id&",$(this).val())""")
+				Response.Write "</div>"
+				Response.Write "<div class=""row mt-2"">"
+					Response.Write "<div class=""col-1 text-left"">"
+						Response.Write "<input type=""checkbox"" oninput=""ajSave('ekMaliyet2','teklifv2.ihale',"&id&"," & ekMaliyet2Durum & ")"" class=""chck30 form-control"" " & chckDurum11 & ">"
+					Response.Write "</div>"
+					Response.Write "<div class=""col-2 text-left"">"
+						Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">" & sb_ekMaliyet2 & "</div>"
+					Response.Write "</div>"
+					call forminput("ekMaliyet2Deger",ekMaliyet2Deger,"","Tutar","bold text-right","","","onChange=""ajSave('ekMaliyet2Deger','teklifv2.ihale',"&id&",$(this).val())""")
+					call formselectv2("ekMaliyet2Birim",ekMaliyet2Birim,"","","btn p-0 okKaldir","","",paraBirimDegerler,"onChange=""ajSave('ekMaliyet2Birim','teklifv2.ihale',"&id&",$(this).val())""")
 				Response.Write "</div>"
 			Response.Write "</div>"
 		'######### /EK BİLGİ

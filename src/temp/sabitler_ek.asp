@@ -27,7 +27,7 @@ if firmaID = 5 then
 		sb_ssl = False
 		'## SERVİSLER
 			sb_activeuserUrl =	"/activeuser.asp"
-			sb_activeuserTime = 10
+			sb_activeuserTime = 3
 		'## SERVİSLER
 	'## TEMEL TANIMLAR
 
@@ -35,16 +35,16 @@ if firmaID = 5 then
 	'## YEDEKLEME
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
-		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
+		sb_sqlYedekCloudMail = "kundakci20@yahoo.com"
 		sb_sqlYedekAlGun = 7
 		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
 	'## EMAIL
-		sb_mailserver = "212.68.61.84:587"
-		sb_mailsender = "teknik@sbstasarim.com"
-		sb_mailsenderPass = "sgxuewlv12!!@3"
+		sb_mailserver = "smtp.yandex.com:465"
+		sb_mailsender = "sistem@tiomedikal.com"
+		sb_mailsenderPass = "?-^?=^&^&+^#!_#&"
 		sb_mailsenderAd = "Tio Medikal"
 	'## EMAIL
 
@@ -102,6 +102,7 @@ if firmaID = 5 then
 
 	'#### PORTAL AYARLARI
 		sb_ekMaliyet1="Shipment Cost"
+		sb_ekMaliyet2="Maturity Cost"
 	'#### PORTAL AYARLARI
 
 
@@ -129,16 +130,16 @@ if firmaID = 9 then
 	'## YEDEKLEME
 		sb_fizikselPath = "C:\web\erp.sbstasarim.com\backup\"
 		sb_sqlYedekCompress = True
-		sb_sqlYedekCloudMail = "raptiye210@yahoo.com"
+		sb_sqlYedekCloudMail = "kundakci20@yahoo.com"
 		sb_sqlYedekAlGun = 7
 		sb_sqlYedekSilGun = 30
 	'## YEDEKLEME
 
 
 	'## EMAIL
-		sb_mailserver = "212.68.61.84:587"
-		sb_mailsender = "teknik@sbstasarim.com"
-		sb_mailsenderPass = "sgxuewlv12!!@3"
+		sb_mailserver = "smtp.yandex.com:465"
+		sb_mailsender = "sistem@tiomedikal.com"
+		sb_mailsenderPass = "?-^?=^&^&+^#!_#&"
 		sb_mailsenderAd = "Tio Medikal"
 	'## EMAIL
 
