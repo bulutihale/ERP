@@ -17,6 +17,10 @@
 .scroll-ekle3 {max-height: calc(70vh);overflow-y: auto;}
 /*div'e scroll ekle*/
 
+/*div'e scroll ekle FULL */
+.scroll-ekleF {max-height: calc(88vh);overflow-y: auto;}
+/*div'e scroll ekle FULL */
+
 /* div hover renk değiştirme */
 .hoverGel:hover {color:#FFFFFF;background-color:#863F40;}
 .hoverGel:hover .text-danger {color:#FFFFFF !important;}

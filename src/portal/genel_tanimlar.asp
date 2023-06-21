@@ -24,54 +24,77 @@ yetkiKontrol = yetkibul(modulAd)
 
 	if hata = "" and yetkiKontrol > 0 then
 
-	sorgu = "SELECT genelSabitID, isgucuSaatlikPara, isgucuSaatlikPB, [stok].[FN_birimIDBul] (isgucuSaatlikPB,'K') as birimID"
-	sorgu = sorgu & " FROM isletme.genelSabit WHERE firmaID = " & firmaID
-	rs.open sorgu, sbsv5,3,3
-	if rs.recordcount > 0 then
-		genelSabitID		=	rs("genelSabitID")
-		isgucuSaatlikPara	=	rs("isgucuSaatlikPara")
-		isgucuSaatlikPB		=	rs("isgucuSaatlikPB")
-		birimID				=	rs("birimID")
-		defDeger 			=	defDegerBul("portal.birimler", "birimID", birimID, "uzunBirim")
-	end if
-	rs.close
 
 		Response.Write "<div class=""card-deck"">"
 			Response.Write "<div class=""card"" id=""card_1"">"
-				Response.Write "<div class=""card-header bg-info"">İş Gücü Maliyet</div>"
-				Response.Write "<div class=""card-body"">"
+
+				Response.Write "<div class=""card-header bg-warning"">Aylık Toplam Maliyetler</div>"
+				Response.Write "<div class=""card-body"" id=""maliyetDIV1"">"
+
+					sorgu = "SELECT * FROM isletme.maliyetKalem t1 WHERE t1.sayfaYer = 'sutun1'"
+					rs.open sorgu, sbsv5,3,3
+					if rs.recordcount > 0 then
+						for zi = 1 to rs.recordcount
+							maliyetKalemID		=	rs("maliyetKalemID")
+							maliyetKalemAd		=	rs("maliyetKalemAd")
+							maliyetKalemDeger	=	rs("maliyetKalemDeger")
+							maliyetKalemPB		=	rs("maliyetKalemPB")
+						Response.Write "<span class=""badge badge-secondary rounded-left mt-2"">" & maliyetKalemAd & "</span>"
 					Response.Write "<div class=""row"">"
-						Response.Write "<div class=""col-4"">"
-							Response.Write "<span class=""badge badge-secondary rounded-left"">1 Saatlik İşgücü Maliyeti</span>"
-							call forminput("isgucuSaatlikPara",isgucuSaatlikPara,"","ücret","text-right bold","autocompleteOFF","isgucuSaatlikPara","onchange=""hucreKaydetGenel('genelSabitID', '"&genelSabitID&"', 'isgucuSaatlikPara', 'isletme.genelSabit', $(this).val(), '', 'card_1', '"&sayfaURL&"', '', '')""")
-						Response.Write "</div>"
-						Response.Write "<div class=""col-4"">"
-							Response.Write "<span class=""badge badge-secondary rounded-left"">ParaBirimi</span>"
-							call formselectv2("isgucuSaatlikPB","","","","formSelect2 isgucuSaatlikPB border inpReset","","isgucuSaatlikPB","","data-holderyazi=""Para Birim"" data-jsondosya=""JSON_paraBirimler"" data-miniput=""0""  data-defdeger=""" & defDeger & """ onchange=""hucreKaydetGenel('genelSabitID', '"&genelSabitID&"', 'isgucuSaatlikPB', 'isletme.genelSabit', $(this).val(), '', 'card_1', '"&sayfaURL&"', '', '')""")
-						Response.Write "</div>"
+					'	call forminput("maliyetKalemAd",ondalikKontrol(maliyetKalemDeger),"","","col-12 text-right bold","autocompleteOFF","maliyetKalemDeger","")
+						call forminput("maliyetKalemDeger",ondalikKontrol(maliyetKalemDeger),"","ücret","col-12 text-right bold","autocompleteOFF","maliyetKalemDeger","onchange=""hucreKaydetGenel('maliyetKalemID', '"&maliyetKalemID&"', 'maliyetKalemDeger', 'isletme.maliyetKalem', $(this).val(), '', 'maliyetDIV1', '', '', '')""")
+						Response.Write "<div class=""col-6 text-left mt-2 bold"">TL</div>"
 					Response.Write "</div>"
+						rs.movenext
+						next
+					end if
+					rs.close
 				Response.Write "</div>"
+
 			Response.Write "</div>"
-			Response.Write "<div class=""card"" id=""card_2"">"
-				Response.Write "<div class=""card-header"">Bölüm 2</div>"
+			Response.Write "<div class=""card"" id=""maliyetDIV2"">"
+
+
+
+				Response.Write "<div class=""card-header bg-info"">İş Gücü</div>"
 				Response.Write "<div class=""card-body"">"
-					Response.Write "<span class=""badge badge-secondary rounded-left""></span>"
-					'call forminput("isgucuSaatlikPara",isgucuSaatlikPara,"numara(this,true,false)","ücret","","autocompleteOFF","isgucuSaatlikPara","")
+
+					sorgu = "SELECT * FROM isletme.maliyetKalem t1 WHERE t1.sayfaYer = 'sutun2'"
+					rs.open sorgu, sbsv5,3,3
+					if rs.recordcount > 0 then
+						for zi = 1 to rs.recordcount
+							maliyetKalemID		=	rs("maliyetKalemID")
+							maliyetKalemAd		=	rs("maliyetKalemAd")
+							maliyetKalemDeger	=	rs("maliyetKalemDeger")
+							maliyetKalemPB		=	rs("maliyetKalemPB")
+						Response.Write "<span class=""badge badge-secondary rounded-left mt-2"">" & maliyetKalemAd & "</span>"
+					Response.Write "<div class=""row"">"
+						'call forminput("maliyetKalemAd",ondalikKontrol(maliyetKalemDeger),"","","col-12 text-right bold","autocompleteOFF","maliyetKalemDeger","")
+						call forminput("maliyetKalemAd",ondalikKontrol(maliyetKalemDeger),"","","text-right bold","autocompleteOFF","maliyetKalemDeger","onchange=""hucreKaydetGenel('maliyetKalemID', '"&maliyetKalemID&"', 'maliyetKalemDeger', 'isletme.maliyetKalem', $(this).val(), '', 'maliyetDIV1', '', '', '')""")
+					Response.Write "</div>"
+						rs.movenext
+						next
+					end if
+
+
+
+
+					
 				Response.Write "</div>"
+
 			Response.Write "</div>"
+
+
+
+
+
 		Response.Write "</div>"
 	else
 		call yetkisizGiris("","","")
 	end if
 '####### SONUÇ TABLOSU
-'####### SONUÇ TABLOSU 
+'####### SONUÇ TABLOSU  
 
 
 %>
 
-<script>
-	$(document).ready(function() {
-		$('#isgucuSaatlikPB').trigger('mouseenter');
-	});
-	 
-</script>

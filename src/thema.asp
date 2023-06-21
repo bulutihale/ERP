@@ -693,7 +693,7 @@ if kid <> "" then
 		Response.Write "<div class=""main-panel"">"
 			'########### ORTA ALAN
 			'########### ORTA ALAN
-				Response.Write "<div class=""content-wrapper"" id=""ortaalan"" style=""background:#f3f3f3 !important"">"
+				Response.Write "<div class=""content-wrapper scroll-ekleF"" id=""ortaalan"" style=""background:#f3f3f3 !important"">"
 				'### sayfayı ateşle
 				'### sayfayı ateşle
 					if sayfa3 = "" then
