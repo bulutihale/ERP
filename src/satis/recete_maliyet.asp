@@ -288,8 +288,8 @@ else
 					Response.Write "</td>"
 					Response.Write "<td class=""text-right"">"
 					if isnull(stokID) then
-						Response.Write "<div><i class=""icon cog mr-3"" title=""üretimde çalışanlar""></i>" & birimMaliyetPara & "</div>"
-						Response.Write "<div><i class=""icon building mr-3"" title=""üretim haricinde çalışanlar""></i>" & birimMaliyetPara2 & "</div>"
+						Response.Write "<div class=""container row justify-content-around""><div class=""col-6""><i class=""icon cog mr-3"" title=""üretimde çalışanlar""></i></div><div class=""col-6"">" & birimMaliyetPara & "</div></div>"
+						Response.Write "<div class=""container row justify-content-around""><div class=""col-6""><i class=""icon building mr-3"" title=""üretim haricinde çalışanlar""></i></div><div class=""col-6"">" & birimMaliyetPara2 & "</div></div>"
 					else
 						Response.Write "<div>" & birimMaliyetPara & "</div>"
 					end if
@@ -306,7 +306,7 @@ else
 								Response.Write "</td>"
 							Response.Write "</tr>"
 						end if
-					toplamBirimMaliyetPara	=	toplamBirimMaliyetPara + birimMaliyetPara
+					toplamBirimMaliyetPara	=	toplamBirimMaliyetPara + birimMaliyetPara + birimMaliyetPara2
 			rs.movenext
 			next
 			' Response.Write "<tr>"
@@ -326,7 +326,7 @@ end if
 
 if receteID <> "" then
 	Response.Write "<div class=""footer fixed-bottom bg-dark"" style=""position: sticky;box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);"">"
-		Response.Write "<div class=""row"">"
+		Response.Write "<div class=""container row"">"
 			Response.Write "<div class=""col-6""></div>"
 uretimIsGucuYuzde	=	CDbl(toplamIsgucuUretim) / CDbl(toplamBirimMaliyetPara)
 toplamIsgucu2Yuzde	=	CDbl(toplamIsgucu2) / CDbl(toplamBirimMaliyetPara)
@@ -430,7 +430,9 @@ sub altReceteGetir(subAltReceteID,conn,subihtiyacMiktar,arkaRenk)
 							end if
 							Response.Write "</td>"
 						Response.Write "</tr>"
-						toplamBirimMaliyetPara = toplamBirimMaliyetPara + subbirimMaliyetPara
+						
+						toplamBirimMaliyetPara = toplamBirimMaliyetPara + subbirimMaliyetPara + subbirimMaliyetPara2
+
 						cizgiKod=""
 						cizgiKod1=""
 						cizgiKod = cizgiKod & "<tr><td></td><td colspan=""7""><hr class="""" style=""border-top: 2px solid;""></td></tr>"
