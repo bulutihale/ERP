@@ -15,7 +15,7 @@
 	'##### request
 	'##### request
 	
-	call logla("Teklif dosyasından sipariş yazılıyor")
+	call logla("Teklif dosyasından sipariş yazılıyor iuID:"&iuID)
 
 	sorgu = "SELECT t2.cariID, t1.stoklarID, t1.kalemNot, t1.firmamFiyat, t1.firmamParaBirim, t2.ad as siparisAd, t1.ihaleID,"
 	sorgu = sorgu & " (SELECT kisaBirim FROM portal.birimler WHERE birimID = "& birimID & ") as mikBirim"

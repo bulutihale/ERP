@@ -95,7 +95,7 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 					Response.Write "<div class=""row bold bg-light mt-2"">"
 						Response.Write "<div class=""col-2"">Ürün Miktar:</div>"
 						Response.Write "<div class=""col-2"">"
-							Response.Write "<input class=""form-control"" id=""inpMamulMiktar"" type=""text"" value=""" & mamulMiktar & """ oninput=""numara(this,true,false);bantHesap('inpMamulMiktar')"">"
+							Response.Write "<input class=""form-control"" id=""inpMamulMiktar"" type=""text"" value=""" & mamulMiktar & """ oninput=""numara(this,true,false);bantHesap('inpMamulMiktar')"" autocomplete=""off"">"
 						Response.Write "</div>"
 						Response.Write "<div class=""col-7 text-success bold"">" & mamulMiktar & "</div>"
 					Response.Write "</div>"
@@ -103,7 +103,7 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 						Response.Write "<div class=""col-2"">Gerekli Koli Sayısı:</div>"
 						Response.Write "<div class=""col-2"">"
 							call formhidden("koliUrunMiktar",koliUrunMiktar,"","","","","koliUrunMiktar","")
-							Response.Write "<input class=""form-control"" id=""ihtiyacKoliSayi"" type=""text"" value=""" & ihtiyacKoliSayi & """ onchange=""bantHesap('ihtiyacKoliSayi')"">"
+							Response.Write "<input class=""form-control"" id=""ihtiyacKoliSayi"" type=""text"" value=""" & ihtiyacKoliSayi & """ onchange=""bantHesap('ihtiyacKoliSayi')"" autocomplete=""off"">"
 						Response.Write "</div>"
 						Response.Write "<div id=""koliHazirDIV"" class=""col-2 text-success bold"" data-deger=""" & hamKoliHazirMiktar & """>" & hamKoliHazirMiktar & "</div>"
 						Response.Write "<div class=""col-2"">Gerekli Bant Mt:</div>"
@@ -143,12 +143,10 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 		var inpMamulMiktar	=	$('#inpMamulMiktar').val();
 		var ihtiyacKoliHesap = 1;
 
-		if(inpMamulMiktar > koliUrunMiktar){
-			var ihtiyacKoliHesap	=	Math.ceil(parseFloat(inpMamulMiktar) / parseFloat(koliUrunMiktar));
-		}		
-
 		if(hangiInput == 'ihtiyacKoliSayi'){
 			var ihtiyacKoliHesap= $('#ihtiyacKoliSayi').val();
+		}else if(hangiInput == 'inpMamulMiktar' && parseFloat(inpMamulMiktar) > parseFloat(koliUrunMiktar)){
+			var ihtiyacKoliHesap	=	Math.ceil(parseFloat(inpMamulMiktar) / parseFloat(koliUrunMiktar));
 		}
 
 		$('#ihtiyacKoliSayi').val(ihtiyacKoliHesap);

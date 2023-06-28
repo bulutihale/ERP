@@ -4,8 +4,8 @@ if kid = 2 then
 	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
 	mamulGoster="on"
-	yariMamulGoster="off"
-	hammaddeGoster="off"
+	yariMamulGoster="on"
+	hammaddeGoster="on"
 end if
 if kid = 5 then
 	stokSifirGoster="on"

@@ -1,0 +1,358 @@
+﻿id;Tarih;personelID;IP;gorevID;islem;firmaID;url;modulAd
+87866;24.05.2023 15:00:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 77000;5;;
+87867;24.05.2023 15:00:00;28;192.168.1.128;3038;Stok Düzenleme Ekrani Girisi;5;;Stok
+87868;24.05.2023 15:00:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87869;24.05.2023 15:00:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87870;24.05.2023 15:00:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87871;24.05.2023 15:02:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87872;24.05.2023 15:02:00;28;192.168.1.128;702;Stok Düzenleme Ekrani Girisi;5;;Stok
+87873;24.05.2023 15:02:00;28;192.168.1.128;702;Stok Güncelleme: HM-00527;5;;Stok
+87874;24.05.2023 15:02:00;28;192.168.1.128;702;Ürün bilgileri güncellendi:HM-00527;5;;Stok
+87875;24.05.2023 15:02:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87876;24.05.2023 15:03:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87877;24.05.2023 15:03:00;28;192.168.1.128;702;Stok Düzenleme Ekrani Girisi;5;;Stok
+87878;24.05.2023 15:03:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87879;24.05.2023 15:03:00;27;192.168.1.138;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+87880;24.05.2023 15:03:00;27;192.168.1.138;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+87881;24.05.2023 15:04:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 24;5;;
+87882;24.05.2023 15:04:00;28;192.168.1.128;702;Stok Düzenleme Ekrani Girisi;5;;Stok
+87883;24.05.2023 15:04:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87884;24.05.2023 15:04:00;27;192.168.1.138;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+87885;24.05.2023 15:04:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87886;24.05.2023 15:04:00;28;192.168.1.128;262;Stok Düzenleme Ekrani Girisi;5;;Stok
+87887;24.05.2023 15:04:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 6070;5;;
+87888;24.05.2023 15:04:00;28;192.168.1.128;262;Stok Düzenleme Ekrani Girisi;5;;Stok
+87889;24.05.2023 15:04:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87890;24.05.2023 15:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87891;24.05.2023 15:05:00;27;192.168.1.138;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+87892;24.05.2023 15:05:00;27;192.168.1.138;0;Üretim Isleri Listelendi;5;;Üretim
+87893;24.05.2023 15:05:00;28;192.168.1.128;336;Stok Düzenleme Ekrani Girisi;5;;Stok
+87894;24.05.2023 15:05:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 15000;5;;
+87895;24.05.2023 15:05:00;28;192.168.1.128;336;Stok Düzenleme Ekrani Girisi;5;;Stok
+87896;24.05.2023 15:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87897;24.05.2023 15:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87898;24.05.2023 15:05:00;27;192.168.1.138;0;Banka Listesi Ekrani;5;;
+87899;24.05.2023 15:05:00;27;192.168.1.138;0;Yetkisiz Giris;5;;
+87900;24.05.2023 15:06:00;28;192.168.1.128;251;Stok Düzenleme Ekrani Girisi;5;;Stok
+87901;24.05.2023 15:06:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 1299;5;;
+87902;24.05.2023 15:06:00;28;192.168.1.128;251;Stok Düzenleme Ekrani Girisi;5;;Stok
+87903;24.05.2023 15:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87904;24.05.2023 15:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87905;24.05.2023 15:06:00;28;192.168.1.128;257;Stok Düzenleme Ekrani Girisi;5;;Stok
+87906;24.05.2023 15:07:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 200;5;;
+87907;24.05.2023 15:07:00;28;192.168.1.128;257;Stok Düzenleme Ekrani Girisi;5;;Stok
+87908;24.05.2023 15:07:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87909;24.05.2023 15:07:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87910;24.05.2023 15:07:00;28;192.168.1.128;252;Stok Düzenleme Ekrani Girisi;5;;Stok
+87911;24.05.2023 15:08:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 13909;5;;
+87912;24.05.2023 15:08:00;28;192.168.1.128;252;Stok Düzenleme Ekrani Girisi;5;;Stok
+87913;24.05.2023 15:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87914;24.05.2023 15:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87915;24.05.2023 15:08:00;28;192.168.1.128;261;Stok Düzenleme Ekrani Girisi;5;;Stok
+87916;24.05.2023 15:08:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 16620;5;;
+87917;24.05.2023 15:08:00;28;192.168.1.128;261;Stok Düzenleme Ekrani Girisi;5;;Stok
+87918;24.05.2023 15:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87919;24.05.2023 15:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87920;24.05.2023 15:09:00;28;192.168.1.128;259;Stok Düzenleme Ekrani Girisi;5;;Stok
+87921;24.05.2023 15:09:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 750;5;;
+87922;24.05.2023 15:09:00;28;192.168.1.128;259;Stok Düzenleme Ekrani Girisi;5;;Stok
+87923;24.05.2023 15:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87924;24.05.2023 15:09:00;29;192.168.1.189;0;Satinalma Temp Siparis Olusturma Ekrani;5;;Satin Alma
+87925;24.05.2023 15:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87926;24.05.2023 15:09:00;28;192.168.1.128;255;Stok Düzenleme Ekrani Girisi;5;;Stok
+87927;24.05.2023 15:09:00;29;192.168.1.189;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+87928;24.05.2023 15:09:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 24578;5;;
+87929;24.05.2023 15:09:00;28;192.168.1.128;255;Stok Düzenleme Ekrani Girisi;5;;Stok
+87930;24.05.2023 15:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87931;24.05.2023 15:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87932;24.05.2023 15:10:00;28;192.168.1.128;256;Stok Düzenleme Ekrani Girisi;5;;Stok
+87933;24.05.2023 15:10:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 7940;5;;
+87934;24.05.2023 15:10:00;28;192.168.1.128;256;Stok Düzenleme Ekrani Girisi;5;;Stok
+87935;24.05.2023 15:10:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87936;24.05.2023 15:10:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87937;24.05.2023 15:10:00;28;192.168.1.128;266;Stok Düzenleme Ekrani Girisi;5;;Stok
+87938;24.05.2023 15:10:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 5950;5;;
+87939;24.05.2023 15:10:00;28;192.168.1.128;266;Stok Düzenleme Ekrani Girisi;5;;Stok
+87940;24.05.2023 15:10:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87941;24.05.2023 15:11:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87942;24.05.2023 15:11:00;28;192.168.1.128;151;Stok Düzenleme Ekrani Girisi;5;;Stok
+87943;24.05.2023 15:11:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 3000;5;;
+87944;24.05.2023 15:11:00;28;192.168.1.128;151;Stok Düzenleme Ekrani Girisi;5;;Stok
+87945;24.05.2023 15:11:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87946;24.05.2023 15:11:00;29;192.168.1.189;0;782 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+87947;24.05.2023 15:11:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87948;24.05.2023 15:11:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87949;24.05.2023 15:12:00;29;192.168.1.189;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+87950;24.05.2023 15:12:00;28;192.168.1.128;268;Stok Düzenleme Ekrani Girisi;5;;Stok
+87951;24.05.2023 15:12:00;29;192.168.1.189;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+87952;24.05.2023 15:12:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 5000;5;;
+87953;24.05.2023 15:12:00;28;192.168.1.128;268;Stok Düzenleme Ekrani Girisi;5;;Stok
+87954;24.05.2023 15:12:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87955;24.05.2023 15:12:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87956;24.05.2023 15:12:00;28;192.168.1.128;254;Stok Düzenleme Ekrani Girisi;5;;Stok
+87957;24.05.2023 15:12:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 3095;5;;
+87958;24.05.2023 15:12:00;28;192.168.1.128;254;Stok Düzenleme Ekrani Girisi;5;;Stok
+87959;24.05.2023 15:12:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87960;24.05.2023 15:13:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87961;24.05.2023 15:13:00;28;192.168.1.128;253;Stok Düzenleme Ekrani Girisi;5;;Stok
+87962;24.05.2023 15:13:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 2600;5;;
+87963;24.05.2023 15:13:00;28;192.168.1.128;253;Stok Düzenleme Ekrani Girisi;5;;Stok
+87964;24.05.2023 15:13:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87965;24.05.2023 15:13:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87966;24.05.2023 15:13:00;28;192.168.1.128;265;Stok Düzenleme Ekrani Girisi;5;;Stok
+87967;24.05.2023 15:14:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 11550;5;;
+87968;24.05.2023 15:14:00;28;192.168.1.128;265;Stok Düzenleme Ekrani Girisi;5;;Stok
+87969;24.05.2023 15:14:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87970;24.05.2023 15:14:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87971;24.05.2023 15:14:00;28;192.168.1.128;258;Stok Düzenleme Ekrani Girisi;5;;Stok
+87972;24.05.2023 15:15:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 5050;5;;
+87973;24.05.2023 15:15:00;28;192.168.1.128;258;Stok Düzenleme Ekrani Girisi;5;;Stok
+87974;24.05.2023 15:15:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+87975;24.05.2023 15:19:00;27;192.168.1.138;0;Welcome Dashboard;5;;Dashboard
+87976;24.05.2023 15:19:00;27;192.168.1.138;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+87977;24.05.2023 15:21:00;29;192.168.1.189;0;Reçeteler Listelendi;5;;Reçete
+87978;24.05.2023 15:22:00;29;192.168.1.189;3186;Reçete Adimlari Listelendi :  U YARIKLI ÖRTÜ STERIL;5;;Reçete
+87979;24.05.2023 15:22:00;29;192.168.1.189;3186;Reçete Adimlari Listelendi :  U YARIKLI ÖRTÜ STERIL;5;;Reçete
+87980;24.05.2023 15:22:00;29;192.168.1.189;0;Üretim Isleri Listelendi;5;;Üretim
+87981;24.05.2023 15:22:00;29;192.168.1.189;0;Üretim Isleri Listelendi;5;;Üretim
+87982;24.05.2023 15:22:00;29;192.168.1.189;0;Üretim Isleri Listelendi;5;;Üretim
+87983;24.05.2023 15:22:00;29;192.168.1.189;0;Üretim Isleri Listelendi;5;;Üretim
+87984;24.05.2023 15:22:00;29;192.168.1.189;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+87985;24.05.2023 15:22:00;29;192.168.1.189;0;Onay Bekleyen Kayit Bulunamadi;5;;Üretim
+87986;24.05.2023 15:23:00;29;192.168.1.189;0;Makine - Teçhizat Listesi Ekrani;5;;Üretim
+87987;24.05.2023 15:23:00;29;192.168.1.189;1;Yeni Teçhizat Ekleme Ekrani Girisi;5;;Üretim
+87988;24.05.2023 15:23:00;29;192.168.1.189;0;Reçeteler Listelendi;5;;Reçete
+87989;24.05.2023 15:23:00;29;192.168.1.189;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+87990;24.05.2023 15:24:00;29;192.168.1.189;1113;Reçete Adimlari Listelendi : BILAMINATED SURGICAL DRAPE  75X90CM  DUBLEX;5;;Reçete
+87991;24.05.2023 15:25:00;29;192.168.1.189;1114;Reçete Adimlari Listelendi : BILAMINARED SURGICAL DRAPE 200X220CM  DUBLEX;5;;Reçete
+87992;24.05.2023 15:26:00;29;192.168.1.189;2;Reçete Adimlari Listelendi : ANJIYO SET;5;;Reçete
+87993;24.05.2023 15:27:00;29;192.168.1.189;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+87994;24.05.2023 15:27:00;29;192.168.1.189;0;Yetkisiz Giris;5;;Kalite Kontrol
+87995;24.05.2023 15:27:00;29;192.168.1.189;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+87996;24.05.2023 15:28:00;29;192.168.1.189;0;Firma Bilgileri Ekrani;5;;Teklif
+87997;24.05.2023 15:28:00;29;192.168.1.189;0;Yetkisiz Giris;5;;Teklif
+87998;24.05.2023 15:28:00;29;192.168.1.189;0;Planlama ajanda sayfasi girisi;5;;Planlama
+87999;24.05.2023 15:28:00;29;192.168.1.189;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+88000;24.05.2023 15:28:00;29;192.168.1.189;0;Yetkisiz Giris;5;;Sterilizasyon
+88001;24.05.2023 15:28:00;29;192.168.1.189;0;Yetkisiz Giris;5;;Sterilizasyon
+88002;24.05.2023 15:28:00;29;192.168.1.189;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+88003;24.05.2023 15:28:00;29;192.168.1.189;0;Yetkisiz Giris;5;;Sterilizasyon
+88004;24.05.2023 15:28:00;29;192.168.1.189;0;Yetkisiz Giris;5;;Sterilizasyon
+88005;24.05.2023 15:28:00;29;192.168.1.189;0;Ariza Ekrani;5;;ITAriza
+88006;24.05.2023 15:28:00;29;192.168.1.189;0;Kalite kontrol formlari listendi;5;;Kalite Kontrol
+88007;24.05.2023 15:28:00;29;192.168.1.189;0;Yetkisiz Giris;5;;Kalite Kontrol
+88008;24.05.2023 15:28:00;29;192.168.1.189;0;Stok Listesi Ekrani;5;;Stok
+88009;24.05.2023 15:29:00;29;192.168.1.189;3031;Stok Düzenleme Ekrani Girisi;5;;Stok
+88010;24.05.2023 15:29:00;29;192.168.1.189;0;Reçeteler Listelendi;5;;Reçete
+88011;24.05.2023 15:33:00;0;192.168.1.165;0;Sifre Giris Ekrani;5;;
+88012;24.05.2023 15:33:00;0;192.168.1.165;0;Sifre Denemesi;5;;Personel
+88013;24.05.2023 15:33:00;0;192.168.1.165;0;Sifre Dogrulaniyor;5;;Personel
+88014;24.05.2023 15:33:00;35;192.168.1.165;0;Basarili Giris;5;;Personel
+88015;24.05.2023 15:33:00;35;192.168.1.165;0;Welcome Dashboard;5;;Dashboard
+88016;24.05.2023 15:33:00;35;192.168.1.165;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+88017;24.05.2023 15:33:00;35;192.168.1.165;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88018;24.05.2023 15:34:00;35;192.168.1.165;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+88019;24.05.2023 15:35:00;35;192.168.1.165;0;Yetkisiz Giris;5;;Teklif
+88020;24.05.2023 15:35:00;35;192.168.1.165;0;Yetkisiz Giris;5;;Depo
+88021;24.05.2023 15:35:00;36;192.168.1.164;0;Welcome Dashboard;5;;Dashboard
+88022;24.05.2023 15:35:00;35;192.168.1.165;0;Kalite kontrol formlari listendi;5;;Kalite Kontrol
+88023;24.05.2023 15:35:00;35;192.168.1.165;0;Yetkisiz Giris;5;;Depo
+88024;24.05.2023 15:35:00;36;192.168.1.164;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88025;24.05.2023 15:35:00;35;192.168.1.165;0;Planlama ajanda sayfasi girisi;5;;Planlama
+88026;24.05.2023 15:35:00;35;192.168.1.165;0;Stok Listesi Ekrani;5;;Stok
+88027;24.05.2023 15:35:00;35;192.168.1.165;0;Stok Listesi Ekrani;5;;Stok
+88028;24.05.2023 15:35:00;36;192.168.1.164;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88029;24.05.2023 15:52:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88030;24.05.2023 15:56:00;27;192.168.1.138;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+88031;24.05.2023 15:56:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+88032;24.05.2023 15:56:00;27;192.168.1.138;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88033;24.05.2023 15:57:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:11111111111;5;;Mal Kabul
+88034;24.05.2023 15:58:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:11111111111;5;;Mal Kabul
+88035;24.05.2023 16:01:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+88036;24.05.2023 16:01:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88037;24.05.2023 16:02:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88038;24.05.2023 16:03:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:11111111111;5;;Mal Kabul
+88039;24.05.2023 16:03:00;27;192.168.1.138;0;Satinalma Temp Siparis Olusturma Ekrani;5;;Satin Alma
+88040;24.05.2023 16:04:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88041;24.05.2023 16:04:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88042;24.05.2023 16:04:00;28;192.168.1.128;197;Stok Düzenleme Ekrani Girisi;5;;Stok
+88043;24.05.2023 16:05:00;27;192.168.1.138;0;Welcome Dashboard;5;;Dashboard
+88044;24.05.2023 16:05:00;27;192.168.1.138;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88045;24.05.2023 16:05:00;27;192.168.1.138;0;1247 carisine satin alma siparisi için 177 kodlu ürün eklendi;5;;Satin Alma
+88046;24.05.2023 16:05:00;27;192.168.1.138;0;Satinalma siparis ana tablo aktarimi;5;;Satin Alma
+88047;24.05.2023 16:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88048;24.05.2023 16:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88049;24.05.2023 16:06:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 1814;5;;
+88050;24.05.2023 16:06:00;28;192.168.1.128;197;Stok Düzenleme Ekrani Girisi;5;;Stok
+88051;24.05.2023 16:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88052;24.05.2023 16:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88053;24.05.2023 16:06:00;28;192.168.1.128;73;Stok Düzenleme Ekrani Girisi;5;;Stok
+88054;24.05.2023 16:06:00;28;192.168.1.128;73;Stok Düzenleme Ekrani Girisi;5;;Stok
+88055;24.05.2023 16:07:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 10884;5;;
+88056;24.05.2023 16:07:00;28;192.168.1.128;73;Stok Düzenleme Ekrani Girisi;5;;Stok
+88057;24.05.2023 16:07:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88058;24.05.2023 16:07:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88059;24.05.2023 16:07:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88060;24.05.2023 16:07:00;28;192.168.1.128;73;Stok Depo Miktarlari Detay;5;;stok
+88061;24.05.2023 16:07:00;28;192.168.1.128;74;Stok Düzenleme Ekrani Girisi;5;;Stok
+88062;24.05.2023 16:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88063;24.05.2023 16:08:00;28;192.168.1.128;104;Stok Depo Miktarlari Detay;5;;stok
+88064;24.05.2023 16:08:00;28;192.168.1.128;114;Stok Depo Miktarlari Detay;5;;stok
+88065;24.05.2023 16:08:00;28;192.168.1.128;115;Stok Depo Miktarlari Detay;5;;stok
+88066;24.05.2023 16:08:00;28;192.168.1.128;117;Stok Depo Miktarlari Detay;5;;stok
+88067;24.05.2023 16:08:00;28;192.168.1.128;118;Stok Depo Miktarlari Detay;5;;stok
+88068;24.05.2023 16:08:00;28;192.168.1.128;189;Stok Depo Miktarlari Detay;5;;stok
+88069;24.05.2023 16:08:00;28;192.168.1.128;191;Stok Depo Miktarlari Detay;5;;stok
+88070;24.05.2023 16:09:00;28;192.168.1.128;232;Stok Depo Miktarlari Detay;5;;stok
+88071;24.05.2023 16:09:00;28;192.168.1.128;233;Stok Depo Miktarlari Detay;5;;stok
+88072;24.05.2023 16:09:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 22851;5;;
+88073;24.05.2023 16:09:00;28;192.168.1.128;74;Stok Düzenleme Ekrani Girisi;5;;Stok
+88074;24.05.2023 16:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88075;24.05.2023 16:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88076;24.05.2023 16:09:00;28;192.168.1.128;198;Stok Düzenleme Ekrani Girisi;5;;Stok
+88077;24.05.2023 16:10:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 9480;5;;
+88078;24.05.2023 16:10:00;28;192.168.1.128;198;Stok Düzenleme Ekrani Girisi;5;;Stok
+88079;24.05.2023 16:10:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88080;24.05.2023 16:10:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88081;24.05.2023 16:10:00;28;192.168.1.128;198;Stok Depo Miktarlari Detay;5;;stok
+88082;24.05.2023 16:10:00;28;192.168.1.128;275;Stok Düzenleme Ekrani Girisi;5;;Stok
+88083;24.05.2023 16:10:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 2105;5;;
+88084;24.05.2023 16:10:00;28;192.168.1.128;275;Stok Düzenleme Ekrani Girisi;5;;Stok
+88085;24.05.2023 16:10:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88086;24.05.2023 16:11:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88087;24.05.2023 16:11:00;28;192.168.1.128;40;Stok Düzenleme Ekrani Girisi;5;;Stok
+88088;24.05.2023 16:11:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 740;5;;
+88089;24.05.2023 16:11:00;28;192.168.1.128;40;Stok Düzenleme Ekrani Girisi;5;;Stok
+88090;24.05.2023 16:11:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88091;24.05.2023 16:11:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88092;24.05.2023 16:11:00;28;192.168.1.128;196;Stok Düzenleme Ekrani Girisi;5;;Stok
+88093;24.05.2023 16:12:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 24200;5;;
+88094;24.05.2023 16:12:00;28;192.168.1.128;196;Stok Düzenleme Ekrani Girisi;5;;Stok
+88095;24.05.2023 16:12:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88096;24.05.2023 16:12:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88097;24.05.2023 16:12:00;28;192.168.1.128;749;Stok Düzenleme Ekrani Girisi;5;;Stok
+88098;24.05.2023 16:12:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 3323;5;;
+88099;24.05.2023 16:12:00;28;192.168.1.128;749;Stok Düzenleme Ekrani Girisi;5;;Stok
+88100;24.05.2023 16:12:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88101;24.05.2023 16:13:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88102;24.05.2023 16:13:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88103;24.05.2023 16:14:00;28;192.168.1.128;76;Stok Düzenleme Ekrani Girisi;5;;Stok
+88104;24.05.2023 16:14:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 5470;5;;
+88105;24.05.2023 16:14:00;28;192.168.1.128;76;Stok Düzenleme Ekrani Girisi;5;;Stok
+88106;24.05.2023 16:14:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88107;24.05.2023 16:14:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88108;24.05.2023 16:14:00;28;192.168.1.128;79;Stok Düzenleme Ekrani Girisi;5;;Stok
+88109;24.05.2023 16:15:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 10714;5;;
+88110;24.05.2023 16:15:00;28;192.168.1.128;79;Stok Düzenleme Ekrani Girisi;5;;Stok
+88111;24.05.2023 16:15:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88112;24.05.2023 16:16:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+88113;24.05.2023 16:16:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88114;24.05.2023 16:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88115;24.05.2023 16:41:00;28;192.168.1.128;80;Stok Düzenleme Ekrani Girisi;5;;Stok
+88116;24.05.2023 16:41:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 3846;5;;
+88117;24.05.2023 16:41:00;28;192.168.1.128;80;Stok Düzenleme Ekrani Girisi;5;;Stok
+88118;24.05.2023 16:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88119;24.05.2023 16:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88120;24.05.2023 16:42:00;27;192.168.1.138;166;Stok Düzenleme Ekrani Girisi;5;;Stok
+88121;24.05.2023 16:42:00;28;192.168.1.128;75;Stok Düzenleme Ekrani Girisi;5;;Stok
+88122;24.05.2023 16:42:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 4741;5;;
+88123;24.05.2023 16:42:00;28;192.168.1.128;0;Lütfen LOT içim Son Kullanma Tarihi bilgisini yaziniz.;5;;
+88124;24.05.2023 16:42:00;28;192.168.1.128;75;Stok Düzenleme Ekrani Girisi;5;;Stok
+88125;24.05.2023 16:42:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 4741;5;;
+88126;24.05.2023 16:42:00;28;192.168.1.128;75;Stok Düzenleme Ekrani Girisi;5;;Stok
+88127;24.05.2023 16:42:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88128;24.05.2023 16:43:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88129;24.05.2023 16:43:00;28;192.168.1.128;328;Stok Düzenleme Ekrani Girisi;5;;Stok
+88130;24.05.2023 16:43:00;27;192.168.1.138;0;Yeni birim katsayisi ekleniyor stokID:166;5;;
+88131;24.05.2023 16:43:00;27;192.168.1.138;166;Stok Düzenleme Ekrani Girisi;5;;Stok
+88132;24.05.2023 16:43:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 19454;5;;
+88133;24.05.2023 16:43:00;28;192.168.1.128;328;Stok Düzenleme Ekrani Girisi;5;;Stok
+88134;24.05.2023 16:43:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88135;24.05.2023 16:43:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88136;24.05.2023 16:44:00;28;192.168.1.128;328;Stok Depo Miktarlari Detay;5;;stok
+88137;24.05.2023 16:44:00;27;192.168.1.138;0;684 carisine satin alma siparisi için 166 kodlu ürün eklendi;5;;Satin Alma
+88138;24.05.2023 16:44:00;27;192.168.1.138;0;684 carisine satin alma siparisi için 166 kodlu ürün eklendi;5;;Satin Alma
+88139;24.05.2023 16:44:00;27;192.168.1.138;0;Siparis Kalemi Silindi;5;;Satin Alma
+88140;24.05.2023 16:44:00;27;192.168.1.138;0;Siparis Kalemi Silindi;5;;Satin Alma
+88141;24.05.2023 16:44:00;27;192.168.1.138;0;684 carisine satin alma siparisi için 166 kodlu ürün eklendi;5;;Satin Alma
+88142;24.05.2023 16:44:00;27;192.168.1.138;0;Siparis Kalemi Silindi;5;;Satin Alma
+88143;24.05.2023 16:44:00;27;192.168.1.138;0;684 carisine satin alma siparisi için 166 kodlu ürün eklendi;5;;Satin Alma
+88144;24.05.2023 16:44:00;27;192.168.1.138;0;Siparis Kalemi Silindi;5;;Satin Alma
+88145;24.05.2023 16:44:00;28;192.168.1.128;328;Stok Depo Miktarlari Detay;5;;stok
+88146;24.05.2023 16:44:00;28;192.168.1.128;319;Stok Düzenleme Ekrani Girisi;5;;Stok
+88147;24.05.2023 16:45:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 5244;5;;
+88148;24.05.2023 16:45:00;28;192.168.1.128;319;Stok Düzenleme Ekrani Girisi;5;;Stok
+88149;24.05.2023 16:45:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88150;24.05.2023 16:45:00;27;192.168.1.138;0;684 carisine satin alma siparisi için 166 kodlu ürün eklendi;5;;Satin Alma
+88151;24.05.2023 16:45:00;27;192.168.1.138;0;684 carisine satin alma siparisi için 166 kodlu ürün eklendi;5;;Satin Alma
+88152;24.05.2023 16:45:00;27;192.168.1.138;0;Siparis Kalemi Silindi;5;;Satin Alma
+88153;24.05.2023 16:46:00;27;192.168.1.138;0;Satinalma siparis ana tablo aktarimi;5;;Satin Alma
+88154;24.05.2023 16:46:00;27;192.168.1.138;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88155;24.05.2023 16:46:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88156;24.05.2023 16:46:00;28;192.168.1.128;3034;Stok Düzenleme Ekrani Girisi;5;;Stok
+88157;24.05.2023 16:46:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 33125;5;;
+88158;24.05.2023 16:46:00;28;192.168.1.128;3034;Stok Düzenleme Ekrani Girisi;5;;Stok
+88159;24.05.2023 16:46:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88160;24.05.2023 16:46:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88161;24.05.2023 16:47:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+88162;24.05.2023 16:48:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+88163;24.05.2023 16:48:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:11111111111;5;;Mal Kabul
+88164;24.05.2023 16:49:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+88165;24.05.2023 16:49:00;28;192.168.1.128;3034;Stok Depo Miktarlari Detay;5;;stok
+88166;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88167;24.05.2023 16:50:00;35;192.168.1.165;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88168;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88169;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88170;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88171;24.05.2023 16:50:00;36;192.168.1.164;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88172;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88173;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88174;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88175;24.05.2023 16:50:00;35;192.168.1.165;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88176;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88177;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88178;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88179;24.05.2023 16:50:00;36;192.168.1.164;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88180;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88181;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88182;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88183;24.05.2023 16:50:00;35;192.168.1.165;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88184;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88185;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88186;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88187;24.05.2023 16:50:00;36;192.168.1.164;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88188;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88189;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88190;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88191;24.05.2023 16:50:00;35;192.168.1.165;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88192;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88193;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88194;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88195;24.05.2023 16:50:00;36;192.168.1.164;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88196;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88197;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88198;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88199;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88200;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88201;24.05.2023 16:50:00;35;192.168.1.165;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88202;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88203;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88204;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88205;24.05.2023 16:50:00;36;192.168.1.164;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88206;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88207;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88208;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88209;24.05.2023 16:50:00;35;192.168.1.165;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88210;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88211;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88212;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88213;24.05.2023 16:50:00;36;192.168.1.164;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88214;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88215;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88216;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88217;24.05.2023 16:50:00;35;192.168.1.165;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88218;24.05.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88219;24.05.2023 16:50:00;2;127.0.0.1;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88220;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88221;24.05.2023 16:50:00;36;192.168.1.164;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+88222;24.05.2023 16:50:00;27;192.168.1.138;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;

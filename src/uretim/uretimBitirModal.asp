@@ -101,12 +101,20 @@
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
-				$('#ajax').load('/uretim/uretimBaslat.asp', {uretilenUrunGirisDepoID:uretilenUrunGirisDepoID,ajandaID:ajandaID, siparisKalemID:siparisKalemID, islemDurum:islemDurum, uretilenMiktar:uretilenMiktar,teminDepoID:teminDepoID});
+				$('#ajax').load('/uretim/uretimBaslat.asp', {
+					uretilenUrunGirisDepoID:uretilenUrunGirisDepoID,
+					ajandaID:ajandaID,
+					siparisKalemID:siparisKalemID,
+					islemDurum:islemDurum,
+					uretilenMiktar:uretilenMiktar,
+					teminDepoID:teminDepoID},
+					function(){
 				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *');
 				//$('#btnDIV').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV > *');
 				$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
 				$('#btnDIV').removeClass('d-none');
 				$('#btnDIV2').removeClass('d-none');
+				});
 			}, //confirm buton yapılanlar
 			function(dismiss) {
 			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'

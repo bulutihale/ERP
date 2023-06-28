@@ -5162,7 +5162,28 @@ Function OndalikKontrol(sayi)
     End If
 End Function
 
-
+function para_basamak(byVal para)
+	if isnull(para) OR para = "" then
+		para = 0
+	end if
+	para	=	formatnumber((para),4)
+	pararr	=	Split(para,",")
+	for pi = 1 to 5
+		if right(pararr(1),1) = "0" then
+			pararr(1) = left(pararr(1),len(pararr(1))-1)
+		end if
+	next	
+	if pararr(1) = "" then
+		para	=	formatnumber(pararr(0),2)
+	else
+		if len(pararr(1)) = 1 then
+			pararr(1) = pararr(1) & "0"
+		end if
+		para	=	pararr(0) & "," & pararr(1)
+	end if
+	set pararr = Nothing
+	para_basamak = para
+end function
 
 
 

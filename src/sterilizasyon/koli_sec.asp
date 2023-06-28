@@ -66,6 +66,8 @@ yetkiKontrol = yetkibul(modulAd)
 		rs.close
 		Response.Write "</tbody>"
 		Response.Write "</table>"
+	else
+		Response.Write "<div class=""text-danger bold"" style=""min-height:100px"">Ürün kartında (stok --> stok kartı koli tanımları sekmesi) ürünün içine konacağı koli tanımlaması yapılmamış.</div>"
 	end if
 '###### ARAMA FORMU
 '###### ARAMA FORMU

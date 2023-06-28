@@ -66,7 +66,8 @@ yetkiKontrol = yetkibul(modulAd)
 '########## stokHareket tablosundaki üretim veya kesim sürecindeki malzemeleri stoktan düş, üretilen yarı mamul veya mamulun stok girişini yap
 
 	'##### üretilen ürüne ait bilgileri al
-			sorgu = "SELECT t1.stokID, t1.isTur, t2.stokKodu, stok.FN_anaBirimIDBul(t2.stokID) as anaBirimID, stok.FN_anaBirimADBul(t2.stokID, 'kad') as anaBirimAD, t1.uretimLot"
+			sorgu = "SELECT t1.stokID, t1.isTur, t2.stokKodu, stok.FN_anaBirimIDBul(t2.stokID) as anaBirimID, stok.FN_anaBirimADBul(t2.stokID, 'kad') as anaBirimAD, t1.uretimLot,"
+			sorgu = sorgu & " stok.FN_lotSktBul("&firmaID&",t1.stokID,t1.uretimLot) as mevcutSKT, t2.rafOmru"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
@@ -77,6 +78,13 @@ yetkiKontrol = yetkibul(modulAd)
 				anaBirimID			=	rs("anaBirimID")
 				anaBirimAD			=	rs("anaBirimAD")
 				uretimLot			=	rs("uretimLot")
+				rafOmru				=	rs("rafOmru")
+				mevcutSKT			=	rs("mevcutSKT")
+				if isnull(mevcutSKT) then
+					lotSKT			=	dateAdd("m",rafOmru,date())
+				else
+					lotSKT			=	mevcutSKT
+				end if
 			rs.close
 	'##### /üretilen ürüne ait bilgileri al
 
@@ -109,7 +117,7 @@ yetkiKontrol = yetkibul(modulAd)
 	sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
 	sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & " AND t1.ajandaID = " & ajandaID & ""
 	sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND t1.silindi = 0"
-	sorgu = sorgu & " ORDER BY t1.stokHareketID DESC"		
+	sorgu = sorgu & " ORDER BY t1.stokHareketID DESC"
 	rs.open sorgu,sbsv5,1,3
 
 	a = 0
@@ -117,7 +125,6 @@ yetkiKontrol = yetkibul(modulAd)
 		if rs.recordcount > 0 then
 			a				=	1
 			lot				=	rs("lot")
-			lotSKT			=	rs("lotSKT")
 			refHareketID	=	rs("stokHareketID")
 			if uretilenUrunGirisDepoID = "" then
 				surecSonuDepoID	=	rs("surecSonuDepoID")

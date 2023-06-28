@@ -12,7 +12,15 @@
 	taslakDurum		=	Request.QueryString("taslakDurum")
 	sayfa5Kontrol	=	Session("sayfa5")
 	if taslakDurum = "evet" OR sayfa5Kontrol = "taslak" then
-		taslakKontrol = "taslak"
+		taslakKontrol 	=	"taslak"
+		sayfaBaslik		=	"Müşteri Siparişi Oluşturma"
+		taslakDurum		=	"evet"
+		sayfaAdres		=	"musteri_siparis_kalem_ekle"
+	elseif taslakDurum = "sevkirsaliye" OR sayfa5Kontrol = "sevkirsaliye" then
+		taslakKontrol 	=	"sevkirsaliye"
+		sayfaBaslik		=	"Müşteri Sevk İrsaliyesi Kayıt"
+		taslakDurum		=	"sevkirsaliye"
+		sayfaAdres		=	"musteri_sevk_liste"
 	else
 		taslakKontrol = ""
 	end if
@@ -39,7 +47,8 @@ yetkiKontrol = yetkibul(modulAd)
                 Response.Write "<div class=""card container"">"
 					Response.Write "<div class=""card-header"">"
 						Response.Write "<div class=""row"">"
-							Response.Write "<div class=""col-lg-9 col-md-6 col-sm-6 h4 text-left"">Müşteri Siparişi Oluşturma</div>"
+							Response.Write "<div class=""col-lg-9 col-md-6 col-sm-6 h4 text-left"">" & sayfaBaslik & "</div>"
+					if taslakKontrol <> "taslak" AND taslakKontrol <> "sevkirsaliye" then
 							Response.Write "<div class=""btn btn-warning col-lg-1 col-sm-12 col-md-12 mr-3"""
 							Response.Write " onclick=""$('#divCariSec').addClass('d-none');"
 							Response.Write " $('#divYeniCari').removeClass('d-none');"
@@ -57,23 +66,28 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write " $('.btn').removeClass('bg-primary');"
 							Response.Write " $(this).addClass('bg-primary');"
 							Response.Write """>Kayıtlı Cari</div>"
+					end if
 						Response.Write "</div>"
 					Response.Write "</div>"
 
 			'###### TASLAK SİPARİŞLERİ LİSTELEMEK İÇİN
 			'###### TASLAK SİPARİŞLERİ LİSTELEMEK İÇİN
-				if taslakKontrol = "taslak" then
-
+				if taslakKontrol <> "" then
 					sorgu = "SELECT DISTINCT t1.cariID, t2.cariAd"
 					sorgu = sorgu & " FROM teklif.siparisKalemTemp t1"
 					sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.cariID = t2.cariID"
-					sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
+					sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & ""
+					if taslakKontrol = "taslak" then
+						sorgu = sorgu & " AND t1.siparisTur ='S'"
+					elseif taslakKontrol = "sevkirsaliye" then
+						sorgu = sorgu & " AND t1.siparisTur ='IRS'"
+					end if
 					rs.open sorgu, sbsv5, 1, 3
 					if not rs.EOF then
 						do until rs.EOF
 							cariID		=	rs("cariID")
 							cariAd		=	rs("cariAd")
-							Response.Write "<div class=""row mt-3 hoverGel pointer sipRow rounded container"" onclick=""$('#tempUrunListesi').load('/satis/musteri_siparis_kalem_ekle.asp?taslakDurum=evet&islem=kontrol&siphash=" & cariID & "');$('.sipRow').removeClass('bg-warning');$(this).addClass('bg-warning')"">"
+							Response.Write "<div class=""row mt-3 hoverGel pointer sipRow rounded container"" onclick=""$('#tempUrunListesi').load('/satis/"&sayfaAdres&".asp?taslakDurum="&taslakDurum&"&islem=kontrol&siphash=" & cariID & "');$('.sipRow').removeClass('bg-warning');$(this).addClass('bg-warning')"">"
 								Response.Write "<div class=""col-7 bold"">" & cariAd & "</div>"
 							Response.Write "</div>"
 						rs.movenext

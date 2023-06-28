@@ -22,10 +22,10 @@ call logla("Reçete adımı sırası değiştirildi")
 
 					sorgu = "" & vbcrlf
 					sorgu = sorgu & "SELECT" & vbcrlf
-					sorgu = sorgu & "recete.receteAdim.sira" & vbcrlf
-					sorgu = sorgu & ",recete.receteAdim.receteID" & vbcrlf
-					sorgu = sorgu & "FROM recete.receteAdim" & vbcrlf
-					sorgu = sorgu & "where recete.receteAdim.receteAdimID = " & receteAdimID & vbcrlf
+					sorgu = sorgu & "t1.sira" & vbcrlf
+					sorgu = sorgu & ",t1.receteID" & vbcrlf
+					sorgu = sorgu & "FROM recete.receteAdim t1" & vbcrlf
+					sorgu = sorgu & "WHERE t1.silindi = 0 AND t1.receteAdimID = " & receteAdimID & vbcrlf
 					rs.open sorgu, sbsv5, 1, 3
 					if rs.recordcount > 0 then
 						mevcutSira = rs("sira")
@@ -44,7 +44,7 @@ call logla("Reçete adımı sırası değiştirildi")
 					 sorgu = sorgu & "SELECT" & vbcrlf
 					 sorgu = sorgu & "recete.receteAdim.sira" & vbcrlf
 					 sorgu = sorgu & "FROM recete.receteAdim" & vbcrlf
-					 sorgu = sorgu & "where recete.receteAdim.receteID = " & receteID & vbcrlf
+					 sorgu = sorgu & "where recete.receteAdim.silindi = 0 AND recete.receteAdim.receteID = " & receteID & vbcrlf
 					 sorgu = sorgu & "order by recete.receteAdim.sira ASC" & vbcrlf
 					 rs.open sorgu, sbsv5, 1, 3
 					 if rs.recordcount > 0 then
@@ -85,7 +85,7 @@ call logla("Reçete adımı sırası değiştirildi")
 					 sorgu = sorgu & "SELECT" & vbcrlf
 					 sorgu = sorgu & "recete.receteAdim.sira" & vbcrlf
 					 sorgu = sorgu & "FROM recete.receteAdim" & vbcrlf
-					 sorgu = sorgu & "where recete.receteAdim.receteID = " & receteID & vbcrlf
+					 sorgu = sorgu & "where recete.receteAdim.silindi = 0 AND recete.receteAdim.receteID = " & receteID & vbcrlf
 					 sorgu = sorgu & "order by recete.receteAdim.sira ASC" & vbcrlf
 					 rs.open sorgu, sbsv5, 1, 3
 					 if rs.recordcount > 0 then

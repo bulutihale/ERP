@@ -330,8 +330,8 @@ if receteID <> "" then
 			Response.Write "<div class=""col-6""></div>"
 uretimIsGucuYuzde	=	CDbl(toplamIsgucuUretim) / CDbl(toplamBirimMaliyetPara)
 toplamIsgucu2Yuzde	=	CDbl(toplamIsgucu2) / CDbl(toplamBirimMaliyetPara)
-			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim Harici İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucu2,2) & "TL <span class=""fontkucuk"">" & formatpercent(toplamIsgucu2Yuzde,2) & "</span></div>"
-			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucuUretim,2) & "TL <span class=""fontkucuk"">" & formatpercent(uretimIsGucuYuzde,2) & "</span></div>"
+			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim Harici İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucu2,2) & " TL <span class=""fontkucuk"">" & formatpercent(toplamIsgucu2Yuzde,2) & "</span></div>"
+			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucuUretim,2) & " TL <span class=""fontkucuk"">" & formatpercent(uretimIsGucuYuzde,2) & "</span></div>"
 			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Toplam Maliyet</span><br>" & formatnumber(toplamBirimMaliyetPara,2) & "</div>"
 		Response.Write "</div>"
 	Response.Write "</div>"

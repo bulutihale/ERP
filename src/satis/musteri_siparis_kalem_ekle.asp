@@ -208,7 +208,7 @@ rs.open sorgu,sbsv5,1,3
 						Response.Write "</div>"
 						
 							Response.Write "<span title=""kayıt sil"""
-						Response.Write " onClick=""bootmodal('Silinsin mi?','custom','/satis/musteri_siparis_kalem_sil.asp?siphash=" & siphash & "&id=" & rs("sipID") & "','','SİL','İPTAL','','','','ajax','','','')"""
+						Response.Write " onClick=""bootmodal('Silinsin mi?','custom','/satis/musteri_siparis_kalem_sil.asp?taslakDurum=evet&siphash=" & siphash & "&id=" & rs("sipID") & "','','SİL','İPTAL','','','','ajax','','','')"""
 							Response.Write " class=""badge badge-pill badge-danger pointer mr-2"">"
 								Response.Write "<i class=""mdi mdi-delete-forever""></i>"
 							Response.Write "</span>"

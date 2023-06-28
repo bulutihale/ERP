@@ -33,9 +33,6 @@
 
 
 '###### veri kontrol
-    if rafOmru = "" then
-        rafOmru = 0
-    end if
     if silindi = "" then
         silindi = 0
     end if
@@ -56,12 +53,13 @@
 
 '##### VERİ KONTROL
     if sb_stokKoduZorunlu = true then
-	    call rqKontrol(stokKodu,translate("Lütfen ürün için bir stok kodu yazın.","",""),"")
+	    call rqKontrol(stokKodu,"Lütfen ürün için bir stok kodu yazın.","")
     end if
-	call rqKontrol(anaBirimID,translate("Lütfen ürüne ait ana birimi seçin","",""),"")
-    call rqKontrol(kdv,translate("Ürüne ait KDV ORANI bilgisini seçiniz","",""),"")
-    call rqKontrol(fiyat1,translate("Ürüne ait fiyat bilgisini yazınız","",""),"")
-    call rqKontrol(paraBirimID,translate("Ürüne ait para birimi bilgisini seçiniz","",""),"")
+	call rqKontrol(anaBirimID,"Lütfen ürüne ait ana birimi seçin","")
+    call rqKontrol(kdv,"Ürüne ait KDV ORANI bilgisini seçiniz","")
+    call rqKontrol(rafOmru,"Ürüne ait RAF ÖMRÜ bilgisi giriniz.","")
+    'call rqKontrol(fiyat1,translate("Ürüne ait fiyat bilgisini yazınız","",""),"")
+    'call rqKontrol(paraBirimID,translate("Ürüne ait para birimi bilgisini seçiniz","",""),"")
 '##### VERİ KONTROL
 
 
