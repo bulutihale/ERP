@@ -26,13 +26,14 @@
 		Response.Write "<table style=""width:100%"" class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
 		Response.Write "<th scope=""col"">Kod</th>"
 		Response.Write "<th scope=""col"">Ürün Adı</th>"
+		Response.Write "<th scope=""col"">Fiyat</th>"
 		Response.Write "<th scope=""col"">Cari</th>"
 		if yetkiKontrol >= 5 then
 			Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 		end if
 		Response.Write "</tr></thead><tbody id=""refTablo"">"
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.id as stokRefID, t1.cariUrunRef, t1.cariUrunAd, t2.cariAd"
+			sorgu = sorgu & " t1.id as stokRefID, t1.cariUrunRef, t1.cariUrunAd, t2.cariAd, t1.cariUrunFiyat, t1.paraBirim"
 			sorgu = sorgu & " FROM stok.stokRef t1"
 			sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
@@ -51,6 +52,8 @@
 					cariUrunRef		=	rs("cariUrunRef")
 					cariUrunAd		=	rs("cariUrunAd")
 					cariAd			=	rs("cariAd")
+					cariUrunFiyat	=	rs("cariUrunFiyat")
+					paraBirim		=	rs("paraBirim")
 					Response.Write "<tr>"
 						Response.Write "<td>"
 							sayfaParametre = "cariID_"&cariID&"**stokID_"&stokID
@@ -59,6 +62,17 @@
 						Response.Write "<td>"
 							'Response.Write cariUrunAd
 			call forminput("cariUrunAd",cariUrunAd,"","","borderless text-left input30","","","onChange=""hucreKaydetGenel('id',"&stokRefID&",'cariUrunAd','stok.stokRef',$(this).val(),'Müşteriye ait Ürün Adı değiştirilsin mi?','refTablo','"&sayfaURL&"','"&sayfaParametre&"','')""")
+						Response.Write "</td>"
+						Response.Write "<td>"
+							Response.Write "<div class=""input-group"">"
+			'				Response.Write "<input name=""cariUrunFiyat"" id=""cariUrunFiyat"" type=""text"" class=""form-control text-right bold"" value=""" & cariUrunFiyat & """>"
+			call forminput("cariUrunFiyat",cariUrunFiyat,"","","borderless text-right bold","","","onChange=""hucreKaydetGenel('id',"&stokRefID&",'cariUrunFiyat','stok.stokRef',$(this).val(),'Fiyat değiştirilsin mi?','refTablo','"&sayfaURL&"','"&sayfaParametre&"','')""")
+  								Response.Write "<div class=""input-group-append"">"
+								    Response.Write "<span class=""input-group-text py-0"">" & paraBirim & "</span>"
+  								Response.Write "</div>"
+		 		call formselectv2("paraBirim",paraBirim,"","","formSelect2 border","","paraBirim","","data-holderyazi=""Para Birimi"" data-jsondosya=""JSON_paraBirimler"" data-miniput=""0"" onChange=""hucreKaydetGenel('id',"&stokRefID&",'paraBirim','stok.stokRef',$(this).val(),'Birim değiştirilsin mi?','refTablo','"&sayfaURL&"','"&sayfaParametre&"','')""")
+							Response.Write "</div>"
+						
 						Response.Write "</td>"
 						Response.Write "<td>"
 							Response.Write cariAd

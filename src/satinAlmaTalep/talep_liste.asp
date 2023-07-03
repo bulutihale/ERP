@@ -35,7 +35,7 @@ Response.Write "<div class=""card rounded-top"">"
 Response.Write "<div class=""card-header h5"">Satınalma Sipariş Listesi</div>"
 
 Response.Write "<div class=""card-body"">"
-		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/satinAlma/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
+		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/satinAlmaTalep/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
 		Response.Write "<div class=""table-responsive mt-3"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
 		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Tarih</th>"
@@ -103,7 +103,7 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td class=""text-center"">"
 							Response.Write siparisTarih
 							Response.Write "<hr class=""p-0 m-0"">"
-							Response.Write "<div class=""pointer"" onclick=""$('#ortaalan').load('/satinAlmaTalep/talep_liste.asp',{siparisNo:'" & siparisNo & "'})"">"
+							Response.Write "<div class=""pointer"" onclick=""$('#ortaalan').load('/satinAlmaTalep/talep_liste.asp',{siparisNo:'" & siparisNo & "',t1:'"&t1&"',t2:'"&t2&"'})"">"
 								Response.Write siparisNo
 							Response.Write "</div>"
 						Response.Write "</td>"

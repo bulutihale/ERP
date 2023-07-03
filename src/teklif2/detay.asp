@@ -545,7 +545,7 @@ Response.Write "<div class=""card-body row"">"
 				stokSart = ""
 			end if
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ürün Seçimi</div>" 
-				call formselectv2("urunSec","","","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-sart="""&stokSart&""" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
+				call formselectv2("urunSec","","","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-sart="""&stokSart&""" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" onchange=""stokRefCagir('" & cariID & "',$(this).val())""")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-5"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Ürünün Teklifte Görünecek  Adı</div>" 
@@ -567,12 +567,12 @@ Response.Write "<div class=""card-body row"">"
 
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Fiyat</div>" 
-				call forminput("firmamFiyat","","numara(this,true,false)","","para text-right p-0 ","","","")
+				call forminput("firmamFiyat","","numara(this,true,false)","","para text-right bold","","firmamFiyat","")
 			Response.Write "</div>"
 
 			Response.Write "<div class=""col-lg-1"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Para Birim</div>" 
-				call formselectv2("firmamParaBirim","","","","btn p-0","","",paraBirimDegerler,"")
+				call formselectv2("firmamParaBirim","","","","btn p-0 bold","","firmamParaBirim",paraBirimDegerler,"")
 			Response.Write "</div>"
 
 			Response.Write "<div class=""col-lg-1"">"
@@ -1592,5 +1592,32 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 
 
 });
+
+function stokRefCagir(cariID, stokID){
+
+
+		
+    $.ajax({
+        type:'POST',
+        url :'/teklif2/stok_ref_cagir.asp',
+        data :{'cariID':cariID,'stokID':stokID,
+                	},
+        beforeSend: function() {
+				$(this).closest('div').html("<img src='/arayuz/working2.gif' width='20' height='20'/>");
+          },
+				success: function(sonuc) {
+						//alert(sonuc);
+						sonucc = sonuc.split('|');
+						p_sonuc = sonucc[0];
+						m_sonuc = sonucc[1];
+				
+				swal('','Müşteriye ait fiyat bilgisi var <br><br>' + p_sonuc + ' ' + m_sonuc)
+				$('#firmamFiyat').val(p_sonuc);
+				$('#firmamParaBirim').val(m_sonuc).trigger('change');
+					
+			}
+    });
+    };
+
 </script>
 

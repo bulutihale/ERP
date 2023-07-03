@@ -20,19 +20,7 @@
 		Response.Write "<div class=""card-header h5"">Fitreler</div>"
 	
 		Response.Write "<div class=""card-body"">"
-			Response.Write "<form action=""/satinAlma/siparis_liste.asp"" method=""post"" id=""filtreForm"">"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-6"">"
-					Response.Write "<div class=""badge badge-secondary rounded-left"">Sipariş No</div>"
-					call forminput("siparisNo","","","Sipariş No","","autocompleteOFF","siparisNo","")
-				Response.Write "</div>"
-			Response.Write "</div>"
-			Response.Write "<div class=""row"">"
-				Response.Write "<div class=""col-12 mt-2"">"
-					Response.Write "<div class=""badge badge-secondary rounded-left"">Cari Seçimi</div>"
-					call formselectv2("cariID","","","","formSelect2 cariID","","cariID","","data-holderyazi=""Cari adı, cari kodu, vergi no"" data-jsondosya=""JSON_cariler"" data-miniput=""3""")
-				Response.Write "</div>"
-			Response.Write "</div>"
+			Response.Write "<form action=""/satinAlmaTalep/talep_liste.asp"" method=""post"" id=""filtreForm"">"
 			Response.Write "<div class=""row"">"
 				Response.Write "<div class=""col-12 mt-2"">"
 					Response.Write "<div class=""badge badge-secondary rounded-left"">Stok Seçimi</div>"

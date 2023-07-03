@@ -13,6 +13,8 @@
     cariID	 		=   Request.Form("cariSec")
 	cariUrunRef		=   Request.Form("cariUrunRef")
     cariUrunAd		=   Request.Form("cariUrunAd")
+    cariUrunFiyat   =   Request.Form("cariUrunFiyat")
+    paraBirim       =   Request.Form("paraBirim")
 	modulAd 		=   "Stok"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -41,6 +43,10 @@ if cariUrunRef = "" then
 	Response.End()
 end if
 
+if cariUrunFiyat <> "" then
+	call rqKontrol(paraBirim,"Para birimi seçiniz","")
+end if
+
 
 if yetkiKontrol > 2 then
 
@@ -58,6 +64,8 @@ end if
                 rs("cariID")			=	cariID
                 rs("cariUrunRef")		=	cariUrunRef
                 rs("cariUrunAd")		=	cariUrunAd
+                rs("cariUrunFiyat")     =   cariUrunFiyat
+                rs("paraBirim")         =   paraBirim
 				call logla("Yeni Ref Ekleniyor: " & cariUrunRef & "")
 				tMesaj	=	"Kayıt Tamamlandı"
 			else

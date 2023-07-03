@@ -47,9 +47,17 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row"">"
-							Response.Write "<div class=""col-6"">"
+							Response.Write "<div class=""col-2"">"
 								Response.Write "<label for="""" class=""fontkucuk2 font-weight-bold m-0 p-0"">Carideki Stok Ref:</label>"
 								call forminput("cariUrunRef",cariUrunRef,"","Ürünümüzün müşterideki stok kodu","","","cariUrunRef","")
+							Response.Write "</div>"
+							Response.Write "<div class=""col-2"">"
+								Response.Write "<label for="""" class=""fontkucuk2 font-weight-bold m-0 p-0"">Cari için fiyat:</label>"
+								call forminput("cariUrunFiyat",cariUrunFiyat,"","Fiyat","","","cariUrunFiyat","")
+							Response.Write "</div>"
+							Response.Write "<div class=""col-2"">"
+								Response.Write "<label for="""" class=""fontkucuk2 font-weight-bold m-0 p-0"">Para Birimi:</label>"
+		 		call formselectv2("paraBirim",paraBirim,"","","formSelect2 border","","paraBirim","","data-holderyazi=""Para Birimi"" data-jsondosya=""JSON_paraBirimler"" data-miniput=""0"" data-defdeger=""" & defDeger & """")
 							Response.Write "</div>"
 							Response.Write "<div class=""col-6"">"
 								Response.Write "<label for="""" class=""fontkucuk2 font-weight-bold m-0 p-0"">Carideki Stok Adı:</label>"
