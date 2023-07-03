@@ -52,7 +52,7 @@ Response.Write "<div class=""card-body"">"
 		
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, t1.mikBirim, t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih,"
-			sorgu = sorgu & " t4.cariAd, t2.siparisNo, t5.ad as talepEden, t1.acilanSipKalemID, t6.siparisNo as acilanSipNo"
+			sorgu = sorgu & " t4.cariAd, t2.siparisNo, t5.ad as talepEden, t1.acilanSipKalemID, t6.siparisNo as acilanSipNo, t1.SAtalepRed, t1.talepRedAciklama"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
@@ -77,6 +77,8 @@ Response.Write "<div class=""card-body"">"
 			
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
+					talepRedAciklama	=	rs("talepRedAciklama")
+					SAtalepRed			=	rs("SAtalepRed")
 					siparisKalemID		=	rs("siparisKalemID")
 					talepEden			=	rs("talepEden")
 					siparisNo			=	rs("siparisNo")
@@ -110,15 +112,29 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td><div>" & stokAd & "</div><div class=""fontkucuk2 ml-3 text-danger""><em>" & kalemNot & "</em></div></td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
 						Response.Write "<td class=""text-right""></td>"
-						Response.Write "<td class=""text-center bold"">"
-						if acilanSipKalemID = 0 then
-							Response.Write "<div class=""btn btn-warning border rounded"""
-							if yetkiKontrol >= 5 then 
+						Response.Write "<td class=""text-center bold"" colspan=""2"">"
+						if acilanSipKalemID = 0 AND SAtalepRed = False then
+						Response.Write "<div class=""row"">"
+							Response.Write "<div class=""col-6 btn btn-warning border rounded bold"""
+							if yetkiKontrol >= 5 then
 								Response.Write " onclick=""modalajaxfit('/satinAlma/siparis.asp?talep=evet&siparisKalemID="&siparisKalemID&"')"""
 							else
 								Response.Write " onclick=""swal('Bu alana giriş yetkiniz yok.','')"""
 							end if
 							Response.Write ">Sipariş Aç</div>"
+							Response.Write "<div class=""col-6 bg-danger btn rounded bold"""
+							if yetkiKontrol >= 5 then
+								Response.Write " onclick=""modalajaxfit('/satinAlmaTalep/talep_red.asp?siparisKalemID="&siparisKalemID&"&redDurum=ilkEkran')"""
+							else
+								Response.Write " onclick=""swal('Bu alana giriş yetkiniz yok.','')"""
+							end if
+								Response.Write ">RED"
+							Response.Write "</div>"
+						Response.Write "</div>"
+						elseif SAtalepRed = True then
+							Response.Write "<div class=""bg-info border rounded pointer"" onclick=""swal('','" & talepRedAciklama & "')"">"
+								Response.Write "--- RED --- <br>" & talepRedAciklama
+							Response.Write "</div>"
 						else
 							'Response.Write "<div class=""bg-success border rounded pointer"" onclick=""$('#ortaalan').load('/satinAlma/siparis_liste.asp',{siparisNo:'" & acilanSipNo & "'})"">"
 							Response.Write "<div class=""bg-success border rounded pointer"" onclick=""modalajaxfit('/satinAlma/siparis_liste.asp?siparisNo="&acilanSipNo&"')"">"

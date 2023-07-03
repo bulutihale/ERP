@@ -148,7 +148,7 @@ Response.Write "<hr>"
 						Response.Write "<td>" & depoAd & "</td>"
 						Response.Write "<td>" & cariAd & "</td>"
 						Response.Write "<td class=""text-center"">"
-						if depoKategori = "satis" then
+						if depoKategori = "satis" AND siparisKalemID <> "" then
 							Response.Write "<div class=""row container text-center"">"
 								Response.Write "<div class=""col-10"">"
 									call forminput("sevkMiktar","","","","bold text-center","autocompleteOFF","sevkMiktar_" & di & "","")
