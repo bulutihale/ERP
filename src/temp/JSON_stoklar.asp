@@ -15,6 +15,7 @@
 	arananKelime		=	TRIM(arananKelime)
 	arananKelime		=	replace(arananKelime,Chr(9),"")
 	sart				=	request.QueryString ("sart")
+	sartOzel			=	request.QueryString ("sartOzel")
 	if mamulGoster = "on" then
 		mDurum = "1"
 	else
@@ -51,6 +52,9 @@
 			sorgu = sorgu & " and firmaID = " & firmaID
 			if mDurum <> "0" OR ymDurum <> "0" OR hmDurum <> "0" then
 				sorgu = sorgu & " AND t1.stokTuru IN (" & mDurum & "," & ymDurum & "," & hmDurum & ")"
+			end if
+			if sartOzel <> "" then
+				sorgu = sorgu & " AND " & sartOzel
 			end if
 			sorgu = sorgu & " ORDER BY t1.stokAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
