@@ -165,19 +165,12 @@
 							toastr.options.positionClass = 'toast-bottom-right';
 							toastr.options.progressBar = true;
 							toastr.success('Ürün kayıt edildi.','İşlem Yapıldı!');
-
 $.get('/teklif2/detay/<%=ihaleID64%>', function(data){
-											var $data = $(data);
-											$('#rakiplerTablo').html($data.find('#rakiplerTablo').html());
+	var $data = $(data);
 											$('#urunlerTablo').html($data.find('#urunlerTablo').html());
 											$('#urunlerInput').html($data.find('#urunlerInput').html());
-											$('#urunler2Tablo').html($data.find('#urunler2Tablo').html());
-											$('#sozlesmeTablo').html($data.find('#sozlesmeTablo').html());
-											$('#topluAlimTablo').html($data.find('#topluAlimTablo').html());
-											$('#siparisInput').html($data.find('#siparisInput').html());
-											$('#siparisTablo').html($data.find('#siparisTablo').html());
-											$('#teslimatTablo').html($data.find('#teslimatTablo').html());
-											$('#teslimatInput').html($data.find('#teslimatInput').html());
+											var sonSira = <%=siraNo+1%>
+											$('#siraNo').val(sonSira);
 								});//tablolar güncellendi
 </script>
 <%

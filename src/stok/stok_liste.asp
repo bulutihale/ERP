@@ -230,10 +230,17 @@
 										'# stok düzenle
 											Response.Write "<a title=""" & translate("Ürün Bilgilerini Düzenle","","") & """"
 											Response.Write " onClick=""modalajax('/stok/stok_yeni.asp?gorevID=" & stokID64 & "')"">"
-											Response.Write "<i class=""icon page-white-edit parmak"
+											Response.Write "<i class=""icon page-white-edit pointer"
 											Response.Write """></i>"
 											Response.Write "</a>"
 										'# stok düzenle
+										'# foto ekle
+											Response.Write "<a title=""Ürün görselleri"" class=""ml-2"""
+											Response.Write " onClick=""modalajax('/stok/stok_gorsel.asp?gorevID=" & stokID64 & "')"">"
+											Response.Write "<i class=""icon images pointer"
+											Response.Write """></i>"
+											Response.Write "</a>"
+										'# foto ekle
 									end if
 									Response.Write "</td>"
 								Response.Write "</tr>"
@@ -259,29 +266,6 @@
 		call yetkisizGiris(hata,"","")
 	end if
 '####### SONUÇ TABLOSU
-
-
-
-
-
-            ' sorgu = "SELECT"
-			' sorgu = sorgu & " t1.stokID, stok.FN_stokSay(" & firmaID & ", t1.stokID) as stokMiktar, t1.stokKodu, t1.stokAd, t1.stokBarcode," 
-			' sorgu = sorgu & " CASE WHEN t1.silindi = 1 THEN '<span class=""text-danger"">PASİF</span>' ELSE 'AKTİF' END as durum, stok.FN_anaBirimADBul(t1.stokID,'kAd') as urunAnaBirim,"
-			' sorgu = sorgu & " CASE WHEN t1.stokTuru = '1' THEN 'Mamul' WHEN t1.stokTuru = '2' THEN 'Yarı Mamul' WHEN t1.stokTuru = '3' THEN 'Bileşen' WHEN t1.stokTuru = '4' THEN 'Hammadde' END as stokTuru"
-			' sorgu = sorgu & " FROM stok.stok t1" 
-			' sorgu = sorgu & " WHERE firmaID = " & firmaID
-			' if durum = "tumListe" then
-			' else	
-			' 	sorgu = sorgu & " AND t1.silindi = 0"
-			' end if
-			' if durum2 = "" AND  aramaad = "" then
-			' 	sorgu = sorgu & " AND stok.FN_stokSay(" & firmaID & ", t1.stokID) > 0"
-			' end if		
-			' if aramaad = "" then
-			' else
-			' 	sorgu = sorgu & " and (t1.stokAd like N'%" & aramaad & "%' OR t1.stokBarcode like N'%" & aramaad & "%' OR t1.stokKodu like N'%" & aramaad & "%')"
-			' end if
-			' sorgu = sorgu & " order by t1.stokKodu, t1.stokAd ASC"
 
 
 

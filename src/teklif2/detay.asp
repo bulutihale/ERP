@@ -5,6 +5,7 @@
 	arama					=	Request.Form("arama")
 	id64					=	Session("sayfa5")
 	gelenadres6				=	Session("sayfa6")
+	
 	if gelenadres6 		= "" then
 		sipVerenCari 	= 0
 		faturaCari		= 0
@@ -536,7 +537,7 @@ Response.Write "<div class=""card-body row"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-lg-2"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Sıra Numarası</div>" 
-					call forminput("siraNo",siraNo,"numara(this,false,false)","Sıra No","","autocompleteOFF","siraNo","")
+					call forminput("siraNo",siraNo,"numara(this,false,false)","Sıra No","bold text-center","autocompleteOFF","siraNo","")
 				Response.Write "</div>"
 			Response.Write "<div class=""col-lg-5"">"
 			if ihaleTipi = "proforma" then
@@ -629,6 +630,7 @@ Response.Write "<div class=""card-body row"">"
 			&" LEFT JOIN teklif.siparisKalem t6 ON t6.iuID = iu.ID"_
 			&" WHERE i.firmaID = " & firmaID & " and ihaleID = " & id & " order by grupNo ASC, siraNo ASC"
 			rs.open sorgu,sbsv5,1,3
+				sonSiraKontrol = 0
 			for i = 1 to rs.recordcount
 				firmaID			=	rs("firmaID")
 				stoklarID		=	rs("stoklarID")
@@ -636,6 +638,9 @@ Response.Write "<div class=""card-body row"">"
 				stoklarAD		=	rs("stoklarAD")
 				ihaleUrunID		=	rs("ihaleUrunID")
 				siraNo			=	rs("siraNo")
+				if i = rs.recordcount then
+					sonSiraKontrol	=	siraNo
+				end if
 				urunAd			=	rs("urunAd")
 				fiyatOnay		=	rs("fiyatOnay")
 				iskontoOran		=	rs("iskontoOran")
@@ -690,7 +695,7 @@ Response.Write "<div class=""card-body row"">"
 			else
 				Response.Write " class=""fa fa-exclamation-triangle text-red btn"""
 			end if
-		if fiyatOnay = False then
+		if fiyatOnay = False OR isnull(fiyatOnay) then
 			Response.Write " onClick=""modalajax('/teklif2/detay_modal_kalemNot.asp?ihaleID=" & rs("ihaleID") & "&id=" & rs("ihaleUrunID") &  "');""></i>"
 		else
 			Response.Write " onClick=""swal('fiyat onaylanmış kalemde değişiklik yapılamaz','','error')""></i>"
@@ -1483,6 +1488,8 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 															$('.def-kapali').hide('slow');
 												});//tablolar güncellendi
 												
+												sonSiraBul(<%=sonSiraKontrol%>);
+
 										}
 					});//ajax işlemi sonu
 					
@@ -1503,7 +1510,20 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 
 <script>
 
+		//son sıra numarasını al yeni ürün için sıra no hesapla
+			function sonSiraBul(sonSiraKontrol){
+				var sonSira = sonSiraKontrol
+				if(sonSira == 0){sonSira = 1}else{sonSira++}
+					$('#siraNo').val(sonSira);
+			}
+		//son sıra numarasını al yeni ürün için sıra no hesapla
+
 	$(document).ready(function() {
+
+				sonSiraBul(<%=sonSiraKontrol%>)
+
+
+
 
 		$(document).on('change','#urunSec',function() {
 			if($('#urunAd').val() == ""){
@@ -1610,11 +1630,11 @@ function stokRefCagir(cariID, stokID){
 						sonucc = sonuc.split('|');
 						p_sonuc = sonucc[0];
 						m_sonuc = sonucc[1];
-				
-				swal('','Müşteriye ait fiyat bilgisi var <br><br>' + p_sonuc + ' ' + m_sonuc)
-				$('#firmamFiyat').val(p_sonuc);
-				$('#firmamParaBirim').val(m_sonuc).trigger('change');
-					
+				if(p_sonuc.length > 0){
+						swal('','Müşteriye ait fiyat bilgisi var <br><br>' + p_sonuc + ' ' + m_sonuc)
+						$('#firmamFiyat').val(p_sonuc);
+						$('#firmamParaBirim').val(m_sonuc).trigger('change');
+					}
 			}
     });
     };
