@@ -12,6 +12,25 @@ $(document).ready(function() {
 		//"html: true" popover içindeki html kodlarının çalışması için 
 		//"trigger:'focus'" popover dışında bir yere tıklandığında kapanması için
 	$('[data-toggle="popover"]').popover({html:true,trigger: 'focus',container: 'body'});
+
+
+	//modal içinde mouseenter ile popover görüntülemek için
+			// Document nesnesine mouseenter olayını bağla ve hedef öğeyi belirle
+			$(document).on("mouseenter", "[data-toggle='popoverModal']", function() {
+				// Popover içeriğini göster
+				$(this).popover({
+					html: true,
+					trigger: "focus",
+					container: "body",
+				}).popover("show");
+			});
+			
+			// Mouseleave olayı olduğunda popover'ı gizle
+			$(document).on("mouseleave", "[data-toggle='popoverModal']", function() {
+				$(this).popover("hide");
+			});
+	//modal içinde mouseenter ile popover görüntülemek için
+	
 	
 	
 //popover içine tıklanabilir link koyulduğunda aşağıdakinin kullanılması gerekli --data-toggle="popoverH"-- kullan

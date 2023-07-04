@@ -32,6 +32,10 @@
 	.chck20{width: 20px;    height: 20px;}
 /*checkbox boyutu için ayarlama*/
 
+.popover{
+    max-width: none !important;
+}
+
 
 /*cursor listesi*/
 	.alias {cursor: alias;}

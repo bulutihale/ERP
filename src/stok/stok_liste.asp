@@ -88,7 +88,7 @@
 							Response.Write "</div>"
 							Response.Write "<div class=""col-lg-1 col-sm-1 my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 							if yetkiKontrol >= 5 then
-								Response.Write "<div class=""col-lg-9 col-sm-3 my-1 text-right"">"
+								Response.Write "<div class=""col-lg-9 my-1 text-right"">"
 									if stokSifirGoster = "on" then
 										Response.Write "<button type=""button"" class=""btn btn-info mr-2"" onClick=""$('#stokSifirGoster').val('off');$('#listebuttonform').submit();"">" & translate("Stok Sıfır Olanları Gizle","","") & "</button>"
 									else
@@ -177,12 +177,11 @@
 							Response.Write "<th scope=""col"">" & translate("Ürün Kodu","","") & "</th>"
 							Response.Write "<th scope=""col"">" & translate("Ürün Adı","","") & "</th>"
 							Response.Write "<th scope=""col"">" & translate("Barkod","","") & "</th>"
-							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Stok Miktarı","","")
+							Response.Write "<th scope=""col"" class=""text-center"">" & translate("Stok Miktarı","","")
 							Response.Write "</th>"
-							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Stok Türü","","") & "</th>"
-							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Durum","","")
-							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Entegrasyon","","")
-							Response.Write "</th>"
+							Response.Write "<th scope=""col"" class=""text-center"">" & translate("Stok Türü","","") & "</th>"
+							Response.Write "<th scope=""col"" class=""text-center"">" & translate("Durum","","") & "</th>"
+							Response.Write "<th scope=""col"" class=""text-center"">Depolar</th>"
 							if yetkiKontrol >= 5 then
 								Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 							end if
@@ -217,16 +216,17 @@
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">" & silindiArr(durum) &  "</td>"
 									Response.Write "<td class=""text-right"">"
-									Response.Write truefalse(manuelKayit,"yokvar")
+											if stokMiktar > 0 then
+												Response.Write "<div title=""" & translate("Depolara göre ürün sayıları","","") & """ class=""badge badge-pill badge-warning pointer mr-2"""
+													Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
+													Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+												Response.Write "</div>"
+											end if
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">"
-									if stokMiktar > 0 then
-										Response.Write "<div title=""" & translate("Depolara göre ürün sayıları","","") & """ class=""badge badge-pill badge-warning pointer mr-2"""
-											Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-											Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
-										Response.Write "</div>"
-									end if
+									Response.Write "<div class=""d-flex justify-content-between"">"
 									if yetkiKontrol >= 5 then
+									Response.Write "<div>"
 										'# stok düzenle
 											Response.Write "<a title=""" & translate("Ürün Bilgilerini Düzenle","","") & """"
 											Response.Write " onClick=""modalajax('/stok/stok_yeni.asp?gorevID=" & stokID64 & "')"">"
@@ -234,14 +234,18 @@
 											Response.Write """></i>"
 											Response.Write "</a>"
 										'# stok düzenle
+									Response.Write "</div>"
+									end if
+									Response.Write "<div>"
 										'# foto ekle
 											Response.Write "<a title=""Ürün görselleri"" class=""ml-2"""
-											Response.Write " onClick=""modalajax('/stok/stok_gorsel.asp?gorevID=" & stokID64 & "')"">"
+											Response.Write " onClick=""modalajax('/dosya/upload_liste.asp?gorevID=" & stokID & "&gorev=urunGorsel')"">"
 											Response.Write "<i class=""icon images pointer"
 											Response.Write """></i>"
 											Response.Write "</a>"
 										'# foto ekle
-									end if
+									Response.Write "</div>"
+									Response.Write "</div>"
 									Response.Write "</td>"
 								Response.Write "</tr>"
 								Response.Flush()

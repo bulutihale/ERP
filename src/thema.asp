@@ -880,7 +880,8 @@ Response.Write "<link href=""/template/select2.css"" rel=""stylesheet"">"
 Response.Write "<link href=""/template/select2-bootstrap4.css"" rel=""stylesheet"">"
 Response.Write "<link href=""/template/swal/dist/sweetalert2.min.css"" rel=""stylesheet"" />"
 Response.Write "<scr" & "ipt type=""text/javascript"" src=""/template/swal/dist/sweetalert2.min.js""></scr" & "ipt>"
-
+Response.Write "<link href=""/template/dropzone/dropzone.css"" rel=""stylesheet"" />"
+Response.Write "<scr" & "ipt type=""text/javascript"" src=""/template/dropzone/dropzone.js""></scr" & "ipt>"
 Response.Write "<div class=""modal fade"" id=""modal-dialog"" tabindex=""-1"" role=""dialog"" aria-labelledby=""modalbaslik"" aria-hidden=""true""><div class=""modal-dialog modal-lg""><div class=""modal-content"" style=""background:whitesmoke;""><div class=""modal-body"" id=""modalform""></div></div></div></div>"
 Response.Write "<div class=""modal fade"" id=""modal-dialogfit"" role=""dialog"" aria-labelledby=""modalbaslik"" aria-hidden=""true""><div class=""modal-dialog modal-xl""><div class=""modal-content"" style=""background:whitesmoke;""><div class=""modal-body""></div></div></div></div>"
 
