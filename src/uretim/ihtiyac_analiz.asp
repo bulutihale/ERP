@@ -31,9 +31,11 @@ yetkiKontrol = yetkibul(modulAd)
 		rs.close
 
 	Response.Write "<div class=""bold"">" & stokKodu & " - " & stokAd & "</div>"
-	Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
+	Response.Write "<div class=""col-12 text-right"">"
+	Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer"""
 		Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
 		Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+	Response.Write "</div>"
 	Response.Write "</div>"
 
 
