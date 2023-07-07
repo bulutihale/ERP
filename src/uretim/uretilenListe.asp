@@ -18,10 +18,13 @@
 
 	if listeTur = "uretimPlan" then
 		sayfaBaslik	=	"Üretim Listesi"
+		sayfaLink	=	"<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/uretimPlan"">Üretim Listesi</a></span></div>"
 	elseif listeTur = "kesimPlan" then
 		sayfaBaslik	=	"Kesim İşleri Listesi"
+		sayfaLink	=	"<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/kesimPlan"">Kesim Listesi</a></span></div>"
 	elseif listeTur = "transfer" then
 		sayfaBaslik	=	"Depolararası transfer edilecek ürünler listesi"
+		sayfaLink	=	"<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/transfer"">Transfer Listesi</a></span></div>"
 	end if
     modulAd 		=   "Üretim"
 	
@@ -45,9 +48,7 @@ call logla("Üretim İşleri Listelendi")
 Response.Write "<div class=""card rounded-top"">"
 Response.Write "<div class=""card-header h5"">"
 Response.Write "<div class=""row"">"
-	Response.Write "<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/uretimPlan"">Üretim Listesi</a></span></div>" 
-	Response.Write "<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/kesimPlan"">Kesim Listesi</a></span></div>"
-	Response.Write "<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/transfer"">Transfer Listesi</a></span></div>"
+	Response.Write sayfaLink
 Response.Write "</div>"
 Response.Write "</div>"
 
