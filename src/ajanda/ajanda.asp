@@ -9,6 +9,10 @@ silAjandaID				=	Request.QueryString("silAjandaID")
 yer						=	Request.QueryString("yer")
 qisTur					=	Request.QueryString("isTur")
 receteID				=	Request.QueryString("receteID")
+sorguIsTur				=	Session("sayfa5")
+if sorguIsTur = "" then
+	sorguIsTur = "uretimPlan"
+end if
 
 if silAjandaID = "" then
 	silAjandaID = 0
@@ -162,7 +166,7 @@ Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein card"">"
 				sorgu = sorgu & " FROM portal.ajanda"
 				sorgu = sorgu & " WHERE silindi = 0"
 				'sorgu = sorgu & " AND kid = " & kid & ""
-				sorgu = sorgu & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & zi
+				sorgu = sorgu & " AND hangiYil = " & hangiYil & "  AND  hangiAy = " & hangiAy & " AND hangiGun = " & zi & " AND isTur = '" & sorguIsTur & "'"
 				rs.open sorgu, sbsv5,1,3
 				if rs.recordcount > 0 then
 					for di = 1 to rs.recordcount
