@@ -116,15 +116,6 @@ Response.Write "<div class=""card-body"">"
 					receteAdimID64		=	receteAdimID
 					receteAdimID64		=	base64_encode_tr(receteAdimID64)
 
-			' sorgu = "SELECT (stok.FN_receteMiktarBul("&ajandaID&") * stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar,"
-			' sorgu = sorgu & " stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar,"
-			' sorgu = sorgu & " stok.FN_anaBirimADBul("&stokID&",'kAd') as anaBirim"
-			' rs1.open sorgu, sbsv5,1,3
-			' 	toplamMiktar	=	rs1("toplamMiktar")
-			' 	transferMiktar	=	rs1("transferMiktar")
-			' 	anaBirim		=	rs1("anaBirim")
-			' rs1.close
-				
 
 
 					Response.Write "<tr id=""tr_"&ajandaID&""" class="""&trClass&""">"
@@ -135,12 +126,22 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td>" & stokKodu & " - " & stokAd & "</td>"
 						'Response.Write "<td><span class=""bold"">" & transferMiktar & " / " & toplamMiktar & "</span> " & anaBirim & "</td>"
 						Response.Write "<td class=""text-center"">"
+						Response.Write "<div class=""container"">"
+						Response.Write "<div class=""row"">"
 							Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
 								Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
 								Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
 							Response.Write "</div>"
 							'Response.Write "</td>"
 						'Response.Write "<td class=""text-right"">"
+
+							if listeTur = "transfer" then
+								Response.Write "<div title=""İhtiyaç analizi"" class=""badge badge-pill badge-secondary pointer mr-2"""
+									Response.Write " onClick=""modalajaxfit('/uretim/ihtiyac_analiz.asp?gorevID=" & stokID64 & "');"">"
+									Response.Write "<i class=""icon book""></i>"
+								Response.Write "</div>"
+							end if
+
 										Response.Write "<div class=""badge badge-pill badge-success pointer mr-2"""
 											if listeTur = "transfer" then
 												if tamamlandi = 0 then
@@ -152,6 +153,8 @@ Response.Write "<div class=""card-body"">"
 												Response.Write "<div onclick=""window.location.href = '/uretim/uretim/"&listeTur&"++"&ajandaID64&"'"" class=""badge badge-pill badge-success pointer mr-2"""
 											end if
 										Response.Write "><i class=""mdi mdi-arrow-right-bold""></i></div>"
+							Response.Write "</div>"
+							Response.Write "</div>"
 						Response.Write "</td>"
 					Response.Write "</tr>"
 

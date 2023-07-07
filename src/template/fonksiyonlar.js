@@ -695,7 +695,7 @@ function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, upd
 			updateDIV	:	update edilecek div in ID değeri
 			updateURL	:	update edilecek DIV in bulunduğu URL
 			postDeger	:	güncellenecek DIV için post edilmesi gereken parametreler (örnek kullanım: "cariID_8**stokID_954")
-			
+			baslik		:	swal uyarısında görüntülenecek metin
 		*/
 
 		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
