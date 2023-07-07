@@ -108,13 +108,14 @@
 					islemDurum:islemDurum,
 					uretilenMiktar:uretilenMiktar,
 					teminDepoID:teminDepoID},
-					function(){
-				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *');
-				//$('#btnDIV').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV > *');
-				$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
-				$('#btnDIV').removeClass('d-none');
-				$('#btnDIV2').removeClass('d-none');
-				});
+						function(){
+							$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *');
+							//$('#btnDIV').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV > *');
+							$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
+							$('#btnDIV').removeClass('d-none');
+							$('#btnDIV2').removeClass('d-none');
+							modalkapat();
+						});
 			}, //confirm buton yapılanlar
 			function(dismiss) {
 			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'

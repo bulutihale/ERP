@@ -180,7 +180,8 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td class=""text-center"">"
 							Response.Write "<div class=""btn btn-sm btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?stokID="&stokID&"&siparisKalemID="&siparisKalemID&"')"">detay</div>"
 							If not isdate(planTarih) Then
-								Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
+								'Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
+								Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/recete/recete_sec.asp?cariID=" & cariID & "&stokID="&stokID&"&yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
 							Else
 								Response.Write "<div class=""btn btn-sm btn-success border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&sorgulananTarih=" & planTarih & "')"">" & planTarih & "</div>"
 							End if

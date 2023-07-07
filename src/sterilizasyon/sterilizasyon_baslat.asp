@@ -7,6 +7,7 @@
     kid					=	kidbul()
     urunTip				=	Request.Form("urunTip")
 	mamulLot			=	Request.Form("lot")
+	mamulLotSKT			=	Request.Form("lotSKT")
 	mamulMiktar			=	Request.Form("mamulMiktar")
 	koliIndexID			=	Request.Form("koliIndexID")
 	sarfDepoID			=	Request.Form("sarfDepoID")
@@ -140,12 +141,12 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("girisTarih")		=	now()
 				rs("stokHareketTuru")	=	"C"
 				rs("lot")				=	mamulLot
+				rs("lotSKT")			=	tarihsql(mamulLotSKT)
 				rs("depoID")			=	mamulCikisDepoID
 				rs("aciklama")			=	"Transfer"
 				rs("siparisKalemID")	=	siparisKalemID
 				rs("stokHareketTipi")	=	"T"
 				rs("prodHareketID")		=	null
-				rs("lotSKT")			=	null
 				rs("ajandaID")			=	ajandaID
 			rs.update
 		rs.close
@@ -170,7 +171,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("siparisKalemID")	=	siparisKalemID
 				rs("stokHareketTipi")	=	"T"
 				rs("prodHareketID")		=	null
-				rs("lotSKT")			=	null
+				rs("lotSKT")			=	tarihsql(mamulLotSKT)
 				rs("ajandaID")			=	ajandaID
 				rs("koliIndexID")		=	koliIndexID
 				rs("koliSayi")		=	ihtiyacKoliSayi

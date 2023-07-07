@@ -8,23 +8,64 @@ if kid = 2 then
 	hammaddeGoster="on"
 end if
 if kid = 5 then
+	mamulGoster="off"
 	stokSifirGoster="on"
 	stokSilinmislerGoster="on"
 end if
 if kid = 27 then
-	stokSilinmislerGoster="off"
+	stokSilinmislerGoster="on"
 	stokSifirGoster="on"
 end if
 if kid = 28 then
 	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
+	mamulGoster="off"
 end if
 if kid = 29 then
-	stokSifirGoster="off"
+	yariMamulGoster="off"
+	hammaddeGoster="off"
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+end if
+if kid = 30 then
+	yariMamulGoster="on"
+	hammaddeGoster="on"
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+	mamulGoster="on"
+end if
+if kid = 31 then
+	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
 end if
 if kid = 32 then
-	stokSifirGoster="off"
+	mamulGoster="off"
+	yariMamulGoster="off"
+	hammaddeGoster="off"
+	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
+end if
+if kid = 33 then
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+end if
+if kid = 34 then
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+end if
+if kid = 35 then
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+end if
+if kid = 37 then
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+end if
+if kid = 39 then
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+	hammaddeGoster="off"
+	yariMamulGoster="off"
+	mamulGoster="off"
 end if
 %>

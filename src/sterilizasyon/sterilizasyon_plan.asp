@@ -8,6 +8,7 @@
     koliIndexID			=	Request.Form("koliIndexID")
 	stokID				=	Request.Form("stokID")
 	lot					=	Request.Form("lot")
+	lotSKT				=	Request.Form("lotSKT")
 	mamulMiktar			=	Request.Form("miktar")
 	ajandaID			=	Request.Form("ajandaID")
 	mamulCikisDepoID	=	Request.Form("mamulCikisDepoID")
@@ -115,12 +116,12 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 					Response.Write "<div class=""row bold bg-light mt-2 justify-content-around"">"
 						Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4"">"
 							Response.Write "<div id="""" class=""row h-100"">"
-								Response.Write "<div class=""btn h3 bold text-center bg-success rounded col-lg-12 col-sm-12 pointer"" onclick=""urunHareket('steril','" & lot & "'," & koliIndexID & "," & sarfDepoID & ", " & ajandaID & ", " & mamulCikisDepoID & ")"">Kolileri Oluştur<br>Sterilizasyon Bekle</div>"
+								Response.Write "<div class=""btn h3 bold text-center bg-success rounded col-lg-12 col-sm-12 pointer"" onclick=""urunHareket('steril','" & lot & "'," & koliIndexID & "," & sarfDepoID & ", " & ajandaID & ", " & mamulCikisDepoID & ", '" & lotSKT & "')"">Kolileri Oluştur<br>Sterilizasyon Bekle</div>"
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""col-lg-4 col-md-4 col-sm-4"">"
 							Response.Write "<div id="""" class=""row h-100"">"
-								Response.Write "<div class=""btn h3 bold text-center bg-warning rounded col-lg-12 col-sm-12 pointer"" onclick=""urunHareket('nonSteril','" & lot & "'," & koliIndexID & "," & sarfDepoID & ", " & ajandaID & ", " & mamulCikisDepoID & ")"">Kolileri Oluştur<br>Non-Steril Ürün</div>"
+								Response.Write "<div class=""btn h3 bold text-center bg-warning rounded col-lg-12 col-sm-12 pointer"" onclick=""urunHareket('nonSteril','" & lot & "'," & koliIndexID & "," & sarfDepoID & ", " & ajandaID & ", " & mamulCikisDepoID & ", '" & lotSKT & "')"">Kolileri Oluştur<br>Non-Steril Ürün</div>"
 							Response.Write "</div>"
 						Response.Write "</div>"
 					Response.Write "</div>"
@@ -159,7 +160,7 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 		$('#ihtiyacBantMt').val(hesapSonucA);
 	}
 
-	function urunHareket(urunTip, lot, koliIndexID, sarfDepoID, ajandaID, mamulCikisDepoID){
+	function urunHareket(urunTip, lot, koliIndexID, sarfDepoID, ajandaID, mamulCikisDepoID, lotSKT){
 		var mamulMiktar			=	$('#inpMamulMiktar').val();
 		var ihtiyacKoliSayi		=	$('#ihtiyacKoliSayi').val();
 		var ihtiyacBantMt		=	$('#ihtiyacBantMt').val();
@@ -202,6 +203,7 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 			$.post("/sterilizasyon/sterilizasyon_baslat.asp", {
 				urunTip:urunTip,
 				lot:lot,
+				lotSKT:lotSKT,
 				mamulMiktar:mamulMiktar,
 				koliIndexID:koliIndexID,
 				sarfDepoID:sarfDepoID,

@@ -7,6 +7,7 @@
     kid					=	kidbul()
     stokID				=	Request.QueryString("stokID")
 	lot					=	Request.QueryString("lot")
+	lotSKT				=	Request.QueryString("lotSKT")
 	miktar				=	Request.QueryString("miktar")
 	ajandaID			=	Request.QueryString("ajandaID")
 	mamulCikisDepoID	=	Request.QueryString("mamulCikisDepoID")
@@ -58,7 +59,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<td>" & hamKoliAd & "</td>"
 				Response.Write "<td>" & bantAd & "</td>"
 				Response.Write "<td class=""text-center"">" & koliUrunMiktar & " " & miktarBirim & " </td>"
-				Response.Write "<td><div class=""btn btn-sm btn-info"" onclick=""sterilizasyonDIVyukle(" & koliIndexID & ",'" & lot & "'," & miktar & "," & ajandaID & ", " & mamulCikisDepoID & "); modalkapat();"">SEÇ</div></td>"
+				Response.Write "<td><div class=""btn btn-sm btn-info"" onclick=""sterilizasyonDIVyukle(" & koliIndexID & ",'" & lot & "'," & miktar & "," & ajandaID & ", " & mamulCikisDepoID & ", '" & lotSKT & "'); modalkapat();"">SEÇ</div></td>"
 			Response.Write "</tr>"
 			Response.Flush()
 		rs.movenext
@@ -83,11 +84,12 @@ yetkiKontrol = yetkibul(modulAd)
 
 <script>
 
-	function sterilizasyonDIVyukle(koliIndexID, lot, miktar, ajandaID, mamulCikisDepoID) {
+	function sterilizasyonDIVyukle(koliIndexID, lot, miktar, ajandaID, mamulCikisDepoID, lotSKT) {
 		working('sterilizasyonDIV2',20,20);
 		$('#sterilizasyonDIV2').load("/sterilizasyon/sterilizasyon_plan.asp", {
 			koliIndexID:koliIndexID,
 			lot:lot,
+			lotSKT:lotSKT,
 			miktar:miktar,
 			ajandaID:ajandaID,
 			mamulCikisDepoID:mamulCikisDepoID

@@ -59,16 +59,18 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "<div id=""listeTablo"" class=""table-responsive mt-3"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
 		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Tarih</th>"
+		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Cari</th>"
 		Response.Write "<th class=""col-2"" scope=""col"">Üretim Başlangıcı</th>"
 		Response.Write "<th class=""col-2"" scope=""col"">Üretim Bitişi</th>"
 		Response.Write "<th class=""col-4"" scope=""col"">Ürün Adı</th>"
-		Response.Write "<th>Üretilen / Talep</th>"
+		'Response.Write "<th>Üretilen / Talep</th>"
+		Response.Write "<th class="""" scope=""col""></th>"
 		Response.Write "</tr></thead><tbody>"
 
 		
             sorgu = "SELECT"
 			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "
-			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID"
+			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID, portal.FN_sipariscariAdbul("&firmaID&", t1.id) as siparisCariAd"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			'sorgu = sorgu & " LEFT JOIN recete.recete t3 ON t1.stokID = t3.stokID"
@@ -96,6 +98,7 @@ Response.Write "<div class=""card-body"">"
 					stokID64			=	base64_encode_tr(stokID64)
 					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
+					siparisCariAd		=	rs("siparisCariAd")
 					planTarih			=	tarihtr(rs("planTarih"))
 					baslangicZaman		=	rs("baslangicZaman")
 					bitisZaman			=	rs("bitisZaman")
@@ -112,23 +115,24 @@ Response.Write "<div class=""card-body"">"
 					receteAdimID64		=	receteAdimID
 					receteAdimID64		=	base64_encode_tr(receteAdimID64)
 
-			sorgu = "SELECT (stok.FN_receteMiktarBul("&ajandaID&") * stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar,"
-			sorgu = sorgu & " stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar,"
-			sorgu = sorgu & " stok.FN_anaBirimADBul("&stokID&",'kAd') as anaBirim"
-			rs1.open sorgu, sbsv5,1,3
-				toplamMiktar	=	rs1("toplamMiktar")
-				transferMiktar	=	rs1("transferMiktar")
-				anaBirim		=	rs1("anaBirim")
-			rs1.close
+			' sorgu = "SELECT (stok.FN_receteMiktarBul("&ajandaID&") * stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar,"
+			' sorgu = sorgu & " stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar,"
+			' sorgu = sorgu & " stok.FN_anaBirimADBul("&stokID&",'kAd') as anaBirim"
+			' rs1.open sorgu, sbsv5,1,3
+			' 	toplamMiktar	=	rs1("toplamMiktar")
+			' 	transferMiktar	=	rs1("transferMiktar")
+			' 	anaBirim		=	rs1("anaBirim")
+			' rs1.close
 				
 
 
 					Response.Write "<tr id=""tr_"&ajandaID&""" class="""&trClass&""">"
 						Response.Write "<td class=""text-center"">" & planTarih & "</td>"
+						Response.Write "<td class=""text-left"">" & siparisCariAd & "</td>"
 						Response.Write "<td class=""text-center"">" & baslangicZaman & "</td>"
 						Response.Write "<td class=""text-center"">" & bitisZaman & "</td>"
 						Response.Write "<td>" & stokKodu & " - " & stokAd & "</td>"
-						Response.Write "<td><span class=""bold"">" & transferMiktar & " / " & toplamMiktar & "</span> " & anaBirim & "</td>"
+						'Response.Write "<td><span class=""bold"">" & transferMiktar & " / " & toplamMiktar & "</span> " & anaBirim & "</td>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
 								Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"

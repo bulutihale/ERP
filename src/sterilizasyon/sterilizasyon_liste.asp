@@ -64,14 +64,14 @@ yetkiKontrol = yetkibul(modulAd)
 		
 			sorgu = "SELECT " 
 			sorgu = sorgu & " stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) as miktar,"
-			sorgu = sorgu & " t3.stokKodu, t1.stokID, t3.stokAd, t1.lot, stok.FN_anaBirimADBul(t1.stokID, 'kAd') as kisaBirim,"
+			sorgu = sorgu & " t3.stokKodu, t1.stokID, t3.stokAd, t1.lot, t1.lotSKT, stok.FN_anaBirimADBul(t1.stokID, 'kAd') as kisaBirim,"
 			sorgu = sorgu & " portal.FN_sipariscariAdbul("&firmaID&", t1.ajandaID) as siparisCariAd, ISNULL(t1.ajandaID,0) as ajandaID, t2.id as mamulCikisDepoID"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " WHERE t2.depoKategori = '"&depoKategori&"' AND t1.silindi = 0"
 			sorgu = sorgu & " AND stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) > 0"
-			sorgu = sorgu & " GROUP BY t1.lot,t3.stokAd,t1.stokID, t3.stokKodu, t1.ajandaID, t2.id"
+			sorgu = sorgu & " GROUP BY t1.lot, t1.lotSKT, t3.stokAd,t1.stokID, t3.stokKodu, t1.ajandaID, t2.id"
 			rs.open sorgu, sbsv5, 1, 3
 
 		Response.Write "<div class=""card-deck"">"
@@ -91,6 +91,7 @@ yetkiKontrol = yetkibul(modulAd)
 					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
 					lot					=	rs("lot")
+					lotSKT				=	rs("lotSKT")
 					miktar				=	rs("miktar")
 					kisaBirim			=	rs("kisaBirim")
 					ajandaID			=	rs("ajandaID")
@@ -101,7 +102,7 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<div class=""col-3"">" & stokKodu & " " & stokAd & "</div>"
 						Response.Write "<div class=""col-3"">" & siparisCariAd & "</div>"
 						Response.Write "<div class=""col-2 text-right"">" & miktar & " " & kisaBirim & "</div>"
-						Response.Write "<div class=""col-1 text-center"" onclick=""modalajaxfit('/sterilizasyon/koli_sec.asp?stokID="&stokID&"&lot="&lot&"&miktar="&miktar&"&ajandaID="&ajandaID&"&mamulCikisDepoID="&mamulCikisDepoID&"')""><i class=""icon server-go""></i></div>"
+						Response.Write "<div class=""col-1 text-center"" onclick=""modalajaxfit('/sterilizasyon/koli_sec.asp?lotSKT="&lotSKT&"&stokID="&stokID&"&lot="&lot&"&miktar="&miktar&"&ajandaID="&ajandaID&"&mamulCikisDepoID="&mamulCikisDepoID&"')""><i class=""icon server-go""></i></div>"
 					Response.Write "</div>"
 					rs.movenext
 					loop

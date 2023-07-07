@@ -7,15 +7,16 @@
 	
 	'##### request 
 	'##### request
-	kid					=	kidbul()
-	hangiYil			=	Request.Form("hangiYil")
-	hangiAy				=	Request.Form("hangiAy")
-	hangiGun			=	Request.Form("hangiGun")
-	siparisKalemID		=	Request.Form("siparisKalemID")
-	yer					=	Request.Form("yer")
-	silAjandaID			=	Request.Form("silAjandaID")
-	isTur				=	Request.Form("isTur")
-	planTarih			=	DateSerial(hangiYil, hangiAy, hangiGun)
+		kid					=	kidbul()
+		hangiYil			=	Request.Form("hangiYil")
+		hangiAy				=	Request.Form("hangiAy")
+		hangiGun			=	Request.Form("hangiGun")
+		siparisKalemID		=	Request.Form("siparisKalemID")
+		yer					=	Request.Form("yer")
+		silAjandaID			=	Request.Form("silAjandaID")
+		isTur				=	Request.Form("isTur")
+		planTarih			=	DateSerial(hangiYil, hangiAy, hangiGun)
+		receteID			=	Request.Form("receteID")
 	'##### request
 	'##### request
 
@@ -89,33 +90,38 @@
 				if siparisKalemID <> "" then
 				
 				'### cari için  özel reçete var mı? yoksa normal reçeteyi al
-						ekSorgu		=	" AND t1.cariID = " & cariID
-						ekSorgu2	=	" AND t1.cariID = 0"
+					' 	ekSorgu		=	" AND t1.cariID = " & cariID
+					' 	ekSorgu2	=	" AND t1.cariID = 0"
 
-					sorgu = "SELECT t1.receteID"
-					sorgu = sorgu & " FROM recete.recete t1"
-					sorgu = sorgu & " WHERE t1.stokID = " & stokID & " AND t1.silindi = 0 AND t1.firmaID = " & firmaID
-					ilkSorgu 	=	sorgu & ekSorgu
-					ikinciSorgu	=	sorgu & ekSorgu2
-					rs.open ilkSorgu, sbsv5,1,3
-						if rs.recordcount  = 0 then
-							rs.close
-							rs.open ikinciSorgu, sbsv5,1,3
-							call jsrun("swal('','Cari için özel reçete kayıt edilmemiş stok için oluşturulmuş genel reçeteye göre işlem kayıtları oluşturuldu.','warning')")
-							receteID		=	rs("receteID")
-							sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
-							rs1.open sorgu, sbsv5,3,3
-						end if
-						if rs.recordcount > 0 then
-							receteID		=	rs("receteID")
-							sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
-							rs1.open sorgu, sbsv5,3,3
-						else
-							receteID = 0
-							call jsrun("swal('Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.','Bu durum üretim adımlarının ve kullanılacak hammaddelerin plan kayıtlarını engeller. Takvim kaydını silerek reçete oluşturduktan sonra işlem yapmanız tavsiye edilir.')")
-						end if
-					rs.close
+					' sorgu = "SELECT t1.receteID"
+					' sorgu = sorgu & " FROM recete.recete t1"
+					' sorgu = sorgu & " WHERE t1.stokID = " & stokID & " AND t1.silindi = 0 AND t1.firmaID = " & firmaID
+					' ilkSorgu 	=	sorgu & ekSorgu
+					' ikinciSorgu	=	sorgu & ekSorgu2
+					' rs.open ilkSorgu, sbsv5,1,3
+					' 	if rs.recordcount  = 0 then
+					' 		rs.close
+					' 		rs.open ikinciSorgu, sbsv5,1,3
+					' 		call jsrun("swal('','Cari için özel reçete kayıt edilmemiş stok için oluşturulmuş genel reçeteye göre işlem kayıtları oluşturuldu.','warning')")
+					' 		receteID		=	rs("receteID")
+					' 		sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
+					' 		rs1.open sorgu, sbsv5,3,3
+					' 	end if
+					' 	if rs.recordcount > 0 then
+					' 		receteID		=	rs("receteID")
+					' 		sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
+					' 		rs1.open sorgu, sbsv5,3,3
+					' 	else
+					' 		receteID = 0
+					' 		call jsrun("swal('Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.','Bu durum üretim adımlarının ve kullanılacak hammaddelerin plan kayıtlarını engeller. Takvim kaydını silerek reçete oluşturduktan sonra işlem yapmanız tavsiye edilir.')")
+					' 	end if
+					' rs.close
 				'### /cari için  özel reçete var mı? yoksa normal reçeteyi al
+
+				'####### üretilecek mamulun, reçeteye göre temin deposunu kayıt et
+					sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul(" & receteID & ") WHERE id = " & ajandaID
+					rs1.open sorgu, sbsv5,3,3
+				'####### üretilecek mamulun, reçeteye göre temin deposunu kayıt et
 
 					sorgu = "SELECT "
 					sorgu = sorgu & " t1.onHazirlikDeger, t1.onHazirlikTur, t1.stokID as receteStokID, t1.miktar as receteMiktar, t1.miktarBirim as receteBirim,"
@@ -227,6 +233,13 @@
 
 				end if
 			'################ /sipariş kaleminin reçetesini bul yarı mamullerin depo transferini ajandaya kaydet
+
+			'########### seçilen reçeteID değerini AJANDA mamul satırına kaydet
+					sorgu = "UPDATE portal.ajanda SET receteID = " & receteID & " WHERE id = " & ajandaID
+					rs1.open sorgu, sbsv5,3,3
+			'########### /seçilen reçeteID değerini AJANDA mamul satırına kaydet
+
+
 				call logla("Ajandaya etkinlik kaydı yapıldı")
 
 					call toastrCagir("Kayıt başarılı", "OK", "right", "success", "otomatik", "")

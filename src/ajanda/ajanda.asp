@@ -8,6 +8,7 @@ siparisKalemID			=	Request.QueryString("siparisKalemID")
 silAjandaID				=	Request.QueryString("silAjandaID")
 yer						=	Request.QueryString("yer")
 qisTur					=	Request.QueryString("isTur")
+receteID				=	Request.QueryString("receteID")
 
 if silAjandaID = "" then
 	silAjandaID = 0
@@ -136,7 +137,7 @@ Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein card"">"
 
 			Response.Write "<div class=""col h-100 border border-dark  scroll-ekle3 " & bugunClass & """"
 			if siparisKalemID <> "" then
-				Response.Write " onclick=""planEkle("&silAjandaID&","&yilDeger&","&ayDeger&","&zi&","&siparisKalemID&",'"&yer&"','"&qisTur&"')"""
+				Response.Write " onclick=""planEkle("&silAjandaID&","&yilDeger&","&ayDeger&","&zi&","&siparisKalemID&",'"&yer&"','"&qisTur&"',"&receteID&")"""
 			end if
 			Response.Write ">"
 				
@@ -221,7 +222,7 @@ Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein card"">"
 					if sipKalemID = 0 AND not isnull(bagliAjandaID) then
 						Response.Write " onclick=""swal('Bağlı işlem değiştirilemez','')"""
 					else
-						Response.Write " onclick=""planDegistir(" & ajID & "," & yilDeger & "," & ayDeger & "," & zi & "," & sipKalemID & ",'" & yer & "','" & isTur & "')"""
+						Response.Write " onclick=""planDegistir(" & ajID & "," & yilDeger & "," & ayDeger & "," & zi & "," & sipKalemID & ",'" & yer & "','" & isTur & "',"&receteID&")"""
 					end if	
 						Response.Write " class=""pointer col-1 text-center hoverGel p-0 m-0"">"
 						Response.Write "<i class=""mdi mdi-arrow-all text-danger""></i>"
@@ -281,7 +282,7 @@ end if
 
 <script>
 // plan Değiştirme işlemleri		
-	function planDegistir(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer,isTur){
+	function planDegistir(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer,isTur,receteID){
 		alert(isTur);
 			sorgulananTarih	=	$('#sabitBilgiler').attr('data-sorgulanantarih');
 				swal({
@@ -301,7 +302,7 @@ end if
 					}else{
 					yuklenecekDIV = 'ortaalan'
 						}
-					$('#'+yuklenecekDIV).load('/ajanda/ajanda.asp?silAjandaID='+silAjandaID+'&sorgulananTarih='+sorgulananTarih+'&siparisKalemID='+siparisKalemID+'&yer='+yer+'&isTur='+isTur);
+					$('#'+yuklenecekDIV).load('/ajanda/ajanda.asp?silAjandaID='+silAjandaID+'&sorgulananTarih='+sorgulananTarih+'&siparisKalemID='+siparisKalemID+'&yer='+yer+'&isTur='+isTur+'&receteID='+receteID);
 
 					
 					}, //confirm buton yapılanlar
@@ -313,7 +314,7 @@ end if
 // plan Değiştirme işlemleri		
 
 // plan Ekleme işlemleri		
-	function planEkle(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer,isTur){
+	function planEkle(silAjandaID,hangiYil,hangiAy,hangiGun,siparisKalemID,yer,isTur,receteID){
 				swal({
 				title: hangiGun+'.'+hangiAy+'.'+hangiYil+' gününe üretim planı eklensin mi?',
 				type: 'warning',
@@ -326,7 +327,7 @@ end if
 					// handle Confirm button click
 					// result is an optional parameter, needed for modals with input
 					
-					$('#ajax').load('/planlama/plan_kaydet.asp',{hangiGun:hangiGun, hangiAy:hangiAy, hangiYil:hangiYil, siparisKalemID:siparisKalemID,yer:yer,silAjandaID:silAjandaID,isTur:isTur});
+					$('#ajax').load('/planlama/plan_kaydet.asp',{hangiGun:hangiGun, hangiAy:hangiAy, hangiYil:hangiYil, siparisKalemID:siparisKalemID,yer:yer,silAjandaID:silAjandaID,isTur:isTur,receteID:receteID});
 
 					
 					}, //confirm buton yapılanlar

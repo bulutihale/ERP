@@ -48,17 +48,15 @@ Response.Flush()
 call logla("Üretim Kontrolü Ekranı")
 
 
-yetkiKontrol = yetkibul(modulAd)
+	yetkiKontrol = yetkibul(modulAd)
 
-'###### ARAMA FORMU
-'###### ARAMA FORMU
 	if hata = "" and yetkiKontrol > 2 then
 
 
 		Response.Write "<div class=""card"">"
 			Response.Write "<div class=""card-header text-white"&class1&""">"
 				Response.Write "<span class=""h4 text-dark"">" &sayfaBaslik & "</span>"
-				Response.Write "<span id=""receteBtn"" onclick=""$('#recetelerDIV').show('slow')"" class=""d-none ml-4 text-warning pointer mdi mdi-receipt"" title=""Reçeteleri göster""></span>"
+				'Response.Write "<span id=""receteBtn"" onclick=""$('#recetelerDIV').show('slow')"" class=""d-none ml-4 text-warning pointer mdi mdi-receipt"" title=""Reçeteleri göster""></span>"
 			Response.Write "</div>"
 			
 			Response.Write "<div class=""card-body"">"
@@ -69,12 +67,13 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 							sorgu = "SELECT t4.cariID, t3.stokID, t4.cariAd, t3.stokKodu, t3.stokAd, t1.miktar, t1.mikBirim, t5.siparisKalemID, t5.tamamlandi, t5.baslangicZaman,"
-							sorgu = sorgu & " t5.bitisZaman, t5.depoKategori"
+							sorgu = sorgu & " t5.bitisZaman, t5.depoKategori, t5.receteID, t6.receteAd, t5.teminDepoID, t5.surecDepoID"
 							sorgu = sorgu & " FROM portal.ajanda t5"
 							sorgu = sorgu & " INNER JOIN teklif.siparisKalem t1 ON t1.id = t5.siparisKalemID"
 							sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 							sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 							sorgu = sorgu & " INNER JOIN cari.cari t4 ON t2.cariID = t4.cariID"
+							sorgu = sorgu & " LEFT JOIN recete.recete t6 ON t5.receteID = t6.receteID"
 							sorgu = sorgu & " WHERE t5.id = " & gorevID
 							rs.Open sorgu, sbsv5, 1, 3
 								cariID				=	rs("cariID")
@@ -90,6 +89,10 @@ yetkiKontrol = yetkibul(modulAd)
 								baslangicZaman		=	rs("baslangicZaman")
 								bitisZaman			=	rs("bitisZaman")
 								teminDepoKategori	=	rs("depoKategori")
+								dbReceteID			=	rs("receteID")
+								receteAd			=	rs("receteAd")
+								teminDepoID			=	rs("teminDepoID")
+								surecDepoID			=	rs("surecDepoID")
 								receteMiktar 		= 	1 'uretimPlan işinde alt reçete miktarına ihtiyaç olmadığı için 1 tanımlandı, kesimPlan işinde lazım.
 							rs.close
 							urtBtnYaz		=	"ÜRETİME BAŞLA"
@@ -109,11 +112,12 @@ yetkiKontrol = yetkibul(modulAd)
 							sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
 							sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem"
 								sorgu = sorgu & " WHERE id = (SELECT siparisKalemID FROM portal.ajanda WHERE id = t4.bagliAjandaID)) as siparisMiktar, t4.tamamlandi, t4.baslangicZaman,"
-							sorgu = sorgu & " t4.bitisZaman, t4.depoKategori"
+							sorgu = sorgu & " t4.bitisZaman, t4.depoKategori, t4.receteID, t5.receteAd, t4.teminDepoID, t4.surecDepoID, t4.techizatID"
 							sorgu = sorgu & " FROM portal.ajanda t4"
 							sorgu = sorgu & " INNER JOIN recete.receteAdim t1 ON t4.receteAdimID = t1.receteAdimID"
 							sorgu = sorgu & " INNER JOIN recete.recete t2 ON t1.altReceteID = t2.receteID"
 							sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.stokID = t3.stokID"
+							sorgu = sorgu & " LEFT JOIN recete.recete t5 ON t4.receteID = t5.receteID"
 							sorgu = sorgu & " WHERE t4.id = " & gorevID
 							rs.Open sorgu, sbsv5, 1, 3
 								icerik				=	rs("icerik")
@@ -129,6 +133,11 @@ yetkiKontrol = yetkibul(modulAd)
 								bitisZaman			=	rs("bitisZaman")
 								teminDepoKategori	=	rs("depoKategori")
 								cariID				=	0
+								dbReceteID			=	rs("receteID")
+								receteAd			=	rs("receteAd")
+								teminDepoID			=	rs("teminDepoID")
+								surecDepoID			=	rs("surecDepoID")
+								techizatID			=	rs("techizatID")
 							rs.close
 							urtBtnYaz	=	"KESİME BAŞLA"
 							urtBtnClass	=	" bg-warning "
@@ -149,22 +158,47 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<div class=""row mt-2"">"
 							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Temin Depo</div>"
 							Response.Write "<div class=""col-9"">"
-								call formselectv2("teminDepoID","","receteSec();","","formSelect2 depoSec border","","teminDepoID","","data-holderyazi=""Yarı mamul temini yapılacak depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
+								if isnull(teminDepoID) OR teminDepoID = "" then
+									call formselectv2("teminDepoID","","receteSec();","","formSelect2 depoSec border","","teminDepoID","","data-holderyazi=""Yarı mamul temini yapılacak depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
+								else
+								call formhidden("teminDepoID",teminDepoID,"","","","","teminDepoID","")
+									sorgu = "SELECT depoAd as teminDepoAd FROM stok.depo WHERE id = " & teminDepoID
+									rs.Open sorgu, sbsv5, 1, 3
+										Response.Write "<span class=""bold font-italic text-success"">" & rs("teminDepoAd") & "</span>"
+									rs.close
+								end if
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-lg-3 col-sm-3 bold default""  data-toggle=""tooltip"" title=""Tooltip on top"">Başlayacak Olan Süreç</div>"
+							Response.Write "<div class=""col-lg-3 col-sm-3 bold default"">Başlayacak Olan Süreç</div>"
 							Response.Write "<div class=""col-9"">"
-								call formselectv2("surecDepoID","","receteSec();","","formSelect2 depoSec border","","surecDepoID","","data-holderyazi=""Başlayacak olan süreç seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sartOzel=""t1.depoTuru =2""")
+							
+								if isnull(surecDepoID) OR surecDepoID = "" OR surecDepoID = 0 then
+									call formselectv2("surecDepoID","","receteSec();","","formSelect2 depoSec border","","surecDepoID","","data-holderyazi=""Başlayacak olan süreç seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sartOzel=""t1.depoTuru =2""")
+								else
+								call formhidden("surecDepoID",surecDepoID,"","","","","surecDepoID","")
+									sorgu = "SELECT depoAd as surecDepoAd FROM stok.depo WHERE id = " & surecDepoID
+									rs.Open sorgu, sbsv5, 1, 3
+										Response.Write "<span class=""bold font-italic text-danger"">" & rs("surecDepoAd") & "</span>"
+									rs.close
+								end if
 							Response.Write "</div>"
 						Response.Write "</div>"
 						if isTur = "kesimPlan" then
-						Response.Write "<div class=""row mt-2"">"
-							Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Teçhizat</div>"
-							Response.Write "<div class=""col-9"">"
-								call formselectv2("techizatSec","","receteSec();","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
+							Response.Write "<div class=""row mt-2"">"
+								Response.Write "<div class=""col-lg-3 col-sm-3 bold"">Teçhizat</div>"
+								Response.Write "<div class=""col-9"">"
+									if isnull(techizatID) OR techizatID = "" then
+										call formselectv2("techizatSec","","receteSec();","","formSelect2 techizatSec border","","techizatID","","data-holderyazi=""İşlem yapılacak teçhizat seçimi"" data-jsondosya=""JSON_techizat"" data-miniput=""0"" data-sart=""('"&teminDepoKategori&"')""")
+									else
+									call formhidden("techizatID",techizatID,"","","","","techizatID","")
+										sorgu = "SELECT techizatAd FROM isletme.techizat WHERE techizatID = " & techizatID
+										rs.Open sorgu, sbsv5, 1, 3
+											Response.Write "<span class=""bold font-italic text-success"">" & rs("techizatAd") & "</span>"
+										rs.close
+									end if
+								Response.Write "</div>"
 							Response.Write "</div>"
-						Response.Write "</div>"
 						end if
 					Response.Write "</div>"
 
@@ -190,29 +224,34 @@ yetkiKontrol = yetkibul(modulAd)
 
 			'#### üretim veya kesim BAŞLAT BUTONU
 			'#### üretim veya kesim BAŞLAT BUTONU
-					Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4"">"
-						Response.Write "<div id=""btnDIV"" class=""row h-100 d-none"">"
-							if not isnull(baslangicZaman) then
-								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-md-12 col-sm-12"">İşlem Başlangıcı:<br> " & baslangicZaman & "</div>"
-							elseif tamamlandi = 0 AND isnull(baslangicZaman) then
-								Response.Write "<button"
-								Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-sm-6 bold"""
-									if yetkiKontrol > 6 then
-										Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBasla')"""
-									else
-										Response.Write " onclick=""swal('YETKİ YOK','Üretim başlatmak için yetkiniz yeterli değil!')"""
-									end if
-								Response.Write ">" & urtBtnYaz & "</button>"
-							end if
-						Response.Write "</div>"
+			if not isnull(baslangicZaman) then
+				btnClass01	=	""
+			else
+				btnClass01	=	" d-none "
+			end if
+				Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4"">"
+					Response.Write "<div id=""btnDIV"" class=""row h-100" & btnClass01 & """>"
+						if not isnull(baslangicZaman) then
+							Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-md-12 col-sm-12"">İşlem Başlangıcı:<br> " & baslangicZaman & "</div>"
+						elseif tamamlandi = 0 AND isnull(baslangicZaman) then
+							Response.Write "<button"
+							Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-sm-6 bold"""
+								if yetkiKontrol > 6 then
+									Response.Write " onclick=""uretimBasla(" & siparisKalemID & "," & ajandaID & ",'islemBasla')"""
+								else
+									Response.Write " onclick=""swal('YETKİ YOK','Üretim başlatmak için yetkiniz yeterli değil!')"""
+								end if
+							Response.Write ">" & urtBtnYaz & "</button>"
+						end if
 					Response.Write "</div>"
+				Response.Write "</div>"
 			'#### /üretim veya kesim BAŞLAT BUTONU
 			'#### /üretim veya kesim BAŞLAT BUTONU
 
 			'#### üretim veya kesim BİTİR BUTONU
 			'#### üretim veya kesim BİTİR BUTONU
 					Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4"">"
-						Response.Write "<div id=""btnDIV2"" class=""row h-100 d-none"">"
+						Response.Write "<div id=""btnDIV2"" class=""row h-100"&btnClass01&""">"
 
 							if not isnull(bitisZaman) then
 								Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-sm-12"">İşlem Sonu:<br> " & bitisZaman & "</div>"
@@ -253,6 +292,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 		Response.Write "</div>"
 
+
+'######## eğer db ajanda tablosuna receteID kayıt edilmemiş eski sipariş kaydı ise recete seçilebilsin
+
+	if isnull(dbReceteID) OR dbReceteID = 0 then
 		'################### REÇETE ID BUL, cariye özel reçete var mı?
 		'################### REÇETE ID BUL, cariye özel reçete var mı?
             sorgu = "SELECT"
@@ -309,6 +352,12 @@ yetkiKontrol = yetkibul(modulAd)
 
 		'################### /REÇETE ID BUL, cariye özel reçete var mı?
 		'################### /REÇETE ID BUL, cariye özel reçete var mı?
+	else
+		secilenReceteID	=	dbReceteID	'eğer veritabanında kayıtlı reçete var ise 
+	end if
+
+'######## /eğer db ajanda tablosuna receteID kayıt edilmemiş eski sipariş kaydı ise recete seçilebilsin
+
 	Response.Write "<div id=""receteAdim"" class=""text-center"">"
 	
 	call formhidden("receteID",secilenReceteID,"","","","","receteID","")
@@ -320,7 +369,7 @@ yetkiKontrol = yetkibul(modulAd)
 					Response.Write "<div class=""card mt-3"">"
 						Response.Write "<div class=""card-header text-white bg-info"">"
 							Response.Write "<div class=""row"">"
-								Response.Write "<div class=""col-lg-3 col-sm-6 text-left"">Reçete Adımları</div>"
+								Response.Write "<div class=""col-12 text-left""><span class=""bold text-dark font-italic"">" & receteAd & "-- </span> Reçetesine ait adımlar</div>"
 							Response.Write "</div>"
 						Response.Write "</div>"
 						
@@ -493,13 +542,15 @@ yetkiKontrol = yetkibul(modulAd)
 		'################### REÇETE ADIM BİLGİLERİ
 		'################### REÇETE ADIM BİLGİLERİ
 	end if
-	Response.Write "</div>"
+	'Response.Write "</div>"
 
+	call jsrun("receteSec("&secilenReceteID&")")
 
 	else
 		call yetkisizGiris("","","")
 		hata = 1
 	end if
+	
 '###### ARAMA FORMU
 '###### ARAMA FORMU
 
@@ -508,8 +559,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 <script>
 	function receteSec(receteID) {
-
 		if(receteID == undefined){var receteID = $('#receteID').val();};
+
 		teminDepoID	=	$('#teminDepoID').val();
 		surecDepoID	=	$('#surecDepoID').val();
 		if($('#techizatID').length > 0){var techizatID = $('#techizatID').val();}else{var techizatID='yok'}; 
@@ -565,6 +616,7 @@ yetkiKontrol = yetkibul(modulAd)
 			}
 
 		teminDepoID		=	$('#teminDepoID').val();
+		surecDepoID		=	$('#surecDepoID').val();
 		secilenReceteID	=	$('#receteID').val();
 		techizatID		=	$('#techizatID').val();
 		if(islemDurum == 'islemBasla')
@@ -585,12 +637,21 @@ yetkiKontrol = yetkibul(modulAd)
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
-				$('#ajax').load('/uretim/uretimBaslat.asp', {ajandaID:ajandaID, siparisKalemID:siparisKalemID, islemDurum:islemDurum, uretilenMiktar:uretilenMiktar,teminDepoID:teminDepoID,techizatID:techizatID});
-				$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *');
-				$('#btnDIV').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV > *');
-				$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
-				$('#btnDIV').removeClass('d-none');
-				$('#btnDIV2').removeClass('d-none');
+				$('#ajax').load('/uretim/uretimBaslat.asp', {
+					ajandaID:ajandaID,
+				 	siparisKalemID:siparisKalemID,
+					islemDurum:islemDurum,
+					uretilenMiktar:uretilenMiktar,
+					teminDepoID:teminDepoID,
+					techizatID:techizatID,
+					secilenReceteID:secilenReceteID,
+					surecDepoID:surecDepoID}, function(){
+						$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #receteAdim > *');
+						$('#btnDIV').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV > *');
+						$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
+						$('#btnDIV').removeClass('d-none');
+						$('#btnDIV2').removeClass('d-none');
+				});
 			}, //confirm buton yapılanlar
 			function(dismiss) {
 			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'

@@ -35,14 +35,14 @@ sorgu = sorgu & " stok.FN_stokSayDepoLot ( " & firmaID & ", t1.stokID, t2.depoID
 sorgu = sorgu & " t3.depoAd, t3.depoKategori, t2.depoID,"
 sorgu = sorgu & " t2.lot,"
 sorgu = sorgu & " t2.miktarBirim,"
-sorgu = sorgu & " t6.cariAd,"
+'sorgu = sorgu & " t6.cariAd,"
 sorgu = sorgu & " t2.lotSKT AS lotSKT"
 sorgu = sorgu & " FROM stok.stok t1"
 sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.stokID = t2.stokID"
 sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.depoID = t3.id"
-sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t4 ON t2.siparisKalemID = t4.id"
-sorgu = sorgu & " LEFT JOIN teklif.siparis t5 ON t4.siparisID = t5.sipID"
-sorgu = sorgu & " LEFT JOIN cari.cari t6 ON t5.cariID = t6.cariID"
+'sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t4 ON t2.siparisKalemID = t4.id"
+'sorgu = sorgu & " LEFT JOIN teklif.siparis t5 ON t4.siparisID = t5.sipID"
+'sorgu = sorgu & " LEFT JOIN cari.cari t6 ON t5.cariID = t6.cariID"
 sorgu = sorgu & " WHERE"
 sorgu = sorgu & " t1.firmaID = " & firmaID & ""
 sorgu = sorgu & " AND t1.stokID = " & gorevID & ""
@@ -57,8 +57,8 @@ sorgu = sorgu & " t3.depoAd, t3.depoKategori,"
 sorgu = sorgu & " t1.stokAd,"
 sorgu = sorgu & " t2.lot,"
 sorgu = sorgu & " t2.miktarBirim,"
-sorgu = sorgu & " t4.siparisID,"
-sorgu = sorgu & " t6.cariAd,"
+'sorgu = sorgu & " t4.siparisID,"
+'sorgu = sorgu & " t6.cariAd,"
 sorgu = sorgu & " t2.lotSKT"
 	rs.open sorgu, sbsv5, 1, 3
 '###### ARAMA FORMU
@@ -140,7 +140,7 @@ Response.Write "<hr>"
 					lotSKT			=	rs("lotSKT")
 					lotMiktar		=	rs("lotMiktar")
 					miktarBirim		=	rs("miktarBirim")
-					cariAd			=	rs("cariAd")
+					'cariAd			=	rs("cariAd")
 					Response.Write "<tr>"
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td>" & lotSKT & "</td>"

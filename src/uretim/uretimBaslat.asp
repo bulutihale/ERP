@@ -10,8 +10,10 @@
 	islemDurum				=	Request.Form("islemDurum")
 	uretilenMiktar			=	Request.Form("uretilenMiktar")
 	teminDepoID				=	Request.Form("teminDepoID")
+	surecDepoID				=	Request.Form("surecDepoID")
 	uretilenUrunGirisDepoID	=	Request.Form("uretilenUrunGirisDepoID")
 	techizatID				=	Request.Form("techizatID")
+	secilenReceteID			=	Request.Form("secilenReceteID")
 	modulAd =   "Üretim"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -52,13 +54,13 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = "UPDATE portal.ajanda SET baslangicZaman = getdate() WHERE id = " & ajandaID & " AND silindi = 0"
 			rs.open sorgu,sbsv5,3,3
 
-			If istur = "uretimPlan" Then
+			'If istur = "uretimPlan" Then
 				turetilmisLot			=	lotOlusturFunc(teminDepoID)
-				sorgu = "UPDATE portal.ajanda SET uretimLot = '" & turetilmisLot & "' WHERE id = " & ajandaID & " AND silindi = 0"
+				sorgu = "UPDATE portal.ajanda SET uretimLot = '" & turetilmisLot & "', receteID = " & secilenReceteID & ", teminDepoID = " & teminDepoID & ", surecDepoID = " & surecDepoID & ", techizatID = " & techizatID & " WHERE id = " & ajandaID & " AND silindi = 0"
 				rs.open sorgu,sbsv5,3,3
-			Else
+			'Else
 				' false
-			End if
+			'End if
 
 
 	elseif islemDurum = "islemBitir" then
