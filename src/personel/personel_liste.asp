@@ -123,7 +123,7 @@ call logla("Personel Listesi Ekranı")
 						Response.Write "</a>"
 
 						Response.Write "<a title=""" & translate("Personel Yetkileri","","") & """"
-						Response.Write " onClick=""modalajax('/personel/yetki.asp?gorevID=" & personelID64 & "');"">"
+						Response.Write " onClick=""modalajaxfit('/personel/yetki.asp?gorevID=" & personelID64 & "');"">"
 						Response.Write "<i class=""icon lock mr-2 parmak"
 						Response.Write """></i>"
 						Response.Write "</a>"

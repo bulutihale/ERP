@@ -1,0 +1,1837 @@
+﻿id;Tarih;personelID;IP;gorevID;islem;firmaID;url;modulAd
+109087;9.06.2023 09:10:00;5;192.168.1.207;0;Sterilizasyon süreci, koli seçimi;5;;Sterilizasyon
+109088;9.06.2023 09:10:00;5;192.168.1.207;0;Sterilizasyon Planlama;5;;Sterilizasyon
+109089;9.06.2023 09:11:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109090;9.06.2023 09:12:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3138;5;;Depo
+109091;9.06.2023 09:12:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+109092;9.06.2023 09:12:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109093;9.06.2023 09:12:00;28;192.168.1.128;35;Stok Depo Miktarlari Detay;5;;stok
+109094;9.06.2023 09:13:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109095;9.06.2023 09:13:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109096;9.06.2023 09:13:00;5;192.168.1.207;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109097;9.06.2023 09:13:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109098;9.06.2023 09:13:00;5;192.168.1.207;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109099;9.06.2023 09:13:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109100;9.06.2023 09:13:00;5;192.168.1.207;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109101;9.06.2023 09:13:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109102;9.06.2023 09:13:00;5;192.168.1.207;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109103;9.06.2023 09:13:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109104;9.06.2023 09:13:00;5;192.168.1.207;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109105;9.06.2023 09:13:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109106;9.06.2023 09:13:00;5;192.168.1.207;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109107;9.06.2023 09:14:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109108;9.06.2023 09:14:00;5;192.168.1.207;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109109;9.06.2023 09:14:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109110;9.06.2023 09:14:00;5;192.168.1.207;705;Stok Depo Miktarlari Detay;5;;stok
+109111;9.06.2023 09:14:00;5;192.168.1.207;705;Stok Depo Miktarlari Detay;5;;stok
+109112;9.06.2023 09:15:00;5;192.168.1.207;705;Stok Depo Miktarlari Detay;5;;stok
+109113;9.06.2023 09:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109114;9.06.2023 09:17:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109115;9.06.2023 09:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109116;9.06.2023 09:17:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109117;9.06.2023 09:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109118;9.06.2023 09:17:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109119;9.06.2023 09:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109120;9.06.2023 09:18:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109121;9.06.2023 09:18:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109122;9.06.2023 09:18:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109123;9.06.2023 09:18:00;28;192.168.1.128;35;Stok Depo Miktarlari Detay;5;;stok
+109124;9.06.2023 09:19:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109125;9.06.2023 09:19:00;39;192.168.1.118;0;Depo Listesi Ekrani;5;;Depo
+109126;9.06.2023 09:19:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109127;9.06.2023 09:19:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109128;9.06.2023 09:20:00;5;192.168.1.207;0;Mal Kabul Ekrani Giris;5;;Lojistik
+109129;9.06.2023 09:20:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109130;9.06.2023 09:21:00;28;192.168.1.128;159;Stok Depo Miktarlari Detay;5;;stok
+109131;9.06.2023 09:21:00;5;192.168.1.207;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+109132;9.06.2023 09:21:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109133;9.06.2023 09:21:00;28;192.168.1.128;274;Stok Depo Miktarlari Detay;5;;stok
+109134;9.06.2023 09:22:00;28;192.168.1.128;274;Stok Depo Miktarlari Detay;5;;stok
+109135;9.06.2023 09:23:00;5;192.168.1.207;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+109136;9.06.2023 09:23:00;28;192.168.1.128;274;Stok Depo Miktarlari Detay;5;;stok
+109137;9.06.2023 09:23:00;5;192.168.1.207;0;Müsteri Siparisleri Listelendi;5;;Satis
+109138;9.06.2023 09:23:00;5;192.168.1.207;0;Dogrudan Müsteri Siparisi Olusturma Ekrani;5;;Satis
+109139;9.06.2023 09:24:00;5;192.168.1.207;0;Müsteri Siparisleri Listelendi;5;;Satis
+109140;9.06.2023 09:24:00;5;192.168.1.207;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+109141;9.06.2023 09:24:00;5;192.168.1.207;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+109142;9.06.2023 09:26:00;5;192.168.1.207;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109143;9.06.2023 09:28:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109144;9.06.2023 09:28:00;28;192.168.1.128;84;Stok Depo Miktarlari Detay;5;;stok
+109145;9.06.2023 09:30:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109146;9.06.2023 09:30:00;28;192.168.1.128;84;Stok Depo Miktarlari Detay;5;;stok
+109147;9.06.2023 09:30:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109148;9.06.2023 09:32:00;28;192.168.1.128;303;Stok Depo Miktarlari Detay;5;;stok
+109149;9.06.2023 09:34:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109150;9.06.2023 09:34:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109151;9.06.2023 09:34:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109152;9.06.2023 09:34:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109153;9.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109154;9.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109155;9.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109156;9.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109157;9.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109158;9.06.2023 09:36:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109159;9.06.2023 09:36:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109160;9.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109161;9.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109162;9.06.2023 09:36:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109163;9.06.2023 09:36:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109164;9.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109165;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109166;9.06.2023 09:37:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109167;9.06.2023 09:37:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109168;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109169;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109170;9.06.2023 09:37:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109171;9.06.2023 09:37:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109172;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109173;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109174;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109175;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109176;9.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109177;9.06.2023 09:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109178;9.06.2023 09:37:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109179;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109180;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109181;9.06.2023 09:38:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109182;9.06.2023 09:38:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109183;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109184;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109185;9.06.2023 09:38:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109186;9.06.2023 09:38:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109187;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109188;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109189;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109190;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109191;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109192;9.06.2023 09:38:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109193;9.06.2023 09:38:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109194;9.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109195;9.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109196;9.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109197;9.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109198;9.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109199;9.06.2023 09:39:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109200;9.06.2023 09:39:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109201;9.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109202;9.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109203;9.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109204;9.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109205;9.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109206;9.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109207;9.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109208;9.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109209;9.06.2023 09:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109210;9.06.2023 09:41:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109211;9.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109212;9.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109213;9.06.2023 09:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109214;9.06.2023 09:41:00;28;192.168.1.128;9;Stok Düzenleme Ekrani Girisi;5;;Stok
+109215;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109216;9.06.2023 09:42:00;28;192.168.1.128;9;Stok Güncelleme: HM-00019;5;;Stok
+109217;9.06.2023 09:42:00;28;192.168.1.128;9;Ürün bilgileri güncellendi:HM-00019;5;;Stok
+109218;9.06.2023 09:42:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109219;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109220;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109221;9.06.2023 09:42:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109222;9.06.2023 09:42:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109223;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109224;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109225;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109226;9.06.2023 09:42:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109227;9.06.2023 09:42:00;28;192.168.1.128;274;Stok Depo Miktarlari Detay;5;;stok
+109228;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109229;9.06.2023 09:42:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109230;9.06.2023 09:42:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109231;9.06.2023 09:42:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109232;9.06.2023 09:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109233;9.06.2023 09:43:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109234;9.06.2023 09:43:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109235;9.06.2023 09:43:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109236;9.06.2023 09:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109237;9.06.2023 09:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109238;9.06.2023 09:45:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109239;9.06.2023 09:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109240;9.06.2023 09:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109241;9.06.2023 09:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109242;9.06.2023 09:45:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109243;9.06.2023 09:45:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109244;9.06.2023 09:45:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109245;9.06.2023 09:45:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109246;9.06.2023 09:45:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109247;9.06.2023 09:45:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109248;9.06.2023 09:45:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109249;9.06.2023 09:45:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109250;9.06.2023 09:45:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3140;5;;Depo
+109251;9.06.2023 09:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109252;9.06.2023 09:45:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109253;9.06.2023 09:45:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109254;9.06.2023 09:45:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109255;9.06.2023 09:45:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109256;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109257;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109258;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109259;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109260;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109261;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109262;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109263;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109264;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109265;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109266;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109267;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109268;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109269;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109270;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109271;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109272;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109273;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109274;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109275;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109276;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109277;9.06.2023 09:46:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109278;9.06.2023 09:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109279;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109280;9.06.2023 09:47:00;32;192.168.1.121;0;Müsteri Siparisleri Listelendi;5;;Satis
+109281;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109282;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109283;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109284;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109285;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109286;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109287;9.06.2023 09:47:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109288;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109289;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109290;9.06.2023 09:47:00;32;192.168.1.121;0;Müsteri Siparisleri Listelendi;5;;Satis
+109291;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109292;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109293;9.06.2023 09:47:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109294;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109295;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109296;9.06.2023 09:47:00;32;192.168.1.121;0;Dogrudan Müsteri Siparisi Olusturma Ekrani;5;;Satis
+109297;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109298;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109299;9.06.2023 09:47:00;5;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109300;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109301;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109302;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109303;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109304;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109305;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109306;9.06.2023 09:47:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+109307;9.06.2023 09:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109308;9.06.2023 09:47:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109309;9.06.2023 09:47:00;5;192.168.1.207;315;Stok Depo Miktarlari Detay;5;;stok
+109310;9.06.2023 09:47:00;28;192.168.1.128;83;Stok Depo Miktarlari Detay;5;;stok
+109311;9.06.2023 09:47:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+109312;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109313;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109314;9.06.2023 09:48:00;32;192.168.1.121;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+109315;9.06.2023 09:48:00;5;192.168.1.207;315;Stok Depo Miktarlari Detay;5;;stok
+109316;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109317;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109318;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109319;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109320;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109321;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109322;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109323;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109324;9.06.2023 09:48:00;28;192.168.1.128;315;Stok Depo Miktarlari Detay;5;;stok
+109325;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109326;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109327;9.06.2023 09:48:00;5;192.168.1.207;274;Stok Depo Miktarlari Detay;5;;stok
+109328;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109329;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109330;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109331;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109332;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109333;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109334;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109335;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109336;9.06.2023 09:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109337;9.06.2023 09:48:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109338;9.06.2023 09:48:00;5;192.168.1.207;0;Personel Çikis Yapti;5;;Personel
+109339;9.06.2023 09:48:00;0;192.168.1.207;0;Sifre Giris Ekrani;5;;
+109340;9.06.2023 09:48:00;28;192.168.1.128;274;Stok Depo Miktarlari Detay;5;;stok
+109341;9.06.2023 09:48:00;0;192.168.1.207;0;Sifre Denemesi;5;;Personel
+109342;9.06.2023 09:48:00;0;192.168.1.207;0;Sifre Dogrulaniyor;5;;Personel
+109343;9.06.2023 09:48:00;37;192.168.1.207;0;Basarili Giris;5;;Personel
+109344;9.06.2023 09:48:00;37;192.168.1.207;0;Welcome Dashboard;5;;Dashboard
+109345;9.06.2023 09:49:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+109346;9.06.2023 09:50:00;32;192.168.1.121;0;Stok Güncelleme: M-00180;5;;Stok
+109347;9.06.2023 09:50:00;32;192.168.1.121;0;Yeni ürün eklendi:M-00180;5;;Stok
+109348;9.06.2023 09:50:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+109349;9.06.2023 09:50:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+109350;9.06.2023 09:50:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+109351;9.06.2023 09:50:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: EXTREMITY SET  LITVANYA;5;;Reçete
+109352;9.06.2023 09:50:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor: EXTREMITY SET  LITVANYA;5;;Reçete
+109353;9.06.2023 09:50:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+109354;9.06.2023 09:51:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+109355;9.06.2023 09:51:00;32;192.168.1.121;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+109356;9.06.2023 09:51:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109357;9.06.2023 09:51:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109358;9.06.2023 09:51:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109359;9.06.2023 09:51:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109360;9.06.2023 09:51:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109361;9.06.2023 09:51:00;32;192.168.1.121;0;Stok Güncelleme: M-00181;5;;Stok
+109362;9.06.2023 09:51:00;32;192.168.1.121;0;Yeni ürün eklendi:M-00181;5;;Stok
+109363;9.06.2023 09:51:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+109364;9.06.2023 09:52:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109365;9.06.2023 09:52:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109366;9.06.2023 09:52:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109367;9.06.2023 09:52:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109368;9.06.2023 09:52:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109369;9.06.2023 09:52:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109370;9.06.2023 09:52:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+109371;9.06.2023 09:52:00;29;192.168.1.212;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+109372;9.06.2023 09:53:00;32;192.168.1.121;0;Lütfen Birim Seçin;5;;
+109373;9.06.2023 09:53:00;32;192.168.1.121;0;1124 carisine müsteri siparisi için 4115 stok ID ürün eklendi;5;;
+109374;9.06.2023 09:53:00;32;192.168.1.121;0;1124 carisine müsteri siparisi için 1924 stok ID ürün eklendi;5;;
+109375;9.06.2023 09:54:00;32;192.168.1.121;0;1124 carisine müsteri siparisi için 1882 stok ID ürün eklendi;5;;
+109376;9.06.2023 09:54:00;29;192.168.1.212;0;Stok Güncelleme: YM-00672;5;;Stok
+109377;9.06.2023 09:54:00;29;192.168.1.212;0;Yeni ürün eklendi:YM-00672;5;;Stok
+109378;9.06.2023 09:54:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+109379;9.06.2023 09:55:00;29;192.168.1.212;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+109380;9.06.2023 09:55:00;32;192.168.1.121;0;1124 carisine müsteri siparisi için 452 stok ID ürün eklendi;5;;
+109381;9.06.2023 09:55:00;32;192.168.1.121;0;1124 carisine müsteri siparisi için 1891 stok ID ürün eklendi;5;;
+109382;9.06.2023 09:55:00;29;192.168.1.212;0;Stok Güncelleme: YM-00673;5;;Stok
+109383;9.06.2023 09:55:00;29;192.168.1.212;0;Yeni ürün eklendi:YM-00673;5;;Stok
+109384;9.06.2023 09:55:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+109385;9.06.2023 09:55:00;32;192.168.1.121;0;1124 carisine müsteri siparisi için 1894 stok ID ürün eklendi;5;;
+109386;9.06.2023 09:55:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109387;9.06.2023 09:55:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+109388;9.06.2023 09:56:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  DÜZ ÖRTÜ 30X300 CM DUBLEX;5;;Reçete
+109389;9.06.2023 09:56:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor:  DÜZ ÖRTÜ 30X300 CM DUBLEX;5;;Reçete
+109390;9.06.2023 09:56:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+109391;9.06.2023 09:56:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+109392;9.06.2023 09:56:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: DÜZ ÖRTÜ 30X260CM DUBLEX;5;;Reçete
+109393;9.06.2023 09:56:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor: DÜZ ÖRTÜ 30X260CM DUBLEX;5;;Reçete
+109394;9.06.2023 09:56:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+109395;9.06.2023 09:56:00;29;192.168.1.212;4288;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 30X300 CM DUBLEX;5;;Reçete
+109396;9.06.2023 09:56:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109397;9.06.2023 09:56:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109398;9.06.2023 09:57:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109399;9.06.2023 09:57:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109400;9.06.2023 09:57:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109401;9.06.2023 09:57:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109402;9.06.2023 09:57:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109403;9.06.2023 09:57:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109404;9.06.2023 09:57:00;29;192.168.1.212;4288;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 30X300 CM DUBLEX;5;;Reçete
+109405;9.06.2023 09:57:00;29;192.168.1.212;4289;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 30X260CM DUBLEX;5;;Reçete
+109406;9.06.2023 09:57:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109407;9.06.2023 09:58:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109408;9.06.2023 09:58:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109409;9.06.2023 10:15:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109410;9.06.2023 10:15:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109411;9.06.2023 10:15:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109412;9.06.2023 10:15:00;29;192.168.1.212;4289;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 30X260CM DUBLEX;5;;Reçete
+109413;9.06.2023 10:15:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+109414;9.06.2023 10:15:00;29;192.168.1.212;4289;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 30X260CM DUBLEX;5;;Reçete
+109415;9.06.2023 10:15:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109416;9.06.2023 10:15:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109417;9.06.2023 10:15:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109418;9.06.2023 10:15:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109419;9.06.2023 10:16:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109420;9.06.2023 10:16:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109421;9.06.2023 10:16:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109422;9.06.2023 10:16:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109423;9.06.2023 10:16:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109424;9.06.2023 10:18:00;27;10.8.0.10;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109425;9.06.2023 10:19:00;27;10.8.0.10;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109426;9.06.2023 10:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109427;9.06.2023 10:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109428;9.06.2023 10:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109429;9.06.2023 10:21:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109430;9.06.2023 10:21:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109431;9.06.2023 10:21:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109432;9.06.2023 10:21:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109433;9.06.2023 10:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109434;9.06.2023 10:22:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109435;9.06.2023 10:29:00;0;192.168.1.113;0;Sifre Giris Ekrani;5;;
+109436;9.06.2023 10:30:00;0;192.168.1.113;0;Sifre Denemesi;5;;Personel
+109437;9.06.2023 10:30:00;0;192.168.1.113;0;Sifre Dogrulaniyor;5;;Personel
+109438;9.06.2023 10:30:00;31;192.168.1.113;0;Basarili Giris;5;;Personel
+109439;9.06.2023 10:30:00;31;192.168.1.113;0;Welcome Dashboard;5;;Dashboard
+109440;9.06.2023 10:32:00;31;192.168.1.113;0;Teklif Listesi Ekrani;5;;Teklif
+109441;9.06.2023 10:32:00;31;192.168.1.113;0;Kayit Basarili.;5;;Teklif
+109442;9.06.2023 10:34:00;31;192.168.1.113;0;Teklif kalemi kayit ediliyor;5;;
+109443;9.06.2023 10:40:00;32;192.168.1.121;0;313 carisine müsteri siparisi için 1875 stok ID ürün eklendi;5;;
+109444;9.06.2023 10:41:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109445;9.06.2023 10:42:00;32;192.168.1.121;0;941 carisine müsteri siparisi için 354 stok ID ürün eklendi;5;;
+109446;9.06.2023 10:42:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109447;9.06.2023 10:42:00;0;192.168.1.126;0;Sifre Giris Ekrani;5;;
+109448;9.06.2023 10:42:00;0;192.168.1.126;0;Sifre Denemesi;5;;Personel
+109449;9.06.2023 10:42:00;0;192.168.1.126;0;Sifre Dogrulaniyor;5;;Personel
+109450;9.06.2023 10:42:00;38;192.168.1.126;0;Basarili Giris;5;;Personel
+109451;9.06.2023 10:42:00;38;192.168.1.126;0;Welcome Dashboard;5;;Dashboard
+109452;9.06.2023 10:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109453;9.06.2023 10:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109454;9.06.2023 10:43:00;32;192.168.1.121;0;740 carisine müsteri siparisi için 1867 stok ID ürün eklendi;5;;
+109455;9.06.2023 10:44:00;32;192.168.1.121;0;740 carisine müsteri siparisi için 1868 stok ID ürün eklendi;5;;
+109456;9.06.2023 10:44:00;32;192.168.1.121;0;740 carisine müsteri siparisi için 1863 stok ID ürün eklendi;5;;
+109457;9.06.2023 10:45:00;32;192.168.1.121;0;740 carisine müsteri siparisi için 1864 stok ID ürün eklendi;5;;
+109458;9.06.2023 10:45:00;32;192.168.1.121;0;740 carisine müsteri siparisi için 1865 stok ID ürün eklendi;5;;
+109459;9.06.2023 10:45:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109460;9.06.2023 10:45:00;38;192.168.1.126;0;Banka Listesi Ekrani;5;;
+109461;9.06.2023 10:45:00;38;192.168.1.126;0;Yeni Banka Bilgisi Ekleme Ekrani Girisi;5;;Teklif
+109462;9.06.2023 10:46:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109463;9.06.2023 10:46:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109464;9.06.2023 10:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109465;9.06.2023 10:46:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109466;9.06.2023 10:46:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109467;9.06.2023 10:46:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109468;9.06.2023 10:47:00;32;192.168.1.121;0;Müsteri Siparisleri Listelendi;5;;Satis
+109469;9.06.2023 10:47:00;38;192.168.1.126;0;Lütfen banka adini yaziniz;5;;Teklif
+109470;9.06.2023 10:47:00;38;192.168.1.126;0;Yeni banka eklendi:DENIZBANK;5;;Teklif
+109471;9.06.2023 10:47:00;38;192.168.1.126;0;Banka Listesi Ekrani;5;;
+109472;9.06.2023 10:47:00;38;192.168.1.126;0;Yeni Banka Bilgisi Ekleme Ekrani Girisi;5;;Teklif
+109473;9.06.2023 10:48:00;38;192.168.1.126;0;Yeni banka eklendi:DENIZBANK;5;;Teklif
+109474;9.06.2023 10:48:00;38;192.168.1.126;0;Banka Listesi Ekrani;5;;
+109475;9.06.2023 10:49:00;32;192.168.1.121;0;1040 carisine müsteri siparisi için 369 stok ID ürün eklendi;5;;
+109476;9.06.2023 10:49:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109477;9.06.2023 10:50:00;31;192.168.1.113;0;Teklif kalemi kayit ediliyor;5;;
+109478;9.06.2023 10:50:00;32;192.168.1.121;0;1055 carisine müsteri siparisi için 1863 stok ID ürün eklendi;5;;
+109479;9.06.2023 10:51:00;32;192.168.1.121;0;1055 carisine müsteri siparisi için 4103 stok ID ürün eklendi;5;;
+109480;9.06.2023 10:51:00;32;192.168.1.121;0;1055 carisine müsteri siparisi için 1820 stok ID ürün eklendi;5;;
+109481;9.06.2023 10:51:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109482;9.06.2023 10:51:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+109483;9.06.2023 10:53:00;32;192.168.1.121;0;1537 carisine müsteri siparisi için 354 stok ID ürün eklendi;5;;
+109484;9.06.2023 10:53:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109485;9.06.2023 10:53:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+109486;9.06.2023 10:53:00;32;192.168.1.121;0;1922 carisine müsteri siparisi için 371 stok ID ürün eklendi;5;;
+109487;9.06.2023 10:53:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109488;9.06.2023 10:53:00;32;192.168.1.121;0;Müsteri Siparisleri Listelendi;5;;Satis
+109489;9.06.2023 10:56:00;32;192.168.1.121;0;Müsteri Siparisleri Listelendi;5;;Satis
+109490;9.06.2023 10:56:00;32;192.168.1.121;0;Dogrudan Müsteri Siparisi Olusturma Ekrani;5;;Satis
+109491;9.06.2023 10:57:00;32;192.168.1.121;0;2422 carisine müsteri siparisi için 1906 stok ID ürün eklendi;5;;
+109492;9.06.2023 10:57:00;32;192.168.1.121;0;Müsteri siparisi ana tablo aktarimi;5;;satis
+109493;9.06.2023 11:19:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+109494;9.06.2023 11:28:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109495;9.06.2023 11:28:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+109496;9.06.2023 11:29:00;38;192.168.1.126;0;Welcome Dashboard;5;;Dashboard
+109497;9.06.2023 11:29:00;38;192.168.1.126;0;Banka Listesi Ekrani;5;;
+109498;9.06.2023 11:29:00;38;192.168.1.126;9;Yeni Banka Bilgisi Ekleme Ekrani Girisi;5;;Teklif
+109499;9.06.2023 11:29:00;38;192.168.1.126;0;Banka bilgileri güncellendi:DENIZBANK;5;;Teklif
+109500;9.06.2023 11:29:00;38;192.168.1.126;0;Banka Listesi Ekrani;5;;
+109501;9.06.2023 11:30:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:S342023000001449;5;;Mal Kabul
+109502;9.06.2023 11:30:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+109503;9.06.2023 11:31:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+109504;9.06.2023 11:31:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109505;9.06.2023 11:31:00;27;10.8.0.14;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109506;9.06.2023 11:31:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109507;9.06.2023 11:31:00;27;10.8.0.14;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109508;9.06.2023 11:35:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109509;9.06.2023 11:35:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3143;5;;Depo
+109510;9.06.2023 11:35:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109511;9.06.2023 11:37:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109512;9.06.2023 11:37:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109513;9.06.2023 11:37:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109514;9.06.2023 11:37:00;28;192.168.1.128;202;Stok Düzenleme Ekrani Girisi;5;;Stok
+109515;9.06.2023 11:38:00;28;192.168.1.128;202;Stok Güncelleme: HM-00373;5;;Stok
+109516;9.06.2023 11:38:00;28;192.168.1.128;202;Ürün bilgileri güncellendi:HM-00373;5;;Stok
+109517;9.06.2023 11:38:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109518;9.06.2023 11:38:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+109519;9.06.2023 11:38:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+109520;9.06.2023 11:40:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:DLF2023000000570;5;;Mal Kabul
+109521;9.06.2023 11:55:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:DLF2023000000570;5;;Mal Kabul
+109522;9.06.2023 11:55:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109523;9.06.2023 11:55:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+109524;9.06.2023 11:57:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109525;9.06.2023 11:58:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109526;9.06.2023 11:58:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109527;9.06.2023 11:58:00;28;192.168.1.128;71;Stok Depo Miktarlari Detay;5;;stok
+109528;9.06.2023 11:58:00;28;192.168.1.128;71;Stok Düzenleme Ekrani Girisi;5;;Stok
+109529;9.06.2023 11:58:00;28;192.168.1.128;71;Stok Güncelleme: HM-00153;5;;Stok
+109530;9.06.2023 11:58:00;28;192.168.1.128;71;Ürün bilgileri güncellendi:HM-00153;5;;Stok
+109531;9.06.2023 11:58:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109532;9.06.2023 11:59:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+109533;9.06.2023 11:59:00;28;192.168.1.128;0;71 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+109534;9.06.2023 11:59:00;28;192.168.1.128;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+109535;9.06.2023 12:00:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109536;9.06.2023 12:02:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109537;9.06.2023 12:02:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109538;9.06.2023 12:02:00;27;10.8.0.6;0;Satinalma Talebinden Siparis Olustur: id:3680;5;;Satin Alma
+109539;9.06.2023 12:03:00;27;10.8.0.6;0;2068 carisine satin alma siparisi için 71 kodlu ürün eklendi;5;;Satin Alma
+109540;9.06.2023 12:03:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109541;9.06.2023 12:03:00;27;10.8.0.6;0;Satinalma siparis ana tablo aktarimi;5;;Satin Alma
+109542;9.06.2023 12:03:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109543;9.06.2023 12:03:00;28;192.168.1.128;71;Stok Depo Miktarlari Detay;5;;stok
+109544;9.06.2023 12:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109545;9.06.2023 12:14:00;37;192.168.1.207;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+109546;9.06.2023 12:14:00;37;192.168.1.207;0;Ariza Ekrani;5;;ITAriza
+109547;9.06.2023 12:14:00;37;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109548;9.06.2023 12:15:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109549;9.06.2023 12:17:00;28;192.168.1.128;795;Stok Düzenleme Ekrani Girisi;5;;Stok
+109550;9.06.2023 12:25:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109551;9.06.2023 12:35:00;37;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109552;9.06.2023 12:36:00;0;10.8.0.6;0;Sifre Giris Ekrani;5;;
+109553;9.06.2023 12:36:00;0;10.8.0.6;0;Sifre Giris Ekrani;5;;
+109554;9.06.2023 12:36:00;0;10.8.0.6;0;Sifre Giris Ekrani;5;;
+109555;9.06.2023 12:36:00;0;10.8.0.6;0;Sifre Giris Ekrani;5;;
+109556;9.06.2023 12:36:00;0;10.8.0.6;0;Sifre Giris Ekrani;5;;
+109557;9.06.2023 12:52:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109558;9.06.2023 12:52:00;5;192.168.1.139;0;Welcome Dashboard;5;;Dashboard
+109559;9.06.2023 12:52:00;5;192.168.1.139;0;Stok Listesi Ekrani;5;;Stok
+109560;9.06.2023 12:53:00;5;192.168.1.139;0;Stok Listesi Ekrani;5;;Stok
+109561;9.06.2023 12:53:00;5;192.168.1.139;0;Stok Listesi Ekrani;5;;Stok
+109562;9.06.2023 12:54:00;5;192.168.1.139;71;Stok Depo Miktarlari Detay;5;;stok
+109563;9.06.2023 12:59:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109564;9.06.2023 13:01:00;35;192.168.1.165;0;Welcome Dashboard;5;;Dashboard
+109565;9.06.2023 13:01:00;35;192.168.1.165;0;Welcome Dashboard;5;;Dashboard
+109566;9.06.2023 13:01:00;35;192.168.1.165;0;Welcome Dashboard;5;;Dashboard
+109567;9.06.2023 13:01:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109568;9.06.2023 13:01:00;35;192.168.1.165;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+109569;9.06.2023 13:02:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109570;9.06.2023 13:02:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109571;9.06.2023 13:02:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109572;9.06.2023 13:02:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109573;9.06.2023 13:03:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109574;9.06.2023 13:04:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109575;9.06.2023 13:04:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109576;9.06.2023 13:04:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109577;9.06.2023 13:04:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109578;9.06.2023 13:05:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 4500;5;;
+109579;9.06.2023 13:05:00;28;192.168.1.128;795;Stok Düzenleme Ekrani Girisi;5;;Stok
+109580;9.06.2023 13:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109581;9.06.2023 13:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109582;9.06.2023 13:05:00;28;192.168.1.128;9;Stok Depo Miktarlari Detay;5;;stok
+109583;9.06.2023 13:05:00;28;192.168.1.128;9;Stok Düzenleme Ekrani Girisi;5;;Stok
+109584;9.06.2023 13:06:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 2800;5;;
+109585;9.06.2023 13:06:00;28;192.168.1.128;9;Stok Düzenleme Ekrani Girisi;5;;Stok
+109586;9.06.2023 13:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109587;9.06.2023 13:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109588;9.06.2023 13:06:00;28;192.168.1.128;9;Stok Depo Miktarlari Detay;5;;stok
+109589;9.06.2023 13:07:00;28;192.168.1.128;9;Stok Depo Miktarlari Detay;5;;stok
+109590;9.06.2023 13:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109591;9.06.2023 13:08:00;28;192.168.1.128;705;Stok Depo Miktarlari Detay;5;;stok
+109592;9.06.2023 13:08:00;28;192.168.1.128;705;Stok Düzenleme Ekrani Girisi;5;;Stok
+109593;9.06.2023 13:08:00;28;192.168.1.128;705;Stok Güncelleme: HM-00530;5;;Stok
+109594;9.06.2023 13:08:00;28;192.168.1.128;705;Ürün bilgileri güncellendi:HM-00530;5;;Stok
+109595;9.06.2023 13:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109596;9.06.2023 13:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109597;9.06.2023 13:09:00;28;192.168.1.128;71;Stok Depo Miktarlari Detay;5;;stok
+109598;9.06.2023 13:11:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109599;9.06.2023 13:11:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109600;9.06.2023 13:11:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109601;9.06.2023 13:11:00;27;10.8.0.6;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109602;9.06.2023 13:13:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+109603;9.06.2023 13:13:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+109604;9.06.2023 13:13:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+109605;9.06.2023 13:13:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109606;9.06.2023 13:13:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109607;9.06.2023 13:13:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109608;9.06.2023 13:14:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109609;9.06.2023 13:14:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109610;9.06.2023 13:14:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109611;9.06.2023 13:14:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109612;9.06.2023 13:14:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109613;9.06.2023 13:15:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109614;9.06.2023 13:16:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109615;9.06.2023 13:16:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109616;9.06.2023 13:16:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109617;9.06.2023 13:16:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109618;9.06.2023 13:16:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109619;9.06.2023 13:16:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109620;9.06.2023 13:16:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109621;9.06.2023 13:16:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109622;9.06.2023 13:16:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109623;9.06.2023 13:16:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109624;9.06.2023 13:16:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109625;9.06.2023 13:17:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109626;9.06.2023 13:17:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109627;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109628;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109629;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109630;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109631;9.06.2023 13:18:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109632;9.06.2023 13:18:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109633;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109634;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109635;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109636;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109637;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109638;9.06.2023 13:18:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109639;9.06.2023 13:18:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109640;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109641;9.06.2023 13:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109642;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109643;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109644;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109645;9.06.2023 13:19:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109646;9.06.2023 13:19:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109647;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109648;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109649;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109650;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109651;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109652;9.06.2023 13:19:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109653;9.06.2023 13:19:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109654;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109655;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109656;9.06.2023 13:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109657;9.06.2023 13:20:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109658;9.06.2023 13:20:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109659;9.06.2023 13:20:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109660;9.06.2023 13:20:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109661;9.06.2023 13:20:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109662;9.06.2023 13:32:00;37;192.168.1.207;0;Stok Listesi Ekrani;5;;Stok
+109663;9.06.2023 13:33:00;37;192.168.1.207;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+109664;9.06.2023 13:33:00;37;192.168.1.207;0;Sterilizasyon süreci, koli seçimi;5;;Sterilizasyon
+109665;9.06.2023 13:34:00;37;192.168.1.207;0;Bildirimler inceleniyor;5;;
+109666;9.06.2023 13:34:00;37;192.168.1.207;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+109667;9.06.2023 13:34:00;37;192.168.1.207;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+109668;9.06.2023 13:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109669;9.06.2023 13:38:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109670;9.06.2023 13:39:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109671;9.06.2023 13:43:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109672;9.06.2023 13:43:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109673;9.06.2023 13:43:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109674;9.06.2023 13:43:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109675;9.06.2023 13:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109676;9.06.2023 13:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109677;9.06.2023 13:51:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109678;9.06.2023 13:51:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3149;5;;Depo
+109679;9.06.2023 13:51:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109680;9.06.2023 13:53:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109681;9.06.2023 13:55:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109682;9.06.2023 13:55:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109683;9.06.2023 13:55:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109684;9.06.2023 13:55:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109685;9.06.2023 13:55:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109686;9.06.2023 13:55:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109687;9.06.2023 13:57:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109688;9.06.2023 13:57:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109689;9.06.2023 13:57:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109690;9.06.2023 13:57:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109691;9.06.2023 13:57:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109692;9.06.2023 14:05:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3151;5;;Depo
+109693;9.06.2023 14:05:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109694;9.06.2023 14:05:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109695;9.06.2023 14:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109696;9.06.2023 14:06:00;28;192.168.1.128;11;Stok Depo Miktarlari Detay;5;;stok
+109697;9.06.2023 14:07:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109698;9.06.2023 14:07:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3153;5;;Depo
+109699;9.06.2023 14:07:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109700;9.06.2023 14:09:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109701;9.06.2023 14:09:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3155;5;;Depo
+109702;9.06.2023 14:09:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109703;9.06.2023 14:10:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109704;9.06.2023 14:11:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109705;9.06.2023 14:11:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+109706;9.06.2023 14:11:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3157;5;;Depo
+109707;9.06.2023 14:11:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109708;9.06.2023 14:11:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109709;9.06.2023 14:11:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109710;9.06.2023 14:11:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109711;9.06.2023 14:11:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109712;9.06.2023 14:11:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109713;9.06.2023 14:11:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109714;9.06.2023 14:12:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109715;9.06.2023 14:12:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109716;9.06.2023 14:12:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109717;9.06.2023 14:12:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109718;9.06.2023 14:12:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109719;9.06.2023 14:12:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109720;9.06.2023 14:13:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109721;9.06.2023 14:13:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109722;9.06.2023 14:13:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109723;9.06.2023 14:13:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109724;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109725;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109726;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109727;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109728;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109729;9.06.2023 14:14:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109730;9.06.2023 14:14:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109731;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109732;9.06.2023 14:14:00;27;10.8.0.10;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109733;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109734;9.06.2023 14:14:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109735;9.06.2023 14:14:00;27;10.8.0.10;0;Satinalma Temp Siparis Olusturma Ekrani;5;;Satin Alma
+109736;9.06.2023 14:15:00;27;10.8.0.10;0;2068 carisine satin alma siparisi için 71 kodlu ürün eklendi;5;;Satin Alma
+109737;9.06.2023 14:15:00;27;10.8.0.10;0;Satinalma siparis ana tablo aktarimi;5;;Satin Alma
+109738;9.06.2023 14:15:00;27;10.8.0.10;0;Welcome Dashboard;5;;Dashboard
+109739;9.06.2023 14:15:00;27;10.8.0.10;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109740;9.06.2023 14:15:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109741;9.06.2023 14:15:00;27;10.8.0.10;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+109742;9.06.2023 14:15:00;28;192.168.1.128;71;Stok Depo Miktarlari Detay;5;;stok
+109743;9.06.2023 14:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109744;9.06.2023 14:17:00;28;192.168.1.128;43;Stok Depo Miktarlari Detay;5;;stok
+109745;9.06.2023 14:18:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109746;9.06.2023 14:18:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3159;5;;Depo
+109747;9.06.2023 14:18:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+109748;9.06.2023 14:20:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109749;9.06.2023 14:20:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3161;5;;Depo
+109750;9.06.2023 14:20:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+109751;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109752;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109753;9.06.2023 14:21:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109754;9.06.2023 14:21:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109755;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109756;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109757;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109758;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109759;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109760;9.06.2023 14:21:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109761;9.06.2023 14:21:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109762;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109763;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109764;9.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109765;9.06.2023 14:22:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109766;9.06.2023 14:22:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109767;9.06.2023 14:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109768;9.06.2023 14:22:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109769;9.06.2023 14:22:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109770;9.06.2023 14:22:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109771;9.06.2023 14:22:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109772;9.06.2023 14:23:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109773;9.06.2023 14:23:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109774;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109775;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109776;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109777;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109778;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109779;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109780;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109781;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109782;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109783;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109784;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109785;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109786;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109787;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109788;9.06.2023 14:23:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109789;9.06.2023 14:23:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109790;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109791;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109792;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109793;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109794;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109795;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109796;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109797;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109798;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109799;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109800;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109801;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109802;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109803;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109804;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109805;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109806;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109807;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109808;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109809;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109810;9.06.2023 14:24:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109811;9.06.2023 14:24:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109812;9.06.2023 14:24:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109813;9.06.2023 14:25:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109814;9.06.2023 14:25:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109815;9.06.2023 14:25:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109816;9.06.2023 14:25:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109817;9.06.2023 14:25:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109818;9.06.2023 14:25:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109819;9.06.2023 14:25:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109820;9.06.2023 14:25:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109821;9.06.2023 14:25:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109822;9.06.2023 14:25:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109823;9.06.2023 14:25:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109824;9.06.2023 14:25:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109825;9.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109826;9.06.2023 14:26:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109827;9.06.2023 14:26:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109828;9.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109829;9.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109830;9.06.2023 14:26:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109831;9.06.2023 14:26:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109832;9.06.2023 14:26:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109833;9.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109834;9.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109835;9.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109836;9.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109837;9.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109838;9.06.2023 14:27:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109839;9.06.2023 14:27:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109840;9.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109841;9.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109842;9.06.2023 14:28:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109843;9.06.2023 14:28:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109844;9.06.2023 14:28:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109845;9.06.2023 14:28:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109846;9.06.2023 14:28:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109847;9.06.2023 14:28:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109848;9.06.2023 14:29:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109849;9.06.2023 14:29:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109850;9.06.2023 14:29:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109851;9.06.2023 14:29:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109852;9.06.2023 14:29:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109853;9.06.2023 14:29:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109854;9.06.2023 14:29:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109855;9.06.2023 14:29:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109856;9.06.2023 14:29:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109857;9.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109858;9.06.2023 14:30:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109859;9.06.2023 14:30:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109860;9.06.2023 14:30:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109861;9.06.2023 14:30:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109862;9.06.2023 14:30:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109863;9.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109864;9.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109865;9.06.2023 14:30:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109866;9.06.2023 14:30:00;29;192.168.1.212;4287;Reçete Adimlari Listelendi : EXTREMITY SET  LITVANYA;5;;Reçete
+109867;9.06.2023 14:30:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109868;9.06.2023 14:31:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109869;9.06.2023 14:31:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109870;9.06.2023 14:31:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109871;9.06.2023 14:31:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3163;5;;Depo
+109872;9.06.2023 14:31:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+109873;9.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109874;9.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109875;9.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+109876;9.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109877;9.06.2023 14:37:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109878;9.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109879;9.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109880;9.06.2023 14:37:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109881;9.06.2023 14:37:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109882;9.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+109883;9.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+109884;9.06.2023 14:37:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+109885;9.06.2023 14:37:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109886;9.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+109887;9.06.2023 14:37:00;29;192.168.1.212;4284;Reçete Adimlari Listelendi : HIP SET    LITVANYA;5;;Reçete
+109888;9.06.2023 14:38:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109889;9.06.2023 14:38:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109890;9.06.2023 14:40:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109891;9.06.2023 14:40:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109892;9.06.2023 14:40:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109893;9.06.2023 14:40:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109894;9.06.2023 14:40:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109895;9.06.2023 14:40:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109896;9.06.2023 14:40:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109897;9.06.2023 14:40:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109898;9.06.2023 14:40:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109899;9.06.2023 14:40:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109900;9.06.2023 14:41:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109901;9.06.2023 14:41:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109902;9.06.2023 14:41:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109903;9.06.2023 14:41:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109904;9.06.2023 14:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109905;9.06.2023 14:41:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109906;9.06.2023 14:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109907;9.06.2023 14:41:00;28;192.168.1.128;208;Stok Depo Miktarlari Detay;5;;stok
+109908;9.06.2023 14:41:00;28;192.168.1.128;208;Stok Depo Miktarlari Detay;5;;stok
+109909;9.06.2023 14:41:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109910;9.06.2023 14:41:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109911;9.06.2023 14:42:00;28;192.168.1.128;208;Stok Düzenleme Ekrani Girisi;5;;Stok
+109912;9.06.2023 14:42:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarCik MIKTAR: 300;5;;
+109913;9.06.2023 14:42:00;28;192.168.1.128;208;Stok Düzenleme Ekrani Girisi;5;;Stok
+109914;9.06.2023 14:42:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109915;9.06.2023 14:42:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109916;9.06.2023 14:42:00;28;192.168.1.128;208;Stok Depo Miktarlari Detay;5;;stok
+109917;9.06.2023 14:43:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109918;9.06.2023 14:43:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109919;9.06.2023 14:44:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109920;9.06.2023 15:33:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109921;9.06.2023 15:33:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3166;5;;Depo
+109922;9.06.2023 15:33:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+109923;9.06.2023 15:48:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109924;9.06.2023 15:48:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109925;9.06.2023 15:48:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109926;9.06.2023 15:48:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109927;9.06.2023 15:49:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109928;9.06.2023 15:49:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109929;9.06.2023 15:49:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109930;9.06.2023 15:49:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109931;9.06.2023 15:49:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109932;9.06.2023 15:49:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109933;9.06.2023 15:49:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+109934;9.06.2023 15:49:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109935;9.06.2023 15:49:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109936;9.06.2023 15:49:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109937;9.06.2023 15:49:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109938;9.06.2023 15:49:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+109939;9.06.2023 15:49:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109940;9.06.2023 15:49:00;28;192.168.1.128;39;Stok Depo Miktarlari Detay;5;;stok
+109941;9.06.2023 15:49:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109942;9.06.2023 15:49:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109943;9.06.2023 15:57:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109944;9.06.2023 15:57:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3168;5;;Depo
+109945;9.06.2023 15:57:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+109946;9.06.2023 15:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109947;9.06.2023 15:59:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3170;5;;Depo
+109948;9.06.2023 15:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+109949;9.06.2023 16:01:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109950;9.06.2023 16:03:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:silindi) (id:1811) (deger:1);5;;
+109951;9.06.2023 16:03:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:silindi) (id:1810) (deger:1);5;;
+109952;9.06.2023 16:03:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109953;9.06.2023 16:03:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:silindi) (id:1835) (deger:1);5;;
+109954;9.06.2023 16:03:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:silindi) (id:1834) (deger:1);5;;
+109955;9.06.2023 16:03:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109956;9.06.2023 16:03:00;39;192.168.1.118;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+109957;9.06.2023 16:04:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+109958;9.06.2023 16:04:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109959;9.06.2023 16:05:00;39;192.168.1.118;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109960;9.06.2023 16:05:00;39;192.168.1.118;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+109961;9.06.2023 16:05:00;39;192.168.1.118;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109962;9.06.2023 16:07:00;39;192.168.1.118;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3172;5;;Depo
+109963;9.06.2023 16:07:00;39;192.168.1.118;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+109964;9.06.2023 16:07:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109965;9.06.2023 16:07:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109966;9.06.2023 16:08:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109967;9.06.2023 16:08:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109968;9.06.2023 16:08:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109969;9.06.2023 16:08:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109970;9.06.2023 16:08:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109971;9.06.2023 16:08:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109972;9.06.2023 16:08:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109973;9.06.2023 16:08:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109974;9.06.2023 16:08:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109975;9.06.2023 16:08:00;39;192.168.1.118;0;Personel Çikis Yapti;5;;Personel
+109976;9.06.2023 16:08:00;0;192.168.1.118;0;Sifre Giris Ekrani;5;;
+109977;9.06.2023 16:08:00;0;192.168.1.118;0;Sifre Denemesi;5;;Personel
+109978;9.06.2023 16:08:00;0;192.168.1.118;0;Sifre Dogrulaniyor;5;;Personel
+109979;9.06.2023 16:08:00;28;192.168.1.118;0;Basarili Giris;5;;Personel
+109980;9.06.2023 16:08:00;28;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+109981;9.06.2023 16:08:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109982;9.06.2023 16:08:00;28;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109983;9.06.2023 16:08:00;28;192.168.1.118;0;Bu bölüme girmeye yetkiniz bulunmamaktadir;5;;Üretim
+109984;9.06.2023 16:08:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109985;9.06.2023 16:08:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109986;9.06.2023 16:08:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109987;9.06.2023 16:08:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109988;9.06.2023 16:08:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109989;9.06.2023 16:09:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109990;9.06.2023 16:09:00;29;192.168.1.212;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+109991;9.06.2023 16:09:00;29;192.168.1.212;0;Müsteri Siparisleri Listelendi;5;;Satis
+109992;9.06.2023 16:09:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109993;9.06.2023 16:09:00;28;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+109994;9.06.2023 16:09:00;28;192.168.1.118;0;Bu bölüme girmeye yetkiniz bulunmamaktadir;5;;Üretim
+109995;9.06.2023 16:09:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+109996;9.06.2023 16:09:00;29;192.168.1.212;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+109997;9.06.2023 16:10:00;28;192.168.1.118;0;Personel Çikis Yapti;5;;Personel
+109998;9.06.2023 16:10:00;0;192.168.1.118;0;Sifre Giris Ekrani;5;;
+109999;9.06.2023 16:10:00;0;192.168.1.118;0;Sifre Denemesi;5;;Personel
+110000;9.06.2023 16:10:00;0;192.168.1.118;0;Sifre Dogrulaniyor;5;;Personel
+110001;9.06.2023 16:10:00;39;192.168.1.118;0;Basarili Giris;5;;Personel
+110002;9.06.2023 16:10:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+110003;9.06.2023 16:15:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110004;9.06.2023 16:15:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110005;9.06.2023 16:18:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110006;9.06.2023 16:27:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110007;9.06.2023 16:28:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110008;9.06.2023 16:28:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110009;9.06.2023 16:28:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110010;9.06.2023 16:28:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110011;9.06.2023 16:29:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110012;9.06.2023 16:41:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110013;9.06.2023 16:41:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110014;9.06.2023 16:42:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110015;9.06.2023 16:42:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor: DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110016;9.06.2023 16:42:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110017;9.06.2023 16:43:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110018;9.06.2023 16:43:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110019;9.06.2023 16:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110020;9.06.2023 16:46:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110021;9.06.2023 16:46:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110022;9.06.2023 16:46:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110023;9.06.2023 16:46:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110024;9.06.2023 16:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110025;9.06.2023 16:46:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110026;9.06.2023 16:47:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110027;9.06.2023 16:47:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110028;9.06.2023 16:47:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110029;9.06.2023 16:47:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110030;9.06.2023 16:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110031;9.06.2023 16:47:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110032;9.06.2023 16:47:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110033;9.06.2023 16:47:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110034;9.06.2023 16:48:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110035;9.06.2023 16:48:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110036;9.06.2023 16:48:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110037;9.06.2023 16:48:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110038;9.06.2023 16:48:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110039;9.06.2023 16:48:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110040;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110041;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110042;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110043;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110044;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110045;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110046;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110047;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110048;9.06.2023 16:50:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110049;9.06.2023 16:50:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110050;9.06.2023 16:50:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110051;9.06.2023 16:50:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110052;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110053;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110054;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110055;9.06.2023 16:50:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110056;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110057;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110058;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110059;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110060;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110061;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110062;9.06.2023 16:50:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110063;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110064;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110065;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110066;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110067;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110068;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110069;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110070;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110071;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110072;9.06.2023 16:50:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110073;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110074;9.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110075;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110076;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110077;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110078;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110079;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110080;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110081;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110082;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110083;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110084;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110085;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110086;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110087;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110088;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110089;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110090;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110091;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110092;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110093;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110094;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110095;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110096;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110097;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110098;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110099;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110100;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110101;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110102;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110103;9.06.2023 16:51:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110104;9.06.2023 16:51:00;29;192.168.1.212;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110105;9.06.2023 16:52:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110106;9.06.2023 16:52:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110107;9.06.2023 16:52:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110108;9.06.2023 16:52:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110109;9.06.2023 16:52:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110110;9.06.2023 16:52:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110111;9.06.2023 16:55:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110112;9.06.2023 16:55:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110113;9.06.2023 16:55:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110114;9.06.2023 16:55:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110115;9.06.2023 16:55:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110116;9.06.2023 16:58:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110117;9.06.2023 17:22:00;28;192.168.1.128;3102;Stok Düzenleme Ekrani Girisi;5;;Stok
+110118;9.06.2023 17:22:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 2415;5;;
+110119;9.06.2023 17:22:00;28;192.168.1.128;3102;Stok Düzenleme Ekrani Girisi;5;;Stok
+110120;9.06.2023 17:22:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110121;9.06.2023 17:22:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110122;9.06.2023 17:22:00;28;192.168.1.128;274;Stok Depo Miktarlari Detay;5;;stok
+110123;9.06.2023 17:24:00;32;192.168.1.121;0;Teklif Listesi Ekrani;5;;Teklif
+110124;9.06.2023 17:24:00;32;192.168.1.121;0;Kayit Basarili.;5;;Teklif
+110125;9.06.2023 17:24:00;28;192.168.1.128;274;Stok Düzenleme Ekrani Girisi;5;;Stok
+110126;9.06.2023 17:24:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarCik MIKTAR: 17000;5;;
+110127;9.06.2023 17:24:00;28;192.168.1.128;274;Stok Düzenleme Ekrani Girisi;5;;Stok
+110128;9.06.2023 17:24:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110129;9.06.2023 17:24:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110130;9.06.2023 17:24:00;28;192.168.1.128;84;Stok Depo Miktarlari Detay;5;;stok
+110131;9.06.2023 17:24:00;32;192.168.1.121;0;Teklif kalemi kayit ediliyor;5;;
+110132;9.06.2023 17:24:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110133;9.06.2023 17:25:00;28;192.168.1.128;315;Stok Depo Miktarlari Detay;5;;stok
+110134;9.06.2023 17:25:00;28;192.168.1.128;315;Stok Düzenleme Ekrani Girisi;5;;Stok
+110135;9.06.2023 17:25:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110136;9.06.2023 17:25:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110137;9.06.2023 17:25:00;28;192.168.1.128;3097;Stok Depo Miktarlari Detay;5;;stok
+110138;9.06.2023 17:26:00;28;192.168.1.128;3098;Stok Depo Miktarlari Detay;5;;stok
+110139;9.06.2023 17:26:00;28;192.168.1.128;83;Stok Depo Miktarlari Detay;5;;stok
+110140;9.06.2023 17:26:00;28;192.168.1.128;84;Stok Depo Miktarlari Detay;5;;stok
+110141;9.06.2023 17:26:00;28;192.168.1.128;315;Stok Depo Miktarlari Detay;5;;stok
+110142;9.06.2023 17:27:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 15100;5;;
+110143;9.06.2023 17:27:00;28;192.168.1.128;315;Stok Düzenleme Ekrani Girisi;5;;Stok
+110144;9.06.2023 17:27:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110145;9.06.2023 17:27:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110146;9.06.2023 17:27:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110147;9.06.2023 17:28:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO K.ALTINTEPE;5;;Depo
+110148;9.06.2023 17:28:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+110149;9.06.2023 17:28:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3177;5;;Depo
+110150;9.06.2023 17:28:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+110151;9.06.2023 17:30:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110152;9.06.2023 17:30:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110153;9.06.2023 17:31:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110154;9.06.2023 17:31:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110155;9.06.2023 17:31:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110156;9.06.2023 17:31:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110157;9.06.2023 17:31:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110158;9.06.2023 17:31:00;28;192.168.1.128;315;Stok Depo Miktarlari Detay;5;;stok
+110159;9.06.2023 17:32:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110160;9.06.2023 17:32:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110161;9.06.2023 17:33:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110162;9.06.2023 17:34:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110163;9.06.2023 17:34:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110164;9.06.2023 17:35:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110165;9.06.2023 17:35:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110166;9.06.2023 17:35:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110167;9.06.2023 17:36:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110168;9.06.2023 17:36:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110169;9.06.2023 17:36:00;28;192.168.1.128;72;Stok Depo Miktarlari Detay;5;;stok
+110170;9.06.2023 17:36:00;28;192.168.1.128;72;Stok Düzenleme Ekrani Girisi;5;;Stok
+110171;9.06.2023 17:36:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3141) (deger:G);5;;
+110172;9.06.2023 17:36:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110173;9.06.2023 17:36:00;28;192.168.1.128;72;Stok Güncelleme: HM-00154;5;;Stok
+110174;9.06.2023 17:36:00;28;192.168.1.128;72;Ürün bilgileri güncellendi:HM-00154;5;;Stok
+110175;9.06.2023 17:36:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110176;9.06.2023 17:36:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3144) (deger:G);5;;
+110177;9.06.2023 17:36:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110178;9.06.2023 17:36:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3150) (deger:G);5;;
+110179;9.06.2023 17:36:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110180;9.06.2023 17:36:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110181;9.06.2023 17:36:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+110182;9.06.2023 17:36:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3152) (deger:G);5;;
+110183;9.06.2023 17:36:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110184;9.06.2023 17:36:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3156) (deger:G);5;;
+110185;9.06.2023 17:36:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110186;9.06.2023 17:36:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110187;9.06.2023 17:37:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3154) (deger:G);5;;
+110188;9.06.2023 17:37:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3179;5;;Depo
+110189;9.06.2023 17:37:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110190;9.06.2023 17:37:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+110191;9.06.2023 17:37:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3158) (deger:G);5;;
+110192;9.06.2023 17:37:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110193;9.06.2023 17:37:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3180) (deger:G);5;;
+110194;9.06.2023 17:37:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110195;9.06.2023 17:37:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:3178) (deger:G);5;;
+110196;9.06.2023 17:37:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110197;9.06.2023 17:37:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110198;9.06.2023 17:37:00;28;192.168.1.128;223;Stok Depo Miktarlari Detay;5;;stok
+110199;9.06.2023 17:38:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110200;9.06.2023 17:39:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110201;9.06.2023 17:39:00;39;192.168.1.118;0;Bildirimler inceleniyor;5;;
+110202;9.06.2023 17:40:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110203;9.06.2023 17:40:00;28;192.168.1.128;303;Stok Depo Miktarlari Detay;5;;stok
+110204;9.06.2023 17:40:00;39;192.168.1.118;0;Depo Listesi Ekrani;5;;Depo
+110205;9.06.2023 17:40:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110206;9.06.2023 17:41:00;39;192.168.1.118;1;Yeni Depo Ekleme Ekrani Girisi;5;;Depo
+110207;9.06.2023 17:41:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3181;5;;Depo
+110208;9.06.2023 17:41:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+110209;9.06.2023 17:44:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110210;9.06.2023 17:44:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110211;9.06.2023 17:44:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110212;9.06.2023 17:44:00;39;192.168.1.118;1;Yeni Depo Ekleme Ekrani Girisi;5;;Depo
+110213;9.06.2023 17:44:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110214;9.06.2023 17:45:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110215;9.06.2023 17:45:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110216;9.06.2023 17:45:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110217;9.06.2023 17:46:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110218;9.06.2023 17:46:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110219;9.06.2023 17:46:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110220;9.06.2023 17:46:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110221;9.06.2023 17:46:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110222;9.06.2023 17:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110223;9.06.2023 17:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110224;9.06.2023 17:47:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+110225;9.06.2023 17:48:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110226;9.06.2023 17:48:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110227;9.06.2023 17:48:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110228;10.06.2023 08:02:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110229;10.06.2023 08:02:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110230;10.06.2023 08:02:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+110231;10.06.2023 08:05:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110232;10.06.2023 08:05:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110233;10.06.2023 08:05:00;29;192.168.1.212;0;Planlama ajanda sayfasi girisi;5;;Planlama
+110234;10.06.2023 08:06:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+110235;10.06.2023 08:06:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+110236;10.06.2023 08:06:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+110237;10.06.2023 08:06:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+110238;10.06.2023 08:06:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110239;10.06.2023 08:06:00;29;192.168.1.212;303;Üretim Kontrolü Ekrani;5;;Üretim
+110240;10.06.2023 08:13:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110241;10.06.2023 08:14:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110242;10.06.2023 08:14:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+110243;10.06.2023 08:14:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110244;10.06.2023 08:25:00;29;192.168.1.212;303;Üretim Kontrolü Ekrani;5;;Üretim
+110245;10.06.2023 08:25:00;29;192.168.1.212;303;Üretim Kontrolü Ekrani;5;;Üretim
+110246;10.06.2023 08:26:00;29;192.168.1.212;303;Üretim Kontrolü Ekrani;5;;Üretim
+110247;10.06.2023 08:38:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110248;10.06.2023 08:38:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110249;10.06.2023 08:38:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110250;10.06.2023 08:39:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110251;10.06.2023 08:40:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110252;10.06.2023 08:40:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor:  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110253;10.06.2023 08:40:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110254;10.06.2023 08:40:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110255;10.06.2023 08:40:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110256;10.06.2023 08:40:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110257;10.06.2023 08:40:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110258;10.06.2023 08:41:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110259;10.06.2023 08:41:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110260;10.06.2023 08:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110261;10.06.2023 08:41:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110262;10.06.2023 08:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110263;10.06.2023 08:41:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110264;10.06.2023 08:41:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110265;10.06.2023 08:41:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110266;10.06.2023 08:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110267;10.06.2023 08:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110268;10.06.2023 08:42:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110269;10.06.2023 08:42:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110270;10.06.2023 08:42:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110271;10.06.2023 08:42:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110272;10.06.2023 08:42:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110273;10.06.2023 08:42:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110274;10.06.2023 08:43:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110275;10.06.2023 08:43:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110276;10.06.2023 08:43:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110277;10.06.2023 08:43:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110278;10.06.2023 08:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110279;10.06.2023 08:43:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110280;10.06.2023 08:46:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110281;10.06.2023 08:46:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110282;10.06.2023 08:47:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110283;10.06.2023 08:47:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110284;10.06.2023 08:47:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110285;10.06.2023 08:47:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110286;10.06.2023 08:58:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110287;10.06.2023 08:58:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110288;10.06.2023 08:59:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110289;10.06.2023 08:59:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110290;10.06.2023 08:59:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110291;10.06.2023 08:59:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110292;10.06.2023 08:59:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110293;10.06.2023 09:00:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110294;10.06.2023 09:00:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110295;10.06.2023 09:00:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110296;10.06.2023 09:00:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110297;10.06.2023 09:00:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110298;10.06.2023 09:00:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110299;10.06.2023 09:00:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110300;10.06.2023 09:01:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110301;10.06.2023 09:01:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110302;10.06.2023 09:01:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110303;10.06.2023 09:01:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110304;10.06.2023 09:01:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110305;10.06.2023 09:01:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110306;10.06.2023 09:01:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110307;10.06.2023 09:02:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110308;10.06.2023 09:02:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110309;10.06.2023 09:02:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110310;10.06.2023 09:02:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110311;10.06.2023 09:02:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110312;10.06.2023 09:02:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110313;10.06.2023 09:02:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110314;10.06.2023 09:02:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110315;10.06.2023 09:02:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110316;10.06.2023 09:02:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110317;10.06.2023 09:02:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110318;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110319;10.06.2023 09:03:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110320;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110321;10.06.2023 09:03:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110322;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110323;10.06.2023 09:03:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110324;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110325;10.06.2023 09:03:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110326;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110327;10.06.2023 09:03:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110328;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110329;10.06.2023 09:03:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110330;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110331;10.06.2023 09:03:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110332;10.06.2023 09:03:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110333;10.06.2023 09:03:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110334;10.06.2023 09:03:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110335;10.06.2023 09:03:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110336;10.06.2023 09:03:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110337;10.06.2023 09:03:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110338;10.06.2023 09:03:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110339;10.06.2023 09:03:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110340;10.06.2023 09:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110341;10.06.2023 09:04:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110342;10.06.2023 09:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110343;10.06.2023 09:04:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110344;10.06.2023 09:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110345;10.06.2023 09:04:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110346;10.06.2023 09:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110347;10.06.2023 09:04:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110348;10.06.2023 09:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110349;10.06.2023 09:04:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110350;10.06.2023 09:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110351;10.06.2023 09:04:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110352;10.06.2023 09:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110353;10.06.2023 09:04:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110354;10.06.2023 09:04:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110355;10.06.2023 09:05:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110356;10.06.2023 09:05:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor:  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110357;10.06.2023 09:05:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110358;10.06.2023 09:05:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110359;10.06.2023 09:05:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110360;10.06.2023 09:05:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110361;10.06.2023 09:05:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110362;10.06.2023 09:05:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110363;10.06.2023 09:06:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110364;10.06.2023 09:06:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110365;10.06.2023 09:06:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110366;10.06.2023 09:06:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110367;10.06.2023 09:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110368;10.06.2023 09:06:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110369;10.06.2023 09:06:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110370;10.06.2023 09:06:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110371;10.06.2023 09:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110372;10.06.2023 09:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110373;10.06.2023 09:07:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110374;10.06.2023 09:07:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110375;10.06.2023 09:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110376;10.06.2023 09:07:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110377;10.06.2023 09:07:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110378;10.06.2023 09:07:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110379;10.06.2023 09:08:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110380;10.06.2023 09:08:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110381;10.06.2023 09:08:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110382;10.06.2023 09:08:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110383;10.06.2023 09:08:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110384;10.06.2023 09:08:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110385;10.06.2023 09:09:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110386;10.06.2023 09:09:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110387;10.06.2023 09:09:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110388;10.06.2023 09:09:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110389;10.06.2023 09:09:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110390;10.06.2023 09:09:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110391;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110392;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110393;10.06.2023 09:10:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110394;10.06.2023 09:10:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110395;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110396;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110397;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110398;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110399;10.06.2023 09:10:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110400;10.06.2023 09:10:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110401;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110402;10.06.2023 09:10:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110403;10.06.2023 09:11:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110404;10.06.2023 09:11:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110405;10.06.2023 09:11:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110406;10.06.2023 09:11:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110407;10.06.2023 09:11:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110408;10.06.2023 09:11:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110409;10.06.2023 09:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110410;10.06.2023 09:19:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110411;10.06.2023 09:19:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110412;10.06.2023 09:19:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110413;10.06.2023 09:19:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110414;10.06.2023 09:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110415;10.06.2023 09:19:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110416;10.06.2023 09:20:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110417;10.06.2023 09:20:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110418;10.06.2023 09:20:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110419;10.06.2023 09:20:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110420;10.06.2023 09:20:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110421;10.06.2023 09:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110422;10.06.2023 09:22:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110423;10.06.2023 09:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110424;10.06.2023 09:22:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110425;10.06.2023 09:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110426;10.06.2023 09:22:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110427;10.06.2023 09:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110428;10.06.2023 09:22:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110429;10.06.2023 09:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110430;10.06.2023 09:22:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110431;10.06.2023 09:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110432;10.06.2023 09:22:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110433;10.06.2023 09:22:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110434;10.06.2023 09:22:00;29;192.168.1.212;4292;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180*200 DUBLEX;5;;Reçete
+110435;10.06.2023 09:23:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110436;10.06.2023 09:23:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110437;10.06.2023 09:23:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110438;10.06.2023 09:23:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110439;10.06.2023 09:23:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110440;10.06.2023 09:23:00;29;192.168.1.212;4290;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 180*180 DUBLEX;5;;Reçete
+110441;10.06.2023 09:23:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110442;10.06.2023 09:23:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110443;10.06.2023 09:23:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110444;10.06.2023 09:23:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110445;10.06.2023 09:23:00;29;192.168.1.212;4291;Reçete Adimlari Listelendi :  ALET MASA ÖRTÜSÜ 100*150 CM  ;5;;Reçete
+110446;10.06.2023 09:24:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110447;10.06.2023 09:24:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110448;10.06.2023 09:24:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: YAN BANTLI 100*150 SMS;5;;Reçete
+110449;10.06.2023 09:24:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor: YAN BANTLI 100*150 SMS;5;;Reçete
+110450;10.06.2023 09:24:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110451;10.06.2023 09:24:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110452;10.06.2023 09:25:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110453;10.06.2023 09:25:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110454;10.06.2023 09:25:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110455;10.06.2023 09:26:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110456;10.06.2023 09:26:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110457;10.06.2023 09:26:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110458;10.06.2023 09:26:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110459;10.06.2023 09:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110460;10.06.2023 09:26:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110461;10.06.2023 09:26:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110462;10.06.2023 09:26:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110463;10.06.2023 09:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110464;10.06.2023 09:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110465;10.06.2023 09:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110466;10.06.2023 09:29:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110467;10.06.2023 09:29:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110468;10.06.2023 09:29:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110469;10.06.2023 09:29:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110470;10.06.2023 09:29:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110471;10.06.2023 09:29:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110472;10.06.2023 09:31:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110473;10.06.2023 09:31:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110474;10.06.2023 09:31:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110475;10.06.2023 09:31:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110476;10.06.2023 09:31:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110477;10.06.2023 09:31:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110478;10.06.2023 09:31:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110479;10.06.2023 09:31:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110480;10.06.2023 09:31:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110481;10.06.2023 09:31:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110482;10.06.2023 09:33:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110483;10.06.2023 09:33:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110484;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110485;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110486;10.06.2023 09:35:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110487;10.06.2023 09:35:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110488;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110489;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110490;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110491;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110492;10.06.2023 09:35:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110493;10.06.2023 09:35:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110494;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110495;10.06.2023 09:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110496;10.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110497;10.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110498;10.06.2023 09:36:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110499;10.06.2023 09:36:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110500;10.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110501;10.06.2023 09:36:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110502;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110503;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110504;10.06.2023 09:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110505;10.06.2023 09:37:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110506;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110507;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110508;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110509;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110510;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110511;10.06.2023 09:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110512;10.06.2023 09:37:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110513;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110514;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110515;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110516;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110517;10.06.2023 09:37:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110518;10.06.2023 09:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110519;10.06.2023 09:37:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110520;10.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110521;10.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110522;10.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110523;10.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110524;10.06.2023 09:38:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110525;10.06.2023 09:39:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110526;10.06.2023 09:39:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110527;10.06.2023 09:39:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110528;10.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110529;10.06.2023 09:39:00;28;192.168.1.128;715;Stok Depo Miktarlari Detay;5;;stok
+110530;10.06.2023 09:39:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110531;10.06.2023 09:39:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110532;10.06.2023 09:39:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110533;10.06.2023 09:39:00;28;192.168.1.128;18;Stok Depo Miktarlari Detay;5;;stok
+110534;10.06.2023 09:39:00;28;192.168.1.128;18;Stok Depo Miktarlari Detay;5;;stok
+110535;10.06.2023 09:40:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110536;10.06.2023 09:40:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110537;10.06.2023 09:40:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110538;10.06.2023 09:40:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110539;10.06.2023 09:40:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110540;10.06.2023 09:40:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110541;10.06.2023 09:40:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110542;10.06.2023 09:40:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110543;10.06.2023 09:40:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110544;10.06.2023 09:40:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110545;10.06.2023 09:40:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110546;10.06.2023 09:40:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110547;10.06.2023 09:40:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110548;10.06.2023 09:40:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110549;10.06.2023 09:40:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110550;10.06.2023 09:40:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110551;10.06.2023 09:40:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110552;10.06.2023 09:40:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110553;10.06.2023 09:41:00;39;192.168.1.118;0;Depo Listesi Ekrani;5;;Depo
+110554;10.06.2023 09:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110555;10.06.2023 09:41:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110556;10.06.2023 09:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110557;10.06.2023 09:41:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110558;10.06.2023 09:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110559;10.06.2023 09:41:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110560;10.06.2023 09:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110561;10.06.2023 09:41:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110562;10.06.2023 09:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110563;10.06.2023 09:41:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110564;10.06.2023 09:41:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110565;10.06.2023 09:41:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110566;10.06.2023 09:42:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110567;10.06.2023 09:42:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+110568;10.06.2023 09:43:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+110569;10.06.2023 09:43:00;29;192.168.1.212;3213;Reçete Adimlari Listelendi : PLAIN DRAPE  100X150CM DBLEK   15223MG ;5;;Reçete
+110570;10.06.2023 09:44:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110571;10.06.2023 09:46:00;39;192.168.1.118;0;Planlama ajanda sayfasi girisi;5;;Planlama
+110572;10.06.2023 09:46:00;39;192.168.1.118;0;Planlama ajanda sayfasi girisi;5;;Planlama
+110573;10.06.2023 09:47:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110574;10.06.2023 09:47:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110575;10.06.2023 09:48:00;39;192.168.1.118;0;Mal Kabul Ekrani Giris;5;;Lojistik
+110576;10.06.2023 09:49:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+110577;10.06.2023 09:49:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+110578;10.06.2023 10:14:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110579;10.06.2023 10:15:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110580;10.06.2023 10:15:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110581;10.06.2023 10:15:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110582;10.06.2023 10:15:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110583;10.06.2023 10:15:00;29;192.168.1.212;4293;Reçete Adimlari Listelendi : YAN BANTLI 100*150 SMS;5;;Reçete
+110584;10.06.2023 10:16:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110585;10.06.2023 10:16:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110586;10.06.2023 10:16:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110587;10.06.2023 10:16:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110588;10.06.2023 10:17:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110589;10.06.2023 10:17:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor: DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110590;10.06.2023 10:17:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110591;10.06.2023 10:17:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110592;10.06.2023 10:17:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110593;10.06.2023 10:17:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110594;10.06.2023 10:17:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110595;10.06.2023 10:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110596;10.06.2023 10:18:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110597;10.06.2023 10:18:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110598;10.06.2023 10:18:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110599;10.06.2023 10:18:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110600;10.06.2023 10:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110601;10.06.2023 10:18:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110602;10.06.2023 10:45:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+110603;10.06.2023 10:45:00;28;192.168.1.128;0;715 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+110604;10.06.2023 10:45:00;28;192.168.1.128;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+110605;10.06.2023 10:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110606;10.06.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+110607;10.06.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+110608;10.06.2023 10:46:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 3183;5;;Depo
+110609;10.06.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+110610;10.06.2023 12:03:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110611;10.06.2023 12:03:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110612;10.06.2023 12:03:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110613;10.06.2023 12:04:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110614;10.06.2023 12:04:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110615;10.06.2023 12:04:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110616;10.06.2023 12:04:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110617;10.06.2023 12:04:00;39;192.168.1.118;0;Bildirimler inceleniyor;5;;
+110618;10.06.2023 12:04:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110619;10.06.2023 12:04:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110620;10.06.2023 12:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110621;10.06.2023 12:04:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110622;10.06.2023 12:04:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110623;10.06.2023 12:07:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+110624;10.06.2023 12:09:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110625;10.06.2023 12:09:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110626;10.06.2023 12:09:00;39;192.168.1.118;8;Stok Depo Miktarlari Detay;5;;stok
+110627;10.06.2023 12:09:00;39;192.168.1.118;7;Stok Depo Miktarlari Detay;5;;stok
+110628;10.06.2023 12:09:00;39;192.168.1.118;3031;Stok Düzenleme Ekrani Girisi;5;;Stok
+110629;10.06.2023 12:10:00;39;192.168.1.118;0;Sterilizasyon Listesi Ekrani;5;;Sterilizasyon
+110630;10.06.2023 12:11:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110631;10.06.2023 12:11:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110632;10.06.2023 12:11:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110633;10.06.2023 12:11:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110634;10.06.2023 12:11:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110635;10.06.2023 12:12:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110636;10.06.2023 12:12:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110637;10.06.2023 12:12:00;39;192.168.1.118;0;Ariza Ekrani;5;;ITAriza
+110638;10.06.2023 12:12:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110639;10.06.2023 13:07:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110640;10.06.2023 13:07:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110641;10.06.2023 13:07:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110642;10.06.2023 13:49:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110643;10.06.2023 13:49:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+110644;10.06.2023 13:49:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110645;10.06.2023 13:49:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+110646;10.06.2023 13:49:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110647;10.06.2023 14:01:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110648;10.06.2023 14:01:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110649;10.06.2023 14:01:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110650;10.06.2023 14:01:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110651;10.06.2023 14:01:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110652;10.06.2023 14:01:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110653;10.06.2023 14:01:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+110654;10.06.2023 14:01:00;28;192.168.1.128;3102;Stok Depo Miktarlari Detay;5;;stok
+110655;10.06.2023 14:01:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110656;10.06.2023 14:01:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110657;10.06.2023 14:01:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110658;10.06.2023 14:01:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110659;10.06.2023 14:01:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110660;10.06.2023 14:02:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110661;10.06.2023 14:02:00;28;192.168.1.128;3101;Stok Depo Miktarlari Detay;5;;stok
+110662;10.06.2023 14:02:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110663;10.06.2023 14:02:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110664;10.06.2023 14:02:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110665;10.06.2023 14:02:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110666;10.06.2023 14:02:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110667;10.06.2023 14:02:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110668;10.06.2023 14:04:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110669;10.06.2023 14:04:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110670;10.06.2023 14:04:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110671;10.06.2023 14:04:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110672;10.06.2023 14:04:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110673;10.06.2023 14:04:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110674;10.06.2023 14:05:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110675;10.06.2023 14:05:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110676;10.06.2023 14:05:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110677;10.06.2023 14:05:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110678;10.06.2023 14:05:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110679;10.06.2023 14:05:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110680;10.06.2023 14:05:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110681;10.06.2023 14:05:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110682;10.06.2023 14:05:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110683;10.06.2023 14:05:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110684;10.06.2023 14:05:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110685;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110686;10.06.2023 14:06:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110687;10.06.2023 14:06:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110688;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110689;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110690;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110691;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110692;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110693;10.06.2023 14:06:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110694;10.06.2023 14:06:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110695;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110696;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110697;10.06.2023 14:06:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110698;10.06.2023 14:07:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110699;10.06.2023 14:07:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110700;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110701;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110702;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110703;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110704;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110705;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110706;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110707;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110708;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110709;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110710;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110711;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110712;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110713;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110714;10.06.2023 14:07:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+110715;10.06.2023 14:07:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110716;10.06.2023 14:07:00;29;192.168.1.212;4294;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 100*150 DUBLEX;5;;Reçete
+110717;10.06.2023 14:07:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110718;10.06.2023 14:08:00;39;192.168.1.118;0;Üretim Isleri Listelendi;5;;Üretim
+110719;10.06.2023 14:08:00;39;192.168.1.118;0;Üretim Isleri Listelendi;5;;Üretim
+110720;10.06.2023 14:08:00;39;192.168.1.118;0;Üretim Isleri Listelendi;5;;Üretim
+110721;10.06.2023 14:08:00;39;192.168.1.118;0;Üretim Isleri Listelendi;5;;Üretim
+110722;10.06.2023 14:08:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+110723;10.06.2023 14:08:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+110724;10.06.2023 14:08:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110725;10.06.2023 14:08:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110726;10.06.2023 14:08:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+110727;10.06.2023 14:08:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+110728;10.06.2023 14:08:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110729;10.06.2023 14:18:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110730;10.06.2023 14:18:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110731;10.06.2023 14:18:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110732;10.06.2023 14:18:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110733;10.06.2023 14:19:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110734;10.06.2023 14:19:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+110735;10.06.2023 14:19:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110736;10.06.2023 14:19:00;29;192.168.1.212;0;Welcome Dashboard;5;;Dashboard
+110737;10.06.2023 14:19:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110738;10.06.2023 14:20:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110739;10.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110740;10.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor:  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110741;10.06.2023 14:21:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110742;10.06.2023 14:21:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110743;10.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110744;10.06.2023 14:21:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110745;10.06.2023 14:22:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+110746;10.06.2023 14:24:00;39;192.168.1.118;0;Depo Listesi Ekrani;5;;Depo
+110747;10.06.2023 14:24:00;39;192.168.1.118;1;Yeni Depo Ekleme Ekrani Girisi;5;;Depo
+110748;10.06.2023 14:24:00;39;192.168.1.118;0;Firma Bilgileri Ekrani;5;;Teklif
+110749;10.06.2023 14:24:00;39;192.168.1.118;0;Yetkisiz Giris;5;;Teklif
+110750;10.06.2023 14:24:00;39;192.168.1.118;0;Planlama ajanda sayfasi girisi;5;;Planlama
+110751;10.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110752;10.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110753;10.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110754;10.06.2023 14:26:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110755;10.06.2023 14:26:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110756;10.06.2023 14:26:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110757;10.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110758;10.06.2023 14:27:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110759;10.06.2023 14:27:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110760;10.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110761;10.06.2023 14:27:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110762;10.06.2023 14:28:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110763;10.06.2023 14:28:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110764;10.06.2023 14:28:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110765;10.06.2023 14:28:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110766;10.06.2023 14:28:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110767;10.06.2023 14:28:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110768;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110769;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110770;10.06.2023 14:30:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110771;10.06.2023 14:30:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110772;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110773;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110774;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110775;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110776;10.06.2023 14:30:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110777;10.06.2023 14:30:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110778;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110779;10.06.2023 14:30:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110780;10.06.2023 14:31:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110781;10.06.2023 14:31:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110782;10.06.2023 14:31:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110783;10.06.2023 14:31:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110784;10.06.2023 14:31:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110785;10.06.2023 14:31:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110786;10.06.2023 14:32:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110787;10.06.2023 14:32:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110788;10.06.2023 14:32:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110789;10.06.2023 14:32:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110790;10.06.2023 14:32:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110791;10.06.2023 14:32:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110792;10.06.2023 14:33:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110793;10.06.2023 14:33:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110794;10.06.2023 14:33:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110795;10.06.2023 14:33:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110796;10.06.2023 14:33:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110797;10.06.2023 14:33:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110798;10.06.2023 14:34:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110799;10.06.2023 14:34:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110800;10.06.2023 14:34:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110801;10.06.2023 14:34:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110802;10.06.2023 14:34:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110803;10.06.2023 14:34:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110804;10.06.2023 14:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110805;10.06.2023 14:35:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110806;10.06.2023 14:35:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110807;10.06.2023 14:35:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110808;10.06.2023 14:35:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110809;10.06.2023 14:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110810;10.06.2023 14:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110811;10.06.2023 14:35:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110812;10.06.2023 14:36:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110813;10.06.2023 14:36:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110814;10.06.2023 14:36:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110815;10.06.2023 14:36:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110816;10.06.2023 14:36:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110817;10.06.2023 14:36:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110818;10.06.2023 14:36:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110819;10.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110820;10.06.2023 14:37:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110821;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110822;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110823;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110824;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110825;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110826;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110827;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110828;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110829;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110830;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110831;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110832;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110833;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110834;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110835;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110836;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110837;10.06.2023 14:37:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110838;10.06.2023 14:37:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110839;10.06.2023 14:37:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110840;10.06.2023 14:38:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110841;10.06.2023 14:39:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110842;10.06.2023 14:39:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor: DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110843;10.06.2023 14:39:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110844;10.06.2023 14:39:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110845;10.06.2023 14:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110846;10.06.2023 14:39:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110847;10.06.2023 14:40:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110848;10.06.2023 14:41:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110849;10.06.2023 14:41:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110850;10.06.2023 14:41:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110851;10.06.2023 14:41:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110852;10.06.2023 14:48:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110853;10.06.2023 14:48:00;29;192.168.1.212;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110854;10.06.2023 14:49:00;29;192.168.1.212;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: DÜZ ÖRTÜ 75*75 SMS;5;;Reçete
+110855;10.06.2023 14:49:00;29;192.168.1.212;0;Yeni Reçete Ekleniyor: DÜZ ÖRTÜ 75*75 SMS;5;;Reçete
+110856;10.06.2023 14:49:00;29;192.168.1.212;0;Reçeteler Listelendi;5;;Reçete
+110857;10.06.2023 14:49:00;29;192.168.1.212;4297;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 75*75 SMS;5;;Reçete
+110858;10.06.2023 14:49:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110859;10.06.2023 14:49:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110860;10.06.2023 14:50:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110861;10.06.2023 14:51:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110862;10.06.2023 14:51:00;29;192.168.1.212;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+110863;10.06.2023 14:51:00;29;192.168.1.212;0;Reçete adimi sirasi degistirildi;5;;Reçete
+110864;10.06.2023 14:51:00;29;192.168.1.212;4297;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 75*75 SMS;5;;Reçete
+110865;10.06.2023 14:51:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110866;10.06.2023 14:51:00;29;192.168.1.212;4297;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 75*75 SMS;5;;Reçete
+110867;10.06.2023 14:51:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110868;10.06.2023 14:52:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110869;10.06.2023 14:52:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110870;10.06.2023 14:52:00;29;192.168.1.212;4297;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110871;10.06.2023 14:53:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110872;10.06.2023 14:53:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110873;10.06.2023 14:53:00;29;192.168.1.212;4297;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 75*75 SMS;5;;Reçete
+110874;10.06.2023 14:53:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110875;10.06.2023 14:55:00;29;192.168.1.212;4295;Reçete Adimlari Listelendi :  DELIKLI ÖRTÜ 100*100cm SMS STERIL;5;;Reçete
+110876;10.06.2023 14:55:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110877;10.06.2023 14:55:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110878;10.06.2023 14:56:00;29;192.168.1.212;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+110879;10.06.2023 14:56:00;29;192.168.1.212;0;Reçete Adimi Güncelleniyor;5;;Reçete
+110880;10.06.2023 14:56:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110881;10.06.2023 14:56:00;29;192.168.1.212;4296;Reçete Adimlari Listelendi : DELIKLI ÖRTÜ 75*75cm SMS STERIL;5;;Reçete
+110882;10.06.2023 14:57:00;29;192.168.1.212;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+110883;10.06.2023 14:57:00;29;192.168.1.212;4297;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+110884;10.06.2023 14:59:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110885;10.06.2023 14:59:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110886;10.06.2023 14:59:00;29;192.168.1.212;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+110887;10.06.2023 14:59:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110888;10.06.2023 15:00:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110889;10.06.2023 15:00:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110890;10.06.2023 15:00:00;29;192.168.1.212;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+110891;10.06.2023 15:00:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110892;10.06.2023 15:00:00;29;192.168.1.212;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+110893;10.06.2023 15:00:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110894;10.06.2023 15:00:00;29;192.168.1.212;0;Stok Listesi Ekrani;5;;Stok
+110895;10.06.2023 15:00:00;29;192.168.1.212;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+110896;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110897;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110898;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110899;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110900;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110901;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110902;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110903;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110904;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110905;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110906;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110907;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110908;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110909;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110910;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110911;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110912;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110913;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110914;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110915;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110916;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110917;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110918;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110919;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110920;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110921;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+110922;10.06.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;

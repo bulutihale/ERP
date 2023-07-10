@@ -23,8 +23,8 @@
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
-	yetkiKontrol	 = yetkibul(modulAd)
-	
+	yetkiKontrol	 =	yetkibul(modulAd)
+	fiyatYetki		=	yetkibul("Satınalma Fiyat")
 
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
@@ -115,7 +115,13 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td>" & stokKodu & "</td>"
 						Response.Write "<td>" & stokAd & "</td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
-						Response.Write "<td class=""text-right"">" & birimFiyat & " " & paraBirim & "</td>"
+						Response.Write "<td class=""text-right"">"
+						if fiyatYetki = 9 then
+							Response.Write birimFiyat & " " & paraBirim
+						else
+							Response.Write "****"
+						end if
+						Response.Write "</td>"
 						Response.Write "<td class=""text-center bold"">"
 							Response.Write  "<span>" & teslimEdilen & " " & teslimBirim & "</span>"
 							Response.Write  "<span class=""text-danger""> / " & eksikMiktarKapat & " " & mikBirim & "</span>"

@@ -621,13 +621,12 @@ Response.Write "<div class=""card-body row"">"
 			&" iu.miktar, ISNULL(iu.miktar,0) as miktar, ISNULL(iu.arttirimMiktar,0) as arttirimMiktar, ISNULL(iu.eksiltimMiktar,0) as eksiltimMiktar, iu.birim, iu.stoklarID, ISNULL(iu.yaklasikMaliyetPB,'TL') as yaklasikMaliyetPB,"_
 			&" iu.bayiMarj, ISNULL(iu.bayiAlisPB,'TL') as bayiAlisPB, iu.stoklarListeFiyat, iu.stoklarListeFiyatPB, iu.listeFiyatTarih, iu.iskontoOran,"_
 			&" iu.id as ihaleUrunID, iu.ad as urunAd, iu.kalemNot, iu.kalemNotTeklifEkle, s.stokAd as stoklarAD, i.id as ihaleID, i.ihaleTipi, i.firmaID,"_
-			&" r.cariUrunRef, r.cariUrunAd, t5.id as sipTempID, t6.id as sipKalemID"_
+			&" r.cariUrunRef, r.cariUrunAd, t5.id as sipTempID"_
 			&" FROM teklifv2.ihale_urun iu"_
 			&" INNER JOIN teklifv2.ihale i ON iu.ihaleID = i.id"_
 			&" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"_
 			&" LEFT JOIN stok.stokRef r ON iu.stoklarID = r.stokID AND r.cariID = " & cariID & ""_
 			&" LEFT JOIN teklif.siparisKalemTemp t5 ON t5.iuID = iu.ID"_
-			&" LEFT JOIN teklif.siparisKalem t6 ON t6.iuID = iu.ID"_
 			&" WHERE i.firmaID = " & firmaID & " and ihaleID = " & id & " order by grupNo ASC, siraNo ASC"
 			rs.open sorgu,sbsv5,1,3
 				sonSiraKontrol = 0
@@ -648,14 +647,22 @@ Response.Write "<div class=""card-body row"">"
 				cariUrunAd		=	rs("cariUrunAd")
 				uhde			=	rs("uhde")
 				sipTempID		=	rs("sipTempID")
-				sipKalemID		=	rs("sipKalemID")
+
+				sorgu = "SELECT id as sipKalemID FROM teklif.siparisKalem WHERE iuID = " & ihaleUrunID
+				rs1.open sorgu,sbsv5,1,3
+					if rs1.recordcount > 0 then
+						sipKalemID	=	rs1("sipKalemID")
+						sipClass = " bg-success "
+					else
+						sipClass 		=	""
+					end if
+				rs1.close
 
 				if not isnull(sipTempID) then
 					sipClass 		=	" bg-info "
 					sipYaziliMsg	=	"Ürün, sipariş TEMP listesinde kayıtlı."
 				elseif not isnull(sipKalemID) then
-					sipClass = " bg-success "
-					sipYaziliMsg	=	"Ürün, sipariş olarak kayıt edilmiş."
+					'sipYaziliMsg	=	"Ürün, sipariş olarak kayıt edilmiş."
 				else
 					sipClass 		=	""
 				end if
@@ -673,7 +680,8 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""col"">"
 				Response.Write "<span class=""icon cart-put pointer"""
 				if yetkiKontrol > 8 then
-					if not isnull(sipTempID) OR not isnull(sipKalemID) then
+					'if not isnull(sipTempID) OR not isnull(sipKalemID) then
+					if not isnull(sipTempID) then
 						Response.Write " onclick=""swal('" & sipYaziliMsg & "','','info')"""
 					else
 						Response.Write " onclick=""modalajax('/teklif2/sipYaz_modal.asp?iuID="&ihaleUrunID&"&ihaleID="&ihaleID&"')"""

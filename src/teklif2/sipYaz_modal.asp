@@ -62,7 +62,34 @@ else
 				Response.Write "<div class=""bold"">Ürüne ait ANA BİRİM seçili olmadığı için sipariş yazılamaz</div>"
 			else
 		call logla("Teklif kaleminden sipariş Temp kaydı açılacak.iuID:"&iuID&"")
-				Response.Write "<span class=""pointer"" data-dismiss=""modal"">&times;</span>"
+				Response.Write "<div class=""text-right"">"
+					Response.Write "<span class=""pointer"" data-dismiss=""modal"">&times;</span>"
+				Response.Write "</div>"
+
+				sipSayi = 10
+				sorgu = "SELECT TOP("&sipSayi&") t1.tarih, t1.miktar, t1.mikBirim, t1.birimFiyat, t1.paraBirim"
+				sorgu = sorgu & " FROM teklif.siparisKalem t1 WHERE t1.iuID = " & iuID & " ORDER BY t1.tarih DESC"
+				rs.open sorgu,sbsv5,1,3
+					if rs.recordcount > 0 then
+
+						Response.Write "<div class=""container"">"
+								Response.Write "<div class=""row text-left bold"">Bu teklif kaleminden oluşturulmuş son "&sipSayi&" sipariş.</div>"
+								Response.Write "<div class=""row text-center bg-secondary"">"
+									Response.Write "<div class=""col border border-dark"">Sipariş Tarihi</div>"
+									Response.Write "<div class=""col border border-dark"">Miktar</div>"
+									Response.Write "<div class=""col border border-dark"">Fiyat</div>"
+								Response.Write "</div>"
+							for zi = 1 to rs.recordcount
+								Response.Write "<div class=""row"">"
+									Response.Write "<div class=""col text-right border border-dark"">" & rs("tarih") & "</div>"
+									Response.Write "<div class=""col text-right border border-dark"">" & rs("miktar") & " " & rs("mikBirim") & "</div>"
+									Response.Write "<div class=""col text-right border border-dark"">" & rs("birimFiyat") & " " & rs("paraBirim") & "</div>"
+								Response.Write "</div>"
+							rs.movenext
+							next
+						Response.Write "</div>"
+					end if
+				rs.close
 
 				Response.Write "<form action=""/teklif2/sipYazKaydet.asp"" method=""post"" class=""ajaxform"">"
 				Response.Write "<input type=""hidden"" name=""birimID"" value=""" & birimID & """ />"
