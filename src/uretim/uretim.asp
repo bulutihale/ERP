@@ -19,10 +19,10 @@
 	ajandaID		=	gorevID
 	ajandaID64		=	gorevID64
 	secilenDepoID	=	Request.QueryString("secilenDepoID")
-	surecDepoID		=	Request.QueryString("surecDepoID")
 	if secilenDepoID = "" or isnull(secilenDepoID) then
 		secilenDepoID = 0
 	end if
+	surecDepoID		=	Request.QueryString("surecDepoID")
 	if surecDepoID = "" or isnull(surecDepoID) then
 		surecDepoID = 0
 	end if
@@ -92,7 +92,10 @@ call logla("Üretim Kontrolü Ekranı")
 								dbReceteID			=	rs("receteID")
 								receteAd			=	rs("receteAd")
 								teminDepoID			=	rs("teminDepoID")
-								surecDepoID			=	rs("surecDepoID")
+								DBsurecDepoID		=	rs("surecDepoID")
+								if not isnull(DBsurecDepoID) then
+									surecDepoID = DBsurecDepoID
+								end if
 								receteMiktar 		= 	1 'uretimPlan işinde alt reçete miktarına ihtiyaç olmadığı için 1 tanımlandı, kesimPlan işinde lazım.
 							rs.close
 							urtBtnYaz		=	"ÜRETİME BAŞLA"
@@ -106,7 +109,7 @@ call logla("Üretim Kontrolü Ekranı")
 								Response.Write "<div class=""col-lg-9 col-sm-9"">" & sipMiktar & " " & mikBirim & "</div>"
 							Response.Write "</div>"
 
-						elseif isTur = "kesimPlan" then
+						elseif isTur = "kesimPlan" OR isTur = "kucukKesim" then
 
 
 							sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
@@ -136,7 +139,10 @@ call logla("Üretim Kontrolü Ekranı")
 								dbReceteID			=	rs("receteID")
 								receteAd			=	rs("receteAd")
 								teminDepoID			=	rs("teminDepoID")
-								surecDepoID			=	rs("surecDepoID")
+								DBsurecDepoID		=	rs("surecDepoID")
+								if not isnull(DBsurecDepoID) then
+									surecDepoID = DBsurecDepoID
+								end if
 								techizatID			=	rs("techizatID")
 							rs.close
 							urtBtnYaz	=	"KESİME BAŞLA"
@@ -563,6 +569,7 @@ call logla("Üretim Kontrolü Ekranı")
 
 		teminDepoID	=	$('#teminDepoID').val();
 		surecDepoID	=	$('#surecDepoID').val();
+
 		if($('#techizatID').length > 0){var techizatID = $('#techizatID').val();}else{var techizatID='yok'}; 
 		
 		if(teminDepoID == null){var teminDepoID = 0};
@@ -599,7 +606,7 @@ call logla("Üretim Kontrolü Ekranı")
 			$('#receteBtn').removeClass('d-none');
 			$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')	
 			$('#linklerDIV').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #linklerDIV > *')
-			$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+' #btnDIV2 > *');
+			$('#btnDIV2').load('/uretim/uretim.asp?secilenReceteID='+receteID+'&secilenDepoID='+teminDepoID+'&surecDepoID='+surecDepoID+' #btnDIV2 > *');
 	}
 
 	function uretimBasla(siparisKalemID, ajandaID, islemDurum, uretilenMiktar){

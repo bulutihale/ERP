@@ -80,11 +80,21 @@ Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""moda
 				next
 			Response.Write "</div>"
 			else
-				Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col bold"">Ürüne ait reçete kaydı yok</div>"
-				Response.Write "</div>"
+				sorgu = "SELECT stokKodu, stokAd FROM stok.stok WHERE stokID = " & stokID
+				rs1.open sorgu, sbsv5, 1, 3
+					stokKodu		=	rs1("stokKodu")
+					stokAd			=	rs1("stokAd")
+				rs1.close
 				Response.Write "<div class=""row mt-4"">"
-					Response.Write "<div class=""col bold text-danger"">Reçete olmadan planlama yapılamaz.</div>"
+					Response.Write "<div class=""col bold text-danger"">Ürüne ait reçete kaydı yok, reçete olmadan planlama yapılamaz.</div>"
+				Response.Write "</div>"
+
+				Response.Write "<div class=""row"">"
+					Response.Write "<div class=""mt-3 bold col"">"
+						Response.Write "<div class=""pointer"" onClick=""modalajax('/recete/recete_yeni.asp?stokID="&stokID&"')"">"
+							Response.Write stokKodu & " - " & stokAd & " ürününe reçete oluşturmak için tıklayınız."
+						Response.Write "</div>"
+					Response.Write "</div>"
 				Response.Write "</div>"
 			end if
 		Response.Write "</div>"

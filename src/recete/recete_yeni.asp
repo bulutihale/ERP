@@ -9,6 +9,7 @@
 	eskiReceteID	=	0
     opener  		=	Request.Form("opener")
     gorevID 		=	Request.QueryString("gorevID")
+    stokID	 		=	Request.QueryString("stokID")'sipariş listesinde reçetesi olmayan ürün linkinden gelindiğinde kullanılır.
 	gorevID64		=	gorevID
 	gorevID			=	base64_decode_tr(gorevID64)
     modulAd =   "Reçete"
@@ -22,6 +23,17 @@ Response.Flush()
 
 
 yetkiKontrol = yetkibul(modulAd)
+
+		if stokID > 0  then
+			sorgu = "SELECT stok.FN_anaBirimADBul("&stokID&", 'uAD') as anaBirimAd, stokID, stokAd FROM stok.stok WHERE stokID = " & stokID
+			rs.open sorgu, sbsv5, 1, 3
+				anaBirimAd		=	rs("anaBirimAd")
+				stokID			=	rs("stokID")
+				stokAd			=	rs("stokAd")
+			rs.close
+		end if
+
+
 
 if gorevID <> "" then
             sorgu = "SELECT t1.receteAd, t1.ozelRecete, t1.receteTipi, t1.silindi, t2.cariID, t2. cariAd, t3.stokID, t3.stokAd,"
@@ -82,8 +94,8 @@ call logla(divAd & " Ekranı Girişi")
 		Response.Write "<div class=""row mt-2"">"
 			Response.Write "<div class=""col-lg-12"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
-				if gorevID = "" then
-					call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id')); $('#receteAd').val($(this).text())","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
+				if gorevID = "" AND stokID = "" then
+					call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id')); $('#receteAd').val($(this).text()); $('#anaBirimDIV').load('/recete/recete_yeni.asp?stokID='+$(this).val()+' #anaBirimDIV > * ')","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
 				else
 					call formhidden("stokSec",stokID,"","","","","stokSec","")
 					call forminput("stokAd",stokAd,"","","","autocompleteOFF","stokAd","disabled")

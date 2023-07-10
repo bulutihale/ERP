@@ -723,30 +723,54 @@ function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, upd
 	  postData[postData1] = postData2;
 	}
   
-	function executeCodeBlock() {
-	  $('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
-		if(updateDIV !== ''){
+	// function executeCodeBlock() {
+	//   $('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
+	// 	if(updateDIV !== ''){
 
-		$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
-		  if (status == "error") {
-			toastr.options.positionClass = 'toast-bottom-right';
-			toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
-		  } else if (status == "success") {
-			toastr.options.positionClass = 'toast-bottom-right';
-			toastr.success('İşlem tamamlandı', 'OK');
-		  }
-		});
-	}else{
+	// 	$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
+	// 	  if (status == "error") {
+	// 		toastr.options.positionClass = 'toast-bottom-right';
+	// 		toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
+	// 	  } else if (status == "success") {
+	// 		toastr.options.positionClass = 'toast-bottom-right';
+	// 		toastr.success('İşlem tamamlandı', 'OK');
+	// 	  }
+	// 	});
+	// }else{
+	// 	if (status == "error") {
+	// 		toastr.options.positionClass = 'toast-bottom-right';
+	// 		toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
+	// 	  } else if (status == "success") {
+	// 		toastr.options.positionClass = 'toast-bottom-right';
+	// 		toastr.success('İşlem tamamlandı', 'OK');
+	// 	  }
+	// }
+	//   });
+	// }
+
+	function executeCodeBlock() {
+		if (deger !== '') {
+			$('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
+				handleResponse(status, xhr);
+			});
+		}
+		
+		if (updateDIV !== '') {
+		  $('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
+			handleResponse(status, xhr);
+		  });
+		}
+	}
+
+	function handleResponse(status, xhr) {
 		if (status == "error") {
 			toastr.options.positionClass = 'toast-bottom-right';
 			toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
-		  } else if (status == "success") {
+		} else if (status == "success") {
 			toastr.options.positionClass = 'toast-bottom-right';
 			toastr.success('İşlem tamamlandı', 'OK');
-		  }
-	}
-	  });
-	}
+		}
+	}	
   
 	if (baslik !== '') {
 	  swal({

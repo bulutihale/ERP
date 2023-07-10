@@ -52,10 +52,6 @@
 			rs.close
 
 
-		'##### DOSYA KAYDET
-		'##### DOSYA KAYDET
-
-			'## veritabanı
 
 			'###### plan tarihi değişiyorsa eski tarihe ait kayıt silindi=1
 				if silAjandaID <> "" then
@@ -89,35 +85,6 @@
 			'################ sipariş kaleminin reçetesini bul yarı mamullerin depo transferini ajandaya kaydet
 				if siparisKalemID <> "" then
 				
-				'### cari için  özel reçete var mı? yoksa normal reçeteyi al
-					' 	ekSorgu		=	" AND t1.cariID = " & cariID
-					' 	ekSorgu2	=	" AND t1.cariID = 0"
-
-					' sorgu = "SELECT t1.receteID"
-					' sorgu = sorgu & " FROM recete.recete t1"
-					' sorgu = sorgu & " WHERE t1.stokID = " & stokID & " AND t1.silindi = 0 AND t1.firmaID = " & firmaID
-					' ilkSorgu 	=	sorgu & ekSorgu
-					' ikinciSorgu	=	sorgu & ekSorgu2
-					' rs.open ilkSorgu, sbsv5,1,3
-					' 	if rs.recordcount  = 0 then
-					' 		rs.close
-					' 		rs.open ikinciSorgu, sbsv5,1,3
-					' 		call jsrun("swal('','Cari için özel reçete kayıt edilmemiş stok için oluşturulmuş genel reçeteye göre işlem kayıtları oluşturuldu.','warning')")
-					' 		receteID		=	rs("receteID")
-					' 		sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
-					' 		rs1.open sorgu, sbsv5,3,3
-					' 	end if
-					' 	if rs.recordcount > 0 then
-					' 		receteID		=	rs("receteID")
-					' 		sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul("&receteID&") WHERE id = " & ajandaID
-					' 		rs1.open sorgu, sbsv5,3,3
-					' 	else
-					' 		receteID = 0
-					' 		call jsrun("swal('Ürün takvim kaydı yapıldı ancak ürüne ait reçete bulunamadı.','Bu durum üretim adımlarının ve kullanılacak hammaddelerin plan kayıtlarını engeller. Takvim kaydını silerek reçete oluşturduktan sonra işlem yapmanız tavsiye edilir.')")
-					' 	end if
-					' rs.close
-				'### /cari için  özel reçete var mı? yoksa normal reçeteyi al
-
 				'####### üretilecek mamulun, reçeteye göre temin deposunu kayıt et
 					sorgu = "UPDATE portal.ajanda SET depoKategori = stok.FN_depoKategoriBul(" & receteID & ") WHERE id = " & ajandaID
 					rs1.open sorgu, sbsv5,3,3
@@ -131,8 +98,6 @@
 					sorgu = sorgu & " WHERE t1.receteID = " & receteID & " AND t1.stokID is not null AND t1.silindi = 0"
 					rs.open sorgu, sbsv5,1,3
 
-					'Response.Write sorgu &"<br>"
-
 					if rs.recordcount > 0 then
 						for ti = 1 to rs.recordcount
 							altReceteID		=	rs("altReceteID")
@@ -145,7 +110,6 @@
 							receteStokID	=	rs("receteStokID")
 							onHazirlikTur	=	rs("onHazirlikTur")
 							onHazirlikDeger	=	rs("onHazirlikDeger") * -1
-
 
 				'####### receteAdımına ait yarı mamullerin üretim depoya transferinin ajanda kaydı yapılsın
 							kayitTarih		=	tarihHesapla(planTarih, onHazirlikTur, onHazirlikDeger)
@@ -171,31 +135,28 @@
 							rs2.close
 				'####### /receteAdımına ait yarı mamullerin üretim depoya transferinin ajanda kaydı yapılsın
 							
-
-
-
 					sorgu = "SELECT t1.stokID as altReceteStokID, t2.stokAd as altReceteStokAd, stok.FN_depoKategoriBul(t1.receteID) as depoKategori,"
-					sorgu = sorgu & " t1.onHazirlikDeger as altReceteOHD, t1.onHazirlikTur altReceteOHT, t2.stokKodu as altReceteStokKodu, t1.receteAdimID as altAdimID"
+					sorgu = sorgu & " t1.onHazirlikDeger as altReceteOHD, t1.onHazirlikTur altReceteOHT, t2.stokKodu as altReceteStokKodu, t1.receteAdimID as altAdimID,"
+					sorgu = sorgu & " t4.planAd"
 					sorgu = sorgu & " FROM recete.receteAdim t1"
 					sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
+					sorgu = sorgu & " INNER JOIN recete.recete t3 ON t1.receteID = t3.receteID"
+					sorgu = sorgu & " INNER JOIN isletme.istasyon t4 ON t3.istasyonID = t4.istasyonID"
 					sorgu = sorgu & " WHERE t1.receteID = " & altReceteID & " AND t1.stokID is not null "
 					rs1.open sorgu, sbsv5,1,3
-					'Response.Write sorgu &"<br>"
-					'response.end
 					
-						if rs1.recordcount > 0 then
-							depoKategori		=	rs1("depoKategori")
-							altAdimID			=	rs1("altAdimID")
-							altReceteStokID		=	rs1("altReceteStokID")
-							altReceteStokAd		=	rs1("altReceteStokAd")
-							altReceteStokKodu	=	rs1("altReceteStokKodu")
-							altReceteOHD		=	rs1("altReceteOHD") * -1
-							altReceteOHDhes		=	onHazirlikDeger + altReceteOHD
-							altReceteOHT		=	rs1("altReceteOHT")
+					if rs1.recordcount > 0 then
+						depoKategori		=	rs1("depoKategori")
+						altAdimID			=	rs1("altAdimID")
+						altReceteStokID		=	rs1("altReceteStokID")
+						altReceteStokAd		=	rs1("altReceteStokAd")
+						altReceteStokKodu	=	rs1("altReceteStokKodu")
+						altReceteOHD		=	rs1("altReceteOHD") * -1
+						altReceteOHDhes		=	onHazirlikDeger + altReceteOHD
+						altReceteOHT		=	rs1("altReceteOHT")
+						planAd				=	rs1("planAd")
 
-
-				'####### receteAdeımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın
-
+					'####### receteAdımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın
 							altRecKayitTar	=	tarihHesapla(planTarih, altReceteOHT, altReceteOHDhes)
 							
 							hangiYil		=	datepart("yyyy",altRecKayitTar)
@@ -216,22 +177,20 @@
 									'rs2("receteAdimID")		=	altAdimID
 									rs2("receteAdimID")			=	receteAdimID
 									rs2("bagliAjandaID")		=	ajandaID
-									rs2("isTur")				=	"kesimPlan"
+									rs2("isTur")				=	planAd
 									rs2("depoKategori")			=	depoKategori
 								rs2.update
 							rs2.close
-				'####### /receteAdeımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın
+					'####### /receteAdımına ait alt recete var ise yarı mamul üretimi vb. işlemin ajanda kaydı yapılsın
 
-
-						end if
+					end if
 					rs1.close	
-				rs.movenext
-				next
-			end if
-			rs.close
-
-
+					rs.movenext
+					next
 				end if
+				rs.close
+
+			end if
 			'################ /sipariş kaleminin reçetesini bul yarı mamullerin depo transferini ajandaya kaydet
 
 			'########### seçilen reçeteID değerini AJANDA mamul satırına kaydet
@@ -242,12 +201,12 @@
 
 				call logla("Ajandaya etkinlik kaydı yapıldı")
 
-					call toastrCagir("Kayıt başarılı", "OK", "right", "success", "otomatik", "")
-					
-					call jsrun("$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?yer=" & yer & "&ayHareket:=0&sorgulananTarih=" & planTarih & " #ajandaAnaDIV > *')")
-					if yer = "modal" then
-						call jsrun("$('#ortaalan').load('/satis/siparis_liste.asp')")
-					end if
+				call toastrCagir("Kayıt başarılı", "OK", "right", "success", "otomatik", "")
+				
+				call jsrun("$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?yer=" & yer & "&ayHareket:=0&sorgulananTarih=" & planTarih & " #ajandaAnaDIV > *')")
+				if yer = "modal" then
+					call jsrun("$('#ortaalan').load('/satis/siparis_liste.asp')")
+				end if
 		else
 			call yetkisizGiris("","","")
 			call jsrun("swal('Yetkisiz İşlem','')")
