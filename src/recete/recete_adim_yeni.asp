@@ -5,9 +5,9 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid					=	kidbul()
-    receteAdimID		=	Request.QueryString("receteAdimID")
-	receteID			=	Request.QueryString("receteID")
-	islem				=	Request.QueryString("islem")
+    receteAdimID		=	Request("receteAdimID")
+	receteID			=	Request("receteID")
+	islem				=	Request("islem")
 	if receteID = "" then
 		receteID = Request.Form("receteID")
 	end if
@@ -78,9 +78,9 @@ if receteAdimID <> "" then
 					onHazirlikTur = "Saat"
 				end if
 				onHazirlikDeger		=	rs("onHazirlikDeger")
-				receteIslemTipiID	=	rs("receteIslemTipiID")
+				dbReceteIslemTipiID	=	rs("receteIslemTipiID")
 				receteIslemAd		=	rs("ad")
-				defDeger1			=	receteIslemTipiID & "###" & receteIslemAd
+				defDeger			=	dbReceteIslemTipiID & "###" & receteIslemAd
 				defDeger3			=	miktarBirim & "###" & uzunBirim
 				defDeger4			=	fireBirim & "###" & uzunBirim
 				defDeger5			=	altReceteID & "###" & altReceteAd
@@ -105,10 +105,12 @@ end if
 	if receteISlemTipiID <> "" then
 		sorgu = "SELECT t1.islemTur, t1.ad FROM recete.receteIslemTipi t1 WHERE receteISlemTipiID = " & receteISlemTipiID
 		rs.open sorgu, sbsv5, 1, 3
-			islemTur	=	rs("islemTur")
-			islemAd		=	rs("ad")
-			defDeger	=	receteISlemTipiID & "###" & islemAd
+			islemTur		=	rs("islemTur")
+			receteIslemAd	=	rs("ad")
+			defDeger		=	receteISlemTipiID & "###" & receteIslemAd
 		rs.close
+	else
+		receteIslemTipiID = dbReceteIslemTipiID
 	end if	
 '################ Yeni adım kayıt ediliyorsa seçilen işleme göre inputları göster
 '################ Yeni adım kayıt ediliyorsa seçilen işleme göre inputları göster
@@ -150,6 +152,7 @@ end if
 '###### ARAMA FORMU
 	if hata = "" and yetkiKontrol >= 5 then
 	Response.Write "<div id=""adimYeniUStDIV"">"
+	
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		Response.Write "<div class=""h5""><span class=""rounded bg-warning"">Üretilecek Ana Ürün:</span> " & esasStokAd & "</div>"
 		Response.Write "<form action=""/recete/recete_adim_ekle.asp"" method=""post"" class=""ajaxform"">"
@@ -159,7 +162,11 @@ end if
 						Response.Write "<div class=""row mt-2"">"
 							Response.Write "<div class=""col-12"">"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">İşlem Tipi</div>"
-								call formselectv2("receteIslemTipiID","","","","formSelect2 receteIslemTipiID border inpReset","","receteIslemTipiID","","data-holderyazi=""İşlem Tipi"" data-jsondosya=""JSON_receteIslemTipi"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
+								if islem = "edit" then
+									Response.Write "<div class=""ml-4 bold text-danger"">" & receteIslemAd & "</div>"
+								else
+									call formselectv2("receteIslemTipiID","","","","formSelect2 receteIslemTipiID border inpReset","","receteIslemTipiID","","data-holderyazi=""İşlem Tipi"" data-jsondosya=""JSON_receteIslemTipi"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
+								end if
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2"&kisiRow&""">"
@@ -304,8 +311,10 @@ end if
 		$('#receteIslemTipiID, #stokID, #birimSec, #enBoyBirim, #fireBirimSec, #altReceteID').trigger('mouseenter');
 		
 		
-		$('#receteIslemTipiID, #stokID').on('change',function() {
-			$('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {receteISlemTipiID:$('#receteIslemTipiID').val(), receteID:$('#receteID').val(), stokID:$('#stokID').val()})
+		//$('#receteIslemTipiID, #stokID').on('change',function() {
+		$('#receteIslemTipiID').on('change',function() {
+			//alert($('#receteIslemTipiID').val());
+			$('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {receteISlemTipiID:$('#receteIslemTipiID').val(), receteID:$('#receteID').val(), stokID:$('#stokID').val(),receteAdimID:$('#receteAdimID').val()})
 		})
 		
 
