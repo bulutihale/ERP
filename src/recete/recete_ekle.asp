@@ -10,6 +10,12 @@
 	eskiReceteID	=	Request.Form("eskiReceteID")
     receteID		=   Request.Form("receteID")
 	stokID			=	Request.Form("stokSec")
+	yeniStokID		=	Request.Form("yeniStokSec")
+	'####### reçete, ilk oluşturulduğu üründen farklı bir ürüne klonlanıyorsa
+		if yeniStokID <> "" AND yeniStokID <> stokID then
+			stokID = yeniStokID
+		end if
+	'####### reçete, ilk oluşturulduğu üründen farklı bir ürüne klonlanıyorsa
     receteAd 		=   Request.Form("receteAd")
 	receteTipi		=   Request.Form("receteTipi")
 	cariID			=	Request.Form("cariID")

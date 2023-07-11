@@ -91,8 +91,9 @@ if receteAdimID <> "" then
 end if
 
 if stokID <> "" then
-	sorgu = "SELECT stokID, stokAd, stokKodu FROM stok.stok WHERE stokID = " & stokID
+	sorgu = "SELECT stokID, stokAd, stokKodu, stok.FN_anaBirimADBul(stokID,'uAd') as anaBirimAD FROM stok.stok WHERE stokID = " & stokID
 	rs.open sorgu, sbsv5, 1, 3
+		anaBirimAD			=	rs("anaBirimAD")
 		stokKodu			=	rs("stokKodu")
 		stokAd				=  	rs("stokAd")
 		defDeger2			=	stokID & "###" & stokKodu & " - " & stokAd
@@ -311,10 +312,10 @@ end if
 		$('#receteIslemTipiID, #stokID, #birimSec, #enBoyBirim, #fireBirimSec, #altReceteID').trigger('mouseenter');
 		
 		
-		//$('#receteIslemTipiID, #stokID').on('change',function() {
-		$('#receteIslemTipiID').on('change',function() {
+		$('#receteIslemTipiID, #stokID').on('change',function() {
+		//$('#receteIslemTipiID').on('change',function() {
 			//alert($('#receteIslemTipiID').val());
-			$('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {receteISlemTipiID:$('#receteIslemTipiID').val(), receteID:$('#receteID').val(), stokID:$('#stokID').val(),receteAdimID:$('#receteAdimID').val()})
+			$('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {receteISlemTipiID:$('#receteIslemTipiID').val(), receteID:$('#receteID').val(), stokID:$('#stokID').val(),receteAdimID:$('#receteAdimID').val(),islem:$('#islem').val()})
 		})
 		
 

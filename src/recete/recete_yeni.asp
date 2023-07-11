@@ -93,12 +93,16 @@ call logla(divAd & " Ekranı Girişi")
 
 		Response.Write "<div class=""row mt-2"">"
 			Response.Write "<div class=""col-lg-12"">"
-				Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün Seçimi</div>"
+				Response.Write "<div class=""badge badge-secondary rounded-left"">Ürün</div>"
 				if gorevID = "" AND stokID = "" then
 					call formselectv2("stokSec","","anaBirimKontrol($(this).val(),$(this).attr('id')); $('#receteAd').val($(this).text()); $('#anaBirimDIV').load('/recete/recete_yeni.asp?stokID='+$(this).val()+' #anaBirimDIV > * ')","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
 				else
 					call formhidden("stokSec",stokID,"","","","","stokSec","")
 					call forminput("stokAd",stokAd,"","","","autocompleteOFF","stokAd","disabled")
+					if islem = "kopyala" then
+						Response.Write "<div class=""mt-2 badge badge-danger rounded-left"">Reçetenin Klonlanacağı Yeni Ürün</div>"
+						call formselectv2("yeniStokSec","","anaBirimKontrol($(this).val(),$(this).attr('id')); $('#receteAd').val($(this).text()); $('#anaBirimDIV').load('/recete/recete_yeni.asp?stokID='+$(this).val()+' #anaBirimDIV > * ')","","formSelect2 stokSec border inpReset","","stokSec","","data-holderyazi=""Ürün adı, stok kodu, barkod"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger1&"""")
+					end if
 				end if
 			Response.Write "</div>"
 		Response.Write "</div>"

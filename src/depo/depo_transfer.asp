@@ -62,16 +62,17 @@ yetkiKontrol = yetkibul(modulAd)
 
 	if ajandaID <> "" then
 		'### sipariş miktar ve birimini bul
-			sorgu = "SELECT t2.miktar, stok.FN_anaBirimADBul("&stokID&",'kad') as urunAnaBirim"
+			sorgu = "SELECT t2.miktar, stok.FN_anaBirimADBul("&stokID&",'kad') as urunAnaBirim, t1.miktar as manuelTalepMiktar"
 			sorgu = sorgu & " FROM portal.ajanda t1"
-			sorgu = sorgu & " INNER JOIN teklif.siparisKalem t2 ON t2.id = "
+			sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t2 ON t2.id = "
 			sorgu = sorgu & " CASE WHEN t1.bagliAjandaID is not null THEN"
 			sorgu = sorgu & " (SELECT siparisKalemID FROM portal.ajanda t3 WHERE t3.id = t1.bagliAjandaID) ELSE (t1.siparisKalemID) END"
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
 			rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount > 0 then
-				siparisMiktar	=	rs("miktar")
-				siparisBirim	=	rs("urunAnaBirim")
+				siparisMiktar		=	rs("miktar")
+				siparisBirim		=	rs("urunAnaBirim")
+				manuelTalepMiktar	=	rs("manuelTalepMiktar")
 			end if
 			rs.close
 		'### /sipariş miktar ve birimini bul
@@ -88,7 +89,8 @@ yetkiKontrol = yetkibul(modulAd)
 
 		ihtiyacMiktar	=	siparisMiktar * receteMiktar
 	else
-		receteID	=	0
+		receteID		=	0
+		ihtiyacMiktar	=	manuelTalepMiktar
 	end if
 
 	if stokID <> "" then
