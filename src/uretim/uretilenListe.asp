@@ -71,7 +71,7 @@ Response.Write "<div class=""card-body"">"
 		
             sorgu = "SELECT"
 			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "
-			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID, portal.FN_sipariscariAdbul("&firmaID&", t1.id) as siparisCariAd"
+			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID, portal.FN_sipariscariAdbul("&firmaID&", t1.id) as siparisCariAd, t1.tarih"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			'sorgu = sorgu & " LEFT JOIN recete.recete t3 ON t1.stokID = t3.stokID"
@@ -94,6 +94,7 @@ Response.Write "<div class=""card-body"">"
 
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
+					dbKayitTarih		=	rs("tarih")
 					stokID				=	rs("stokID")
 					stokID64	 		=	stokID
 					stokID64			=	base64_encode_tr(stokID64)
@@ -119,7 +120,7 @@ Response.Write "<div class=""card-body"">"
 
 
 					Response.Write "<tr id=""tr_"&ajandaID&""" class="""&trClass&""">"
-						Response.Write "<td class=""text-center"">" & planTarih & "</td>"
+						Response.Write "<td class=""text-center pointer"" data-toggle=""popoverModal"" title=""veritabanı kayıt tarihi: "&dbKayitTarih&""">" & planTarih & "</td>"
 						Response.Write "<td class=""text-left"">" & siparisCariAd & "</td>"
 						Response.Write "<td class=""text-center"">" & baslangicZaman & "</td>"
 						Response.Write "<td class=""text-center"">" & bitisZaman & "</td>"

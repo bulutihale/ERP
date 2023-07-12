@@ -52,6 +52,7 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "</tr></thead><tbody>"
 				genelIhtiyac = 0
 				for zi = 1 to rs.recordcount
+				
 					ajandaID			=	rs("ajandaID")
 					bagliAjandaID		=	rs("bagliAjandaID")
 					sipMiktar			=	rs("sipMiktar")
