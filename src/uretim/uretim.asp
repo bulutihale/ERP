@@ -63,7 +63,7 @@ call logla("Üretim Kontrolü Ekranı")
 					Response.Write "<div class=""col-lg-6 col-md-12 col-sm-12"">"
 						if isTur = "uretimPlan" then
 							sorgu = "SELECT t4.cariID, t3.stokID, t4.cariAd, t3.stokKodu, t3.stokAd, t1.miktar, t1.mikBirim, t5.siparisKalemID, t5.tamamlandi, t5.baslangicZaman,"
-							sorgu = sorgu & " t5.bitisZaman, t5.depoKategori, t5.receteID, t6.receteAd, t5.teminDepoID, t5.surecDepoID"
+							sorgu = sorgu & " t5.bitisZaman, t5.depoKategori, t5.receteID, t6.receteAd, t5.teminDepoID, t5.surecDepoID, t5.uretimLot"
 							sorgu = sorgu & " FROM portal.ajanda t5"
 							sorgu = sorgu & " INNER JOIN teklif.siparisKalem t1 ON t1.id = t5.siparisKalemID"
 							sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
@@ -82,6 +82,7 @@ call logla("Üretim Kontrolü Ekranı")
 								mikBirim			=	rs("mikBirim")
 								siparisKalemID		=	rs("siparisKalemID")
 								tamamlandi			=	rs("tamamlandi")
+								uretimLot			=	rs("uretimLot")
 								baslangicZaman		=	rs("baslangicZaman")
 								bitisZaman			=	rs("bitisZaman")
 								teminDepoKategori	=	rs("depoKategori")
@@ -109,7 +110,7 @@ call logla("Üretim Kontrolü Ekranı")
 							sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
 							sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem"
 								sorgu = sorgu & " WHERE id = (SELECT siparisKalemID FROM portal.ajanda WHERE id = t4.bagliAjandaID)) as siparisMiktar, t4.tamamlandi, t4.baslangicZaman,"
-							sorgu = sorgu & " t4.bitisZaman, t4.depoKategori, t4.receteID, t5.receteAd, t4.teminDepoID, t4.surecDepoID, t4.techizatID"
+							sorgu = sorgu & " t4.bitisZaman, t4.depoKategori, t4.receteID, t5.receteAd, t4.teminDepoID, t4.surecDepoID, t4.techizatID, t4.uretimLot"
 							sorgu = sorgu & " FROM portal.ajanda t4"
 							sorgu = sorgu & " INNER JOIN recete.receteAdim t1 ON t4.receteAdimID = t1.receteAdimID"
 							sorgu = sorgu & " INNER JOIN recete.recete t2 ON t1.altReceteID = t2.receteID"
@@ -126,6 +127,7 @@ call logla("Üretim Kontrolü Ekranı")
 								uretilenMiktar		=	receteMiktar * sipMiktar
 								siparisKalemID		=	rs("siparisKalemID")
 								tamamlandi			=	rs("tamamlandi")
+								uretimLot			=	rs("uretimLot")
 								baslangicZaman		=	rs("baslangicZaman")
 								bitisZaman			=	rs("bitisZaman")
 								teminDepoKategori	=	rs("depoKategori")
@@ -228,9 +230,10 @@ call logla("Üretim Kontrolü Ekranı")
 							btnClass01	=	" d-none "
 						end if
 						Response.Write "<div class=""col-lg-2 col-md-4 col-sm-4"">"
-							Response.Write "<div id=""btnDIV"" class=""row h-100" & btnClass01 & """>"
+							Response.Write "<div id=""btnDIV"" class=""row h-100" & btnClass01 & " border"">"
 								if not isnull(baslangicZaman) then
 									Response.Write "<div class=""h3 bold text-center text-danger mt-5 col-lg-12 col-md-12 col-sm-12"">İşlem Başlangıcı:<br> " & baslangicZaman & "</div>"
+									Response.Write "<div class=""text-center bold fontkucuk"">LOT: " & uretimLot & "</div>"
 								elseif tamamlandi = 0 AND isnull(baslangicZaman) then
 									Response.Write "<button"
 									Response.Write " class=""shadow h-100 border-0 rounded " & urtBtnClass & " col-lg-12 col-sm-6 bold"""
@@ -356,101 +359,102 @@ call logla("Üretim Kontrolü Ekranı")
 
 				'################### REÇETE ADIM BİLGİLERİ
 				'################### REÇETE ADIM BİLGİLERİ
-						Response.Write "<div class=""card mt-3"">"
-							Response.Write "<div class=""card-header text-white bg-info"">"
-								Response.Write "<div class=""row"">"
-									Response.Write "<div class=""col-12 text-left""><span class=""bold text-dark font-italic"">" & receteAd & "-- </span> Reçetesine ait adımlar</div>"
-								Response.Write "</div>"
+					Response.Write "<div class=""card mt-3"">"
+						Response.Write "<div class=""card-header text-white bg-info"">"
+							Response.Write "<div class=""row"">"
+								Response.Write "<div class=""col-12 text-left""><span class=""bold text-dark font-italic"">" & receteAd & "-- </span> Reçetesine ait adımlar</div>"
 							Response.Write "</div>"
-							
-							Response.Write "<div class=""card-body"">"
-								Response.Write "<div class=""row"">"
-									sorgu = ""
-									sorgu = sorgu & " SELECT stok.FN_stokSayDepo(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as hazirMiktar,"
-									sorgu = sorgu & " stok.FN_stokSayGB(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as GBmiktar,"
-									sorgu = sorgu & " t1.receteAdimID, t1.islemAciklama,"
-									sorgu = sorgu & " t2.ad,"
-									sorgu = sorgu & " t1.stokID,"
-									sorgu = sorgu & " t3.stokAd,"
-									sorgu = sorgu & " t3.stokKodu,"
-									sorgu = sorgu & " t1.isGucuSayi,"
-									sorgu = sorgu & " t1.miktar,"
-									sorgu = sorgu & " t1.miktarBirim,"
-									sorgu = sorgu & " t1.sira,"
-									sorgu = sorgu & " t1.altReceteID,"
-									sorgu = sorgu & " t4.receteAd,"
-									sorgu = sorgu & " t1.stokKontroluYap"
-									sorgu = sorgu & " FROM recete.receteAdim t1"
-									sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t2.receteIslemTipiID =  t1.receteIslemTipiID"
-									sorgu = sorgu & " LEFT JOIN stok.stok t3 ON  t3.stokID =  t1.stokID"
-									sorgu = sorgu & " LEFT JOIN recete.recete t4 ON  t4.receteID =  t1.altReceteID"
-									sorgu = sorgu & " WHERE t1.receteID = " & secilenReceteID
-									sorgu = sorgu & " AND t1.silindi = 0"
-									sorgu = sorgu & " ORDER BY t1.sira ASC"	
-									rs.open sorgu, sbsv5, 1, 3
+						Response.Write "</div>"
+						
+						Response.Write "<div class=""card-body"">"
+							Response.Write "<div class=""row"">"
+								sorgu = ""
+								sorgu = sorgu & " SELECT stok.FN_stokSayDepo(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as hazirMiktar,"
+								sorgu = sorgu & " stok.FN_stokSayGB(" & firmaID & ",  t1.stokID, " & secilenDepoID & ") as GBmiktar,"
+								sorgu = sorgu & " t1.receteAdimID, t1.islemAciklama,"
+								sorgu = sorgu & " t2.ad,"
+								sorgu = sorgu & " t1.stokID,"
+								sorgu = sorgu & " t3.stokAd,"
+								sorgu = sorgu & " t3.stokKodu,"
+								sorgu = sorgu & " t1.isGucuSayi,"
+								sorgu = sorgu & " t1.miktar,"
+								sorgu = sorgu & " t1.miktarBirim,"
+								sorgu = sorgu & " t1.sira,"
+								sorgu = sorgu & " t1.altReceteID,"
+								sorgu = sorgu & " t4.receteAd,"
+								sorgu = sorgu & " t1.stokKontroluYap"
+								sorgu = sorgu & " FROM recete.receteAdim t1"
+								sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t2.receteIslemTipiID =  t1.receteIslemTipiID"
+								sorgu = sorgu & " LEFT JOIN stok.stok t3 ON  t3.stokID =  t1.stokID"
+								sorgu = sorgu & " LEFT JOIN recete.recete t4 ON  t4.receteID =  t1.altReceteID"
+								sorgu = sorgu & " WHERE t1.receteID = " & secilenReceteID
+								sorgu = sorgu & " AND t1.silindi = 0"
+								sorgu = sorgu & " ORDER BY t1.sira ASC"	
+								rs.open sorgu, sbsv5, 1, 3
 
 
-									if rs.recordcount = 0 then
-										Response.Write "Reçete Adımları Bulunamadı"
-									else
-										Response.Write "<div class=""col mt-3"">"
-											Response.Write "<table class=""table table-sm table-striped table-bordered table-hover"">"
-												Response.Write "<thead class=""thead-dark"">"
-													Response.Write "<tr class=""text-center"">"
-														Response.Write "<th class=""col-1"" scope=""col"">İşlem Tipi</th>"
-														Response.Write "<th class=""col-4"" scope=""col"">Stok Adı</th>"
-														Response.Write "<th class=""col-1"" scope=""col"">Birim Miktar</th>"
-														Response.Write "<th class=""col-1"" scope=""col"">İhtiyaç Miktar</th>"
-														Response.Write "<th class=""col-2"" scope=""col"">Temin Depo Miktar</th>"
-														Response.Write "<th class=""col-1"" scope=""col"">İşgücü Sayı</th>"
-														Response.Write "<th class=""col-2"" scope=""col"">LOT Seçimi</th>"
-													Response.Write "</tr>"
-												Response.Write "</thead>"
-												Response.Write "<tbody>"
-													for i = 1 to rs.recordcount
-														stokID			=	rs("stokID")
-														stokID64		=	stokID
-														stokID64		=	base64_encode_tr(stokID64)
-														isGucuSayi		=	rs("isGucuSayi")
-														miktar			=	rs("miktar")
-														miktarBirim		=	rs("miktarBirim")
-														GBmiktar		=	rs("GBmiktar")
-														stokAd			=	rs("stokAd")
-														stokKodu		=	rs("stokKodu")
-														hazirMiktar		=	rs("hazirMiktar")
-														islemAciklama	=	rs("islemAciklama")
-														receteAdimID	=	rs("receteAdimID")
-														receteAdimID64	=	receteAdimID
-														receteAdimID64	=	base64_encode_tr(receteAdimID64)
-														ihtiyacMiktar	=	cdbl(miktar) * cdbl(sipMiktar) * cdbl(receteMiktar)
+								if rs.recordcount = 0 then
+									Response.Write "Reçete Adımları Bulunamadı"
+								else
+									Response.Write "<div class=""col mt-3"">"
+										Response.Write "<table class=""table table-sm table-striped table-bordered table-hover"">"
+											Response.Write "<thead class=""thead-dark"">"
+												Response.Write "<tr class=""text-center"">"
+													Response.Write "<th class=""col-1"" scope=""col"">İşlem Tipi</th>"
+													Response.Write "<th class=""col-4"" scope=""col"">Stok Adı</th>"
+													Response.Write "<th class=""col-1"" scope=""col"">Birim Miktar</th>"
+													Response.Write "<th class=""col-1"" scope=""col"">İhtiyaç Miktar</th>"
+													Response.Write "<th class=""col-2"" scope=""col"">Temin Depo Miktar</th>"
+													Response.Write "<th class=""col-1"" scope=""col"">İşgücü Sayı</th>"
+													Response.Write "<th class=""col-2"" scope=""col"">LOT Seçimi</th>"
+												Response.Write "</tr>"
+											Response.Write "</thead>"
+											Response.Write "<tbody>"
+												for i = 1 to rs.recordcount
+													stokID			=	rs("stokID")
+													stokID64		=	stokID
+													stokID64		=	base64_encode_tr(stokID64)
+													isGucuSayi		=	rs("isGucuSayi")
+													miktar			=	rs("miktar")
+													miktarBirim		=	rs("miktarBirim")
+													GBmiktar		=	rs("GBmiktar")
+													stokAd			=	rs("stokAd")
+													stokKodu		=	rs("stokKodu")
+													hazirMiktar		=	rs("hazirMiktar")
+													islemAciklama	=	rs("islemAciklama")
+													receteAdimID	=	rs("receteAdimID")
+													receteAdimID64	=	receteAdimID
+													receteAdimID64	=	base64_encode_tr(receteAdimID64)
+													ihtiyacMiktar	=	cdbl(miktar) * cdbl(sipMiktar) * cdbl(receteMiktar)
 
-													if not isnull(stokID) then
-														trClass 		=	" bg-warning "
-														GBmiktarYaz		=	""
-														If secilenDepoID > 0 Then
-															hazirMiktarYaz		=	"<div class=""text-dark bold"" title=""Hazır miktar"">Hazır: " & hazirMiktar & " " & miktarBirim & "</div>"
-															if GBmiktar > 0 then
-																GBmiktarYaz		=	"<div class=""text-dark bg-light rounded mt-2 bold pointer"" onclick=""window.location.href = '/depo/bekleyen_liste/uretim'"" title=""Giriş bekleyen miktar"">Bekleyen: " & GBmiktar & "</div>"
-															end if
-														Else
-															hazirMiktarYaz		=	"depo seçilmedi" 
-														End if
-													else
-														GBmiktarYaz		=	""
-														'ihtiyacMiktar	=	""
-														trClass 		=	""
-														hazirMiktarYaz		=	"-"
-													end if
+												if not isnull(stokID) then
+													trClass 		=	" bg-warning "
+													GBmiktarYaz		=	""
+													If secilenDepoID > 0 Then
+														hazirMiktarYaz		=	"<div class=""text-dark bold"" title=""Hazır miktar"">Hazır: " & hazirMiktar & " " & miktarBirim & "</div>"
+														if GBmiktar > 0 then
+															GBmiktarYaz		=	"<div class=""text-dark bg-light rounded mt-2 bold pointer"" onclick=""window.location.href = '/depo/bekleyen_liste/uretim'"" title=""Giriş bekleyen miktar"">Bekleyen: " & GBmiktar & "</div>"
+														end if
+													Else
+														hazirMiktarYaz		=	"depo seçilmedi" 
+													End if
+												else
+													GBmiktarYaz		=	""
+													'ihtiyacMiktar	=	""
+													trClass 		=	""
+													hazirMiktarYaz		=	"-"
+												end if
 
-														Response.Write "<tr class=""" & trClass & """>"
-															Response.Write "<td class=""text-left"">" & rs("ad") & "</td>"
-															Response.Write "<td class=""text-left"">"
-																Response.Write "<div>" & stokKodu & " - " & stokAd & "</div>"
-																Response.Write "<div class=""fonkucuk2 font-italic text-info pl-3"">" & islemAciklama & "</div>"
-															Response.Write "</td>"
-															Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
-															Response.Write "<td class=""text-right"">" & ihtiyacMiktar & " " & miktarBirim & "</td>"
-															Response.Write "<td class=""text-right"">"
+													Response.Write "<tr class=""" & trClass & """>"
+														Response.Write "<td class=""text-left"">" & rs("ad") & "</td>"
+														Response.Write "<td class=""text-left"">"
+															Response.Write "<div>" & stokKodu & " - " & stokAd & "</div>"
+															Response.Write "<div class=""fonkucuk2 font-italic text-info pl-3"">" & islemAciklama & "</div>"
+														Response.Write "</td>"
+														Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
+														Response.Write "<td class=""text-right"">" & ihtiyacMiktar & " " & miktarBirim & "</td>"
+														Response.Write "<td class=""text-right"">"
+															if not isnull(stokID) then
 																Response.Write "<div class=""row"">"
 																'Response.Write "<div class=""col-4 text-left"" onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&isTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "&secilenDepoID="&secilenDepoID&"&surecDepoID="&surecDepoID&"')"">"
 																Response.Write "<div class=""col-4 text-left"" onclick=""modalajaxfit('/depo/urun_talep_base.asp?stokID=" & stokID & "')"">"
@@ -460,79 +464,80 @@ call logla("Üretim Kontrolü Ekranı")
 																Response.Write hazirMiktarYaz & GBmiktarYaz
 																Response.Write "</div>"
 																Response.Write "</div>"
-															Response.Write "</td>"
-															Response.Write "<td class=""text-right"">" & isGucuSayi & "</td>"
-															Response.Write "<td class=""text-center"">"
-																if not isnull(stokID) then
-																	sorgu = "SELECT t1.stokHareketID, t1.lot, t1.miktar, t1.miktarBirim, t1.stokHareketTipi"
-																	sorgu = sorgu & " FROM stok.stokHareket t1"
-																	sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
-																	sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & ""
-																	sorgu = sorgu & " AND t1.ajandaID = " & ajandaID & ""
-																	sorgu = sorgu & " AND t1.stokID = " & stokID & ""
-																	sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID & " AND t1.receteAdimID = " & receteAdimID
-																	rs1.open sorgu, sbsv5, 1, 3
+															end if
+														Response.Write "</td>"
+														Response.Write "<td class=""text-right"">" & isGucuSayi & "</td>"
+														Response.Write "<td class=""text-center"">"
+															if not isnull(stokID) then
+																sorgu = "SELECT t1.stokHareketID, t1.lot, t1.miktar, t1.miktarBirim, t1.stokHareketTipi"
+																sorgu = sorgu & " FROM stok.stokHareket t1"
+																sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
+																sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & ""
+																sorgu = sorgu & " AND t1.ajandaID = " & ajandaID & ""
+																sorgu = sorgu & " AND t1.stokID = " & stokID & ""
+																sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND stokHareketTipi IN ('T','U') AND t1.silindi = 0 AND t2.surecSonuDepoID = " & secilenDepoID & " AND t1.receteAdimID = " & receteAdimID
+																rs1.open sorgu, sbsv5, 1, 3
 
-																	toplamLotMiktar	=	0
+																toplamLotMiktar	=	0
 
-																	if rs1.recordcount > 0 then
-																		for ti = 1 to rs1.recordcount
-																			stokHareketID		=	rs1("stokHareketID")
-																			lot					=	rs1("lot")
-																			miktar				=	rs1("miktar")
-																			miktarBirim			=	rs1("miktarBirim")
-																			stokHAreketTipi		=	rs1("stokHAreketTipi")
-																			toplamLotMiktar		=	toplamLotMiktar + miktar
-																			Response.Write "<div class=""row"">"
-																				Response.Write "<div class=""col-lg-1 col-md-1 col-sm-1"""
-																				if stokHareketTipi = "T" then
-																					Response.Write " onclick=""lotSil("&stokHareketID&","&secilenDepoID&","&secilenReceteID&","&surecDepoID&")"""
-																					cl1 = " text-danger "
-																				elseif stokHareketTipi = "U" then
-																					Response.Write " onclick=""swal('','Üretim başlatılmış, LOT girişleri silinemez.');"""
-																					cl1 = " text-secondary "
-																				end if
-																				Response.Write ">"
-																					Response.Write "<i class=""mdi mdi-minus-circle " & cl1 & " pointer""></i>"
-																				Response.Write "</div>"
-																				Response.Write "<div class=""col-lg-10 col-md-10 col-sm-10 text-left"">"
-																					Response.Write lot & " - " & miktar & " " & miktarBirim
-																				Response.Write "</div>"
-																			Response.Write "</div>" 
-																		rs1.movenext
-																		next
-																	end if
-																	rs1.close
-																	Response.Write "<span class=""pointer"""
-																	if cdbl(toplamLotMiktar) >= cdbl(ihtiyacMiktar) then
-																		Response.Write " onclick=""swal('Yeterli seçim yapıldı.','')"""
-																		btnRenk			=	" btn-secondary "
-																		miktarKontrol	=	1
-																	elseif not isnull(baslangicZaman) then
-																		Response.Write " onclick=""swal('','Üretim başlatılmış, LOT eklenemez.')"""
-																		btnRenk	=	" btn-secondary "
-																		miktarKontrol	=	0
-																	else
-																		Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?ihtiyacMiktar="&ihtiyacMiktar&"&isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"&surecDepoID="&surecDepoID&"&receteAdimID="&receteAdimID&"');"""
-																		btnRenk	=	" btn-success "
-																		miktarKontrol	=	0
-																	end if
-																	Response.Write ">"
-																		Response.Write "<div class=""btn btn-sm btn-pill "&btnRenk&" miktarKontrol"" data-miktarkontrol=""" & miktarKontrol & """>LOT Seç</div>"
-																	Response.Write "</span>"
+																if rs1.recordcount > 0 then
+																	for ti = 1 to rs1.recordcount
+																		stokHareketID		=	rs1("stokHareketID")
+																		lot					=	rs1("lot")
+																		miktar				=	rs1("miktar")
+																		miktarBirim			=	rs1("miktarBirim")
+																		stokHAreketTipi		=	rs1("stokHAreketTipi")
+																		toplamLotMiktar		=	toplamLotMiktar + miktar
+																		Response.Write "<div class=""row"">"
+																			Response.Write "<div class=""col-lg-1 col-md-1 col-sm-1"""
+																			if stokHareketTipi = "T" then
+																				Response.Write " onclick=""lotSil("&stokHareketID&","&secilenDepoID&","&secilenReceteID&","&surecDepoID&")"""
+																				cl1 = " text-danger "
+																			elseif stokHareketTipi = "U" then
+																				Response.Write " onclick=""swal('','Üretim başlatılmış, LOT girişleri silinemez.');"""
+																				cl1 = " text-secondary "
+																			end if
+																			Response.Write ">"
+																				Response.Write "<i class=""mdi mdi-minus-circle " & cl1 & " pointer""></i>"
+																			Response.Write "</div>"
+																			Response.Write "<div class=""col-lg-10 col-md-10 col-sm-10 text-left"">"
+																				Response.Write lot & " - " & miktar & " " & miktarBirim
+																			Response.Write "</div>"
+																		Response.Write "</div>" 
+																	rs1.movenext
+																	next
 																end if
-															Response.Write "</td>" 
-														Response.Write "</tr>"
-													rs.movenext
-													next
-												Response.Write "</tbody>"
-											Response.Write "</table>"
-										Response.Write "</div>"
-									end if
-									rs.close
-								Response.Write "</div>"
+																rs1.close
+																Response.Write "<span class=""pointer"""
+																if cdbl(toplamLotMiktar) >= cdbl(ihtiyacMiktar) then
+																	Response.Write " onclick=""swal('Yeterli seçim yapıldı.','')"""
+																	btnRenk			=	" btn-secondary "
+																	miktarKontrol	=	1
+																elseif not isnull(baslangicZaman) then
+																	Response.Write " onclick=""swal('','Üretim başlatılmış, LOT eklenemez.')"""
+																	btnRenk	=	" btn-secondary "
+																	miktarKontrol	=	0
+																else
+																	Response.Write " onclick=""modalajaxfit('/uretim/uretimLotSec.asp?ihtiyacMiktar="&ihtiyacMiktar&"&isTur="&isTur&"&gorevID="&gorevID64&"&stokID="&stokID&"&secilenReceteID="&secilenReceteID&"&secilenDepoID="&secilenDepoID&"&surecDepoID="&surecDepoID&"&receteAdimID="&receteAdimID&"');"""
+																	btnRenk	=	" btn-success "
+																	miktarKontrol	=	0
+																end if
+																Response.Write ">"
+																	Response.Write "<div class=""btn btn-sm btn-pill "&btnRenk&" miktarKontrol"" data-miktarkontrol=""" & miktarKontrol & """>LOT Seç</div>"
+																Response.Write "</span>"
+															end if
+														Response.Write "</td>" 
+													Response.Write "</tr>"
+												rs.movenext
+												next
+											Response.Write "</tbody>"
+										Response.Write "</table>"
+									Response.Write "</div>"
+								end if
+								rs.close
 							Response.Write "</div>"
 						Response.Write "</div>"
+					Response.Write "</div>"
 					
 				'################### REÇETE ADIM BİLGİLERİ
 				'################### REÇETE ADIM BİLGİLERİ
