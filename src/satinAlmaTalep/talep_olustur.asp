@@ -70,12 +70,22 @@ yetkiKontrol = yetkibul(modulAd)
 	rs.close
 	
 	
-	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim"
+	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim, t2.stokKodu, t2.stokAd,"
+	sorgu = sorgu & " t3.ad as talepEden"
 	sorgu = sorgu & " FROM teklif.siparisKalemTemp t1"
-	sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & ""
+	sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
+	sorgu = sorgu & " INNER JOIN personel.personel t3 ON t1.kid = t3.id"
+	sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & " AND t1.kid = " & kid
 	sorgu = sorgu & " AND siparisTur = 'satinalmaTalep'"
 	rs.open sorgu, sbsv5,1,3
 
+	mailicerik	=	""
+	mailicerik = mailicerik & "<table border=""1"" style=""border-collapse: collapse;""><tr><thead>"
+	mailicerik = mailicerik & "<th>Stok Kodu</th>"
+	mailicerik = mailicerik & "<th>Ürün Adı</th>"
+	mailicerik = mailicerik & "<th>Ürün Not</th>"
+	mailicerik = mailicerik & "<th>Miktar</th></tr></thead><tbody>"
+			talepEden		=	rs("talepEden")
 		for zi = 1 to rs.recordcount
 			tempKayitKID	=	rs("tempKID")
 			stokID			=	rs("stokID")
@@ -85,6 +95,16 @@ yetkiKontrol = yetkibul(modulAd)
 			mikBirimID		=	rs("mikBirimID")
 			birimFiyat		=	rs("birimFiyat")
 			paraBirim		=	rs("paraBirim")
+			stokKodu		=	rs("stokKodu")
+			stokAd			=	rs("stokAd")
+
+	mailicerik = mailicerik & "<tr>"
+	mailicerik = mailicerik & "<td>" & stokKodu & "</td>"
+	mailicerik = mailicerik & "<td>" & stokAd & "</td>"
+	mailicerik = mailicerik & "<td>" & kalemNot & "</td>"
+	mailicerik = mailicerik & "<td>" & miktar & " " & mikBirim &"</td>"
+	mailicerik = mailicerik & "</tr>"
+
 			
 			
 			sorgu = "SELECT * FROM teklif.siparisKalem"
@@ -105,6 +125,7 @@ yetkiKontrol = yetkibul(modulAd)
 			rs1.close
 		rs.movenext
 		next
+	mailicerik = mailicerik & "</tbody></table>"
 	rs.close
 	
 	'######### TEMP tablosundaki sipariş kayıtları silinsin
@@ -116,6 +137,8 @@ yetkiKontrol = yetkibul(modulAd)
 '#### siparişe ürünleri ekle
 
 call bildirim(2,"Ürün Bildirimi",stokKodu & " Ürün girişi yapıldı",1,kid,"","","","","")
+
+call mailGonderCDO(talepEden & " tarafından satınalma talebi girildi.", mailicerik, "","","10")
 
 call jsrun("$('#siparislistesi').html('<h3 class=""text-center text-danger"">TALEP OLUŞTURULDU.<br />Talep No : " & siparisNo & "</h3>')")
 
