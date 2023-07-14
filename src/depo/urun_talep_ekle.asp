@@ -7,6 +7,7 @@
     kid		=	kidbul()
 	stokID			=	Request("stokID")
 	talepMiktar		=	Request("talepMiktar")
+	talepAciklama	=	Request("talepAciklama")
 	modulAd			=   "Depo"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -28,7 +29,7 @@ yetkiKontrol = yetkibul(modulAd)
 			rs("hangiGun")				=	hangiGun
 			rs("hangiAy")				=	hangiAy
 			rs("hangiYil")				=	hangiYil
-			rs("icerik")				=	"manuel talep"
+			rs("icerik")				=	talepAciklama
 			rs("stokID")				=	stokID
 			rs("isTur")					=	"transfer"
 			rs("miktar")				=	talepMiktar

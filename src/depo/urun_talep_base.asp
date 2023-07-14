@@ -42,6 +42,10 @@ yetkiKontrol = yetkibul(modulAd)
 					Response.Write "</div>"
 					Response.Write "<div id=""birimDIV"" class=""row"">"
 						Response.Write "<div class=""col-lg-12"">"
+							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Talep İçin Açıklama</div>"
+							Response.Write "<input style="""" class=""form-control bold"" name=""talepAciklama"" id=""talepAciklama"" autocomplete=""off"">"
+						Response.Write "</div>"
+						Response.Write "<div class=""col-lg-12"">"
 							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Miktar</div>"
 								Response.Write "<input style=""font-size:26px;"" class=""form-control bold"" name=""talepMiktar"" id=""talepMiktar"" autocomplete=""off"">"
 							Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Birim</div>"
@@ -62,7 +66,7 @@ yetkiKontrol = yetkibul(modulAd)
 					if stokID <> "" then
 
 					sorgu = "SELECT"
-					sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t2.stokID, t2.stokKodu, t2.stokAd, "
+					sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t2.stokID, t2.stokKodu, t2.stokAd, t1.icerik,"
 					sorgu = sorgu & " t1.id as ajandaID, t1.miktar"
 					sorgu = sorgu & " FROM portal.ajanda t1"
 					sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
@@ -76,13 +80,15 @@ yetkiKontrol = yetkibul(modulAd)
 					if rs.recordcount > 0 then
 						Response.Write "<div class=""bold"">" & rs("stokkodu") & " " & rs("stokAd") & "</div>"
 						Response.Write "<table class=""table table-sm mt-2"">"
-							Response.Write "<thead><tr>"
+							Response.Write "<thead><tr class=""text-center"">"
 								Response.Write "<th>Talep Tarihi</th>"
+								Response.Write "<th>Talep Açıklama</th>"
 								Response.Write "<th>Talep Miktar</th>"
 							Response.Write "</tr></thead>"
 						for zi = 1 to rs.recordcount
 							Response.Write "<tr>"
 								Response.Write "<td>" & tarihtr(rs("planTarih")) & "</td>"
+								Response.Write "<td class=""text-left"">" & rs("icerik") & "</td>"
 								Response.Write "<td class=""text-right"">" & rs("miktar") & "</td>"
 							Response.Write "</tr>"
 						rs.movenext
@@ -117,10 +123,11 @@ function urunDegistir(){
 
 
 	function talepGonder(){
-		var stokID		=	$('#stokID').val();
-		var talepMiktar	=	$('#talepMiktar').val();
+		var stokID			=	$('#stokID').val();
+		var talepMiktar		=	$('#talepMiktar').val();
+		var talepAciklama	=	$('#talepAciklama').val();
 
-		$.post('/depo/urun_talep_ekle.asp', {stokID:stokID, talepMiktar:talepMiktar}, function(){
+		$.post('/depo/urun_talep_ekle.asp', {stokID:stokID, talepMiktar:talepMiktar, talepAciklama:talepAciklama}, function(){
 			toastr.options.positionClass = 'toast-bottom-right';
 			toastr.options.progressBar = true;
 			toastr.success('Ürün kayıt edildi.','İşlem Yapıldı!');

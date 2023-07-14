@@ -165,6 +165,7 @@ end if
 								Response.Write "<div class=""badge badge-secondary rounded-left"">İşlem Tipi</div>"
 								if islem = "edit" then
 									Response.Write "<div class=""ml-4 bold text-danger"">" & receteIslemAd & "</div>"
+									call formhidden("receteIslemTipiID",receteIslemTipiID,"","","","autocompleteOFF","receteIslemTipiID","")
 								else
 									call formselectv2("receteIslemTipiID","","","","formSelect2 receteIslemTipiID border inpReset","","receteIslemTipiID","","data-holderyazi=""İşlem Tipi"" data-jsondosya=""JSON_receteIslemTipi"" data-miniput=""0"" data-defdeger="""&defDeger&"""")
 								end if
