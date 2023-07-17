@@ -202,6 +202,7 @@ if yetkiKontrol > 2 then
 				rs("kid")				=	kid
 				rs("ayiriciTabloAd")	=	"stokHareket"
 				rs("ayiriciTabloID")	=	stokHareketID
+				rs("atananLOT")			=	atananLOT
 			rs.update
 		rs.close
 

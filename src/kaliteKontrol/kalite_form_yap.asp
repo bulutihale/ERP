@@ -70,18 +70,32 @@ end if
 		sutunWidthArr	=	split(sutunWidth,",")
 	rs.close
 
+
+
 '###### sabit değerleri js ye hazırla
 
 	if hata = "" and yetkiKontrol > 2 then
 	Response.Write "<div id=""kaliteFormUstDiv"">"
+		'########### kalite departmanının atadığı LOT'u forma çek
+			sorgu = "SELECT t1.atananLOT FROM kalite.degerForm t1"
+			sorgu = sorgu & " WHERE t1.ayiriciTabloAd = '" & ayiriciTabloAd & "' AND t1.ayiriciTabloID = " & ayiriciTabloID
+			rs2.open sorgu, sbsv5, 1, 3
+				if rs2.recordcount > 0 then
+					atananLOT		=	rs2("atananLOT")
+				end if
+			rs2.close
+		'########### kalite departmanının atadığı LOT'u forma çek
+
 		if pdf = "" then
-				Response.Write "<div class=""btn btn-info pdfOlustur"">PDF</div>"
-				Response.Write "<div class=""text-right""><span onclick=""modalkapat()"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
-				Response.Write "<div class=""row mt-2"">"
-					Response.Write "<div class=""col-12"">"
-						Response.Write "<div class=""badge badge-secondary rounded-left"">Kalite Form Seçimi</div>"
-						call formselectv2("kaliteFormSec","","","","formSelect2 kaliteFormSec border","","kaliteFormSec","","data-holderyazi=""Kalite Form Seçimi"" data-jsondosya=""JSON_kaliteForm"" data-miniput=""0"" data-sart=""" & formKod & """ data-defdeger="""&defDeger&"""")
-					Response.Write "</div>"
+			Response.Write "<div class=""btn btn-info pdfOlustur"">PDF</div>"
+			Response.Write "<div class=""bold mt-2"">Girdi LOT Numarası: <span class=""text-info copyText cell"">" & atananLOT & "</span></div>"
+
+			Response.Write "<div class=""text-right""><span onclick=""modalkapat()"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
+			Response.Write "<div class=""row mt-2"">"
+				Response.Write "<div class=""col-12"">"
+					Response.Write "<div class=""badge badge-secondary rounded-left"">Kalite Form Seçimi</div>"
+					call formselectv2("kaliteFormSec","","","","formSelect2 kaliteFormSec border","","kaliteFormSec","","data-holderyazi=""Kalite Form Seçimi"" data-jsondosya=""JSON_kaliteForm"" data-miniput=""0"" data-sart=""" & formKod & """ data-defdeger="""&defDeger&"""")
+				Response.Write "</div>"
 				Response.Write "</div>"
 		end if
 

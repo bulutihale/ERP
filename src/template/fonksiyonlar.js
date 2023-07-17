@@ -5,6 +5,22 @@ $(document).ready(function() {
 	var ortaform = {target:'#ortaalan',type:'POST'};$('.ortaform').ajaxForm(ortaform);
 	$('.tarih').datepicker({format: "dd.mm.yyyy",weekStart: 1,maxViewMode: 2,language: "tr",keyboardNavigation: false,daysOfWeekHighlighted: "0,6",autoclose: true,todayHighlight: true});
 	$('.summernote').summernote({height: 300});
+
+//tıklama ile text kopyalama için
+		$(document).on('click', '.copyText', function(){
+			value = $(this).text();
+			var $temp = $("<input>");
+			  $("body").append($temp);
+			  $temp.val(value).select();
+			  document.execCommand("copy");
+			  $temp.remove();
+
+			toastr.options.positionClass = 'toast-bottom-right';
+			toastr.success('kopyalandı.',value);
+
+		});
+//tıklama ile text kopyalama için
+
 	
 
 	//popover aktifleştimrk için 
