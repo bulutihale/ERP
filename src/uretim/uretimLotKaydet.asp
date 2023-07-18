@@ -9,6 +9,8 @@
 	stokKodu			=	Request.Form("stokKodu")
 	stokHareketTuru		=	Request.Form("stokHareketTuru")
 	kullanimMiktar		=	Request.Form("kullanimMiktar")
+	kullanimMiktar 		=	replace(kullanimMiktar,".",",")
+	kullanimMiktar		=	cdbl(kullanimMiktar)
 	miktarBirim			=	Request.Form("miktarBirim")
 	surecDepoID			=	Request.Form("surecDepoID")
 	stokID				=	Request.Form("stokID")
@@ -20,7 +22,6 @@
 	ajandaID			=	Request.Form("ajandaID")
 	ihtiyacMiktar		=	Request.Form("ihtiyacMiktar")
 	receteAdimID		=	Request.Form("receteAdimID")
-
 
 	sorgu = "SELECT stok.FN_birimIDBul('" & miktarBirim & "','K') as bid"
 	rs.open sorgu,sbsv5,1,3

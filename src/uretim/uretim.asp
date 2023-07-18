@@ -6,13 +6,16 @@
     call sessiontest()
     kid				=	kidbul()
 	gelenVeriHam	=	Session("sayfa5")
+	
 	if gelenVeriHam = "" then
 		isTur			=	Request.QueryString("isTur")
 		gorevID64		=	Request.QueryString("ajandaID64")
+		manuelPlan		=	Request.QueryString("manuelPlan")
 	else
 		gelenVeri		=	split(gelenVeriHam,"++")
 		isTur			=	gelenVeri(0)
 		gorevID64		=	gelenVeri(1)
+		manuelPlan		=	gelenVeri(2)
 	end if
 	gorevID			=	gorevID64
 	gorevID			=	base64_decode_tr(gorevID)
@@ -107,16 +110,47 @@ call logla("Üretim Kontrolü Ekranı")
 							Response.Write "</div>"
 
 						elseif isTur = "kesimPlan" OR isTur = "kucukKesim" then
-							sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
-							sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem"
-								sorgu = sorgu & " WHERE id = (SELECT siparisKalemID FROM portal.ajanda WHERE id = t4.bagliAjandaID)) as siparisMiktar, t4.tamamlandi, t4.baslangicZaman,"
-							sorgu = sorgu & " t4.bitisZaman, t4.depoKategori, t4.receteID, t5.receteAd, t4.teminDepoID, t4.surecDepoID, t4.techizatID, t4.uretimLot"
-							sorgu = sorgu & " FROM portal.ajanda t4"
-							sorgu = sorgu & " INNER JOIN recete.receteAdim t1 ON t4.receteAdimID = t1.receteAdimID"
-							sorgu = sorgu & " INNER JOIN recete.recete t2 ON t1.altReceteID = t2.receteID"
-							sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.stokID = t3.stokID"
-							sorgu = sorgu & " LEFT JOIN recete.recete t5 ON t4.receteID = t5.receteID"
-							sorgu = sorgu & " WHERE t4.id = " & gorevID
+							if manuelPlan = "evet" then
+								sorgu = "SELECT"
+									sorgu = sorgu & " t2.stokID,"
+									sorgu = sorgu & " t3.stokKodu,"
+									sorgu = sorgu & " t3.stokAd,"
+									sorgu = sorgu & " t4.icerik,"
+									sorgu = sorgu & " 1 AS receteMiktar," '1 adet için üretilen miktar hesaplaması yapılması gerektiği için.
+									sorgu = sorgu & " t1.miktarBirim as receteMiktarBirim,"
+									sorgu = sorgu & " t4.miktar AS siparisMiktar,"
+									sorgu = sorgu & " t4.tamamlandi,"
+									sorgu = sorgu & " t4.siparisKalemID,"
+									sorgu = sorgu & " t4.baslangicZaman,"
+									sorgu = sorgu & " t4.bitisZaman,"
+									sorgu = sorgu & " t4.depoKategori,"
+									sorgu = sorgu & " t4.receteID,"
+									sorgu = sorgu & " t5.receteAd,"
+									sorgu = sorgu & " t4.teminDepoID,"
+									sorgu = sorgu & " t4.surecDepoID,"
+									sorgu = sorgu & " t4.techizatID,"
+									sorgu = sorgu & " t4.uretimLot"
+								sorgu = sorgu & " FROM"
+									sorgu = sorgu & " portal.ajanda t4"
+									sorgu = sorgu & " INNER JOIN recete.recete t2 ON t4.receteID = t2.receteID"
+									sorgu = sorgu & " INNER JOIN recete.receteAdim t1 ON t4.receteID = t1.receteID"
+									sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.stokID = t3.stokID"
+									sorgu = sorgu & " LEFT JOIN recete.recete t5 ON t4.receteID = t5.receteID"
+								sorgu = sorgu & " WHERE"
+									sorgu = sorgu & " t4.id = " & gorevID & ""
+									sorgu = sorgu & " AND t1.stokID is not null"
+							else
+								sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
+								sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem"
+									sorgu = sorgu & " WHERE id = (SELECT siparisKalemID FROM portal.ajanda WHERE id = t4.bagliAjandaID)) as siparisMiktar, t4.tamamlandi, t4.baslangicZaman,"
+								sorgu = sorgu & " t4.bitisZaman, t4.depoKategori, t4.receteID, t5.receteAd, t4.teminDepoID, t4.surecDepoID, t4.techizatID, t4.uretimLot"
+								sorgu = sorgu & " FROM portal.ajanda t4"
+								sorgu = sorgu & " INNER JOIN recete.receteAdim t1 ON t4.receteAdimID = t1.receteAdimID"
+								sorgu = sorgu & " INNER JOIN recete.recete t2 ON t1.altReceteID = t2.receteID"
+								sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.stokID = t3.stokID"
+								sorgu = sorgu & " LEFT JOIN recete.recete t5 ON t4.receteID = t5.receteID"
+								sorgu = sorgu & " WHERE t4.id = " & gorevID
+							end if
 							rs.Open sorgu, sbsv5, 1, 3
 								icerik				=	rs("icerik")
 								stokID				=	rs("stokID")
@@ -425,6 +459,7 @@ call logla("Üretim Kontrolü Ekranı")
 													receteAdimID	=	rs("receteAdimID")
 													receteAdimID64	=	receteAdimID
 													receteAdimID64	=	base64_encode_tr(receteAdimID64)
+
 													ihtiyacMiktar	=	cdbl(miktar) * cdbl(sipMiktar) * cdbl(receteMiktar)
 
 												if not isnull(stokID) then
@@ -509,7 +544,8 @@ call logla("Üretim Kontrolü Ekranı")
 																end if
 																rs1.close
 																Response.Write "<span class=""pointer"""
-																if cdbl(toplamLotMiktar) >= cdbl(ihtiyacMiktar) then
+																'if cdbl(toplamLotMiktar) >= cdbl(ihtiyacMiktar) then
+																if toplamLotMiktar >= ihtiyacMiktar then
 																	Response.Write " onclick=""swal('Yeterli seçim yapıldı.','')"""
 																	btnRenk			=	" btn-secondary "
 																	miktarKontrol	=	1
@@ -523,6 +559,7 @@ call logla("Üretim Kontrolü Ekranı")
 																	miktarKontrol	=	0
 																end if
 																Response.Write ">"
+
 																	Response.Write "<div class=""btn btn-sm btn-pill "&btnRenk&" miktarKontrol"" data-miktarkontrol=""" & miktarKontrol & """>LOT Seç</div>"
 																Response.Write "</span>"
 															end if

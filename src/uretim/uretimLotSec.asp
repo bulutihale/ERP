@@ -42,7 +42,7 @@ yetkiKontrol = yetkibul(modulAd)
 	if hata = "" and yetkiKontrol > 0 then
 
 
-	sorgu = "SELECT t1.stokID, t2.stokKodu, t2.stokAd, portal.siparisKalemIDbul(" & firmaID  & ", " & ajandaID & ") as siparisKalemID"
+	sorgu = "SELECT t1.stokID, t2.stokKodu, t2.stokAd, ISNULL(portal.siparisKalemIDbul(" & firmaID  & ", " & ajandaID & "),0) as siparisKalemID"
 	sorgu = sorgu & " FROM recete.receteAdim t1"
 	sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 	sorgu = sorgu & " WHERE t1.silindi = 0 AND t1.receteID = " & secilenReceteID & " AND t1.stokID = " & stokID & " AND t1.receteAdimID = " & receteAdimID
@@ -100,7 +100,7 @@ yetkiKontrol = yetkibul(modulAd)
 								Response.Write "<td class=""text-right"">" & lot & "</td>"
 								Response.Write "<td class=""text-right"">" & lotMiktar & " " & miktarBirim & "</td>"
 								Response.Write "<td class=""text-right col-2"">"
-									call forminput("kullanimMiktar","","","","","autocompleteOFF","kullanimMiktar"&divSayi&"","")
+									call forminput("kullanimMiktar","","","","","autocompleteOFF","kullanimMiktar"&divSayi&"","onchange=""ondalikKontrol($(this).val(),$(this).attr('id'))""")
 								Response.Write "</td>"
 								Response.Write "<td class=""text-center"">"
 									Response.Write "<div onclick=""lotKullan('"&isTur&"',"&divSayi&",'"&stokKodu&"','C','"&surecDepoID&"',"&stokID&","&siparisKalemID&",'"&lot&"','T','"&miktarBirim&"',"&secilenDepoID&","&secilenReceteID&",'"&lotSKT&"',"&ajandaID&","&surecDepoID&","&receteAdimID&");"" class=""btn btn-info"">kullan</div>"

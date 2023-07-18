@@ -809,5 +809,20 @@ function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, upd
   }
 
 
-// hucreKaydet işlemleri		
+		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+	function ondalikKontrol(deger,idDeger){
 
+		var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
+
+		if (decimalSeparator === '.' ) {
+			if (deger.toString().includes(',')){
+					deger = deger.toString().replace(',','.');
+				}
+		}else{
+			if (deger.toString().includes('.')){
+					deger = deger.toString().replace('.',',');
+				}
+		}
+		$('#'+idDeger).val(deger);
+	};
+	//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın

@@ -22,6 +22,7 @@
 	elseif listeTur = "kesimPlan" then
 		sayfaBaslik	=	"Kesim İşleri Listesi"
 		sayfaLink	=	"<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/kesimPlan"">Kesim Listesi</a></span></div>"
+		sayfaLink	=	sayfaLink & "<div class=""col-8 text-right""><button class=""btn btn-info rounded"" onclick=""modalajaxfit('/uretim/manuel_isemri_base.asp?listeTur="&listeTur&"&stokID="&stokID&"')"">Yeni Kesim İşi</button></div>"
 	elseif listeTur = "transfer" then
 		sayfaBaslik	=	"Depolararası transfer edilecek ürünler listesi"
 		sayfaLink	=	"<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/transfer"">Transfer Listesi</a></span></div>"
@@ -71,7 +72,7 @@ Response.Write "<div class=""card-body"">"
 		
             sorgu = "SELECT"
 			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "
-			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID,"
+			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID, t1.manuelPlan,"
 			sorgu = sorgu & " ISNULL(portal.FN_sipariscariAdbul("&firmaID&", t1.id),N'<span class=""font-italic bold text-info"">Manuel İstem</span>') as siparisCariAd,"
 			sorgu = sorgu & " t1.icerik, t1.tarih"
 			sorgu = sorgu & " FROM portal.ajanda t1"
@@ -97,6 +98,12 @@ Response.Write "<div class=""card-body"">"
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
 					dbKayitTarih		=	rs("tarih")
+					manuelPlan			=	rs("manuelPlan")
+					if manuelPlan = True then
+						manuelPlan = "evet"
+					else
+						manuelPlan = "hayir"
+					end if
 					stokID				=	rs("stokID")
 					stokID64	 		=	stokID
 					stokID64			=	base64_encode_tr(stokID64)
@@ -161,7 +168,7 @@ Response.Write "<div class=""card-body"">"
 												Response.Write " onclick=""swal('','Transfer işlemi yapılmış.')"""
 											end if
 										else
-											Response.Write " onclick=""window.location.href = '/uretim/uretim/"&listeTur&"++"&ajandaID64&"'"" class=""badge badge-pill badge-success pointer mr-2"""
+											Response.Write " onclick=""window.location.href = '/uretim/uretim/"&listeTur&"++"&ajandaID64&"++"&manuelPlan&"'"" class=""badge badge-pill badge-success pointer mr-2"""
 										end if
 									Response.Write "><i class=""mdi mdi-arrow-right-bold""></i>"
 									Response.Write "</div>"
