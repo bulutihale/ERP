@@ -147,6 +147,8 @@ function sqlinj(byVal deger)
 		if karakterinj = chr(33) or karakterinj = chr(34) or karakterinj = chr(35) or karakterinj = chr(36) or karakterinj = chr(37) or karakterinj = chr(38) or karakterinj = chr(39) or karakterinj = chr(40) or karakterinj = chr(41) or karakterinj = chr(42) or karakterinj = chr(61) or karakterinj = chr(63) or karakterinj = chr(64) then
 			Response.End()
 '			sitelog(12)'tag ile hack denemesi
+		else
+			sqlinj = deger
 		End if
 	next
 end function

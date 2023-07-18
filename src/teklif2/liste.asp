@@ -88,10 +88,10 @@ sayfaKayitSayisi	=	100
 '##### YETKİ BUL
 
 
+
 if arama <> "" then
 	arama = sqlinj(arama)
 end if
-
 
 '##### SAYFA BUL
 '##### SAYFA BUL
@@ -155,15 +155,11 @@ if arama <> "" then
 	arama = sqlinj(arama)
 	sorgufiltre = " AND (i.dosyaNo like '%" & arama & "%' OR"_
 				&" i.ihaleNo like '%" & arama & "%' OR"_
-				&" f.adKisa like '%" & arama & "%' OR"_
+				&" f.Ad like '%" & arama & "%' OR"_
 				&" i.ad like '%" & arama & "%' OR"_
-				&" c.ad like '%" & arama & "%' OR"_
-				&" c.adKisa like '%" & arama & "%' OR"_
+				&" c.cariAd like '%" & arama & "%' OR"_
 				&" i.yeniCariAd like '%" & arama & "%' OR"_
-				&" iller.ad like '%" & arama & "%' OR"_
 				&" i.ikn like '%" & arama & "%' OR"_
-				&" c2.ad like '%" & arama & "%' OR"_
-				&" c2.adKisa like '%" & arama & "%' OR"_
 				&" i.tarih_ihale like '%" & arama & "%')"
 end if
 
@@ -193,7 +189,7 @@ end if
 
 sorgu = "Select count(i.id) from teklifv2.ihale i LEFT JOIN cari.cari c ON i.cariID = c.cariID"_
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
-&" LEFT JOIN portal.iller ON c.il = iller.ilID"_
+&" LEFT JOIN portal.iller ON c.il COLLATE DATABASE_DEFAULT = iller.sehirAdi COLLATE DATABASE_DEFAULT"_
 &" LEFT JOIN portal.firma f ON i.firmaID = f.Id"_
 &" WHERE i.silindi = 0 AND i.firmaID = " & firmaID & sorgufiltre & sorguKayitTip & sorguihaleTipi
 rs.open sorgu,sbsv5,1,3
