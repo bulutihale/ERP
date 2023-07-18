@@ -10,8 +10,10 @@ Response.Flush()
 
 	if yeniCariID <> "" then
 		cariID 	=	yeniCariID
-	else
+	elseif eskicariID <> "" then
 		cariID	=	eskicariID
+	else
+		cariID	=	0
 	end if
 
 '###### yetki bul

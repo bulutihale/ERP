@@ -17,9 +17,9 @@ id64 = Request.QueryString("id")
 if yetkiKontrol  >= 3 then
 
 
-	sorgu = "SELECT t1.ad as teklifAd, t1.cariID, t2.cariAd"
+	sorgu = "SELECT t1.ad as teklifAd, t1.cariID, ISNULL(t2.cariAd, t1.yeniCariAd) as cariAd"
 	sorgu = sorgu & " FROM teklifv2.ihale t1"
-	sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.cariID = t2.cariID"
+	sorgu = sorgu & " LEFT JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 	sorgu = sorgu & " WHERE t1.id = " &ihaleID
 	rs.open sorgu,sbsv5,1,3
 
