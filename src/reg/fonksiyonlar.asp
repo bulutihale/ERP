@@ -5189,4 +5189,32 @@ end function
 
 
 
+
+Function dosyaNoOlustur()
+
+		sorgu = "SELECT TOP(1) dosyaNo FROM teklifv2.ihale ORDER BY id DESC"
+		fn1.open sorgu, sbsv5,1,3
+			'##### DOSYA NO OLUŞTUR
+			'##### DOSYA NO OLUŞTUR
+				if fn1.recordcount = 0 then
+					dosyaNo_p2	=	"00001"
+					dosyaNo 	=	year(date()) & "_" & dosyaNo_p2
+				else
+					dosyaNo		=	fn1("dosyaNo")
+					dosyaNo_p2	=	right(dosyaNo,5)
+					if int(left(dosyaNo,4)) <> int(year(date())) then
+						dosyaNo_p2 = "00000"
+					end if
+					dosyaNo_p2	=	int(dosyaNo_p2)
+					dosyaNo_p2	=	dosyaNo_p2+1
+					dosyaNo_p2	=	1000000 + dosyaNo_p2
+					dosyaNo_p2	=	right(dosyaNo_p2,5)
+					dosyaNo		=	year(date()) & "_" & dosyaNo_p2
+				end if
+			'##### /DOSYA NO OLUŞTUR
+			'##### /DOSYA NO OLUŞTUR
+		fn1.close
+		dosyaNoOlustur	=	dosyaNo
+end function
+
 %>

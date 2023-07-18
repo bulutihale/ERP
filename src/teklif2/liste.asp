@@ -296,7 +296,7 @@ if rs.recordcount > 0 then
 			Response.Write "<td class=""align-middle text-left"">"
 			Response.Write "<div class=""row "">"
 				Response.Write "<div class=""col-2"" title=""dosya işlemleri"">"
-					Response.Write "<a class=""pointer rounded"" href=""/teklif2/detay/" & ihaleID64 & """><i class=""fa fa-edit""></i></a>"
+					Response.Write "<a class=""pointer rounded"" href=""/teklif2/detay/" & ihaleID64 & """><i class=""icon page-edit""></i></a>"
 				Response.Write "</div>"
 					'if instr(yetki,",5,") = 0 then
 						'Response.Write "<div class=""hoverGel rounded p-0 m-0""><a href=""/dosya/upload_liste/" & ihaleID64 & """><i class=""btn btn-success rounded px-1 py-0 fa fa-book""></i></a></div>"
@@ -310,8 +310,13 @@ if rs.recordcount > 0 then
 					Response.Write "<div class=""col-2 rounded"" title=""teklif önizleme"">"
 						Response.Write "<a target="""" href=""/teklifSablon/" & teklifSablon & "/" & ihaleID64 & """><i class=""fa fa-envelope""></i></a>"
 					Response.Write "</div>"
+
+			Response.Write "<div class=""col-2 pointer"" onClick=""modalajax(&#39;/teklif2/teklif_klonla.asp?id="& ihaleID64 & "&#39;);"" title=""dosyayı yeni numara ve tarih ile klonla"">"
+				Response.Write "<i class=""icon page-copy""></i>"
+			Response.Write "</div>"
+					
 					if yetkiKontrol > 5 then
-						Response.Write "<div class=""pointer rounded col-2"" onclick=""silDosya(&#39;"&ihaleID64&"&#39;)"" title=""dosyayı sil""><i class=""fa fa-trash text-danger""></i></div>"
+						Response.Write "<div class=""pointer rounded col-2"" onclick=""silDosya(&#39;"&ihaleID64&"&#39;)"" title=""dosyayı sil""><i class=""icon delete text-danger""></i></div>"
 					end if
 	'############## POPOVER ile işlemler listesi gösterimi
 			' Response.Write "<div class=""col-6"">"
