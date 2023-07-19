@@ -206,7 +206,7 @@ Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein card"">"
 				Response.Write "<div "
 					Response.Write " title=""" & icerik & """"
 					if isTur = "uretimPlan" then
-						Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
+						Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/uretim/uretim/"&isTur&"++"&ajandaID64&"++0','','Üretime Başla','Kapat','','btn-danger','','','','','')"""
 						Response.Write " class=""col-10 text-left fontkucuk2 pointer hoverGel p-0 m-0 bg-info"""
 					elseif isTur = "kesimPlan" then
 						Response.Write " onclick=""bootmodal('"&icerikHam&"','custom','/depo/is_listesi/"&gunTarih&"','','Kesimhane','Kapat','btn-success','btn-danger','','','','','')"""
