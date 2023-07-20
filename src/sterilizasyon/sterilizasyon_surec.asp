@@ -59,7 +59,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 	sorgu = "SELECT id FROM stok.depo WHERE depoKategori = '" & depoKategori & "'"
 	rs.open sorgu,sbsv5,1,3
+	if rs.recordcount > 0 then
 		bekleyenUrunDepoID	=	rs("id")
+	end if
 	rs.close
 		
 			sorgu = "SELECT t1.stokHareketID, t1.miktar, t1.koliSayi, stok.FN_koliHacimHesapla(t1.koliIndexID,'m3') as hacimLt,"

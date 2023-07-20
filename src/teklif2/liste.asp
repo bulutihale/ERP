@@ -514,6 +514,7 @@ function silDosya(ihaleID64) {
 	$(document).on('hidden.bs.modal', function () {
      $('.modal-body').html('');
 });
+function paging(sayfa){$('#page').val(sayfa);$('#paging').submit();}
 
 </script><!--modal kapandığında içini boşalt-->
 
