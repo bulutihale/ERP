@@ -51,7 +51,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 '###### ARAMA FORMU
 '###### ARAMA FORMU
-	if hata = "" and opener = "" and yetkiKontrol > 0 then
+	if hata = "" and opener = "" and yetkiKontrol >= 5 then
 
 		Response.Write "<div class=""container-fluid"">"
 		Response.Write "<div class=""row"">"
