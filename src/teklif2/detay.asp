@@ -595,13 +595,18 @@ Response.Write "<div class=""card-body row"">"
 '##### tablo başlıklar	
 				Response.Write "<thead class=""thead-dark"">"
 					Response.Write "<tr class=""text-center bg-gray-200 p-0"">"
-					Response.Write "<th class=""align-middle"">"
-						Response.Write "<div class=""switch switch-lg switch-text switch-success"">"
-							Response.Write "<input id=""urunlerSwitch"" type=""checkbox"" class=""switch-input hover"" checked=""checked"" onclick=""$('#urunlerInput').toggle('slow');"">"
-							Response.Write "<span class=""switch-div"" data-on=""✓"" data-off=""X"">"
-							Response.Write "</span>"
-							Response.Write "<span class=""switch-handle""></span>"
-						Response.Write "</div>"					
+					Response.Write "<th class=""align-middle text-center"">"
+						' Response.Write "<div class=""row text-center"">"
+						' 	Response.Write "<div class=""col-1"">"
+						' 		Response.Write "<div id=""urunlerSwitch"" class=""btn btn-sm btn-warning"" onclick=""$('#urunlerInput').toggle('slow');"">A/K</div>"
+						' 	Response.Write "</div>"
+						' Response.Write "</div>"
+						Response.Write "<div class=""row text-center"">"
+							Response.Write "<div class=""col-2 mt-1"">"
+								Response.Write "<div id=""siparisButton"" class=""btn btn-sm btn-warning "" onclick=""topluSiparisKaydet();"">Sipariş</div>"
+							Response.Write "</div>"
+						Response.Write "</div>"
+						Response.Write "</div>"
 					Response.Write "</th>"
 					Response.Write "<th class=""align-middle"">Notlar</th>"
 					Response.Write "<th class=""align-middle"">Sıra No</th>"
@@ -621,7 +626,7 @@ Response.Write "<div class=""card-body row"">"
 			&" iu.miktar, ISNULL(iu.miktar,0) as miktar, ISNULL(iu.arttirimMiktar,0) as arttirimMiktar, ISNULL(iu.eksiltimMiktar,0) as eksiltimMiktar, iu.birim, iu.stoklarID, ISNULL(iu.yaklasikMaliyetPB,'TL') as yaklasikMaliyetPB,"_
 			&" iu.bayiMarj, ISNULL(iu.bayiAlisPB,'TL') as bayiAlisPB, iu.stoklarListeFiyat, iu.stoklarListeFiyatPB, iu.listeFiyatTarih, iu.iskontoOran,"_
 			&" iu.id as ihaleUrunID, iu.ad as urunAd, iu.kalemNot, iu.kalemNotTeklifEkle, s.stokAd as stoklarAD, i.id as ihaleID, i.ihaleTipi, i.firmaID,"_
-			&" r.cariUrunRef, r.cariUrunAd, t5.id as sipTempID"_
+			&" r.cariUrunRef, r.cariUrunAd, t5.id as sipTempID, [stok].[FN_anaBirimIDBul](iu.stoklarID) as anaBirimID "_
 			&" FROM teklifv2.ihale_urun iu"_
 			&" INNER JOIN teklifv2.ihale i ON iu.ihaleID = i.id"_
 			&" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"_
@@ -631,6 +636,7 @@ Response.Write "<div class=""card-body row"">"
 			rs.open sorgu,sbsv5,1,3
 				sonSiraKontrol = 0
 			for i = 1 to rs.recordcount
+				anaBirimID		=	rs("anaBirimID")
 				firmaID			=	rs("firmaID")
 				stoklarID		=	rs("stoklarID")
 				bayiAlis		=	rs("bayiAlis")
@@ -647,6 +653,7 @@ Response.Write "<div class=""card-body row"">"
 				cariUrunAd		=	rs("cariUrunAd")
 				uhde			=	rs("uhde")
 				sipTempID		=	rs("sipTempID")
+				miktar			=	rs("miktar")
 
 				sorgu = "SELECT id as sipKalemID FROM teklif.siparisKalem WHERE iuID = " & ihaleUrunID
 				rs1.open sorgu,sbsv5,1,3
@@ -667,7 +674,7 @@ Response.Write "<div class=""card-body row"">"
 					sipClass 		=	""
 				end if
 
-	Response.Write "<tr>"
+	Response.Write "<tr class=""urunSatir"" data-iuid=""" & ihaleUrunID & """ data-anabirimid=""" & anaBirimID & """ data-miktar=""" & miktar & """>"
 		Response.Write "<td width=""5%"" class=""align-middle text-center "&sipClass&""">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col"">"
@@ -752,7 +759,7 @@ Response.Write "<div class=""card-body row"">"
 
 '## miktar
 		Response.Write "<td width=""7%"" class=""align-middle border-right-0 p-0"">"
-			call forminput("miktar",formatnumber(rs("miktar"),0),"","","borderless text-right input50","","","onChange=""ajSave('miktar','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
+			call forminput("miktar",formatnumber(miktar,0),"","","borderless text-right input50","","","onChange=""ajSave('miktar','teklifv2.ihale_urun',"&ihaleUrunID&",$(this).val())""")
 		Response.Write "</td>"
 '## /miktar
 
@@ -1622,9 +1629,6 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 });
 
 function stokRefCagir(cariID, stokID){
-
-
-		
     $.ajax({
         type:'POST',
         url :'/teklif2/stok_ref_cagir.asp',
@@ -1646,6 +1650,59 @@ function stokRefCagir(cariID, stokID){
 			}
     });
     };
+
+
+	//tüm ürünleri sipariş TEMP tablosuna kaydet
+		function topluSiparisKaydet(){
+
+	  swal({
+		title: "Teklifteki ürünlerin tamamı sipariş TEMP tablosuna yazılsın mı?",
+		type: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#DD6B55',
+		confirmButtonText: 'evet',
+		cancelButtonText: 'hayır'
+	  }).then(function(result) {
+		// handle Confirm button click
+		// result is an optional parameter, needed for modals with input
+
+			$('.urunSatir').each(function(){
+				var iuID		=	$(this).attr('data-iuid');
+				var anaBirimID	=	$(this).attr('data-anabirimid');
+				var miktar		=	$(this).attr('data-miktar');
+
+				$.post('/teklif2/sipYazKaydet.asp',{
+					iuID:iuID,
+					birimID:anaBirimID,
+					sipMiktar:miktar
+				},function(cevap){
+					cevapArr = cevap.split("|");
+						if(cevapArr[0] == "ok"){
+							toastr.options.positionClass = 'toast-bottom-right';
+							toastr.success(cevapArr[1],'İşlem Yapıldı!');
+						}
+						else{
+							toastr.options.positionClass = 'toast-bottom-right';
+							toastr.error(cevapArr[1],'Ürün zaten TEMP tablosuna kayıtlı!');
+						};
+					
+				});
+			})
+	  }).catch(function(dismiss) {
+		// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+	  });
+			
+		}
+
+
+
+
+
+
+
+
+
+
 
 </script>
 

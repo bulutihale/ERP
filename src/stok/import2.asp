@@ -55,58 +55,58 @@ if dosyavar = True then
 
 
 	'reset
-	sorgu = "Update fatura.gsm set fatura.gsm." & ay & " = '0' where fatura.gsm.operator = 'Vodafone'"
-	rs.open sorgu,sbsv5,3,3
+	'sorgu = "Update fatura.gsm set fatura.gsm." & ay & " = '0' where fatura.gsm.operator = 'Vodafone'"
+	'rs.open sorgu,sbsv5,3,3
 	'reset
 
 
 
 
 
-	di = 1
-	do while not rsx.eof
-		if rsx.eof then
-			exit do
-		end if
-			numara	=	rsx.Fields(1).value
-			tarife	=	rsx.Fields(2).value
-			durum	=	rsx.Fields(3).value
-			tanim	=	rsx.Fields(4).value
-			tutar	=	rsx.Fields(5).value
-			indirim	=	rsx.Fields(6).value
-			kdv		=	rsx.Fields(7).value
-			oiv		=	rsx.Fields(8).value
-			toplam	=	tutar + indirim + kdv + oiv
+' 	di = 1
+' 	do while not rsx.eof
+' 		if rsx.eof then
+' 			exit do
+' 		end if
+' 			numara	=	rsx.Fields(1).value
+' 			tarife	=	rsx.Fields(2).value
+' 			durum	=	rsx.Fields(3).value
+' 			tanim	=	rsx.Fields(4).value
+' 			tutar	=	rsx.Fields(5).value
+' 			indirim	=	rsx.Fields(6).value
+' 			kdv		=	rsx.Fields(7).value
+' 			oiv		=	rsx.Fields(8).value
+' 			toplam	=	tutar + indirim + kdv + oiv
 
-			'## kaydet
-			sorgu = "Select " & ay & "," & ay & "a,operator,firma,tarife from fatura.gsm where telefon = '" & numara & "'"
-			rs.open sorgu,sbsv5,1,3
-			if rs.recordcount = 0 then
-				Response.Write "Sorun = Numara Yok : " & numara & vbcrlf
-			elseif rs.recordcount > 1 then
-				Response.Write "Sorun = Çoklu Kayıt : " & numara & vbcrlf
-			else
-				if durum = "CDR" then
-					rs(ay & "a") = tutar + indirim + kdv + oiv
-				end if
-				if isnull(rs(ay)) = True then
-					rs(ay) = 0
-					rs.update
-				end if
-				rs(ay) = rs(ay) + toplam
-				rs("operator") = "Vodafone"
-'				rs("firma")		=	"Ultra Emar"
+' 			'## kaydet
+' 			sorgu = "Select " & ay & "," & ay & "a,operator,firma,tarife from fatura.gsm where telefon = '" & numara & "'"
+' 			rs.open sorgu,sbsv5,1,3
+' 			if rs.recordcount = 0 then
+' 				Response.Write "Sorun = Numara Yok : " & numara & vbcrlf
+' 			elseif rs.recordcount > 1 then
+' 				Response.Write "Sorun = Çoklu Kayıt : " & numara & vbcrlf
+' 			else
+' 				if durum = "CDR" then
+' 					rs(ay & "a") = tutar + indirim + kdv + oiv
+' 				end if
+' 				if isnull(rs(ay)) = True then
+' 					rs(ay) = 0
+' 					rs.update
+' 				end if
+' 				rs(ay) = rs(ay) + toplam
+' 				rs("operator") = "Vodafone"
+' '				rs("firma")		=	"Ultra Emar"
 
-				'tarife bul
-				if rs("tarife") = "" or isnull(rs("tarife")) = True then
-					if trim(tanim) = "Aylık Mobil Ses ve SMS" then
-						rs("tarife") = tarife
-					end if
-				end if
-				'tarife bul
-				rs.update
-			end if
-			rs.close
+' 				'tarife bul
+' 				if rs("tarife") = "" or isnull(rs("tarife")) = True then
+' 					if trim(tanim) = "Aylık Mobil Ses ve SMS" then
+' 						rs("tarife") = tarife
+' 					end if
+' 				end if
+' 				'tarife bul
+' 				rs.update
+' 			end if
+' 			rs.close
 			'## kaydet
 
 	rsx.movenext

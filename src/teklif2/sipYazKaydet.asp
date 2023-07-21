@@ -17,12 +17,14 @@
 	
 	call logla("Teklif dosyasından sipariş yazılıyor iuID:"&iuID)
 
-	sorgu = "SELECT t2.cariID, t1.stoklarID, t1.kalemNot, t1.firmamFiyat, t1.firmamParaBirim, t2.ad as siparisAd, t1.ihaleID,"
+	sorgu = "SELECT t2.cariID, t1.stoklarID, t1.kalemNot, t1.firmamFiyat, t1.firmamParaBirim, t2.ad as siparisAd, t1.ihaleID, t1.ad as urunAd, t1.siraNo,"
 	sorgu = sorgu & " (SELECT kisaBirim FROM portal.birimler WHERE birimID = "& birimID & ") as mikBirim"
 	sorgu = sorgu & " FROM teklifv2.ihale_urun t1"
 	sorgu = sorgu & " INNER JOIN teklifv2.ihale t2 ON t1.ihaleID = t2.id"
 	sorgu = sorgu & " WHERE t1.id = " & iuID
 	rs.open sorgu, sbsv5,1,3
+		urunAd			=	rs("urunAd")
+		siraNo			=	rs("siraNo")
 		cariID			=	rs("cariID")
 		stokID			=	rs("stoklarID")
 		kalemNot		=	rs("kalemNot")
@@ -57,9 +59,12 @@
 				rs("iuID")				=	iuID
 			rs.update
 			call logla("Kayıt Başarılı.")
+			Response.Write "ok|sıra No: " & siraNo & " - " & urunAd & "|"
 		else
 			hatamesaj = "Zaten Kayıtlı."
 			call logla("Zaten Kayıtlı.")
+			
+			Response.Write "kayitli|sıra No: " & siraNo & " - " & urunAd & "|"
 		end if
 	rs.close
 '### gelen veri ayır

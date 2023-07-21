@@ -231,24 +231,24 @@ Function ucasetr(gelen)
 End Function
 
 Function temptemizle()
-	Set fso = CreateObject("Scripting.FileSystemObject")
-		Set ana = fso.GetFolder(Server.Mappath("/temp"))
-		Set dosyalar=ana.Files
-			for each dosyaa in dosyalar
-				dosyaa.Delete
-			next
-		Set dosyaa = Nothing
-		Set dosyalar = Nothing
-		Set ana = Nothing
-		Set ana = fso.GetFolder(Server.Mappath("/temp2"))
-		Set dosyalar=ana.Files
-			for each dosyaa in dosyalar
-				dosyaa.Delete
-			next
-		Set dosyaa = Nothing
-		Set dosyalar = Nothing
-		Set ana = Nothing
-	Set fso = Nothing
+	' Set fso = CreateObject("Scripting.FileSystemObject")
+	' 	Set ana = fso.GetFolder(Server.Mappath("/temp"))
+	' 	Set dosyalar=ana.Files
+	' 		for each dosyaa in dosyalar
+	' 			dosyaa.Delete
+	' 		next
+	' 	Set dosyaa = Nothing
+	' 	Set dosyalar = Nothing
+	' 	Set ana = Nothing
+	' 	Set ana = fso.GetFolder(Server.Mappath("/temp2"))
+	' 	Set dosyalar=ana.Files
+	' 		for each dosyaa in dosyalar
+	' 			dosyaa.Delete
+	' 		next
+	' 	Set dosyaa = Nothing
+	' 	Set dosyalar = Nothing
+	' 	Set ana = Nothing
+	' Set fso = Nothing
 End Function
 
 Public Function RSSTemizle(strInput)
@@ -1720,48 +1720,48 @@ End Function
 
 
 function resimcek(byVal strURL)
-'örnek kullanım call resimcek(urladres,ID,resimtur=prod/gallery)
-	if len(strURL) > 20 and left(strURL,4) = "http" then
-		strURL = Replace(strURL, "'", "")
-		Set objHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
-		set img		=	Server.CreateObject("Persits.Jpeg")
+' 'örnek kullanım call resimcek(urladres,ID,resimtur=prod/gallery)
+' 	if len(strURL) > 20 and left(strURL,4) = "http" then
+' 		strURL = Replace(strURL, "'", "")
+' 		Set objHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
+' 		set img		=	Server.CreateObject("Persits.Jpeg")
 
-		if right(strURL,4) = ".png" then
-			img.PNGOutput		=	True
-			img.Interpolation	=	15
-			img.quality			=	100
-			resimadi			=	"/temp/temp.png"
-			objHTTP.Open "GET", strURL, false
-			objHTTP.Send()
-			img.OpenBinary(objHTTP.responseBody)
-			img.save Server.MapPath(resimadi)
-			set img = Nothing
-			set objHTTP = nothing
-		else
-			resimadi = "/temp/temp.jpg"
-			objHTTP.Open "GET", strURL, false
-			objHTTP.Send()
-				'mevcut dosyayı sil
-					set FSO = Createobject("Scripting.FileSystemObject")
-					if FSO.FileExists(Server.MapPath(resimadi)) = True then
-						Fso.DeleteFile Server.MapPath(resimadi)
-					End If
-					set FSO = Nothing
-				'mevcut dosyayı sil
-				'binary olarak ramdeki bilgiyi al dosyaya kaydet
-					set DataStream = CreateObject("ADODB.Stream")
-					DataStream.Open
-					DataStream.Type = 1
-					DataStream.Write objHTTP.ResponseBody
-					DataStream.Position = 0
-					DataStream.SaveToFile Server.MapPath(resimadi)
-					DataStream.Close
-					set DataStream = Nothing
-				'binary olarak ramdeki bilgiyi al dosyaya kaydet
-			set objHTTP = nothing
-		end if
-	resimcek = resimadi
-	end if
+' 		if right(strURL,4) = ".png" then
+' 			img.PNGOutput		=	True
+' 			img.Interpolation	=	15
+' 			img.quality			=	100
+' 			resimadi			=	"/temp/temp.png"
+' 			objHTTP.Open "GET", strURL, false
+' 			objHTTP.Send()
+' 			img.OpenBinary(objHTTP.responseBody)
+' 			img.save Server.MapPath(resimadi)
+' 			set img = Nothing
+' 			set objHTTP = nothing
+' 		else
+' 			resimadi = "/temp/temp.jpg"
+' 			objHTTP.Open "GET", strURL, false
+' 			objHTTP.Send()
+' 				'mevcut dosyayı sil
+' 					set FSO = Createobject("Scripting.FileSystemObject")
+' 					if FSO.FileExists(Server.MapPath(resimadi)) = True then
+' 						Fso.DeleteFile Server.MapPath(resimadi)
+' 					End If
+' 					set FSO = Nothing
+' 				'mevcut dosyayı sil
+' 				'binary olarak ramdeki bilgiyi al dosyaya kaydet
+' 					set DataStream = CreateObject("ADODB.Stream")
+' 					DataStream.Open
+' 					DataStream.Type = 1
+' 					DataStream.Write objHTTP.ResponseBody
+' 					DataStream.Position = 0
+' 					DataStream.SaveToFile Server.MapPath(resimadi)
+' 					DataStream.Close
+' 					set DataStream = Nothing
+' 				'binary olarak ramdeki bilgiyi al dosyaya kaydet
+' 			set objHTTP = nothing
+' 		end if
+' 	resimcek = resimadi
+' 	end if
 end function
 
 
