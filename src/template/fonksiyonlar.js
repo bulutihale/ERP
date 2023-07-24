@@ -550,10 +550,12 @@ function numara(nesne,para,uyari)
 //stok ana kartını aç
 
 //farklı birim miktarlarını anaBirim miktarına çevir
-	function anaBirimMiktarHesap(inputID, stokID){
+	function anaBirimMiktarHesap(inputID, inputID2, stokID){
+		//inputID : update edilecek, miktar hesabı yapıldığında ana birim cinsinden miktarın yazılacağı inputa ait ID
+		//inputID2 : update edilecek, fiyat hesabı yapıldığında ana birim cinsinden fiyatın yazılacağı inputa ait ID
 
 		if(stokID != undefined){
-			modalajax("/portal/birimMiktarHesap.asp?stokID="+stokID+"&inputID="+inputID);
+			modalajax("/portal/birimMiktarHesap.asp?stokID="+stokID+"&inputID="+inputID+"&inputID2="+inputID2);
 		}else{swal('ürün seçimi yapmadınız.','');}
 	}
 //stok ana kartını aç

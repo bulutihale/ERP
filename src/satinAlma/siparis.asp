@@ -99,7 +99,7 @@ yetkiKontrol = yetkibul(modulAd)
 								Response.Write "<div class=""row mt-2"">"
 									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
 										Response.Write "<div class=""badge badge-secondary rounded-left"">Miktar</div>"
-										Response.Write "<div class=""badge badge-warning rounded pointer"" onclick=""anaBirimMiktarHesap('miktar',$('#stokSec').val())"">Hesap</div>"
+										Response.Write "<div class=""badge badge-warning rounded pointer"" onclick=""anaBirimMiktarHesap('miktar','birimfiyat',$('#stokSec').val())"">Hesap</div>"
 										call forminput("miktar",miktar,"numara(this,true,false)","miktar","inpReset","","miktar","")
 									Response.Write "</div>"
 									Response.Write "<div class=""col-lg-6 col-sm-12 col-md-6"">"
