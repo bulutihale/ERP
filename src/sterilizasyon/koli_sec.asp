@@ -6,6 +6,8 @@
     call sessiontest()
     kid					=	kidbul()
     stokID				=	Request.QueryString("stokID")
+	stokID64			=	stokID
+	stokID64			=	base64_encode_tr(stokID64)
 	lot					=	Request.QueryString("lot")
 	lotSKT				=	Request.QueryString("lotSKT")
 	miktar				=	Request.QueryString("miktar")
@@ -69,6 +71,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "</table>"
 	else
 		Response.Write "<div class=""text-danger bold"" style=""min-height:100px"">Ürün kartında (stok --> stok kartı koli tanımları sekmesi) ürünün içine konacağı koli tanımlaması yapılmamış.</div>"
+		Response.Write "<div class=""pointer"" onclick=""modalajax('/stok/stok_yeni.asp?gorevID="&stokID64&"')"">koli tanımlaması ekranı.</div>"
 	end if
 '###### ARAMA FORMU
 '###### ARAMA FORMU

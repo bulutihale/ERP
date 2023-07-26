@@ -12,7 +12,7 @@
     rqmamulGoster				=   Request.Form("mamulGoster")
     rqyariMamulGoster			=   Request.Form("yariMamulGoster")
     rqhammaddeGoster			=   Request.Form("hammaddeGoster")
-	aramaad		=	Request.Form("aramaad")
+	aramaad		=	trim(Request.Form("aramaad"))
     hata    	=   ""
     modulAd 	=   "Stok"
     Response.Flush()
