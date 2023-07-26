@@ -69,6 +69,7 @@ Response.Write "<div id=""ajandaAnaDIV"" class=""animated fadein card"">"
 			Response.Write " data-sipariskalemid=""" & siparisKalemID & """"
 			Response.Write " data-yer=""" & yer & """"
 			Response.Write " data-istur=""" & qisTur & """"
+			Response.Write " data-receteid=""" & receteID & """"
 		Response.Write "></div>"
 	
 	
@@ -410,6 +411,7 @@ end if
 			silAjandaID		=	$('#sabitBilgiler').attr('data-silajandaid');
 			yer				=	$('#sabitBilgiler').attr('data-yer');
 			isTur			=	$('#sabitBilgiler').attr('data-istur');
+			receteID		=	$('#sabitBilgiler').attr('data-receteid');
 			
 			if($(this).hasClass('ileri')){
 				ayHareket = 1;
@@ -420,7 +422,7 @@ end if
 			else{ayHareket = 0};
 			
 			$('#ajandaAnaDIV').fadeOut('slow', function () {
-				$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?isTur='+isTur+'&yer='+yer+'&silAjandaID='+silAjandaID+'&siparisKalemID='+siparisKalemID+'&ayHareket='+ayHareket+'&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *').fadeIn('slow');
+				$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?receteID='+receteID+'&isTur='+isTur+'&yer='+yer+'&silAjandaID='+silAjandaID+'&siparisKalemID='+siparisKalemID+'&ayHareket='+ayHareket+'&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *').fadeIn('slow');
 			});
 				
 		});
@@ -452,7 +454,7 @@ end if
 			else{ayHareket = 0};  
 			
 			$('#ajandaAnaDIV').fadeOut('slow', function () {
-				$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?isTur='+isTur+'&yer='+yer+'&silAjandaID='+silAjandaID+'&siparisKalemID='+siparisKalemID+'&ayHareket='+ayHareket+'&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *').fadeIn('slow');
+				$('#ajandaAnaDIV').load('/ajanda/ajanda.asp?receteID='+receteID+'&isTur='+isTur+'&yer='+yer+'&silAjandaID='+silAjandaID+'&siparisKalemID='+siparisKalemID+'&ayHareket='+ayHareket+'&sorgulananTarih='+sorgulananTarih+' #ajandaAnaDIV > *').fadeIn('slow');
 			});
 				
 		});

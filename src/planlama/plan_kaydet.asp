@@ -16,7 +16,7 @@
 		silAjandaID			=	Request.Form("silAjandaID")
 		isTur				=	Request.Form("isTur")
 		planTarih			=	DateSerial(hangiYil, hangiAy, hangiGun)
-		receteID			=	Request.Form("receteID")
+		receteID			=	Request("receteID")
 	'##### request
 	'##### request
 
