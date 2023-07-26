@@ -60,19 +60,22 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "</div>"
 		Response.Write "<div id=""listeTablo"" class=""table-responsive mt-3"">"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr class=""text-center"">"
-		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Tarih</th>"
-		Response.Write "<th class=""col-1"" scope=""col"">Sipariş Cari</th>"
-		Response.Write "<th class=""col-2"" scope=""col"">Üretim Başlangıcı</th>"
-		Response.Write "<th class=""col-2"" scope=""col"">Üretim Bitişi</th>"
-		Response.Write "<th class=""col-4"" scope=""col"">Ürün Adı</th>"
-		'Response.Write "<th>Üretilen / Talep</th>"
-		Response.Write "<th class="""" scope=""col""></th>"
+		Response.Write "<th class=""col-1"" >Sipariş Tarih</th>"
+		Response.Write "<th class=""col-3"" >Sipariş Cari</th>"
+		Response.Write "<th class=""col-1"" >Üretim Başlangıcı</th>"
+		Response.Write "<th class=""col-1"" >Üretim Bitişi</th>"
+		Response.Write "<th class=""col-3"" >Ürün Adı</th>"
+		Response.Write "<th class=""col-1"">Miktar</th>"
+		Response.Write "<th class=""col-1"" ></th>"
 		Response.Write "</tr></thead><tbody>"
 
 		
             sorgu = "SELECT"
 			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "
 			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID, t1.manuelPlan,"
+			sorgu = sorgu & " ISNULL([stok].[FN_siparisMiktarBul] (t1.id , "&firmaID&"),t1.miktar) as sipMiktar,"
+			sorgu = sorgu & " ISNULL([stok].[FN_receteMiktarBul] (t1.id),1) as bilesenMiktar,"
+			sorgu = sorgu & " [stok].[FN_anaBirimADBul] ( t2.stokID, 'kAd') as miktarBirim,"
 			sorgu = sorgu & " ISNULL(portal.FN_sipariscariAdbul("&firmaID&", t1.id),N'<span class=""font-italic bold text-info"">Manuel İstem</span>') as siparisCariAd,"
 			sorgu = sorgu & " t1.icerik, t1.tarih"
 			sorgu = sorgu & " FROM portal.ajanda t1"
@@ -110,6 +113,10 @@ Response.Write "<div class=""card-body"">"
 					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
 					icerik				=	rs("icerik")
+					sipMiktar			=	rs("sipMiktar")
+					bilesenMiktar		=	rs("bilesenMiktar")
+					bilesenToplamMiktar	=	bilesenMiktar * sipMiktar
+					miktarBirim			=	rs("miktarBirim")
 					siparisCariAd		=	rs("siparisCariAd")
 					planTarih			=	tarihtr(rs("planTarih"))
 					baslangicZaman		=	rs("baslangicZaman")
@@ -138,10 +145,10 @@ Response.Write "<div class=""card-body"">"
 							Response.Write "<div class="""">" & stokKodu & " - " & stokAd & "</div>"
 							Response.Write "<div class=""mt-2 ml-3 font-italic fontkucuk2"">" & icerik & "</div>"
 						Response.Write "</td>"
-
+						Response.Write "<td class=""text-right"">" & bilesenToplamMiktar & " " & miktarBirim &"</td>"
 						Response.Write "<td class=""text-center"">"
 						'Response.Write "<div class=""container-flex"">"
-							Response.Write "<div class=""row"">"
+							Response.Write "<div class=""row container"">"
 							Response.Write "<div class=""col-4"">"
 								Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
 									Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
