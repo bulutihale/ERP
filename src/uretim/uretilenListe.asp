@@ -26,6 +26,7 @@
 	elseif listeTur = "transfer" then
 		sayfaBaslik	=	"Depolararası transfer edilecek ürünler listesi"
 		sayfaLink	=	"<div class=""col-4""><span class=""bg-info rounded""><a href=""/uretim/uretilenListe/transfer"">Transfer Listesi</a></span></div>"
+		exportBtn	=	"<div><a href=""/portal/depo_transfer_export.asp?listeTur="&listeTur&""" target=""_blank"" class=""btn btn-warning"">Excel Dosyasını İndir</a></div>"
 	end if
     modulAd 		=   "Üretim"
 	
@@ -50,6 +51,7 @@ Response.Write "<div class=""card rounded-top"">"
 Response.Write "<div class=""card-header h5"">"
 Response.Write "<div class=""row"">"
 	Response.Write sayfaLink
+	Response.Write exportBtn
 Response.Write "</div>"
 Response.Write "</div>"
 
