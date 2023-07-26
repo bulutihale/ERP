@@ -1,0 +1,30 @@
+﻿id;Tarih;personelID;IP;gorevID;islem;firmaID;url;modulAd
+129802;26.06.2023 08:26:00;0;192.168.1.153;0;Sifre Giris Ekrani;5;;
+129803;26.06.2023 08:27:00;0;192.168.1.153;0;Sifre Denemesi;5;;Personel
+129804;26.06.2023 08:27:00;0;192.168.1.153;0;Sifre Dogrulaniyor;5;;Personel
+129805;26.06.2023 08:27:00;30;192.168.1.153;0;Basarili Giris;5;;Personel
+129806;26.06.2023 08:27:00;30;192.168.1.153;0;Welcome Dashboard;5;;Dashboard
+129807;26.06.2023 08:28:00;30;192.168.1.153;0;Teklif Listesi Ekrani;5;;Teklif
+129808;26.06.2023 08:28:00;30;192.168.1.153;0;Kayit Basarili.;5;;Teklif
+129809;26.06.2023 08:30:00;30;192.168.1.153;0;Teklif kalemi kayit ediliyor;5;;
+129810;26.06.2023 08:54:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+129811;26.06.2023 09:38:00;27;192.168.1.161;0;Welcome Dashboard;5;;Dashboard
+129812;26.06.2023 09:38:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129813;26.06.2023 09:38:00;27;192.168.1.161;0;Mail Bilgileri Tanimlanmamis;5;;
+129814;26.06.2023 10:23:00;36;192.168.1.190;0;Welcome Dashboard;5;;Dashboard
+129815;26.06.2023 11:50:00;0;192.168.1.228;0;Sifre Giris Ekrani;5;;
+129816;26.06.2023 11:50:00;0;192.168.1.228;0;Sifre Denemesi;5;;Personel
+129817;26.06.2023 11:50:00;0;192.168.1.228;0;Sifre Dogrulaniyor;5;;Personel
+129818;26.06.2023 11:50:00;31;192.168.1.228;0;Basarili Giris;5;;Personel
+129819;26.06.2023 11:50:00;31;192.168.1.228;0;Welcome Dashboard;5;;Dashboard
+129820;26.06.2023 11:50:00;31;192.168.1.228;0;Teklif kaleminden siparis Temp kaydi açilacak.iuID:3234;5;;Satis
+129821;26.06.2023 11:50:00;31;192.168.1.228;0;Teklif dosyasindan siparis yaziliyor;5;;
+129822;26.06.2023 11:50:00;31;192.168.1.228;0;Kayit Basarili.;5;;
+129823;26.06.2023 11:50:00;31;192.168.1.228;0;Teklif kaleminden siparis Temp kaydi açilacak.iuID:3235;5;;Satis
+129824;26.06.2023 11:50:00;31;192.168.1.228;0;Teklif dosyasindan siparis yaziliyor;5;;
+129825;26.06.2023 11:50:00;31;192.168.1.228;0;Kayit Basarili.;5;;
+129826;26.06.2023 11:50:00;31;192.168.1.228;0;Teklif kaleminden siparis Temp kaydi açilacak.iuID:3236;5;;Satis
+129827;26.06.2023 11:50:00;31;192.168.1.228;0;Teklif dosyasindan siparis yaziliyor;5;;
+129828;26.06.2023 11:50:00;31;192.168.1.228;0;Kayit Basarili.;5;;
+129829;26.06.2023 11:50:00;31;192.168.1.228;0;Dogrudan Müsteri Siparisi Olusturma Ekrani;5;;Satis
+129830;26.06.2023 11:52:00;31;192.168.1.228;0;Müsteri siparisi ana tablo aktarimi;5;;satis

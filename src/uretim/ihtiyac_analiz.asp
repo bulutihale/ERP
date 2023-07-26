@@ -5,6 +5,7 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid				=	kidbul()
+	listeTur		=	Request("listeTur")
 	stokID64		=	Request("gorevID")
 	stokID			=	stokID64
 	stokID			=	base64_decode_tr(stokID)
@@ -39,9 +40,17 @@ yetkiKontrol = yetkibul(modulAd)
 	Response.Write "</div>"
 
 
-		sorgu = "SELECT t1.id as ajandaID, t1.bagliAjandaID, [stok].[FN_receteMiktarBul](t1.id) as receteMiktar, DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih,"
-		sorgu = sorgu & " [stok].[FN_siparisMiktarBul](t1.bagliAjandaID, "&firmaID&") as sipMiktar, [stok].[FN_anaBirimADBul](t1.stokID,'kAd') as anaBirim"
-		sorgu = sorgu & " FROM portal.ajanda t1 WHERE t1.stokID = " & stokID & " AND t1.isTur = 'transfer' AND t1.silindi = 0 AND t1.tamamlandi = 0"
+		sorgu = "SELECT t1.id as ajandaID, t1.bagliAjandaID,"
+		sorgu = sorgu & " ISNULL([stok].[FN_receteMiktarBul](t1.id), 1 ) as receteMiktar,"
+		sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih,"
+		if listeTur = "uretimPlan" then
+			sorgu = sorgu & " [stok].[FN_siparisMiktarBul](t1.id, " & firmaID & ") as sipMiktar,"
+		elseif listeTur = "kesimPlan" OR listeTur = "transfer" then
+			sorgu = sorgu & " [stok].[FN_siparisMiktarBul]( CASE WHEN t1.manuelPlan = 1 THEN t1.id ELSE t1.bagliAjandaID END, " & firmaID & ") as sipMiktar,"
+		end if
+		sorgu = sorgu & " [stok].[FN_anaBirimADBul](t1.stokID,'kAd') as anaBirim"
+		sorgu = sorgu & " FROM portal.ajanda t1"
+		sorgu = sorgu & " WHERE t1.stokID = " & stokID & " AND t1.isTur = '" & listeTur & "' AND t1.silindi = 0 AND t1.tamamlandi = 0"
 		rs.open sorgu,sbsv5,1,3
 			if rs.recordcount > 0 then
 			Response.Write "<div id=""ihtiyacTablo"">"
@@ -64,9 +73,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 					Response.Write "<tr>"
 						Response.Write "<td>" & tarihtr(planTarih) & "</td>"
-						Response.Write "<td class=""text-right""><span class=""help"" data-toggle=""popoverModal"" title=""Bu tarih dahil toplam ihtiyaç:<span class='text-danger'> "&genelIhtiyac&"</span>"">" & toplamIhtiyac & " " & anaBirim &"</span></td>"
+						Response.Write "<td class=""text-right""><span class=""help"" data-toggle=""popoverModal"" title=""Bu tarih dahil toplam ihtiyaç:<span class='text-danger'> " & genelIhtiyac & "</span>"">" & toplamIhtiyac & " " & anaBirim &"</span></td>"
 						Response.Write "<td class=""text-center"">"
-							Response.Write "<span title=""ürün sevki yapılmadan tamamlandı olarak işaretlemek için tıklayın."" onclick=""hucreKaydetGenel('id', "&ajandaID&", 'tamamlandi', 'portal.ajanda', 1, 'ürün sevki olmadan tamamlandı olarak işaretlensin mi?', 'ihtiyacTablo', '/uretim/ihtiyac_analiz.asp', 'gorevID_"&stokID64&"', '')"">"
+							Response.Write "<span title=""ürün sevki yapılmadan tamamlandı olarak işaretlemek için tıklayın."" onclick=""hucreKaydetGenel('id', "&ajandaID&", 'tamamlandi', 'portal.ajanda', 1, 'işlem tamamlandı olarak işaretlensin mi?', 'ihtiyacTablo', '/uretim/ihtiyac_analiz.asp', 'gorevID_"&stokID64&"**listeTur_"&listeTur&"', '')"">"
 								Response.Write "<i class=""icon table-go pointer""></i>"
 							Response.Write "<span>"
 						Response.Write "</td>"

@@ -33,6 +33,7 @@ yetkiKontrol = yetkibul(modulAd)
 			rs("stokID")				=	stokID
 			rs("isTur")					=	"transfer"
 			rs("miktar")				=	talepMiktar
+			rs("manuelPlan")			=	1
 		rs.update
 	rs.close
 

@@ -158,12 +158,12 @@ Response.Write "<div class=""card-body"">"
 
 
 							Response.Write "<div class=""col-4"">"
-								if listeTur = "transfer" then
+								'if listeTur = "transfer" then
 									Response.Write "<div title=""İhtiyaç analizi"" class=""badge badge-pill badge-secondary pointer mr-2"""
-										Response.Write " onClick=""modalajaxfit('/uretim/ihtiyac_analiz.asp?gorevID=" & stokID64 & "');"">"
+										Response.Write " onClick=""modalajaxfit('/uretim/ihtiyac_analiz.asp?gorevID=" & stokID64 & "&listeTur="&listeTur&"');"">"
 										Response.Write "<i class=""fa fa-book""></i>"
 									Response.Write "</div>"
-								end if
+								'end if
 							Response.Write "</div>"
 
 							Response.Write "<div class=""col-4"">"
