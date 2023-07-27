@@ -82,9 +82,11 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " t1.icerik, t1.tarih"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
-			'sorgu = sorgu & " LEFT JOIN recete.recete t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
-			sorgu = sorgu & " AND t1.isTur = '" & listeTur & "'" 
+			sorgu = sorgu & " AND t1.isTur = '" & listeTur & "'"
+			if cariID <> "" then
+				sorgu = sorgu & " AND [portal].[FN_sipariscariIDbul] ("&firmaID&", t1.id) = " & cariID & ""
+			end if
 			if stokID <> "" then
 				sorgu = sorgu & " AND t2.stokID = " & stokID & ""
 			end if
@@ -94,8 +96,6 @@ Response.Write "<div class=""card-body"">"
 			if t4 <> "" then
 				sorgu = sorgu & " AND t1.baslangicZaman <= '" & tarihsql(t4) &"'"	
 			end if
-			'sorgu = sorgu & " AND (t1.bitisZaman is null OR (CONVERT(varchar,t1.bitisZaman,103) >= '" & tarihsql(t1) &"' AND CONVERT(varchar, t1.bitisZaman, 103) <= '" & tarihsql(t2) &"'))"
-			sorgu = sorgu & " AND (t1.bitisZaman is null OR (t1.bitisZaman >= '" & tarihsql(t1) &"' AND t1.bitisZaman <= '" & tarihsql(t2) &"'))"
 			sorgu = sorgu & " AND t1.silindi = 0"
 			sorgu = sorgu & " ORDER BY DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) DESC"
 			rs.open sorgu, sbsv5, 1, 3
