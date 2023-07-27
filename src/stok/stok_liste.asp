@@ -216,12 +216,12 @@
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">" & silindiArr(durum) &  "</td>"
 									Response.Write "<td class=""text-right"">"
-											if stokMiktar > 0 then
-												Response.Write "<div title=""" & translate("Depolara göre ürün sayıları","","") & """ class=""badge badge-pill badge-warning pointer mr-2"""
-													Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-													Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
-												Response.Write "</div>"
-											end if
+										if stokMiktar > 0 then
+											Response.Write "<div title=""" & translate("Depolara göre ürün sayıları","","") & """ class=""badge badge-pill badge-warning pointer mr-2"""
+												Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
+												Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+											Response.Write "</div>"
+										end if
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">"
 									Response.Write "<div class=""d-flex justify-content-between"">"
@@ -234,6 +234,15 @@
 											Response.Write """></i>"
 											Response.Write "</a>"
 										'# stok düzenle
+									Response.Write "</div>"
+									Response.Write "<div>"
+										'# koli tanımla
+											Response.Write "<a title=""Ürün bazında koli tanımları"""
+											Response.Write " onClick=""modalajax('/stok/urun_koli_esle.asp?gorevID=" & stokID64 & "')"">"
+											Response.Write "<i class=""icon package-add pointer"
+											Response.Write """></i>"
+											Response.Write "</a>"
+										'# koli tanımla
 									Response.Write "</div>"
 									end if
 									Response.Write "<div>"

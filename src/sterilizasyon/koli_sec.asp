@@ -25,12 +25,23 @@ call logla("Sterilizasyon süreci, koli seçimi")
 
 yetkiKontrol = yetkibul(modulAd)
 
+			Response.Write "<div>"
+				'# koli tanımla
+					Response.Write "<a title=""koli - ürün eşleşmesi oluştur."""
+					Response.Write " onClick=""modalajax('/stok/urun_koli_esle.asp?gorevID=" & stokID64 & "')"">"
+					Response.Write "<i class=""icon package-add pointer"
+					Response.Write """></i>"
+					Response.Write "</a>"
+				'# koli tanımla
+			Response.Write "</div>"
 
-            sorgu = "SELECT t1.koliUrunMiktar, t2.ad as koliAd, t3.stokAd as hamKoliAd, t4.stokAd as bantAd, t1.koliIndexID"
+
+            sorgu = "SELECT t1.koliUrunMiktar, t2.ad as koliAd, t3.stokAd as hamKoliAd, t4.stokAd as bantAd, t1.koliIndexID, t5.stokAd as urunAd, t5.stokKodu as urunStokKodu"
 			sorgu = sorgu & " FROM stok.koliIndex t1"
 			sorgu = sorgu & " INNER JOIN stok.koli t2 ON t1.koliID = t2.koliID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t2.hamKoliStokID = t3.stokID"
 			sorgu = sorgu & " INNER JOIN stok.stok t4 ON t2.bantStokID = t4.stokID"
+			sorgu = sorgu & " INNER JOIN stok.stok t5 ON t1.stokID = t5.stokID"
 			sorgu = sorgu & " WHERE t1.silindi = 0 AND t1.firmaID = " & firmaID & " AND t1.stokID = " & stokID & ""
 			rs.open sorgu, sbsv5, 1, 3
 
@@ -39,7 +50,10 @@ yetkiKontrol = yetkibul(modulAd)
 '###### ARAMA FORMU
 	if yetkiKontrol > 2 AND rs.recordcount > 0 then
 		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
-
+		
+		urunAd			=	rs("urunAd")
+		urunStokKodu	=	rs("urunStokKodu")
+	Response.Write "<div class=""bold h3"">Koli Seçimi (" & urunStokKodu & " - " & urunAd	 & ")</div>"
 
 
 		Response.Write "<div class=""table-responsive"">"
