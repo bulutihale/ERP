@@ -15,6 +15,7 @@
 	arananKelime		=	TRIM(arananKelime)
 	arananKelime		=	replace(arananKelime,Chr(9),"")
 	sart				=	request.QueryString ("sart")
+	cariID				=	request.QueryString ("cariID") 'LEFT JOIN de cariID için kullan
 	sartOzel			=	request.QueryString ("sartOzel")
 	if mamulGoster = "on" then
 		mDurum = "1"
@@ -46,10 +47,20 @@
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.stokID,"
 			sorgu = sorgu & " t1.stokKodu,"
-			sorgu = sorgu & " t1.stokAd, t1.stokAdEn, t1.stokBarcode" 
-			sorgu = sorgu & " FROM stok.stok t1" 
-			sorgu = sorgu & " WHERE t1.silindi = 0 AND (t1.stokAd like N'%" & arananKelime & "%' OR t1.stokBarcode like N'%" & arananKelime & "%' OR t1.stokKodu like N'%" & arananKelime & "%' OR t1.stokAdEN like N'%" & arananKelime & "%')"
-			sorgu = sorgu & " and firmaID = " & firmaID
+			sorgu = sorgu & " t1.stokAd, t1.stokAdEn, t1.stokBarcode, t2.cariUrunRef" 
+			sorgu = sorgu & " FROM stok.stok t1"
+			sorgu = sorgu & " LEFT JOIN stok.stokRef t2 ON t1.stokID = t2.stokID"
+			if cariID <> "" then
+				sorgu = sorgu & " AND t2.cariID = " & cariID & ""
+			end if 
+			sorgu = sorgu & " WHERE t1.silindi = 0"
+				sorgu = sorgu & " AND (t1.stokAd like N'%" & arananKelime & "%'"
+					sorgu = sorgu & " OR t1.stokBarcode like N'%" & arananKelime & "%'"
+					sorgu = sorgu & " OR t1.stokKodu like N'%" & arananKelime & "%'"
+					sorgu = sorgu & " OR t2.cariUrunRef like N'%" & arananKelime & "%'"
+					sorgu = sorgu & " OR t2.cariUrunAd like N'%" & arananKelime & "%'"
+					sorgu = sorgu & " OR t1.stokAdEN like N'%" & arananKelime & "%')"
+					sorgu = sorgu & " and t1.firmaID = " & firmaID
 			if mDurum <> "0" OR ymDurum <> "0" OR hmDurum <> "0" then
 				sorgu = sorgu & " AND t1.stokTuru IN (" & mDurum & "," & ymDurum & "," & hmDurum & ")"
 			end if
@@ -78,6 +89,7 @@
 					stokBarcode		=	rs("stokBarcode")
 					stokAd			=	rs("stokAd")
 					stokAdEN		=	rs("stokAdEN")
+					cariUrunRef		=	rs("cariUrunRef")
 					if sart = "english" AND not isnull(stokAdEN) then
 						stokAd = stokAdEn
 					end if
@@ -101,6 +113,9 @@
 					Response.Write """text"":"""
 					if stokKodu <> "" then
 						Response.Write stokKodu & " -- "
+					end if
+					if cariUrunRef <> "" then
+						Response.Write cariUrunRef & " -- "
 					end if
 					Response.Write stokAd
 					if stokBarcode <> "" then

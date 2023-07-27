@@ -17,7 +17,7 @@
 
 Response.Flush()
 
-call logla("Depolar arası transfer ihtiyaç analizi ekranı stokID: "&stokID)
+call logla("ihtiyaç analizi ekranı stokID: "&stokID)
 
 
 yetkiKontrol = yetkibul(modulAd)

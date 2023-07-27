@@ -56,7 +56,7 @@ end if
 
             sorgu = "SELECT top 1 * FROM stok.stokRef WHERE firmaID = " & firmaID & " AND stokID= " & stokID & " AND cariID = " & cariID
 			rs.open sorgu, sbsv5, 1, 3
-            if rs.recordcount = 0 then
+           ' if rs.recordcount = 0 then
                 rs.addnew
 				rs("firmaID")			=	firmaID
 				rs("kid")				=	kid
@@ -68,10 +68,10 @@ end if
                 rs("paraBirim")         =   paraBirim
 				call logla("Yeni Ref Ekleniyor: " & cariUrunRef & "")
 				tMesaj	=	"Kayıt Tamamlandı"
-			else
-				tMesaj	=	"Ref kaydı zaten var."
-				call logla(tMesaj & ": " & cariUrunRef & "")
-            end if
+			'else
+				'tMesaj	=	"Ref kaydı zaten var."
+				'call logla(tMesaj & ": " & cariUrunRef & "")
+           ' end if
             rs.update
             rs.close
 

@@ -546,7 +546,7 @@ Response.Write "<div class=""card-body row"">"
 				stokSart = ""
 			end if
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ürün Seçimi</div>" 
-				call formselectv2("urunSec","","","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-sart="""&stokSart&""" data-sartozel=""t1.stokTuru=1"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" onchange=""stokRefCagir('" & cariID & "',$(this).val())""")
+				call formselectv2("urunSec","","","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-sart="""&stokSart&""" data-cariid="""&cariID&""" data-sartozel=""t1.stokTuru=1"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" onchange=""stokRefCagir('" & cariID & "',$(this).val())""")
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-5"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Ürünün Teklifte Görünecek  Adı</div>" 

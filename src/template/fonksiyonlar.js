@@ -125,6 +125,7 @@ $(document).ready(function() {
 				var holderYazi		=	$(this).attr('data-holderyazi');
 				var jsonDosya		=	$(this).attr('data-jsondosya');
 				var sart			=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
+				var cariID			=	$(this).attr('data-cariid');//stok seçerken cariID gönder JSON_stoklar'da stokRef left joinde kullan
 				var sartOzel		=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
 				var anaBirimFiltre	=	$(this).attr('data-anabirimfiltre');//select2 sadece ürüne ait anabirim görüntülensin, birime ait select2 class ında "anaBirimFiltre" olmalı.
 				var idKullan		=	$(this).attr('data-idkullan');
@@ -140,6 +141,7 @@ $(document).ready(function() {
 					data: function (params) {
 					  return {
 						 sart:sart,
+						 cariID:cariID,
 						 sartOzel:sartOzel,
 						 anaBirimFiltre:anaBirimFiltre,
 						 idKullan:idKullan,
@@ -253,11 +255,13 @@ jQuery(document).ajaxSuccess(
 				var holderYazi		=	$(this).attr('data-holderyazi');
 				var jsonDosya		=	$(this).attr('data-jsondosya');
 				var sart			=	$(this).attr('data-sart');//özellikle birim seçiminde sadece belirli bir birimi çağırmak için
+				var cariID			=	$(this).attr('data-cariid');//stok seçerken cariID gönder JSON_stoklar'da stokRef left joinde kullan
 				var sartOzel		=	$(this).attr('data-sartozel');//WHERE sorgusunu olduğu gibi yazmak için
 				var anaBirimFiltre	=	$(this).attr('data-anabirimfiltre');//select2 sadece ürüne ait anabirim görüntülensin, birime ait select2 class ında "anaBirimFiltre" olmalı.
 				var idKullan		=	$(this).attr('data-idkullan');
 				var minInput		=	$(this).attr('data-miniput');
 				var defDeger		=	$(this).attr('data-defdeger');
+
 
 				$(this).select2({
 					
@@ -268,6 +272,7 @@ jQuery(document).ajaxSuccess(
 					data: function (params) {
 					  return {
 						 sart:sart,
+						 cariID:cariID,
 						 sartOzel:sartOzel,
 						 anaBirimFiltre:anaBirimFiltre,
 						 idKullan:idKullan,
