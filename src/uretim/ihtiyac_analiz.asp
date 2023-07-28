@@ -45,7 +45,7 @@ yetkiKontrol = yetkibul(modulAd)
 		sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih,"
 		if listeTur = "uretimPlan" then
 			sorgu = sorgu & " [stok].[FN_siparisMiktarBul](t1.id, " & firmaID & ") as sipMiktar,"
-		elseif listeTur = "kesimPlan" OR listeTur = "transfer" then
+		elseif listeTur = "kesimPlan" OR listeTur = "transfer" OR listeTur = "kucukKesim" then
 			sorgu = sorgu & " [stok].[FN_siparisMiktarBul]( CASE WHEN t1.manuelPlan = 1 THEN t1.id ELSE t1.bagliAjandaID END, " & firmaID & ") as sipMiktar,"
 		end if
 		sorgu = sorgu & " [stok].[FN_anaBirimADBul](t1.stokID,'kAd') as anaBirim"
