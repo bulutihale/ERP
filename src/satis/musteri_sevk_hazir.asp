@@ -35,7 +35,7 @@ kid				=	kidbul()
 			sorgu = sorgu & " t2.stokKodu,"
 			sorgu = sorgu & " t1.stokID,"
 			sorgu = sorgu & " t2.stokAd,"
-			sorgu = sorgu & " t1.ajandaID,"
+			sorgu = sorgu & " ISNULL(t1.ajandaID,0) as ajandaID,"
 			'sorgu = sorgu & " t1.miktar,"
 			sorgu = sorgu & " stok.FN_anaBirimADBul ( t1.stokID, 'kAd' ) AS kisaBirim,"
 			sorgu = sorgu & " ISNULL([portal].[FN_sipariscariAdbul] (" & firmaID & ", t1.ajandaID),'Stok için') as cariAd,"
@@ -80,7 +80,7 @@ kid				=	kidbul()
 					sevkTip = "siparisSevk"
 				end if	
 					Response.Write "<tbody>"
-						Response.Write "<td class="""">" & stokKodu & "</td>"
+						Response.Write "<td class="""">" & stokKodu & "<br> " &stokHareketID&"</td>"
 						Response.Write "<td class="""">" & stokAd & "</td>"
 						Response.Write "<td class="""">" & lot & "</td>"
 						Response.Write "<td class="""">" & miktar & " " & kisaBirim & "</td>"

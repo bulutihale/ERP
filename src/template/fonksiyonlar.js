@@ -6,6 +6,12 @@ $(document).ready(function() {
 	$('.tarih').datepicker({format: "dd.mm.yyyy",weekStart: 1,maxViewMode: 2,language: "tr",keyboardNavigation: false,daysOfWeekHighlighted: "0,6",autoclose: true,todayHighlight: true});
 	$('.summernote').summernote({height: 300});
 
+//sayfa yüklendiğinde sayfada spinner var ise kapansın.	
+	$('.spinnerDIV').hide();
+	$('.spinnerEkle').removeClass('bg-warning');
+	$('.workControl').css('display','block');
+//sayfa yüklendiğinde sayfada spinner var ise kapansın.		
+
 //tıklama ile text kopyalama için
 		$(document).on('click', '.copyText', function(){
 			value = $(this).text();
