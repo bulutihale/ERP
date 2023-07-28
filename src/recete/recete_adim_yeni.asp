@@ -7,6 +7,7 @@
     kid					=	kidbul()
     receteAdimID		=	Request("receteAdimID")
 	receteID			=	Request("receteID")
+	receteStokID		=	Request("receteStokID")
 	islem				=	Request("islem")
 	if receteID = "" then
 		receteID = Request.Form("receteID")
@@ -36,8 +37,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 if receteAdimID <> "" then
             sorgu = "SELECT t1.stokID, t1.miktar, t1.isGucuSayi, t1.miktarBirim, t1.fire, t1.fireBirim, t4.uzunBirim, t1.sira, t1.altReceteID, t1.en, t1.boy, t1.enBoyBirim,"
-			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger, t5.receteAd as altReceteAd,  t6.uzunBirim as ebUzunBirim,"
-			sorgu = sorgu & " stok.FN_anaBirimIDBul(t1.stokID) as anaBirimID, stok.FN_anaBirimADBul(t1.stokID,'uAd') as anaBirimAD, t1.etiketeEkle, t1.etiketAd, t7.receteAd as anaReceteAd, t8.stokAd as esasStokAd,"
+			sorgu = sorgu & " t1.stokKontroluYap, t1.receteIslemTipiID, t2.ad, t2.islemTur, t1.onHazirlikTur,  t1.onHazirlikDeger, t5.receteAd as altReceteAd,"
+			sorgu = sorgu & " t6.uzunBirim as ebUzunBirim, t1.altReceteDurum,"
+			sorgu = sorgu & " stok.FN_anaBirimIDBul(t1.stokID) as anaBirimID, stok.FN_anaBirimADBul(t1.stokID,'uAd') as anaBirimAD, t1.etiketeEkle, t1.etiketAd,"
+			sorgu = sorgu & " t7.receteAd as anaReceteAd, t8.stokAd as esasStokAd, t8.stokID as esasStokID,"
 			sorgu = sorgu & " stok.FN_anaBirimADBul(t1.stokID,'kAd') as anaBirimADkisa, t1.islemAciklama"
 			sorgu = sorgu & " FROM recete.receteAdim t1"
 			sorgu = sorgu & " INNER JOIN recete.receteIslemTipi t2 ON t1.receteISlemTipiID = t2.receteISlemTipiID"
@@ -73,6 +76,14 @@ if receteAdimID <> "" then
 				ebUzunBirim			=	rs("ebUzunBirim")
 				etiketeEkle			=	rs("etiketeEkle")
 				etiketAd			=	rs("etiketAd")
+				altReceteDurum		=	rs("altReceteDurum")
+				if altReceteDurum = True then
+					altReceteChck	=	" checked "
+					selectDurum		=	" disabled "
+				else
+					altReceteChck	=	""
+					selectDurum		=	""
+				end if
 				onHazirlikTur		=	rs("onHazirlikTur")
 				if onHazirlikTur = "" OR isnull(onHazirlikTur) then
 					onHazirlikTur = "Saat"
@@ -159,6 +170,7 @@ end if
 		Response.Write "<form action=""/recete/recete_adim_ekle.asp"" method=""post"" class=""ajaxform"">"
 			call formhidden("islem",islem,"","","","autocompleteOFF","islem","")
 			call formhidden("receteID",receteID,"","","","autocompleteOFF","receteID","")
+			call formhidden("receteStokID",receteStokID,"","","","autocompleteOFF","receteStokID","")
 			call formhidden("receteAdimID",receteAdimID,"","","","autocompleteOFF","receteAdimID","")
 						Response.Write "<div class=""row mt-2"">"
 							Response.Write "<div class=""col-12"">"
@@ -181,7 +193,7 @@ end if
 						Response.Write "<div class=""row mt-2" & stokRow & """>"
 							Response.Write "<div class=""col-12" & stokClass & """>"
 								Response.Write "<div class=""badge badge-secondary rounded-left"">Hammadde / Yarı Mamul</div>"
-								call formselectv2("stokID","","anaBirimKontrol($(this).val(),$(this).attr('id'))","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger2&"""")
+								call formselectv2("stokID","","anaBirimKontrol($(this).val(),$(this).attr('id'));select2Kontrol($(this).attr('id'),$(this).val(),"&receteStokID&",'Reçetesi oluşturulan ürün reçete bileşeni olamaz.')","","formSelect2 stokID border","","stokID","","data-holderyazi=""Stok Adı"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" data-defdeger="""&defDeger2&"""")
 							Response.Write "</div>"
 						Response.Write "</div>"
 						Response.Write "<div class=""row mt-2" & miktarRow & """>"
@@ -229,7 +241,8 @@ end if
 						Response.Write "<div id=""altReceteDIV"" class=""row mt-2" & stokRow & """>"
 							Response.Write "<div class=""col-12" & stokClass & """>"
 								Response.Write "<div class=""badge badge-warning rounded"">Alt Reçete</div><span class=""pointer text-info"" onclick=""swal('','Üstte seçilerek reçeteye eklenen ürünün bizim tarafımızdan üretildiği durumlarda seçilir. Alt Reçete\'nin seçilmesi, üretilmesi için planlama modülünde gerekli kayıtların oluşturulmasını sağlar.<br><br>Alt reçete varsa açılır menüde sadece o reçete görüntülenecektir.')""><i class=""mdi mdi-information""></i></span>"
-								call formselectv2("altReceteID","","","","formSelect2 altReceteID border","","altReceteID","","data-holderyazi=""Alt Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sart="""& stokID & """ data-defdeger="""&defDeger5&"""")
+								Response.Write "<span class=""ml-3""><input id=""altReceteDurum"" type=""checkbox"" onchange=""$('#altReceteID')"" name=""altReceteDurum"" """&altReceteChck&"""><label for=""altReceteDurum""><code>Alt Reçete Yok</code></label></span>"
+								call formselectv2("altReceteID","","","","formSelect2 altReceteID border","","altReceteID","","data-holderyazi=""Alt Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sart="""& stokID & """ data-defdeger="""&defDeger5&""" "&selectDurum&"")
 							Response.Write "</div>"
 						Response.Write "</div>"
 
@@ -310,17 +323,33 @@ end if
 //'//ANCHOR - select2 seçili gelsin data-defdeger 
 
 	$(document).ready(function() {
+		
 		$('#receteIslemTipiID, #stokID, #birimSec, #enBoyBirim, #fireBirimSec, #altReceteID').trigger('mouseenter');
-		
-		
-		$('#receteIslemTipiID, #stokID').on('change',function() {
-		//$('#receteIslemTipiID').on('change',function() {
-			//alert($('#receteIslemTipiID').val());
-			$('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {receteISlemTipiID:$('#receteIslemTipiID').val(), receteID:$('#receteID').val(), stokID:$('#stokID').val(),receteAdimID:$('#receteAdimID').val(),islem:$('#islem').val()})
-		})
-		
 
-	});
+
+  $('#altReceteDurum').on('change', function() {
+    var isChecked = $(this).prop('checked');
+    $('#altReceteID').prop('disabled', isChecked);
+  });	
+		
+  $('#receteIslemTipiID, #stokID').on('change', function() {
+    $('#adimYeniUStDIV').load('/recete/recete_adim_yeni.asp', {
+      receteISlemTipiID: $('#receteIslemTipiID').val(),
+      receteID: $('#receteID').val(),
+      stokID: $('#stokID').val(),
+      receteAdimID: $('#receteAdimID').val(),
+      islem: $('#islem').val(),
+      receteStokID: $('#receteStokID').val()
+    });
+  });
+
+
+});
+
+
+
+
+
 	
 	
 

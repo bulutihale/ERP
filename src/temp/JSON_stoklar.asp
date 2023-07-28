@@ -122,6 +122,8 @@
 						Response.Write " -- " & stokBarcode
 					end if
 					Response.Write """"
+					'Response.Write ","
+					'Response.Write """disabled"":true"
 					if i < rs.recordcount then
 						Response.Write "},"
 					else

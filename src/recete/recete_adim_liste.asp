@@ -58,18 +58,19 @@ else
 	'################### REÇETE BİLGİLERİ
 	'################### REÇETE BİLGİLERİ
 				sorgu = "SELECT"
-				sorgu = sorgu & " t1.receteAd, t2.cariKodu, t2.cariAd, t3.stokKodu, t3.stokAd"
+				sorgu = sorgu & " t1.receteAd, t2.cariKodu, t2.cariAd, t3.stokKodu, t3.stokAd, t3.stokID"
 				sorgu = sorgu & " FROM recete.recete t1"
 				sorgu = sorgu & " LEFT JOIN cari.cari t2 ON t1.cariID = t2.cariID"
 				sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 				sorgu = sorgu & " WHERE t1.receteID = " & gorevID
 				rs.open sorgu, sbsv5, 1, 3
 				if rs.recordcount > 0 then
-					receteAd	=	rs("receteAd")
-					cariKodu	=	rs("cariKodu")
-					cariAd		=	rs("cariAd")
-					stokKodu	=	rs("stokKodu")
-					stokAd		=	rs("stokAd")
+					receteAd		=	rs("receteAd")
+					cariKodu		=	rs("cariKodu")
+					cariAd			=	rs("cariAd")
+					stokKodu		=	rs("stokKodu")
+					stokAd			=	rs("stokAd")
+					receteStokID	=	rs("stokID")
 				end if
 				rs.close
 	'################### REÇETE BİLGİLERİ
@@ -119,7 +120,7 @@ else
 								Response.Write "<div class=""col-lg-3 col-sm-6 text-left"">Reçete Adımları</div>"
 								if yetkiKontrol >= 5 then
 									Response.Write "<div class=""col-lg-9 col-sm-6 my-1 text-right"">"
-										Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/recete/recete_adim_yeni.asp?receteID=" & gorevID & "')"">YENİ ADIM EKLE</button>&nbsp;"
+										Response.Write "<button type=""button"" class=""btn btn-success"" onClick=""modalajax('/recete/recete_adim_yeni.asp?receteID=" & gorevID & "&receteStokID="&receteStokID&"')"">YENİ ADIM EKLE</button>&nbsp;"
 									Response.Write "</div>"
 								end if
 							Response.Write "</div>"

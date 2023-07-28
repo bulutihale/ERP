@@ -28,11 +28,23 @@
 	etiketeEkle			=	Request.Form("etiketeEkle")
 	etiketAd			=	Request.Form("etiketAd")
 	islemAciklama		=	Request.Form("islemAciklama")
-	
+	altReceteDurum		=	Request.Form("altReceteDurum")
+	if altReceteDurum = "on" then
+		altReceteDurum	=	1
+		altReceteID		=	0
+	else
+		altReceteDurum = 0
+	end if
+
     modulAd =   "Reçete"
     modulID =   "97"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
+
+if stokID <> "" AND altReceteID = "" AND altReceteDurum = 0 then
+	call jsrun("swal('Alt reçete seçilmedi','Alt reçete gerekli değil ise ""Alt Reçete Yok"" kutusu işaretlenmelidir.','error')")
+	Response.End()
+end if
 
 call rqKontrol(miktar,"Lütfen kullanılan hammadde/yarı mamul için Miktar girişi yapınız.","")
 
@@ -75,6 +87,7 @@ if altReceteID = "" then
     altReceteID = 0
 end if
 
+
             sorgu = "SELECT * FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
 			rs.open sorgu, sbsv5, 1, 3
             if rs.recordcount = 0 then
@@ -106,6 +119,7 @@ end if
 				rs("etiketeEkle")		=	etiketeEkle
 				rs("etiketAd")			=	etiketAd
 				rs("islemAciklama")		=	islemAciklama
+				rs("altReceteDurum")	=	altReceteDurum
 				
 				if islem <> "edit" then 'editleniyorsa sıra değişmesin
 					rs("sira")				=	900' en son eklenen adım en son sıraya atılsın, recete_adim_sira.asp ye yönlendiğinde sıra numarası düzeltiliyor.

@@ -148,7 +148,9 @@ $(document).ready(function() {
 						q: params.term, // search term
 						page: params.page
 					  };
+					  
 					},
+					
 					processResults: function (data, params) {
 					  // parse the results into the format expected by Select2
 					  // since we are using custom formatting functions we do not need to
@@ -175,6 +177,22 @@ $(document).ready(function() {
 				  selectOnClose: false,
 				  
 				});
+				function formatResult(result) {
+					if (!result.id) return result.text; // Placeholder için
+				  
+					var $result = $('<span>' + result.text + '</span>');
+				  
+					if (result.disabled) {
+					  $result.addClass('disabled-option');
+					}
+				  
+					return $result;
+				  }
+				  
+				  // templateSelection işlevi
+				  function formatSelection(result) {
+					return result.text;
+				  }				
 			///// default seçilecek olan veri için
 				if(defDeger != undefined){
 
@@ -330,7 +348,7 @@ jQuery(document).ajaxSuccess(
 
 
 	}
-);
+);//ajax success sonu
 
 
 //bekleme animasyonu için ID gönder 
@@ -515,6 +533,7 @@ function numara(nesne,para,uyari)
 }
 
 
+// sistemde seçilen bir ürünün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.
 //'//NOTE - sistemde seçilen bir ürünün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.
 	function anaBirimKontrol(stokID,inputID){
 	//anaBirimKontrol($(this).val(),$(this).attr('id')) --> kullanım
@@ -544,7 +563,21 @@ function numara(nesne,para,uyari)
 		});
 	}
 // sistemde seçilen bir ürürnün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.
+// sistemde seçilen bir ürürnün anaBirimi tanımlı mı? tanımlı değil ise modal aç seçtir.
 
+//select2 içinde seçilmemesi gereken option seçiildiğinde uyarı versin
+//select2 içinde seçilmemesi gereken option seçiildiğinde uyarı versin
+	function select2Kontrol(select2ID,secilenOptionID,kontrolOptionID,mesaj){
+		if(secilenOptionID == kontrolOptionID){
+			$('#'+select2ID).val(null).trigger('change');
+			toastr.error(mesaj,'UYARI');
+		}
+	}
+//select2 içinde seçilmemesi gereken option seçiildiğinde uyarı versin
+//select2 içinde seçilmemesi gereken option seçiildiğinde uyarı versin
+
+
+//stok ana kartını aç
 //stok ana kartını aç
 	function stokKartAc(stokID64){
 		if(stokID64 != undefined){
@@ -553,7 +586,10 @@ function numara(nesne,para,uyari)
 		}else{swal('ürün seçimi yapmadınız.','');}
 	}
 //stok ana kartını aç
+//stok ana kartını aç
 
+
+//farklı birim miktarlarını anaBirim miktarına çevir
 //farklı birim miktarlarını anaBirim miktarına çevir
 	function anaBirimMiktarHesap(inputID, inputID2, stokID){
 		//inputID : update edilecek, miktar hesabı yapıldığında ana birim cinsinden miktarın yazılacağı inputa ait ID
@@ -563,9 +599,13 @@ function numara(nesne,para,uyari)
 			modalajax("/portal/birimMiktarHesap.asp?stokID="+stokID+"&inputID="+inputID+"&inputID2="+inputID2);
 		}else{swal('ürün seçimi yapmadınız.','');}
 	}
-//stok ana kartını aç
+//farklı birim miktarlarını anaBirim miktarına çevir
+//farklı birim miktarlarını anaBirim miktarına çevir
 
-	// DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
+
+
+// DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
+// DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
 	function urunCevap(cevap,idAlan,stokHareketID,alan,tablo,deger,refHareketID,ntfDeger,depoKategori,refreshDIV,refreshFile,receteAdimID64,ajandaID64,stokID64,girisDepoID,secilenReceteID,secilenDepoID,surecDepoID){
 
 	if(cevap == 'kabul'){
@@ -615,6 +655,7 @@ function numara(nesne,para,uyari)
 		);//swal sonu
 	}
 // DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
+// DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
 
 
 //alan hesapla
@@ -641,9 +682,9 @@ function numara(nesne,para,uyari)
 
 // tooltip çalışsabilsin
 	//elementte, "data-toggle="tooltip" ve "title="açıklama içerik" olmalı."
-$(function () {
-	$('[data-toggle="tooltip"]').tooltip()
-  })
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
 // tooltip çalışsabilsin
 
 
@@ -711,112 +752,90 @@ function teklifPDFmail(id64,mailDurum,divID){
 
 
 // hucreKaydet işlemleri		
-function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, updateURL, postDeger, ek4) {
-	
-		/* idAlan 		: 	tablonun id değerinin olduğu alanın adı
-			id			: 	id değeri
-			updateDIV	:	update edilecek div in ID değeri
-			updateURL	:	update edilecek DIV in bulunduğu URL
-			postDeger	:	güncellenecek DIV için post edilmesi gereken parametreler (örnek kullanım: "cariID_8**stokID_954")
-			baslik		:	swal uyarısında görüntülenecek metin
-		*/
+// hucreKaydet işlemleri		
+	function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, updateURL, postDeger, ek4) {
+		
+			/* idAlan 		: 	tablonun id değerinin olduğu alanın adı
+				id			: 	id değeri
+				updateDIV	:	update edilecek div in ID değeri
+				updateURL	:	update edilecek DIV in bulunduğu URL
+				postDeger	:	güncellenecek DIV için post edilmesi gereken parametreler (örnek kullanım: "cariID_8**stokID_954")
+				baslik		:	swal uyarısında görüntülenecek metin
+			*/
 
-		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
-			
-			var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
-
-			if (decimalSeparator === '.' ) {
-				if (deger.toString().includes(',')){
-						deger = deger.toString().replace(',','.');
-					}
-			}else{
-				if (deger.toString().includes('.')){
-						deger = deger.toString().replace('.',',');
-					}
-			}
+			//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 				
-		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+				var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
 
-		var postDegerBol = postDeger.split("**");
-		var postData = {};
-	for (var i = 0; i < postDegerBol.length; i++) {
-	  var postData1 = postDegerBol[i].split("_")[0];
-	  var postData2 = postDegerBol[i].split("_")[1];
+				if (decimalSeparator === '.' ) {
+					if (deger.toString().includes(',')){
+							deger = deger.toString().replace(',','.');
+						}
+				}else{
+					if (deger.toString().includes('.')){
+							deger = deger.toString().replace('.',',');
+						}
+				}
+					
+			//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 
-	  postData[postData1] = postData2;
-	}
-  
-	// function executeCodeBlock() {
-	//   $('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
-	// 	if(updateDIV !== ''){
+			var postDegerBol = postDeger.split("**");
+			var postData = {};
+		for (var i = 0; i < postDegerBol.length; i++) {
+		var postData1 = postDegerBol[i].split("_")[0];
+		var postData2 = postDegerBol[i].split("_")[1];
 
-	// 	$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
-	// 	  if (status == "error") {
-	// 		toastr.options.positionClass = 'toast-bottom-right';
-	// 		toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
-	// 	  } else if (status == "success") {
-	// 		toastr.options.positionClass = 'toast-bottom-right';
-	// 		toastr.success('İşlem tamamlandı', 'OK');
-	// 	  }
-	// 	});
-	// }else{
-	// 	if (status == "error") {
-	// 		toastr.options.positionClass = 'toast-bottom-right';
-	// 		toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
-	// 	  } else if (status == "success") {
-	// 		toastr.options.positionClass = 'toast-bottom-right';
-	// 		toastr.success('İşlem tamamlandı', 'OK');
-	// 	  }
-	// }
-	//   });
-	// }
-
-	function executeCodeBlock() {
-		if (deger !== '') {
-			$('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
+		postData[postData1] = postData2;
+		}
+	
+		function executeCodeBlock() {
+			if (deger !== '') {
+				$('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
+					handleResponse(status, xhr);
+				});
+			}
+			
+			if (updateDIV !== '') {
+			$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
 				handleResponse(status, xhr);
 			});
+			}
 		}
-		
-		if (updateDIV !== '') {
-		  $('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
-			handleResponse(status, xhr);
-		  });
-		}
-	}
 
-	function handleResponse(status, xhr) {
-		if (status == "error") {
-			toastr.options.positionClass = 'toast-bottom-right';
-			toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
-		} else if (status == "success") {
-			toastr.options.positionClass = 'toast-bottom-right';
-			toastr.success('İşlem tamamlandı', 'OK');
-		}
-	}	
-  
-	if (baslik !== '') {
-	  swal({
-		title: baslik,
-		type: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#DD6B55',
-		confirmButtonText: 'evet',
-		cancelButtonText: 'hayır'
-	  }).then(function(result) {
-		// handle Confirm button click
-		// result is an optional parameter, needed for modals with input
+		function handleResponse(status, xhr) {
+			if (status == "error") {
+				toastr.options.positionClass = 'toast-bottom-right';
+				toastr.error('İşlem başarısız (' + xhr.statusText + xhr.status + ')', 'HATA!');
+			} else if (status == "success") {
+				toastr.options.positionClass = 'toast-bottom-right';
+				toastr.success('İşlem tamamlandı', 'OK');
+			}
+		}	
+	
+		if (baslik !== '') {
+		swal({
+			title: baslik,
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			executeCodeBlock();
+		}).catch(function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+		});
+		} else {
 		executeCodeBlock();
-	  }).catch(function(dismiss) {
-		// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-	  });
-	} else {
-	  executeCodeBlock();
+		}
 	}
-  }
+// hucreKaydet işlemleri		
+// hucreKaydet işlemleri		
 
-
-		//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 	function ondalikKontrol(deger,idDeger){
 
 		var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
@@ -832,4 +851,5 @@ function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, upd
 		}
 		$('#'+idDeger).val(deger);
 	};
-	//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
