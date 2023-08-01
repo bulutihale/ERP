@@ -94,7 +94,7 @@ kid				=	kidbul()
 							end if
 						Response.Write "</td>"
 						Response.Write "<td class="""">"
-							call forminput("sevkMiktar","","","","bold text-center","autocompleteOFF","sevkMiktar_" & di & "","")
+							call forminput("sevkMiktar",miktar,"","","bold text-center","autocompleteOFF","sevkMiktar_" & di & "","")
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center bg-success rounded pointer"" data-miktarinputid=""sevkMiktar_" & di & """ onclick=""sevkKaydet('sevkMiktar_" & di & "','"&kisaBirim&"','"&siparisKalemID&"',"&satisDepoID&",'"&lot&"',"&ajandaID&","&satisDepoID&",$('#cariID').val(),'"&sevkTip&"',"&stokHareketID&")""><i class=""icon bullet-go""></i></td>"
 					Response.Write "</tbody>"
