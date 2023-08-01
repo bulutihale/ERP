@@ -25,6 +25,7 @@
     fiyat4          =   Request.Form("fiyat4")
     paraBirimID     =   Request.Form("paraBirimID")
     stokBarcode     =   Request.Form("stokBarcode")
+    disaridanTemin  =   Request.Form("disaridanTemin")
 	modulAd 		=   "Stok"
     call logla("Stok Güncelleme: " & stokKodu & "")
     Response.Flush()
@@ -169,6 +170,7 @@ end if
     rs("rafOmru")           =   rafOmru
     rs("lotTakip")          =   lotTakip
     rs("katalogKodu")       =   katalogKodu
+    rs("disaridanTemin")    =   disaridanTemin
     rs.update
     rs.close
 

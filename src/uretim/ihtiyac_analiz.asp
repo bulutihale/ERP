@@ -7,6 +7,7 @@
     kid				=	kidbul()
 	listeTur		=	Request("listeTur")
 	stokID64		=	Request("gorevID")
+	ekran			=	Request("ekran")
 	stokID			=	stokID64
 	stokID			=	base64_decode_tr(stokID)
 
@@ -31,14 +32,15 @@ yetkiKontrol = yetkibul(modulAd)
 			stokAd		=	rs("stokAd")
 		rs.close
 
-	Response.Write "<div class=""bold"">" & stokKodu & " - " & stokAd & "</div>"
-	Response.Write "<div class=""col-12 text-right"">"
-	Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer"""
-		Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-		Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
-	Response.Write "</div>"
-	Response.Write "</div>"
-
+		Response.Write "<div class=""bold"">" & stokKodu & " - " & stokAd & "</div>"
+	if ekran <> "satinalma" then
+		Response.Write "<div class=""col-12 text-right"">"
+		Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer"""
+			Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
+			Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+		Response.Write "</div>"
+		Response.Write "</div>"
+	end if
 
 		sorgu = "SELECT t1.id as ajandaID, t1.bagliAjandaID,"
 		sorgu = sorgu & " ISNULL([stok].[FN_receteMiktarBul](t1.id), 1 ) as receteMiktar,"
@@ -56,7 +58,7 @@ yetkiKontrol = yetkibul(modulAd)
 			Response.Write "<div id=""ihtiyacTablo"">"
 				Response.Write "<table class=""mt-3"" border=""1"" style=""width:100%"">"
 					Response.Write "<thead><tr class=""text-center bold"">"
-					Response.Write "<td>Planlanan Sevk Tarihi</td>"
+					Response.Write "<td>Planlanan Kullanım Tarihi</td>"
 					Response.Write "<td>İhtiyaç Miktar</td>"
 				Response.Write "</tr></thead><tbody>"
 				genelIhtiyac = 0
@@ -75,9 +77,11 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td>" & tarihtr(planTarih) & "</td>"
 						Response.Write "<td class=""text-right""><span class=""help"" data-toggle=""popoverModal"" title=""Bu tarih dahil toplam ihtiyaç:<span class='text-danger'> " & genelIhtiyac & "</span>"">" & toplamIhtiyac & " " & anaBirim &"</span></td>"
 						Response.Write "<td class=""text-center"">"
+						if ekran <> "satinalma" then
 							Response.Write "<span title=""ürün sevki yapılmadan tamamlandı olarak işaretlemek için tıklayın."" onclick=""hucreKaydetGenel('id', "&ajandaID&", 'tamamlandi', 'portal.ajanda', 1, 'işlem tamamlandı olarak işaretlensin mi?', 'ihtiyacTablo', '/uretim/ihtiyac_analiz.asp', 'gorevID_"&stokID64&"**listeTur_"&listeTur&"', '')"">"
 								Response.Write "<i class=""icon table-go pointer""></i>"
 							Response.Write "<span>"
+						end if
 						Response.Write "</td>"
 					Response.Write "</tr>"
 				rs.movenext
