@@ -29,7 +29,6 @@ kid				=	kidbul()
 	else
 
 		sorgu = "SELECT"
-			sorgu = sorgu & " t1.stokHareketID,"
 			sorgu = sorgu & " ISNULL(t1.siparisKalemID,0) as siparisKalemID,"
 			sorgu = sorgu & " t1.lot,"
 			sorgu = sorgu & " t2.stokKodu,"
@@ -47,9 +46,10 @@ kid				=	kidbul()
 			sorgu = sorgu & " AND t1.depoID = 8"
 			sorgu = sorgu & " AND [stok].[FN_stokSayDepoLot] (" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
 			sorgu = sorgu & " AND t1.stokHareketTipi <> 'S'" 'satılmış olan ürünleri dahil etme
+			sorgu = sorgu & " GROUP BY t1.siparisKalemID, t1.lot, t2.stokKodu, t1.cariID, t1.stokID, t1.depoID, t2.stokAd,t1.ajandaID"
 			rs.open sorgu,sbsv5,1,3
 
-			if rs.recordcount = 0 then
+			if rs.EOF then
 				Response.Write "<div class=""bold"">Sevk bekleyen ürün yok.</div>"
 			else
 
@@ -63,7 +63,8 @@ kid				=	kidbul()
 						Response.Write "<th class="" text-center bold"">Sevk Miktar</th>"
 						Response.Write "<th class="" text-center bold"">İşlem</th>"
 					Response.Write "</thead>"
-				for di = 1 to rs.recordcount
+				'for di = 1 to rs.recordcount
+				do until rs.EOF
 				stokAd			=	rs("stokAd")
 				miktar			=	rs("miktar")
 				kisaBirim		=	rs("kisaBirim")
@@ -72,7 +73,7 @@ kid				=	kidbul()
 				lot				=	rs("lot")
 				ajandaID		=	rs("ajandaID")
 				siparisKalemID	=	rs("siparisKalemID")
-				stokHareketID	=	rs("stokHareketID")
+				'stokHareketID	=	rs("stokHareketID")
 
 				if siparisKalemID = 0 then
 					sevkTip = "stoktanSevk"
@@ -80,7 +81,7 @@ kid				=	kidbul()
 					sevkTip = "siparisSevk"
 				end if	
 					Response.Write "<tbody>"
-						Response.Write "<td class="""">" & stokKodu & "<br> " &stokHareketID&"</td>"
+						Response.Write "<td class="""">" & stokKodu & "</td>"
 						Response.Write "<td class="""">" & stokAd & "</td>"
 						Response.Write "<td class="""">" & lot & "</td>"
 						Response.Write "<td class="""">" & miktar & " " & kisaBirim & "</td>"
@@ -98,7 +99,7 @@ kid				=	kidbul()
 						Response.Write "<td class=""text-center bg-success rounded pointer"" data-miktarinputid=""sevkMiktar_" & di & """ onclick=""sevkKaydet('sevkMiktar_" & di & "','"&kisaBirim&"','"&siparisKalemID&"',"&satisDepoID&",'"&lot&"',"&ajandaID&","&satisDepoID&",$('#cariID').val(),'"&sevkTip&"',"&stokHareketID&")""><i class=""icon bullet-go""></i></td>"
 					Response.Write "</tbody>"
 				rs.movenext
-				next
+				loop
 				Response.Write "</table>"
 			end if
 rs.close
