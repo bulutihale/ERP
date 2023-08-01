@@ -13,6 +13,7 @@
 			cariID = 0
 		end if
 		urunsec					=	Request.Form("urunsec")
+		refSec					=	Request.Form("refSec")
 		grupNo					=	Request.Form("grupNo")
 		siraNo					=	Request.Form("siraNo")
 		ad						=	Request.Form("urunAd")
@@ -35,7 +36,9 @@
 		if urunsec = "" then
 			urunsec = 0
 		end if
-		
+		if refSec = "" then
+			refSec = 0
+		end if
 		
 		if firmamFiyat = "" then
 			firmamFiyat = 0
@@ -126,6 +129,7 @@
 			rs.addnew
 				rs("ihaleID")				=	ihaleID
 				rs("stoklarID")				=	urunsec
+				rs("stokRefID")				=	refSec
 				rs("grupNo")				=	grupNo
 				rs("siraNo") 				=	siraNo
 				rs("ad")					=	ad

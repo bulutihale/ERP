@@ -5,6 +5,7 @@
 	arama					=	Request.Form("arama")
 	id64					=	Session("sayfa5")
 	gelenadres6				=	Session("sayfa6")
+	stokID					=	Request("stokID")
 	
 	if gelenadres6 		= "" then
 		sipVerenCari 	= 0
@@ -13,6 +14,10 @@
 		sipVerenCari 	= gelenadres6
 		faturaCari		= gelenadres6
 	end if
+	if id64 = "" then
+		id64 = Request("id64")
+	end if
+
 	id						=	id64
 	id						=	base64_decode_tr(id)
 	ihaleID					=	id
@@ -535,28 +540,44 @@ Response.Write "<div class=""card-body row"">"
 				Response.Write "<div class=""card-header""><h5>Ürün Tanımlama</h5></div>"
 				Response.Write "<div class=""card-body"">"
 		Response.Write "<div class=""row"">"
-			Response.Write "<div class=""col-lg-2"">"
+			Response.Write "<div class=""col-1"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Sıra Numarası</div>" 
 					call forminput("siraNo",siraNo,"numara(this,false,false)","Sıra No","bold text-center","autocompleteOFF","siraNo","")
 				Response.Write "</div>"
-			Response.Write "<div class=""col-lg-5"">"
+			Response.Write "<div class=""col-lg-3"">"
 			if ihaleTipi = "proforma" then
 				stokSart = "english"
 			else
 				stokSart = ""
 			end if
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Ürün Seçimi</div>" 
-				call formselectv2("urunSec","","","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-sart="""&stokSart&""" data-cariid="""&cariID&""" data-sartozel=""t1.stokTuru=1"" data-jsondosya=""JSON_stoklar"" data-miniput=""3"" onchange=""stokRefCagir('" & cariID & "',$(this).val())""")
+				call formselectv2("urunSec","","$('#refInput').load('/teklif2/detay.asp?id64="&id64&"&stokID='+$(this).val()+' #refInput >*');","","formSelect2 urunSec border","","urunSec","","data-holderyazi=""Stok Adı"" data-sart="""&stokSart&""" data-cariid="""&cariID&""" data-sartozel=""t1.stokTuru=1"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
 			Response.Write "</div>"
-			Response.Write "<div class=""col-lg-5"">"
+			Response.Write "<div class=""col-lg-3"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2""> Ürünün Teklifte Görünecek  Adı</div>" 
 				call forminput("urunAd",urunAd,"","Ürünün Listedeki Adı","","autocompleteOFF","urunAd","")
 			Response.Write "</div>"
+			'#### müşteriye ait birden fazla REF kaydı var ise stok seçildiğinde seçilen stoğa tanımlı olan refler için SELECT2 aç
+			'#### müşteriye ait birden fazla REF kaydı var ise stok seçildiğinde seçilen stoğa tanımlı olan refler için SELECT2 aç
+			Response.Write "<div id=""refInput"" class=""col-3"">"
+				if stokID <> "" then
+				sorgu = "SELECT cariUrunFiyat, paraBirim FROM stok.stokRef WHERE firmaID = " & firmaID & " AND silindi = 0 AND stokID = " & stokID & " AND cariID = " & cariID
+				rs.open sorgu, sbsv5, 1, 3
+					if rs.recordcount > 0 then
+						Response.Write "<div class=""col-12"">"
+							Response.Write "<div class=""badge badge-secondary rounded-left mt-2 badge-warning"">" & pa_musteriRef & "</div>" 
+							call formselectv2("refSec","","","","formSelect2 refSec border","","refSec","","data-holderyazi=""Stok Adı"" data-cariid="""&cariID&""" data-sartozel=""t1.stokID = "&stokID&""" data-jsondosya=""JSON_musteriRef"" data-miniput=""0"" onchange=""stokRefCagir('" & cariID & "',$(this).val());$('#urunAd').val($('#refSec option:selected').text());""")
+						Response.Write "</div>"
+					end if
+				end if
+			Response.Write "</div>"
+			'#### müşteriye ait birden fazla REF kaydı var ise stok seçildiğinde seçilen stoğa tanımlı olan refler için SELECT2 aç
+			'#### müşteriye ait birden fazla REF kaydı var ise stok seçildiğinde seçilen stoğa tanımlı olan refler için SELECT2 aç
 		Response.Write "</div>"
 
 
 		Response.Write "<div class=""row mt-2"">"
-			Response.Write "<div class=""col-lg-2"">"
+			Response.Write "<div class=""col-1"">"
 				Response.Write "<div class=""badge badge-secondary rounded-left mt-2"">Miktar</div>" 
 				call forminput("miktar",miktar,"numara(this,false,false)","Miktar","","autocompleteOFF","miktar","")
 			Response.Write "</div>"
@@ -630,7 +651,7 @@ Response.Write "<div class=""card-body row"">"
 			&" FROM teklifv2.ihale_urun iu"_
 			&" INNER JOIN teklifv2.ihale i ON iu.ihaleID = i.id"_
 			&" LEFT JOIN stok.stok s ON iu.stoklarID = s.stokID"_
-			&" LEFT JOIN stok.stokRef r ON iu.stoklarID = r.stokID AND r.cariID = " & cariID & ""_
+			&" LEFT JOIN stok.stokRef r ON iu.stokrefID = r.id"_
 			&" LEFT JOIN teklif.siparisKalemTemp t5 ON t5.iuID = iu.ID"_
 			&" WHERE i.firmaID = " & firmaID & " and ihaleID = " & id & " order by grupNo ASC, siraNo ASC"
 			rs.open sorgu,sbsv5,1,3
@@ -1546,7 +1567,6 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 			}
 		});
 
-
 		$('.cariID').trigger('mouseenter');
 
 		$('.def-kapali').hide('slow');
@@ -1628,11 +1648,11 @@ function cokluIDkaydet(alan, tablo, tabloID, deger){
 
 });
 
-function stokRefCagir(cariID, stokID){
+function stokRefCagir(cariID, stokRefID){
     $.ajax({
         type:'POST',
         url :'/teklif2/stok_ref_cagir.asp',
-        data :{'cariID':cariID,'stokID':stokID,
+        data :{'cariID':cariID,	'stokRefID':stokRefID
                 	},
         beforeSend: function() {
 				$(this).closest('div').html("<img src='/arayuz/working2.gif' width='20' height='20'/>");

@@ -103,6 +103,7 @@ if firmaID = 5 then
 	'#### PORTAL AYARLARI
 		sb_ekMaliyet1="Shipment Cost"
 		sb_ekMaliyet2="Maturity Cost"
+		pa_musteriRef="Müşteri Stok Ref Seçimi"
 	'#### PORTAL AYARLARI
 
 

@@ -17,25 +17,6 @@
 	sart				=	request.QueryString ("sart")
 	cariID				=	request.QueryString ("cariID") 'LEFT JOIN de cariID için kullan
 	sartOzel			=	request.QueryString ("sartOzel")
-	if mamulGoster = "on" then
-		mDurum = "1"
-	else
-		mDurum = "0"
-	end if
-	if yariMamulGoster = "on" then
-		ymDurum = "2"
-	else
-		ymDurum = "0"
-	end if
-	if hammaddeGoster = "on" then
-		hmDurum = "4"
-	else
-		hmDurum = "0"
-	end if
-
-'	arananKelime 		=	Replace(arananKelime,"Ş","þ")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
-'	arananKelime 		=	Replace(arananKelime,"İ","Ý")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
-'	arananKelime 		=	Replace(arananKelime,"Ğ","Ð")'NETSİS veritabanı Türkçe'ye dönüşmeden önce aramaya yapılığı ve dbo.TRK çalışmadığı için
 	
 '##### /ajax ile gelen sorgu 
 '##### /ajax ile gelen sorgu 
@@ -45,23 +26,22 @@
 	'##### /STOKLARI ÇEK select2 için JSON verisi oluştur
 	
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.stokID,"
-			sorgu = sorgu & " t1.stokKodu,"
-			sorgu = sorgu & " t1.stokAd, t1.stokAdEn, t1.stokBarcode" 
-			sorgu = sorgu & " FROM stok.stok t1"
+			sorgu = sorgu & " t1.id as stokRefID,"
+			sorgu = sorgu & " t2.stokKodu,"
+			sorgu = sorgu & " t2.stokAd, t2.stokAdEn, t2.stokBarcode, t1.cariUrunRef, t1.cariUrunAd" 
+			sorgu = sorgu & " FROM stok.stokRef t1"
+			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
+			if cariID <> "" then
+				sorgu = sorgu & " AND t1.cariID = " & cariID & ""
+			end if 
 			sorgu = sorgu & " WHERE t1.silindi = 0"
-				sorgu = sorgu & " AND (t1.stokAd like N'%" & arananKelime & "%'"
-					sorgu = sorgu & " OR t1.stokBarcode like N'%" & arananKelime & "%'"
-					sorgu = sorgu & " OR t1.stokKodu like N'%" & arananKelime & "%'"
-					sorgu = sorgu & " OR t1.stokAdEN like N'%" & arananKelime & "%')"
+				sorgu = sorgu & " AND (t1.cariUrunAd like N'%" & arananKelime & "%'"
+					sorgu = sorgu & " OR t1.cariUrunRef like N'%" & arananKelime & "%')"
 					sorgu = sorgu & " and t1.firmaID = " & firmaID
-			if mDurum <> "0" OR ymDurum <> "0" OR hmDurum <> "0" then
-				sorgu = sorgu & " AND t1.stokTuru IN (" & mDurum & "," & ymDurum & "," & hmDurum & ")"
-			end if
 			if sartOzel <> "" then
 				sorgu = sorgu & " AND " & sartOzel
 			end if
-			sorgu = sorgu & " ORDER BY t1.stokAd ASC"
+			sorgu = sorgu & " ORDER BY t2.stokAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
 			
 '			stokAd = rs("stokBarcode")
@@ -83,6 +63,8 @@
 					stokBarcode		=	rs("stokBarcode")
 					stokAd			=	rs("stokAd")
 					stokAdEN		=	rs("stokAdEN")
+					cariUrunRef		=	rs("cariUrunRef")
+					cariUrunAd		=	rs("cariUrunAd")
 					if sart = "english" AND not isnull(stokAdEN) then
 						stokAd = stokAdEn
 					end if
@@ -102,12 +84,17 @@
 				
 				
 					Response.Write "{"
-					Response.Write """id"":" & rs("stokID") & ","
+					Response.Write """id"":" & rs("stokRefID") & ","
 					Response.Write """text"":"""
 					if stokKodu <> "" then
 						Response.Write stokKodu & " -- "
 					end if
-					Response.Write stokAd
+					if cariUrunRef <> "" then
+						Response.Write cariUrunRef & " -- "
+						Response.Write cariUrunAd
+					else
+						Response.Write stokAd
+					end if
 					if stokBarcode <> "" then
 						Response.Write " -- " & stokBarcode
 					end if
