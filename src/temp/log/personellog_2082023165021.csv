@@ -1,0 +1,1072 @@
+﻿id;Tarih;personelID;IP;gorevID;islem;firmaID;url;modulAd
+129834;3.07.2023 08:05:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129835;3.07.2023 08:11:00;0;192.168.1.118;0;Sifre Giris Ekrani;5;;
+129836;3.07.2023 08:12:00;0;192.168.1.118;0;Sifre Denemesi;5;;Personel
+129837;3.07.2023 08:12:00;0;192.168.1.118;0;Sifre Dogrulaniyor;5;;Personel
+129838;3.07.2023 08:12:00;0;192.168.1.118;0;Hatali Kullanici adi veya sifre yazdiniz;5;;Personel
+129839;3.07.2023 08:12:00;0;192.168.1.118;0;Sifre Denemesi;5;;Personel
+129840;3.07.2023 08:12:00;0;192.168.1.118;0;Sifre Dogrulaniyor;5;;Personel
+129841;3.07.2023 08:12:00;0;192.168.1.118;0;Hatali Kullanici adi veya sifre yazdiniz;5;;Personel
+129842;3.07.2023 08:14:00;0;192.168.1.118;0;Sifre Denemesi;5;;Personel
+129843;3.07.2023 08:14:00;0;192.168.1.118;0;Sifre Dogrulaniyor;5;;Personel
+129844;3.07.2023 08:14:00;0;192.168.1.118;0;Hatali Kullanici adi veya sifre yazdiniz;5;;Personel
+129845;3.07.2023 08:15:00;0;192.168.1.118;0;Sifre Denemesi;5;;Personel
+129846;3.07.2023 08:15:00;0;192.168.1.118;0;Sifre Dogrulaniyor;5;;Personel
+129847;3.07.2023 08:15:00;39;192.168.1.118;0;Basarili Giris;5;;Personel
+129848;3.07.2023 08:15:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+129849;3.07.2023 08:15:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+129850;3.07.2023 08:16:00;39;192.168.1.118;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129851;3.07.2023 08:16:00;39;192.168.1.118;0;Depo Listesi Ekrani;5;;Depo
+129852;3.07.2023 08:16:00;39;192.168.1.118;0;Depo Günlük Is Listesi;5;;Depo
+129853;3.07.2023 08:16:00;39;192.168.1.118;0;Planlama ajanda sayfasi girisi;5;;Planlama
+129854;3.07.2023 08:17:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+129855;3.07.2023 08:17:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+129856;3.07.2023 08:18:00;39;192.168.1.118;361;Stok Depo Miktarlari Detay;5;;stok
+129857;3.07.2023 08:18:00;39;192.168.1.118;1814;Stok Depo Miktarlari Detay;5;;stok
+129858;3.07.2023 08:18:00;39;192.168.1.118;366;Stok Depo Miktarlari Detay;5;;stok
+129859;3.07.2023 08:20:00;30;192.168.1.153;0;Welcome Dashboard;5;;Dashboard
+129860;3.07.2023 08:22:00;30;192.168.1.153;0;Teklif Listesi Ekrani;5;;Teklif
+129861;3.07.2023 08:22:00;30;192.168.1.153;0;Kayit Basarili.;5;;Teklif
+129862;3.07.2023 08:23:00;30;192.168.1.153;0;Teklif kalemi kayit ediliyor;5;;
+129863;3.07.2023 08:24:00;30;192.168.1.153;0;Teklif kalemi kayit ediliyor;5;;
+129864;3.07.2023 08:24:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129865;3.07.2023 08:24:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129866;3.07.2023 08:25:00;39;192.168.1.118;126;Stok Depo Miktarlari Detay;5;;stok
+129867;3.07.2023 08:26:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+129868;3.07.2023 08:29:00;31;192.168.1.228;0;Welcome Dashboard;5;;Dashboard
+129869;3.07.2023 08:29:00;31;192.168.1.228;0;Müsteri Siparisleri Listelendi;5;;Satis
+129870;3.07.2023 08:29:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129871;3.07.2023 08:29:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+129872;3.07.2023 08:30:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129873;3.07.2023 08:30:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+129874;3.07.2023 08:30:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129875;3.07.2023 08:30:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129876;3.07.2023 08:31:00;39;192.168.1.118;233;Stok Depo Miktarlari Detay;5;;stok
+129877;3.07.2023 08:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129878;3.07.2023 08:32:00;39;192.168.1.118;108;Stok Depo Miktarlari Detay;5;;stok
+129879;3.07.2023 08:33:00;39;192.168.1.118;106;Stok Depo Miktarlari Detay;5;;stok
+129880;3.07.2023 08:38:00;39;192.168.1.118;0;Planlama ajanda sayfasi girisi;5;;Planlama
+129881;3.07.2023 08:38:00;0;192.168.1.161;0;Sifre Giris Ekrani;5;;
+129882;3.07.2023 08:38:00;0;192.168.1.161;0;Sifre Denemesi;5;;Personel
+129883;3.07.2023 08:38:00;0;192.168.1.161;0;Sifre Dogrulaniyor;5;;Personel
+129884;3.07.2023 08:38:00;27;192.168.1.161;0;Basarili Giris;5;;Personel
+129885;3.07.2023 08:38:00;27;192.168.1.161;0;Welcome Dashboard;5;;Dashboard
+129886;3.07.2023 08:38:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129887;3.07.2023 08:38:00;27;192.168.1.161;0;Mail Bilgileri Tanimlanmamis;5;;
+129888;3.07.2023 08:39:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129889;3.07.2023 08:39:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129890;3.07.2023 08:52:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+129891;3.07.2023 08:55:00;2;::1;0;Welcome Dashboard;5;;Dashboard
+129892;3.07.2023 08:55:00;2;::1;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129893;3.07.2023 08:57:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129894;3.07.2023 08:57:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129895;3.07.2023 08:57:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129896;3.07.2023 08:59:00;2;::1;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129897;3.07.2023 08:59:00;2;::1;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129898;3.07.2023 09:00:00;2;::1;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129899;3.07.2023 09:00:00;2;::1;0;Müsteri Siparisleri Listelendi;5;;Satis
+129900;3.07.2023 09:00:00;2;::1;65;Stok Depo Miktarlari Detay;5;;stok
+129901;3.07.2023 09:00:00;2;::1;357;Stok Depo Miktarlari Detay;5;;stok
+129902;3.07.2023 09:00:00;2;::1;1863;Stok Depo Miktarlari Detay;5;;stok
+129903;3.07.2023 09:00:00;2;::1;354;Stok Depo Miktarlari Detay;5;;stok
+129904;3.07.2023 09:01:00;2;::1;374;Stok Depo Miktarlari Detay;5;;stok
+129905;3.07.2023 09:05:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+129906;3.07.2023 09:05:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+129907;3.07.2023 09:05:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Sterilizasyon Sarf Malzeme Deposu;5;;Depo
+129908;3.07.2023 09:06:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+129909;3.07.2023 09:06:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+129910;3.07.2023 09:06:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+129911;3.07.2023 09:06:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5324;5;;Depo
+129912;3.07.2023 09:06:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Sterilizasyon Sarf Malzeme Deposu;5;;Depo
+129913;3.07.2023 09:06:00;39;192.168.1.118;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129914;3.07.2023 09:06:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+129915;3.07.2023 09:06:00;28;192.168.1.128;3031;Stok Depo Miktarlari Detay;5;;stok
+129916;3.07.2023 09:07:00;28;192.168.1.128;3031;Stok Depo Miktarlari Detay;5;;stok
+129917;3.07.2023 09:07:00;28;192.168.1.128;2;Stok Depo Miktarlari Detay;5;;stok
+129918;3.07.2023 09:07:00;28;192.168.1.128;782;Stok Düzenleme Ekrani Girisi;5;;Stok
+129919;3.07.2023 09:07:00;28;192.168.1.128;782;Stok Düzenleme Ekrani Girisi;5;;Stok
+129920;3.07.2023 09:07:00;28;192.168.1.128;3031;Stok Düzenleme Ekrani Girisi;5;;Stok
+129921;3.07.2023 09:08:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129922;3.07.2023 09:09:00;28;192.168.1.128;3031;Stok Güncelleme: H-00013;5;;Stok
+129923;3.07.2023 09:09:00;28;192.168.1.128;3031;Ürün bilgileri güncellendi:H-00013;5;;Stok
+129924;3.07.2023 09:09:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129925;3.07.2023 09:09:00;28;192.168.1.128;3031;Stok Depo Miktarlari Detay;5;;stok
+129926;3.07.2023 09:09:00;28;192.168.1.128;3031;Stok Düzenleme Ekrani Girisi;5;;Stok
+129927;3.07.2023 09:10:00;28;192.168.1.128;3031;Stok Güncelleme: H-00013;5;;Stok
+129928;3.07.2023 09:10:00;28;192.168.1.128;3031;Ürün bilgileri güncellendi:H-00013;5;;Stok
+129929;3.07.2023 09:10:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129930;3.07.2023 09:10:00;28;192.168.1.128;807;Stok Düzenleme Ekrani Girisi;5;;Stok
+129931;3.07.2023 09:13:00;28;192.168.1.128;807;Stok Güncelleme: HM 000557;5;;Stok
+129932;3.07.2023 09:13:00;28;192.168.1.128;807;Ürün bilgileri güncellendi:HM 000557;5;;Stok
+129933;3.07.2023 09:13:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129934;3.07.2023 09:13:00;28;192.168.1.128;2;Stok Depo Miktarlari Detay;5;;stok
+129935;3.07.2023 09:13:00;28;192.168.1.128;2;Stok Düzenleme Ekrani Girisi;5;;Stok
+129936;3.07.2023 09:14:00;28;192.168.1.128;2;Stok Güncelleme: HM-00001;5;;Stok
+129937;3.07.2023 09:14:00;28;192.168.1.128;2;Ürün bilgileri güncellendi:HM-00001;5;;Stok
+129938;3.07.2023 09:14:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129939;3.07.2023 09:14:00;28;192.168.1.128;3017;Stok Düzenleme Ekrani Girisi;5;;Stok
+129940;3.07.2023 09:15:00;28;192.168.1.128;3017;Stok Güncelleme: HM-00002;5;;Stok
+129941;3.07.2023 09:15:00;28;192.168.1.128;3017;Ürün bilgileri güncellendi:HM-00002;5;;Stok
+129942;3.07.2023 09:15:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129943;3.07.2023 09:16:00;28;192.168.1.128;3020;Stok Düzenleme Ekrani Girisi;5;;Stok
+129944;3.07.2023 09:17:00;28;192.168.1.128;3020;Stok Güncelleme: HM-00004;5;;Stok
+129945;3.07.2023 09:17:00;28;192.168.1.128;3020;Ürün bilgileri güncellendi:HM-00004;5;;Stok
+129946;3.07.2023 09:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129947;3.07.2023 09:17:00;28;192.168.1.128;3044;Stok Düzenleme Ekrani Girisi;5;;Stok
+129948;3.07.2023 09:17:00;28;192.168.1.128;3044;Stok Güncelleme: HM-00003;5;;Stok
+129949;3.07.2023 09:17:00;28;192.168.1.128;3044;Ürün bilgileri güncellendi:HM-00003;5;;Stok
+129950;3.07.2023 09:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129951;3.07.2023 09:17:00;28;192.168.1.128;3020;Stok Düzenleme Ekrani Girisi;5;;Stok
+129952;3.07.2023 09:17:00;28;192.168.1.128;3;Stok Düzenleme Ekrani Girisi;5;;Stok
+129953;3.07.2023 09:19:00;28;192.168.1.128;3;Stok Güncelleme: HM-00005;5;;Stok
+129954;3.07.2023 09:19:00;28;192.168.1.128;3;Ürün bilgileri güncellendi:HM-00005;5;;Stok
+129955;3.07.2023 09:19:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129956;3.07.2023 09:20:00;28;192.168.1.128;749;Stok Depo Miktarlari Detay;5;;stok
+129957;3.07.2023 09:24:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129958;3.07.2023 09:24:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+129959;3.07.2023 09:27:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129960;3.07.2023 09:27:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129961;3.07.2023 09:29:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:KRM2023000003438;5;;Mal Kabul
+129962;3.07.2023 09:35:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+129963;3.07.2023 09:37:00;28;192.168.1.128;5;Stok Düzenleme Ekrani Girisi;5;;Stok
+129964;3.07.2023 09:37:00;28;192.168.1.128;749;Stok Depo Miktarlari Detay;5;;stok
+129965;3.07.2023 09:37:00;28;192.168.1.128;749;Stok Düzenleme Ekrani Girisi;5;;Stok
+129966;3.07.2023 09:37:00;28;192.168.1.128;749;Stok Güncelleme: HM-00006;5;;Stok
+129967;3.07.2023 09:37:00;28;192.168.1.128;749;Ürün bilgileri güncellendi:HM-00006;5;;Stok
+129968;3.07.2023 09:37:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129969;3.07.2023 09:39:00;0;192.168.1.190;0;Sifre Giris Ekrani;5;;
+129970;3.07.2023 09:39:00;0;192.168.1.190;0;Sifre Denemesi;5;;Personel
+129971;3.07.2023 09:39:00;0;192.168.1.190;0;Sifre Dogrulaniyor;5;;Personel
+129972;3.07.2023 09:39:00;36;192.168.1.190;0;Basarili Giris;5;;Personel
+129973;3.07.2023 09:39:00;36;192.168.1.190;0;Welcome Dashboard;5;;Dashboard
+129974;3.07.2023 09:39:00;36;192.168.1.190;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+129975;3.07.2023 09:39:00;36;192.168.1.190;5326;Stok girisi kalite kontrol onayi;5;;Kalite Kontrol
+129976;3.07.2023 09:39:00;36;192.168.1.190;0;Kalite Kontrol ürün kabul: 5326;5;;Kalite Kontrol
+129977;3.07.2023 09:39:00;36;192.168.1.190;0;Kalite Kontrol Bekleyen Ürünler Ekrani;5;;Kalite Kontrol
+129978;3.07.2023 09:40:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+129979;3.07.2023 09:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129980;3.07.2023 09:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129981;3.07.2023 09:41:00;28;192.168.1.128;4138;Stok Depo Miktarlari Detay;5;;stok
+129982;3.07.2023 09:41:00;28;192.168.1.128;4138;Stok Düzenleme Ekrani Girisi;5;;Stok
+129983;3.07.2023 09:41:00;28;192.168.1.128;4138;Stok Düzenleme Ekrani Girisi;5;;Stok
+129984;3.07.2023 09:41:00;28;192.168.1.128;4138;Stok Düzenleme Ekrani Girisi;5;;Stok
+129985;3.07.2023 09:42:00;5;192.168.1.139;0;Welcome Dashboard;5;;Dashboard
+129986;3.07.2023 09:42:00;5;192.168.1.139;0;Mail Bilgileri Tanimlanmamis;5;;
+129987;3.07.2023 09:43:00;28;192.168.1.128;749;Stok Düzenleme Ekrani Girisi;5;;Stok
+129988;3.07.2023 09:43:00;28;192.168.1.128;5;Stok Düzenleme Ekrani Girisi;5;;Stok
+129989;3.07.2023 09:44:00;28;192.168.1.128;5;Stok Güncelleme: HM-00007;5;;Stok
+129990;3.07.2023 09:44:00;28;192.168.1.128;5;Ürün bilgileri güncellendi:HM-00007;5;;Stok
+129991;3.07.2023 09:44:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129992;3.07.2023 09:44:00;28;192.168.1.128;750;Stok Düzenleme Ekrani Girisi;5;;Stok
+129993;3.07.2023 09:45:00;28;192.168.1.128;750;Stok Güncelleme: HM-00008;5;;Stok
+129994;3.07.2023 09:45:00;28;192.168.1.128;750;Ürün bilgileri güncellendi:HM-00008;5;;Stok
+129995;3.07.2023 09:45:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+129996;3.07.2023 09:45:00;28;192.168.1.128;6;Stok Düzenleme Ekrani Girisi;5;;Stok
+129997;3.07.2023 09:46:00;28;192.168.1.128;6;Stok Güncelleme: HM-00009;5;;Stok
+129998;3.07.2023 09:46:00;28;192.168.1.128;6;Ürün bilgileri güncellendi:HM-00009;5;;Stok
+129999;3.07.2023 09:46:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130000;3.07.2023 09:46:00;28;192.168.1.128;6;Stok Düzenleme Ekrani Girisi;5;;Stok
+130001;3.07.2023 09:46:00;28;192.168.1.128;6;Stok Güncelleme: HM-00009;5;;Stok
+130002;3.07.2023 09:46:00;28;192.168.1.128;6;Ürün bilgileri güncellendi:HM-00009;5;;Stok
+130003;3.07.2023 09:46:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130004;3.07.2023 09:47:00;28;192.168.1.128;6;Stok Düzenleme Ekrani Girisi;5;;Stok
+130005;3.07.2023 09:47:00;28;192.168.1.128;6;Stok Güncelleme: HM-00009;5;;Stok
+130006;3.07.2023 09:47:00;28;192.168.1.128;6;Ürün bilgileri güncellendi:HM-00009;5;;Stok
+130007;3.07.2023 09:47:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130008;3.07.2023 09:51:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130009;3.07.2023 09:51:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130010;3.07.2023 09:51:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130011;3.07.2023 09:51:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130012;3.07.2023 09:51:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130013;3.07.2023 09:51:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130014;3.07.2023 09:52:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130015;3.07.2023 09:52:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130016;3.07.2023 09:53:00;39;192.168.1.118;178;Stok Depo Miktarlari Detay;5;;stok
+130017;3.07.2023 09:54:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130018;3.07.2023 09:54:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:5313) (deger:G);5;;
+130019;3.07.2023 09:54:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130020;3.07.2023 09:54:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:5286) (deger:G);5;;
+130021;3.07.2023 09:54:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130022;3.07.2023 09:54:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:5288) (deger:G);5;;
+130023;3.07.2023 09:54:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130024;3.07.2023 09:54:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:5282) (deger:G);5;;
+130025;3.07.2023 09:54:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130026;3.07.2023 09:54:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:5280) (deger:G);5;;
+130027;3.07.2023 09:54:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130028;3.07.2023 09:54:00;39;192.168.1.118;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:stokHareketTuru) (id:5284) (deger:G);5;;
+130029;3.07.2023 09:54:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130030;3.07.2023 09:55:00;39;192.168.1.118;0;Makine - Teçhizat Listesi Ekrani;5;;Üretim
+130031;3.07.2023 09:55:00;39;192.168.1.118;0;Dogrudan Müsteri Siparisi Olusturma Ekrani;5;;Satis
+130032;3.07.2023 09:55:00;39;192.168.1.118;0;Yetkisiz Giris;5;;Satis
+130033;3.07.2023 09:55:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+130034;3.07.2023 10:17:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+130035;3.07.2023 10:18:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130036;3.07.2023 10:18:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130037;3.07.2023 10:18:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130038;3.07.2023 10:19:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130039;3.07.2023 10:19:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130040;3.07.2023 10:19:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130041;3.07.2023 10:19:00;39;192.168.1.118;202;Stok Depo Miktarlari Detay;5;;stok
+130042;3.07.2023 10:19:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+130043;3.07.2023 10:21:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130044;3.07.2023 10:21:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130045;3.07.2023 10:21:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130046;3.07.2023 10:21:00;39;192.168.1.118;3052;Stok Depo Miktarlari Detay;5;;stok
+130047;3.07.2023 10:22:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+130048;3.07.2023 10:23:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130049;3.07.2023 10:23:00;28;192.168.1.128;3052;Stok Depo Miktarlari Detay;5;;stok
+130050;3.07.2023 10:23:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130051;3.07.2023 10:23:00;28;192.168.1.128;0;3052 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130052;3.07.2023 10:24:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130053;3.07.2023 10:24:00;28;192.168.1.128;239;Stok Depo Miktarlari Detay;5;;stok
+130054;3.07.2023 10:24:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130055;3.07.2023 10:24:00;28;192.168.1.128;0;239 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130056;3.07.2023 10:24:00;28;192.168.1.128;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+130057;3.07.2023 10:25:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130058;3.07.2023 10:25:00;28;192.168.1.128;3027;Stok Düzenleme Ekrani Girisi;5;;Stok
+130059;3.07.2023 10:26:00;28;192.168.1.128;3027;Stok Güncelleme: HM-00010;5;;Stok
+130060;3.07.2023 10:26:00;28;192.168.1.128;3027;Ürün bilgileri güncellendi:HM-00010;5;;Stok
+130061;3.07.2023 10:26:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130062;3.07.2023 10:26:00;28;192.168.1.128;7;Stok Düzenleme Ekrani Girisi;5;;Stok
+130063;3.07.2023 10:27:00;28;192.168.1.128;7;Stok Güncelleme: HM-00011;5;;Stok
+130064;3.07.2023 10:27:00;28;192.168.1.128;7;Ürün bilgileri güncellendi:HM-00011;5;;Stok
+130065;3.07.2023 10:27:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130066;3.07.2023 10:27:00;28;192.168.1.128;3024;Stok Düzenleme Ekrani Girisi;5;;Stok
+130067;3.07.2023 10:28:00;28;192.168.1.128;3024;Stok Güncelleme: HM-00012;5;;Stok
+130068;3.07.2023 10:28:00;28;192.168.1.128;3024;Ürün bilgileri güncellendi:HM-00012;5;;Stok
+130069;3.07.2023 10:28:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130070;3.07.2023 10:30:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130071;3.07.2023 10:30:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130072;3.07.2023 10:30:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130073;3.07.2023 10:30:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5329;5;;Depo
+130074;3.07.2023 10:30:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130075;3.07.2023 10:31:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130076;3.07.2023 10:31:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130077;3.07.2023 10:31:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130078;3.07.2023 10:31:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5331;5;;Depo
+130079;3.07.2023 10:31:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130080;3.07.2023 10:32:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+130081;3.07.2023 10:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130082;3.07.2023 10:32:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130083;3.07.2023 10:32:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130084;3.07.2023 10:32:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130085;3.07.2023 10:32:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130086;3.07.2023 10:32:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130087;3.07.2023 10:32:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130088;3.07.2023 10:32:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130089;3.07.2023 10:34:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5333;5;;Depo
+130090;3.07.2023 10:34:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130091;3.07.2023 10:34:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130092;3.07.2023 10:34:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130093;3.07.2023 10:34:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130094;3.07.2023 10:35:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5335;5;;Depo
+130095;3.07.2023 10:35:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130096;3.07.2023 10:35:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130097;3.07.2023 10:35:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130098;3.07.2023 10:35:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130099;3.07.2023 10:35:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5337;5;;Depo
+130100;3.07.2023 10:35:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130101;3.07.2023 10:38:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130102;3.07.2023 10:38:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130103;3.07.2023 10:38:00;28;192.168.1.128;781;Stok Depo Miktarlari Detay;5;;stok
+130104;3.07.2023 10:43:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130105;3.07.2023 10:43:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130106;3.07.2023 10:44:00;39;192.168.1.118;4126;Stok Depo Miktarlari Detay;5;;stok
+130107;3.07.2023 10:44:00;28;192.168.1.128;3032;Stok Depo Miktarlari Detay;5;;stok
+130108;3.07.2023 10:44:00;28;192.168.1.128;3032;Stok Düzenleme Ekrani Girisi;5;;Stok
+130109;3.07.2023 10:44:00;28;192.168.1.128;3032;Stok Güncelleme: HM-00014;5;;Stok
+130110;3.07.2023 10:44:00;28;192.168.1.128;3032;Ürün bilgileri güncellendi:HM-00014;5;;Stok
+130111;3.07.2023 10:44:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130112;3.07.2023 10:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130113;3.07.2023 10:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130114;3.07.2023 10:45:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130115;3.07.2023 10:46:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130116;3.07.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130117;3.07.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130118;3.07.2023 10:46:00;39;192.168.1.118;154;Stok Depo Miktarlari Detay;5;;stok
+130119;3.07.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130120;3.07.2023 10:46:00;28;192.168.1.128;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:silindi) (id:5330) (deger:1);5;;
+130121;3.07.2023 10:46:00;28;192.168.1.128;0;Hücre Kaydet islemi basarili (tablo:stok.stokHareket) (alan:silindi) (id:5329) (deger:1);5;;
+130122;3.07.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130123;3.07.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130124;3.07.2023 10:46:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5339;5;;Depo
+130125;3.07.2023 10:46:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130126;3.07.2023 10:52:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130127;3.07.2023 10:52:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130128;3.07.2023 10:52:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Sterilizasyon Sarf Malzeme Deposu;5;;Depo
+130129;3.07.2023 10:52:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5341;5;;Depo
+130130;3.07.2023 10:52:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Sterilizasyon Sarf Malzeme Deposu;5;;Depo
+130131;3.07.2023 10:53:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130132;3.07.2023 10:53:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130133;3.07.2023 10:53:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+130134;3.07.2023 10:53:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5343;5;;Depo
+130135;3.07.2023 10:53:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+130136;3.07.2023 10:53:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130137;3.07.2023 10:53:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130138;3.07.2023 10:53:00;27;192.168.1.161;0;Stok Listesi Ekrani;5;;Stok
+130139;3.07.2023 10:54:00;27;192.168.1.161;0;Stok Listesi Ekrani;5;;Stok
+130140;3.07.2023 10:54:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5345;5;;Depo
+130141;3.07.2023 10:54:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Üretim Depo;5;;Depo
+130142;3.07.2023 10:55:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130143;3.07.2023 10:55:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130144;3.07.2023 10:56:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130145;3.07.2023 10:56:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5347;5;;Depo
+130146;3.07.2023 10:56:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130147;3.07.2023 10:56:00;39;192.168.1.118;3052;Stok Depo Miktarlari Detay;5;;stok
+130148;3.07.2023 10:56:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130149;3.07.2023 10:57:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5349;5;;Depo
+130150;3.07.2023 10:57:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:DIKIMHANE DEPO;5;;Depo
+130151;3.07.2023 10:57:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130152;3.07.2023 10:57:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130153;3.07.2023 10:57:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130154;3.07.2023 10:58:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5351;5;;Depo
+130155;3.07.2023 10:58:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130156;3.07.2023 10:58:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130157;3.07.2023 10:58:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5353;5;;Depo
+130158;3.07.2023 10:58:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130159;3.07.2023 10:58:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130160;3.07.2023 10:59:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5355;5;;Depo
+130161;3.07.2023 10:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130162;3.07.2023 10:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130163;3.07.2023 10:59:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5357;5;;Depo
+130164;3.07.2023 10:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130165;3.07.2023 10:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130166;3.07.2023 10:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130167;3.07.2023 10:59:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130168;3.07.2023 11:00:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5359;5;;Depo
+130169;3.07.2023 11:00:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:Kesimhane depo;5;;Depo
+130170;3.07.2023 11:02:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130171;3.07.2023 11:04:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130172;3.07.2023 11:04:00;28;192.168.1.128;101;Stok Depo Miktarlari Detay;5;;stok
+130173;3.07.2023 11:05:00;28;192.168.1.128;0;101 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130174;3.07.2023 11:05:00;28;192.168.1.128;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+130175;3.07.2023 11:15:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130176;3.07.2023 11:15:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130177;3.07.2023 11:15:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130178;3.07.2023 11:15:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5361;5;;Depo
+130179;3.07.2023 11:15:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130180;3.07.2023 11:15:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130181;3.07.2023 11:16:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5363;5;;Depo
+130182;3.07.2023 11:16:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130183;3.07.2023 11:16:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130184;3.07.2023 11:16:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5365;5;;Depo
+130185;3.07.2023 11:16:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130186;3.07.2023 11:17:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130187;3.07.2023 11:17:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130188;3.07.2023 11:18:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:;5;;Depo
+130189;3.07.2023 11:18:00;28;192.168.1.128;0;Depo transferi olusturuldu <b>stokHareketID:</b> 5367;5;;Depo
+130190;3.07.2023 11:18:00;28;192.168.1.128;0;Depolar arasi transfer giris depo seçildi giris depo:FASON DEPO DISPOSED;5;;Depo
+130191;3.07.2023 11:18:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130192;3.07.2023 11:18:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130193;3.07.2023 11:19:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130194;3.07.2023 11:19:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130195;3.07.2023 11:19:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130196;3.07.2023 11:19:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130197;3.07.2023 11:23:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+130198;3.07.2023 11:23:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130199;3.07.2023 11:23:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130200;3.07.2023 11:24:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130201;3.07.2023 11:24:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130202;3.07.2023 11:24:00;39;192.168.1.118;0;Welcome Dashboard;5;;Dashboard
+130203;3.07.2023 11:24:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130204;3.07.2023 11:24:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130205;3.07.2023 11:25:00;27;192.168.1.161;0;Satinalma Talep red ediliyor;5;;Satin Alma
+130206;3.07.2023 11:25:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130207;3.07.2023 11:25:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130208;3.07.2023 11:25:00;27;192.168.1.161;0;Welcome Dashboard;5;;Dashboard
+130209;3.07.2023 11:25:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130210;3.07.2023 11:25:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130211;3.07.2023 11:25:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130212;3.07.2023 11:25:00;27;192.168.1.161;0;Mail Bilgileri Tanimlanmamis;5;;
+130213;3.07.2023 11:25:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130214;3.07.2023 11:27:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130215;3.07.2023 11:27:00;39;192.168.1.118;25;Stok Depo Miktarlari Detay;5;;stok
+130216;3.07.2023 11:27:00;39;192.168.1.118;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130217;3.07.2023 11:28:00;39;192.168.1.118;0;Müsteri Siparisleri Listelendi;5;;Satis
+130218;3.07.2023 11:29:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130219;3.07.2023 11:29:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130220;3.07.2023 11:29:00;28;192.168.1.128;4125;Stok Depo Miktarlari Detay;5;;stok
+130221;3.07.2023 11:30:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130222;3.07.2023 11:30:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130223;3.07.2023 11:30:00;28;192.168.1.128;3029;Stok Depo Miktarlari Detay;5;;stok
+130224;3.07.2023 11:30:00;28;192.168.1.128;3029;Stok Düzenleme Ekrani Girisi;5;;Stok
+130225;3.07.2023 11:31:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130226;3.07.2023 11:31:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130227;3.07.2023 11:31:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130228;3.07.2023 11:31:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130229;3.07.2023 11:31:00;28;192.168.1.128;3029;Stok Güncelleme: HM-00015;5;;Stok
+130230;3.07.2023 11:31:00;28;192.168.1.128;3029;Ürün bilgileri güncellendi:HM-00015;5;;Stok
+130231;3.07.2023 11:31:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130232;3.07.2023 11:31:00;28;192.168.1.128;8;Stok Düzenleme Ekrani Girisi;5;;Stok
+130233;3.07.2023 11:31:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130234;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130235;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130236;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130237;3.07.2023 11:32:00;28;192.168.1.128;8;Stok Güncelleme: HM-00016;5;;Stok
+130238;3.07.2023 11:32:00;28;192.168.1.128;8;Ürün bilgileri güncellendi:HM-00016;5;;Stok
+130239;3.07.2023 11:32:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130240;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130241;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130242;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130243;3.07.2023 11:32:00;28;192.168.1.128;3026;Stok Düzenleme Ekrani Girisi;5;;Stok
+130244;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130245;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130246;3.07.2023 11:32:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130247;3.07.2023 11:33:00;28;192.168.1.128;3026;Stok Güncelleme: HM-00017;5;;Stok
+130248;3.07.2023 11:33:00;28;192.168.1.128;3026;Ürün bilgileri güncellendi:HM-00017;5;;Stok
+130249;3.07.2023 11:33:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130250;3.07.2023 11:33:00;28;192.168.1.128;3030;Stok Düzenleme Ekrani Girisi;5;;Stok
+130251;3.07.2023 11:34:00;28;192.168.1.128;3030;Stok Güncelleme: HM-00018;5;;Stok
+130252;3.07.2023 11:34:00;28;192.168.1.128;3030;Ürün bilgileri güncellendi:HM-00018;5;;Stok
+130253;3.07.2023 11:34:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130254;3.07.2023 11:34:00;28;192.168.1.128;9;Stok Depo Miktarlari Detay;5;;stok
+130255;3.07.2023 11:34:00;28;192.168.1.128;9;Stok Düzenleme Ekrani Girisi;5;;Stok
+130256;3.07.2023 11:35:00;28;192.168.1.128;9;Stok Güncelleme: HM-00019;5;;Stok
+130257;3.07.2023 11:35:00;28;192.168.1.128;9;Ürün bilgileri güncellendi:HM-00019;5;;Stok
+130258;3.07.2023 11:35:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130259;3.07.2023 11:35:00;28;192.168.1.128;4141;Stok Depo Miktarlari Detay;5;;stok
+130260;3.07.2023 11:35:00;28;192.168.1.128;4141;Stok Düzenleme Ekrani Girisi;5;;Stok
+130261;3.07.2023 11:36:00;28;192.168.1.128;4141;Stok Güncelleme: HM-00020;5;;Stok
+130262;3.07.2023 11:36:00;28;192.168.1.128;4141;Ürün bilgileri güncellendi:HM-00020;5;;Stok
+130263;3.07.2023 11:36:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130264;3.07.2023 11:36:00;28;192.168.1.128;4141;Stok Düzenleme Ekrani Girisi;5;;Stok
+130265;3.07.2023 11:36:00;28;192.168.1.128;3033;Stok Düzenleme Ekrani Girisi;5;;Stok
+130266;3.07.2023 11:36:00;28;192.168.1.128;3033;Stok Güncelleme: HM-00021;5;;Stok
+130267;3.07.2023 11:36:00;28;192.168.1.128;3033;Ürün bilgileri güncellendi:HM-00021;5;;Stok
+130268;3.07.2023 11:36:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130269;3.07.2023 11:36:00;28;192.168.1.128;3023;Stok Depo Miktarlari Detay;5;;stok
+130270;3.07.2023 11:36:00;31;192.168.1.228;0;Welcome Dashboard;5;;Dashboard
+130271;3.07.2023 11:36:00;28;192.168.1.128;3023;Stok Düzenleme Ekrani Girisi;5;;Stok
+130272;3.07.2023 11:37:00;28;192.168.1.128;3023;Stok Güncelleme: HM-00024;5;;Stok
+130273;3.07.2023 11:37:00;28;192.168.1.128;3023;Ürün bilgileri güncellendi:HM-00024;5;;Stok
+130274;3.07.2023 11:37:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130275;3.07.2023 11:37:00;28;192.168.1.128;3019;Stok Depo Miktarlari Detay;5;;stok
+130276;3.07.2023 11:37:00;28;192.168.1.128;3019;Stok Düzenleme Ekrani Girisi;5;;Stok
+130277;3.07.2023 11:38:00;28;192.168.1.128;3019;Stok Güncelleme: HM-00025;5;;Stok
+130278;3.07.2023 11:38:00;28;192.168.1.128;3019;Ürün bilgileri güncellendi:HM-00025;5;;Stok
+130279;3.07.2023 11:38:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130280;3.07.2023 11:38:00;28;192.168.1.128;3012;Stok Düzenleme Ekrani Girisi;5;;Stok
+130281;3.07.2023 11:39:00;28;192.168.1.128;3012;Stok Güncelleme: HM-00026;5;;Stok
+130282;3.07.2023 11:39:00;28;192.168.1.128;3012;Ürün bilgileri güncellendi:HM-00026;5;;Stok
+130283;3.07.2023 11:39:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130284;3.07.2023 11:39:00;28;192.168.1.128;11;Stok Düzenleme Ekrani Girisi;5;;Stok
+130285;3.07.2023 11:40:00;28;192.168.1.128;11;Stok Güncelleme: HM-00027;5;;Stok
+130286;3.07.2023 11:40:00;28;192.168.1.128;11;Ürün bilgileri güncellendi:HM-00027;5;;Stok
+130287;3.07.2023 11:40:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130288;3.07.2023 11:40:00;28;192.168.1.128;3012;Stok Düzenleme Ekrani Girisi;5;;Stok
+130289;3.07.2023 11:40:00;28;192.168.1.128;12;Stok Düzenleme Ekrani Girisi;5;;Stok
+130290;3.07.2023 11:41:00;28;192.168.1.128;12;Stok Güncelleme: HM-00028;5;;Stok
+130291;3.07.2023 11:41:00;28;192.168.1.128;12;Ürün bilgileri güncellendi:HM-00028;5;;Stok
+130292;3.07.2023 11:41:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130293;3.07.2023 11:41:00;28;192.168.1.128;13;Stok Düzenleme Ekrani Girisi;5;;Stok
+130294;3.07.2023 11:41:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130295;3.07.2023 11:41:00;27;192.168.1.161;0;Satinalma Talebinden Siparis Olustur: id:3937;5;;Satin Alma
+130296;3.07.2023 11:42:00;27;192.168.1.161;0;664 carisine satin alma siparisi için 101 kodlu ürün eklendi;5;;Satin Alma
+130297;3.07.2023 11:42:00;27;192.168.1.161;0;Satinalma siparis ana tablo aktarimi;5;;Satin Alma
+130298;3.07.2023 11:42:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130299;3.07.2023 11:44:00;27;192.168.1.161;0;Satinalma Talebinden Siparis Olustur: id:3935;5;;Satin Alma
+130300;3.07.2023 11:44:00;27;192.168.1.161;0;2068 carisine satin alma siparisi için 3052 kodlu ürün eklendi;5;;Satin Alma
+130301;3.07.2023 11:44:00;27;192.168.1.161;0;Satinalma siparis ana tablo aktarimi;5;;Satin Alma
+130302;3.07.2023 11:44:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130303;3.07.2023 12:13:00;0;192.168.1.214;0;Sifre Giris Ekrani;5;;
+130304;3.07.2023 12:13:00;0;192.168.1.214;0;Sifre Giris Ekrani;5;;
+130305;3.07.2023 12:13:00;0;192.168.1.214;0;Sifre Denemesi;5;;Personel
+130306;3.07.2023 12:13:00;0;192.168.1.214;0;Sifre Dogrulaniyor;5;;Personel
+130307;3.07.2023 12:13:00;29;192.168.1.214;0;Basarili Giris;5;;Personel
+130308;3.07.2023 12:13:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130309;3.07.2023 12:13:00;29;192.168.1.214;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130310;3.07.2023 12:14:00;29;192.168.1.214;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130311;3.07.2023 12:14:00;29;192.168.1.214;0;Satinalma Temp Siparis Olusturma Ekrani;5;;Satin Alma
+130312;3.07.2023 12:16:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130313;3.07.2023 12:16:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130314;3.07.2023 12:16:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130315;3.07.2023 12:16:00;39;192.168.1.118;0;Reçeteler Listelendi;5;;Reçete
+130316;3.07.2023 12:16:00;39;192.168.1.118;0;Üretim Depo Girisi Bekleyen Ürünler Ekrani;5;;Üretim
+130317;3.07.2023 12:16:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130318;3.07.2023 12:17:00;29;192.168.1.214;4343;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE 140X150CM;5;;Reçete
+130319;3.07.2023 12:17:00;29;192.168.1.214;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130320;3.07.2023 12:18:00;29;192.168.1.214;4343;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130321;3.07.2023 12:18:00;39;192.168.1.118;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130322;3.07.2023 12:18:00;29;192.168.1.214;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130323;3.07.2023 12:19:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130324;3.07.2023 12:19:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130325;3.07.2023 12:19:00;39;192.168.1.118;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130326;3.07.2023 12:19:00;39;192.168.1.118;0;Stok Listesi Ekrani;5;;Stok
+130327;3.07.2023 12:19:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130328;3.07.2023 12:19:00;29;192.168.1.214;0;Yeni Reçete Ekleniyor: SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130329;3.07.2023 12:19:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130330;3.07.2023 12:19:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130331;3.07.2023 12:19:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130332;3.07.2023 12:20:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130333;3.07.2023 12:20:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130334;3.07.2023 12:20:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130335;3.07.2023 12:20:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130336;3.07.2023 12:21:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130337;3.07.2023 12:21:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130338;3.07.2023 12:21:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130339;3.07.2023 12:21:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130340;3.07.2023 12:21:00;29;192.168.1.214;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130341;3.07.2023 12:21:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  DÜZ ÖRTÜ 180X240 DUBLEX;5;;Reçete
+130342;3.07.2023 12:21:00;29;192.168.1.214;0;Yeni Reçete Ekleniyor:  DÜZ ÖRTÜ 180X240 DUBLEX;5;;Reçete
+130343;3.07.2023 12:21:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130344;3.07.2023 12:21:00;29;192.168.1.214;4346;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180X240 DUBLEX;5;;Reçete
+130345;3.07.2023 12:21:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130346;3.07.2023 12:21:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130347;3.07.2023 12:22:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130348;3.07.2023 12:22:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130349;3.07.2023 12:22:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130350;3.07.2023 12:22:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130351;3.07.2023 12:22:00;29;192.168.1.214;4346;Reçete Adimlari Listelendi :  DÜZ ÖRTÜ 180X240 DUBLEX;5;;Reçete
+130352;3.07.2023 12:22:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130353;3.07.2023 12:22:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130354;3.07.2023 12:22:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130355;3.07.2023 12:22:00;29;192.168.1.214;0;Reçete Adimi Güncelleniyor;5;;Reçete
+130356;3.07.2023 12:22:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130357;3.07.2023 12:22:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130358;3.07.2023 12:22:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130359;3.07.2023 12:24:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130360;3.07.2023 12:24:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130361;3.07.2023 12:24:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130362;3.07.2023 12:24:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130363;3.07.2023 12:24:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130364;3.07.2023 12:24:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130365;3.07.2023 12:24:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130366;3.07.2023 12:24:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130367;3.07.2023 12:24:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130368;3.07.2023 12:24:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130369;3.07.2023 12:46:00;0;10.8.0.6;0;Sifre Giris Ekrani;5;;
+130370;3.07.2023 12:46:00;0;10.8.0.6;0;Sifre Denemesi;5;;Personel
+130371;3.07.2023 12:46:00;0;10.8.0.6;0;Sifre Dogrulaniyor;5;;Personel
+130372;3.07.2023 12:46:00;2;10.8.0.6;0;Basarili Giris;5;;Personel
+130373;3.07.2023 12:47:00;2;10.8.0.6;0;Welcome Dashboard;5;;Dashboard
+130374;3.07.2023 12:47:00;2;10.8.0.6;0;Müsteri Siparisleri Listelendi;5;;Satis
+130375;3.07.2023 12:58:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130376;3.07.2023 12:58:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130377;3.07.2023 12:58:00;2;10.8.0.6;0;Stok Listesi Ekrani;5;;Stok
+130378;3.07.2023 12:58:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130379;3.07.2023 12:58:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130380;3.07.2023 12:58:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130381;3.07.2023 12:58:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130382;3.07.2023 12:58:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130383;3.07.2023 12:58:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130384;3.07.2023 12:59:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130385;3.07.2023 12:59:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130386;3.07.2023 12:59:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130387;3.07.2023 12:59:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130388;3.07.2023 12:59:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130389;3.07.2023 12:59:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130390;3.07.2023 13:00:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130391;3.07.2023 13:00:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130392;3.07.2023 13:00:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130393;3.07.2023 13:00:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130394;3.07.2023 13:00:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130395;3.07.2023 13:00:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130396;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130397;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130398;3.07.2023 13:01:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130399;3.07.2023 13:01:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130400;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130401;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130402;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130403;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130404;3.07.2023 13:01:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130405;3.07.2023 13:01:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130406;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130407;3.07.2023 13:01:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130408;3.07.2023 13:02:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130409;3.07.2023 13:02:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130410;3.07.2023 13:02:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130411;3.07.2023 13:02:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130412;3.07.2023 13:02:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130413;3.07.2023 13:02:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130414;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130415;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130416;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130417;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130418;3.07.2023 13:03:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130419;3.07.2023 13:03:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130420;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130421;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130422;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130423;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130424;3.07.2023 13:03:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130425;3.07.2023 13:03:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130426;3.07.2023 13:03:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130427;3.07.2023 13:04:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130428;3.07.2023 13:04:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130429;3.07.2023 13:04:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130430;3.07.2023 13:04:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130431;3.07.2023 13:04:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130432;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130433;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130434;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130435;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130436;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130437;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130438;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130439;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130440;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130441;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130442;3.07.2023 13:04:00;0;192.168.1.121;0;Sifre Giris Ekrani;5;;
+130443;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130444;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130445;3.07.2023 13:04:00;0;192.168.1.121;0;Sifre Denemesi;5;;Personel
+130446;3.07.2023 13:04:00;0;192.168.1.121;0;Sifre Dogrulaniyor;5;;Personel
+130447;3.07.2023 13:04:00;32;192.168.1.121;0;Basarili Giris;5;;Personel
+130448;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130449;3.07.2023 13:04:00;32;192.168.1.121;0;Welcome Dashboard;5;;Dashboard
+130450;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130451;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130452;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130453;3.07.2023 13:04:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130454;3.07.2023 13:04:00;29;192.168.1.214;4345;Reçete Adimlari Listelendi : SURGICAL ADHESIVE DRAPE  180X240CM  DUBLEX ;5;;Reçete
+130455;3.07.2023 13:05:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130456;3.07.2023 13:05:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130457;3.07.2023 13:05:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130458;3.07.2023 13:06:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130459;3.07.2023 13:06:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130460;3.07.2023 13:06:00;32;192.168.1.121;0;Teklif Listesi Ekrani;5;;Teklif
+130461;3.07.2023 13:06:00;32;192.168.1.121;0;Kayit Basarili.;5;;Teklif
+130462;3.07.2023 13:06:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130463;3.07.2023 13:06:00;32;192.168.1.121;0;Welcome Dashboard;5;;Dashboard
+130464;3.07.2023 13:06:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130465;3.07.2023 13:06:00;29;192.168.1.214;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+130466;3.07.2023 13:06:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130467;3.07.2023 13:06:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+130468;3.07.2023 13:06:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130469;3.07.2023 13:06:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130470;3.07.2023 13:06:00;32;192.168.1.121;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+130471;3.07.2023 13:06:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130472;3.07.2023 13:07:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130473;3.07.2023 13:07:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130474;3.07.2023 13:07:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130475;3.07.2023 13:07:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130476;3.07.2023 13:07:00;29;192.168.1.214;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+130477;3.07.2023 13:07:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130478;3.07.2023 13:07:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130479;3.07.2023 13:07:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130480;3.07.2023 13:07:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130481;3.07.2023 13:07:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130482;3.07.2023 13:08:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130483;3.07.2023 13:08:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130484;3.07.2023 13:08:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130485;3.07.2023 13:08:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130486;3.07.2023 13:08:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130487;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Güncelleme: M-00188;5;;Stok
+130488;3.07.2023 13:09:00;32;192.168.1.121;0;Ürüne ait RAF ÖMRÜ bilgisi giriniz.;5;;Stok
+130489;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130490;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Güncelleme: M-00188;5;;Stok
+130491;3.07.2023 13:09:00;32;192.168.1.121;0;Yazmis oldugunuz stok koduna ait baska bir ürün bulunuyor. Lütfen girdiginiz bilgileri kontrol edin.;5;;Stok
+130492;3.07.2023 13:09:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130493;3.07.2023 13:09:00;29;192.168.1.214;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+130494;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130495;3.07.2023 13:09:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130496;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130497;3.07.2023 13:09:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130498;3.07.2023 13:09:00;29;192.168.1.214;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+130499;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130500;3.07.2023 13:09:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130501;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Güncelleme: M-00190;5;;Stok
+130502;3.07.2023 13:09:00;32;192.168.1.121;0;Yazmis oldugunuz stok koduna ait baska bir ürün bulunuyor. Lütfen girdiginiz bilgileri kontrol edin.;5;;Stok
+130503;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Güncelleme: M-00191;5;;Stok
+130504;3.07.2023 13:09:00;32;192.168.1.121;0;Yazmis oldugunuz stok koduna ait baska bir ürün bulunuyor. Lütfen girdiginiz bilgileri kontrol edin.;5;;Stok
+130505;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130506;3.07.2023 13:09:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130507;3.07.2023 13:09:00;29;192.168.1.214;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+130508;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130509;3.07.2023 13:09:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130510;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Güncelleme: M-00192;5;;Stok
+130511;3.07.2023 13:09:00;32;192.168.1.121;0;Yazmis oldugunuz stok koduna ait baska bir ürün bulunuyor. Lütfen girdiginiz bilgileri kontrol edin.;5;;Stok
+130512;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130513;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Güncelleme: M-00193;5;;Stok
+130514;3.07.2023 13:09:00;32;192.168.1.121;0;Yazmis oldugunuz stok koduna ait baska bir ürün bulunuyor. Lütfen girdiginiz bilgileri kontrol edin.;5;;Stok
+130515;3.07.2023 13:09:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130516;3.07.2023 13:09:00;29;192.168.1.214;0;Ajandaya etkinlik kaydi yapildi;5;;Planlama
+130517;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130518;3.07.2023 13:09:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130519;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Güncelleme: M-00194;5;;Stok
+130520;3.07.2023 13:09:00;32;192.168.1.121;0;Yeni ürün eklendi:M-00194;5;;Stok
+130521;3.07.2023 13:09:00;32;192.168.1.121;0;Stok Listesi Ekrani;5;;Stok
+130522;3.07.2023 13:09:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130523;3.07.2023 13:09:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130524;3.07.2023 13:10:00;32;192.168.1.121;0;Teklif kalemi kayit ediliyor;5;;
+130525;3.07.2023 13:10:00;29;192.168.1.214;2138;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130526;3.07.2023 13:10:00;32;192.168.1.121;0;Teklif kalemi kayit ediliyor;5;;
+130527;3.07.2023 13:11:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  GÖZ ÖRTÜSÜ 150*150    TEK POSLU;5;;Reçete
+130528;3.07.2023 13:11:00;29;192.168.1.214;0;Reçete Güncelleniyor:  GÖZ ÖRTÜSÜ 150*150    TEK POSLU;5;;Reçete
+130529;3.07.2023 13:11:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130530;3.07.2023 13:11:00;29;192.168.1.214;2137;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130531;3.07.2023 13:11:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: ARTROSKOPI SETI;5;;Reçete
+130532;3.07.2023 13:11:00;29;192.168.1.214;0;Reçete Güncelleniyor: ARTROSKOPI SETI;5;;Reçete
+130533;3.07.2023 13:11:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130534;3.07.2023 13:11:00;29;192.168.1.214;2136;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130535;3.07.2023 13:11:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  PERKÜTAN ÖRTÜ SETI;5;;Reçete
+130536;3.07.2023 13:11:00;29;192.168.1.214;0;Reçete Güncelleniyor:  PERKÜTAN ÖRTÜ SETI;5;;Reçete
+130537;3.07.2023 13:11:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130538;3.07.2023 13:11:00;29;192.168.1.214;2133;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130539;3.07.2023 13:11:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama:  KALÇA ÖRTÜ SETI;5;;Reçete
+130540;3.07.2023 13:11:00;29;192.168.1.214;0;Reçete Güncelleniyor:  KALÇA ÖRTÜ SETI;5;;Reçete
+130541;3.07.2023 13:11:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130542;3.07.2023 13:11:00;29;192.168.1.214;2132;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130543;3.07.2023 13:11:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: SEZARYAN ÖRTÜ SETI ;5;;Reçete
+130544;3.07.2023 13:11:00;29;192.168.1.214;0;Reçete Güncelleniyor: SEZARYAN ÖRTÜ SETI ;5;;Reçete
+130545;3.07.2023 13:11:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130546;3.07.2023 13:11:00;29;192.168.1.214;2131;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130547;3.07.2023 13:12:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: TUR ÖRTÜ SETI;5;;Reçete
+130548;3.07.2023 13:12:00;29;192.168.1.214;0;Reçete Güncelleniyor: TUR ÖRTÜ SETI;5;;Reçete
+130549;3.07.2023 13:12:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130550;3.07.2023 13:14:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130551;3.07.2023 13:15:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130552;3.07.2023 13:15:00;28;192.168.1.128;13;Stok Güncelleme: HM-00029;5;;Stok
+130553;3.07.2023 13:15:00;28;192.168.1.128;13;Ürün bilgileri güncellendi:HM-00029;5;;Stok
+130554;3.07.2023 13:15:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130555;3.07.2023 13:15:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130556;3.07.2023 13:15:00;28;192.168.1.128;14;Stok Düzenleme Ekrani Girisi;5;;Stok
+130557;3.07.2023 13:15:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130558;3.07.2023 13:15:00;29;192.168.1.214;0;Planlama ajanda sayfasi girisi;5;;Planlama
+130559;3.07.2023 13:15:00;29;192.168.1.214;0;ajanda plan kaydi degistirildi ID:0;5;;Planlama
+130560;3.07.2023 13:15:00;28;192.168.1.128;14;Stok Güncelleme: HM-00030;5;;Stok
+130561;3.07.2023 13:15:00;28;192.168.1.128;14;Ürün bilgileri güncellendi:HM-00030;5;;Stok
+130562;3.07.2023 13:15:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130563;3.07.2023 13:22:00;31;192.168.1.228;0;Welcome Dashboard;5;;Dashboard
+130564;3.07.2023 13:22:00;31;192.168.1.228;0;Müsteri Siparisleri Listelendi;5;;Satis
+130565;3.07.2023 13:22:00;31;192.168.1.228;0;Teklif Listesi Ekrani;5;;Teklif
+130566;3.07.2023 13:22:00;31;192.168.1.228;0;Kayit Basarili.;5;;Teklif
+130567;3.07.2023 13:24:00;31;192.168.1.228;0;Teklif kalemi kayit ediliyor;5;;
+130568;3.07.2023 13:26:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+130569;3.07.2023 13:26:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130570;3.07.2023 13:32:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130571;3.07.2023 13:36:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130572;3.07.2023 13:36:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130573;3.07.2023 13:36:00;28;192.168.1.128;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+130574;3.07.2023 13:36:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130575;3.07.2023 13:36:00;31;192.168.1.228;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130576;3.07.2023 13:36:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130577;3.07.2023 13:36:00;31;192.168.1.228;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130578;3.07.2023 13:36:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130579;3.07.2023 13:36:00;31;192.168.1.228;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130580;3.07.2023 13:36:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130581;3.07.2023 13:37:00;31;192.168.1.228;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130582;3.07.2023 13:37:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130583;3.07.2023 13:37:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130584;3.07.2023 13:37:00;31;192.168.1.228;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130585;3.07.2023 13:37:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130586;3.07.2023 13:37:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130587;3.07.2023 13:38:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130588;3.07.2023 13:38:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130589;3.07.2023 13:38:00;28;192.168.1.128;0;Stok Güncelleme: YM-00232;5;;Stok
+130590;3.07.2023 13:38:00;28;192.168.1.128;0;Ürüne ait KDV ORANI bilgisini seçiniz;5;;Stok
+130591;3.07.2023 13:39:00;28;192.168.1.128;0;Stok Güncelleme: YM-00232;5;;Stok
+130592;3.07.2023 13:39:00;28;192.168.1.128;0;Ürüne ait RAF ÖMRÜ bilgisi giriniz.;5;;Stok
+130593;3.07.2023 13:39:00;28;192.168.1.128;0;Stok Güncelleme: YM-00232;5;;Stok
+130594;3.07.2023 13:39:00;28;192.168.1.128;0;Yeni ürün eklendi:YM-00232;5;;Stok
+130595;3.07.2023 13:39:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130596;3.07.2023 13:54:00;31;192.168.1.228;0;Welcome Dashboard;5;;Dashboard
+130597;3.07.2023 13:56:00;31;192.168.1.228;0;Teklif kalemi kayit ediliyor;5;;
+130598;3.07.2023 13:56:00;31;192.168.1.228;0;Silindi.;5;;
+130599;3.07.2023 13:56:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130600;3.07.2023 13:56:00;28;192.168.1.128;3060;Stok Düzenleme Ekrani Girisi;5;;Stok
+130601;3.07.2023 13:56:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130602;3.07.2023 13:56:00;31;192.168.1.228;4184;Stok Düzenleme Ekrani Girisi;5;;Stok
+130603;3.07.2023 13:56:00;28;192.168.1.128;3060;Stok Güncelleme: HM-00031;5;;Stok
+130604;3.07.2023 13:56:00;28;192.168.1.128;3060;Ürün bilgileri güncellendi:HM-00031;5;;Stok
+130605;3.07.2023 13:56:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130606;3.07.2023 13:56:00;31;192.168.1.228;4184;Stok Güncelleme: YM-00232;5;;Stok
+130607;3.07.2023 13:56:00;31;192.168.1.228;4184;Ürün bilgileri güncellendi:YM-00232;5;;Stok
+130608;3.07.2023 13:56:00;31;192.168.1.228;0;Stok Listesi Ekrani;5;;Stok
+130609;3.07.2023 13:57:00;28;192.168.1.128;15;Stok Düzenleme Ekrani Girisi;5;;Stok
+130610;3.07.2023 13:57:00;28;192.168.1.128;15;Stok Düzenleme Ekrani Girisi;5;;Stok
+130611;3.07.2023 13:57:00;28;192.168.1.128;15;Stok Güncelleme: HM-00032;5;;Stok
+130612;3.07.2023 13:57:00;28;192.168.1.128;15;Ürün bilgileri güncellendi:HM-00032;5;;Stok
+130613;3.07.2023 13:57:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130614;3.07.2023 13:57:00;28;192.168.1.128;14;Stok Düzenleme Ekrani Girisi;5;;Stok
+130615;3.07.2023 13:58:00;28;192.168.1.128;16;Stok Düzenleme Ekrani Girisi;5;;Stok
+130616;3.07.2023 13:58:00;28;192.168.1.128;16;Stok Güncelleme: HM-00034;5;;Stok
+130617;3.07.2023 13:58:00;28;192.168.1.128;16;Ürün bilgileri güncellendi:HM-00034;5;;Stok
+130618;3.07.2023 13:58:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130619;3.07.2023 13:58:00;31;192.168.1.228;0;Silindi.;5;;
+130620;3.07.2023 13:58:00;28;192.168.1.128;3045;Stok Düzenleme Ekrani Girisi;5;;Stok
+130621;3.07.2023 13:58:00;28;192.168.1.128;3045;Stok Güncelleme: HM-00035;5;;Stok
+130622;3.07.2023 13:58:00;28;192.168.1.128;3045;Ürün bilgileri güncellendi:HM-00035;5;;Stok
+130623;3.07.2023 13:58:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130624;3.07.2023 13:59:00;28;192.168.1.128;17;Stok Düzenleme Ekrani Girisi;5;;Stok
+130625;3.07.2023 13:59:00;28;192.168.1.128;17;Stok Güncelleme: HM-00036;5;;Stok
+130626;3.07.2023 13:59:00;28;192.168.1.128;17;Ürün bilgileri güncellendi:HM-00036;5;;Stok
+130627;3.07.2023 13:59:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130628;3.07.2023 13:59:00;31;192.168.1.228;0;Teklif kalemi kayit ediliyor;5;;
+130629;3.07.2023 13:59:00;28;192.168.1.128;3046;Stok Düzenleme Ekrani Girisi;5;;Stok
+130630;3.07.2023 13:59:00;31;192.168.1.228;0;Dosya silindi KID:31dosyaID:3180;5;;
+130631;3.07.2023 13:59:00;28;192.168.1.128;3046;Stok Güncelleme: HM-00037;5;;Stok
+130632;3.07.2023 13:59:00;28;192.168.1.128;3046;Ürün bilgileri güncellendi:HM-00037;5;;Stok
+130633;3.07.2023 13:59:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130634;3.07.2023 14:00:00;31;192.168.1.228;0;Teklif Listesi Ekrani;5;;Teklif
+130635;3.07.2023 14:00:00;31;192.168.1.228;0;Kayit Basarili.;5;;Teklif
+130636;3.07.2023 14:00:00;28;192.168.1.128;3025;Stok Düzenleme Ekrani Girisi;5;;Stok
+130637;3.07.2023 14:00:00;28;192.168.1.128;3025;Stok Güncelleme: HM-00038;5;;Stok
+130638;3.07.2023 14:00:00;28;192.168.1.128;3025;Ürün bilgileri güncellendi:HM-00038;5;;Stok
+130639;3.07.2023 14:00:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130640;3.07.2023 14:00:00;31;192.168.1.228;0;Teklif kalemi kayit ediliyor;5;;
+130641;3.07.2023 14:01:00;0;192.168.1.250;0;Sifre Giris Ekrani;5;;
+130642;3.07.2023 14:07:00;28;192.168.1.128;3034;Stok Düzenleme Ekrani Girisi;5;;Stok
+130643;3.07.2023 14:08:00;28;192.168.1.128;3034;Stok Güncelleme: HM-00039;5;;Stok
+130644;3.07.2023 14:08:00;28;192.168.1.128;3034;Ürün bilgileri güncellendi:HM-00039;5;;Stok
+130645;3.07.2023 14:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130646;3.07.2023 14:08:00;28;192.168.1.128;3028;Stok Düzenleme Ekrani Girisi;5;;Stok
+130647;3.07.2023 14:08:00;28;192.168.1.128;3028;Stok Güncelleme: HM-0004;5;;Stok
+130648;3.07.2023 14:08:00;28;192.168.1.128;3028;Ürün bilgileri güncellendi:HM-0004;5;;Stok
+130649;3.07.2023 14:08:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130650;3.07.2023 14:09:00;28;192.168.1.128;18;Stok Düzenleme Ekrani Girisi;5;;Stok
+130651;3.07.2023 15:13:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130652;3.07.2023 15:13:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130653;3.07.2023 15:14:00;29;192.168.1.214;0;Ariza Ekrani;5;;ITAriza
+130654;3.07.2023 15:14:00;29;192.168.1.214;0;Yetkisiz Giris;5;;Depo
+130655;3.07.2023 15:14:00;29;192.168.1.214;0;Yetkisiz Giris;5;;Depo
+130656;3.07.2023 15:14:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130657;3.07.2023 15:15:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130658;3.07.2023 15:17:00;29;192.168.1.214;4322;Reçete Adimlari Listelendi : OPU ÖRTÜ SETI;5;;Reçete
+130659;3.07.2023 15:19:00;29;192.168.1.214;4322;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130660;3.07.2023 15:19:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: OPU ÖRTÜ SETI;5;;Reçete
+130661;3.07.2023 15:19:00;29;192.168.1.214;0;Reçete Güncelleniyor: OPU ÖRTÜ SETI;5;;Reçete
+130662;3.07.2023 15:19:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130663;3.07.2023 15:20:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130664;3.07.2023 15:20:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130665;3.07.2023 15:20:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130666;3.07.2023 15:20:00;29;192.168.1.214;2150;Reçete Adimlari Listelendi : EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130667;3.07.2023 15:22:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130668;3.07.2023 15:22:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130669;3.07.2023 15:22:00;29;192.168.1.214;0;Reçete Adimi Güncelleniyor;5;;Reçete
+130670;3.07.2023 15:22:00;29;192.168.1.214;2150;Reçete Adimlari Listelendi : EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130671;3.07.2023 15:23:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130672;3.07.2023 15:23:00;29;192.168.1.214;2150;Reçete Adimlari Listelendi : EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130673;3.07.2023 15:23:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130674;3.07.2023 15:23:00;29;192.168.1.214;2150;Reçete Adimlari Listelendi : EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130675;3.07.2023 15:23:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130676;3.07.2023 15:23:00;29;192.168.1.214;2150;Reçete Adimlari Listelendi : EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130677;3.07.2023 15:23:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130678;3.07.2023 15:23:00;29;192.168.1.214;2150;Reçete Adimlari Listelendi : EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130679;3.07.2023 15:24:00;29;192.168.1.214;0;Reçete Klonlama Ekrani Girisi;5;;Reçete
+130680;3.07.2023 15:24:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130681;3.07.2023 15:24:00;29;192.168.1.214;0;Yeni Reçete Ekleniyor: EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130682;3.07.2023 15:24:00;29;192.168.1.214;0;Reçete Kopyalandi: EMBRIYO TRANSFER ÖRTÜ  SETI ( E.T SETI);5;;Reçete
+130683;3.07.2023 15:24:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130684;3.07.2023 15:25:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130685;3.07.2023 15:25:00;29;192.168.1.214;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130686;3.07.2023 15:28:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130687;3.07.2023 15:28:00;29;192.168.1.214;0;Yeni Reçete Ekleniyor: POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130688;3.07.2023 15:28:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130689;3.07.2023 15:28:00;29;192.168.1.214;0;Müsteri Siparisleri Listelendi;5;;Satis
+130690;3.07.2023 15:44:00;29;192.168.1.214;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130691;3.07.2023 15:44:00;29;192.168.1.214;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130692;3.07.2023 15:52:00;29;192.168.1.214;0;Yeni Reçete Ekleme, Güncelleme, Kopyalama: DÜZ ÖRTÜ 200X200 CM SMS;5;;Reçete
+130693;3.07.2023 15:52:00;29;192.168.1.214;0;Yeni Reçete Ekleniyor: DÜZ ÖRTÜ 200X200 CM SMS;5;;Reçete
+130694;3.07.2023 15:52:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130695;3.07.2023 15:52:00;29;192.168.1.214;4349;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 200X200 CM SMS;5;;Reçete
+130696;3.07.2023 15:52:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130697;3.07.2023 15:52:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130698;3.07.2023 15:53:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130699;3.07.2023 15:53:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130700;3.07.2023 15:53:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130701;3.07.2023 15:53:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130702;3.07.2023 15:53:00;29;192.168.1.214;4349;Reçete Adimlari Listelendi : DÜZ ÖRTÜ 200X200 CM SMS;5;;Reçete
+130703;3.07.2023 15:54:00;29;192.168.1.214;0;Stok Listesi Ekrani;5;;Stok
+130704;3.07.2023 15:55:00;29;192.168.1.214;0;Stok Listesi Ekrani;5;;Stok
+130705;3.07.2023 15:56:00;27;192.168.1.161;0;Welcome Dashboard;5;;Dashboard
+130706;3.07.2023 15:56:00;27;192.168.1.161;0;Mail Bilgileri Tanimlanmamis;5;;
+130707;3.07.2023 15:56:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130708;3.07.2023 15:56:00;29;192.168.1.214;0;Stok Listesi Ekrani;5;;Stok
+130709;3.07.2023 15:57:00;29;192.168.1.214;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+130710;3.07.2023 15:59:00;29;192.168.1.214;0;Stok Güncelleme: YM-00681;5;;Stok
+130711;3.07.2023 15:59:00;29;192.168.1.214;0;Ürüne ait RAF ÖMRÜ bilgisi giriniz.;5;;Stok
+130712;3.07.2023 15:59:00;28;192.168.1.128;18;Stok Güncelleme: HM-00040;5;;Stok
+130713;3.07.2023 15:59:00;28;192.168.1.128;18;Ürün bilgileri güncellendi:HM-00040;5;;Stok
+130714;3.07.2023 15:59:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130715;3.07.2023 15:59:00;29;192.168.1.214;0;Stok Güncelleme: YM-00681;5;;Stok
+130716;3.07.2023 15:59:00;29;192.168.1.214;0;Ürüne ait RAF ÖMRÜ bilgisi giriniz.;5;;Stok
+130717;3.07.2023 15:59:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+130718;3.07.2023 15:59:00;29;192.168.1.214;0;Stok Güncelleme: YM-00681;5;;Stok
+130719;3.07.2023 15:59:00;29;192.168.1.214;0;Yeni ürün eklendi:YM-00681;5;;Stok
+130720;3.07.2023 15:59:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130721;3.07.2023 15:59:00;29;192.168.1.214;0;Stok Güncelleme: YM-00681;5;;Stok
+130722;3.07.2023 15:59:00;29;192.168.1.214;0;Yeni ürün eklendi:YM-00681;5;;Stok
+130723;3.07.2023 15:59:00;29;192.168.1.214;0;Stok Güncelleme: YM-00681;5;;Stok
+130724;3.07.2023 15:59:00;29;192.168.1.214;0;Yeni ürün eklendi:YM-00681;5;;Stok
+130725;3.07.2023 16:00:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130726;3.07.2023 16:00:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130727;3.07.2023 16:00:00;29;192.168.1.214;0;Stok Listesi Ekrani;5;;Stok
+130728;3.07.2023 16:00:00;29;192.168.1.214;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+130729;3.07.2023 16:00:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130730;3.07.2023 16:01:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130731;3.07.2023 16:01:00;28;192.168.1.128;93;Stok Depo Miktarlari Detay;5;;stok
+130732;3.07.2023 16:01:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130733;3.07.2023 16:01:00;28;192.168.1.128;0;154 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130734;3.07.2023 16:01:00;29;192.168.1.214;0;Stok Güncelleme: YM-00682;5;;Stok
+130735;3.07.2023 16:01:00;29;192.168.1.214;0;Ürüne ait RAF ÖMRÜ bilgisi giriniz.;5;;Stok
+130736;3.07.2023 16:01:00;29;192.168.1.214;0;Stok Güncelleme: YM-00682;5;;Stok
+130737;3.07.2023 16:01:00;29;192.168.1.214;0;Yeni ürün eklendi:YM-00682;5;;Stok
+130738;3.07.2023 16:01:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130739;3.07.2023 16:02:00;28;192.168.1.128;0;239 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130740;3.07.2023 16:02:00;28;192.168.1.128;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+130741;3.07.2023 16:02:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130742;3.07.2023 16:02:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130743;3.07.2023 16:02:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130744;3.07.2023 16:02:00;29;192.168.1.214;0;Yeni Reçete Olusturma Ekrani Girisi;5;;Reçete
+130745;3.07.2023 16:02:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130746;3.07.2023 16:03:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+130747;3.07.2023 16:03:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130748;3.07.2023 16:03:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130749;3.07.2023 16:09:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:11111111111;5;;Mal Kabul
+130750;3.07.2023 16:09:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+130751;3.07.2023 16:09:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130752;3.07.2023 16:09:00;28;192.168.1.128;0;22 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130753;3.07.2023 16:15:00;28;192.168.1.128;0;Mal Kabul Belge Kayit:11111111111;5;;Mal Kabul
+130754;3.07.2023 16:15:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130755;3.07.2023 16:15:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130756;3.07.2023 16:15:00;28;192.168.1.128;0;Satinalma Talep ana tablo aktarimi;5;;Satin Alma
+130757;3.07.2023 16:15:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130758;3.07.2023 16:16:00;28;192.168.1.128;3021;Stok Düzenleme Ekrani Girisi;5;;Stok
+130759;3.07.2023 16:16:00;28;192.168.1.128;3021;Stok Güncelleme: HM-00041;5;;Stok
+130760;3.07.2023 16:16:00;28;192.168.1.128;3021;Ürün bilgileri güncellendi:HM-00041;5;;Stok
+130761;3.07.2023 16:16:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130762;3.07.2023 16:17:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130763;3.07.2023 16:18:00;28;192.168.1.128;3103;Stok Depo Miktarlari Detay;5;;stok
+130764;3.07.2023 16:18:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130765;3.07.2023 16:18:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130766;3.07.2023 16:18:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130767;3.07.2023 16:18:00;28;192.168.1.128;0;Mal Kabul Ekrani Giris;5;;Lojistik
+130768;3.07.2023 16:18:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130769;3.07.2023 16:18:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130770;3.07.2023 16:19:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130771;3.07.2023 16:19:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130772;3.07.2023 16:22:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130773;3.07.2023 16:22:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130774;3.07.2023 16:22:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130775;3.07.2023 16:22:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130776;3.07.2023 16:22:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130777;3.07.2023 16:22:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130778;3.07.2023 16:24:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130779;3.07.2023 16:24:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130780;3.07.2023 16:24:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130781;3.07.2023 16:24:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130782;3.07.2023 16:24:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130783;3.07.2023 16:24:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130784;3.07.2023 16:26:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130785;3.07.2023 16:27:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130786;3.07.2023 16:27:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130787;3.07.2023 16:27:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130788;3.07.2023 16:27:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130789;3.07.2023 16:28:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130790;3.07.2023 16:28:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130791;3.07.2023 16:29:00;32;192.168.1.121;0;Teklif Listesi Ekrani;5;;Teklif
+130792;3.07.2023 16:29:00;32;192.168.1.121;0;Kayit Basarili.;5;;Teklif
+130793;3.07.2023 16:29:00;32;192.168.1.121;0;Teklif kalemi kayit ediliyor;5;;
+130794;3.07.2023 16:30:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130795;3.07.2023 16:30:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130796;3.07.2023 16:30:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130797;3.07.2023 16:30:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130798;3.07.2023 16:30:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130799;3.07.2023 16:30:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130800;3.07.2023 16:30:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130801;3.07.2023 16:30:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130802;3.07.2023 16:31:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130803;3.07.2023 16:31:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130804;3.07.2023 16:31:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130805;3.07.2023 16:31:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130806;3.07.2023 16:31:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130807;3.07.2023 16:31:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130808;3.07.2023 16:31:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130809;3.07.2023 16:31:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130810;3.07.2023 16:31:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130811;3.07.2023 16:31:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130812;3.07.2023 16:32:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130813;3.07.2023 16:32:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130814;3.07.2023 16:32:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130815;3.07.2023 16:32:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130816;3.07.2023 16:32:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130817;3.07.2023 16:32:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130818;3.07.2023 16:32:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130819;3.07.2023 16:32:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130820;3.07.2023 16:32:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130821;3.07.2023 16:32:00;28;192.168.1.128;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130822;3.07.2023 16:33:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130823;3.07.2023 16:33:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130824;3.07.2023 16:33:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130825;3.07.2023 16:33:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130826;3.07.2023 16:33:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130827;3.07.2023 16:33:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130828;3.07.2023 16:33:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130829;3.07.2023 16:33:00;29;192.168.1.214;0;Reçete Adimi Güncelleniyor;5;;Reçete
+130830;3.07.2023 16:33:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130831;3.07.2023 16:33:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130832;3.07.2023 16:33:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130833;3.07.2023 16:34:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130834;3.07.2023 16:34:00;28;192.168.1.128;0;Seçtiginiz kriterlerde kayit bulunamadi;5;;Stok
+130835;3.07.2023 16:34:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130836;3.07.2023 16:34:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130837;3.07.2023 16:34:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130838;3.07.2023 16:34:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130839;3.07.2023 16:34:00;28;192.168.1.128;0;Stok Düzenleme Ekrani Girisi;5;;Stok
+130840;3.07.2023 16:34:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130841;3.07.2023 16:34:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130842;3.07.2023 16:35:00;28;192.168.1.128;0;Stok Güncelleme: HM-00138;5;;Stok
+130843;3.07.2023 16:35:00;28;192.168.1.128;0;Ürüne ait RAF ÖMRÜ bilgisi giriniz.;5;;Stok
+130844;3.07.2023 16:35:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130845;3.07.2023 16:35:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130846;3.07.2023 16:35:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130847;3.07.2023 16:35:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130848;3.07.2023 16:35:00;28;192.168.1.128;0;Stok Güncelleme: HM-00138;5;;Stok
+130849;3.07.2023 16:35:00;28;192.168.1.128;0;Yeni ürün eklendi:HM-00138;5;;Stok
+130850;3.07.2023 16:35:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130851;3.07.2023 16:35:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130852;3.07.2023 16:35:00;28;192.168.1.128;4185;Stok Düzenleme Ekrani Girisi;5;;Stok
+130853;3.07.2023 16:35:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130854;3.07.2023 16:36:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130855;3.07.2023 16:36:00;28;192.168.1.128;4181;Stok Düzenleme Ekrani Girisi;5;;Stok
+130856;3.07.2023 16:36:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130857;3.07.2023 16:36:00;28;192.168.1.128;4181;Stok Depo Miktarlari Detay;5;;stok
+130858;3.07.2023 16:36:00;28;192.168.1.128;4182;Stok Depo Miktarlari Detay;5;;stok
+130859;3.07.2023 16:36:00;28;192.168.1.128;4181;Stok Depo Miktarlari Detay;5;;stok
+130860;3.07.2023 16:36:00;28;192.168.1.128;4185;Stok Düzenleme Ekrani Girisi;5;;Stok
+130861;3.07.2023 16:36:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130862;3.07.2023 16:36:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130863;3.07.2023 16:36:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130864;3.07.2023 16:36:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130865;3.07.2023 16:36:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130866;3.07.2023 16:36:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130867;3.07.2023 16:37:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 57000;5;;
+130868;3.07.2023 16:37:00;28;192.168.1.128;0;Lütfen LOT içim Son Kullanma Tarihi bilgisini yaziniz.;5;;
+130869;3.07.2023 16:37:00;28;192.168.1.128;4185;Stok Düzenleme Ekrani Girisi;5;;Stok
+130870;3.07.2023 16:37:00;28;192.168.1.128;0;Stok Miktari Güncelleme. ISLEM: miktarGir MIKTAR: 57000;5;;
+130871;3.07.2023 16:37:00;28;192.168.1.128;4185;Stok Düzenleme Ekrani Girisi;5;;Stok
+130872;3.07.2023 16:37:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130873;3.07.2023 16:38:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130874;3.07.2023 16:38:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130875;3.07.2023 16:38:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130876;3.07.2023 16:38:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130877;3.07.2023 16:38:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130878;3.07.2023 16:38:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130879;3.07.2023 16:38:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130880;3.07.2023 16:39:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130881;3.07.2023 16:39:00;29;192.168.1.214;0;Yeni Reçete Adimi Ekleniyor;5;;Reçete
+130882;3.07.2023 16:39:00;29;192.168.1.214;0;Reçete adimi sirasi degistirildi;5;;Reçete
+130883;3.07.2023 16:39:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130884;3.07.2023 16:45:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130885;3.07.2023 16:45:00;29;192.168.1.214;0;Welcome Dashboard;5;;Dashboard
+130886;3.07.2023 16:45:00;29;192.168.1.214;0;Reçeteler Listelendi;5;;Reçete
+130887;3.07.2023 16:45:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130888;3.07.2023 16:45:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130889;3.07.2023 16:46:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130890;3.07.2023 16:46:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130891;3.07.2023 16:46:00;28;192.168.1.128;329;Stok Depo Miktarlari Detay;5;;stok
+130892;3.07.2023 16:46:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130893;3.07.2023 16:46:00;28;192.168.1.128;0;Satinalma Talep Olusturma Ekrani;5;;Satin Alma
+130894;3.07.2023 16:46:00;29;192.168.1.214;0;Yeni Reçete Ekleme veya Güncelleme: ;5;;Reçete
+130895;3.07.2023 16:46:00;29;192.168.1.214;0;Reçete Adimi Güncelleniyor;5;;Reçete
+130896;3.07.2023 16:46:00;29;192.168.1.214;4348;Reçete Adimlari Listelendi : POSITION NO.1 UNIVERSAL OPERATING SET;5;;Reçete
+130897;3.07.2023 16:46:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130898;3.07.2023 16:46:00;29;192.168.1.214;0;Yeni Reçete Adim Ekleme Ekrani Girisi;5;;Reçete
+130899;3.07.2023 16:46:00;28;192.168.1.128;0;329 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130900;3.07.2023 16:47:00;28;192.168.1.128;0;Stok Listesi Ekrani;5;;Stok
+130901;3.07.2023 16:47:00;28;192.168.1.128;0;216 ID ürün için satinalma talebi eklendi;5;;Satin Alma
+130902;3.07.2023 16:48:00;27;192.168.1.161;0;Mal Kabul Siparisleri Listelendi;5;;Satin Alma
+130903;3.07.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;
+130904;3.07.2023 16:50:00;28;192.168.1.128;0;Log dosyasi olusturuldu. Olusturulan dosya : ;5;;

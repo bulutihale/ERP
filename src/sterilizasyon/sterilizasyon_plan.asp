@@ -96,7 +96,7 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 					Response.Write "<div class=""row bold bg-light mt-2"">"
 						Response.Write "<div class=""col-2"">Ürün Miktar:</div>"
 						Response.Write "<div class=""col-2"">"
-							Response.Write "<input class=""form-control"" id=""inpMamulMiktar"" type=""text"" value=""" & mamulMiktar & """ oninput=""numara(this,true,false);bantHesap('inpMamulMiktar')"" autocomplete=""off"">"
+							Response.Write "<input class=""form-control"" id=""inpMamulMiktar"" type=""text"" value=""" & mamulMiktar & """ oninput=""ondalikKontrol($(this).val(),'inpMamulMiktar');numara(this,true,false);bantHesap('inpMamulMiktar');miktarKontrol(" & mamulMiktar & ",$(this).val(),'inpMamulMiktar')"" autocomplete=""off"">"
 						Response.Write "</div>"
 						Response.Write "<div class=""col-7 text-success bold"">" & mamulMiktar & "</div>"
 					Response.Write "</div>"
@@ -224,5 +224,14 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 		
 
 		}
+
+
+	function miktarKontrol(urunMiktar, inputMiktar, inputID){
+		if(urunMiktar < inputMiktar){
+			swal('Mevcut ürün miktarından fazla ürün girişi yapılamaz','','error');
+			$('#'+inputID).val(urunMiktar);
+			return false;
+		}
+	}
 		
 </script>
