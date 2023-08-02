@@ -63,7 +63,8 @@ yetkiKontrol = yetkibul(modulAd)
 	rs.close
 		
 			sorgu = "SELECT " 
-			sorgu = sorgu & " stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) as miktar,"
+			'sorgu = sorgu & " stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) as miktar,"
+			sorgu = sorgu & " t1.miktar,"
 			sorgu = sorgu & " t3.stokKodu, t1.stokID, t3.stokAd, t1.lot, t1.lotSKT, stok.FN_anaBirimADBul(t1.stokID, 'kAd') as kisaBirim,"
 			sorgu = sorgu & " portal.FN_sipariscariAdbul("&firmaID&", t1.ajandaID) as siparisCariAd, ISNULL(t1.ajandaID,0) as ajandaID, t2.id as mamulCikisDepoID"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
@@ -71,7 +72,7 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " WHERE t2.depoKategori = '"&depoKategori&"' AND t1.silindi = 0"
 			sorgu = sorgu & " AND stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) > 0"
-			sorgu = sorgu & " GROUP BY t1.lot, t1.lotSKT, t3.stokAd,t1.stokID, t3.stokKodu, t1.ajandaID, t2.id"
+			sorgu = sorgu & " GROUP BY t1.lot, t1.lotSKT, t3.stokAd,t1.stokID, t3.stokKodu, t1.ajandaID, t2.id, t1.miktar"
 			rs.open sorgu, sbsv5, 1, 3
 
 		Response.Write "<div class=""card-deck"">"

@@ -91,6 +91,7 @@ yetkiKontrol = yetkibul(modulAd)
 
 	function sterilizatorDIVyukle(stokHareketID, techizatID, sterilCevrimID) {
 		working('surecDIV2',20,20);
+		working('surecDIV1',20,20);
 		$('#surecDIV2').load("/sterilizasyon/cihaz_yukle.asp", {stokHareketID:stokHareketID, techizatID:techizatID, sterilCevrimID:sterilCevrimID}, function(){
 					$('#surecDIV1').load('/sterilizasyon/sterilizasyon_surec.asp #surecDIV1 > *')		
 				});		

@@ -108,6 +108,11 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 					Response.Write "<tbody class=""hoverGel pointer fontkucuk2"">"
+						if sterilCevrimID = 0 then
+							Response.Write "<td onclick=""surecUrunCikar(" & stokHareketID & ", " & techizatID & ")""><i class=""icon server-delete""></i></td>"
+						else
+							Response.Write "<td onclick=""swal('','ürün sterilizatöre yüklenmiş, hareket iptal edilemez!')""><i class=""icon server-delete""></i></td>"
+						end if
 						Response.Write "<td>" & lot & "</td>"
 						Response.Write "<td>" & stokKodu & " " & stokAd & "</td>"
 						Response.Write "<td>" & siparisCariAd & "</td>"
@@ -146,4 +151,30 @@ yetkiKontrol = yetkibul(modulAd)
 %>
 
 <script>
+	function surecUrunCikar(stokHareketID, techizatID){
+	//	alert(secilenReceteID)
+		swal({
+			title: 'Ürün, non-steril depoya geri alınsın mı?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(
+			function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			
+				working('surecDIV1',30,30)
+				$('#ajax').load('/stok/stok_hareket_iptal.asp', {stokHareketID:stokHareketID}, function(){
+					$('#surecDIV1').load('/sterilizasyon/sterilizasyon_surec.asp #surecDIV1 > *')		
+				});
+			}, //confirm buton yapılanlar
+			function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			} //cancel buton yapılanlar		
+		);//swal sonu
+		}
+
+
 </script>

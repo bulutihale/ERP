@@ -156,6 +156,7 @@ yetkiKontrol = yetkibul(modulAd)
 			// handle Confirm button click
 			// result is an optional parameter, needed for modals with input
 			
+				working('surecDIV1',30,30)
 				$('#ajax').load('/sterilizasyon/sterilizasyonUrunSil.asp', {stokHareketID:stokHareketID}, function(){
 					$('#surecDIV2').load('/sterilizasyon/cihaz_yukle.asp', {techizatID:techizatID});
 					$('#surecDIV1').load('/sterilizasyon/sterilizasyon_surec.asp #surecDIV1 > *')		

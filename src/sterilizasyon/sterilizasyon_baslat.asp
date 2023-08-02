@@ -149,6 +149,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("prodHareketID")		=	null
 				rs("ajandaID")			=	ajandaID
 			rs.update
+				refHareketID			=	rs("stokHareketID")
 		rs.close
 		'#### /kolilere konan mamülün beklediği depodan çıkışını yap
 
@@ -174,7 +175,8 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("lotSKT")			=	tarihsql(mamulLotSKT)
 				rs("ajandaID")			=	ajandaID
 				rs("koliIndexID")		=	koliIndexID
-				rs("koliSayi")		=	ihtiyacKoliSayi
+				rs("koliSayi")			=	ihtiyacKoliSayi
+				rs("refHareketID")		=	refHareketID
 			rs.update
 		rs.close
 '#### /NON steril ürünleri mamul depoya giriş yap
