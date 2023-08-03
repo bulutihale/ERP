@@ -78,7 +78,7 @@
 					rs1("stokID")			=	stokID
 					rs1("stokHareketTipi")	=	"S"
 					rs1("lot")				=	lot
-					rs1("lotSKT")			=	lotSKT
+					rs1("lotSKT")			=	tarihsql(lotSKT)
 					rs1("ajandaID")			=	ajandaID
 					rs1("siparisKalemID")	=	siparisKalemID
 				rs1.update

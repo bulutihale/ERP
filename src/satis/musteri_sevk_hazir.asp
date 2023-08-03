@@ -64,7 +64,9 @@ kid				=	kidbul()
 						Response.Write "<th class="" text-center bold"">İşlem</th>"
 					Response.Write "</thead>"
 				'for di = 1 to rs.recordcount
+				di = 0
 				do until rs.EOF
+				di				=	di + 1
 				stokAd			=	rs("stokAd")
 				miktar			=	rs("miktar")
 				kisaBirim		=	rs("kisaBirim")

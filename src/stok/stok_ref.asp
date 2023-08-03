@@ -92,4 +92,30 @@ yetkiKontrol = yetkibul(modulAd)
 
 %>
 
+<script>
+	function refIptal(stokRefID,cariID){
+	//	alert(secilenReceteID)
+		swal({
+			title: 'REF kaydı iptal edilsin mi?',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(
+			function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			
+				$('#ajax').load('/stok/stok_ref_iptal.asp', {stokRefID:stokRefID}, function(){
+					$('#divStokRef').load('/stok/stok_ref_liste.asp ',{cariID:cariID})		
+				});
+			}, //confirm buton yapılanlar
+			function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			} //cancel buton yapılanlar		
+		);//swal sonu
+		}
 
+
+</script>

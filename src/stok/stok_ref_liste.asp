@@ -24,6 +24,7 @@
 
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<table style=""width:100%"" class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark""><tr>"
+		Response.Write "<th scope=""col""></th>"
 		Response.Write "<th scope=""col"">Kod</th>"
 		Response.Write "<th scope=""col"">Ürün Adı</th>"
 		Response.Write "<th scope=""col"">Fiyat</th>"
@@ -36,7 +37,7 @@
 			sorgu = sorgu & " t1.id as stokRefID, t1.cariUrunRef, t1.cariUrunAd, t2.cariAd, t1.cariUrunFiyat, t1.paraBirim"
 			sorgu = sorgu & " FROM stok.stokRef t1"
 			sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.cariID = t2.cariID"
-			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
+			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.silindi = 0" 
 			if stokID <> "" then
 				sorgu = sorgu & " AND t1.stokID = " & stokID  & ""
 			end if
@@ -55,6 +56,7 @@
 					cariUrunFiyat	=	rs("cariUrunFiyat")
 					paraBirim		=	rs("paraBirim")
 					Response.Write "<tr>"
+					Response.Write "<td><span class=""pointer"" onclick=""refIptal(" & stokRefID & "," & cariID & ")""><i class=""icon delete""></i></span></td>"
 						Response.Write "<td>"
 							sayfaParametre = "cariID_"&cariID&"**stokID_"&stokID
 			call forminput("cariUrunRef",cariUrunRef,"","","borderless text-left input30","","","onChange=""hucreKaydetGenel('id',"&stokRefID&",'cariUrunRef','stok.stokRef',$(this).val(),'Müşteriye ait ref değiştirilsin mi?','refTablo','"&sayfaURL&"','"&sayfaParametre&"','')""")
@@ -112,10 +114,5 @@
 
 
 
-
-
-
-
-
-
 %>
+

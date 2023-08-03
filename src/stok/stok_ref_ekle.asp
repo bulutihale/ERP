@@ -54,9 +54,9 @@ if gorevID = "" then
     gorevID = 0
 end if
 
-            sorgu = "SELECT top 1 * FROM stok.stokRef WHERE firmaID = " & firmaID & " AND stokID= " & stokID & " AND cariID = " & cariID
+            sorgu = "SELECT top 1 * FROM stok.stokRef WHERE firmaID = " & firmaID & " AND stokID= " & stokID & " AND cariID = " & cariID & " AND cariUrunRef = '" & cariUrunRef & "'"
 			rs.open sorgu, sbsv5, 1, 3
-           ' if rs.recordcount = 0 then
+            if rs.recordcount = 0 then
                 rs.addnew
 				rs("firmaID")			=	firmaID
 				rs("kid")				=	kid
@@ -68,18 +68,20 @@ end if
                 rs("paraBirim")         =   paraBirim
 				call logla("Yeni Ref Ekleniyor: " & cariUrunRef & "")
 				tMesaj	=	"Kayıt Tamamlandı"
-			'else
-				'tMesaj	=	"Ref kaydı zaten var."
-				'call logla(tMesaj & ": " & cariUrunRef & "")
-           ' end if
+                call toastrCagir(tMesaj, "OK", "right", "success", "otomatik", "")
+			else
+				tMesaj	=	"Ref kaydı zaten var."
+				call logla(tMesaj & ": " & cariUrunRef & "")
+                call toastrCagir(tMesaj, "HATA", "right", "error", "otomatik", "")
+            end if
             rs.update
             rs.close
 
 end if
 
-call toastrCagir(tMesaj, "OK", "right", "success", "otomatik", "")
 
-call jsac("/stok/stok_ref.asp")
+'call jsac("/stok/stok_ref.asp")
+call jsrun("$('#divStokRef').load('/stok/stok_ref_liste.asp',{cariID:"&cariID&"})")
 modalkapat()
 
 
