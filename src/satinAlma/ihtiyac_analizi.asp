@@ -44,7 +44,7 @@
 					
 					
 					sorgu = sorgu & " SELECT DISTINCT t1.stokID, t2.stokkodu, t2.stokAd, t1.isTur,"
-					sorgu = sorgu & " [stok].[FN_stokSay] (" & firmaID & ", t1.stokID) as toplamStokMiktar"
+					sorgu = sorgu & " ISNULL([stok].[FN_stokSay] (" & firmaID & ", t1.stokID),0) as toplamStokMiktar"
 					sorgu = sorgu & " FROM portal.ajanda t1"
 					sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 					sorgu = sorgu & " WHERE t1.isTur = 'transfer' AND t1.tamamlandi = 0 AND t1.silindi = 0 AND t2.disaridanTemin = 1"
@@ -77,6 +77,7 @@
 								sorgu1 = "EXEC stok.SP_urunIhtiyacMiktarBul @stokID = "&stokID&", @firmaID= "&firmaID&", @isTur = '"&isTur&"'"
 								fn1.open sorgu1, sbsv5, 1, 3			
 									planMiktar	=	fn1(0)
+									if ISNULL(planMiktar) then planMiktar = 0
 								fn1.close
 
 								if cdbl(toplamStokMiktar) - cdbl(planMiktar) < 0  then

@@ -53,6 +53,7 @@ yetkiKontrol = yetkibul(modulAd)
 		sorgu = sorgu & " [stok].[FN_anaBirimADBul](t1.stokID,'kAd') as anaBirim"
 		sorgu = sorgu & " FROM portal.ajanda t1"
 		sorgu = sorgu & " WHERE t1.stokID = " & stokID & " AND t1.isTur = '" & listeTur & "' AND t1.silindi = 0 AND t1.tamamlandi = 0"
+		sorgu = sorgu & " ORDER BY DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) ASC"
 		rs.open sorgu,sbsv5,1,3
 			if rs.recordcount > 0 then
 			Response.Write "<div id=""ihtiyacTablo"">"

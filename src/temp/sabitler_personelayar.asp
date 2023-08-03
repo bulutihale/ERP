@@ -2,7 +2,7 @@
 kid = kidbul()
 if kid = 2 then
 	stokSifirGoster="on"
-	stokSilinmislerGoster="off"
+	stokSilinmislerGoster="on"
 	mamulGoster="on"
 	yariMamulGoster="on"
 	hammaddeGoster="on"
@@ -18,8 +18,10 @@ if kid = 27 then
 end if
 if kid = 28 then
 	stokSifirGoster="on"
-	stokSilinmislerGoster="off"
+	stokSilinmislerGoster="on"
 	mamulGoster="off"
+	hammaddeGoster="off"
+	yariMamulGoster="off"
 end if
 if kid = 29 then
 	yariMamulGoster="off"
@@ -37,9 +39,10 @@ end if
 if kid = 31 then
 	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
+	mamulGoster="on"
 end if
 if kid = 32 then
-	mamulGoster="off"
+	mamulGoster="on"
 	yariMamulGoster="off"
 	hammaddeGoster="off"
 	stokSifirGoster="on"
@@ -56,6 +59,11 @@ end if
 if kid = 35 then
 	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
+end if
+if kid = 36 then
+	stokSifirGoster="on"
+	stokSilinmislerGoster="off"
+	mamulGoster="on"
 end if
 if kid = 37 then
 	stokSifirGoster="on"
