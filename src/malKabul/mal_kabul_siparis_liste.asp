@@ -91,7 +91,7 @@
 							Response.Write  "<div class=""w-100 p-0""></div>"
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
-							Response.Write "<div class=""btn btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?siparisKalemID="&siparisKalemID&"&stokID="&stokID&"')"">detay</div>"
+							Response.Write "<div class=""btn btn-warning border rounded"" onclick=""modalajaxfit('/malKabul/mal_giris_detay.asp?siparisKalemID="&siparisKalemID&"&stokID="&stokID&"')"">detay</div>"
 						Response.Write "</td>"
 						Response.Write "<td class=""px-3"">" 
 							Response.Write "<div id=""inputDIV"&siparisKalemID&""" class=""row inputDIV"">"

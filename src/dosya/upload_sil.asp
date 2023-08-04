@@ -9,6 +9,8 @@ dosyavar = False
 	klasorYol	=	base64_decode_tr(klasorYol)
 	dosya		=	Request.QueryString("dosya")
 
+call logla(klasorYol & "/" & dosya & " dosya silindi")
+
 		Set fso = CreateObject("Scripting.FileSystemObject")
 			Set objFolder = FSO.GetFolder(Server.Mappath(klasorYol))
 				Set objFiles = objFolder.Files

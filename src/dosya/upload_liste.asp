@@ -16,26 +16,28 @@ dosyavar = False
 	gorevID64	=	gorevID
 	gorevID64	=	base64_encode_tr(gorevID64)
 	
-if gorev = "urunGorsel" then
-	if klasorkontrol("/temp/dosya/" & firmaID & "/urunGorsel") = True then
+	if klasorkontrol("/temp/dosya/" & firmaID & "/" & gorev) = True then
 	else
-		call klasorolustur("/temp/dosya/" & firmaID & "/urunGorsel")
+		call klasorolustur("/temp/dosya/" & firmaID & "/" & gorev)
 	end if
 
-	if klasorkontrol("/temp/dosya/" & firmaID & "/urunGorsel/" & gorevID64) = True then
+	if klasorkontrol("/temp/dosya/" & firmaID & "/" & gorev & "/" & gorevID64) = True then
 	else
-		call klasorolustur("/temp/dosya/" & firmaID & "/urunGorsel/" & gorevID64)
+		call klasorolustur("/temp/dosya/" & firmaID & "/" & gorev & "/" & gorevID64)
 	end if
 
-	klasorYol	=	"/temp/dosya/" & firmaID & "/urunGorsel/" & gorevID64
+	klasorYol	=	"/temp/dosya/" & firmaID & "/" & gorev & "/" & gorevID64
 	klasorYol64	=	klasorYol
 	klasorYol64	=	base64_encode_tr(klasorYol64)
 
+if gorev = "urunGorsel" then
 	sorgu = "SELECT t1.stokKodu, t1.stokAd FROM stok.stok t1 WHERE t1.stokID = " & gorevID
 	rs.open sorgu, sbsv5, 1, 3
 		baslik1		=	rs("stokKodu")
 		baslik2		=	rs("stokAd")
 	rs.close
+elseif gorev = "malKabulGorsel" then
+		baslik2		=	"Mal Kabul görsel."
 end if
 
 
@@ -49,7 +51,7 @@ Response.Write "<div class=""h2 text-center bold"">" & baslik1 & " - " & baslik2
 Response.Write "<div id=""div2"" class=""card-body"">"
 
 if yetkiKontrol > 4 then
-	Response.Write "<form action=""/dosya/upload_upload.asp?id=" & gorevID & "&klasorYol="&klasorYol64&""" method=""post"" enctype=""multipart/form-data"" class=""dropzone"" id=""mydropzone"" data-gorevid=""" & gorevID & """ data-gorev =""urunGorsel"" data-klasoryol=""" & klasorYol64 & """>"
+	Response.Write "<form action=""/dosya/upload_upload.asp?id=" & gorevID & "&klasorYol="&klasorYol64&""" method=""post"" enctype=""multipart/form-data"" class=""dropzone"" id=""mydropzone"" data-gorevid=""" & gorevID & """ data-gorev =""" & gorev & """ data-klasoryol=""" & klasorYol64 & """>"
 	Response.Write "</form>"
 else
 	Response.Write "<div>Dosya yükleme yetkisi yok</div>"

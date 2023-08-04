@@ -74,6 +74,7 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/satinAlma/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark text-center""><tr>"
+		Response.Write "<th scope=""col"">Görsel</th>"
 		Response.Write "<th scope=""col"">Giriş Tarih</th>"
 		Response.Write "<th scope=""col"">Belge No</th>"
 		Response.Write "<th scope=""col"">Cari Adı</th>"
@@ -127,6 +128,17 @@ yetkiKontrol = yetkibul(modulAd)
 					cariID64		 	=	cariID
 					cariID64			=	base64_encode_tr(cariID64)
 					Response.Write "<tr>"
+						Response.Write "<td class=""text-center"">"
+							Response.Write "<div>"
+								'# foto ekle
+									Response.Write "<a title=""Gelen ürün görseli yüklemek için tıklayınız"" class=""ml-2"""
+									Response.Write " onClick=""modalajax('/dosya/upload_liste.asp?gorevID=" & stokHareketID & "&gorev=malKabulGorsel')"">"
+									Response.Write "<i class=""icon images pointer"
+									Response.Write """></i>"
+									Response.Write "</a>"
+								'# foto ekle
+							Response.Write "</div>"
+						Response.Write "</td>"
 						Response.Write "<td>" & girisTarih & "</td>"
 						Response.Write "<td>" & belgeNo & "</td>"
 						Response.Write "<td>" & cariAd & "</td>"

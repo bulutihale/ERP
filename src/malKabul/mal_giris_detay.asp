@@ -25,6 +25,7 @@
 		Response.Write "<th scope=""col"">Belge No</th>"
 		Response.Write "<th scope=""col"">Belge Tarih</th>"
 		Response.Write "<th scope=""col"">Açıklama</th>"
+		Response.Write "<th scope=""col"">Görsel</th>"
 		Response.Write "</tr></thead><tbody>"
 		
             sorgu = "SELECT"
@@ -70,6 +71,17 @@
 						Response.Write "<td class=""text-center"">" & belgeNo & "</td>"
 						Response.Write "<td class=""text-center"">" & belgeTarih & "</td>"
 						Response.Write "<td class=""text-center pointer"" onclick=""$(this).html('" & aciklama & "')"">" & aciklamaL & "</td>"
+						Response.Write "<td class=""text-center"">"
+							Response.Write "<div>"
+								'# foto ekle
+									Response.Write "<a title=""Gelen ürün görseli yüklemek için tıklayınız"" class=""ml-2"""
+									Response.Write " onClick=""modalajax('/dosya/upload_liste.asp?gorevID=" & stokHareketID & "&gorev=malKabulGorsel')"">"
+									Response.Write "<i class=""icon images pointer"
+									Response.Write """></i>"
+									Response.Write "</a>"
+								'# foto ekle
+							Response.Write "</div>"
+						Response.Write "</td>"
 					Response.Write "</tr>"
 					Response.Flush()
 				rs.movenext
