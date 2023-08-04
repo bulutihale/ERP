@@ -88,6 +88,7 @@ yetkiKontrol = yetkibul(modulAd)
 			rs1.open sorgu, sbsv5,1,3
 			rs1.addnew
 				rs1("kid")			=	kid
+				rs1("firmaID")		=	firmaID
 				rs1("tempKayitKID")	=	tempKayitKID
 				rs1("siparisID")	=	siparisID
 				rs1("stokID")		=	stokID

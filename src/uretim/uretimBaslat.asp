@@ -170,13 +170,25 @@ yetkiKontrol = yetkibul(modulAd)
 				yeniGirisID	=	rs("stokHareketID")
 			rs.close
 
+
+'$$$$$$$$$$$$ AŞAĞIDAKİ SORGU KESİM SÜRECİ BİTTİĞİNDE süreçteki ürünü çıkarmıyordu
+			' sorgu = "SELECT t1.stokHareketID, t1.stokKodu, t1.stokID, t1.lot, t1.miktar as stokHareketMiktar, t1.miktarBirim, t1.miktarBirimID, t1.lotSKT,"
+			' sorgu = sorgu & " t1.depoID, t1.siparisKalemID, t1.stokHareketTipi, t1.ajandaID, t3.miktar as receteAdimMiktar"
+			' sorgu = sorgu & " FROM stok.stokHareket t1"
+			' sorgu = sorgu & " LEFT JOIN portal.ajanda t2 ON t1.ajandaID = t2.bagliAjandaID AND t1.stokID = t2.stokID AND t2.silindi = 0"
+			' sorgu = sorgu & " INNER JOIN recete.receteAdim t3 ON t2.receteAdimID = t3.receteAdimID"
+			' sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & " AND t1.ajandaID = " & ajandaID & ""
+			' sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND t1.silindi = 0 AND t1.stokHareketID <> " & yeniGirisID & " ORDER BY t1.stokHareketID DESC"	
+'$$$$$$$$$$$$ AŞAĞIDAKİ SORGU KESİM SÜRECİ BİTTİĞİNDE süreçteki ürünü çıkarmıyordu
+
 			sorgu = "SELECT t1.stokHareketID, t1.stokKodu, t1.stokID, t1.lot, t1.miktar as stokHareketMiktar, t1.miktarBirim, t1.miktarBirimID, t1.lotSKT,"
 			sorgu = sorgu & " t1.depoID, t1.siparisKalemID, t1.stokHareketTipi, t1.ajandaID, t3.miktar as receteAdimMiktar"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
-			sorgu = sorgu & " LEFT JOIN portal.ajanda t2 ON t1.ajandaID = t2.bagliAjandaID AND t1.stokID = t2.stokID AND t2.silindi = 0"
-			sorgu = sorgu & " INNER JOIN recete.receteAdim t3 ON t2.receteAdimID = t3.receteAdimID"
+			sorgu = sorgu & " INNER JOIN recete.receteAdim t3 ON t1.receteAdimID = t3.receteAdimID"
 			sorgu = sorgu & " WHERE t1.siparisKalemID = " & siparisKalemID & " AND t1.ajandaID = " & ajandaID & ""
 			sorgu = sorgu & " AND t1.stokHareketTuru = 'G' AND t1.silindi = 0 AND t1.stokHareketID <> " & yeniGirisID & " ORDER BY t1.stokHareketID DESC"	
+
+
 			rs.open sorgu,sbsv5,1,3
 
 
