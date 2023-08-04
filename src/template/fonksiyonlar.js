@@ -358,7 +358,8 @@ jQuery(document).ajaxSuccess(
 
 
 //bekleme animasyonu için ID gönder 
-	function working(id,deger1,deger2){$('#'+id).html('<img src="/arayuz/working2.gif" width="'+deger1+'" height="'+deger2+'"/>');}
+	function working(id,deger1,deger2){$('#'+id).html('<img src="/arayuz/working2.gif" style="width:'+deger1+';height:'+deger2+';"/>');}
+	//working('stokID','20px','20px');
 //bekleme animasyonu için ID gönder 
 
 function divackapa(id){if ($(id).hasClass('hide')){$(id).removeClass('hide');}else{$(id).addClass('hide');}}

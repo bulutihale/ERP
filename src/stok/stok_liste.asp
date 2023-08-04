@@ -142,34 +142,36 @@
                 Response.Write "<div class=""card"">"
                 Response.Write "<div class=""card-body"">"
 				Response.Write "<div class=""row"">"
-					sorgu = "SELECT" & vbcrlf
-					sorgu = sorgu & "stok.stok.stokID," & vbcrlf
-					sorgu = sorgu & "stok.FN_stokSay(" & firmaID & ", stok.stok.stokID) as stokMiktar," & vbcrlf
-					sorgu = sorgu & "stok.stok.stokKodu," & vbcrlf
-					sorgu = sorgu & "stok.stok.stokAd," & vbcrlf
-					sorgu = sorgu & "stok.stok.stokBarcode," & vbcrlf
-					sorgu = sorgu & "stok.stok.stokTuru," & vbcrlf
-					sorgu = sorgu & "stok.stok.manuelKayit," & vbcrlf
-					sorgu = sorgu & "stok.stok.silindi," & vbcrlf
-					sorgu = sorgu & "portal.birimler.uzunBirim as urunAnaBirimAd"  & vbcrlf
-					sorgu = sorgu & "FROM stok.stok" & vbcrlf
-					sorgu = sorgu & "LEFT JOIN portal.birimler ON stok.stok.anaBirimID = portal.birimler.birimID" & vbcrlf
-					sorgu = sorgu & "WHERE" & vbcrlf
-					sorgu = sorgu & "stok.stok.firmaID in (select Id from portal.firma where portal.firma.anaFirmaID = " & firmaID & " OR portal.firma.Id = " & firmaID & ")" & vbcrlf
-					if mDurum <> "0" OR ymDurum <> "0" OR hmDurum <> "0" then
-						sorgu = sorgu & " AND stok.stok.stokTuru IN (" & mDurum & "," & ymDurum & "," & hmDurum & ")" & vbcrlf
-					end if
-					if aramaad <> "" then
-						sorgu = sorgu & " and (stok.stok.stokAd like N'%" & aramaad & "%' OR stok.stok.stokBarcode like N'%" & aramaad & "%' OR stok.stok.stokKodu like N'%" & aramaad & "%')"
-					end if
-					if stokSifirGoster = "off" then
-						sorgu = sorgu & " AND stok.FN_stokSay(" & firmaID & ", stok.stok.stokID) > 0" & vbcrlf
-					end if
-					if stokSilinmislerGoster = "on" then
-						sorgu = sorgu & " AND stok.stok.silindi = 0" & vbcrlf
-					end if
-					sorgu = sorgu & "ORDER BY stok.stok.stokKodu ASC" & vbcrlf
+					sorgu = "SELECT" 
+					sorgu = sorgu & " t1.stokID,"
+					'sorgu = sorgu & " stok.FN_stokSay(" & firmaID & ", t1.stokID) as stokMiktar,"
+					sorgu = sorgu & " t1.stokKodu,"
+					sorgu = sorgu & " t1.stokAd,"
+					sorgu = sorgu & " t1.stokBarcode,"
+					sorgu = sorgu & " t1.stokTuru,"
+					sorgu = sorgu & " t1.manuelKayit,"
+					sorgu = sorgu & " t1.silindi,"
+					sorgu = sorgu & " portal.birimler.uzunBirim as urunAnaBirimAd"
+					sorgu = sorgu & " FROM stok.stok t1"
+					sorgu = sorgu & " LEFT JOIN portal.birimler ON t1.anaBirimID = portal.birimler.birimID"
+					sorgu = sorgu & " WHERE"
+					sorgu = sorgu & " t1.firmaID =" & firmaID
+						if mDurum <> "0" OR ymDurum <> "0" OR hmDurum <> "0" then
+							sorgu = sorgu & " AND t1.stokTuru IN (" & mDurum & "," & ymDurum & "," & hmDurum & ")"
+						end if
+						if aramaad <> "" then
+							sorgu = sorgu & " and (t1.stokAd like N'%" & aramaad & "%' OR t1.stokBarcode like N'%" & aramaad & "%' OR t1.stokKodu like N'%" & aramaad & "%')"
+						end if
+						if stokSifirGoster = "off" then
+							sorgu = sorgu & " AND stok.FN_stokSay(" & firmaID & ", t1.stokID) > 0"
+						end if
+						if stokSilinmislerGoster = "on" then
+							sorgu = sorgu & " AND t1.silindi = 0"
+						end if
+					sorgu = sorgu & " ORDER BY t1.stokKodu ASC"
 					rs.open sorgu, sbsv5, 1, 3
+
+
 					if rs.recordcount > 0 then
 						Response.Write "<div class=""table-responsive"">"
 						Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark"">"
@@ -197,15 +199,17 @@
 								urunAnaBirim	=	rs("urunAnaBirimAd")
 								stokTuru		=	rs("stokTuru")
 								stokBarcode		=	rs("stokBarcode")
-								stokMiktar		=	rs("stokMiktar")
+								'stokMiktar		=	rs("stokMiktar")
 								durum			=	rs("silindi")
 								manuelKayit		=	rs("manuelKayit")
 								Response.Write "<tr>"
 									Response.Write "<td>" & stokKodu & "</td>"
 									Response.Write "<td>" & stokAd & "</td>"
 									Response.Write "<td>" & stokBarcode & "</td>"
-									Response.Write "<td class=""text-right"">"
-										Response.Write "<div>" & formatnumber(stokMiktar,0) & " " & translate(urunAnaBirim,"","") & "</div>"
+									Response.Write "<td class=""text-right"" onmouseenter=""working('stokID_"& stokID &"','20px','20px');$('#stokID_"& stokID &"').load('/stok/urun_miktar_bul.asp?stokID="&stokID&"&birimGonder=3')"">"
+									'Response.Write "<td class=""text-right"" onmouseenter=""working('stokID_"& stokID &"','20px','20px');"">"
+										'Response.Write "<div>" & formatnumber(stokMiktar,0) & " " & translate(urunAnaBirim,"","") & "</div>"
+										Response.Write "<div id=""stokID_"& stokID &""" class=""text-right pointer""><i class=""icon arrow-refresh-small""></i></div>"
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">"
 									if stokTuru = "" then
