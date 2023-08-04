@@ -109,7 +109,7 @@
 											acikSiparis = 0
 										end if
 									rs1.close
-								Response.Write "<tr class=""pointer hoverGel"" onclick=""working('stokMiktarDIV',30,30); working('ihtiyacDIV',30,30);$('#stokMiktarDIV').load('/stok/stok_depo_miktar.asp?gorevID="&stokID64&"&listeTur="&isTur&"&ekran=satinalma');$('#ihtiyacDIV').load('/uretim/ihtiyac_analiz.asp?gorevID="&stokID64&"&listeTur="&isTur&"&ekran=satinalma')"">"
+								Response.Write "<tr class=""pointer hoverGel"" onclick=""working('stokMiktarDIV','30px','30px'); working('ihtiyacDIV','30px','30px');$('#stokMiktarDIV').load('/stok/stok_depo_miktar.asp?gorevID="&stokID64&"&listeTur="&isTur&"&ekran=satinalma');$('#ihtiyacDIV').load('/uretim/ihtiyac_analiz.asp?gorevID="&stokID64&"&listeTur="&isTur&"&ekran=satinalma')"">"
 									Response.Write "<td>" & stokKodu & "</td>"
 									Response.Write "<td>" & stokAd & "</td>"
 									Response.Write "<td class=""text-right"">" & toplamStokMiktar & "</td>"
