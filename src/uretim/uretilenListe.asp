@@ -151,7 +151,7 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "<td class=""text-center"">"
 						'Response.Write "<div class=""container-flex"">"
 							Response.Write "<div class=""row container"">"
-							Response.Write "<div class=""col-4"">"
+							Response.Write "<div class=""col-3"">"
 								Response.Write "<div title=""Depolara göre stok sayıları"" class=""pointer mr-2"""
 									Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
 									Response.Write "<i class=""icon report-magnify""></i>"
@@ -159,28 +159,35 @@ Response.Write "<div class=""card-body"">"
 							Response.Write "</div>"
 
 
-							Response.Write "<div class=""col-4"">"
-								'if listeTur = "transfer" then
-									Response.Write "<div title=""İhtiyaç analizi"" class=""pointer mr-2"""
-										Response.Write " onClick=""modalajaxfit('/uretim/ihtiyac_analiz.asp?gorevID=" & stokID64 & "&listeTur="&listeTur&"');"">"
-										Response.Write "<i class=""icon chart-line""></i>"
-									Response.Write "</div>"
-								'end if
+							Response.Write "<div class=""col-3"">"
+								Response.Write "<div title=""İhtiyaç analizi"" class=""pointer mr-2"""
+									Response.Write " onClick=""modalajaxfit('/uretim/ihtiyac_analiz.asp?gorevID=" & stokID64 & "&listeTur="&listeTur&"');"">"
+									Response.Write "<i class=""icon chart-line""></i>"
+								Response.Write "</div>"
 							Response.Write "</div>"
-
-							Response.Write "<div class=""col-4"">"
-									Response.Write "<div class=""badge badge-pill badge-success pointer mr-2"""
-										if listeTur = "transfer" then
-											if tamamlandi = 0 then
-												Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&listeTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
-											else
-												Response.Write " onclick=""swal('','Transfer işlemi yapılmış.')"""
-											end if
-										else
-											Response.Write " onclick=""window.location.href = '/uretim/uretim/"&listeTur&"++"&ajandaID64&"++"&manuelPlan&"'"" class=""badge badge-pill badge-success pointer mr-2"""
-										end if
-									Response.Write "><i class=""mdi mdi-arrow-right-bold""></i>"
+						if yetkiKontrol > 8 then
+							Response.Write "<div class=""col-3"">"
+								if isnull(baslangicZaman) AND tamamlandi = 0 then 
+									Response.Write "<div title=""İşlemi iptal et."" class=""pointer mr-2"""
+										Response.Write " onClick=""islemIptal('" & ajandaID & "','" & listeTur & "','tr_"&ajandaID&"');"">"
+										Response.Write "<i class=""icon date-delete""></i>"
 									Response.Write "</div>"
+								end if
+							Response.Write "</div>"
+						end if
+							Response.Write "<div class=""col-3"">"
+								Response.Write "<div class=""pointer mr-2"""
+									if listeTur = "transfer" then
+										if tamamlandi = 0 then
+											Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&listeTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+										else
+											Response.Write " onclick=""swal('','Transfer işlemi yapılmış.')"""
+										end if
+									else
+										Response.Write " onclick=""window.location.href = '/uretim/uretim/"&listeTur&"++"&ajandaID64&"++"&manuelPlan&"'"" class=""badge badge-pill badge-success pointer mr-2"""
+									end if
+								Response.Write "><i class=""icon drive-go""></i>"
+								Response.Write "</div>"
 							Response.Write "</div>"
 								'Response.Write "</div>"
 							Response.Write "</div>"
@@ -210,12 +217,29 @@ Response.Write "<div class=""card-body"">"
 %>
 
 
+<script>
+	function islemIptal(ajandaID,listeTur,updateDIV){
+		swal({
+			title: 'İşleme ait ajanda kaydı ve bağlı işlemler iptal edilsin mi? <br><br>Bu işlem geri alınamaz.',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			$.post('/uretim/ajanda_kayit_iptal.asp',{ajandaID:ajandaID}, function(){
+				$('#'+updateDIV).load('/uretim/uretilenListe.asp #'+updateDIV+' > *',{listeTur:listeTur})
+			})
+		}).catch(function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+		});
+		
+	}
 
 
-
-
-
-
+</script>
 
 
 

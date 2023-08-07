@@ -27,7 +27,6 @@
 		Response.Write "<div class=""card-header h5"">Üretimi Biten Mamul Hareketi</div>"
 	
 		Response.Write "<div class=""card-body"">"
-			'Response.Write "<form action=""/uretim/uretimBaslat.asp"" method=""post"" id=""filtreForm"">"
 			Response.Write "<input id=""siparisKalemID"" type=""hidden"" value=""" & siparisKalemID & """>"
 			Response.Write "<input id=""ajandaID"" type=""hidden"" value=""" & ajandaID & """>"
 			Response.Write "<input id=""islemDurum"" type=""hidden"" value=""" & islemDurum & """>"
@@ -48,12 +47,6 @@
 				Response.Write "</div>"
 			Response.Write "</div>"
 
-			' Response.Write "<div class=""row"">"
-			' 	Response.Write "<div class=""col-12 mt-2"">"
-			' 		Response.Write "<div class=""badge badge-secondary rounded-left"">Stok Seçimi</div>"
-			' 		call formselectv2("stokID","","","","formSelect2 stokID","","stokID","","data-holderyazi=""Stok adı, stok kodu"" data-jsondosya=""JSON_stoklar"" data-miniput=""3""")
-			' 	Response.Write "</div>"
-			' Response.Write "</div>"
 			
 			
 			Response.Write "<div class=""row"">"
@@ -61,7 +54,6 @@
 					Response.Write "<div class=""btn btn-primary"" onclick=""uretimMiktarBitir()"">ÜRETİM BİTİR</button>"
 				Response.Write "</div>"
 			Response.Write "</div>"
-			'Response.Write "</form>"
 		Response.Write "</div>"'card-body
 	Response.Write "</div>"'card
 	
