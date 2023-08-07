@@ -241,7 +241,7 @@
 									Response.Write "</div>"
 									Response.Write "<div>"
 										'# koli tanımla
-											Response.Write "<a title=""Ürün bazında koli tanımları"""
+											Response.Write "<a title=""Ürün bazında koli tanımları"" class=""ml-2"
 											Response.Write " onClick=""modalajax('/stok/urun_koli_esle.asp?gorevID=" & stokID64 & "')"">"
 											Response.Write "<i class=""icon package-add pointer"
 											Response.Write """></i>"

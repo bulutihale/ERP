@@ -774,6 +774,13 @@ function teklifPDFmail(id64,mailDurum,divID){
 				baslik		:	swal uyarısında görüntülenecek metin
 			*/
 
+			//eğer tarih kayıt ediliyorsa SQL formatına çevir
+				if (isValidDate(deger)) {
+					var dateParts = deger.split('.');
+					var deger = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+				};		
+			//eğer tarih kayıt ediliyorsa SQL formatına çevir
+
 			//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 				
 				var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
@@ -805,7 +812,7 @@ function teklifPDFmail(id64,mailDurum,divID){
 					handleResponse(status, xhr);
 				});
 			}
-			
+			4
 			if (updateDIV !== '') {
 			$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
 				handleResponse(status, xhr);
@@ -843,7 +850,29 @@ function teklifPDFmail(id64,mailDurum,divID){
 		}
 	}
 // hucreKaydet işlemleri		
-// hucreKaydet işlemleri		
+// hucreKaydet işlemleri	
+
+
+// girilen değer geçerli bir tarih mi
+		function isValidDate(dateString) {
+			var parts = dateString.split('.');
+			if (parts.length !== 3) return false;
+			
+			var day = parseInt(parts[0], 10);
+			var month = parseInt(parts[1], 10);
+			var year = parseInt(parts[2], 10);
+			
+			if (isNaN(day) || isNaN(month) || isNaN(year)) return false;
+			
+			var date = new Date(year, month - 1, day);
+			if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+				return false;
+			}
+			
+			return true;
+		}
+// girilen değer geçerli bir tarih mi
+
 
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın

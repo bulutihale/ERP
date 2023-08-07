@@ -368,6 +368,17 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "Teklif Önizleme</a>"
 		Response.Write "</li>"
 
+	if ihaleTipi = "proforma" then
+		Response.Write "<li class=""nav-item"" id=""commercialTAB"">"
+		if teklifSablon <> "" then
+			Response.Write "<a class=""nav-link fontkucuk"" href=""/teklifSablon/" & teklifSablon & "/" & id64 & "/commercial"">"
+		else
+			Response.Write "<a class=""nav-link fontkucuk"" data-toggle=""tab"" href=""#commercialDIV"" role=""tab"" aria-controls=""commercialDIV"">"
+		end if
+			Response.Write "Commercial Invoice</a>"
+		Response.Write "</li>"
+	end if
+
 	Response.Write "</ul>"
 '##### /SEKMELER
 '##### /SEKMELER

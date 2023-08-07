@@ -20,7 +20,9 @@
 	sayfa3				=	""
 	sayfa4				=	""
 	sayfa5				=	""
+	sayfa6				=	""
 	Session("sayfa5")	=	""
+	Session("sayfa6")	=	""
 	kid					=	kidbul()
 '###### ANA TANIMLAMALAR
 
@@ -139,6 +141,11 @@
 			sayfa5				=	gelenadresarr(5)
 			sayfa5				=	Replace(sayfa5,".html","")
 			Session("sayfa5")	=	sayfa5
+		end if
+		if ubound(gelenadresarr) >= 6 then
+			sayfa6				=	gelenadresarr(6)
+			sayfa6				=	Replace(sayfa6,".html","")
+			Session("sayfa6")	=	sayfa6
 		end if
 		set gelenadresarr = Nothing
 	end if

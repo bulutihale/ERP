@@ -9,6 +9,7 @@ response.codepage=65001
 			IDseri 					= 	split(hamID,"|")
 			id64					=	IDseri(0)
 			mailDeger				= 	IDseri(1)
+			ekDurum					=	IDseri(2)
 			id						=	id64
 			id						=	base64_decode_tr(id)
 			call sessiontest()
@@ -98,7 +99,7 @@ asp_dosya	=	asp_dosya & serverName
 asp_dosya	=	asp_dosya & ":"
 asp_dosya	=	asp_dosya & serverPort
 asp_dosya	=	asp_dosya & "/teklifSablon/" & teklifDosya & ".asp?ihaleid="
-asp_dosya	=	asp_dosya & id &"&pdf=yes"
+asp_dosya	=	asp_dosya & id &"&pdf=yes&ekDurum="&ekDurum&""
 
 
 Doc.ImportFromUrl asp_dosya,"LeftMargin=30, RightMargin=" & rightValue & ",TopMargin=10, BottomMargin=" & bottomValue & ",scale=1,landscape="&landscapeDeger&""

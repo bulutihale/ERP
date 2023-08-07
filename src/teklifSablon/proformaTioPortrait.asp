@@ -32,6 +32,7 @@ Response.Write "</style>"
 	pdf 					=	request.QueryString("pdf")
 	id						=	request.QueryString("ihaleid")
 	musteriID				=	request.QueryString("musteriID")
+	ekDurum					=	request.QueryString("ekDurum")
 	
 	if pdf = "" then
 			Response.Flush()
@@ -40,9 +41,9 @@ Response.Write "</style>"
 			urlBolum1				=	Session("sayfa3")
 			urlBolum2				=	Session("sayfa4")
 			id64					=	Session("sayfa5")
-			'id64					=	request.QueryString("ihaleid")
 			id						=	id64
 			id						=	base64_decode_tr(id)
+			ekDurum					=	Session("sayfa6")
 			call sessiontest()
 		
 	end if
@@ -53,7 +54,7 @@ sorgu = "SELECT i.ad as ihaleAD, i.grupIhale, i.ihaleTipi, f.uzunAd as firmamAdU
 &" f.kasePath, f.kaseWidth, f.kaseHeight, f.firmaTanimlayiciNo, f.vergiDairesi, f.vergiNo, i.teklifIban, i.teklifKDV, i.altTopGoster, i.satirKDV, ISNULL(i.cariID,0) as cariID,"_
 &" CASE WHEN i.cariID is null OR LEN(i.yeniCariAd ) > 0 THEN i.yeniCariAd ELSE CONCAT(c1.cariAd COLLATE DATABASE_DEFAULT,'<br>',c1.adres,'<br>',c1.ilce,' / ',c1.il) END as teklifCariAD,"_
 &" (SELECT COUNT(id) FROM teklifv2.ihale_urun WHERE ihaleID = i.id AND kalemNotTeklifEkle is not null) as kalemNotSutun, i.ekMaliyet1, i.ekMaliyet1Deger, i.ekMaliyet1Birim,"_
-&" i.catKodGoster, i.mustKodGoster, f.antetPath, i.teklifAciklamaDIV, i.ekMaliyet2, i.ekMaliyet2Deger, i.ekMaliyet2Birim"_
+&" i.catKodGoster, i.mustKodGoster, f.antetPath, i.teklifAciklamaDIV, i.ekMaliyet2, i.ekMaliyet2Deger, i.ekMaliyet2Birim, i.commercialDate, i.commercialNo"_
 &" FROM teklifv2.ihale i"_
 &" LEFT JOIN cari.cari c1 ON i.cariID = c1.cariID"_
 &" LEFT JOIN cari.cari c2 ON i.bayiKurumID = c2.cariID"_
@@ -106,6 +107,8 @@ rs.open sorgu,sbsv5,1,3
 	ekMaliyet2			=	rs("ekMaliyet2")
 	ekMaliyet2Deger		=	rs("ekMaliyet2Deger")
 	ekMaliyet2Birim		=	rs("ekMaliyet2Birim")
+	commercialDate		=	rs("commercialDate")
+	commercialNo		=	rs("commercialNo")
 	rs.close
 	
 	
@@ -144,11 +147,29 @@ Response.Write "<table border=""1"" style=""width:100%;font-family:calibri;borde
 		end if
 		Response.Write "</td>"
 		Response.Write "<td style=""text-align:center; font-size:30px; width:auto;border-width: 3px;"" class=""b-all"">"
+		if ekDurum = "commercial" then
+			Response.Write "<span style=""font-weight:bold;"">COMMERCIAL INVOICE</span>"
+		else
 			Response.Write "<span style=""font-weight:bold;"">PROFORMA INVOICE</span>"
+		end if
 		Response.Write "</td>"
 		Response.Write "<td class=""b-all"" style=""border-width: 3px;width:130px;padding-top:20px;padding-right:10px;text-align:right;vertical-align:middle;font-size:11px;"">"
+		if ekDurum = "commercial" then
+		Response.Write "<input type=""text"" value="""&commercialDate&""" style=""text-align:right;"" class=""tarih text-right"" onchange=""hucreKaydetGenel('id',"&id&",'commercialDate','teklifv2.ihale',$(this).val(),'','','','','')"">"
+			' Response.Write "<div style=""font-size:9pt""" 
+			' 	Response.Write " data-tabloid=""" & id & """"
+			' 	Response.Write " data-tablo=""teklifv2.ihale"""
+			' 	Response.Write " data-alan=""commercialDate"""
+			' Response.Write " contenteditable=""true"" class=""ajSaveBlur"">" & commercialDate & "</div>"
+			Response.Write "<div style=""font-size:9pt;margin-top:7px;""" 
+				Response.Write " data-tabloid=""" & id & """"
+				Response.Write " data-tablo=""teklifv2.ihale"""
+				Response.Write " data-alan=""commercialNo"""
+			Response.Write " contenteditable=""true"" class=""ajSaveBlur"">" & commercialNo & "</div>"
+		else	
 			Response.Write "<b>Date: </b>"&formatdatetime(tarih_ihale,2) & "<br>"
 			Response.Write "<b>Number: </b>" & dosyaNo
+		end if
 		Response.Write "</td>"
 	Response.Write "</tr>"
 Response.Write "</table>"
@@ -186,7 +207,7 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 			Response.Write "<div class=""row text-right"">"
 				if fiyatOnay = "OK" then
 					Response.Write "<div class=""col-4"">"
-						Response.Write "<a class=""text-left pointer"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
+						Response.Write "<a class=""text-left pointer"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok|"&ekDurum&"""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-4"">"
 						Response.Write "<div id=""teklifMailGonder"" class=""text-left pointer"" onclick=""teklifPDFmail('"&id64&"','mailVar',$(this).attr('id'))"">"
@@ -325,9 +346,9 @@ Response.Write "<tbody style=""" & tbstyle & """ class=""fontkucuk2"">"
 
 for i = 1 to rs.recordcount
 	ihaleUrunID			=	rs("ihaleUrunID")
-	cariUrunRef			=	rs("cariUrunRef")
+	cariUrunRef			=	rs("cariUrunRef")& " "
 	stokKodu			=	rs("stokKodu")
-	katalogKodu			=	rs("katalogKodu")&"&nbsp;"
+	katalogKodu			=	rs("katalogKodu")& " "
 	kdv					=	rs("kdv")
 	siraNo				=	rs("siraNo")
 	ubbKod				=	rs("ubbKod")
