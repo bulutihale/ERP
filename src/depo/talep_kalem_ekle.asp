@@ -129,9 +129,9 @@ rs.open sorgu,sbsv5,1,3
 					Response.Write miktar & " " & mikBirim
 				Response.Write "</td>"
 				Response.Write "<td class=""text-right"">"
-					Response.Write "<div title=""Depolara göre stok sayıları"" class=""bg-primary badge badge-pill badge-warning pointer mr-2"""
+					Response.Write "<div title=""Depolara göre stok sayıları"" class=""bg-primary pointer mr-2"""
 						Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-						Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+						Response.Write "<i class=""icon report-magnify""></i>"
 					Response.Write "</div>"
 					if tamamlandi = 0 then	
 						Response.Write "<div title=""Sil"" class=""bg-danger badge badge-pill badge-warning pointer mr-2"""

@@ -349,7 +349,11 @@ jQuery(document).ajaxSuccess(
 		//////////////////////// select2 
 
 
-
+		//modal kapandığında içini boşalt
+				$(document).on('hidden.bs.modal', function () {
+					$('.modal-body').html('');
+				});
+		//modal kapandığında içini boşalt
 
 
 

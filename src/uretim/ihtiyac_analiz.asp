@@ -35,9 +35,9 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""bold"">" & stokKodu & " - " & stokAd & "</div>"
 	if ekran <> "satinalma" then
 		Response.Write "<div class=""col-12 text-right"">"
-		Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer"""
+		Response.Write "<div title=""Depolara göre stok sayıları"" class=""pointer"""
 			Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-			Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+			Response.Write "<i class=""icon report-magnify""></i>"
 		Response.Write "</div>"
 		Response.Write "</div>"
 	end if

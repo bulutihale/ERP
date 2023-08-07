@@ -220,12 +220,12 @@
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">" & silindiArr(durum) &  "</td>"
 									Response.Write "<td class=""text-right"">"
-										if stokMiktar > 0 then
-											Response.Write "<div title=""" & translate("Depolara göre ürün sayıları","","") & """ class=""badge badge-pill badge-warning pointer mr-2"""
+										'if stokMiktar > 0 then
+											Response.Write "<div title=""" & translate("Depolara göre ürün sayıları","","") & """ class=""text-center pointer mr-2"""
 												Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-												Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+												Response.Write "<i class=""icon report-magnify""></i>"
 											Response.Write "</div>"
-										end if
+										'end if
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">"
 									Response.Write "<div class=""d-flex justify-content-between"">"

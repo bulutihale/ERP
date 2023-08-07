@@ -76,9 +76,9 @@ rs.open sorgu,sbsv5,1,3
 					Response.Write "<input type=""checkbox"" name=""lotChck"" class=""form-control"" value=""" & stokHareketID & """>"
 				Response.Write "</td>"
 				Response.Write "<td class=""text-right"">"
-						Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
+						Response.Write "<div title=""Depolara göre stok sayıları"" class=""pointer mr-2"""
 							Response.Write " onClick=""modalajaxfit('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-							Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+							Response.Write "<i class=""icon report-magnify""></i>"
 						Response.Write "</div>"
 						
 							Response.Write "<span title=""kayıt sil"""

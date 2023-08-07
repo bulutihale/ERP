@@ -152,18 +152,18 @@ Response.Write "<div class=""card-body"">"
 						'Response.Write "<div class=""container-flex"">"
 							Response.Write "<div class=""row container"">"
 							Response.Write "<div class=""col-4"">"
-								Response.Write "<div title=""Depolara göre stok sayıları"" class=""badge badge-pill badge-warning pointer mr-2"""
+								Response.Write "<div title=""Depolara göre stok sayıları"" class=""pointer mr-2"""
 									Response.Write " onClick=""modalajax('/stok/stok_depo_miktar.asp?gorevID=" & stokID64 & "');"">"
-									Response.Write "<i class=""mdi mdi-numeric-9-plus-box-multiple-outline""></i>"
+									Response.Write "<i class=""icon report-magnify""></i>"
 								Response.Write "</div>"
 							Response.Write "</div>"
 
 
 							Response.Write "<div class=""col-4"">"
 								'if listeTur = "transfer" then
-									Response.Write "<div title=""İhtiyaç analizi"" class=""badge badge-pill badge-secondary pointer mr-2"""
+									Response.Write "<div title=""İhtiyaç analizi"" class=""pointer mr-2"""
 										Response.Write " onClick=""modalajaxfit('/uretim/ihtiyac_analiz.asp?gorevID=" & stokID64 & "&listeTur="&listeTur&"');"">"
-										Response.Write "<i class=""fa fa-book""></i>"
+										Response.Write "<i class=""icon chart-line""></i>"
 									Response.Write "</div>"
 								'end if
 							Response.Write "</div>"
