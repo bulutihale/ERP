@@ -124,7 +124,7 @@
 								Response.Write "<div class=""col-lg-2"">"
 									Response.Write "<div class=""row h-100"">"
 										Response.Write "<div class=""col-lg-12 col-sm-12 h-100"">"
-											Response.Write "<button id=""btn_"&siparisKalemID&""" type=""submit"" onclick=""working('btn_"&siparisKalemID&"','30','30')"" class=""btn btn-warning rounded p-0 h-100"">KAYDET</button>"
+											Response.Write "<button id=""btn_"&siparisKalemID&""" type=""submit"" onclick=""working('btn_"&siparisKalemID&"','30px','30px')"" class=""btn btn-warning rounded p-0 h-100"">KAYDET</button>"
 										Response.Write "</div>"
 									Response.Write "</div>"
 								Response.Write "</div>"

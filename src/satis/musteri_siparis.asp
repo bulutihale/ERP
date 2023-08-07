@@ -232,7 +232,7 @@ Response.Write "</scr" & "ipt>"
 			
 			if(vergiNo.length < 10){return false};
 		
-			working('utsNoListe',30,30)
+			working('utsNoListe','30px','30px')
 
 			//vergi numarası sistemde kayıtlı mı kontrol et değil ise ÜTS sistemini sorgula
 				$.ajax({

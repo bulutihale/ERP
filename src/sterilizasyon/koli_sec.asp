@@ -102,7 +102,7 @@ yetkiKontrol = yetkibul(modulAd)
 <script>
 
 	function sterilizasyonDIVyukle(koliIndexID, lot, miktar, ajandaID, mamulCikisDepoID, lotSKT) {
-		working('sterilizasyonDIV2',20,20);
+		working('sterilizasyonDIV2','20px','20px');
 		$('#sterilizasyonDIV2').load("/sterilizasyon/sterilizasyon_plan.asp", {
 			koliIndexID:koliIndexID,
 			lot:lot,
