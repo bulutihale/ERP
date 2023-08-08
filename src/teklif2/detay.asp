@@ -558,6 +558,7 @@ Response.Write "<div class=""card-body row"">"
 			Response.Write "<div class=""col-lg-3"">"
 			if ihaleTipi = "proforma" then
 				stokSart = "english"
+				birim	=	"PCS"
 			else
 				stokSart = ""
 			end if

@@ -2,13 +2,15 @@
 kid = kidbul()
 if kid = 2 then
 	stokSifirGoster="on"
-	stokSilinmislerGoster="on"
+	stokSilinmislerGoster="off"
 	mamulGoster="on"
 	yariMamulGoster="on"
 	hammaddeGoster="on"
 end if
 if kid = 5 then
-	mamulGoster="off"
+	hammaddeGoster="on"
+	yariMamulGoster="on"
+	mamulGoster="on"
 	stokSifirGoster="on"
 	stokSilinmislerGoster="on"
 end if

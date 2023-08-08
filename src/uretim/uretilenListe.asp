@@ -40,7 +40,8 @@
 '###### FİLTRELER
 '###### FİLTRELER
 
-	yetkiKontrol	 = yetkibul(modulAd)
+	yetkiKontrol	= yetkibul(modulAd)
+	stokYetki		= yetkibul("stok")
 
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
@@ -165,7 +166,7 @@ Response.Write "<div class=""card-body"">"
 									Response.Write "<i class=""icon chart-line""></i>"
 								Response.Write "</div>"
 							Response.Write "</div>"
-						if yetkiKontrol > 8 then
+						if yetkiKontrol > 8 OR stokYetki > 8 then
 							Response.Write "<div class=""col-3"">"
 								if isnull(baslangicZaman) AND tamamlandi = 0 then 
 									Response.Write "<div title=""İşlemi iptal et."" class=""pointer mr-2"""

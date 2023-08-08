@@ -143,7 +143,7 @@ Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;borde
 		Response.Write "<div class=""row text-right"">"
 			if fiyatOnay = "OK" then
 				Response.Write "<div class=""col-10"">"
-					Response.Write "<a class=""text-left pointer"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
+					Response.Write "<a class=""text-left pointer"" href=""/teklif2/teklif_firma_pdf/"&id64&"|mailYok|""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur. Sadece kendi hesabına e-posta yolla.""></i></a>"
 				Response.Write "</div>"
 				Response.Write "<div class=""col-1"">"
 				'Response.Write "&nbsp;&nbsp;&nbsp;&nbsp;"

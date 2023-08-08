@@ -113,7 +113,7 @@ Response.Write "<div class=""card-body"">"
 							Response.Write "</div>"
 						Response.Write "</td>"
 						Response.Write "<td>" & stokKodu & "</td>"
-						Response.Write "<td>" & stokAd & "</td>"
+						Response.Write "<td>" & stokAd & "<br> <code>" & kalemNot & "</code> </td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & mikBirim & "</td>"
 						Response.Write "<td class=""text-right"">"
 						if fiyatYetki = 9 then
