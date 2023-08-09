@@ -27,7 +27,7 @@ yetkiKontrol = yetkibul(modulAd)
 				sorgu = "SELECT DISTINCT t1.lot,"
 				sorgu = sorgu & " stok.FN_stokSayDepoLot (" & firmaID & ", " & stokID & ", " & depoID & ", t1.lot) as lotMiktar"
 				sorgu = sorgu & " FROM stok.stokHareket t1"
-				sorgu = sorgu & " WHERE stok.FN_stokSayDepoLot (" & firmaID & ", " & stokID & ", " & depoID & ", t1.lot)  > 0"
+				sorgu = sorgu & " WHERE stok.FN_stokSayDepoLot (" & firmaID & ", " & stokID & ", " & depoID & ", t1.lot)  <> 0"
 				rs1.open sorgu, sbsv5, 1, 3
 
 			Response.Write "<table class=""table table-sm"">"

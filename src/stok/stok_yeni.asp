@@ -21,12 +21,13 @@
 
 	if gorevID <> "" then
 		sorgu = "SELECT" & vbcrlf
-		sorgu = sorgu & "stok.stok.*" & vbcrlf
-		sorgu = sorgu & ",portal.birimler.uzunBirim as seciliBirim" & vbcrlf
-		sorgu = sorgu & ",stok.FN_stokHareketKontrol(" & firmaID & ", " & gorevID & ") as hareketKontrol" & vbcrlf
-		sorgu = sorgu & " FROM stok.stok"
-		sorgu = sorgu & " LEFT JOIN portal.birimler ON stok.stok.anaBirimID = portal.birimler.birimID"
-		sorgu = sorgu & " WHERE stok.stok.firmaID = " & firmaID & " AND stok.stok.stokID = " & gorevID
+		sorgu = sorgu & "t1.*,"
+		sorgu = sorgu & " t2.uzunBirim as seciliBirim,"
+		sorgu = sorgu & " stok.FN_stokHareketKontrol(" & firmaID & ", " & gorevID & ") as hareketKontrol,"
+		sorgu = sorgu & " [stok].[FN_stokSay] (" & firmaID & ", t1.stokID) as stokMiktar"
+		sorgu = sorgu & " FROM stok.stok t1"
+		sorgu = sorgu & " LEFT JOIN portal.birimler t2 ON t1.anaBirimID = t2.birimID"
+		sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.stokID = " & gorevID
 		rs.open sorgu, sbsv5, 1, 3
 			stokKodu		=	rs("stokKodu")
 			katalogKodu		=	rs("katalogKodu")
@@ -52,6 +53,7 @@
 			fiyat4			=	rs("fiyat4")
 			disaridanTemin	=	rs("disaridanTemin")
 			agirlik			=	rs("agirlik")
+			stokMiktar		=	rs("stokMiktar")
 			defDeger		=	anaBirimID & "###" & uzunBirim
 		rs.close
 		inpKontrol	=	""
@@ -267,7 +269,6 @@ Response.Write "<div class=""tab-content"">"
                     Response.Write "<div class=""card-header text-white bg-primary"">" & translate("Depolama Bilgileri","","") & "</div>"
                     Response.Write "<div class=""card-body"">"
 						Response.Write "<div class=""row"">"
-							'######## WAREHOUSE
 								Response.Write "<div class=""col-sm-3 my-1"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Stok Türü","","") & "</span>"
 									call formselectv2("stokTuru",stokTuru,"","","stokTuru","","stokTuru",stokTurDegerler,"")
@@ -293,7 +294,11 @@ Response.Write "<div class=""tab-content"">"
 								if yetkiKontrol >= 8 then
 									 Response.Write "<div class=""col-sm-3 my-1"">"
 									 	Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Kullanım Dışı Ürün","","") & "</span>"
-									 	call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
+										if stokMiktar = 0 then
+									 		call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
+										else
+											Response.Write "<div class=""text-center pointer"" onclick=""swal('','Stoktaki Ürün Miktarı: " & stokMiktar & "<br><br> Stok miktarı \'0 (sıfır)\' olmayan ürün silinemez.')""><i class=""icon information""></i></div>"
+										end if
 									 Response.Write "</div>"
 									Response.Write "<div class=""col-sm-3 my-1"">"
 										Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("LOT Takibi Yapılsın","","") & "</span><span class=""text-danger pointer ml-2"" onclick=""swal('','" & translate("Koli, koli bandı gibi sarf malzemelerde LOT takibi yapılmayacağı için bu tip ürünlerde HAYIR seçilir.","","") & "')""><i class=""mdi mdi-information-outline""></i></span>"
@@ -315,7 +320,6 @@ Response.Write "<div class=""tab-content"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Mal Kabul Kalite Kontrol Deposundan Mı Yapılsın?","","") & "</span>"
 									call formselectv2("kkDepoGiris",kkDepoGiris,"","","kkDepoGiris","","kkDepoGiris",HEDegerler,"")
 								Response.Write "</div>"
-							'######## WAREHOUSE
 								Response.Write "<div class=""col-sm-3 my-1"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("KDV Oranı","","") & "</span>"
 									call forminput("kdv",kdv,"numara(this,false,false)",translate("KDV","",""),"","","kdv","")

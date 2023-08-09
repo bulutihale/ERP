@@ -153,9 +153,9 @@ Response.Write "<div class=""card-body"">"
 							Response.Write "</div>"
 							Response.Write "<div class=""col-6"">"
 								if yetkibul("Admin") = 9 then
-								Response.Write "<div title=""Reçete maliyeti hesaplama"" class=""badge badge-pill badge-success pointer mr-2"""
+								Response.Write "<div title=""Reçete maliyeti hesaplama"" class=""pointer mr-2"""
 									Response.Write " onClick=""modalajaxfit('/satis/recete_maliyet.asp?siparisKalemID="&siparisKalemID&"&cariID=" & cariID & "&stokID=" & stokID & "');"">"
-									Response.Write "<i class=""mdi mdi-calculator""></i>"
+									Response.Write "<i class=""icon money""></i>"
 								Response.Write "</div>"
 								end if
 							Response.Write "</div>"

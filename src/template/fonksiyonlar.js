@@ -350,9 +350,9 @@ jQuery(document).ajaxSuccess(
 
 
 		//modal kapandığında içini boşalt
-				$(document).on('hidden.bs.modal', function () {
-					$('.modal-body').html('');
-				});
+			//	$(document).on('hidden.bs.modal', function () {
+			//		$('.modal-body').html('');
+			//	});
 		//modal kapandığında içini boşalt
 
 
