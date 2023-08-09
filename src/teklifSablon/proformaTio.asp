@@ -418,7 +418,7 @@ for i = 1 to rs.recordcount
 
 '##### KALEM DETAYI
 '##### KALEM DETAYI
-	if kalemNotTeklifEkle > 0 then
+	if kalemNotSutun > 0 then
 			Response.Write "<td style=""text-align:left;font-size:7pt;width:" & w5 & """ class=""b-all"">" & kalemNot & "</td>"
 	end if
 '##### KALEM DETAYI

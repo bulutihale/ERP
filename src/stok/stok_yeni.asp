@@ -22,6 +22,7 @@
 	if gorevID <> "" then
 		sorgu = "SELECT" & vbcrlf
 		sorgu = sorgu & "t1.*,"
+		sorgu = sorgu & " (SELECT COUNT(receteID) FROM recete.recete WHERE silindi = 0 AND stokID = t1.stokID) as receteMevcut, "
 		sorgu = sorgu & " t2.uzunBirim as seciliBirim,"
 		sorgu = sorgu & " stok.FN_stokHareketKontrol(" & firmaID & ", " & gorevID & ") as hareketKontrol,"
 		sorgu = sorgu & " [stok].[FN_stokSay] (" & firmaID & ", t1.stokID) as stokMiktar"
@@ -54,6 +55,7 @@
 			disaridanTemin	=	rs("disaridanTemin")
 			agirlik			=	rs("agirlik")
 			stokMiktar		=	rs("stokMiktar")
+			receteMevcut	=	rs("receteMevcut")
 			defDeger		=	anaBirimID & "###" & uzunBirim
 		rs.close
 		inpKontrol	=	""
@@ -196,7 +198,7 @@ Response.Write "<div class=""tab-content"">"
 								Response.Write "<div class=""col-sm-6 my-1"">"
 									Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Ürünün İngilizce Adı","","") & "</span>"
 									call forminput("stokAdEn",stokAdEn,"","","",inpKontrol,"stokAdEn","")
-								Response.Write "</div>"
+								Response.Write "</div>" 
 							'######## NAME
 						Response.Write "</div>"
 					Response.Write "</div>"
@@ -294,10 +296,14 @@ Response.Write "<div class=""tab-content"">"
 								if yetkiKontrol >= 8 then
 									 Response.Write "<div class=""col-sm-3 my-1"">"
 									 	Response.Write "<span class=""badge badge-secondary rounded-left"">" & translate("Kullanım Dışı Ürün","","") & "</span>"
-										if stokMiktar = 0 then
+										if stokMiktar = 0 AND receteMevcut = 0 then
 									 		call formselectv2("silindi",silindi,"","","silindi","","silindi",HEDegerler,"")
-										else
+										end if
+										if stokMiktar <> 0 then
 											Response.Write "<div class=""text-center pointer"" onclick=""swal('','Stoktaki Ürün Miktarı: " & stokMiktar & "<br><br> Stok miktarı \'0 (sıfır)\' olmayan ürün silinemez.')""><i class=""icon information""></i></div>"
+										end if
+										if receteMevcut > 0 then
+											Response.Write "<div class=""text-center pointer"" onclick=""swal('','Ürün reçete içinde kullanımda.<br><br>Aktif olarak kullanılan bir reçete bileşeni olan ürün silinemez.')""><i class=""icon exclamation""></i></div>"
 										end if
 									 Response.Write "</div>"
 									Response.Write "<div class=""col-sm-3 my-1"">"

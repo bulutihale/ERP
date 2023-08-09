@@ -93,24 +93,19 @@ else
 	end if
 '######## maliyetin tamamını hesaplamak için "siparisMiktar" bulunmalı eğer sipariş yoksa miktar = 1 olsun
 
+	sorgu = "SELECT SUM(maliyetKalemDeger) as uretimKisi FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori1 = N'uretimKisi'"
+	rs1.open sorgu, sbsv5, 1, 3
+		if not rs1.EOF then
+			uretimKisi	=	rs1("uretimKisi")
+		end if
+	rs1.close
 
-	'######### üretim işlerinde çalışan kişi sayısını bul.
-		sorgu = "SELECT SUM(maliyetKalemDeger) as uretimKisi FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori1 = N'uretimKisi' AND silindi = 0"
-		rs1.open sorgu, sbsv5, 1, 3
-			if not rs1.EOF then
-				uretimKisi	=	rs1("uretimKisi")
-			end if
-		rs1.close
-	'######### üretim işlerinde çalışan kişi sayısını bul.
-
-	'######### diğer bölümlerde çalışan kişi sayısını bul.
-		sorgu = "SELECT SUM(maliyetKalemDeger) as digerKisi FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori1 = N'digerKisi' AND silindi = 0"
-		rs1.open sorgu, sbsv5, 1, 3
-			if not rs1.EOF then
-				digerKisi	=	rs1("digerKisi")
-			end if
-		rs1.close
-	'######### diğer bölümlerde çalışan kişi sayısını bul.
+	sorgu = "SELECT SUM(maliyetKalemDeger) as digerKisi FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori1 = N'digerKisi'"
+	rs1.open sorgu, sbsv5, 1, 3
+		if not rs1.EOF then
+			digerKisi	=	rs1("digerKisi")
+		end if
+	rs1.close
 
 	'############ iş gücü maliyetini db den çek "firmam --> genel tanımlar menüsünden tanımlanır
 		'### üretimde çalışanlar
@@ -118,7 +113,7 @@ else
 			sorgu = sorgu &" (maliyetKalemDeger / (225 * "&uretimKisi&")) as isgucuSaatlikPara,"
 			sorgu = sorgu &" (maliyetKalemDeger / (225*60 * "&uretimKisi&")) as isgucuDakikaPara,"
 			sorgu = sorgu &" (maliyetKalemDeger / (225*60*60 * "&uretimKisi&")) as isgucuSaniyePara"
-			sorgu = sorgu &" FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori2 = 'uretimMaas' AND silindi = 0"
+			sorgu = sorgu &" FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori2 = 'uretimMaas'"
 			rs1.open sorgu, sbsv5, 1, 3
 				if rs1.recordcount > 0 then
 					isgucuSaatlikPara	=	rs1("isgucuSaatlikPara")
@@ -132,42 +127,22 @@ else
 		'### üretimde çalışanlar
 
 		'### diğer çalışanlar
-			' sorgu = "SELECT maliyetKalemDeger, maliyetKalemPB,"
-			' sorgu = sorgu &" (maliyetKalemDeger / (225 * "&digerKisi&")) as isgucuSaatlikPara,"
-			' sorgu = sorgu &" (maliyetKalemDeger / (225*60 * "&digerKisi&")) as isgucuDakikaPara,"
-			' sorgu = sorgu &" (maliyetKalemDeger / (225*60*60 * "&digerKisi&")) as isgucuSaniyePara"
-			' sorgu = sorgu &" FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori2 = 'digerMaas' AND silindi = 0"
-			' rs1.open sorgu, sbsv5, 1, 3
-			' 	if rs1.recordcount > 0 then
-			' 		isgucuSaatlikPara2	=	rs1("isgucuSaatlikPara")
-			' 		isgucuDakikaPara2	=	rs1("isgucuDakikaPara")
-			' 		isgucuSaniyePara2	=	rs1("isgucuSaniyePara")
-			' 		maliyetKalemPB2		=	rs1("maliyetKalemPB")
-			' 		maliyetKalemDeger2	=	rs1("maliyetKalemDeger")
-			' 		saatSwal2 = formatnumber(maliyetKalemDeger2,2) & " / (225 * " & uretimKisi& ")"
-			' 	end if
-			' rs1.close
-		'### diğer çalışanlar
-
-		'### genel yönetim giderleri 
-			sorgu = "SELECT SUM(maliyetKalemDeger) as genYonDeger, maliyetKalemPB,"
-			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225)) as genYonSaatlikPara,"
-			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225*60)) as genYonDakikaPara,"
-			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225*60*60)) as genYonSaniyePara"
-			sorgu = sorgu &" FROM isletme.maliyetKalem"
-			sorgu = sorgu &" WHERE firmaID = " & firmaID & " AND kategori2 = 'genel' AND silindi = 0"
-			sorgu = sorgu &" GROUP BY maliyetKalemPB"
+			sorgu = "SELECT maliyetKalemDeger, maliyetKalemPB,"
+			sorgu = sorgu &" (maliyetKalemDeger / (225 * "&digerKisi&")) as isgucuSaatlikPara,"
+			sorgu = sorgu &" (maliyetKalemDeger / (225*60 * "&digerKisi&")) as isgucuDakikaPara,"
+			sorgu = sorgu &" (maliyetKalemDeger / (225*60*60 * "&digerKisi&")) as isgucuSaniyePara"
+			sorgu = sorgu &" FROM isletme.maliyetKalem WHERE firmaID = " & firmaID & " AND kategori2 = 'digerMaas'"
 			rs1.open sorgu, sbsv5, 1, 3
-				if NOT rs1.EOF then
-					isgucuSaatlikPara2	=	rs1("genYonSaatlikPara")
-					isgucuDakikaPara2	=	rs1("genYonDakikaPara")
-					isgucuSaniyePara2	=	rs1("genYonSaniyePara")
+				if rs1.recordcount > 0 then
+					isgucuSaatlikPara2	=	rs1("isgucuSaatlikPara")
+					isgucuDakikaPara2	=	rs1("isgucuDakikaPara")
+					isgucuSaniyePara2	=	rs1("isgucuSaniyePara")
 					maliyetKalemPB2		=	rs1("maliyetKalemPB")
-					maliyetKalemDeger2	=	rs1("genYonDeger")
+					maliyetKalemDeger2	=	rs1("maliyetKalemDeger")
 					saatSwal2 = formatnumber(maliyetKalemDeger2,2) & " / (225 * " & uretimKisi& ")"
 				end if
 			rs1.close
-		'### genel yönetim giderleri 
+		'### diğer çalışanlar
 	'############ iş gücü maliyetini db den çek "firmam --> genel tanımlar menüsünden tanımlanır
 
 
@@ -176,22 +151,18 @@ else
 
 	Response.Write "<div class=""container mt-3"">"
 		Response.Write "<div class=""row mb-3"">"
-			Response.Write "<div class=""col-2 text-danger text-right""><i class=""icon cog mr-2"" title=""üretim süreçlerinde çalışanlar""></i> <i class=""icon information pointer"" onclick=""swal('Üretimde Çalışan İşgücü Ortalama Saat Ücreti<br><br>" & saatSwal & "','(Toplam Üretim Çalışan Maaş) / (Aylık resmi çalışma saati) * (Üretimde çalışan kişi sayısı))')""></i>Saat Ücret:</div>"
+			Response.Write "<div class=""col-2 text-danger text-right""><i class=""icon cog"" title=""üretim süreçlerinde çalışanlar""></i> <i class=""icon information pointer"" onclick=""swal('Üretimde Çalışan İşgücü Ortalama Saat Ücreti<br><br>" & saatSwal & "','(Toplam Üretim Çalışan Maaş) / (Aylık resmi çalışma saati) * (Üretimde çalışan kişi sayısı))')""></i>Saat Ücret:</div>"
 			Response.Write "<div class=""col-2 bold text-left"">" & formatnumber(isgucuSaatlikPara,2) & " " & maliyetKalemPB & "</div>"
-			Response.Write "<div class=""col-2 text-info text-right"">Dakika:</div>"
+			Response.Write "<div class=""col-2 text-info text-right"">Dakika Ücret:</div>"
 			Response.Write "<div class=""col-2 bold text-left"">" & formatnumber(isgucuDakikaPara,2) & " " & maliyetKalemPB & "</div>"
-			Response.Write "<div class=""col-2 text-warning text-right"">Saniye:</div>"
+			Response.Write "<div class=""col-2 text-warning text-right"">Saniye Ücret:</div>"
 			Response.Write "<div class=""col-2 bold text-left"">" & isgucuSaniyePara & " " & maliyetKalemPB & "</div>"
 		Response.Write "</div>"
 	Response.Write "</div>"
 
 	Response.Write "<div class=""container mt-3"">"
 		Response.Write "<div class=""row mb-3"">"
-			Response.Write "<div class=""col-2 text-danger text-right"">"
-				Response.Write "<i class=""icon page-white-key mr-2 pointer"" title=""genel tanımlar"" onclick=""modalajax('/portal/genel_tanimlar.asp')""></i>"
-				Response.Write "<i class=""icon building mr-2"" title=""genel yönetim giderleri""></i>"
-				Response.Write "<i class=""icon information pointer"" onclick=""swal('Saat başına genel yönetim gideri <br><br>" & saatSwal2 & "','(Aylık Genel Yönetim Gideri) / (Aylık resmi çalışma saati))')""></i>Saatlik GYY:"
-			Response.Write "</div>"
+			Response.Write "<div class=""col-2 text-danger text-right""><i class=""icon building"" title=""üretim haricinde çalışanlar""></i> <i class=""icon information pointer"" onclick=""swal('Üretim Harici Çalışan İşgücü Ortalama Saat Ücreti<br><br>" & saatSwal2 & "','(Üretim Harici Çalışan Maaş) / (Aylık resmi çalışma saati) * (Üretim dışı çalışan kişi sayısı))')""></i>Saat Ücret:</div>"
 			Response.Write "<div class=""col-2 bold text-left"">" & formatnumber(isgucuSaatlikPara2,2) & " " & maliyetKalemPB2 & "</div>"
 			Response.Write "<div class=""col-2 text-info text-right"">Dakika Ücret:</div>"
 			Response.Write "<div class=""col-2 bold text-left"">" & formatnumber(isgucuDakikaPara2,2) & " " & maliyetKalemPB2 & "</div>"
@@ -318,7 +289,7 @@ else
 					Response.Write "<td class=""text-right"">"
 					if isnull(stokID) then
 						Response.Write "<div class=""container row justify-content-around""><div class=""col-6""><i class=""icon cog mr-3"" title=""üretimde çalışanlar""></i></div><div class=""col-6"">" & birimMaliyetPara & "</div></div>"
-						Response.Write "<div class=""container row justify-content-around""><div class=""col-6""><i class=""icon building mr-3"" title=""genel yöndetim giderleri""></i></div><div class=""col-6"">" & birimMaliyetPara2 & "</div></div>"
+						Response.Write "<div class=""container row justify-content-around""><div class=""col-6""><i class=""icon building mr-3"" title=""üretim haricinde çalışanlar""></i></div><div class=""col-6"">" & birimMaliyetPara2 & "</div></div>"
 					else
 						Response.Write "<div>" & birimMaliyetPara & "</div>"
 					end if
@@ -359,8 +330,8 @@ if receteID <> "" then
 			Response.Write "<div class=""col-6""></div>"
 uretimIsGucuYuzde	=	CDbl(toplamIsgucuUretim) / CDbl(toplamBirimMaliyetPara)
 toplamIsgucu2Yuzde	=	CDbl(toplamIsgucu2) / CDbl(toplamBirimMaliyetPara)
-			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Genel Yönetim Giderleri</span><br>" & formatnumber(toplamIsgucu2,2) & " TL<br> <span class=""fontkucuk"">" & formatpercent(toplamIsgucu2Yuzde,2) & "</span></div>"
-			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucuUretim,2) & " TL<br> <span class=""fontkucuk"">" & formatpercent(uretimIsGucuYuzde,2) & "</span></div>"
+			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim Harici İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucu2,2) & " TL <span class=""fontkucuk"">" & formatpercent(toplamIsgucu2Yuzde,2) & "</span></div>"
+			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucuUretim,2) & " TL <span class=""fontkucuk"">" & formatpercent(uretimIsGucuYuzde,2) & "</span></div>"
 			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Toplam Maliyet</span><br>" & formatnumber(toplamBirimMaliyetPara,2) & "</div>"
 		Response.Write "</div>"
 	Response.Write "</div>"
