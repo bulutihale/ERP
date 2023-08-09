@@ -21,7 +21,11 @@ yetkiKontrol = yetkibul(modulAd)
 
 
 	Response.Write "<div class=""text-right""><span data-dismiss=""modal"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
-				
+
+	sorgu = "SELECT stokKodu, stokAd FROM stok.stok WHERE stokID = " & anastokID
+	rs.open sorgu, sbsv5, 1, 3
+		Response.Write "<div class=""mb-3""><span class=""h4 mb-3 bold"">" & rs("stokKodu") & " - " & rs("stokAd") &"</span></div>"
+	rs.close
 		 '### cari için  özel reçete var mı? yoksa normal reçeteyi al
 		 		ekSorgu		=	" AND t1.cariID = " & cariID
 		 		ekSorgu2	=	" AND t1.cariID = 0"
