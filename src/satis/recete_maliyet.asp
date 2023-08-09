@@ -280,7 +280,10 @@ else
 		if isnull(stokID) then
 			if birimMaliyet = 0 then
 				birimMaliyetPara	=	isgucuBirimMaliyet * miktar * isGucuSayi
-				birimMaliyetPara2	=	isgucuBirimMaliyet2 * miktar * isGucuSayi
+				'birimMaliyetPara2	=	isgucuBirimMaliyet2 * miktar * isGucuSayi
+				'Genel Yönetim Giderleri hesaplanırken, geçen saniye GYY için sadece 1 birim geçeceğinden, işgücü sayısı ile çarpma
+					birimMaliyetPara2	=	isgucuBirimMaliyet2 * miktar
+				'Genel Yönetim Giderleri hesaplanırken, geçen saniye GYY için sadece 1 birim geçeceğinden, işgücü sayısı ile çarpma
 			else
 				birimMaliyetPara	=	birimMaliyet * miktar * isGucuSayi
 			end if
