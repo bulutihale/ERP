@@ -18,6 +18,8 @@
 	redDepoID		=   Request.Form("redDepoID")
 	
 	if isnull(redMiktar) OR redMiktar = "" then redmiktar = 0
+	if isnull(onayMiktar) OR onayMiktar = "" then onayMiktar = 0	
+
 	
 	modulAd 	=   "Kalite Kontrol"
 '###### ANA TANIMLAMALAR

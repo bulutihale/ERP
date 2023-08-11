@@ -5,6 +5,8 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid					=	kidbul()
+	cariID				=	Request.QueryString("cariID")
+	receteID			=	Request.QueryString("receteID")
     stokID				=	Request.QueryString("stokID")
 	stokID64			=	stokID
 	stokID64			=	base64_encode_tr(stokID64)
@@ -13,6 +15,7 @@
 	miktar				=	Request.QueryString("miktar")
 	ajandaID			=	Request.QueryString("ajandaID")
 	mamulCikisDepoID	=	Request.QueryString("mamulCikisDepoID")
+	opener				=	Request("opener")
 	modulAd 	=   "Sterilizasyon"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -75,7 +78,13 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<td>" & hamKoliAd & "</td>"
 				Response.Write "<td>" & bantAd & "</td>"
 				Response.Write "<td class=""text-center"">" & koliUrunMiktar & " " & miktarBirim & " </td>"
-				Response.Write "<td><div class=""btn btn-sm btn-info"" onclick=""sterilizasyonDIVyukle(" & koliIndexID & ",'" & lot & "'," & miktar & "," & ajandaID & ", " & mamulCikisDepoID & ", '" & lotSKT & "'); modalkapat();"">SEÇ</div></td>"
+				Response.Write "<td>"
+					if opener	=	"maliyet" then
+						Response.Write "<div class=""btn btn-sm btn-info"" onclick=""maliyetDIVyukle(" & koliIndexID & "," & stokID & "," & cariID & "," & receteID & ");"">SEÇ</div>"
+					else
+						Response.Write "<div class=""btn btn-sm btn-info"" onclick=""sterilizasyonDIVyukle(" & koliIndexID & ",'" & lot & "'," & miktar & "," & ajandaID & ", " & mamulCikisDepoID & ", '" & lotSKT & "'); modalkapat();"">SEÇ</div>"
+					end if
+				Response.Write "</td>"
 			Response.Write "</tr>"
 			Response.Flush()
 		rs.movenext
@@ -113,6 +122,14 @@ yetkiKontrol = yetkibul(modulAd)
 		});		
 	}
 
+	function maliyetDIVyukle(koliIndexID, stokID, cariID, receteID) {
+		$('#koliDIV').load("/satis/koli_sec_maliyet.asp", {
+			koliIndexID:koliIndexID,
+			stokID:stokID,
+			cariID:cariID,
+			receteID:receteID
+		});		
+	}
 </script>
 
 

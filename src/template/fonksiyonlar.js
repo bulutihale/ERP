@@ -878,6 +878,8 @@ function teklifPDFmail(id64,mailDurum,divID){
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 	function ondalikKontrol(deger,idDeger){
 
+		if(idDeger == ''){var idDeger = undefined};
+		
 		var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
 
 		if (decimalSeparator === '.' ) {
@@ -889,7 +891,12 @@ function teklifPDFmail(id64,mailDurum,divID){
 					deger = deger.toString().replace('.',',');
 				}
 		}
-		$('#'+idDeger).val(deger);
+		if(idDeger == undefined){
+			return deger;	
+		}else{
+			$('#'+idDeger).val(deger);
+		};
+		
 	};
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın

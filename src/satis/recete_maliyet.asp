@@ -5,7 +5,18 @@
 '###### ANA TANIMLAMALAR
     call sessiontest()
     kid				=	kidbul()
-    siparisKalemID	=	Request("siparisKalemID")
+
+    sarfFiyat			=	Request("sarfFiyat")
+	sarfMiktar			=	Request("sarfMiktar")
+	alanID				=	Request("alanID")
+	sarfToplamMaliyet	=	Request("sarfToplamMaliyet")
+
+	'if alanID = "urunKoliMaliyet" then
+		'urunBasinaKoliMaliyet	=	koliFiyat / koliUrunMiktar
+		'urunBasinaKoliMaliyet	=	ondalikKontrol(urunBasinaKoliMaliyet)
+	'end if
+    
+	siparisKalemID	=	Request("siparisKalemID")
 	anastokID		=	Request("stokID")
 	cariID			=	Request("cariID")
 	receteID		=	Request("receteID")
@@ -345,10 +356,9 @@ else
 					toplamBirimMaliyetPara	=	toplamBirimMaliyetPara + birimMaliyetPara + birimMaliyetPara2
 			rs.movenext
 			next
-			' Response.Write "<tr>"
-			' 	Response.Write "<td colspan=""7""></td>"
-			' 	Response.Write "<td>" & toplamBirimMaliyetPara & "</td>"
-			' Response.Write "</tr>"
+
+			'########## bir birim ürün başına koli maliyetini ekle
+				toplamBirimMaliyetPara	=	toplamBirimMaliyetPara + sarfToplamMaliyet
 
 		Response.Write "</tbody>"
 		Response.Write "</table>"
@@ -361,14 +371,34 @@ end if
 end if
 
 if receteID <> "" then
-	Response.Write "<div class=""footer fixed-bottom bg-dark"" style=""position: sticky;box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);"">"
+	Response.Write "<div class=""footer fixed-bottom bg-dark mt-4"" style=""position: sticky;"">"
 		Response.Write "<div class=""container row"">"
-			Response.Write "<div class=""col-6""></div>"
-uretimIsGucuYuzde	=	CDbl(toplamIsgucuUretim) / CDbl(toplamBirimMaliyetPara)
-toplamIsgucu2Yuzde	=	CDbl(toplamIsgucu2) / CDbl(toplamBirimMaliyetPara)
-			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Genel Yönetim Giderleri</span><br>" & formatnumber(toplamIsgucu2,2) & " TL<br> <span class=""fontkucuk"">" & formatpercent(toplamIsgucu2Yuzde,2) & "</span></div>"
-			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Üretim İşgücü Maliyet</span><br>" & formatnumber(toplamIsgucuUretim,2) & " TL<br> <span class=""fontkucuk"">" & formatpercent(uretimIsGucuYuzde,2) & "</span></div>"
-			Response.Write "<div class=""text-right bold text-light col-2"" style=""font-size:18pt;""><span class=""fontkucuk2"">Toplam Maliyet</span><br>" & formatnumber(toplamBirimMaliyetPara,2) & "</div>"
+			Response.Write "<div class=""col-6 bg-light"">"
+				Response.Write "<div class=""pointer bold"" onclick=""modalajax('/sterilizasyon/koli_sec.asp?stokID=" & anastokID & "&opener=maliyet&cariID="&cariID&"&receteID="&receteID&"')"">"
+					Response.Write "Koli Seçimi <i class=""icon asterisk-orange""></i>"
+				Response.Write "</div>"
+				Response.Write "<div id=""koliDIV"" class=""ml-3""></div>"
+			Response.Write "</div>"
+			uretimIsGucuYuzde	=	CDbl(toplamIsgucuUretim) / CDbl(toplamBirimMaliyetPara)
+			toplamIsgucu2Yuzde	=	CDbl(toplamIsgucu2) / CDbl(toplamBirimMaliyetPara)
+			Response.Write "<div id=""toplamlarDIV"" class=""col-6"">"
+				Response.Write "<div class=""row"">"
+					Response.Write "<div id=""toplamDIV_1"" class=""text-right bold text-light col-4"" style=""font-size:18pt;"">"
+						Response.Write "<span class=""fontkucuk2"">Genel Yönetim Giderleri</span>"
+						Response.Write "<br>" & formatnumber(toplamIsgucu2,2) & " TL<br>"
+						Response.Write "<span class=""fontkucuk"">" & formatpercent(toplamIsgucu2Yuzde,2) & "</span>"
+					Response.Write "</div>"
+					Response.Write "<div id=""toplamDIV_2"" class=""text-right bold text-light col-4"" style=""font-size:18pt;"">"
+						Response.Write "<span class=""fontkucuk2"">Üretim İşgücü Maliyet</span>"
+						Response.Write "<br>" & formatnumber(toplamIsgucuUretim,2) & " TL<br>"
+						Response.Write "<span class=""fontkucuk"">" & formatpercent(uretimIsGucuYuzde,2) & "</span>"
+					Response.Write "</div>"
+					Response.Write "<div id=""genelToplamDIV"" class=""text-right bold text-light col-4"" style=""font-size:18pt;"">"
+						Response.Write "<span class=""fontkucuk2"">Toplam Maliyet</span>"
+						Response.Write "<br>" & formatnumber(toplamBirimMaliyetPara,2)
+					Response.Write "</div>"
+				Response.Write "</div>"
+			Response.Write "</div>"
 		Response.Write "</div>"
 	Response.Write "</div>"
 Response.Write "</div>"
