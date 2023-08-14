@@ -873,6 +873,16 @@ function teklifPDFmail(id64,mailDurum,divID){
 		}
 // girilen değer geçerli bir tarih mi
 
+//server yerel ölçü ayarlarına göre "," veya "." kullanır, mevcut server hangisini kullanıyor tespit et
+	function jsOndalikFormat(sayiDeger){
+		var localeOptions = { style: 'decimal', useGrouping: true };
+		var sayiDeger = sayiDeger.toLocaleString('tr-TR', localeOptions);
+		return sayiDeger;
+	}
+//server yerel ölçü ayarlarına göre "," veya "." kullanır, mevcut server hangisini kullanıyor tespit et
+
+
+
 
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın

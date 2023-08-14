@@ -166,9 +166,9 @@ else
 
 		'### genel yönetim giderleri 
 			sorgu = "SELECT SUM(maliyetKalemDeger) as genYonDeger, maliyetKalemPB,"
-			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225)) as genYonSaatlikPara,"
-			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225*60)) as genYonDakikaPara,"
-			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225*60*60)) as genYonSaniyePara"
+			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225 * "&uretimKisi&")) as genYonSaatlikPara,"
+			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225*60 * "&uretimKisi&")) as genYonDakikaPara,"
+			sorgu = sorgu &" (SUM(maliyetKalemDeger) / (225*60*60 * "&uretimKisi&")) as genYonSaniyePara"
 			sorgu = sorgu &" FROM isletme.maliyetKalem"
 			sorgu = sorgu &" WHERE firmaID = " & firmaID & " AND kategori2 = 'genel' AND silindi = 0"
 			sorgu = sorgu &" GROUP BY maliyetKalemPB"

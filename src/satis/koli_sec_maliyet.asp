@@ -117,32 +117,36 @@ Response.Write "<hr class=""p-0 m-1"">"
 
 
 <script>
-	function fiyatGir(sarfFiyat,stokID,cariID,receteID,sarfMiktar,alanID){
-		
 
-		aSarfFiyat	=	ondalikKontrol(sarfFiyat,'')
-		aMiktar		=	ondalikKontrol(sarfMiktar,'')
+
+	function fiyatGir(sarfFiyat,stokID,cariID,receteID,sarfMiktar,alanID){
+
+		aSarfFiyat	=	sarfFiyat.toString().replace(',','.');
+		aMiktar		=	sarfMiktar.toString().replace(',','.');
 
 		if(alanID == 'urunKoliMaliyet'){
-			var birimSarfMaliyet	=	aSarfFiyat / aMiktar
+			var birimSarfMaliyet	=	parseFloat(aSarfFiyat) / parseFloat(aMiktar)
 		}else{
-			var birimSarfMaliyet	=	aSarfFiyat * aMiktar
+			var birimSarfMaliyet	=	parseFloat(aSarfFiyat) * parseFloat(aMiktar)
 		}
 
 		var birimSarfMaliyet = parseFloat(birimSarfMaliyet).toFixed(2);
-		birimSarfMaliyet = birimSarfMaliyet.toString().replace('.',',');
+		//birimSarfMaliyet = birimSarfMaliyet.toString().replace('.',',');
+
 		$('#'+alanID).text(birimSarfMaliyet);
 
 	// hesaplanan maliyetleri göndermek üzere al ve topla
-		var koliBirimMaliyet	=	ondalikKontrol($('#urunKoliMaliyet').text());
-		var bantBirimMaliyet	=	ondalikKontrol($('#urunBantMaliyet').text());
+		var koliBirimMaliyet	=	$('#urunKoliMaliyet').text();
+		var bantBirimMaliyet	=	$('#urunBantMaliyet').text();
+		var aKoliBirimMaliyet	=	koliBirimMaliyet.toString().replace(',','.');
+		var aBantBirimMaliyet	=	bantBirimMaliyet.toString().replace(',','.');
 
+		if(koliBirimMaliyet == ''){var aKoliBirimMaliyet = 0};
+		if(bantBirimMaliyet == ''){var aBantBirimMaliyet = 0};
 
-		if(koliBirimMaliyet == ''){var koliBirimMaliyet = 0};
-		if(bantBirimMaliyet == ''){var bantBirimMaliyet = 0};
+		var sarfToplamMaliyet	=	parseFloat(aKoliBirimMaliyet) + parseFloat(aBantBirimMaliyet)
 
-		var sarfToplamMaliyet	=	parseFloat(koliBirimMaliyet) + parseFloat(bantBirimMaliyet)
-		sarfToplamMaliyet	 	=	sarfToplamMaliyet.toString().replace('.',',');
+		var sarfToplamMaliyet	=	sarfToplamMaliyet.toString().replace('.',',');
 
 	// hesaplanan maliyetleri göndermek üzere al ve topla
 		
@@ -159,5 +163,6 @@ Response.Write "<hr class=""p-0 m-1"">"
 			//sarfMiktar:sarfMiktar,
 			sarfToplamMaliyet:sarfToplamMaliyet
 			});
+
 	}
 </script>

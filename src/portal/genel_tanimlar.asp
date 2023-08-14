@@ -44,7 +44,7 @@ yetkiKontrol = yetkibul(modulAd)
 					Response.Write "<div class=""row"">"
 					'	call forminput("maliyetKalemAd",ondalikKontrol(maliyetKalemDeger),"","","col-12 text-right bold","autocompleteOFF","maliyetKalemDeger","")
 						Response.Write "<div class=""col-6"">"
-							call forminput("maliyetKalemDeger",ondalikKontrol(maliyetKalemDeger),"","ücret","text-right bold","autocompleteOFF","maliyetKalemDeger","onchange=""hucreKaydetGenel('maliyetKalemID', '"&maliyetKalemID&"', 'maliyetKalemDeger', 'isletme.maliyetKalem', $(this).val(), '', 'maliyetDIV1', '', '', '')""")
+							call forminput("maliyetKalemDeger",ondalikKontrol(maliyetKalemDeger),"","ücret","text-right bold","autocompleteOFF","maliyetKalemDeger","onchange=""hucreKaydetGenel('maliyetKalemID', '"&maliyetKalemID&"', 'maliyetKalemDeger', 'isletme.maliyetKalem', $(this).val(), '', 'maliyetDIV1', '/portal/genel_tanimlar.asp', '', '')""")
 						Response.Write "</div>"
 						Response.Write "<div class=""col-2 text-left mt-2 bold"">TL</div>"
 						Response.Write "<div class=""col-4 text-left mt-2 bold fontkucuk"">" & kategori1 & "</div>"
@@ -67,14 +67,14 @@ yetkiKontrol = yetkibul(modulAd)
 					rs.open sorgu, sbsv5,3,3
 					if rs.recordcount > 0 then
 						for zi = 1 to rs.recordcount
-							maliyetKalemID		=	rs("maliyetKalemID")
+							maliyetKalemID		=	rs("maliyetKalemID") 
 							maliyetKalemAd		=	rs("maliyetKalemAd")
 							maliyetKalemDeger	=	rs("maliyetKalemDeger")
 							maliyetKalemPB		=	rs("maliyetKalemPB")
 						Response.Write "<span class=""badge badge-secondary rounded-left mt-2"">" & maliyetKalemAd & "</span>"
 					Response.Write "<div class=""row"">"
 						'call forminput("maliyetKalemAd",ondalikKontrol(maliyetKalemDeger),"","","col-12 text-right bold","autocompleteOFF","maliyetKalemDeger","")
-						call forminput("maliyetKalemAd",ondalikKontrol(maliyetKalemDeger),"","","text-right bold","autocompleteOFF","maliyetKalemDeger","onchange=""hucreKaydetGenel('maliyetKalemID', '"&maliyetKalemID&"', 'maliyetKalemDeger', 'isletme.maliyetKalem', $(this).val(), '', 'maliyetDIV1', '', '', '')""")
+						call forminput("maliyetKalemAd",ondalikKontrol(maliyetKalemDeger),"","","text-right bold","autocompleteOFF","maliyetKalemDeger","onchange=""hucreKaydetGenel('maliyetKalemID', '"&maliyetKalemID&"', 'maliyetKalemDeger', 'isletme.maliyetKalem', $(this).val(), '', 'maliyetDIV1', '/portal/genel_tanimlar.asp', '', '')""")
 					Response.Write "</div>"
 						rs.movenext
 						next
