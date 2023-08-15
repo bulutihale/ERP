@@ -32,7 +32,7 @@
 call logla("Mal Kabul Siparişleri Listelendi")
 
 Response.Write "<div class=""card rounded-top"">"
-Response.Write "<div class=""card-header h5"">Satınalma Sipariş Listesi</div>"
+Response.Write "<div class=""card-header h5"">Satınalma Talep Listesi</div>"
 
 Response.Write "<div class=""card-body"">"
 		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/satinAlmaTalep/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"

@@ -13,14 +13,17 @@
 		id						=	Request.Form("id")
 		tablo					=	Request.Form("tablo")
 		deger					=	Request.Form("deger")
+		veriTuru				=	Request.Form("veriTuru")
 		ntfDeger				=	Request.Form("ntfDeger")
 	'##### request
 	'##### request
 
-
-
-
-
+	'######## veri türü konusu db'ye kayıt yapılırken sayısal alanlardaki nokta ve virgül (decimal) alanlarda sıkıntı çıkmasını engellemek için
+		if veriTuru = "string" then
+		else
+			deger = deger * 1
+		end if
+	'######## veri türü konusu db'ye kayıt yapılırken sayısal alanlardaki nokta ve virgül (decimal) alanlarda sıkıntı çıkmasını engellemek için
 
 	
 

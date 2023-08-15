@@ -29,6 +29,7 @@
 yetkiKontrol = yetkibul(modulAd)
 
 
+			call formhidden("decimalSeparator",decimalSeparator,"","","","","decimalSeparator","")
 
 
 	Response.Write "<div class=""text-right""><span data-dismiss=""modal"" class=""mdi mdi-close-circle pointer d-none""></span></div>"
@@ -328,7 +329,7 @@ else
 					if not isnull(stokID) AND altReceteID = 0 then
 						Response.Write "<div onclick=""modalajax('/satis/urun_gelis_fiyat.asp?stokID="&stokID&"&receteAdimID="&receteAdimID&"');""><i class=""icon page-go pointer""></i></div>"
 						postDeger1	=	"stokID_"&anastokID&"**cariID_"&cariID&"**siparisKalemID_"&siparisKalemID&"**receteID_"&receteID&""
-						call forminput("birimMaliyet",birimMaliyet,"","","text-center bold text-success birimMaliyet","autocompleteOFF","birimMaliyet_"&receteAdimID&"","onchange=""hucreKaydetGenel('receteAdimID','"&receteAdimID&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','')""")
+						call forminput("birimMaliyet",birimMaliyet,"","","text-center bold text-success birimMaliyet","autocompleteOFF","birimMaliyet_"&receteAdimID&"","onchange=""hucreKaydetGenel('receteAdimID','"&receteAdimID&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','sayisal')""")
 					elseif altReceteID > 0 then
 						Response.Write "<div class=""text-center""><span class=""help"" onclick=""swal('','Ürüne ait alt reçete mevcut<br><br> alt reçete maliyetleri zaten ürün maliyetine ekleneceği için fiyat girişi yapılamaz.','warning')""><i class=""icon error-delete ""></i></span></div>"
 					end if
@@ -482,7 +483,7 @@ sub altReceteGetir(subAltReceteID,conn,subihtiyacMiktar,arkaRenk)
 							if not isnull(conn("stokID")) AND conn("altReceteID") = 0 then
 								Response.Write "<div onclick=""modalajax('/satis/urun_gelis_fiyat.asp?stokID="&conn("stokID")&"&receteAdimID="&conn("receteAdimID")&"');""><i class=""icon page-go pointer""></i></div>"
 								postDeger1	=	"stokID_"&anastokID&"**cariID_"&cariID&"**siparisKalemID_"&siparisKalemID&"**receteID_"&receteID&""
-								call forminput("subbirimMaliyet",subbirimMaliyet,"","","text-center bold text-success subbirimMaliyet","autocompleteOFF","birimMaliyet_"&conn("receteAdimID"),"onchange=""hucreKaydetGenel('receteAdimID','"&conn("receteAdimID")&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','')""")
+								call forminput("subbirimMaliyet",subbirimMaliyet,"","","text-center bold text-success subbirimMaliyet","autocompleteOFF","birimMaliyet_"&conn("receteAdimID"),"onchange=""hucreKaydetGenel('receteAdimID','"&conn("receteAdimID")&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','sayisal')""")
 							elseif conn("altReceteID") > 0 then
 								Response.Write "<div class=""text-center""><span class=""help"" onclick=""swal('','Ürüne ait alt reçete mevcut<br><br> alt reçete maliyetleri zaten ürün maliyetine ekleneceği için fiyat girişi yapılamaz.','warning')""><i class=""icon error-delete ""></i></span></div>"
 							end if

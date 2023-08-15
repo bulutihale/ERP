@@ -29,7 +29,8 @@
 
 call logla("Stok Miktarı Güncelleme. İŞLEM: " & islem & " MİKTAR: " & hareketmiktar & "")
 
-yetkiKontrol = yetkibul("Admin")
+'yetkiKontrol = yetkibul("Admin")
+yetkiKontrol = yetkibul("Stok")
 
 
 

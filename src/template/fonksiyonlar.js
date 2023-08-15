@@ -764,7 +764,7 @@ function teklifPDFmail(id64,mailDurum,divID){
 
 // hucreKaydet işlemleri		
 // hucreKaydet işlemleri		
-	function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, updateURL, postDeger, ek4) {
+	function hucreKaydetGenel(idAlan, id, alan, tablo, deger, baslik, updateDIV, updateURL, postDeger, veriTuru) {
 		
 			/* idAlan 		: 	tablonun id değerinin olduğu alanın adı
 				id			: 	id değeri
@@ -772,7 +772,10 @@ function teklifPDFmail(id64,mailDurum,divID){
 				updateURL	:	update edilecek DIV in bulunduğu URL
 				postDeger	:	güncellenecek DIV için post edilmesi gereken parametreler (örnek kullanım: "cariID_8**stokID_954")
 				baslik		:	swal uyarısında görüntülenecek metin
+				veriTuru	:	"sayisal","string" gelebilir, "deger" alanına ait veri turu "/portal/hucre_kaydet.asp" de kayıt alanınına düzgün kayıt edilmes için.
 			*/
+
+			decimalSeparator = $('#decimalSeparator').val(); //"temp/sabitler.asp" dosyasında tanımlanmış olan değeri getir.
 
 			//eğer tarih kayıt ediliyorsa SQL formatına çevir
 				if (isValidDate(deger)) {
@@ -782,19 +785,21 @@ function teklifPDFmail(id64,mailDurum,divID){
 			//eğer tarih kayıt ediliyorsa SQL formatına çevir
 
 			//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
-				
-				var decimalSeparator = (1.1).toLocaleString().substring(1, 2); // Ondalık ayırıcısını alır
-
-				if (decimalSeparator === '.' ) {
+			
+			if(veriTuru ==''){
+				var veriTuru = 'string'
+			}else{				
+				if (decimalSeparator == 'nokta' ) { //decimalSeparator-->sabitler.asp içinde tanımlı
 					if (deger.toString().includes(',')){
-							deger = deger.toString().replace(',','.');
-						}
+						deger = deger.toString().replace(',','.');
+					}
 				}else{
 					if (deger.toString().includes('.')){
-							deger = deger.toString().replace('.',',');
-						}
+						deger = deger.toString().replace('.',',');
+					}
 				}
-					
+			}
+		
 			//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 
 			var postDegerBol = postDeger.split("**");
@@ -808,16 +813,18 @@ function teklifPDFmail(id64,mailDurum,divID){
 	
 		function executeCodeBlock() {
 			if (deger !== '') {
-				$('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger}, function(response, status, xhr) {
-					handleResponse(status, xhr);
+
+				$('#ajax').load('/portal/hucre_kaydet.asp', {idAlan: idAlan, id: id, alan: alan, tablo: tablo, deger: deger, veriTuru:veriTuru}, function(response, status, xhr) {
+					if (updateDIV !== '') {
+						$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
+							handleResponse(status, xhr);
+						});
+					}else{
+						handleResponse(status, xhr);
+						}
 				});
 			}
-			4
-			if (updateDIV !== '') {
-			$('#' + updateDIV).load(updateURL + ' #' + updateDIV + ' > *', postData, function(response, status, xhr) {
-				handleResponse(status, xhr);
-			});
-			}
+
 		}
 
 		function handleResponse(status, xhr) {
