@@ -19,7 +19,7 @@
 	'##### request
 
 	'######## veri türü konusu db'ye kayıt yapılırken sayısal alanlardaki nokta ve virgül (decimal) alanlarda sıkıntı çıkmasını engellemek için
-		if veriTuru = "string" then
+		if veriTuru = "string" OR veriTuru = "" then
 		else
 			deger = deger * 1
 		end if

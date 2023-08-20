@@ -69,7 +69,8 @@ yetkiKontrol = yetkibul(modulAd)
 	rs.close
 	
 	
-	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim, t1.iuID  FROM teklif.siparisKalemTemp t1 WHERE t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & ""
+	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim, t1.iuID"
+	sorgu = sorgu & " FROM teklif.siparisKalemTemp t1 WHERE t1.siparisTur = 'S' AND t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & ""
 	rs.open sorgu, sbsv5,1,3
 
 		for zi = 1 to rs.recordcount
