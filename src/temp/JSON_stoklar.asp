@@ -44,7 +44,7 @@
 	'##### /STOKLARI ÇEK select2 için JSON verisi oluştur
 	'##### /STOKLARI ÇEK select2 için JSON verisi oluştur
 	
-            sorgu = "SELECT"
+            sorgu = "SELECT DISTINCT"
 			sorgu = sorgu & " t1.stokID,"
 			sorgu = sorgu & " t1.stokKodu,"
 			sorgu = sorgu & " t1.stokAd, t1.stokAdEn, t1.stokBarcode" 
@@ -80,8 +80,8 @@
 					response.Write "{"
 					response.Write """items"": "
 					response.Write "["
-				for i = 1 to rs.recordcount
-				
+
+				do until rs.EOF
 		'####### chr13 ve chr10 temizle json patlamasın
 					stokBarcode		=	rs("stokBarcode")
 					stokAd			=	rs("stokAd")
@@ -119,13 +119,13 @@
 					Response.Write """"
 					'Response.Write ","
 					'Response.Write """disabled"":true"
-					if i < rs.recordcount then
+				rs.movenext
+					if not rs.EOF then
 						Response.Write "},"
 					else
 						Response.Write "}"
 					end if	
-				rs.movenext
-				next
+				loop
 					Response.Write "]"
 					Response.Write "}"
 				rs.close

@@ -20,6 +20,8 @@
 	anastokID		=	Request("stokID")
 	cariID			=	Request("cariID")
 	receteID		=	Request("receteID")
+	tumReceteGoster	=	Request("tumReceteGoster")
+	
 	
 	modulAd 		=   "Admin"
 '###### ANA TANIMLAMALAR
@@ -39,8 +41,15 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""mb-3""><span class=""h4 mb-3 bold"">" & rs("stokKodu") & " - " & rs("stokAd") &"</span></div>"
 	rs.close
 		 '### cari için  özel reçete var mı? yoksa normal reçeteyi al
+		 	if tumReceteGoster = "evet" then
+				ekSorgu		=	""
+				ekSorgu2	=	""
+				sartOzel	=	"stokID="& anastokID & ""
+			else
 		 		ekSorgu		=	" AND t1.cariID = " & cariID
 		 		ekSorgu2	=	" AND t1.cariID = 0"
+				sartOzel	=	"stokID="& anastokID & " AND cariID =" & cariID & ""
+			end if
 
 		 	sorgu = "SELECT t1.receteID"
 		 	sorgu = sorgu & " FROM recete.recete t1"
@@ -57,13 +66,13 @@ yetkiKontrol = yetkibul(modulAd)
 		 			else
 						Response.Write "<div class=""col-12"">"
 							Response.Write "<div class=""badge badge-warning rounded"">Reçete</div>"
-							call formselectv2("receteID","","","","formSelect2 receteID border","","receteID","","data-holderyazi=""Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sartozel=""(stokID="& anastokID & " AND cariID = 0)"" onchange=""$('#anaDIV').load('/satis/recete_maliyet.asp #anaDIV >*',{siparisKalemID:"&siparisKalemID&",stokID:"&anastokID&",cariID:"&cariID&",receteID:$(this).val()})""")
+							call formselectv2("receteID","","","","formSelect2 receteID border","","receteID","","data-holderyazi=""Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sartozel=""(" & sartOzel & ")"" onchange=""$('#anaDIV').load('/satis/recete_maliyet.asp #anaDIV >*',{siparisKalemID:"&siparisKalemID&",stokID:"&anastokID&",cariID:"&cariID&",receteID:$(this).val()})""")
 						Response.Write "</div>"
 		 			end if
 		 		else
 					Response.Write "<div class=""col-12"">"
 						Response.Write "<div class=""badge badge-warning rounded"">Reçete</div>"
-						call formselectv2("receteID","","","","formSelect2 receteID border","","receteID","","data-holderyazi=""Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sartozel=""(stokID="& anastokID & " AND cariID =" & cariID & ")"" onchange=""$('#anaDIV').load('/satis/recete_maliyet.asp #anaDIV >*',{siparisKalemID:"&siparisKalemID&",stokID:"&anastokID&",cariID:"&cariID&",receteID:$(this).val()})""")
+						call formselectv2("receteID","","","","formSelect2 receteID border","","receteID","","data-holderyazi=""Reçete"" data-jsondosya=""JSON_recete"" data-miniput=""0"" data-sartozel=""(" & sartOzel & ")"" onchange=""$('#anaDIV').load('/satis/recete_maliyet.asp #anaDIV >*',{siparisKalemID:"&siparisKalemID&",stokID:"&anastokID&",cariID:"&cariID&",receteID:$(this).val()})""")
 					Response.Write "</div>"
 		 		end if
 		 	rs.close

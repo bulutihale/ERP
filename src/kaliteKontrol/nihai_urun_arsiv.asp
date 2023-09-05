@@ -41,6 +41,7 @@ yetkiKontrol = yetkibul(modulAd)
                 Response.Write "<div class=""card"">"
                 Response.Write "<div class=""card-body"">"
 				Response.Write "<div class=""row"">"
+					Response.Write "<div class=""col-4"">"
 					Response.Write "<form action=""/kaliteKontrol/form_arsiv.asp"" method=""post"" class=""ortaform"">"
 					Response.Write "<div class=""form-row align-items-center"">"
 					Response.Write "<div class=""col-auto my-1"">"
@@ -49,6 +50,8 @@ yetkiKontrol = yetkibul(modulAd)
 					Response.Write "<div class=""col-auto my-1""><button type=""submit"" class=""btn btn-primary"">" & translate("ARA","","") & "</button></div>"
 					Response.Write "</div>"
 					Response.Write "</form>"
+					Response.Write "</div>"
+					Response.Write "<div class=""col-8 h3 mt-2"">Nihai Ürün Kontrol Formları</div>"
 				Response.Write "</div>"
 				Response.Write "</div>"
 				Response.Write "</div>"
@@ -75,38 +78,23 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""table-responsive"">"
 		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/kaliteKontrol/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
 		Response.Write "<table class=""table table-striped table-bordered table-hover table-sm""><thead class=""thead-dark text-center""><tr>"
-		Response.Write "<th scope=""col"">Giriş Tarih</th>"
-		Response.Write "<th scope=""col"">Form</th>"
-		Response.Write "<th scope=""col"">Cari Adı</th>"
+		Response.Write "<th scope=""col"">Ürün Kodu</th>"
 		Response.Write "<th scope=""col"">Ürün Adı</th>"
-		Response.Write "<th scope=""col"">Miktar</th>"
+		Response.Write "<th scope=""col"">Üretim Başlangıç</th>"
+		Response.Write "<th scope=""col"">Üretim Bitiş</th>"
 		Response.Write "<th scope=""col"">LOT</th>"
-		Response.Write "<th scope=""col"">SKT</th>"
 		if yetkiKontrol >= 5 then
 			Response.Write "<th scope=""col"" class=""d-sm-table-cell"">&nbsp;</th>"
 		end if
 		Response.Write "</tr></thead><tbody>"
-            sorgu = "SELECT"
-			sorgu = sorgu & " t2.cariID, t2.stokID, t2.lotSKT, t2.miktar, t2.miktarBirim, t3.cariAd, t4.stokAd, t5.formAd, t2.girisTarih, t2.lot, t2.belgeNo, t2.stokHareketID,"
-			sorgu = sorgu & " t1.dosyaPath, t1.dosyaAd"
-			sorgu = sorgu & " FROM kalite.degerForm t1"
-			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.ayiriciTabloID = t2.stokHareketID"
-			sorgu = sorgu & " LEFT JOIN cari.cari t3 ON t2.cariID = t3.cariID"
-			sorgu = sorgu & " INNER JOIN stok.stok t4 ON t2.stokID = t4.stokID"
-			sorgu = sorgu & " LEFT JOIN kalite.form t5 ON t1.formID = t5.formID"
-			sorgu = sorgu & " WHERE t1.silindi = 0"
-			if lot <> "" then
-				sorgu = sorgu & " AND t2.lot = '" & lot & "'"
-			end if
-			if cariID <> "" then
-				sorgu = sorgu & " AND t2.cariID = " & cariID & ""
-			end if
-			if aramaad = "" then
-			else
-				sorgu = sorgu & " AND (t4.stokKodu like N'%" & aramaad & "%' OR t4.stokAd like N'%" & aramaad & "%' OR t3.cariAd like N'%" & aramaad & "%' OR t2.lot like N'%" & aramaad & "%')"
-			end if
-			sorgu = sorgu & " AND t2.girisTarih >= '" & tarihsql2(t1) &"' AND t2.girisTarih <= '" & tarihsql2(t2) &"'"
-			sorgu = sorgu & " ORDER BY t2.girisTarih DESC"
+            sorgu = "SELECT t1.id as ajandaID, t1.stokID, portal.FN_sipariscariIDbul(" & firmaID & ", t1.id) as cariID,"
+			sorgu = sorgu & " t1.baslangicZaman, t1.bitisZaman, t1.uretimLot, t2.stokKodu, t2.stokAd"
+			sorgu = sorgu & " FROM portal.ajanda t1"
+			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
+			sorgu = sorgu & " WHERE t1.isTur = 'uretimPlan' AND t1.tamamlandi = 1"
+			sorgu = sorgu & " AND t1.silindi = 0"
+			sorgu = sorgu & " ORDER BY t1.bitisZaman DESC"
+
 			rs.open sorgu, sbsv5, 1, 3
 			
 			
@@ -116,39 +104,30 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "</td></tr>"
 			else
 				for i = 1 to rs.recordcount
-					formAd				=	rs("formAd")
-					dosyaPath			=	rs("dosyaPath")
-					dosyaAd				=	rs("dosyaAd")
-					stokHareketID		=	rs("stokHareketID")
-					stokHareketID64	 	=	stokHareketID
-					stokHareketID64		=	base64_encode_tr(stokHareketID64)
-					girisTarih			=	rs("girisTarih")
-					belgeNo				=	rs("belgeNo")
-					cariAd				=	rs("cariAd")
+					baslangicZaman		=	rs("baslangicZaman")
+					bitisZaman			=	rs("bitisZaman")
+					uretimLot			=	rs("uretimLot")
+					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
-					miktar				=	rs("miktar")
-					miktarBirim			=	rs("miktarBirim")
-					lot					=	rs("lot")
-					lotSKT				=	rs("lotSKT")
+					ajandaID			=	rs("ajandaID")
+					ajandaID64			=	ajandaID
+					ajandaID64			=	base64_encode_tr(ajandaID64)
 					stokID				=	rs("stokID")
-					stokID64		 	=	stokID
+					stokID64			=	stokID
 					stokID64			=	base64_encode_tr(stokID64)
 					cariID				=	rs("cariID")
-					cariID64		 	=	cariID
+					cariID64			=	cariID
 					cariID64			=	base64_encode_tr(cariID64)
 					Response.Write "<tr>"
-						Response.Write "<td>" & girisTarih & "</td>"
-						Response.Write "<td class=""fontkucuk2"">" & formAd & "</td>"
-						'Response.Write "<td>" & belgeNo & "</td>"
-						Response.Write "<td>" & cariAd & "</td>"
-						Response.Write "<td>" & stokAd & "</td>"
-						Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
-						Response.Write "<td class=""text-center"">" & lot & "</td>"
-						Response.Write "<td class=""text-center"">" & lotSKT & "</td>"
+						Response.Write "<td>" & stokKodu & "</td>"
+						Response.Write "<td class="""">" & stokAd & "</td>"
+						Response.Write "<td>" & baslangicZaman & "</td>"
+						Response.Write "<td>" & bitisZaman & "</td>"
+						Response.Write "<td class="""">" & uretimLot & "</td>"
 					if yetkiKontrol >= 5 then
 						Response.Write "<td class=""text-right"">"
 							Response.Write "<div class=""badge badge-pill badge-info pointer mr-1 col-5"" title=""Gelen Malzeme Kalite Kontrol Formu"""
-								Response.Write " onClick=""modalajaxfitozelKapat('/kaliteKontrol/kalite_form_yap.asp?formKod=1&stokID=" & stokID64 & "&cariID=" & cariID64 & "&ayiriciTabloAd=stokHareket&ayiriciTabloID=" & stokHareketID64 & "');"">"
+								Response.Write " onClick=""modalajaxfitozelKapat('/kaliteKontrol/kalite_form_yap.asp?formKod=3&stokID=" & stokID64 & "&cariID=" & cariID64 & "&ayiriciTabloAd=ajanda&ayiriciTabloID=" & ajandaID64 & "');"">"
 								Response.Write "<i class=""mdi mdi-webhook""></i>"
 							Response.Write "</div>"
 							Response.Write "<div"
