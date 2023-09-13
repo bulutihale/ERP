@@ -88,13 +88,13 @@ yetkiKontrol = yetkibul(modulAd)
 		end if
 		Response.Write "</tr></thead><tbody>"
             sorgu = "SELECT t1.id as ajandaID, t1.stokID, portal.FN_sipariscariIDbul(" & firmaID & ", t1.id) as cariID,"
-			sorgu = sorgu & " t1.baslangicZaman, t1.bitisZaman, t1.uretimLot, t2.stokKodu, t2.stokAd"
+			sorgu = sorgu & " t1.baslangicZaman, t1.bitisZaman, t1.uretimLot, t2.stokKodu, t2.stokAd, t3.dosyaPath, t3.dosyaAd"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
+			sorgu = sorgu & " LEFT JOIN kalite.degerForm t3 ON t1.id = t3.ayiriciTabloID"
 			sorgu = sorgu & " WHERE t1.isTur = 'uretimPlan' AND t1.tamamlandi = 1"
 			sorgu = sorgu & " AND t1.silindi = 0"
 			sorgu = sorgu & " ORDER BY t1.bitisZaman DESC"
-
 			rs.open sorgu, sbsv5, 1, 3
 			
 			
@@ -104,6 +104,8 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "</td></tr>"
 			else
 				for i = 1 to rs.recordcount
+					dosyaPath			=	rs("dosyaPath")
+					dosyaAd				=	rs("dosyaAd")
 					baslangicZaman		=	rs("baslangicZaman")
 					bitisZaman			=	rs("bitisZaman")
 					uretimLot			=	rs("uretimLot")
