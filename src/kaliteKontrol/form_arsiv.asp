@@ -87,7 +87,8 @@ yetkiKontrol = yetkibul(modulAd)
 		end if
 		Response.Write "</tr></thead><tbody>"
             sorgu = "SELECT"
-			sorgu = sorgu & " t2.cariID, t2.stokID, t2.lotSKT, t2.miktar, t2.miktarBirim, t3.cariAd, t4.stokAd, t5.formAd, t2.girisTarih, t2.lot, t2.belgeNo, t2.stokHareketID,"
+			sorgu = sorgu & " t2.cariID, t2.stokID, t2.lotSKT, t2.miktar, t2.miktarBirim, t3.cariAd, t4.stokAd, t5.formAd, t2.girisTarih, t2.lot, t2.belgeNo,"
+			sorgu = sorgu & " t2.stokHareketID, t1.atananLOT,"
 			sorgu = sorgu & " t1.dosyaPath, t1.dosyaAd"
 			sorgu = sorgu & " FROM kalite.degerForm t1"
 			sorgu = sorgu & " INNER JOIN stok.stokHareket t2 ON t1.ayiriciTabloID = t2.stokHareketID"
@@ -103,7 +104,7 @@ yetkiKontrol = yetkibul(modulAd)
 			end if
 			if aramaad = "" then
 			else
-				sorgu = sorgu & " AND (t4.stokKodu like N'%" & aramaad & "%' OR t4.stokAd like N'%" & aramaad & "%' OR t3.cariAd like N'%" & aramaad & "%' OR t2.lot like N'%" & aramaad & "%')"
+				sorgu = sorgu & " AND (t4.stokKodu like N'%" & aramaad & "%' OR t4.stokAd like N'%" & aramaad & "%' OR t3.cariAd like N'%" & aramaad & "%' OR t1.atananLOT like N'%" & aramaad & "%')"
 			end if
 			sorgu = sorgu & " AND t2.girisTarih >= '" & tarihsql2(t1) &"' AND t2.girisTarih <= '" & tarihsql2(t2) &"'"
 			sorgu = sorgu & " ORDER BY t2.girisTarih DESC"
@@ -128,7 +129,7 @@ yetkiKontrol = yetkibul(modulAd)
 					stokAd				=	rs("stokAd")
 					miktar				=	rs("miktar")
 					miktarBirim			=	rs("miktarBirim")
-					lot					=	rs("lot")
+					atananLOT			=	rs("atananLOT")
 					lotSKT				=	rs("lotSKT")
 					stokID				=	rs("stokID")
 					stokID64		 	=	stokID
@@ -143,7 +144,7 @@ yetkiKontrol = yetkibul(modulAd)
 						Response.Write "<td>" & cariAd & "</td>"
 						Response.Write "<td>" & stokAd & "</td>"
 						Response.Write "<td class=""text-right"">" & miktar & " " & miktarBirim & "</td>"
-						Response.Write "<td class=""text-center"">" & lot & "</td>"
+						Response.Write "<td class=""text-center"">" & atananLOT & "</td>"
 						Response.Write "<td class=""text-center"">" & lotSKT & "</td>"
 					if yetkiKontrol >= 5 then
 						Response.Write "<td class=""text-right"">"
