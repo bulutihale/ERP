@@ -128,4 +128,30 @@ end if
     end if
 '#### LOGLARI TXT YE AKTAR
 
+
+
+
+'############ zamanı gelmişse stok maiktarlarını mail at
+    sorgu = "SELECT stokMailSonTarih FROM portal.firma WHERE id = " & firmaID
+    rs.Open sorgu, sbsv5, 1, 3
+        stokMailSonTarih    =   rs("stokMailSonTarih")
+        'sb_stokMailPeriyod --> sabitler_ek.asp den gelir portal.portalAyar tablosunda tanımlı
+        if ISNULL(stokMailSonTarih) then
+            gunFark = sb_stokMailPeriyod + 1
+        else
+            gunFark = datediff("d",stokMailSonTarih,date())
+        end if
+
+    if cint(sb_stokMailPeriyod) <= cint(gunFark) then
+        'call jsrun("alert('Stok Miktar Raporu gönderilecek, bu işlem yaklaşık 1 dakika sürecektir.')")
+        'Response.Flush()
+        rs("stokMailSonTarih") = date()
+        rs.update
+        Server.Execute "/portal/stokMailGonder.asp"
+        call toastrCagir("Stok Miktar Raporu gönderildi.", "BİLGİ", "right", "info", "otomatik", "")
+    end if
+    rs.close
+
+'############ zamanı gelmişse stok maiktarlarını mail at
+
 %>
