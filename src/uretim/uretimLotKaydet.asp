@@ -59,7 +59,33 @@ yetkiKontrol = yetkibul(modulAd)
 	
 
 		sorgu = "SELECT * FROM stok.stokHareket"
+		sorgu = sorgu & " WHERE ajandaID = " & ajandaID & ""
+		sorgu = sorgu & " AND siparisKalemID = " & siparisKalemID & ""
+		sorgu = sorgu & " AND stokID = " & stokID & ""
+		sorgu = sorgu & " AND lot = '" & lot & "'"
+		sorgu = sorgu & " AND silindi = 0"
+		sorgu = sorgu & " AND stokHareketTuru = 'G'"
 		rs.open sorgu, sbsv5, 1, 3
+
+		if rs.recordcount > 0 then
+			'########## gelen LOT daha önce üretim sürecine kayıt edilmiş ise miktarını arttır
+				lotEskiMiktar	=	rs("miktar")
+				lotYeniMiktar	=	cdbl(lotEskiMiktar) + cdbl(kullanimMiktar)
+				rs("miktar")	=	lotYeniMiktar
+				rs.update
+			'########## /gelen LOT daha önce üretim sürecine kayıt edilmiş ise miktarını arttır
+
+			'########## gelen LOT daha önce üretim sürecine kayıt edilmiş ise ÇIKIŞ miktarını arttır
+				sorgu = "UPDATE stok.stokHareket SET miktar = " & lotYeniMiktar & ""
+				sorgu = sorgu & " WHERE ajandaID = " & ajandaID & ""
+				sorgu = sorgu & " AND siparisKalemID = " & siparisKalemID & ""
+				sorgu = sorgu & " AND stokID = " & stokID & ""
+				sorgu = sorgu & " AND lot = '" & lot & "'"
+				sorgu = sorgu & " AND silindi = 0"
+				sorgu = sorgu & " AND stokHareketTuru = 'C'"
+				rs1.open sorgu, sbsv5, 3, 3
+			'########## /gelen LOT daha önce üretim sürecine kayıt edilmiş ise ÇIKIŞ miktarını arttır
+		else
 			rs.addnew
 				rs("kid")					=	kid
 				rs("firmaID")				=	firmaID
@@ -101,6 +127,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs("ajandaID")				=	ajandaID
 				rs("receteAdimID")			=	receteAdimID
 			rs.update
+		end if
 		rs.close
 	else
 		call yetkisizGiris("","","")

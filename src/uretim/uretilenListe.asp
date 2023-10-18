@@ -186,6 +186,7 @@ Response.Write "<div class=""card-body"">"
 										end if
 									else
 										Response.Write " onclick=""window.location.href = '/uretim/uretim/"&listeTur&"++"&ajandaID64&"++"&manuelPlan&"'"" class=""badge badge-pill badge-success pointer mr-2"""
+										'Response.Write " onclick=""$('#ortaalan').load('/uretim/uretim.asp?isTur="&listeTur&"&ajandaID64="&ajandaID64&"&manuelPlan="&manuelPlan&"');"" class=""badge badge-pill badge-success pointer mr-2"""
 									end if
 								Response.Write "><i class=""icon drive-go""></i>"
 								Response.Write "</div>"
