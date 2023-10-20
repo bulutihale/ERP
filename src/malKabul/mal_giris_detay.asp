@@ -99,7 +99,7 @@
 						Response.Write "<td class=""text-center"">"
 						
 						if satinalmaYetki > 5 then
-							Response.Write "<span class=""btn btn-sm border rounded fontkucuk2 btnEksikKapat bg-danger"" data-islem=""kapamaiptal"" data-deger="""&siparisKalemID&"""><i class=""mdi mdi-delete-forever""></i></span>"
+							Response.Write "<span class=""btn btn-sm border rounded fontkucuk2 btnEksikKapat bg-danger"" data-islem=""kapamaiptal"" data-deger="""&siparisKalemID&""" data-stokid=""" & stokID & """><i class=""mdi mdi-delete-forever""></i></span>"
 						end if
 						Response.Write "</td>"
 					Response.Write "</tr>"

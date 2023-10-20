@@ -174,7 +174,7 @@ Response.Write "<div class=""card-body"">"
 							Response.Write  "<span class=""text-danger""> / " & eksikMiktarKapat & " " & mikBirim & "</span>"
 							Response.Write  "<div class=""w-100 p-0""></div>"
 							if teslimDurum = "eksik" then
-								Response.Write  "<span class=""btn btn-sm border p-0 bg-warning rounded fontkucuk2 btnEksikKapat"" data-islem=""kapama"" data-deger="""&siparisKalemID&""">bakiye kapat</span>"
+								Response.Write  "<span class=""btn btn-sm border p-0 bg-warning rounded fontkucuk2 btnEksikKapat"" data-islem=""kapama"" data-deger="""&siparisKalemID&""" data-stokid=""" & stokID & """>bakiye kapat</span>"
 							end if
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
@@ -238,7 +238,8 @@ jQuery(document).ajaxSuccess(function(){
 					
 					var islem		= $(this).attr('data-islem');
 					var gitDeger	= $(this).attr('data-deger');
-					
+					var stokID		= $(this).attr('data-stokid');
+
 					if(islem == 'kapamaiptal'){
 						var baslik = 'Bakiye kapama işlemi iptal edilsin mi?'
 					}else{
@@ -257,7 +258,7 @@ jQuery(document).ajaxSuccess(function(){
 						// handle Confirm button click
 						// result is an optional parameter, needed for modals with input
 						
-						$('#ajax').load('/satis/bakiye_kapat.asp',{gitDeger:gitDeger, islem:islem});
+						$('#ajax').load('/satis/bakiye_kapat.asp',{gitDeger:gitDeger, islem:islem, stokID:stokID});
 
 						
 					  }, //confirm buton yapılanlar

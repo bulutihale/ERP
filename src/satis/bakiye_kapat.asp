@@ -9,6 +9,7 @@
 	
 	siparisKalemID	=	Request.Form("gitDeger")
 	islem			=	Request.Form("islem")
+	stokID			=	Request.Form("stokID")
 	modulAd 		=   "satis"
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -27,7 +28,7 @@ yetkiKontrol = yetkibul(modulAd)
 '################### siparisKalem tablosuna kapanacak olan bakiye miktarı yaz
 	
             sorgu = "SELECT t2.siparisNo, t2.cariID,"
-			sorgu = sorgu & " (t1.miktar - ISNULL((SELECT SUM(t3.miktar) FROM stok.stokHareket t3 WHERE t3.siparisKalemID = t1.id AND t3.silindi = 0),0)) as eksikMiktar, t1.eksikMiktarKapat"
+			sorgu = sorgu & " (t1.miktar - ISNULL((SELECT SUM(t3.miktar) FROM stok.stokHareket t3 WHERE t3.stokID = " & stokID & " AND t3.siparisKalemID = t1.id AND t3.silindi = 0),0)) as eksikMiktar, t1.eksikMiktarKapat"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " WHERE t1.id= " & siparisKalemID & ""
