@@ -161,7 +161,8 @@ Response.Write "<hr class=""p-0 m-1"">"
 			cariID:cariID,
 			receteID:receteID,
 			//sarfMiktar:sarfMiktar,
-			sarfToplamMaliyet:sarfToplamMaliyet
+			sarfToplamMaliyet:sarfToplamMaliyet,
+			tumReceteGoster: 'evet'
 			});
 
 	}

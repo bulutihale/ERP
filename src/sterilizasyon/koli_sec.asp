@@ -52,7 +52,7 @@ yetkiKontrol = yetkibul(modulAd)
 '###### ARAMA FORMU
 '###### ARAMA FORMU
 	if yetkiKontrol > 2 AND rs.recordcount > 0 then
-		Response.Write "<div class=""text-right"" onclick=""modalkapat()""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
+		Response.Write "<div class=""text-right""  data-dismiss=""modal""><span class=""mdi mdi-close-circle pointer d-none""></span></div>"
 		
 		urunAd			=	rs("urunAd")
 		urunStokKodu	=	rs("urunStokKodu")

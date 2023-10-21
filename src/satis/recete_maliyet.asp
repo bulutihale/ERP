@@ -334,7 +334,7 @@ else
 					Response.Write "<td class=""text-right"">"
 					if not isnull(stokID) AND altReceteID = 0 then
 						Response.Write "<div onclick=""modalajax('/satis/urun_gelis_fiyat.asp?stokID="&stokID&"&receteAdimID="&receteAdimID&"');""><i class=""icon page-go pointer""></i></div>"
-						postDeger1	=	"stokID_"&anastokID&"**cariID_"&cariID&"**siparisKalemID_"&siparisKalemID&"**receteID_"&receteID&""
+						postDeger1	=	"stokID_"&anastokID&"**cariID_"&cariID&"**siparisKalemID_"&siparisKalemID&"**receteID_"&receteID&"**tumReceteGoster_evet"
 						call forminput("birimMaliyet",birimMaliyet,"","","text-center bold text-success birimMaliyet","autocompleteOFF","birimMaliyet_"&receteAdimID&"","onchange=""hucreKaydetGenel('receteAdimID','"&receteAdimID&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','sayisal')""")
 					elseif altReceteID > 0 then
 						Response.Write "<div class=""text-center""><span class=""help"" onclick=""swal('','Ürüne ait alt reçete mevcut<br><br> alt reçete maliyetleri zaten ürün maliyetine ekleneceği için fiyat girişi yapılamaz.','warning')""><i class=""icon error-delete ""></i></span></div>"
@@ -366,6 +366,8 @@ else
 
 			'########## bir birim ürün başına koli maliyetini ekle
 				toplamBirimMaliyetPara	=	toplamBirimMaliyetPara + sarfToplamMaliyet
+				malzemeMaliyet			=	CDbl(toplamBirimMaliyetPara) - CDbl(toplamIsgucuUretim) - CDbl(toplamIsgucu2)
+
 
 		Response.Write "</tbody>"
 		Response.Write "</table>"
@@ -388,21 +390,27 @@ if receteID <> "" then
 			Response.Write "</div>"
 			uretimIsGucuYuzde	=	CDbl(toplamIsgucuUretim) / CDbl(toplamBirimMaliyetPara)
 			toplamIsgucu2Yuzde	=	CDbl(toplamIsgucu2) / CDbl(toplamBirimMaliyetPara)
+			malzemeMaliyetYuzde	=	CDbl(malzemeMaliyet) / CDbl(toplamBirimMaliyetPara)
 			Response.Write "<div id=""toplamlarDIV"" class=""col-6"">"
 				Response.Write "<div class=""row"">"
-					Response.Write "<div id=""toplamDIV_1"" class=""text-right bold text-light col-4"" style=""font-size:18pt;"">"
+					Response.Write "<div id=""toplamDIV_1"" class=""text-right bold text-light col-3"" style=""font-size:18pt;"">"
 						Response.Write "<span class=""fontkucuk2"">Genel Yönetim Giderleri</span>"
 						Response.Write "<br>" & formatnumber(toplamIsgucu2,2) & " TL<br>"
 						Response.Write "<span class=""fontkucuk"">" & formatpercent(toplamIsgucu2Yuzde,2) & "</span>"
 					Response.Write "</div>"
-					Response.Write "<div id=""toplamDIV_2"" class=""text-right bold text-light col-4"" style=""font-size:18pt;"">"
+					Response.Write "<div id=""toplamDIV_2"" class=""text-right bold text-light col-3"" style=""font-size:18pt;"">"
 						Response.Write "<span class=""fontkucuk2"">Üretim İşgücü Maliyet</span>"
 						Response.Write "<br>" & formatnumber(toplamIsgucuUretim,2) & " TL<br>"
 						Response.Write "<span class=""fontkucuk"">" & formatpercent(uretimIsGucuYuzde,2) & "</span>"
 					Response.Write "</div>"
-					Response.Write "<div id=""genelToplamDIV"" class=""text-right bold text-light col-4"" style=""font-size:18pt;"">"
+					Response.Write "<div id=""toplamDIV_3"" class=""text-right bold text-light col-3"" style=""font-size:18pt;"">"
+						Response.Write "<span class=""fontkucuk2"">Malzeme Maliyet</span>"
+						Response.Write "<br>" & formatnumber(malzemeMaliyet,2) & " TL<br>"
+						Response.Write "<span class=""fontkucuk"">" & formatpercent(malzemeMaliyetYuzde,2) & "</span>"
+					Response.Write "</div>"
+					Response.Write "<div id=""genelToplamDIV"" class=""text-right bold text-light col-3"" style=""font-size:18pt;"">"
 						Response.Write "<span class=""fontkucuk2"">Toplam Maliyet</span>"
-						Response.Write "<br>" & formatnumber(toplamBirimMaliyetPara,2)
+						Response.Write "<br>" & formatnumber(toplamBirimMaliyetPara,2) & " TL"
 					Response.Write "</div>"
 				Response.Write "</div>"
 			Response.Write "</div>"
@@ -488,7 +496,7 @@ sub altReceteGetir(subAltReceteID,conn,subihtiyacMiktar,arkaRenk)
 							Response.Write "<td class=""text-right"">"
 							if not isnull(conn("stokID")) AND conn("altReceteID") = 0 then
 								Response.Write "<div onclick=""modalajax('/satis/urun_gelis_fiyat.asp?stokID="&conn("stokID")&"&receteAdimID="&conn("receteAdimID")&"');""><i class=""icon page-go pointer""></i></div>"
-								postDeger1	=	"stokID_"&anastokID&"**cariID_"&cariID&"**siparisKalemID_"&siparisKalemID&"**receteID_"&receteID&""
+								postDeger1	=	"stokID_"&anastokID&"**cariID_"&cariID&"**siparisKalemID_"&siparisKalemID&"**receteID_"&receteID&"**tumReceteGoster_evet"
 								call forminput("subbirimMaliyet",subbirimMaliyet,"","","text-center bold text-success subbirimMaliyet","autocompleteOFF","birimMaliyet_"&conn("receteAdimID"),"onchange=""hucreKaydetGenel('receteAdimID','"&conn("receteAdimID")&"','birimMaliyet','recete.receteAdim',$(this).val(),'','anaDIV','/satis/recete_maliyet','"&postDeger1&"','sayisal')""")
 							elseif conn("altReceteID") > 0 then
 								Response.Write "<div class=""text-center""><span class=""help"" onclick=""swal('','Ürüne ait alt reçete mevcut<br><br> alt reçete maliyetleri zaten ürün maliyetine ekleneceği için fiyat girişi yapılamaz.','warning')""><i class=""icon error-delete ""></i></span></div>"
