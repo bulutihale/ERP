@@ -212,6 +212,7 @@ sarfMalzemeDepoKategori	=	"sterilizasyonSarf"
 				ajandaID:ajandaID,
 				mamulCikisDepoID:mamulCikisDepoID
 				}, function(){
+					working('sterilizasyonDIV1','20px','20px');
 					$('#sterilizasyonDIV1').load('/sterilizasyon/sterilizasyon_liste.asp #sterilizasyonDIV1 > *');
 					$('#sterilizasyonDIV2').html(backBilgi);
 				});

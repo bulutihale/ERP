@@ -1145,7 +1145,7 @@ Response.Write "<div class=""card text-center"">"
 					Response.Write "<div class=""input-group-prepend"">"
 						Response.Write "<span class=""input-group-text pointer p-0""><i class=""fa fa-2x fa-arrow-left"" onclick=""$('#teklifNot').val($('#teklifNot').val()+'\n'+$('#yazi5').val());""></i></span>"
 					Response.Write "</div>"
-						Response.Write "<input id=""yazi5"" class=""form-control col-12"" value="""">"
+						Response.Write "<input id=""yazi5"" class=""form-control col-12"" value=""- Vadeli çalışmalarda maksimum vade 60 günle sınırlıdır. Geçen ödemelerde aylık % 3.5 vade farkı uygulanacaktır."">"
 				Response.Write "</div>"
 				
 				Response.Write "<div class=""input-group mb-3"">"
