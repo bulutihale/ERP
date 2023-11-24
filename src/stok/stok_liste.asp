@@ -206,7 +206,7 @@
 									Response.Write "<td>" & stokKodu & "</td>"
 									Response.Write "<td>" & stokAd & "</td>"
 									Response.Write "<td>" & stokBarcode & "</td>"
-									Response.Write "<td class=""text-right"" onmouseenter=""working('stokID_"& stokID &"','20px','20px');$('#stokID_"& stokID &"').load('/stok/urun_miktar_bul.asp?stokID="&stokID&"&birimGonder=3')"">"
+									Response.Write "<td class=""text-right"" onmouseenter=""working('stokID_"& stokID &"','20px','20px');$('#stokID_"& stokID &"').load('/stok/urun_miktar_bul.asp?stokID="&stokID&"&birimGonder=3');$('#stokID_"& stokID &"').attr('id','');"">"
 									'Response.Write "<td class=""text-right"" onmouseenter=""working('stokID_"& stokID &"','20px','20px');"">"
 										'Response.Write "<div>" & formatnumber(stokMiktar,0) & " " & translate(urunAnaBirim,"","") & "</div>"
 										Response.Write "<div id=""stokID_"& stokID &""" class=""text-right pointer""><i class=""icon arrow-refresh-small""></i></div>"

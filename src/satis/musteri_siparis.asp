@@ -44,10 +44,10 @@ yetkiKontrol = yetkibul(modulAd)
 		Response.Write "<div class=""container-fluid"">"
 		Response.Write "<div class=""row"">"
 			Response.Write "<div class=""col-md-12 grid-margin stretch-card"">"
-                Response.Write "<div class=""card container"">"
+                Response.Write "<div class=""card container scroll-ekle2"">"
 					Response.Write "<div class=""card-header"">"
+							Response.Write "<div class=""col-lg-9 col-md-6 col-sm-6 h4 text-left sticky-top"">" & sayfaBaslik & "</div>"
 						Response.Write "<div class=""row"">"
-							Response.Write "<div class=""col-lg-9 col-md-6 col-sm-6 h4 text-left"">" & sayfaBaslik & "</div>"
 					if taslakKontrol <> "taslak" AND taslakKontrol <> "sevkirsaliye" then
 							Response.Write "<div class=""btn btn-warning col-lg-1 col-sm-12 col-md-12 mr-3"""
 							Response.Write " onclick=""$('#divCariSec').addClass('d-none');"
