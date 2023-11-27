@@ -16,7 +16,7 @@
 
 	
 	'####### varsayılan tarih sınırları
-		if t1 = "" then t1 = date() - 60 end if
+		if t1 = "" then t1 = date() - 30 end if
 		if t2 = "" then t2 = date() end if
 	'####### /varsayılan tarih sınırları
 	
