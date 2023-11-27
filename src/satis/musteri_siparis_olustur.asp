@@ -69,7 +69,7 @@ yetkiKontrol = yetkibul(modulAd)
 	rs.close
 	
 	
-	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim, t1.iuID"
+	sorgu = "SELECT t1.kid as tempKID, t1.stokID, t1.kalemNot, t1.miktar, t1.mikBirim, t1.mikBirimID, t1.birimFiyat, t1.paraBirim, t1.iuID, t1.siparisAd"
 	sorgu = sorgu & " FROM teklif.siparisKalemTemp t1 WHERE t1.siparisTur = 'S' AND t1.firmaID = " & firmaID & " AND t1.cariID = " & cariID & ""
 	rs.open sorgu, sbsv5,1,3
 
@@ -83,6 +83,7 @@ yetkiKontrol = yetkibul(modulAd)
 			birimFiyat		=	rs("birimFiyat")
 			paraBirim		=	rs("paraBirim")
 			iuID			=	rs("iuID")
+			siparisAd		=	rs("siparisAd")
 			
 			
 			sorgu = "SELECT * FROM teklif.siparisKalem"
@@ -105,10 +106,15 @@ yetkiKontrol = yetkibul(modulAd)
 		rs.movenext
 		next
 	rs.close
+
+	'######### TEMP tablosundaki sipariş adını sipariş tablosuna yaz.
+		sorgu = "UPDATE teklif.siparis SET siparisAd = '" & siparisAd & "' WHERE sipID = " & siparisID & ""
+		rs.open sorgu, sbsv5,3,3
+	'######### TEMP tablosundaki sipariş adını sipariş tablosuna yaz.
 	
 	'######### TEMP tablosundaki müşteri siparişi kayıtları silinsin
 		sorgu = "DELETE FROM teklif.siparisKalemTemp WHERE cariID = " & cariID & " AND siparisTur = 'S'"
-		rs.open sorgu, sbsv5,1,3
+		rs.open sorgu, sbsv5,3,3
 	'######### TEMP tablosundaki müşteri siparişi kayıtları silinsin
 
 '#### müşteri siparişi oluştur

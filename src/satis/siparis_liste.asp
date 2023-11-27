@@ -54,11 +54,11 @@ Response.Write "<div class=""card-body"">"
 		'//FIXME - miktar hesaplaması yanlış, düzeltilmeli!!!
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, t1.mikBirim, ISNULL(t1.birimFiyat,0) as birimFiyat, t1.paraBirim,"
-			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot, t2.siparisTarih, t2.teslimTarih, t2.cariID,"
+			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot as siparisKalemNot, t2.siparisTarih, t2.teslimTarih, t2.cariID, t2.siparisAD,"
 			sorgu = sorgu & " stok.FN_satilanMiktarBul(t1.id, t3.stokID, "&firmaID&") as teslimEdilen,"
 			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id AND silindi = 0 AND stokID = t3.stokID) as teslimBirim, t4.cariAd, t2.siparisNo,"
 			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat, DATEFROMPARTS(t5.hangiYil, t5.hangiAy, t5.hangiGun) as planTarih,"
-			sorgu = sorgu & " t5.baslangicZaman, t5.bitisZaman, t6.ad as teklifUrunAd, t6.kalemNot, t1.iuID"
+			sorgu = sorgu & " t5.baslangicZaman, t5.bitisZaman, t6.ad as teklifUrunAd, t6.kalemNot as teklifKalemNot, t1.iuID"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
@@ -98,7 +98,8 @@ Response.Write "<div class=""card-body"">"
 					stokAd				=	rs("stokAd")
 					cariAd				=	rs("cariAd")
 					cariID				=	rs("cariID")
-					kalemNot			=	rs("kalemNot")
+					siparisKalemNot		=	rs("siparisKalemNot")
+					siparisAD			=	rs("siparisAD")
 					miktar				=	rs("miktar")
 					mikBirim			=	rs("mikBirim")
 					teslimEdilen		=	rs("teslimEdilen")
@@ -134,7 +135,10 @@ Response.Write "<div class=""card-body"">"
 								Response.Write siparisNo
 							Response.Write "</div>"
 						Response.Write "</td>"
-						Response.Write "<td>" & cariAd & "</td>"
+						Response.Write "<td>"
+							Response.Write  "<div>" & cariAd & "</div>"
+							Response.Write "<div class=""font-italic fontkucuk2 text-danger ml-3"">" & siparisAD & "</div>"
+						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">" & teslimTarih & "</td>"
 						Response.Write "<td>" & stokKodu & "</td>"
 						Response.Write "<td>"
@@ -142,6 +146,7 @@ Response.Write "<div class=""card-body"">"
 							if not isnull(teklifUrunAd) then
 								Response.Write "<div class=""ml-4 text-info fontkucuk2 font-italic""><i class=""icon information pointer"" onclick=""modalajax('/satis/modal_kalem_not.asp?iuID="&iuID&"')""></i> " & teklifUrunAd & "</div>"
 							end if
+							Response.Write "<div class=""font-italic fontkucuk2 text-danger ml-3"">" & siparisKalemNot & "</div>"
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write "<div class=""row"">"

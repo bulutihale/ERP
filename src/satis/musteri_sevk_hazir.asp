@@ -38,15 +38,17 @@ kid				=	kidbul()
 			'sorgu = sorgu & " t1.miktar,"
 			sorgu = sorgu & " stok.FN_anaBirimADBul ( t1.stokID, 'kAd' ) AS kisaBirim,"
 			sorgu = sorgu & " ISNULL([portal].[FN_sipariscariAdbul] (" & firmaID & ", t1.ajandaID),'Stok için') as cariAd,"
-			sorgu = sorgu & " [stok].[FN_stokSayDepoLot] (5, t1.stokID, t1.depoID, t1.lot) as miktar"
+			sorgu = sorgu & " [stok].[FN_stokSayDepoLot] (5, t1.stokID, t1.depoID, t1.lot) as miktar,"
+			sorgu = sorgu & " t3.miktar as siparisMiktar"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
+			sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t3 ON t1.siparisKalemID = t3.id"
 		sorgu = sorgu & " WHERE"
 			sorgu = sorgu & " t1.silindi = 0"
 			sorgu = sorgu & " AND t1.depoID = 8"
 			sorgu = sorgu & " AND [stok].[FN_stokSayDepoLot] (" & firmaID & ", t1.stokID, t1.depoID, t1.lot) > 0"
 			sorgu = sorgu & " AND t1.stokHareketTipi <> 'S'" 'satılmış olan ürünleri dahil etme
-			sorgu = sorgu & " GROUP BY t1.siparisKalemID, t1.lot, t2.stokKodu, t1.cariID, t1.stokID, t1.depoID, t2.stokAd,t1.ajandaID"
+			sorgu = sorgu & " GROUP BY t1.siparisKalemID, t1.lot, t2.stokKodu, t1.cariID, t1.stokID, t1.depoID, t2.stokAd, t1.ajandaID, t3.miktar"
 			rs.open sorgu,sbsv5,1,3
 
 			if rs.EOF then
@@ -58,7 +60,8 @@ kid				=	kidbul()
 						Response.Write "<th class="" text-center bold"">Stok Kodu</th>"
 						Response.Write "<th class="" text-center bold"">Ürün Adı</th>"
 						Response.Write "<th class="" text-center bold"">LOT</th>"
-						Response.Write "<th class="" text-center bold"">Miktar</th>"
+						Response.Write "<th class="" text-center bold"">Depo Miktar</th>"
+						Response.Write "<th class="" text-center bold"">Sipariş Miktar</th>"
 						Response.Write "<th class="" text-center bold"">Sipariş Veren</th>"
 						Response.Write "<th class="" text-center bold"">Sevk Miktar</th>"
 						Response.Write "<th class="" text-center bold"">İşlem</th>"
@@ -75,6 +78,7 @@ kid				=	kidbul()
 				lot				=	rs("lot")
 				ajandaID		=	rs("ajandaID")
 				siparisKalemID	=	rs("siparisKalemID")
+				siparisMiktar	=	rs("siparisMiktar")
 				'stokHareketID	=	rs("stokHareketID")
 
 				if siparisKalemID = 0 then
@@ -87,6 +91,7 @@ kid				=	kidbul()
 						Response.Write "<td class="""">" & stokAd & "</td>"
 						Response.Write "<td class="""">" & lot & "</td>"
 						Response.Write "<td class="""">" & miktar & " " & kisaBirim & "</td>"
+						Response.Write "<td class="""">" & siparisMiktar & " " & kisaBirim & "</td>"
 						Response.Write "<td class="""">"
 							Response.Write cariAd
 							if sevkTip = "stoktanSevk" then
@@ -96,7 +101,7 @@ kid				=	kidbul()
 							end if
 						Response.Write "</td>"
 						Response.Write "<td class="""">"
-							call forminput("sevkMiktar",miktar,"","","bold text-center","autocompleteOFF","sevkMiktar_" & di & "","")
+							call forminput("sevkMiktar",siparisMiktar,"","","bold text-center","autocompleteOFF","sevkMiktar_" & di & "","")
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center bg-success rounded pointer"" data-miktarinputid=""sevkMiktar_" & di & """ onclick=""sevkKaydet('sevkMiktar_" & di & "','"&kisaBirim&"','"&siparisKalemID&"',"&satisDepoID&",'"&lot&"',"&ajandaID&","&satisDepoID&",$('#cariID').val(),'"&sevkTip&"',"&stokHareketID&")""><i class=""icon bullet-go""></i></td>"
 					Response.Write "</tbody>"
