@@ -22,8 +22,9 @@ yetkiKontrol = yetkibul(modulAd)
 
 '################### stok miktarlarını al mail gövdesi oluştur
 
-'######## miktar "0" olanları silinfi işaretle hesaplamaya dahil edilmesin
-	sorgu = "UPDATE stok.stokLotMiktar SET silindi = 1 WHERE miktar = 0"
+'######## miktar "0" olanları silindi işaretle hesaplamaya dahil edilmesin
+	'sorgu = "UPDATE stok.stokLotMiktar SET silindi = 1 WHERE miktar = 0"
+	sorgu = "DELETE stok.stokLotMiktar WHERE miktar = 0"
 	rs.open sorgu, sbsv5, 3, 3
 '######## miktar "0" olanları silinfi işaretle hesaplamaya dahil edilmesin
 
@@ -97,7 +98,9 @@ mailGovde = ""
 
 
 
-call mailGonderCDO("Stok Miktar Raporu", mailGovde, "","","11")
+'call mailGonderCDO("Stok Miktar Raporu", mailGovde, "","","11")
+
+response.write mailGovde
 
 'call toastrCagir("Mal kabul ürün kaydı yapıldı.", "OK", "right", "success", "otomatik", "")
 
