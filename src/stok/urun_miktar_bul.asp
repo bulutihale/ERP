@@ -20,7 +20,7 @@
 
 	'## veritabanı
 
-		sorgu = "SELECT stok.FN_stokSay(" & firmaID & ", " & stokID & ") as urunMiktar, [stok].[FN_anaBirimADBul] ( " & stokID & ", 'uAd' ) as anaBirim FROM stok.stok"
+		sorgu = "SELECT ISNULL(stok.FN_stokSay(" & firmaID & ", " & stokID & "),0) as urunMiktar, [stok].[FN_anaBirimADBul] ( " & stokID & ", 'uAd' ) as anaBirim FROM stok.stok"
 		rs.open sorgu, sbsv5,1,3
 					
 			urunMiktar	=	rs("urunMiktar")

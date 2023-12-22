@@ -99,7 +99,7 @@ if yetkiKontrol > 2 then
 	'################# mevcut reçete kopyalanıyorsa Reçete Adımlarını da kopyala
 		if islem = "kopyala" then
 	call logla("Reçete Kopyalandı: " & receteAd & "")
-			sorgu = "SELECT * FROM recete.receteAdim WHERE receteID = " & eskiReceteID
+			sorgu = "SELECT * FROM recete.receteAdim WHERE receteID = " & eskiReceteID & " AND silindi = 0"
 			rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount > 0 then
 				for zi = 1 to rs.recordcount
@@ -119,6 +119,7 @@ if yetkiKontrol > 2 then
 					etiketeEkle			=	rs("etiketeEkle")
 					etiketAd			=	rs("etiketAd")
 					islemAciklama		=	rs("islemAciklama")
+					altReceteDurum		=	rs("altReceteDurum")
 					
 					sorgu = "SELECT * FROM recete.receteAdim WHERE receteAdimID = " & receteAdimID
 					rs1.open sorgu, sbsv5, 1, 3
@@ -138,7 +139,7 @@ if yetkiKontrol > 2 then
 						rs1("etiketeEkle")		=	etiketeEkle
 						rs1("etiketAd")			=	etiketAd
 						rs1("islemAciklama")	=	islemAciklama
-
+						rs1("altReceteDurum")	=	altReceteDurum
 
 
 					rs1.update

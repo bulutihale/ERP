@@ -295,7 +295,7 @@ end if
     'Stok Ad
     'Stok Açıklama
       Response.Write "<tr><td width=""100"">" & translate("Ürün Notu","","") & "</td><td colspan=""" & sb_TeklifFiyatSayi+1 & """>"
-      call formtextarea("stokAciklama",stokAciklama,"","","stokAciklama mb-2 height-100","autocompleteOFF","stokAciklama","")
+      call formtextarea("stokAciklama",stokAciklama,"","","stokAciklama mb-2 ","autocompleteOFF","stokAciklama","")
       Response.Write "</td></tr>"
     'Stok Açıklama
     'Adet
