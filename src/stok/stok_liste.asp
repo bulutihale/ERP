@@ -17,7 +17,9 @@
     modulAd 	=   "Stok"
     Response.Flush()
 	call logla("Stok Listesi Ekranı") 
-	yetkiKontrol = yetkibul("Stok")
+	yetkiKontrol	=	yetkibul("Stok")
+	fiyatYetki		=	yetkibul("Satınalma Fiyat")
+
 '###### ANA TANIMLAMALAR
 
 
@@ -179,6 +181,9 @@
 							Response.Write "<th scope=""col"">" & translate("Ürün Kodu","","") & "</th>"
 							Response.Write "<th scope=""col"">" & translate("Ürün Adı","","") & "</th>"
 							Response.Write "<th scope=""col"">" & translate("Barkod","","") & "</th>"
+							if fiyatYetki > 0 then
+								Response.Write "<th scope=""col"">Son Alış Fiyat</th>"
+							end if
 							Response.Write "<th scope=""col"" class=""text-center"">" & translate("Stok Miktarı","","")
 							Response.Write "</th>"
 							Response.Write "<th scope=""col"" class=""text-center"">" & translate("Stok Türü","","") & "</th>"
@@ -206,9 +211,12 @@
 									Response.Write "<td>" & stokKodu & "</td>"
 									Response.Write "<td>" & stokAd & "</td>"
 									Response.Write "<td>" & stokBarcode & "</td>"
+							if fiyatYetki > 0 then
+									Response.Write "<td class=""text-right"" onmouseenter=""working('fiyat_"& stokID &"','20px','20px');$('#fiyat_"& stokID &"').load('/stok/urun_fiyat_bul.asp?stokID="&stokID&"');$('#fiyat_"& stokID &"').attr('id','');"">"
+										Response.Write "<div id=""fiyat_"& stokID &""" class=""text-right pointer""><i class=""icon arrow-refresh-small""></i></div>"
+									Response.Write "</td>"
+							end if
 									Response.Write "<td class=""text-right"" onmouseenter=""working('stokID_"& stokID &"','20px','20px');$('#stokID_"& stokID &"').load('/stok/urun_miktar_bul.asp?stokID="&stokID&"&birimGonder=3');$('#stokID_"& stokID &"').attr('id','');"">"
-									'Response.Write "<td class=""text-right"" onmouseenter=""working('stokID_"& stokID &"','20px','20px');"">"
-										'Response.Write "<div>" & formatnumber(stokMiktar,0) & " " & translate(urunAnaBirim,"","") & "</div>"
 										Response.Write "<div id=""stokID_"& stokID &""" class=""text-right pointer""><i class=""icon arrow-refresh-small""></i></div>"
 									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">"
