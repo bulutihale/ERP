@@ -14,6 +14,7 @@
         sorgu = sorgu & " FROM stok.stokLotMiktar t1"
         sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
         sorgu = sorgu & " INNER JOIN stok.depo t3 ON t1.depoID = t3.id"
+        sorgu = sorgu & " WHERE t1.silindi = 0"
         sorgu = sorgu & " ORDER BY t2.stokAd, t3.depoAd"
         rs.open sorgu, sbsv5, 1, 3
         if rs.recordcount > 0 then
