@@ -917,3 +917,30 @@ function teklifPDFmail(id64,mailDurum,divID){
 	};
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
 //eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
+
+
+
+// bir formun mükerrer submit olmasını engellemek için
+// bir formun mükerrer submit olmasını engellemek için
+		function formSubmitKontrol(butonIDdeger){
+			
+
+			$('#'+butonIDdeger).click(function(event) {
+				var submitButton = $('#'+butonIDdeger);
+		  
+				if (submitButton.data("clicked")) {
+				  // Form daha önce gönderildiyse
+				  swal('','veriler zaten gönderilmiş');
+				  event.preventDefault(); // Formun normal submit işlemini engelle
+				} else {
+				  // Form daha önce gönderilmediyse
+				  //swal('','veriler gönderildi');
+				  // Buraya sadece bir kere çalışmasını istediğiniz kodu ekleyebilirsiniz.
+				  submitButton.data("clicked", true); // Formun daha önce gönderildiğini işaretle
+				  submitButton.prop("disabled", true); // Submit düğmesini devre dışı bırak
+				}
+			  });
+		}
+// bir formun mükerrer submit olmasını engellemek için
+// bir formun mükerrer submit olmasını engellemek için
+	

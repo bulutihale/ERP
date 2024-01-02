@@ -113,7 +113,9 @@ end if
 				Response.Write "<span class=""badge badge-danger rounded-left"">Red Ürün Depo</span>"
 				call formselectv2("redDepoID","","","","formSelect2 depoSec border","","redDepoID","","data-holderyazi=""Red depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""redGirisizin""")
 			Response.Write "</div>"
-			Response.Write "<div class=""col-12 my-1""><button type=""submit"" class=""btn btn-primary"">KAYDET</button></div>"
+			Response.Write "<div id=""btnDIV"" class=""col-12 my-1"">"
+				Response.Write "<button id=""btn11"" type=""submit"" onclick=""formSubmitKontrol($(this).attr('id'))"" class=""btn btn-primary"">KAYDET</button>"
+			Response.Write "</div>"
 		Response.Write "</div>"
 		Response.Write "</form>"
 	end if
