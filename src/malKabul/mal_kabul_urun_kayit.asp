@@ -26,6 +26,7 @@
 	girisTarih		=	tarihsql(girisTarih)
 	siparisKalemID	=	Request.Form("siparisKalemID")
 	lot				=	Request.Form("lot")
+	lot				=	TRIM(lot)
 	lotSKT			=	Request.Form("lotSKT")
 	lotSKT			=	tarihsql(lotSKT)
 	
