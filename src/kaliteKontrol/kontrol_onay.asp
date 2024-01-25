@@ -102,7 +102,7 @@ end if
 			Response.Write "</div>"
 			Response.Write "<div class=""col-lg-3 col-sm-12 my-1"">"
 				Response.Write "<span class=""badge badge-success rounded-left"">Atanan LOT</span> <span class=""icon brick-edit ml-3 pointer"" id=""lotGetir"" title=""LOT hesapla""></span> "
-				call forminput("atananLot",atananLot,"","Atanan LOT","","autocompleteOFF","atananLot","")
+				call forminput("atananLot",atananLot,"karakterFiltre(this.id)","Atanan LOT","","autocompleteOFF","atananLot","")
 			Response.Write "</div>"
 			Response.Write "<div class=""w-100""></div>"
 			Response.Write "<div class=""col-lg-3 col-sm-12 my-1"">"

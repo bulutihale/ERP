@@ -944,3 +944,18 @@ function teklifPDFmail(id64,mailDurum,divID){
 // bir formun mükerrer submit olmasını engellemek için
 // bir formun mükerrer submit olmasını engellemek için
 	
+
+// A-Z a-z 0-9 - _ izin veren ve türkçe karakterlere izin vermeyen input
+	function karakterFiltre(inputID){
+		var deger = $('#'+inputID).val();
+		if (deger.length > 0) {
+		var regex = /^[a-zA-Z0-9_\-]+$/u;
+
+		if (!regex.test(deger)) {
+		alert('Geçersiz karakter! Sadece A-Z, a-z, 0-9, _, - karakterlerini içerebilir.');
+		$('#'+inputID).val(deger.replace(/[^a-zA-Z0-9_-]/g, ''));
+		}
+	}
+	}
+
+// A-Z a-z 0-9 - _ izin veren ve türkçe karakterlere izin vermeyen input
