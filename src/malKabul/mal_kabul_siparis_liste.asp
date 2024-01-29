@@ -125,6 +125,7 @@
 									Response.Write "<div class=""row h-100"">"
 										Response.Write "<div class=""col-lg-12 col-sm-12 h-100"">"
 											Response.Write "<button id=""btn_"&siparisKalemID&""" type=""submit"" onclick=""working('btn_"&siparisKalemID&"','30px','30px');formSubmitKontrol($(this).attr('id'))"" class=""btn btn-warning rounded p-0 h-100"">KAYDET</button>"
+										'mal_kabul.asp de yer alan form a eklendiği için buton tıklandığında o form submit oluyor.
 										Response.Write "</div>"
 									Response.Write "</div>"
 								Response.Write "</div>"

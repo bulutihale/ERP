@@ -100,7 +100,6 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " AND t1.silindi = 0"
 			sorgu = sorgu & " ORDER BY DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) DESC"
 			rs.open sorgu, sbsv5, 1, 3
-
 			if rs.recordcount > 0 then
 				for i = 1 to rs.recordcount
 					dbKayitTarih		=	rs("tarih")

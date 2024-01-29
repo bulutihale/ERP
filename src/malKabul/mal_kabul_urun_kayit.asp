@@ -26,9 +26,9 @@
 	girisTarih		=	tarihsql(girisTarih)
 	siparisKalemID	=	Request.Form("siparisKalemID")
 	lot				=	Request.Form("lot")
-	lot				=	TRIM(lot)
 	lotSKT			=	Request.Form("lotSKT")
-	lotSKT			=	tarihsql(lotSKT)
+
+
 	
     modulAd =   "Mal Kabul"
     modulID =   "89"
@@ -62,6 +62,7 @@ yetkiKontrol = yetkibul(modulAd)
 	call rqKontrol(girisTarih,"Giriş tarihi belirtilmeli.","")
 	call rqKontrol(miktar,"Miktar belirtilmeli.","")
 	call rqKontrol(miktarBirim,"Birim seçimi yapılmalı.","")
+	'call rqKontrol(lot,"LOT seçimi yapılmalı.(yapılmadığı durumda mükerrer giriş engellenemez.)")
 
 if cdbl(miktar) + cdbl(teslimEdilen) > cdbl(sipMiktar) then 
 	hatamesaj = "Toplam teslim alınan miktar sipariş miktarından fazla olamaz."
@@ -71,8 +72,15 @@ if cdbl(miktar) + cdbl(teslimEdilen) > cdbl(sipMiktar) then
 end if
 
 	call rqKontrol(depoID,"Giriş deposu seçilmeli.","")
-	call rqKontrol(lotSKT,"LOT a ait son kullanma tarihi girilmedi.","")
 
+	if lot = "" then
+		lot = null
+		lotSKT = null
+	else
+		lot				=	TRIM(lot)
+		call rqKontrol(lotSKT,"LOT a ait son kullanma tarihi girilmedi.","")
+		lotSKT			=	tarihsql(lotSKT)
+	end if
 
 '################### stok hareket tablosuna mal kabul kaydı yaz
 	
