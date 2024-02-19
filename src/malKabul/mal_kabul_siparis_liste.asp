@@ -109,7 +109,7 @@
 											Response.Write "</div>"
 										Response.Write "</div>"
 										Response.Write "<div class=""col-lg-6 col-sm-12"">"
-											call forminput("lot","","","LOT","inpReset","autocompleteOFF","lot","")
+											call forminput("lot","","karakterFiltre('lot')","LOT","inpReset","autocompleteOFF","lot","")
 										Response.Write "</div>"
 									Response.Write "</div>"
 									Response.Write "<div class=""row"">"
