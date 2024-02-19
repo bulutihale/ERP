@@ -9,6 +9,7 @@
     girisDepoID		=   Request.Form("girisDepoID") 
     depoID 			=   Request.Form("depoID")
     lot		 		=   Request.Form("lot")
+	lot				=	TRIM(lot)
 	lotSKT			=   Request.Form("lotSKT")
     aktarMiktar		=   cdbl(Request.Form("aktarMiktar"))
 	lotMiktar		=	cdbl(Request.Form("lotMiktar"))

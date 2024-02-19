@@ -14,6 +14,7 @@
     islem           =   Request.Form("islem")
     hareketmiktar   =   Request.Form("hareketmiktar")
     lot             =   Request.Form("lot")
+	lot				=	TRIM(lot)
     lotSKT          =   Request.Form("lotSKT")
     girisDepoSec    =   Request.Form("girisDepoSec")
 

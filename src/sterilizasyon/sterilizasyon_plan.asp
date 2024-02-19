@@ -8,6 +8,7 @@
     koliIndexID			=	Request.Form("koliIndexID")
 	stokID				=	Request.Form("stokID")
 	lot					=	Request.Form("lot")
+	lot					=	TRIM(lot)
 	lotSKT				=	Request.Form("lotSKT")
 	mamulMiktar			=	Request.Form("miktar")
 	ajandaID			=	Request.Form("ajandaID")

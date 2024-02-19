@@ -16,6 +16,7 @@
 	stokID				=	Request.Form("stokID")
 	siparisKalemID		=	Request.Form("siparisKalemID")
 	lot					=	Request.Form("lot")
+	lot					=	TRIM(lot)
 	stokHareketTipi		=	Request.Form("stokHareketTipi")
 	secilenDepoID		=	Request.Form("secilenDepoID")
 	lotSKT				=	Request.Form("lotSKT")

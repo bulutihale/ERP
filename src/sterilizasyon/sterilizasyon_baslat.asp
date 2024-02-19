@@ -7,6 +7,7 @@
     kid					=	kidbul()
     urunTip				=	Request.Form("urunTip")
 	mamulLot			=	Request.Form("lot")
+	mamulLot			=	TRIM(mamulLot)
 	mamulLotSKT			=	Request.Form("lotSKT")
 	mamulMiktar			=	Request.Form("mamulMiktar")
 	koliIndexID			=	Request.Form("koliIndexID")

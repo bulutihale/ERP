@@ -184,13 +184,17 @@ $(document).ready(function() {
 		
 	var belgeTarih		=	$('#belgeTarih').val();
 	var belgeNo			=	$('#belgeNo').val();
+	var lot				=	$('#lot').val();
 	var girisTarih		=	$('#girisTarih').val();
+	var lotSKT			=	$('#lotSKT').val();
 	var depoSec			=	$('#depoSec').val();
 	var hata 			= 	0
 
 	if(belgeTarih == ''){swal('','belge tarihi girilmedi');var hata = 1;return false}
 	if(belgeNo == ''){swal('','belge no girilmedi');var hata = 1;return false}
+	if(lot == ''){swal('','LOT no girilmedi');var hata = 1;return false}
 	if(girisTarih == ''){swal('','giriş tarihi seçilmedi');var hata = 1;return false}
+	if(lotSKT == ''){swal('','LOT son kullanma tarihi seçilmedi');var hata = 1;return false}
 	if(depoSec == null){swal('','giriş yapılacak depo seçilmedi');var hata = 1;return false}
 
 

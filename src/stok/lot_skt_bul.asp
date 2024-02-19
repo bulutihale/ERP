@@ -10,6 +10,7 @@
 		kid						=	kidbul()
 		stokID					=	Request.Form("stokID")
 		lot						=	Request.Form("lot")
+		lot						=	TRIM(lot)
 	'##### request
 	'##### request
 

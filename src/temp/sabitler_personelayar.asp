@@ -1,7 +1,7 @@
 ﻿<%
 kid = kidbul()
 if kid = 2 then
-	stokSifirGoster="off"
+	stokSifirGoster="on"
 	stokSilinmislerGoster="off"
 	mamulGoster="on"
 	yariMamulGoster="on"

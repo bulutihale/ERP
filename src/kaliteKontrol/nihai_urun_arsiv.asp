@@ -14,6 +14,7 @@
 	t1		=	Request.Form("t1")
 	t2		=	Request.Form("t2")
 	lot		=	Request.Form("lot")
+	lot		=	TRIM(lot)
     hata    =   ""
     modulAd =   "Kalite Kontrol"
     personelID =   gorevID
