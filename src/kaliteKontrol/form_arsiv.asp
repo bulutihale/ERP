@@ -11,6 +11,7 @@
     gorevID =   Request.QueryString("gorevID")
 	aramaad	=	Request.Form("aramaad")
 	cariID	=	Request.Form("cariID")
+	stokID	=	Request.Form("stokID")
 	t1		=	Request.Form("t1")
 	t2		=	Request.Form("t2")
 	lot		=	Request.Form("lot")
@@ -102,6 +103,9 @@ yetkiKontrol = yetkibul(modulAd)
 			end if
 			if cariID <> "" then
 				sorgu = sorgu & " AND t2.cariID = " & cariID & ""
+			end if
+			if stokID <> "" then
+				sorgu = sorgu & " AND t4.stokID = " & stokID & ""
 			end if
 			if aramaad = "" then
 			else
