@@ -15,6 +15,7 @@
 	Response.Flush()
 	call logla("Stok Düzenleme Ekranı Girişi")
 	yetkiKontrol 	=	yetkibul("Stok")
+	manuelStokYetki	=	yetkibul("Manuel Stok G/C")
 	inpKontrol		=	""
 '###### ANA TANIMLAMALAR
 
@@ -517,9 +518,13 @@ Response.Write "<div class=""tab-content"">"
 			Response.Write "<div class=""col-sm-3 my-1"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left bg-success"">" & translate("Giriş Yapılacak Miktar","","") & "</span>"
 				call forminput("girisMiktar",girisMiktar,"$('#cikisMiktar').val('');",translate("Giriş Yapılacak Miktar","",""),"border border-success text-success bold","","girisMiktar","")
-			if yetkiKontrol >= 8 then
+			if manuelStokYetki >= 8 then
 				Response.Write "<div class=""my-1"">"
 					Response.Write "<div id=""ozelIslemKayit"" onclick=""ozelIslem('miktarGir', $('#girisMiktar').val())"" class=""col-12 btn btn-success text-center rounded"">" & translate("MİKTAR GİRİŞİ YAP","","") & "</div>"
+				Response.Write "</div>"
+			else
+				Response.Write "<div class=""my-1"">"
+					Response.Write "Yetki YOK"
 				Response.Write "</div>"
 			end if
 			Response.Write "</div>"
@@ -528,9 +533,13 @@ Response.Write "<div class=""tab-content"">"
 				Response.Write "<span class=""badge badge-secondary rounded-left bg-danger"">" & translate("Çıkış Yapılacak Miktar","","") & "</span>"
 				call forminput("cikisMiktar",cikisMiktar,"$('#girisMiktar').val('');",translate("Çıkış Yapılacak Miktar","",""),"border border-danger text-danger bold","","cikisMiktar","")
 
-			if yetkiKontrol >= 8 then
+			if manuelStokYetki >= 8 then
 				Response.Write "<div class=""my-1"">"
 					Response.Write "<div id=""ozelIslemKayit"" onclick=""ozelIslem('miktarCik',$('#cikisMiktar').val())"" class=""col-12 btn btn-danger text-center rounded"">" & translate("MİKTAR ÇIKIŞI YAP","","") & "</div>"
+				Response.Write "</div>"
+			else
+				Response.Write "<div class=""my-1"">"
+					Response.Write "Yetki YOK"
 				Response.Write "</div>"
 			end if
 			Response.Write "</div>"
