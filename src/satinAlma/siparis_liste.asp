@@ -104,7 +104,7 @@ Response.Write "<div class=""card-body"">"
 						teslimDurum	=	"eksik"
 					end if
 					
-					Response.Write "<tr class=""" & satirClass & """>"
+					Response.Write "<tr id=""satir"&siparisKalemID&""" class=""" & satirClass & """>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write siparisTarih
 							Response.Write "<hr class=""p-0 m-0"">"
@@ -208,6 +208,7 @@ jQuery(document).ajaxSuccess(function(){
 						// result is an optional parameter, needed for modals with input
 						
 						$('#ajax').load('/satinAlma/bakiye_kapat.asp',{gitDeger:gitDeger, islem:islem});
+						$('#satir'+gitDeger).load('/satinAlma/siparis_liste.asp #satir'+gitDeger+' >*')
 
 						
 					  }, //confirm buton yapılanlar

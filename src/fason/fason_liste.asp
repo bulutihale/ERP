@@ -29,10 +29,10 @@
 '####### SONUÇ TABLOSU
 '####### SONUÇ TABLOSU
 
-call logla("Müşteri Siparişleri Listelendi")
+call logla("Fason İşler Listelendi")
 
 Response.Write "<div class=""card rounded-top"">"
-Response.Write "<div class=""card-header h5"">Müşterilerden Gelen Sipariş Listesi</div>"
+Response.Write "<div class=""card-header h5"">Fason Listesi</div>"
 
 Response.Write "<div class=""card-body"">"
 		Response.Write "<div class=""col-1 pointer"" onclick=""modalajax('/satis/filtre.asp')""><i class=""mdi mdi-filter table-success rounded""></i></div>"
@@ -53,39 +53,11 @@ Response.Write "<div class=""card-body"">"
 		Response.Write "</tr></thead><tbody>"
 		
 		
-		'//FIXME - miktar hesaplaması yanlış, düzeltilmeli!!!
             sorgu = "SELECT"
-			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, ISNULL(t1.miktarFason,0) as miktarFason, t1.sipMiktar, t1.mikBirim, ISNULL(t1.birimFiyat,0) as birimFiyat, t1.paraBirim,"
-			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot as siparisKalemNot, t2.siparisTarih, t2.teslimTarih, t2.cariID, t2.siparisAD,"
-			sorgu = sorgu & " stok.FN_satilanMiktarBul(t1.id, t3.stokID, "&firmaID&") as teslimEdilen,"
-			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id AND silindi = 0 AND stokID = t3.stokID) as teslimBirim, t4.cariAd, t2.siparisNo,"
-			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat, DATEFROMPARTS(t5.hangiYil, t5.hangiAy, t5.hangiGun) as planTarih,"
-			sorgu = sorgu & " t5.baslangicZaman, t5.bitisZaman, t6.ad as teklifUrunAd, t6.kalemNot as teklifKalemNot, t1.iuID"
-			sorgu = sorgu & " FROM teklif.siparisKalem t1"
-			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
-			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
-			sorgu = sorgu & " INNER JOIN cari.cari t4 ON t2.cariID = t4.cariID"
-			sorgu = sorgu & " LEFT JOIN portal.ajanda t5 ON t1.id = t5.sipariskalemID AND t5.silindi = 0"
-			sorgu = sorgu & " LEFT JOIN teklifv2.ihale_urun t6 ON t1.iuID = t6.id"
-			sorgu = sorgu & " WHERE t2.firmaID = " & firmaID
-			if stokID <> "" then
-				sorgu = sorgu & " AND t3.stokID = " & stokID & ""
-			end if
-			if cariID <> "" then
-				sorgu = sorgu & " AND t2.cariID = " & cariID & ""
-			end if
-			if siparisNo <> "" then
-				sorgu = sorgu & " AND t2.siparisNo = '" & siparisNo & "'"
-			end if
-			if t3 <> "" then
-				sorgu = sorgu & " AND t2.teslimTarih >= '" & tarihsql2(t3) &"'"	
-			end if
-			if t4 <> "" then
-				sorgu = sorgu & " AND t2.teslimTarih <= '" & tarihsql2(t4) &"'"	
-			end if
-			sorgu = sorgu & " AND t2.siparisTarih >= '" & tarihsql2(t1) &"' AND t2.siparisTarih <= '" & tarihsql2(t2) &"'"
-			sorgu = sorgu & " AND t2.siparisTur = 'S'"
-			sorgu = sorgu & " ORDER BY t2.siparisNo DESC"
+			sorgu = sorgu & "*"
+			sorgu = sorgu & "FROM teklif.siparisKalem t1"
+			sorgu = sorgu & "INNER stok.stok t2 ON t1.stokID = t2.stokID"
+			'sorgu = sorgu & "WHERE t1.s"
 			rs.open sorgu, sbsv5, 1, 3
 
 

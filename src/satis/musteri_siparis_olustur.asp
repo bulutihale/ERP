@@ -96,6 +96,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs1("stokID")		=	stokID
 				rs1("kalemNot")		=	kalemNot
 				rs1("miktar")		=	miktar
+				rs1("sipMiktar")	=	miktar
 				rs1("mikBirim")		=	mikBirim
 				rs1("mikBirimID")	=	mikBirimID
 				rs1("birimFiyat")	=	birimFiyat

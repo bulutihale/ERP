@@ -54,7 +54,7 @@ call toastrCagir("İşlem Yapıldı.", "OK", "right", "success", "otomatik", "")
 
 call modalkapat()
 
-call jsrun("$('#ortaalan').load('/satinAlma/siparis_liste.asp',{cariID:"&cariID&"})")
+'call jsrun("$('#ortaalan').load('/satinAlma/siparis_liste.asp',{cariID:"&cariID&"})")
 
 
 
