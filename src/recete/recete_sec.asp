@@ -20,6 +20,8 @@
 	isTur					=	Request.QueryString("isTur")
 	stokID					=	Request.QueryString("stokID")
 	cariID					=	Request.QueryString("cariID")
+	fasonAnaID				=	Request("fasonAnaID")
+
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
 
@@ -74,7 +76,8 @@ call logla("Üretim planlaması için reçete seçimi siparisKalemID: " & sipari
 						'Response.Write "<div class=""col-lg-1 col-sm-4 pointer text-center"" onclick=""receteSec(" & receteID & ");"">"
 							'Response.Write "<div class=""badge badge-pill pointer badge-success""><i class=""mdi mdi-arrow-right-bold""></i></div>"
 						'Response.Write "</div>"
-Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "&receteID="&receteID&"')"">SEÇ</div>"
+Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur="&isTur&"&siparisKalemID=" & siparisKalemID & "&receteID="&receteID&"&fasonAnaID="&fasonAnaID&"')"">SEÇ</div>"
+
 					Response.Write "</div>"
 				rs.movenext
 				next

@@ -14,6 +14,8 @@
 	arananKelime		=	request.QueryString ("q")
 	arananKelime		=	TRIM(arananKelime)
 	arananKelime		=	replace(arananKelime,Chr(9),"")
+	sartOzel			=	request.QueryString ("sartOzel")
+
 '##### /ajax ile gelen sorgu 
 '##### /ajax ile gelen sorgu 
 
@@ -28,6 +30,9 @@
 			sorgu = sorgu & " t1.cariAd, t1.il, t1.vergiNo" 
 			sorgu = sorgu & " FROM cari.cari t1" 
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND (t1.cariAd like N'%" & arananKelime & "%' OR t1.vergiNo like N'" & arananKelime & "' OR t1.cariKodu like N'%" & arananKelime & "%')"
+			if sartOzel <> "" then
+				sorgu = sorgu & " AND " & sartOzel
+			end if
 			sorgu = sorgu & " ORDER BY t1.cariAd ASC"
 			rs.open sorgu, sbsv5, 1, 3
 			

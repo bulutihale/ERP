@@ -27,6 +27,8 @@
     gorevID			=   Request.Form("gorevID")
     cariTur         =   Request.Form("cariTur")
     ulkeID          =   Request.Form("ulkeID")
+    fasonDepoID     =   Request.Form("fasonDepoID")
+    fasonDepoKilit  =   Request.Form("fasonDepoKilit")
 '###### ANA TANIMLAMALAR
 
 
@@ -89,6 +91,8 @@ end if
 	rs("email")             =   email
 	rs("ilce")              =   ilce
     rs("ulkeID")            =   ulkeID
+    rs("fasonDepoID")       =   fasonDepoID
+    rs("fasonDepoKilit")    =   fasonDepoKilit
 rs.update
 rs.close
 

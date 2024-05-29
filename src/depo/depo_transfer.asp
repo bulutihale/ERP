@@ -62,7 +62,10 @@ yetkiKontrol = yetkibul(modulAd)
 
 	if ajandaID <> "" then
 		'### sipariş miktar ve birimini bul
-			sorgu = "SELECT t2.miktar, stok.FN_anaBirimADBul("&stokID&",'kad') as urunAnaBirim, t1.miktar as manuelTalepMiktar"
+			sorgu = "SELECT stok.FN_anaBirimADBul("&stokID&",'kad') as urunAnaBirim, t1.miktar as manuelTalepMiktar,"
+			'sorgu = sorgu & " (CASE WHEN t1.miktar = 0 THEN [stok].[FN_siparisMiktarBul] (t1.id , "&firmaID&") ELSE t1.miktar END) as sipMiktar"
+			sorgu = sorgu & " (CASE WHEN t1.miktar = 0 THEN ([stok].[FN_siparisMiktarBul] (t1.id , "&firmaID&") * ISNULL([stok].[FN_receteMiktarBul] (t1.id),1)) ELSE t1.miktar END) as sipMiktar,"
+			sorgu = sorgu & " ISNULL((SELECT fasonAnaID FROM portal.ajanda WHERE id = t1.bagliAjandaID AND silindi = 0),0) as fasonAnaID"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " LEFT JOIN teklif.siparisKalem t2 ON t2.id = "
 			sorgu = sorgu & " CASE WHEN t1.bagliAjandaID is not null THEN"
@@ -70,11 +73,26 @@ yetkiKontrol = yetkibul(modulAd)
 			sorgu = sorgu & " WHERE t1.id = " & ajandaID
 			rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount > 0 then
-				siparisMiktar		=	rs("miktar")
+				siparisMiktar		=	rs("sipMiktar")
 				siparisBirim		=	rs("urunAnaBirim")
 				manuelTalepMiktar	=	rs("manuelTalepMiktar")
+				fasonAnaID			=	rs("fasonAnaID")
 			end if
 			rs.close
+'Response.Write fasonAnaID=""
+'response.end
+			if fasonAnaID > 0 then
+				sorgu ="SELECT t2.fasonDepoID, t3.depoAd as girisDepoAd FROM fason.fasonAna t1"
+				sorgu = sorgu & " INNER JOIN cari.cari t2 ON t1.fasonCariID = t2.cariID"
+				sorgu = sorgu & " INNER JOIN stok.depo t3 ON t2.fasonDepoID = t3.id"
+				sorgu = sorgu & " WHERE t1.id = " & fasonAnaID
+				rs.open sorgu, sbsv5, 1, 3
+					fasonDepoID		=	rs("fasonDepoID")
+					girisDepoAd		=	rs("girisDepoAd")
+				rs.close
+			else
+				fasonDepoID		=	0
+			end if
 		'### /sipariş miktar ve birimini bul
 	end if
 
@@ -87,7 +105,8 @@ yetkiKontrol = yetkibul(modulAd)
 			rs.close
 		'### /bileşenin reçetedeki miktarını  bul
 
-		ihtiyacMiktar	=	siparisMiktar * receteMiktar
+		'ihtiyacMiktar	=	siparisMiktar * receteMiktar
+		ihtiyacMiktar	=	siparisMiktar
 	else
 		receteID		=	0
 		ihtiyacMiktar	=	manuelTalepMiktar
@@ -148,7 +167,12 @@ yetkiKontrol = yetkibul(modulAd)
 				Response.Write "<div class=""row mt-2"">"
 					Response.Write "<div class=""col-lg-2 col-sm-6 bold"">Giriş Depo</div>"
 					Response.Write "<div class=""col-lg-10 col-sm-6"">"
-						call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "','" & depoKategori & "','','"&depoTalepID&"')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0""")
+						if fasonDepoID > 0 then
+							Response.Write "<input type=""hidden"" id=""girisDepoID"" class=""form-control"" readonly value=""" & fasonDepoID & """>"
+							Response.Write "<input type=""text"" class=""form-control"" readonly  value=""" & girisDepoAd & """>"
+						else
+							call formselectv2("girisDepoID","","girisDepoSec($(this).val(),'" & receteAdimID64 & "', '" & ajandaID64 & "','" & stokID64 & "','" & depoKategori & "','','"&depoTalepID&"')","","formSelect2 depoSec border","","girisDepoID","","data-holderyazi=""Giriş depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0""")
+						end if
 					Response.Write "</div>"
 				Response.Write "</div>"
 
@@ -156,7 +180,8 @@ yetkiKontrol = yetkibul(modulAd)
 	'#####seçilen depoda giriş bekleyenleri göster
 		if girisDepoID <> "" then
 				sorgu = "SELECT"
-				sorgu = sorgu & " t1.kid as transferKid, t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID"
+				sorgu = sorgu & " t1.kid as transferKid, t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t4.depoKategori,"
+				sorgu = sorgu & " t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo, t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID"
 				sorgu = sorgu & " FROM stok.stokHareket t1"
 				sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 				sorgu = sorgu & " INNER JOIN stok.depo t4 ON t1.depoID = t4.id"
@@ -170,6 +195,7 @@ yetkiKontrol = yetkibul(modulAd)
 							Response.Write "</div>"
 							for ti = 1 to rs.recordcount
 								transferKid		=	rs("transferKid")
+								depoKategori	=	rs("depoKategori")
 
 								Response.Write "<div class=""row m-2"">"
 									Response.Write "<div class=""col"">" & rs("stokKodu") & "</div>"
@@ -182,16 +208,18 @@ yetkiKontrol = yetkibul(modulAd)
 					if depoYetkiKontrol >= 6 then 
 						'# transfer red
 						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""
-							Response.Write " onClick=""urunCevap('red','stokHareketID',"&rs("stokHareketID")&",'silindi','stok.stokHareket','1',"&rs("refHareketID")&",'depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&","&surecDepoID&")"">"
+							Response.Write " onClick=""urunCevap('red','stokHareketID',"&rs("stokHareketID")&",'silindi','stok.stokHareket','1',"&rs("refHareketID")&",'depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&","&surecDepoID&",'')"">"
 							Response.Write "<i class=""mdi mdi-window-close""></i>"
 						Response.Write "</div>"
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
-						if transferKid <> kid then
-							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&rs("stokHareketID")&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&","&surecDepoID&")"">"
-						else
+						if transferKid <> kid AND depoKategori <> "fason" then
+							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&rs("stokHareketID")&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','refreshDIV','depoTransfer','"&receteAdimID64&"','"&ajandaID64&"','"&stokID64&"',"&girisDepoID&","&receteID&","&secilenDepoID&","&surecDepoID&",'')"">"
+						elseif transferKid = kid AND depoKategori <> "fason" then
 							Response.Write " onClick=""swal('','Çıkışını yaptığınız transferin girişini onaylayamazsınız.','error')"">"
+						elseif transferKid <> kid AND depoKategori = "fason" then
+							Response.Write " onClick=""swal('','Fason depo onayları fason modülünden yapılabilir','error')"">"
 						end if
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
@@ -319,14 +347,15 @@ yetkiKontrol = yetkibul(modulAd)
 						lotMiktar:lotMiktar,
 						ajandaID64:ajandaID64,
 						depoTalepID:depoTalepID,
+						receteAdimID64:receteAdimID64,
 						surecDepoID:surecDepoID}, function(){
 							$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID=<%=receteID%>&secilenDepoID=<%=secilenDepoID%>&surecDepoID='+surecDepoID+' #receteAdim > *')
 							girisDepoSec(girisDepoID,receteAdimID64,ajandaID64,stokID64,depoKategori,surecDepoID,depoTalepID);
 						});
 					
 
-					// $('#tr_'+ajandaID).load('/uretim/uretilenListe.asp #tr_'+ajandaID+' >*', {listeTur:listeTur});
-					$('#listeTablo').load('/uretim/uretilenListe.asp #listeTablo >*', {listeTur:listeTur});
+					 $('#tr_'+ajandaID).load('/uretim/uretilenListe.asp #tr_'+ajandaID+' >*', {listeTur:listeTur,sadeceUpdate:'evet',ajandaID:ajandaID});
+					//$('#listeTablo').load('/uretim/uretilenListe.asp #listeTablo >*', {listeTur:listeTur});
 
 					  }, //confirm buton yapılanlar
 					  function(dismiss) {

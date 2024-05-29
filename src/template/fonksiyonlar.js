@@ -617,7 +617,7 @@ function numara(nesne,para,uyari)
 
 // DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
 // DEPO girişi Bekleyen ürünü, reddet veya onayla ve depoya giriş kaydet
-	function urunCevap(cevap,idAlan,stokHareketID,alan,tablo,deger,refHareketID,ntfDeger,depoKategori,refreshDIV,refreshFile,receteAdimID64,ajandaID64,stokID64,girisDepoID,secilenReceteID,secilenDepoID,surecDepoID){
+	function urunCevap(cevap,idAlan,stokHareketID,alan,tablo,deger,refHareketID,ntfDeger,depoKategori,refreshDIV,refreshFile,receteAdimID64,ajandaID64,stokID64,girisDepoID,secilenReceteID,secilenDepoID,surecDepoID,parametre1){
 
 	if(cevap == 'kabul'){
 		var baslik = 'Ürünün kesin kabulü yapılsın mı?'
@@ -651,12 +651,18 @@ function numara(nesne,para,uyari)
 					id:refHareketID,
 					alan:alan,
 					tablo:tablo,
-					deger:deger})} //kabul edilmeyecekse ise çıkışı iptal et
+					deger:deger}, function(){
+						$.post('/portal/hucre_kaydet.asp',{ajandaID64:ajandaID64,idAlan:'id',tablo:'portal.ajanda',alan:'tamamlandi',deger:0});
+					})}
 				if(refreshFile == 'bekleyenListe'){
 					$('#'+refreshDIV).load('/depo/bekleyen_liste/'+depoKategori+' #'+refreshDIV+' >*');
 				}else if(refreshFile == 'depoTransfer'){
 					$('#'+refreshDIV).load('/depo/depo_transfer.asp?listeTur='+depoKategori+'&receteAdimID='+receteAdimID64+'&ajandaID='+ajandaID64+'&stokID='+stokID64+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #'+refreshDIV+' >*', {girisDepoID:girisDepoID});
 					$('#receteAdim').load('/uretim/uretim.asp?secilenReceteID='+secilenReceteID+'&secilenDepoID='+secilenDepoID+'&surecDepoID='+surecDepoID+' #receteAdim > *')
+				}else if(refreshFile == 'fasonCevap'){
+					$.post('/portal/hucre_kaydet.asp',{ajandaID64:ajandaID64,idAlan:'id',tablo:'portal.ajanda',alan:'tamamlandi',deger:0}, function(){
+						$('#'+refreshDIV).load('/fason/urun_detay.asp #'+refreshDIV+' >*', {fasonAnaID:parametre1});
+					});
 				}
 			});
 		}, //confirm buton yapılanlar
@@ -692,7 +698,7 @@ function numara(nesne,para,uyari)
 //alan hesapla
 
 // tooltip çalışsabilsin
-	//elementte, "data-toggle="tooltip" ve "title="açıklama içerik" olmalı."
+	//elementte, data-toggle="tooltip" ve title="açıklama içerik" olmalı."
 	$(function () {
 		$('[data-toggle="tooltip"]').tooltip()
 	})
@@ -778,10 +784,12 @@ function teklifPDFmail(id64,mailDurum,divID){
 			decimalSeparator = $('#decimalSeparator').val(); //"temp/sabitler.asp" dosyasında tanımlanmış olan değeri getir.
 
 			//eğer tarih kayıt ediliyorsa SQL formatına çevir
-				if (isValidDate(deger)) {
-					var dateParts = deger.split('.');
-					var deger = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-				};		
+				if(deger != ''){
+					if (isValidDate(deger)) {
+						var dateParts = deger.split('.');
+						var deger = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+					};
+				}
 			//eğer tarih kayıt ediliyorsa SQL formatına çevir
 
 			//eğer ondalıklı sayı kayıt ediliyorsa "." ve "," sorunu çıkmasın
@@ -959,3 +967,9 @@ function teklifPDFmail(id64,mailDurum,divID){
 	}
 
 // A-Z a-z 0-9 - _ izin veren ve türkçe karakterlere izin vermeyen input
+
+
+	function butonRenk(id,renk,sinif){
+		$('.'+sinif).removeClass('bg-'+renk);
+		$('#'+id).addClass('bg-'+renk);
+	}

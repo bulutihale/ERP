@@ -20,6 +20,9 @@
 	ajandaID64		=   Request.Form("ajandaID64")
 	ajandaID		=	ajandaID64
 	ajandaID		=	base64_decode_tr(ajandaID)
+	receteAdimID64	=	Request.Form("receteAdimID64")
+	receteAdimID	=	receteAdimID64
+	receteAdimID	=	base64_decode_tr(receteAdimID)
 	modulAd 		=   "Depo"
 
 sorgu = "SELECT stok.FN_birimIDBul('" & miktarBirim & "','K') as bid"
@@ -63,6 +66,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("lot")				=	lot
 					rs1("lotSKT")			=	tarihsql(lotSKT)
 					rs1("ajandaID")			=	ajandaID
+					rs1("receteAdimID")		=	receteAdimID
 				rs1.update
 				stokHareketID	=	rs1("stokHareketID")
 			rs1.close
@@ -91,6 +95,7 @@ yetkiKontrol = yetkibul(modulAd)
 					rs1("lot")				=	lot
 					rs1("lotSKT")			=	tarihsql(lotSKT)
 					rs1("ajandaID")			=	ajandaID
+					rs1("receteAdimID")		=	receteAdimID
 				rs1.update
 			rs1.close
 		'#### /yarı mamullerin hareketini stokHareket tablosuna üretim depoya G (giriş) olarak kaydet
@@ -98,15 +103,23 @@ yetkiKontrol = yetkibul(modulAd)
 
 		'### Eğer ajanda üzerinden gelen bir hareket kaydı ise ajanda üzerinde tamamlandı işaretle.
 			if ajandaID > 0 then
-			sorgu = "SELECT (ISNULL(stok.FN_receteMiktarBul("&ajandaID&"),1) * stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar, stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar"
+			'sorgu = "SELECT (ISNULL(stok.FN_receteMiktarBul("&ajandaID&"),1) * stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar, stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar"
+			sorgu = "SELECT"
+			sorgu = sorgu & " (stok.FN_siparisMiktarBul("&ajandaID&","&firmaID&")) as toplamMiktar,"
+			sorgu = sorgu & " stok.FN_transferMiktarBul("&ajandaID&","&firmaID&") as transferMiktar"
 			rs.open sorgu, sbsv5,1,3
 				toplamMiktar	=	rs("toplamMiktar")
 				transferMiktar	=	rs("transferMiktar")
+Response.Write toplamMiktar&"-toplamMİk<br>"
+Response.Write transferMiktar&"-transMİk<br>"
 			rs.close
 				if not ISNULL(toplamMiktar) then
 					if cdbl(transferMiktar) >= cdbl(toplamMiktar) then
 						sorgu = "UPDATE portal.ajanda SET tamamlandi = 1 WHERE id = " & ajandaID
 						rs.open sorgu, sbsv5,3,3
+		Response.Write "transfer tamamlandi"
+					else
+					Response.Write "transfer eksik"
 					end if
 				end if
 			end if

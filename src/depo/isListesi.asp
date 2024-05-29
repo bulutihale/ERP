@@ -313,7 +313,7 @@ call logla("Depo Günlük İş Listesi")
 
 		$.ajax({
 			type:'POST',
-			url :'/ajanda/hucre_kaydet.asp',
+			url :'/portal/hucre_kaydet.asp',
 			data :{'alan':alan,'id':id,'tablo':tablo,'deger':$(this).val(),
 						},
 			beforeSend: function() {

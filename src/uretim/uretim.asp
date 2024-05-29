@@ -141,8 +141,9 @@ call logla("Üretim Kontrolü Ekranı")
 									sorgu = sorgu & " AND t1.stokID is not null"
 							else
 								sorgu = "SELECT t2.stokID, t3.stokKodu, t3.stokAd, t4.icerik, t1.miktar as receteMiktar, portal.siparisKalemIDbul("&firmaID&", t4.id) as siparisKalemID,"
-								sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem"
-									sorgu = sorgu & " WHERE id = (SELECT siparisKalemID FROM portal.ajanda WHERE id = t4.bagliAjandaID)) as siparisMiktar, t4.tamamlandi, t4.baslangicZaman,"
+								'sorgu = sorgu & " (SELECT miktar FROM teklif.siparisKalem WHERE id = (SELECT siparisKalemID FROM portal.ajanda WHERE id = t4.bagliAjandaID)) as siparisMiktar,"
+								sorgu = sorgu & " t4.miktar as siparisMiktar,"
+								sorgu = sorgu & " t4.tamamlandi, t4.baslangicZaman,"
 								sorgu = sorgu & " t4.bitisZaman, t4.depoKategori, t4.receteID, t5.receteAd, t4.teminDepoID, t4.surecDepoID, t4.techizatID, t4.uretimLot"
 								sorgu = sorgu & " FROM portal.ajanda t4"
 								sorgu = sorgu & " INNER JOIN recete.receteAdim t1 ON t4.receteAdimID = t1.receteAdimID"
@@ -151,6 +152,7 @@ call logla("Üretim Kontrolü Ekranı")
 								sorgu = sorgu & " LEFT JOIN recete.recete t5 ON t4.receteID = t5.receteID"
 								sorgu = sorgu & " WHERE t4.id = " & gorevID
 							end if
+
 							rs.Open sorgu, sbsv5, 1, 3
 								icerik				=	rs("icerik")
 								stokID				=	rs("stokID")

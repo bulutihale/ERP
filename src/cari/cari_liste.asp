@@ -89,7 +89,8 @@
 					sorgu = sorgu & "cari.cari.il," & vbcrlf
 					sorgu = sorgu & "cari.cari.cariTur," & vbcrlf
 					sorgu = sorgu & "cari.cari.manuelKayit," & vbcrlf
-					sorgu = sorgu & "cari.cari.silindi" & vbcrlf
+					sorgu = sorgu & "cari.cari.silindi," & vbcrlf
+					sorgu = sorgu & "ISNULL(cari.cari.fasonDepoID,0) as fasonDepoID" & vbcrlf
 					sorgu = sorgu & "FROM cari.cari" & vbcrlf
 					sorgu = sorgu & "WHERE" & vbcrlf
 					sorgu = sorgu & "cari.cari.firmaID in (select Id from portal.firma where portal.firma.anaFirmaID = " & firmaID & " OR portal.firma.Id = " & firmaID & ")" & vbcrlf
@@ -110,7 +111,7 @@
 							Response.Write "<th scope=""col"">" & translate("Telefonu","","") & "</th>"
 							Response.Write "<th scope=""col"">" & translate("Email","","") & "</th>"
 							Response.Write "<th scope=""col"">" & translate("Şehir","","") & "</th>"
-							Response.Write "<th scope=""col"">" & translate("Firma Türü","","") & "</th>"
+							Response.Write "<th scope=""col"">" & translate("Fason","","") & "</th>"
 							Response.Write "<th scope=""col"" class=""text-right"">" & translate("Entegrasyon","","")
 							Response.Write "</th>"
 								Response.Write "<th scope=""col"" class=""text-right"">" & translate("İşlem","","") & "</th>"
@@ -128,13 +129,21 @@
 								cariTur			=	rs("cariTur")
 								durum			=	rs("silindi")
 								manuelKayit		=	rs("manuelKayit")
+								fasonDepoID		=	rs("fasonDepoID")
+								if fasonDepoID > 0 then
+									fasonDurum = "EVET"
+								else
+									fasonDurum = "YOK"
+								end if
 								Response.Write "<tr>"
 									Response.Write "<td>" & cariKodu & "</td>"
 									Response.Write "<td>" & cariAd & "</td>"
 									Response.Write "<td>" & kvkkMaske(telefon,6,yetkiKontrol) & "</td>"
 									Response.Write "<td>" & kvkkMaske(email,6,yetkiKontrol) & "</td>"
 									Response.Write "<td>" & il & "</td>"
-									Response.Write "<td>" & arrayDegerBulfn(cariTur,sb_cariTurArr) & "</td>"
+									Response.Write "<td>"
+										Response.Write "<div class=""btn btn-sm rounded"">" & fasonDurum & "</div>"
+									Response.Write "</td>"
 									Response.Write "<td class=""text-right"">"
 									Response.Write truefalse(manuelKayit,"yokvar")
 									Response.Write "</td>"

@@ -65,7 +65,7 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " INNER JOIN teklif.siparis t2 ON t1.siparisID = t2.sipID"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " INNER JOIN cari.cari t4 ON t2.cariID = t4.cariID"
-			sorgu = sorgu & " LEFT JOIN portal.ajanda t5 ON t1.id = t5.sipariskalemID AND t5.silindi = 0"
+			sorgu = sorgu & " LEFT JOIN portal.ajanda t5 ON t1.id = t5.sipariskalemID AND t5.silindi = 0 AND isTur = 'uretimPlan'"
 			sorgu = sorgu & " LEFT JOIN teklifv2.ihale_urun t6 ON t1.iuID = t6.id"
 			sorgu = sorgu & " WHERE t2.firmaID = " & firmaID
 			if stokID <> "" then
@@ -86,6 +86,7 @@ Response.Write "<div class=""card-body"">"
 			sorgu = sorgu & " AND t2.siparisTarih >= '" & tarihsql2(t1) &"' AND t2.siparisTarih <= '" & tarihsql2(t2) &"'"
 			sorgu = sorgu & " AND t2.siparisTur = 'S'"
 			sorgu = sorgu & " ORDER BY t2.siparisNo DESC"
+	'Response.Write sorgu		
 			rs.open sorgu, sbsv5, 1, 3
 
 
@@ -131,7 +132,7 @@ Response.Write "<div class=""card-body"">"
 						teslimDurum	=	"eksik"
 					end if
 					
-					Response.Write "<tr class=""" & satirClass & """>"
+					Response.Write "<tr id=""divSipListe"&siparisKalemID&""" class=""" & satirClass & """>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write siparisTarih
 							Response.Write "<hr class=""p-0 m-0"">"
@@ -176,9 +177,18 @@ Response.Write "<div class=""card-body"">"
 								Response.Write "<div class=""btn btn-sm btn-info"" onclick=""modalajax('/satis/modal_fason_miktar.asp?sipKalemID="&siparisKalemID&"')"">FASON</div>"
 							end if
 						Response.Write "</td>"
-						Response.Write "<td id=""divFasonMiktar"&siparisKalemID&""" class=""text-right"">"
-							if miktarFason > 0 then fClass = " bg-danger rounded p-2 bold " else fClass="" end if
-							Response.Write "<div class=""" & fClass & """>" & miktarFason & " " & mikBirim & "</div>"'fasona girecek olan miktar
+						Response.Write "<td class=""text-right"">"
+
+							if miktarFason > 0 then
+								fClass = " bg-danger rounded p-2 bold text-center "
+								Response.Write "<div class=""" & fClass & """>"
+									Response.Write "<div class="""">" & miktarFason & " " & mikBirim & "</div>"'fasona girecek olan miktar
+									Response.Write "<span onclick=""modalajax('/satis/modal_fason_bilgi.asp?sipKalemID="&siparisKalemID&"')"" class=""pointer icon information"" title=""fason firma - adet bilgileri""></span>"
+									Response.Write "<span onclick=""$('#ortaalan').load('/fason/fason_ana.asp',{siparisKalemID:" & siparisKalemID & ",stokID:" & stokID & "})"" class=""pointer ml-3 icon date-magnify"" title=""fason modülüne geç""></span>"
+								Response.Write "</div>"
+							else
+								fClass=""
+							end if
 						Response.Write "</td>"
 						Response.Write "<td id=""divMiktar"&siparisKalemID&""" class=""text-right"">"
 							Response.Write "<div>" & miktar & " " & mikBirim & "</div>"'üretime girecek olan miktar
@@ -201,9 +211,11 @@ Response.Write "<div class=""card-body"">"
 						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
 							Response.Write "<div class=""btn btn-sm btn-warning border rounded"" onclick=""modalajax('/malKabul/mal_giris_detay.asp?stokID="&stokID&"&siparisKalemID="&siparisKalemID&"')"">detay</div>"
-							If not isdate(planTarih) Then
+							If not isdate(planTarih) AND sipMiktar > miktarFason Then
 								'Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
 								Response.Write "<div class=""btn btn-sm btn-info border rounded"" onclick=""modalajaxfit('/recete/recete_sec.asp?cariID=" & cariID & "&stokID="&stokID&"&yer=modal&isTur=uretimPlan&siparisKalemID=" & siparisKalemID & "')"">planla</div>"
+							elseif sipMiktar = miktarFason then
+								'Response.Write "<div class=""btn btn-sm btn-secondary border rounded"" onclick=""$('#ortaalan').load('/fason/fason_ana.asp',{siparisKalemID:" & siparisKalemID & "})"">FASON</div>"
 							Else
 								Response.Write "<div class=""btn btn-sm btn-success border rounded"" onclick=""modalajaxfit('/ajanda/ajanda.asp?yer=modal&isTur=uretimPlan&sorgulananTarih=" & planTarih & "')"">" & planTarih & "</div>"
 							End if

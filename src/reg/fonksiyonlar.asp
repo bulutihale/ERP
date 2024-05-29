@@ -2639,6 +2639,25 @@ Function repTr(text)
 	end if
 End Function
 
+Function repAscii(text)
+	if text <> "" then
+		text	=	Replace(text,"ğ","&#287;")
+		text	=	Replace(text,"ü","&#252;")
+		text	=	Replace(text,"ş","&#351;")
+		text	=	Replace(text,"ı","&#305;")
+		text	=	Replace(text,"ö","&#246;")
+		text	=	Replace(text,"ç","&#231;")
+
+		text	=	Replace(text,"Ğ","&#286;")
+		text	=	Replace(text,"Ü","&#220;")
+		text	=	Replace(text,"Ş","&#350;")
+		text	=	Replace(text,"İ","&#304;")
+		text	=	Replace(text,"Ö","&#214;")
+		text	=	Replace(text,"Ç","&#199;")
+		repAscii	=	text
+	end if
+End Function
+
 
 
 

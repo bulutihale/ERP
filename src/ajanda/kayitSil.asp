@@ -19,7 +19,7 @@
 '##### DOSYA SİL
 '##### DOSYA SİL
 
-	sorgu = "SELECT t1.id FROM portal.ajanda t1 WHERE t1.bagliAjandaID = " & silinecekID & " AND t1.tamamlandi = 1"
+	sorgu = "SELECT t1.id FROM portal.ajanda t1 WHERE t1.bagliAjandaID = " & silinecekID & " AND t1.tamamlandi = 1 AND silindi = 0"
 	rs.open sorgu,sbsv5,1,3
 		kayitKontrol	=	rs.recordcount
 	rs.close

@@ -21,7 +21,9 @@
 
 
 if gorevID <> "" then
-	sorgu = "Select top 1 * from cari.cari where firmaID = " & firmaID & " AND cariID = " & gorevID
+	sorgu = "SELECT top 1 * FROM cari.cari t1"
+	sorgu = sorgu & " LEFT JOIN stok.depo t2 ON t1.fasonDepoID = t2.id"
+	sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.cariID = " & gorevID
 	rs.open sorgu, sbsv5, 1, 3
 		cariKodu			=	rs("cariKodu")'
 		cariAd				=	rs("cariAd")'
@@ -40,6 +42,10 @@ if gorevID <> "" then
 		ilce				=	rs("ilce")
 		silindi				=	rs("silindi")
 		ulkeID				=	rs("ulkeID")
+		fasonDepoKilit		=	rs("fasonDepoKilit")
+		fasonDepoID			=	rs("fasonDepoID")
+		depoAd				=	rs("depoAd")
+		depoDefDeger		=	fasonDepoID & "###" & depoAd
 	rs.close
 end if
 
@@ -47,8 +53,17 @@ end if
 		defDeger = defDegerBul("portal.ulkeler", "id", ulkeID, "adTurkce")
 	end if
 
+	if fasonDepoKilit = False then
+		kilitValue	=	1
+		chkDurum1	=	""
+		kilitli		=	"hayir"
+	else
+		kilitValue	=	0
+		chkDurum1	=	" checked "
+		kilitli		=	"evet"
+	end if
 
-
+if isnull(fasonDepoID) then fasonDepoID = 0
 
 if gorevID = "" then
 	call logla(translate("Cari Ayrıntıları Ekranı","",""))
@@ -164,7 +179,25 @@ end if
 					Response.Write "<div class=""badge badge-secondary"">" & translate("Posta Adresi","","") & "</div>"
 					call formtextarea("adres",adres,"","","form-control","","adres","")
 				Response.Write "</div>"
-				'## unvan
+
+				Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs mb-4"">"
+					Response.Write "<div class=""badge badge-secondary"">Fason Depo Tanımı<span class=""icon information pointer ml-2"" onclick=""swal('','fason işlemleri için firmaya tanımlı bir fason depo olmalıdır, fason depo tanımlaması yapılmamış bir FİRMA fason işlemleri menüsünde görüntülenmez.')""></span></div>"
+					if kilitli = "evet" then
+						Response.Write "<div class=""bold text-danger"">" & depoAd & "</div>"
+					else
+						call formselectv2("fasonDepoID",cint(fasonDepoID),"","","formSelect2 fasonDepoID border","","fasonDepoID","","data-holderyazi=""Fason depo seçimi"" data-jsondosya=""JSON_depolar"" data-miniput=""0"" data-sart=""('fason')"" data-defdeger="""&depoDefDeger&"""")
+					end if
+				Response.Write "</div>"
+
+				Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs mb-4 text-center"">"
+					Response.Write "<div class=""badge badge-secondary rounded"">Fason Depo Kilit</div>"
+					if kilitli = "evet" then
+						Response.Write "<div class=""bold text-danger"">kilitli</div>"
+					else
+						Response.Write "<input type=""checkbox"" id=""fasonDepoKilit"" name=""fasonDepoKilit"" class=""form-control inp30"" value="""&kilitValue&""" "&chkDurum1&">"
+					end if
+				Response.Write "</div>"
+
 			Response.Write "<div class=""col-lg-12 col-md-12 col-sm-12 col-xs"">"
 				if manuelKayit = False then
 					Response.Write "<button class=""form-control btn btn-success"" type=""submit"" disabled>" & translate("Kaydet","","") & "</button>"

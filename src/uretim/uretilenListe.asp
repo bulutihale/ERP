@@ -11,6 +11,8 @@
 	t3				=	Request.Form("t3")
 	t4				=	Request.Form("t4")
 	siparisNo		=	Request.Form("siparisNo")
+	ajandaID		=	Request.Form("ajandaID")
+	sadeceUpdate	=	Request.Form("sadeceUpdate")
 	listeTur		=	session("sayfa5")
 	if listeTur = "" then
 		listeTur	=	Request.Form("listeTur")
@@ -33,7 +35,7 @@
 	'####### varsayılan tarih sınırları
 		if t1 = "" then t1 = date() - 60 end if
 		if t2 = "" then t2 = date() end if
-		t2 = t2+1
+		t2 = t2 + 1
 	'####### /varsayılan tarih sınırları
 	
 
@@ -76,11 +78,15 @@ Response.Write "<div class=""card-body"">"
             sorgu = "SELECT"
 			sorgu = sorgu & " DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) as planTarih, t1.baslangicZaman, t1.bitisZaman, t2.stokID, t2.stokKodu, t2.stokAd, "
 			sorgu = sorgu & " t1.id as ajandaID, t1.tamamlandi, t1.receteAdimID, t1.manuelPlan,"
-			sorgu = sorgu & " ISNULL([stok].[FN_siparisMiktarBul] (t1.id , "&firmaID&"),t1.miktar) as sipMiktar,"
+			'sorgu = sorgu & " ISNULL([stok].[FN_siparisMiktarBul] (t1.id , "&firmaID&"),t1.miktar) as sipMiktar,"
+			'sorgu = sorgu & " (CASE WHEN t1.miktar = 0 THEN [stok].[FN_siparisMiktarBul] (t1.id , "&firmaID&") ELSE t1.miktar END) as sipMiktar,"
+			sorgu = sorgu & " (CASE WHEN t1.miktar = 0 THEN ([stok].[FN_siparisMiktarBul] (t1.id , "&firmaID&") * ISNULL([stok].[FN_receteMiktarBul] (t1.id),1)) ELSE t1.miktar END) as sipMiktar,"
+			sorgu = sorgu & " stok.FN_transferMiktarBul ( t1.id, "&firmaID&" ) as transferMiktar, "
 			sorgu = sorgu & " ISNULL([stok].[FN_receteMiktarBul] (t1.id),1) as bilesenMiktar,"
 			sorgu = sorgu & " [stok].[FN_anaBirimADBul] ( t2.stokID, 'kAd') as miktarBirim,"
 			sorgu = sorgu & " ISNULL(portal.FN_sipariscariAdbul("&firmaID&", t1.id),N'<span class=""font-italic bold text-info"">Manuel İstem</span>') as siparisCariAd,"
-			sorgu = sorgu & " t1.icerik, t1.tarih"
+			sorgu = sorgu & " t1.icerik, t1.tarih, t1.fasonMiktarKilit," 
+			sorgu = sorgu & " ISNULL((SELECT ISNULL(miktar,0) as miktar FROM fason.fasonAna WHERE silindi = 0 AND id = (SELECT fasonAnaID FROM portal.ajanda WHERE id = t1.bagliAjandaID AND silindi = 0)),0) as fasonMiktar"
 			sorgu = sorgu & " FROM portal.ajanda t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t2 ON t1.stokID = t2.stokID"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID
@@ -92,10 +98,17 @@ Response.Write "<div class=""card-body"">"
 				sorgu = sorgu & " AND t2.stokID = " & stokID & ""
 			end if
 			if t3 <> "" then
-				sorgu = sorgu & " AND t1.baslangicZaman >= '" & tarihsql(t3) &"'"	
+				sorgu = sorgu & " AND t1.baslangicZaman >= '" & tarihsql(t3) &"'"
+			else
+				sorgu = sorgu & " AND DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) >= '" & tarihsql(t1) &"'"
 			end if
 			if t4 <> "" then
 				sorgu = sorgu & " AND t1.baslangicZaman <= '" & tarihsql(t4) &"'"	
+			else
+				'sorgu = sorgu & " AND t1.baslangicZaman <= '" & tarihsql(t2) &"'"	
+			end if
+			if sadeceUpdate = "evet" then
+				sorgu = sorgu & " AND t1.id = " & ajandaID & ""	
 			end if
 			sorgu = sorgu & " AND t1.silindi = 0"
 			sorgu = sorgu & " ORDER BY DATEFROMPARTS(t1.hangiYil, t1.hangiAy, t1.hangiGun) DESC"
@@ -115,15 +128,23 @@ Response.Write "<div class=""card-body"">"
 					stokKodu			=	rs("stokKodu")
 					stokAd				=	rs("stokAd")
 					icerik				=	rs("icerik")
+					transferMiktar		=	rs("transferMiktar")
 					sipMiktar			=	rs("sipMiktar")
+					fasonMiktar			=	rs("fasonMiktar")
 					bilesenMiktar		=	rs("bilesenMiktar")
-					bilesenToplamMiktar	=	bilesenMiktar * sipMiktar
+					
+					'asonToplamMiktar	=	fasonMiktar * bilesenMiktar
+					fasonToplamMiktar	=	sipMiktar
+					'bilesenToplamMiktar	=	(bilesenMiktar * sipMiktar)
+					bilesenToplamMiktar	=	sipMiktar
+					
 					miktarBirim			=	rs("miktarBirim")
 					siparisCariAd		=	rs("siparisCariAd")
 					planTarih			=	tarihtr(rs("planTarih"))
 					baslangicZaman		=	rs("baslangicZaman")
 					bitisZaman			=	rs("bitisZaman")
 					tamamlandi			=	rs("tamamlandi")
+					fasonMiktarKilit	=	rs("fasonMiktarKilit")
 					if tamamlandi = 1 then
 						trClass= " table-success "
 					else
@@ -147,7 +168,18 @@ Response.Write "<div class=""card-body"">"
 							Response.Write "<div class="""">" & stokKodu & " - " & stokAd & "</div>"
 							Response.Write "<div class=""mt-2 ml-3 font-italic fontkucuk2"">" & icerik & "</div>"
 						Response.Write "</td>"
-						Response.Write "<td class=""text-right"">" & bilesenToplamMiktar & " " & miktarBirim &"</td>"
+						Response.Write "<td class=""text-right"">"
+				'Response.Write bilesenToplamMiktar & "<br>"
+				'Response.Write fasonToplamMiktar & "<br>"
+						if fasonMiktar > 0 then
+							isFason	=	"evet"
+							Response.Write fasonToplamMiktar & " " & miktarBirim & "/" & transferMiktar
+						else
+							isFason = "hayir"
+							Response.Write bilesenToplamMiktar & " " & miktarBirim & "/" & transferMiktar
+						end if
+				'Response.Write "<br>"&isFason
+						Response.Write "</td>"
 						Response.Write "<td class=""text-center"">"
 						'Response.Write "<div class=""container-flex"">"
 							Response.Write "<div class=""row container"">"
@@ -178,8 +210,13 @@ Response.Write "<div class=""card-body"">"
 							Response.Write "<div class=""col-3"">"
 								Response.Write "<div class=""pointer mr-2"""
 									if listeTur = "transfer" then
+
 										if tamamlandi = 0 then
-											Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&listeTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+											if isFason = "hayir" OR (isFason = "evet" AND fasonMiktarKilit = 1) then
+												Response.Write " onclick=""modalajax('/depo/depo_transfer.asp?listeTur="&listeTur&"&receteAdimID="&receteAdimID64&"&ajandaID=" & ajandaID64 & "&stokID=" & stokID64 & "')"""
+											elseif isFason = "evet" AND fasonMiktarKilit = 0 then
+												Response.Write " onclick=""swal('','Fason üreticiye gönderilecek bileşenlerin transfer edilebilmesi için öncelikle fason modülünden \'ajanda sevk miktarlarını kilitle\' işlemi yapılmalıdır.')"""
+											end if
 										else
 											Response.Write " onclick=""swal('','Transfer işlemi yapılmış.')"""
 										end if

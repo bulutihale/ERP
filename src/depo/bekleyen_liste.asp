@@ -9,8 +9,8 @@
     hata    		=   ""
 	If depoKategori = "uretim" Then 
 		modulAd 		=   "Üretim"
-	Else
-		' false
+	Elseif depoKategori = "fason" Then 
+		modulAd 		=   "Fason"
 	End if
     Response.Flush()
 '###### ANA TANIMLAMALAR
@@ -28,12 +28,19 @@ yetkiKontrol 	= 	yetkibul(modulAd)
 	if hata = "" and yetkiKontrol > 0 then
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.kid as transferKid, t1.stokHareketID, t1.stokKodu, t3.stokAd, t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.lotSKT, t1.belgeNo,"
-			sorgu = sorgu & " t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID, t5.depoAd as cikisDepo"
+			sorgu = sorgu & " t3.stokID, t1.cariID, t4.depoAd, t1.refHareketID, t5.depoAd as cikisDepo, t1.ajandaID"
 			sorgu = sorgu & " FROM stok.stokHareket t1"
 			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
 			sorgu = sorgu & " INNER JOIN stok.depo t4 ON t1.depoID = t4.id"
+			'sorgu = sorgu & " INNER JOIN stok.depo t4 ON t1.depoID = t4.id"
 			sorgu = sorgu & " LEFT JOIN stok.depo t5 ON t5.id = (SELECT depoID FROM stok.stokHareket WHERE stokHareketID = t1.refHareketID)"
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.silindi = 0 AND t1.stokHareketTuru = 'GB'"
+			if modulAd = "Fason" then
+				sorgu = sorgu & " AND t4.depoKategori = 'fason'"
+				sorgu = sorgu & " AND t1.receteAdimID is null"
+			else
+				sorgu = sorgu & " AND t4.depoKategori <> 'fason'"
+			end if
 			sorgu = sorgu & " ORDER BY t1.girisTarih DESC"
 			rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount = 0 then
@@ -98,6 +105,9 @@ yetkiKontrol 	= 	yetkibul(modulAd)
 					cariID				=	rs("cariID")
 					cariID64		 	=	cariID
 					cariID64			=	base64_encode_tr(cariID64)
+					ajandaID			=	rs("ajandaID")
+					ajandaID64			=	ajandaID
+					ajandaID64			=	base64_encode_tr(ajandaID64)
 					Response.Write "<tr>"
 						Response.Write "<td class=""text-danger bold"">" & cikisDepo & "</td>"
 						Response.Write "<td class=""text-success bold"">" & depoAd & "</td>"
@@ -111,14 +121,14 @@ yetkiKontrol 	= 	yetkibul(modulAd)
 						Response.Write "<td class=""text-right"">"
 						'# transfer red
 						Response.Write "<div class=""badge badge-pill badge-danger pointer mr-2"""
-							Response.Write " onClick=""urunCevap('red','stokHareketID',"&stokHareketID&",'silindi','stok.stokHareket','1',"&refHareketID&",'depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','')"">"
+							Response.Write " onClick=""urunCevap('red','stokHareketID',"&stokHareketID&",'silindi','stok.stokHareket','1',"&refHareketID&",'depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','" &ajandaID64 & "','','','','','')"">"
 							Response.Write "<i class=""mdi mdi-window-close""></i>"
 						Response.Write "</div>"
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
 						if transferKid <> kid then
-							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','')"">"
+							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','','')"">"
 						else
 							Response.Write " onClick=""swal('','Çıkışını yaptığınız transferin girişini onaylayamazsınız.','error')"">"
 						end if

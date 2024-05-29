@@ -265,6 +265,7 @@ yetkiKontrol = yetkibul(modulAd)
 				rs.movenext
 				loop
 			rs.close
+'Response.Write miktarTamamKontrol & "jlşjlkıhjjhujıkhujkıhnjk"
 
 			if miktarTamamKontrol = "tamam" then
 				sorgu = "UPDATE portal.ajanda SET bitisZaman = getdate(), tamamlandi = 1  WHERE id = " & ajandaID & " AND silindi = 0"

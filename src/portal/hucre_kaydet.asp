@@ -15,6 +15,15 @@
 		deger					=	Request.Form("deger")
 		veriTuru				=	Request.Form("veriTuru")
 		ntfDeger				=	Request.Form("ntfDeger")
+
+		ajandaID64				=	Request.Form("ajandaID64")
+
+		if ajandaID64 <> "" then
+			id				=	ajandaID64
+			id				=	base64_decode_tr(ajandaID64)
+		else
+		end if
+		
 	'##### request
 	'##### request
 
