@@ -37,12 +37,14 @@ yetkiKontrol 	= 	yetkibul(modulAd)
 			sorgu = sorgu & " WHERE t1.firmaID = " & firmaID & " AND t1.silindi = 0 AND t1.stokHareketTuru = 'GB'"
 			if modulAd = "Fason" then
 				sorgu = sorgu & " AND t4.depoKategori = 'fason'"
-				sorgu = sorgu & " AND t1.receteAdimID is null"
+				'sorgu = sorgu & " AND t1.receteAdimID is null"
 			else
 				sorgu = sorgu & " AND t4.depoKategori <> 'fason'"
 			end if
 			sorgu = sorgu & " ORDER BY t1.girisTarih DESC"
 			rs.open sorgu, sbsv5, 1, 3
+			'Response.Write sorgu
+			'Response.end
 			if rs.recordcount = 0 then
 				call yetkisizGiris("Onay Bekleyen Kayıt Bulunamadı","Bilgi","")
 			else
@@ -127,11 +129,14 @@ yetkiKontrol 	= 	yetkibul(modulAd)
 						'# transfer red
 						'# giriş onayla
 						Response.Write "<div class=""badge badge-pill badge-success pointer"""
-						if transferKid <> kid then
-							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','','')"">"
-						else
-							Response.Write " onClick=""swal('','Çıkışını yaptığınız transferin girişini onaylayamazsınız.','error')"">"
+						if transferKid <> kid AND depoKategori <> "fason" then
+							Response.Write " onClick=""urunCevap('kabul','stokHareketID',"&stokHareketID&",'stokHareketTuru','stok.stokHareket','G','','depoRed','"&depoKategori&"','tabloBekleyen','bekleyenListe','','','','','','','')"""
+						elseif transferKid = kid then
+							Response.Write " onClick=""swal('','Çıkışını yaptığınız transferin girişini onaylayamazsınız.','error')"""
+						elseif transferKid <> kid AND depoKategori = "fason" then
+							Response.Write " onClick=""swal('','Fason depo onayları Süreç Takip bölümünden yapılabilir','error')"""
 						end if
+							Response.Write ">"
 							Response.Write "<i class=""mdi mdi-chevron-right""></i>"
 						Response.Write "</div>"
 						'# /giriş onayla

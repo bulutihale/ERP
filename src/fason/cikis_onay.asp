@@ -62,7 +62,7 @@
 			stokHareketID		=	rs("stokHareketID")
 			stokID				=	rs("stokID")
 			
-			sorgu = "INSERT INTO fason.fasonDetay(fasonAnaID, stokID, gonderimZamani, gidisStokhareketID, belgeNo) VALUES(" & fasonAnaID & ", " & stokID & ", getdate(), " & stokHareketID & ", '" & belgeNo &"')"
+			sorgu = "INSERT INTO fason.fasonDetay(fasonAnaID, stokID, onayZamani, gidisStokhareketID, belgeNo) VALUES(" & fasonAnaID & ", " & stokID & ", getdate(), " & stokHareketID & ", '" & belgeNo &"')"
 			rs1.open sorgu, sbsv5, 3, 3
 		rs.movenext
 		next

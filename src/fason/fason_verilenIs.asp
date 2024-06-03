@@ -17,6 +17,7 @@
 
 	islem			=	Request("islem")
 	cariID			=	Request("cariID")
+	fasonAnaID		=	Request("fasonAnaID")
 
 '###### ANA TANIMLAMALAR
 '###### ANA TANIMLAMALAR
@@ -34,16 +35,19 @@
 	sorgu = sorgu & " INNER JOIN stok.stok t6 ON t3.stokID = t6.stokID"
 	sorgu = sorgu & " INNER JOIN cari.cari t7 ON t7.cariID = " & cariID & ""
 	sorgu = sorgu & " WHERE t1.silindi = 0 AND t2.fasonCariID = " & cariID
+	if fasonAnaID <> "" then
+		sorgu = sorgu & " AND t2.id = " & fasonAnaID
+	end if
 	rs.open sorgu, sbsv5, 1, 3
 	if rs.recordcount = 0 then
 		Response.Write "kayıt yok"
 	else
 		fasonCariAd		=	rs("fasonCariAd")
 
-	Response.Write "<div class=""card-header text-center bold"">"
-		Response.Write "<div>" & fasonCariAd & "</div>"
-	Response.Write "</div>"
-
+		Response.Write "<div class=""container"">"
+			Response.Write "<div class=""card-header text-center bold"">"
+				Response.Write "<div>" & fasonCariAd & "</div>"
+			Response.Write "</div>"
 
 		Response.Write "<div class=""container"">"
 			Response.Write "<div class=""row text-center bold"">"
@@ -56,6 +60,7 @@
 			cariAd			=	rs("cariAd")
 			stokAd			=	rs("stokAd")
 			fasonMiktar		=	rs("fasonMiktar")
+			fasonMiktar		=	OndalikKontrol(fasonMiktar)
 			mikBirim		=	rs("mikBirim")
 				Response.Write "<div id=""satir"&zi&""" class=""row fontkucuk mt-2 hoverGel rounded mSatir"" onclick="""">"
 					Response.Write "<div class=""col-4"">" & stokAd & "</div>"
@@ -78,6 +83,7 @@
 				Response.Write "</div>"
 			rs.movenext
 			next
+		Response.Write "</div>"
 		Response.Write "</div>"
 
 	end if

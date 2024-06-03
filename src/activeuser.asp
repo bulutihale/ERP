@@ -72,6 +72,16 @@ end if
 '#### BİLDİRİM YÖNETİMİ
 '#### BİLDİRİM YÖNETİMİ
 
+        '## FASON SEVK ONAY BEKLEYEN
+        '## FASON SEVK ONAY BEKLEYEN
+			sorgu = "SELECT COUNT(stokhareketID) as fasonGBsayi FROM stok.stokhareket WHERE silindi = 0 AND stokHareketTuru = 'GB' AND ajandaID IN (SELECT id FROM portal.ajanda WHERE bagliAjandaID IN (SELECT id FROM portal.ajanda WHERE isTur = 'fason'))"
+			rs.Open sorgu, sbsv5, 1, 3
+				fasonGBsayi		=	rs("fasonGBsayi")
+			rs.close
+                komut = "$('#fasonGBsayi').text('" & fasonGBsayi & "');"
+                call jsrun(komut)
+        '## /FASON SEVK ONAY BEKLEYEN
+        '## /FASON SEVK ONAY BEKLEYEN
 
 '#### MAİL
 '#### MAİL

@@ -422,6 +422,30 @@ if kid <> "" then
 					Response.Write "</li>"
 				end if
 			'## MAİL
+			'## FASON SEVK ONAY BEKLEYEN
+			sorgu = "SELECT COUNT(stokhareketID) as fasonGBsayi FROM stok.stokhareket WHERE silindi = 0 AND stokHareketTuru = 'GB' AND ajandaID IN (SELECT id FROM portal.ajanda WHERE bagliAjandaID IN (SELECT id FROM portal.ajanda WHERE isTur = 'fason'))"
+			rs.Open sorgu, sbsv5, 1, 3
+				fasonGBsayi		=	rs("fasonGBsayi")
+			rs.close
+			sorgu = "SELECT t1.personelGrupIndexID"
+			sorgu = sorgu & " FROM personel.personelGrupIndex t1" 
+			sorgu = sorgu & " INNER JOIN personel.personelGrup t2 ON t1.personelGrupID = t2.personelGrupID"
+			sorgu = sorgu & " WHERE t2.grupAd = 'Depo' AND t1.personelID = " & kid
+			rs1.Open sorgu, sbsv5, 1, 3
+				personelGrupIndexID		=	rs1.recordcount
+			rs1.close
+				Response.Write "<li class=""nav-item dropdown>"
+					Response.Write "<a class=""nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"" id="""" href=""#"" data-toggle="""" aria-expanded=""true"">"
+						if personelGrupIndexID > 0 then
+							Response.Write "<i onclick=""$.post('/fason/onay_talep.asp')"" style=""font-size:30px;"" class=""pointer mdi mdi-truck"" data-toggle=""popoverModal"" title="""&repAscii("fason depoya gönderim için hazırlanmış ürünler onay bekliyor. Yöneticiye onay talep maili göndermek için tıklayınız.")&"""></i>"
+						else
+							Response.Write "<i onclick=""swal('UYARI','sadece depo grubuna dahil olan kullanıcılar fason çıkış onay talebi için e-posta gönderebilir.')"" class=""pointer mdi mdi-truck"" style=""font-size:30px;"" data-toggle=""popoverModal"" title="""&repAscii("fason depoya gönderim için hazırlanmış ürünler onay bekliyor. Yöneticiye onay talep maili göndermek için tıklayınız.")&"""></i>"
+						end if
+						Response.Write "<div class=""badge badge-pill badge-success""><span id=""fasonGBsayi"">" & fasonGBsayi & "</span></div>"
+					Response.Write "</a>"
+				Response.Write "</li>"
+			
+			'## /FASON SEVK ONAY BEKLEYEN
 			'## BİLDİRİM ALANI
 				sorgu = "Select top 50 notificationID,icerik,onem from portal.notification where okundu = 0 and firmaID = " & firmaID & " and kid =  " & kid & " and tarih >= '" & tarihsql(date()-3) & "' order by notificationID desc"
 				rs.Open sorgu, sbsv5, 1, 3

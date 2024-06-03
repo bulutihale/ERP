@@ -30,18 +30,19 @@ Response.Write "<div class=""card-deck"">"
 
 	Response.Write "<div class=""card col-3"">"
 		Response.Write "<div class=""card-header"">"	
-			Response.Write "<div class=""btn btn-sm rounded btn-info"" onclick=""working('DIV1','30px','30px');$('#DIV1').load('/fason/fason_firmalar.asp', {islem:'gidecekUrun'})"">Gönderim Bekleyen</div>"
-			Response.Write "<div class=""btn btn-sm rounded btn-info ml-2"">Ürünler</div>"
+			Response.Write "<div id=""btnFsnIs"" class=""btn btn-sm rounded btn-secondary fsnBtn2"" onclick=""butonRenk('btnFsnIs','warning','fsnBtn2');working('DIV1','30px','30px');$('#DIV2').html('');$('#DIV3').html('');$('#DIV1').load('/fason/fason_firmalar.asp', {islem:'gidecekUrun'})"">Fason İşler</div>"
+			Response.Write "<div id=""btnSevk1"" class=""btn btn-sm rounded btn-secondary ml-2 fsnBtn2"" onclick=""butonRenk('btnSevk1','warning','fsnBtn2');working('DIV1','30px','30px');$('#DIV2').html('');$('#DIV3').html('');$('#DIV1').load('/fason/sevk_edilecekler.asp', {islem:'gidecekUrun'})"">sevk belgeleri</div>"
+			Response.Write "<div id=""btnOnay"" class=""btn btn-sm rounded btn-secondary ml-2 fsnBtn2"" onclick=""butonRenk('btnOnay','warning','fsnBtn2');working('DIV1','30px','30px');$('#DIV2').html('');$('#DIV3').html('');$('#DIV1').load('/fason/onay_bekleyen.asp')"">onay bekleyen</div>"
 		Response.Write "</div>"	
-		Response.Write "<div id=""DIV1"" class=""card-body""></div>"
+		Response.Write "<div id=""DIV1""></div>"
 	Response.Write "</div>"
 
 	Response.Write "<div class=""card col-4"">"
-		Response.Write "<div id=""DIV2""></div>"
+		Response.Write "<div id=""DIV2"" class=""scroll-ekle3""></div>"
 	Response.Write "</div>"
 
 	Response.Write "<div class=""card col-5"">"
-		Response.Write "<div id=""DIV3"" ></div>"
+		Response.Write "<div id=""DIV3"" class=""scroll-ekle3""></div>"
 	Response.Write "</div>"
 
 

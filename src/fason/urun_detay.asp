@@ -34,24 +34,28 @@
 		else
 			stokAd			=	rs("stokAd")
 			ajandaID		=	rs("ajandaID")
-
-			Response.Write "<div class=""card-header text-center bold"">"
-				Response.Write "<div class=""row"">"
-					Response.Write "<div class=""col-1 btn btn-sm rounded btn-secondary"" "
-						Response.Write " onclick=""listeOnayla('onayListe'," & fasonAnaID & ")"" "
-						Response.Write " data-toggle=""popoverModal"" "
-						Response.Write " title="""&repAscii("toplu onay, işaretli tüm ürünlerin fason depoya kabul işlemini onayla.")&""">"
-						Response.Write "<i class=""icon tick""></i>"
+		
+				Response.Write "<div class=""card-header text-center bold"">"
+					Response.Write "<div class=""row"">"
+						Response.Write "<div class=""col-1 btn btn-sm rounded btn-secondary"" "
+						if yetkiKontrol = 9 then
+							Response.Write " onclick=""listeOnayla('onayListe'," & fasonAnaID & ")"" "
+						else
+							Response.Write " onclick=""swal('','sevk işlemini onaylama yetkiniz yok.','error')"" "
+						end if
+							Response.Write " data-toggle=""popoverModal"" "
+							Response.Write " title="""&repAscii("toplu onay, işaretli tüm ürünlerin fason depoya kabul işlemini onayla.")&""">"
+							Response.Write "<i class=""icon tick""></i>"
+						Response.Write "</div>"
+						Response.Write "<div class=""col-11"">" & stokAd & "</div>"
 					Response.Write "</div>"
-					Response.Write "<div class=""col-11"">" & stokAd & "</div>"
 				Response.Write "</div>"
-			Response.Write "</div>"
 		end if
 	rs.close
 
 	sorgu = "SELECT t1.id as ajandaID, t2.stokKodu, t2.stokAd,"
 	sorgu = sorgu & " [stok].[FN_anaBirimADBul] ( t1.stokID, 'kAD' ) as mikBirim, t3.lot, t3.refHareketID, t3.stokHareketTuru,"
-	sorgu = sorgu & " t3.stokHareketID, t4.belgeNo, t4.gonderimZamani,"
+	sorgu = sorgu & " t3.stokHareketID, t4.belgeNo, t4.onayZamani,"
 	sorgu = sorgu & " CASE WHEN t3.miktar is null THEN t1.miktar ELSE t3.miktar END as miktar,"
 	sorgu = sorgu & " CASE"
 		sorgu = sorgu & " WHEN"
@@ -101,6 +105,7 @@ oncekiBelgeNo		=	""
 		ajandaID64			=	ajandaID
 		ajandaID64			=	base64_encode_tr(ajandaID64)
 		miktar				=	rs("miktar")
+		miktar				=	OndalikKontrol(miktar)
 		mikBirim			=	rs("mikBirim")
 		stokKodu			=	rs("stokKodu")
 		stokAd				=	rs("stokAd")
@@ -112,12 +117,19 @@ oncekiBelgeNo		=	""
 		stokHareketTuru		=	rs("stokHareketTuru")
 		stokHareketID		=	rs("stokHareketID")
 		belgeNo				=	rs("belgeNo")
-		gonderimZamani		=	rs("gonderimZamani")
+		onayZamani			=	rs("onayZamani")
 
 		if belgeNo <> oncekiBelgeNo then
-			Response.Write "<div class=""mt-2 border-top border-dark"">" & belgeNo & " - " & gonderimZamani &"</div>"
+			Response.Write "<div class=""row border-top border-dark mt-2"">"
+				Response.Write "<div class=""col-1"">"
+				Response.Write "<a class=""text-left pointer"" href=""/fason/giden_bilesen_pdf.asp?belgeNo="&belgeNo&""" target=""_blank""><i class=""fa fa-file-pdf-o"" title=""PDF oluştur.""></i></a>"
+				Response.Write "</div>"
+				Response.Write "<div class=""col-11 pointer"" onclick=""modalajaxfit('/fason/giden_urun_belge.asp?belgeNo="&belgeNo&"')"">"
+					Response.Write belgeNo & " - " & onayZamani
+				Response.Write "</div>"
+			Response.Write "</div>"
 		end if
-			Response.Write "<div id=""kalemDiv"&ajandaID&""" class=""row fontkucuk mt-2 hoverGel pointer rounded"">"
+			Response.Write "<div id=""kalemDiv"&ajandaID&""" class=""row fontkucuk mt-2 pointer rounded"">"
 				Response.Write "<div class=""col-2 text-center"">"
 					Response.Write "<div class=""row"">"
 						Response.Write "<div class=""col m-0 p-0"">"
