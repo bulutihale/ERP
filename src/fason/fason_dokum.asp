@@ -138,6 +138,43 @@ end if
 	}
 
 
+
+	function gonderimKaydet(belgeNo, listeTur, islem){
+
+		if(islem == 'kaydet'){
+			var baslik='Depo çıkış zamanı kayıt edilecek, bu işlemin iptali sadece yetkisi olan kullanıcı tarafından yapılabilir.'
+		}else if(islem == 'iptal'){
+			var baslik='Depo çıkış işlemi iptal edilsin mi?'
+		}
+
+
+	//	alert(secilenReceteID)
+		swal({
+			title: baslik,
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#DD6B55',
+			confirmButtonText: 'evet',
+			cancelButtonText: 'hayır'
+		}).then(
+			function(result) {
+			// handle Confirm button click
+			// result is an optional parameter, needed for modals with input
+			
+
+		$.post('/fason/gonderim_kaydet.asp',{belgeNo:belgeNo,islem:islem}, function(){
+			$('#DIV2').html('');
+			$('#div'+belgeNo).load('/fason/sevk_edilecekler.asp #div'+belgeNo + ' > *', {listeTur:listeTur});
+		})
+
+			}, //confirm buton yapılanlar
+			function(dismiss) {
+			// dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+			} //cancel buton yapılanlar		
+		);//swal sonu
+	}
+
+
 </script>
 
 

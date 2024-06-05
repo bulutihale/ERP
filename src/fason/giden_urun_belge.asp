@@ -29,7 +29,7 @@ Response.Write "<meta http-equiv=""Content-Type"" content=""text/html;charset=UT
 
 
 		sorgu = "SELECT t5.cariAd as fasonCari, t4.stokAd as mamulAd, t6.stokAd as bilesenAd, t7.stokKodu as gidenStokKodu, t7.miktar as gidenMiktar, t7.miktarBirim,"
-		sorgu = sorgu & " t7.lot as gidenLot, t1.onayZamani, t9.cariAd"
+		sorgu = sorgu & " t7.lot as gidenLot, t1.onayZamani, t9.cariAd, t2.miktar as mamulFasonMiktar, t3.mikBirim as mamulBirim"
 		sorgu = sorgu & " FROM fason.fasonDetay t1"
 		sorgu = sorgu & " INNER JOIN fason.fasonAna t2 ON t1.fasonAnaID = t2.id"
 		sorgu = sorgu & " INNER JOIN teklif.siparisKalem t3 ON t2.siparisKalemID = t3.id"
@@ -49,6 +49,8 @@ Response.Write "<meta http-equiv=""Content-Type"" content=""text/html;charset=UT
 			mamulAd				=	rs("mamulAd")
 			onayZamani			=	rs("onayZamani")
 			cariAd				=	rs("cariAd")
+			mamulFasonMiktar	=	rs("mamulFasonMiktar")
+			mamulBirim			=	rs("mamulBirim")
 
 
 			Response.Write "<table border=""0"" style=""width:100%;font-family:calibri;border-collapse:collapse;"">"
@@ -80,7 +82,9 @@ Response.Write "<meta http-equiv=""Content-Type"" content=""text/html;charset=UT
 					Response.Write "</tr>"
 					Response.Write "<tr>"
 						Response.Write "<td style=""font-weight:bold"">Mamul</td>"
-						Response.Write "<td colspan=""3"">" & mamulAd & "</td>"
+						Response.Write "<td>" & mamulAd & "</td>"
+						Response.Write "<td style=""font-weight:bold;text-align:right;"">Miktar</td>"
+						Response.Write "<td>" & OndalikKontrol(mamulFasonMiktar) & " " & mamulBirim & "</td>"
 					Response.Write "</tr>"
 					Response.Write "<tr>"
 						Response.Write "<td style=""font-weight:bold"">Onay Tarihi</td>"
@@ -90,7 +94,7 @@ Response.Write "<meta http-equiv=""Content-Type"" content=""text/html;charset=UT
 				Response.Write "</tbody>"
 			Response.Write "</table>"	
 
-			Response.Write "<table border=""1"" style=""width:100%;border-collapse:collapse;"">"
+			Response.Write "<table border=""1"" style=""width:100%;border-collapse:collapse;font-size:11px;"">"
 				Response.Write "<thead>"
 					Response.Write "<tr align=""center"">"
 						Response.Write "<th>Stok Kodu</th>"

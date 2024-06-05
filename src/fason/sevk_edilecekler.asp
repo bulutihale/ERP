@@ -38,7 +38,6 @@
 	elseif listeTur = "hepsi" then
 		sorgu = sorgu & ""
 	end if
-	'sorgu = sorgu & " GROUP BY t1.belgeNo, t1.onayZamani"
 	sorgu = sorgu & " ORDER BY t1.belgeNo"
 	rs.open sorgu, sbsv5, 1, 3
 
@@ -68,10 +67,19 @@
 				onayZamani			=	rs("onayZamani")
 				gonderimZamani		=	rs("gonderimZamani")
 
-				Response.Write "<div id="""&belgeNo&""" class=""row fontkucuk hoverGel mt-2 pointer belgeNoCls"" onclick=""butonRenk('"&belgeNo&"','info','belgeNoCls');$('#DIV3').html('');$('#DIV2').load('/fason/fason_verilenIs.asp',{fasonAnaID:"&fasonAnaID&",cariID:"&fasonCariID&"})"">"
+				Response.Write "<div id=""div"&belgeNo&""" class=""row fontkucuk hoverGel mt-2 pointer belgeNoCls"" onclick=""butonRenk('"&belgeNo&"','info','belgeNoCls');$('#DIV3').html('');$('#DIV2').load('/fason/fason_verilenIs.asp',{fasonAnaID:"&fasonAnaID&",cariID:"&fasonCariID&"})"">"
 					Response.Write "<div class=""col-4"">" & belgeNo & "</div>"
 					Response.Write "<div class=""col-4 text-center"">" & onayZamani & "</div>"
-					Response.Write "<div class=""col-4 text-center"">" & gonderimZamani & "</div>"
+					Response.Write "<div class=""col-4 text-center"">"
+					if listeTur = "sevkBekleyen" then
+						Response.Write "<div class=""btn btn-sm btn-secondary rounded"" onclick=""gonderimKaydet('"&belgeNo&"','sevkBekleyen','kaydet')"">sevk</div>"
+					elseif listeTur = "gonderilmis" OR listeTur = "hepsi" then
+						Response.Write gonderimZamani
+						if yetkiKontrol = 9 then
+							Response.Write "<div><i class=""icon cancel"" onclick=""gonderimKaydet('"&belgeNo&"','sevkBekleyen','iptal')""></i></div>"
+						end if
+					end if
+					Response.Write "</div>"
 				Response.Write "</div>"
 			rs.movenext
 			loop
