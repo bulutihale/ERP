@@ -109,7 +109,7 @@
 					Response.Write "<div class=""col-3 text-right mt-3"">"
 					Response.Write "</div>"
 					Response.Write "<div class=""col-9 text-left mt-2"">"
-						Response.Write "<div class=""btn btn-info rounded"" onclick=""gelenUrunKayit()"">KAYDET</div>"
+						Response.Write "<button id=""btnGelenUrun"" class=""btn btn-info rounded"" onclick=""gelenUrunKayit()"">KAYDET</button>"
 					Response.Write "</div>"
 				Response.Write "</div>"
 			Response.Write "</div>"

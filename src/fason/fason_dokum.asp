@@ -95,6 +95,7 @@ end if
 
 
 	function gelenUrunKayit() {
+		alert();
 		var gelisTarih			=	$('#gelisTarih').val();
 		var gelenMiktar			=	$('#gelenMiktar').val();
 		var gelenLot			=	$('#gelenLot').val();
@@ -120,9 +121,11 @@ end if
         if (errorMessage) {
             swal('HATA!',errorMessage);
 			return false;
-        }
+        }else{
+					$("#btnGelenUrun").prop("disabled", true);
+			}
 
-
+/*
 		$.post('/fason/gelen_urunKayit.asp',{
 			gelisTarih:gelisTarih,
 			gelenMiktar:gelenMiktar,
@@ -133,7 +136,7 @@ end if
 				working('divGelenUrunAna', '30px', '30px');
 				$('#divGelenUrunAna').load('/fason/modal_gelen_mamul.asp?fasonAnaID='+fasonAnaID);
 			})
-
+*/
 
 	}
 
