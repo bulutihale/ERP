@@ -63,17 +63,47 @@ yetkiKontrol = yetkibul(modulAd)
 		bekleyenUrunDepoID	=	rs("id")
 	end if
 	rs.close
-		
-			sorgu = "SELECT t1.stokHareketID, t1.miktar, t1.koliSayi, stok.FN_koliHacimHesapla(t1.koliIndexID,'m3') as hacimLt,"
-			sorgu = sorgu & " t3.stokKodu, t1.stokID, t3.stokAd, t1.lot, stok.FN_anaBirimADBul(t1.stokID, 'kAd') as kisaBirim,"
-			sorgu = sorgu & " portal.FN_sipariscariAdbul("&firmaID&", t1.ajandaID) as siparisCariAd, t1.sterilCevrimID, t4.techizatID"
-			sorgu = sorgu & " FROM stok.stokHareket t1"
-			sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
-			sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
-			sorgu = sorgu & " LEFT JOIN stok.sterilCevrim t4 ON t1.sterilCevrimID = t4.sterilCevrimID"
-			sorgu = sorgu & " WHERE t2.depoKategori = '" & depoKategori & "' AND t1.silindi = 0"
-			sorgu = sorgu & " AND stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) > 0"
-			sorgu = sorgu & " AND t4.cevrimBitis is null"
+		'########### ÇOK yavaş çalışan bu sorgu değiştirildi
+		'########### ÇOK yavaş çalışan bu sorgu değiştirildi
+			'sorgu = "SELECT t1.stokHareketID, t1.miktar, t1.koliSayi, stok.FN_koliHacimHesapla(t1.koliIndexID,'m3') as hacimLt,"
+			'sorgu = sorgu & " t3.stokKodu, t1.stokID, t3.stokAd, t1.lot, stok.FN_anaBirimADBul(t1.stokID, 'kAd') as kisaBirim,"
+			'sorgu = sorgu & " portal.FN_sipariscariAdbul("&firmaID&", t1.ajandaID) as siparisCariAd, t1.sterilCevrimID, t4.techizatID"
+			'sorgu = sorgu & " FROM stok.stokHareket t1"
+			'sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
+			'sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
+			'sorgu = sorgu & " LEFT JOIN stok.sterilCevrim t4 ON t1.sterilCevrimID = t4.sterilCevrimID"
+			'sorgu = sorgu & " WHERE t2.depoKategori = '" & depoKategori & "' AND t1.silindi = 0"
+			'sorgu = sorgu & " AND stok.FN_stokSayDepoLot("&firmaID&", t1.stokID, " & bekleyenUrunDepoID & ", t1.lot) > 0"
+			'sorgu = sorgu & " AND t4.cevrimBitis is null"
+		'########### /ÇOK yavaş çalışan bu sorgu değiştirildi
+		'########### /ÇOK yavaş çalışan bu sorgu değiştirildi
+			sorgu = "SELECT"
+				sorgu = sorgu & " t1.stokHareketID,"
+				sorgu = sorgu & " t1.miktar,"
+				sorgu = sorgu & " t1.koliSayi,"
+				sorgu = sorgu & " stok.FN_koliHacimHesapla ( t1.koliIndexID, 'm3' ) AS hacimLt,"
+				sorgu = sorgu & " t3.stokKodu,"
+				sorgu = sorgu & " t1.stokID,"
+				sorgu = sorgu & " t3.stokAd,"
+				sorgu = sorgu & " t1.lot,"
+				sorgu = sorgu & " stok.FN_anaBirimADBul ( t1.stokID, 'kAd' ) AS kisaBirim,"
+				sorgu = sorgu & " portal.FN_sipariscariAdbul ( 5, t1.ajandaID ) AS siparisCariAd,"
+				sorgu = sorgu & " t1.sterilCevrimID,"
+				sorgu = sorgu & " t4.techizatID"
+			sorgu = sorgu & " FROM"
+				sorgu = sorgu & " stok.stokHareket t1"
+				sorgu = sorgu & " INNER JOIN stok.depo t2 ON t1.depoID = t2.id"
+				sorgu = sorgu & " INNER JOIN stok.stok t3 ON t1.stokID = t3.stokID"
+				sorgu = sorgu & " LEFT JOIN stok.sterilCevrim t4 ON t1.sterilCevrimID = t4.sterilCevrimID"
+				sorgu = sorgu & " LEFT JOIN stok.stokLotMiktar t5 ON t1.stokID = t5.stokID AND t1.lot = t5.lot AND t1.depoID = t5.depoID AND t5.silindi = 0"
+			sorgu = sorgu & " WHERE"
+				sorgu = sorgu & " t2.depoKategori = '" & depoKategori & "'"
+				sorgu = sorgu & " AND t1.silindi = 0" 
+				sorgu = sorgu & " AND t5.miktar > 0"
+				sorgu = sorgu & " AND t4.cevrimBitis IS NULL"
+
+
+
 			rs.open sorgu, sbsv5, 1, 3	
 
 		Response.Write "<div class=""card-deck"">"
