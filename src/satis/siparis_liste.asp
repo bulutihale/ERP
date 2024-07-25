@@ -57,8 +57,9 @@ Response.Write "<div class=""card-body"">"
             sorgu = "SELECT"
 			sorgu = sorgu & " t1.id as siparisKalemID, t3.stokID, t1.miktar, ISNULL(t1.miktarFason,0) as miktarFason, t1.sipMiktar, t1.mikBirim, ISNULL(t1.birimFiyat,0) as birimFiyat, t1.paraBirim,"
 			sorgu = sorgu & " t3.stokKodu, t3.stokAd, t1.kalemNot as siparisKalemNot, t2.siparisTarih, t2.teslimTarih, t2.cariID, t2.siparisAD,"
-			sorgu = sorgu & " stok.FN_satilanMiktarBul(t1.id, t3.stokID, "&firmaID&") as teslimEdilen,"
-			sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id AND silindi = 0 AND stokID = t3.stokID) as teslimBirim, t4.cariAd, t2.siparisNo,"
+			'sorgu = sorgu & " stok.FN_satilanMiktarBul(t1.id, t3.stokID, "&firmaID&") as teslimEdilen,"
+			'sorgu = sorgu & " (SELECT DISTINCT(miktarBirim) FROM stok.stokHareket WHERE siparisKalemID = t1.id AND silindi = 0 AND stokID = t3.stokID) as teslimBirim,"
+			sorgu = sorgu & " t4.cariAd, t2.siparisNo,"
 			sorgu = sorgu & " ISNULL(t1.eksikMiktarKapat,0) as eksikMiktarKapat, DATEFROMPARTS(t5.hangiYil, t5.hangiAy, t5.hangiGun) as planTarih,"
 			sorgu = sorgu & " t5.baslangicZaman, t5.bitisZaman, t6.ad as teklifUrunAd, t6.kalemNot as teklifKalemNot, t1.iuID"
 			sorgu = sorgu & " FROM teklif.siparisKalem t1"
@@ -107,8 +108,8 @@ Response.Write "<div class=""card-body"">"
 					miktarFason			=	rs("miktarFason")
 					sipMiktar			=	rs("sipMiktar")
 					mikBirim			=	rs("mikBirim")
-					teslimEdilen		=	rs("teslimEdilen")
-					teslimBirim			=	rs("teslimBirim")
+					'teslimEdilen		=	rs("teslimEdilen")
+					'teslimBirim			=	rs("teslimBirim")
 					birimFiyat			=	formatNumber(rs("birimFiyat"),2)
 					paraBirim			=	rs("paraBirim")
 					siparisTarih		=	rs("siparisTarih")
