@@ -123,7 +123,7 @@
 
 		sorgu = "SELECT t1.girisTarih, t1.miktar, t1.miktarBirim, t1.lot, t1.aciklama"
 		sorgu = sorgu & " FROM stok.stokHareket t1"
-		sorgu = sorgu & " WHERE t1.fasonAnaID = " & fasonAnaID & " AND t1.stokHareketTuru = 'G' AND t1.cariID = " & fasonCariID
+		sorgu = sorgu & " WHERE t1.silindi = 0 AND t1.fasonAnaID = " & fasonAnaID & " AND t1.stokHareketTuru = 'G' AND t1.cariID = " & fasonCariID
 		rs.open sorgu, sbsv5, 1, 3
 			if rs.recordcount > 0 then
 				Response.Write "<div class=""container"">"
